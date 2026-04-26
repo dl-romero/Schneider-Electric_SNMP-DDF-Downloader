@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="emicon_edx501dkc"
-	ddfname="EMICON EDX501DKC"
+	ddfname="EMICON EDX501DKC [pcoWeb][SNMP]"
 	ddfversion="2"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>

@@ -1,0 +1,2194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="motivair_chilleddoor_m8"
+	ddfname="MotivAir ChilledDoor M8 [pcoWeb][SNMP]"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+
+	<device deviceid="motivair_chilleddoor_m8">
+		<oidMustExist ruleid="motivair_chilleddoor_m8_mustexist" oid=".1.3.6.1.2.1.1.5.0" istree="yes"/>
+
+        <oidMustMatch ruleid="mib2objidtest" oid=".1.3.6.1.2.1.1.2.0">
+			<valueList>
+				<value>.1.3.6.1.4.1.8072.3.2.10</value>
+			</valueList>
+		</oidMustMatch>
+
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">MotivAir</setProductData>
+		<setProductData ruleid="modeldata" field="model">MotivAir ChilledDoor M8</setProductData>
+		<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+
+		<valueMap ruleid="skip_missing_sensor">
+			<valueIn>-9999</valueIn> <valueOut>[false]</valueOut>
+			<valueIn>-32767</valueIn> <valueOut>[false]</valueOut>
+			<valueIn>-858993460</valueIn><valueOut>[false]</valueOut> <!-- drop invalid reading while pCOWeb restart -->
+			<valueIn>*</valueIn> <valueOut>[true]</valueOut>
+		</valueMap>
+
+<!-- MotivAir ChilledDoor M8 analogObjects -->
+        <numSensor ruleid="air_out_temp">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.1.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>AIR_OUT_TEMP</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                <op><getOid>.1.3.6.1.4.1.9839.2.1.2.1.0</getOid></op>
+                                <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Outlet  Air Temperature</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setpt_airout">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.2.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETPT_AIROUT</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                <op><getOid>.1.3.6.1.4.1.9839.2.1.2.2.0</getOid></op>
+                                <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Outlet Air Temperature Setpoint</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdiff_airout">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.3.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>num</type>
+            <sensorId>SETDIFF_AIROUT</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.9839.2.1.2.3.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Outlet  Air Control Band</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fan_output_signal">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.4.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pctofcapicty</type>
+            <sensorId>FAN_OUTPUT_SIGNAL</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.9839.2.1.2.4.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Fan Output Signal</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="water_out_temp">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.5.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>WATER_OUT_TEMP</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.5.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Water Outlet Temperature</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setpt_waterout">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.6.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETPT_WATEROUT</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.6.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Water Outlet Temperature Setpoint</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdiff_waterout">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.7.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>num</type>
+            <sensorId>SETDIFF_WATEROUT</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.9839.2.1.2.7.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Water Outlet Control Band</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="valve_output_signal">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.8.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pctofcapicty</type>
+            <sensorId>VALVE_OUTPUT_SIGNAL</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.9839.2.1.2.8.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Valve Output Signal</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="room_temp_output">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.9.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>ROOM_TEMP_OUTPUT</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.9.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Room Temperature Output</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="calibrate_b1">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.10.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>CALIBRATE_B1</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.10.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Calibrate B1</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="calibrate_b3">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.11.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>CALIBRATE_B3</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.11.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Calibrate B3</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="calibrate_b2">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.12.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>CALIBRATE_B2</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.12.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Calibrate B2</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setalm_highroom">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.13.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETALM_HIGHROOM</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.13.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>High Room Temperature Alarm Threshold</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setalm_lowroom">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.14.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETALM_LOWROOM</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.14.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Low Room Temperature Alarm Threshold</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="calibrate_b4">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.15.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>CALIBRATE_B4</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.15.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Calibrate B4</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="server_out_temp">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.16.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SERVER_OUT_TEMP</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.16.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Server Outlet Temperature</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setalm_highserver_out">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.17.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETALM_HIGHSERVER_OUT</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.17.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>High Server Outlet Temperature Alarm Threshold</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inject_inlet_temp">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.19.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>INJECT_INLET_TEMP</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.19.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div> 
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Injection Pump Inlet Temperature</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="low_limit_setpt">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.20.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>LOW_LIMIT_SETPT</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.20.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Low Inlet Limit Setpoint</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="calibrate_b6">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.22.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>CALIBRATE_B6</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.22.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Calibrate B6</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="calibrate_b2p">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.23.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>CALIBRATE_B2P</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.23.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Calibrate B2P</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="max_press_setpt">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.26.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pressure</type>
+            <sensorId>MAX_PRESS_SETPT</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.9839.2.1.2.26.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Max Pressure Setpoint</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="min_press_setpt">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.27.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pressure</type>
+            <sensorId>MIN_PRESS_SETPT</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.9839.2.1.2.27.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Min Pressure Setpoint</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fanpressure_wc_out">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.28.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pressure</type>
+            <sensorId>FANPRESSURE_WC_OUT</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.9839.2.1.2.28.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Fan Pressure WC Out</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="servermax_temp_setpt">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.29.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SERVERMAX_TEMP_SETPT</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.29.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Server Maximum Temperature Setpoint</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="servermin_temp_setpt">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.30.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SERVERMIN_TEMP_SETPT</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                        <op>
+                            <mult>
+                                <op>
+                                    <getOid>.1.3.6.1.4.1.9839.2.1.2.30.0</getOid>
+                                </op>
+                                <op>0.1</op>
+                            </mult>
+                        </op>
+                        <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Server Minimum Temperature Setpoint</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setpt_servertemp">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.31.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETPT_SERVERTEMP</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.31.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                        <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Server Outlet Air Temperature Setpoint </label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdiff_servertemp">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.32.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>num/difftemp</type>
+            <sensorId>SETDIFF_SERVERTEMP</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.32.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                        <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Server Outlet Air Differential Temperature Setpoint</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setalm_lowair">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.33.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETALM_LOWAIR</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <mult>
+                                    <op>
+                                        <getOid>.1.3.6.1.4.1.9839.2.1.2.33.0</getOid>
+                                    </op>
+                                    <op>0.1</op>
+                                </mult>
+                            </op>
+                        <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Low Temperature Alarm Setpoint</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="flow_meter_out">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.2.34.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>volairflow</type>
+            <sensorId>FLOW_METER_OUT</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.9839.2.1.2.34.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Flow Meter Out</label>
+            <sensorSet>Analog Objects</sensorSet>
+        </numSensor>    
+
+<!-- MotivAir ChilledDoor M8 integerObjects -->
+        <numSensor ruleid="min_fan_speed">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.1.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>MIN_FAN_SPEED</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Minimum Fan Speed</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fan_alarm_delay">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.2.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>FAN_ALARM_DELAY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Alarm Activation Delay</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="intergral_time">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.3.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>INTERGRAL_TIME</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>PI Temperature Control Time</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="intergral_time_valve">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.4.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>INTERGRAL_TIME_VALVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.4.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>PI Valve Control Time</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="min_valve_open">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.5.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>MIN_VALVE_OPEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.5.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Minimum Valve Opening</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setalm_highair">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.6.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETALM_HIGHAIR</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                               <getOid>.1.3.6.1.4.1.9839.2.1.3.6.0</getOid>
+                            </op>
+                        <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>1</valueInc>
+            <label>High Air Temperature Alarm Setpoint</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdelay_highair">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.7.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>SETDELAY_HIGHAIR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.7.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>High Air Temperature Alarm Delay</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setalm_highwater">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.8.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETALM_HIGHWATER</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <getOid>.1.3.6.1.4.1.9839.2.1.3.8.0</getOid>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>1</valueInc>
+            <label>High Water Temperature Alarm Setpoint</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdelay_highwater">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.9.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>SETDELAY_HIGHWATER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.9.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>High Water Temperature Alarm Delay</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setalm_lowwater">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.10.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>SETALM_LOWWATER</sensorId>
+            <value>
+                <div>
+                    <op>
+                        <sub>
+                            <op>
+                                <getOid>.1.3.6.1.4.1.9839.2.1.3.10.0</getOid>
+                            </op>
+                            <op>32</op>
+                        </sub>
+                    </op>
+                    <op>1.8</op>
+                </div>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Low Water Temperature Alarm Setpoint</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdelay_lowwater">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.11.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>SETDELAY_LOWWATER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.11.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Low Water Temperature Alarm Delay</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdelay_highroom">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.12.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>SETDELAY_HIGHROOM</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.12.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>High Room Temperature Alarm Delay</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdelay_lowroom">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.13.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>SETDELAY_LOWROOM</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.13.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Low Room Temperature Alarm Delay</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fan1_rpm_last">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.14.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>fanspeed</type>
+            <sensorId>FAN1_RPM_LAST</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.14.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan 1 RPM Last</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fan2_rpm_last">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.15.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>fanspeed</type>
+            <sensorId>FAN2_RPM_LAST</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.15.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan 2 RPM Last</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fan3_rpm_last">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.16.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>fanspeed</type>
+            <sensorId>FAN3_RPM_LAST</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.16.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan 3 RPM Last</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fan4_rpm_last">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.17.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>fanspeed</type>
+            <sensorId>FAN4_RPM_LAST</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.17.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan 4 RPM Last</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fan5_rpm_last">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.18.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>fanspeed</type>
+            <sensorId>FAN5_RPM_LAST</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.18.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan 5 RPM Last</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdelay_high_server_out">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.19.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>SETDELAY_HIGH_SERVER_OUT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.19.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>High Server Outlet Temperature Alarm Delay</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="timedelay_fanpress">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.20.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>TIMEDELAY_FANPRESS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.20.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Pressure Delay Time</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="min_fan_speed_actual">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.21.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>MIN_FAN_SPEED_ACTUAL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.21.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Actual Minimum Fan Speed</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="press_alarm_delay">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.22.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>PRESS_ALARM_DELAY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.22.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Pressure Alarm Delay</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="setdelay_lowair">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.23.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>timeinsec</type>
+            <sensorId>SETDELAY_LOWAIR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.23.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Low Air Temperature Alarm Delay</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fan_max_limit">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.25.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>FAN_MAX_LIMIT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.25.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Speed Limit</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="valve_max_limit">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.26.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>VALVE_MAX_LIMIT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.26.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>CW Valve Maximum Opening Limit</label>
+            <sensorSet>Integer Objects</sensorSet>
+        </numSensor>
+        <numSensor ruleid="pCOId1_ErrorsNumber">
+            <rowTest>
+                <mapValue mapid="skip_missing_sensor">
+                    <getOid>.1.3.6.1.4.1.9839.2.0.11.1.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>num</type>
+            <sensorId>PCOID1_ERRORSNUMBER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.0.11.1.0</getOid>
+            </value>
+            <valueInc></valueInc>
+            <label>pCOid1 Communication Errors Number</label>
+            <sensorSet></sensorSet>
+        </numSensor>
+        <stateSensor ruleid="pCOId1_Status">
+            <type>state</type>
+            <sensorId>PCOID1_STATUS</sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.0.10.1.0</getOid>
+                </mapValue>
+            </value>
+            <label>pCOid1 Status</label>
+            <enum>offInitOn-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <valueMap ruleid="3state-vm">
+			<valueIn>0</valueIn> <valueOut>0</valueOut>
+			<valueIn>1</valueIn> <valueOut>1</valueOut>
+            <valueIn>2</valueIn> <valueOut>2</valueOut>
+            <valueIn>*</valueIn> <valueOut>3</valueOut>
+		</valueMap>
+        <enumMap ruleid="offInitOn-em">
+			<label>Offline</label>
+            <label>Init</label>
+			<label>Online</label>
+            <label>Unknown</label>
+		</enumMap>
+
+<!-- Carel pCO Sistema digitalObjects status -->
+        <valueMap ruleid="2state-vm">
+            <valueIn>0</valueIn> <valueOut>0</valueOut>
+            <valueIn>1</valueIn> <valueOut>1</valueOut>
+            <valueIn>*</valueIn> <valueOut>2</valueOut>
+        </valueMap>
+        <enumMap ruleid="offOn-em">
+            <label>Off</label>
+            <label>On</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="inactiveActive-em">
+            <label>Inactive</label>
+            <label>Active</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="closedOpen-em">
+            <label>Contact Closed</label>
+            <label>Contact Open</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="pPI-em">
+            <label>P</label>
+            <label>P+I</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="noYes-em">
+            <label>No</label>
+            <label>Yes</label>
+            <label>Unknown</label>
+        </enumMap>
+        <stateSensor ruleid="fan1">
+            <type>state</type>
+            <sensorId>FAN1</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.1.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 1 Output Status</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="fan2">
+            <type>state</type>
+            <sensorId>FAN2</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.2.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 2 Output Status</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="fan3">
+            <type>state</type>
+            <sensorId>FAN3</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.3.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 3 Output Status</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="fan4">
+            <type>state</type>
+            <sensorId>FAN4</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.4.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 4 Output Status</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="fan5">
+            <type>state</type>
+            <sensorId>FAN5</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.5.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 5 Output Status</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="enable_pi">
+            <type>state</type>
+            <sensorId>ENABLE_PI</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.6.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable PI Outlet Air</label>
+            <enum>pPI-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="fan_1_enable">
+            <type>state</type>
+            <sensorId>FAN_1_ENABLE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.7.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 1 Enable</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="fan_2_enable">
+            <type>state</type>
+            <sensorId>FAN_2_ENABLE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.8.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 2 Enable</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="fan_3_enable">
+            <type>state</type>
+            <sensorId>FAN_3_ENABLE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.9.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 3 Enable</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="fan_4_enable">
+            <type>state</type>
+            <sensorId>FAN_4_ENABLE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.10.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 4 Enable</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="fan_5_enable">
+            <type>state</type>
+            <sensorId>FAN_5_ENABLE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.11.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan 5 Enable</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="enable_pi_valve">
+            <type>state</type>
+            <sensorId>ENABLE_PI_VALVE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.12.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable PI Valve</label>
+            <enum>pPI-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="sys_on">
+            <type>state</type>
+            <sensorId>SYS_ON</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.16.0</getOid>
+                </mapValue>
+            </value>
+            <label>System State</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="power_relay">
+            <type>state</type>
+            <sensorId>POWER_RELAY</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.17.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power Relay</label>
+            <enum>closedOpen-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="valve_enable">
+            <type>state</type>
+            <sensorId>VALVE_ENABLE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.18.0</getOid>
+                </mapValue>
+            </value>
+            <label>Valve Enable</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="logoma_enable">
+            <type>state</type>
+            <sensorId>LOGOMA_ENABLE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.34.0</getOid>
+                </mapValue>
+            </value>
+            <label>MotivAir Logo Splash Screen Enabler</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="en_wds_valve_close">
+            <type>state</type>
+            <sensorId>EN_WDS_VALVE_CLOSE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.35.0</getOid>
+                </mapValue>
+            </value>
+            <label>WDS Alarm to Close Valve Enabler</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="b4_present">
+            <type>state</type>
+            <sensorId>B4_PRESENT</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.37.0</getOid>
+                </mapValue>
+            </value>
+            <label>B4 Coil in Probe Presence</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="select_air_out_valve">
+            <type>state</type>
+            <sensorId>SELECT_AIR_OUT_VALVE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.40.0</getOid>
+                </mapValue>
+            </value>
+            <label>Select Air Out Valve Control</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_1">
+            <type>state</type>
+            <sensorId>N_DOORS_1</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.41.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 1</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_2">
+            <type>state</type>
+            <sensorId>N_DOORS_2</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.42.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 2</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_3">
+            <type>state</type>
+            <sensorId>N_DOORS_3</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.43.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 3</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_4">
+            <type>state</type>
+            <sensorId>N_DOORS_4</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.44.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 4</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_5">
+            <type>state</type>
+            <sensorId>N_DOORS_5</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.45.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 5</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_6">
+            <type>state</type>
+            <sensorId>N_DOORS_6</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.46.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 6</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_7">
+            <type>state</type>
+            <sensorId>N_DOORS_7</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.47.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 7</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_8">
+            <type>state</type>
+            <sensorId>N_DOORS_8</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.48.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 8</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_9">
+            <type>state</type>
+            <sensorId>N_DOORS_9</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.49.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 9</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_10">
+            <type>state</type>
+            <sensorId>N_DOORS_10</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.50.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 10</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_11">
+            <type>state</type>
+            <sensorId>N_DOORS_11</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.51.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 11</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_12">
+            <type>state</type>
+            <sensorId>N_DOORS_12</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.52.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 12</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_13">
+            <type>state</type>
+            <sensorId>N_DOORS_13</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.53.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 13</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_14">
+            <type>state</type>
+            <sensorId>N_DOORS_14</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.54.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 14</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="n_doors_15">
+            <type>state</type>
+            <sensorId>N_DOORS_15</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.55.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Chilled Door 15</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="reverse_0_10v">
+            <type>state</type>
+            <sensorId>REVERSE_0_10V</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.56.0</getOid>
+                </mapValue>
+            </value>
+            <label>Reverse Valve Output</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="b6_room_en">
+            <type>state</type>
+            <sensorId>B6_ROOM_EN</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.59.0</getOid>
+                </mapValue>
+            </value>
+            <label>B6 Room Probe Enabler</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="enablebpoweralrm">
+            <type>state</type>
+            <sensorId>ENABLE_B_POWER_ALRM</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.61.0</getOid>
+                </mapValue>
+            </value>
+            <label>B Power Alarm Enable</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="superv_onoff">
+            <type>state</type>
+            <sensorId>SUPERV_ONOFF</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.62.0</getOid>
+                </mapValue>
+            </value>
+            <label>BMS Supervisor On off</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="enable_flowm">
+            <type>state</type>
+            <sensorId>ENABLE_FLOWM</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.67.0</getOid>
+                </mapValue>
+            </value>
+            <label>Flow Meter Enabler</label>
+            <enum>inactiveActive-em</enum>
+            <sensorSet>Digital Objects</sensorSet>
+        </stateSensor>
+
+<!-- MotivAir ChilledDoor M8 digitalObjects alarms -->
+        <alarmFlags ruleid="alarm_high_temp_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.13.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Temperature Alarm Present</activeText>
+                    <inactiveText>High Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>High Temperature Alarm Present</activeText>
+                    <inactiveText>High Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_high_water_temp_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.14.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Water Temperature Alarm Present</activeText>
+                    <inactiveText>High Water Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>High Water Temperature Alarm Present</activeText>
+                    <inactiveText>High Water Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_low_water_temp_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.15.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Water Temperature Alarm Present</activeText>
+                    <inactiveText>Low Water Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Low Water Temperature Alarm Present</activeText>
+                    <inactiveText>Low Water Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="enable_wds_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.19.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Enable WDS Alarm Present</activeText>
+                    <inactiveText>Enable WDS Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Enable WDS Alarm Present</activeText>
+                    <inactiveText>Enable WDS Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="reset_alarm_bms_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.20.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Alarm Reset by BMS Present</activeText>
+                    <inactiveText>Alarm Reset by BMS Cleared</inactiveText>
+                </name>
+                <severity>information</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Alarm Reset by BMS Present</activeText>
+                    <inactiveText>Alarm Reset by BMS Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_wds_in">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.21.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>WDS Input Alarm Present</activeText>
+                    <inactiveText>WDS Input Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>WDS Input Alarm Present</activeText>
+                    <inactiveText>WDS Input Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="general_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.22.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>General Alarm Present</activeText>
+                    <inactiveText>General Alarm Cleared</inactiveText>
+                </name>
+                <severity>information</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>General Alarm Present</activeText>
+                    <inactiveText>General Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_clock_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.23.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Clock Board Alarm Present</activeText>
+                    <inactiveText>Clock Board Alarm Cleared</inactiveText>
+                </name>
+                <severity>information</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Clock Board Alarm Present</activeText>
+                    <inactiveText>Clock Board Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_high_room_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.24.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Room Alarm Present</activeText>
+                    <inactiveText>High Room Alarm Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>High Room Alarm Present</activeText>
+                    <inactiveText>High Room Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_low_room_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.25.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Room Alarm Present</activeText>
+                    <inactiveText>Low Room Alarm Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Low Room Alarm Present</activeText>
+                    <inactiveText>Low Room Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_probe_1_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.26.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Probe 1 Alarm Present</activeText>
+                    <inactiveText>Probe 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Probe 1 Alarm Present</activeText>
+                    <inactiveText>Probe 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_probe_2_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.27.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Probe 2 Alarm Present</activeText>
+                    <inactiveText>Probe 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Probe 2 Alarm Present</activeText>
+                    <inactiveText>Probe 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_probe_3_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.28.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Probe 3 Alarm Present</activeText>
+                    <inactiveText>Probe 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Probe 3 Alarm Present</activeText>
+                    <inactiveText>Probe 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_fan1">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.29.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Alarm Present</activeText>
+                    <inactiveText>Fan 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 1 Alarm Present</activeText>
+                    <inactiveText>Fan 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_fan2">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.30.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Alarm Present</activeText>
+                    <inactiveText>Fan 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 2 Alarm Present</activeText>
+                    <inactiveText>Fan 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_fan3">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.31.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Alarm Present</activeText>
+                    <inactiveText>Fan 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 3 Alarm Present</activeText>
+                    <inactiveText>Fan 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_fan4">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.32.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Alarm  Alarm Present</activeText>
+                    <inactiveText>Fan 4 Alarm  Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 4 Alarm  Alarm Present</activeText>
+                    <inactiveText>Fan 4 Alarm  Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_fan5">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.33.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 5 Alarm  Alarm Present</activeText>
+                    <inactiveText>Fan 5 Alarm  Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 5 Alarm  Alarm Present</activeText>
+                    <inactiveText>Fan 5 Alarm  Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_high_server_out">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.36.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Server Outlet Temperature Alarm Present</activeText>
+                    <inactiveText>High Server Outlet Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>High Server Outlet Temperature Alarm Present</activeText>
+                    <inactiveText>High Server Outlet Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_probe_3p_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.38.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Probe 3P Alarm Present</activeText>
+                    <inactiveText>Probe 3P Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Probe 3P Alarm Present</activeText>
+                    <inactiveText>Probe 3P Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_high_press">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.39.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Pressure Alarm Present</activeText>
+                    <inactiveText>High Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>High Pressure Alarm Present</activeText>
+                    <inactiveText>High Pressure Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_probe_4_alarm">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.57.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Probe 4 Alarm Present</activeText>
+                    <inactiveText>Probe 4 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Probe 4 Alarm Present</activeText>
+                    <inactiveText>Probe 4 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alarm_low_temp">
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.1.58.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Air Temperature Alarm Present</activeText>
+                    <inactiveText>Low Air Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Low Air Temperature Alarm Present</activeText>
+                    <inactiveText>Low Air Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+                
+	</device>
+</APC_DDF>

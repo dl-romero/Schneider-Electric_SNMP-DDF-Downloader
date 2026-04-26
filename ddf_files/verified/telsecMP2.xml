@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="apc_ddf_1_6.xsl"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="telsecMP2"
+	ddfname="Telsec MP2"
+	ddfversion="1"
+	canremove="yes">
+
+  <schemaVersion>1.6</schemaVersion>
+
+	<!--
+    MANUFACTURER:					Quest Controls
+    MODEL:								Telsec MP2
+
+    REFERENCE:						QUEST-MP2-MIB
+    Reference Location:		/snmp/resources/mibs/quest_controls/QUEST-MP2-MIB.txt
+
+    Scope:								(mp2InputTable) .1.3.6.1.4.1.11476.7.1.*
+                          (mp2AlarmPointTable) .1.3.6.1.4.1.11476.7.2.*
+                          (mp2OutputTable) .1.3.6.1.4.1.11476.7.4.*
+
+    Walkfiles:						/snmp/resources/sapro/walkfiles/quest_controls/Telsec_SNMP Walk File.txt
+  -->
+
+	<device deviceid="telsecMP2">
+		<oidMustExist istree="yes" ruleid="ems_telsecMP2_exists" oid=".1.3.6.1.4.1.11476.7"/>
+		<setProductData ruleid="typedata" field="type">Environmental Monitor</setProductData>
+		<setProductData ruleid="vendordata" field="vendor">Quest Controls</setProductData>
+    <setProductData ruleid="modeldata" field="model">Telsec MP2</setProductData>
+
+    <numSensor ruleid="mp2InputIntegerValue" index=".1.3.6.1.4.1.11476.7.1.1.4">
+			<rowTest>
+        <mapValue mapid="stateSensorInvalid-vm">
+            <getRowOid>.1.3.6.1.4.1.11476.7.1.1.7</getRowOid>
+        </mapValue>
+    	</rowTest>
+			<type>num</type>
+			<units>
+				<mapValue mapid="sensorType-vm">
+					<getRowOid>.1.3.6.1.4.1.11476.7.1.1.7</getRowOid>
+				</mapValue>
+			</units>
+			<sensorId>MP2_INPUT_INTEGER_VALUE_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.11476.7.1.1.4</getRowOid></op>
+					<op>0.01</op>
+			 </mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.11476.7.1.1.2</getRowOid>
+			</label>
+			<sensorSet>Temperature Status</sensorSet>
+		</numSensor>
+
+    <stateSensor ruleid="mp2InputState" index=".1.3.6.1.4.1.11476.7.1.1.4">
+			<rowTest>
+        <mapValue mapid="numSensorInvalid-vm">
+            <getRowOid>.1.3.6.1.4.1.11476.7.1.1.7</getRowOid>
+        </mapValue>
+    	</rowTest>
+			<type>state</type>
+			<sensorId>MP2_INPUT_STATE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="defaultIsTwo-vm">
+					<getRowOid>.1.3.6.1.4.1.11476.7.1.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.11476.7.1.1.2</getRowOid>
+			</label>
+			<enum>offOn-em</enum>
+			<sensorSet>Input Status</sensorSet>
+		</stateSensor>
+
+    <stateSensor ruleid="mp2OutputState" index=".1.3.6.1.4.1.11476.7.4.1.3">
+			<type>state</type>
+			<sensorId>MP2_OUTPUT_STATE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="defaultIsTwo-vm">
+					<getRowOid>.1.3.6.1.4.1.11476.7.4.1.3</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.11476.7.4.1.2</getRowOid> State
+			</label>
+			<enum>inactiveActive-em</enum>
+			<sensorSet>Output Status</sensorSet>
+		</stateSensor>
+
+		<stateSensor ruleid="mp2OutputDefaultState" index=".1.3.6.1.4.1.11476.7.4.1.5">
+			<type>state</type>
+			<sensorId>MP2_OUTPUT_DEFAULT_STATE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="defaultIsTwo-vm">
+					<getRowOid>.1.3.6.1.4.1.11476.7.4.1.5</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.11476.7.4.1.2</getRowOid> Default State
+			</label>
+			<enum>deEnergizedEnergized-em</enum>
+			<sensorSet>Output Status</sensorSet>
+		</stateSensor>
+
+		<alarmFlags2 ruleid="mp2Alarm" index=".1.3.6.1.4.1.11476.7.2.1.3">
+			<value>
+				<getRowOid>.1.3.6.1.4.1.11476.7.2.1.3</getRowOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.11476.7.2.1.2</getRowOid><space/>Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.11476.7.2.1.2</getRowOid><space/>Alarm Cleared</inactiveText>
+				</name>
+				<severity>
+					<mapValue mapid="alarmSeverity-vm">
+					 <getRowOid>.1.3.6.1.4.1.11476.7.2.1.5</getRowOid>
+					</mapValue>
+				</severity>
+				<category>Device</category>
+				<description>
+					<activeText>
+						<getRowOid>.1.3.6.1.4.1.11476.7.2.1.2</getRowOid><space/>
+						<mapValue mapid="comparisonType-vm">
+							<getRowOid>.1.3.6.1.4.1.11476.7.2.1.8</getRowOid>
+						</mapValue><space/>
+						alarm is active.
+					</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.11476.7.2.1.2</getRowOid> alarm is no longer exist.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<valueMap ruleid="stateSensorInvalid-vm">
+			<valueIn>0</valueIn><valueOut>[true]</valueOut>
+			<valueIn>1</valueIn><valueOut>[true]</valueOut>
+			<valueIn>*</valueIn><valueOut>[false]</valueOut>
+		</valueMap>
+		<valueMap ruleid="sensorType-vm">
+			<valueIn>0</valueIn><valueOut>degreeF</valueOut>
+			<valueIn>1</valueIn><valueOut>degreeC</valueOut>
+		</valueMap>
+		<valueMap ruleid="numSensorInvalid-vm">
+			<valueIn>3</valueIn><valueOut>[true]</valueOut>
+			<valueIn>4</valueIn><valueOut>[true]</valueOut>
+			<valueIn>5</valueIn><valueOut>[true]</valueOut>
+			<valueIn>6</valueIn><valueOut>[true]</valueOut>
+			<valueIn>*</valueIn><valueOut>[false]</valueOut>
+		</valueMap>
+		<valueMap ruleid="defaultIsTwo-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<valueMap ruleid="alarmSeverity-vm">
+			<valueIn>1</valueIn><valueOut>informational</valueOut>
+			<valueIn>2</valueIn><valueOut>warning</valueOut>
+			<valueIn>3</valueIn><valueOut>warning</valueOut>
+			<valueIn>4</valueIn><valueOut>critical</valueOut>
+			<valueIn>5</valueIn><valueOut>critical</valueOut>
+			<valueIn>*</valueIn><valueOut></valueOut>
+		</valueMap>
+		<valueMap ruleid="comparisonType-vm">
+			<valueIn>0</valueIn><valueOut>above threshold</valueOut>
+			<valueIn>1</valueIn><valueOut>below threshold</valueOut>
+			<valueIn>*</valueIn><valueOut></valueOut>
+		</valueMap>
+
+		<enumMap ruleid="offOn-em">
+      <label>Off</label>
+      <label>On</label>
+      <label>Unknown</label>
+    </enumMap>
+		<enumMap ruleid="inactiveActive-em">
+      <label>Inactive</label>
+      <label>Active</label>
+      <label>Unknown</label>
+    </enumMap>
+		<enumMap ruleid="deEnergizedEnergized-em">
+      <label>De-Energized</label>
+      <label>Energized</label>
+      <label>Unknown</label>
+    </enumMap>
+  </device>
+</APC_DDF>

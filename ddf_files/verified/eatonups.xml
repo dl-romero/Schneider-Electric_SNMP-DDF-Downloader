@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <APC_DDF
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-	ddfid ="eatonups"
-	ddfname="Eaton Powerware UPS"
-	ddfversion="16"
-	canremove="yes">
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+         ddfid="eatonups"
+         ddfname="Eaton Powerware UPS"
+         ddfversion="17"
+         canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<!--
 		SOURCE
@@ -18,8 +18,8 @@
 		<oidMustExist ruleid="powerwareups_header" oid=".1.3.6.1.2.1.47.1.1.1.1" istree="yes"/>
 		
 		<suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
-        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
-        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+		<suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+		<suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
 		<suppressRule ruleid="stomp-mib2-model" suppressid="upsmib/upsmib/modeldata"/>
 
 		<setProductData ruleid="manufacturerdata" field="manufacturer"><getOid>.1.3.6.1.4.1.534.1.1.1.0</getOid></setProductData>
@@ -359,7 +359,7 @@
 					<getOid>.1.3.6.1.4.1.534.1.4.5.0</getOid>
 				</mapValue>
 			</value>
-			<label>Output Source </label>
+			<label>Output Source</label>
 			<enum>xupsOutputSource-em</enum>
 			<sensorSet>Output</sensorSet>
 		</stateSensor>
@@ -404,7 +404,7 @@
 						<getOid>.1.3.6.1.4.1.534.1.5.1.0</getOid>
 					</op>
 					<op>.1</op>
-				</mult>            
+				</mult>
 			</value>
 			<label>Bypass Frequency</label>
 			<sensorSet>Bypass</sensorSet>
@@ -639,780 +639,584 @@
 
 	<device deviceid="powerwareups_alarms">
 		<oidMustExist ruleid="powerwareups_sensor_exist" oid=".1.3.6.1.4.1.534.1.7.1.0"/>
-
-		<alarmFlags2 ruleid="eaton_ups_alarms" index=".1.3.6.1.4.1.534.1.7.2.1.1">
+		
+		<!-- suppress upsmib ups alarm rules -->
+		<suppressRule suppressid="upsmib/upsmib/upsMib_alarm"/>
+		
+		<alarmFlags2 ruleid="eaton_ups_alarms" index=".1.3.6.1.4.1.534.1.7.2.1.2">
 			<value>
 				<baseNToInt base="16">
-					<mapValue mapid="alarm_map">
-						<getRowOid>.1.3.6.1.4.1.534.1.7.2.1.2</getRowOid>
-					</mapValue>
+					<regex>
+						<op>1\.3\.6\.1\.4\.1\.534\.1\.7\.(\d+)</op>
+						<op><getRowOid>.1.3.6.1.4.1.534.1.7.2.1.2</getRowOid></op>
+						<op>%1$s</op>
+						<op>0</op>
+					</regex>
 				</baseNToInt>
 			</value>
 
+
 			<!-- On Battery -->
-			<alarmFlagsTest match="3" log="no">
+			<alarmFlagsTest match="3">
 				<name>
 					<activeText>On Battery</activeText>
 					<inactiveText>On Battery Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>battery</category>
 				<description>
 					<activeText>An on battery alarm exists.</activeText>
 					<inactiveText>An on battery alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Low Battery -->
-			<alarmFlagsTest match="4" log="no">
+			<alarmFlagsTest match="4">
 				<name>
 					<activeText>Low Battery</activeText>
 					<inactiveText>Low Battery Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>battery</category>
 				<description>
 					<activeText>A low battery alarm exists.</activeText>
 					<inactiveText>A low battery alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Utility Power Restored -->
-			<alarmFlagsTest match="5" log="no">
+			<alarmFlagsTest match="5">
 				<name>
 					<activeText>Utility Power Restored</activeText>
 					<inactiveText>Utility Power Restored Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>An utility power restored alarm exists.</activeText>
 					<inactiveText>An utility power restored alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Return From Low Battery -->
-			<alarmFlagsTest match="6" log="no">
+			<alarmFlagsTest match="6">
 				<name>
 					<activeText>Return From Low Battery</activeText>
 					<inactiveText>Return From Low Battery Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>battery</category>
 				<description>
 					<activeText>A return from low battery alarm exists.</activeText>
 					<inactiveText>A return from low battery alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Output Overload -->
-			<alarmFlagsTest match="7" log="no">
+			<alarmFlagsTest match="7">
 				<name>
 					<activeText>Output Overload</activeText>
 					<inactiveText>Output Overload Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>output</category>
 				<description>
 					<activeText>An output overload alarm exists.</activeText>
 					<inactiveText>An output overload alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Internal Failure -->
-			<alarmFlagsTest match="8" log="no">
+			<alarmFlagsTest match="8">
 				<name>
 					<activeText>Internal Failure</activeText>
 					<inactiveText>Internal Failure Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>fault</category>
 				<description>
 					<activeText>An internal failure alarm exists.</activeText>
 					<inactiveText>An internal failure alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Battery Discharged -->
-			<alarmFlagsTest match="9" log="no">
+			<alarmFlagsTest match="9">
 				<name>
 					<activeText>Battery Discharged</activeText>
 					<inactiveText>Battery Discharged Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>battery</category>
 				<description>
 					<activeText>A battery discharged alarm exists.</activeText>
 					<inactiveText>A battery discharged alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Inverter Failure -->
-			<alarmFlagsTest match="10" log="no">
+			<alarmFlagsTest match="10">
 				<name>
 					<activeText>Inverter Failure</activeText>
 					<inactiveText>Inverter Failure Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>An inverter failure alarm exists.</activeText>
 					<inactiveText>An inverter failure alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- On Bypass -->
-			<alarmFlagsTest match="11" log="no">
+			<alarmFlagsTest match="11">
 				<name>
 					<activeText>On Bypass</activeText>
 					<inactiveText>On Bypass Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>bypass</category>
 				<description>
 					<activeText>An on bypass alarm exists.</activeText>
 					<inactiveText>An on bypass alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Bypass Not Available -->
-			<alarmFlagsTest match="12" log="no">
+			<alarmFlagsTest match="12">
 				<name>
 					<activeText>Bypass Not Available</activeText>
 					<inactiveText>Bypass Not Available Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>bypass</category>
 				<description>
 					<activeText>A bypass not available alarm exists.</activeText>
 					<inactiveText>A bypass not available alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Output Off -->
-			<alarmFlagsTest match="13" log="no">
+			<alarmFlagsTest match="13">
 				<name>
 					<activeText>Output Off</activeText>
 					<inactiveText>Output Off Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>output</category>
 				<description>
 					<activeText>An output off alarm exists.</activeText>
 					<inactiveText>An output off alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Input Failure -->
-			<alarmFlagsTest match="14" log="no">
+			<alarmFlagsTest match="14">
 				<name>
 					<activeText>Input Failure</activeText>
 					<inactiveText>Input Failure Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>input</category>
 				<description>
 					<activeText>An input failure alarm exists.</activeText>
 					<inactiveText>An input failure alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Building -->
-			<alarmFlagsTest match="15" log="no">
+			<alarmFlagsTest match="15">
 				<name>
 					<activeText>Building</activeText>
 					<inactiveText>Building Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>fault</category>
 				<description>
 					<activeText>A building alarm exists.</activeText>
 					<inactiveText>A building alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Shutdown Imminent -->
-			<alarmFlagsTest match="16" log="no">
+			<alarmFlagsTest match="16">
 				<name>
 					<activeText>Shutdown Imminent</activeText>
 					<inactiveText>Shutdown Imminent Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>A shutdown imminent alarm exists.</activeText>
 					<inactiveText>A shutdown imminent alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- On Inverter -->
-			<alarmFlagsTest match="17" log="no">
+			<alarmFlagsTest match="17">
 				<name>
 					<activeText>On Inverter</activeText>
 					<inactiveText>On Inverter Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>An on inverter alarm exists.</activeText>
 					<inactiveText>An on inverter alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Breaker Open -->
-			<alarmFlagsTest match="20" log="no">
+			<alarmFlagsTest match="20">
 				<name>
 					<activeText>Breaker Open</activeText>
 					<inactiveText>Breaker Open Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>A breaker open alarm exists.</activeText>
 					<inactiveText>A breaker open alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Entry Added -->
-			<alarmFlagsTest match="21" log="no">
+			<alarmFlagsTest match="21">
 				<name>
 					<activeText>Entry Added</activeText>
 					<inactiveText>Entry Added Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>device</category>
 				<description>
 					<activeText>An entry added alarm exists.</activeText>
 					<inactiveText>An entry added alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Entry Removed -->
-			<alarmFlagsTest match="22" log="no">
+			<alarmFlagsTest match="22">
 				<name>
 					<activeText>Entry Removed</activeText>
 					<inactiveText>Entry Removed Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>device</category>
 				<description>
 					<activeText>An entry removed alarm exists.</activeText>
 					<inactiveText>An entry removed alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Battery Bad -->
-			<alarmFlagsTest match="23" log="no">
+			<alarmFlagsTest match="23">
 				<name>
 					<activeText>Battery Bad</activeText>
 					<inactiveText>Battery Bad Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>battery</category>
 				<description>
 					<activeText>A battery bad alarm exists.</activeText>
 					<inactiveText>A battery bad alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Output Off As Requested -->
-			<alarmFlagsTest match="24" log="no">
+			<alarmFlagsTest match="24">
 				<name>
 					<activeText>Output Off As Requested</activeText>
 					<inactiveText>Output Off As Requested Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>output</category>
 				<description>
 					<activeText>An output off as requested alarm exists.</activeText>
 					<inactiveText>An output off as requested alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Diagnostic Test Failed -->
-			<alarmFlagsTest match="25" log="no">
+			<alarmFlagsTest match="25">
 				<name>
 					<activeText>Diagnostic Test Failed</activeText>
 					<inactiveText>Diagnostic Test Failed Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>device</category>
 				<description>
 					<activeText>A diagnostic test failed alarm exists.</activeText>
 					<inactiveText>A diagnostic test failed alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Communications Lost -->
-			<alarmFlagsTest match="26" log="no">
+			<alarmFlagsTest match="26">
 				<name>
 					<activeText>Communications Lost</activeText>
 					<inactiveText>Communications Lost Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>communication</category>
 				<description>
 					<activeText>A communications lost alarm exists.</activeText>
 					<inactiveText>A communications lost alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Ups Shutdown Pending -->
-			<alarmFlagsTest match="27" log="no">
+			<alarmFlagsTest match="27">
 				<name>
 					<activeText>Ups Shutdown Pending</activeText>
 					<inactiveText>Ups Shutdown Pending Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>An ups shutdown pending alarm exists.</activeText>
 					<inactiveText>An ups shutdown pending alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Test In Progress -->
-			<alarmFlagsTest match="28" log="no">
+			<alarmFlagsTest match="28">
 				<name>
 					<activeText>Test In Progress</activeText>
 					<inactiveText>Test In Progress Cleared</inactiveText>
 				</name>
-				<severity>warning</severity>
-				<category>General Alarms</category>
+				<severity>information</severity>
+				<category>battery</category>
 				<description>
 					<activeText>A test in progress alarm exists.</activeText>
 					<inactiveText>A test in progress alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Ambient Temperature Bad -->
-			<alarmFlagsTest match="29" log="no">
+			<alarmFlagsTest match="29">
 				<name>
 					<activeText>Ambient Temperature Bad</activeText>
 					<inactiveText>Ambient Temperature Bad Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>temperature</category>
 				<description>
 					<activeText>An ambient temperature bad alarm exists.</activeText>
 					<inactiveText>An ambient temperature bad alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Loss Of Redundancy -->
-			<alarmFlagsTest match="30" log="no">
+			<alarmFlagsTest match="30">
 				<name>
 					<activeText>Loss Of Redundancy</activeText>
 					<inactiveText>Loss Of Redundancy Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>A loss of redundancy alarm exists.</activeText>
 					<inactiveText>A loss of redundancy alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Temperature Bad -->
-			<alarmFlagsTest match="31" log="no">
+			<alarmFlagsTest match="31">
 				<name>
 					<activeText>Temperature Bad</activeText>
 					<inactiveText>Temperature Bad Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>temperature</category>
 				<description>
 					<activeText>A temperature bad alarm exists.</activeText>
 					<inactiveText>A temperature bad alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Charger Failed -->
-			<alarmFlagsTest match="32" log="no">
+			<alarmFlagsTest match="32">
 				<name>
 					<activeText>Charger Failed</activeText>
 					<inactiveText>Charger Failed Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>A charger failed alarm exists.</activeText>
 					<inactiveText>A charger failed alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Fan Failure -->
-			<alarmFlagsTest match="33" log="no">
+			<alarmFlagsTest match="33">
 				<name>
 					<activeText>Fan Failure</activeText>
 					<inactiveText>Fan Failure Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>fault</category>
 				<description>
 					<activeText>A fan failure alarm exists.</activeText>
 					<inactiveText>A fan failure alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Fuse Failure -->
-			<alarmFlagsTest match="34" log="no">
+			<alarmFlagsTest match="34">
 				<name>
 					<activeText>Fuse Failure</activeText>
 					<inactiveText>Fuse Failure Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>A fuse failure alarm exists.</activeText>
 					<inactiveText>A fuse failure alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Power Switch Bad -->
-			<alarmFlagsTest match="35" log="no">
+			<alarmFlagsTest match="35">
 				<name>
 					<activeText>Power Switch Bad</activeText>
 					<inactiveText>Power Switch Bad Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>A power switch bad alarm exists.</activeText>
 					<inactiveText>A power switch bad alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Module Failure -->
-			<alarmFlagsTest match="36" log="no">
+			<alarmFlagsTest match="36">
 				<name>
 					<activeText>Module Failure</activeText>
 					<inactiveText>Module Failure Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>fault</category>
 				<description>
 					<activeText>A module failure alarm exists.</activeText>
 					<inactiveText>A module failure alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- On Alternate Power Source -->
-			<alarmFlagsTest match="37" log="no">
+			<alarmFlagsTest match="37">
 				<name>
 					<activeText>On Alternate Power Source</activeText>
 					<inactiveText>On Alternate Power Source Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>An on alternate power source alarm exists.</activeText>
 					<inactiveText>An on alternate power source alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Alternate Power Not Available -->
-			<alarmFlagsTest match="38" log="no">
+			<alarmFlagsTest match="38">
 				<name>
 					<activeText>Alternate Power Not Available</activeText>
 					<inactiveText>Alternate Power Not Available Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>An alternate power not available alarm exists.</activeText>
 					<inactiveText>An alternate power not available alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Notice Condition -->
-			<alarmFlagsTest match="39" log="no">
+			<alarmFlagsTest match="39">
 				<name>
 					<activeText>Notice Condition</activeText>
 					<inactiveText>Notice Condition Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>device</category>
 				<description>
 					<activeText>A notice condition alarm exists.</activeText>
 					<inactiveText>A notice condition alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Remote Temperature Bad -->
-			<alarmFlagsTest match="40" log="no">
+			<alarmFlagsTest match="40">
 				<name>
 					<activeText>Remote Temperature Bad</activeText>
 					<inactiveText>Remote Temperature Bad Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>temperature</category>
 				<description>
 					<activeText>A remote temperature bad alarm exists.</activeText>
 					<inactiveText>A remote temperature bad alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Remote Humidity Bad -->
-			<alarmFlagsTest match="41" log="no">
+			<alarmFlagsTest match="41">
 				<name>
 					<activeText>Remote Humidity Bad</activeText>
 					<inactiveText>Remote Humidity Bad Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>humidity</category>
 				<description>
 					<activeText>A remote humidity bad alarm exists.</activeText>
 					<inactiveText>A remote humidity bad alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Output Bad -->
-			<alarmFlagsTest match="42" log="no">
+			<alarmFlagsTest match="42">
 				<name>
 					<activeText>Output Bad</activeText>
 					<inactiveText>Output Bad Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>output</category>
 				<description>
 					<activeText>An output bad alarm exists.</activeText>
 					<inactiveText>An output bad alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- Awaiting Power -->
-			<alarmFlagsTest match="43" log="no">
+			<alarmFlagsTest match="43">
 				<name>
 					<activeText>Awaiting Power</activeText>
 					<inactiveText>Awaiting Power Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>power</category>
 				<description>
 					<activeText>An awaiting power alarm exists.</activeText>
 					<inactiveText>An awaiting power alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
 
 			<!-- On Maintenance Bypass -->
-			<alarmFlagsTest match="44" log="no">
+			<alarmFlagsTest match="44">
 				<name>
 					<activeText>On Maintenance Bypass</activeText>
 					<inactiveText>On Maintenance Bypass Cleared</inactiveText>
 				</name>
 				<severity>warning</severity>
-				<category>General Alarms</category>
+				<category>bypass</category>
 				<description>
 					<activeText>An on maintenance bypass alarm exists.</activeText>
 					<inactiveText>An on maintenance bypass alarm has cleared.</inactiveText>
 				</description>
-				<alarmRecommendedActions>
-					<recommendedActionId/>
-				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 		</alarmFlags2>
 
-		<valueMap ruleid="alarm_map">
-			<valueIn>.1.3.6.1.4.1.534.1.7.3</valueIn>
-			<valueOut>3</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.4</valueIn>
-			<valueOut>4</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.5</valueIn>
-			<valueOut>5</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.6</valueIn>
-			<valueOut>6</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.7</valueIn>
-			<valueOut>7</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.8</valueIn>
-			<valueOut>8</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.9</valueIn>
-			<valueOut>9</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.10</valueIn>
-			<valueOut>10</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.11</valueIn>
-			<valueOut>11</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.12</valueIn>
-			<valueOut>12</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.13</valueIn>
-			<valueOut>13</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.14</valueIn>
-			<valueOut>14</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.15</valueIn>
-			<valueOut>15</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.16</valueIn>
-			<valueOut>16</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.17</valueIn>
-			<valueOut>17</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.20</valueIn>
-			<valueOut>20</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.21</valueIn>
-			<valueOut>21</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.22</valueIn>
-			<valueOut>22</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.23</valueIn>
-			<valueOut>23</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.24</valueIn>
-			<valueOut>24</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.25</valueIn>
-			<valueOut>25</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.26</valueIn>
-			<valueOut>26</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.27</valueIn>
-			<valueOut>27</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.28</valueIn>
-			<valueOut>28</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.29</valueIn>
-			<valueOut>29</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.30</valueIn>
-			<valueOut>30</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.31</valueIn>
-			<valueOut>31</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.32</valueIn>
-			<valueOut>32</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.33</valueIn>
-			<valueOut>33</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.34</valueIn>
-			<valueOut>34</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.35</valueIn>
-			<valueOut>35</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.36</valueIn>
-			<valueOut>36</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.37</valueIn>
-			<valueOut>37</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.38</valueIn>
-			<valueOut>38</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.39</valueIn>
-			<valueOut>39</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.40</valueIn>
-			<valueOut>40</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.41</valueIn>
-			<valueOut>41</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.42</valueIn>
-			<valueOut>42</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.43</valueIn>
-			<valueOut>43</valueOut>
-			<valueIn>.1.3.6.1.4.1.534.1.7.44</valueIn>
-			<valueOut>44</valueOut>
-		</valueMap>
 	</device>
 
 	<device deviceid="mge-fix">
@@ -1422,8 +1226,8 @@
 		duplicate sensors. This section contains
 		suppressRules to block sensors in mge.xml
 	-->
-		<oidMustExist ruleid="eaton" oid=".1.3.6.1.4.1.534" istree="yes" />
-		<oidMustExist ruleid="mge" oid=".1.3.6.1.4.1.705" istree="yes" />
+		<oidMustExist ruleid="eaton" oid=".1.3.6.1.4.1.534" istree="yes"/>
+		<oidMustExist ruleid="mge" oid=".1.3.6.1.4.1.705" istree="yes"/>
 
 		<suppressRule suppressid="mge/mgeups/timeremainingonbatt"/>
 		<suppressRule suppressid="mge/mgeups/pctofbatt"/>

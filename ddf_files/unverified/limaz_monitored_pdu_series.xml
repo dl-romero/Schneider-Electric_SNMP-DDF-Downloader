@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="limaz_monitored_pdu_series"
+	ddfname="LIMAZ Monitored PDU Series"
+	ddfversion="2"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+	
+		SOURCE
+		\snmp\resources\mibs\limaz\IP_PDU_MIB.txt
+		
+		LIEBERT-UPSTATION-D-UPS-MIB | 29 June 2021
+		
+		PRODUCT SPECIFICATION
+		\snmp\resources\mibs\limaz\PDU.pdf
+		
+		WALKFILES
+		\snmp\resources\sapro\walkfiles\limaz\SNMPwalk_RPDU.txt
+	
+	-->
+	<device deviceid="ippdu">
+		<oidMustExist ruleid="ippdu1_exists" oid=".1.3.6.1.4.1.42578.20.1" istree="yes"/> 
+		
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">LIMAZ</setProductData>
+		<setProductData ruleid="modeldata" field="model">Monitored PDU Series</setProductData>
+		<setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+		
+		<setProductData ruleid="inputphasecount" field="inputphasecount">1</setProductData>
+		<setProductData ruleid="outputphasecount" field="outputphasecount">1</setProductData>
+
+        <numSensor ruleid="voltage1">
+            <type>voltage</type>
+            <sensorId>RPDU_OUTPUT_VOLTAGE_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.42578.20.1.1.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Voltage</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="current1">
+            <type>amperage</type>
+            <sensorId>_OUTPUT_CURRENT_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.42578.20.1.2.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Current</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="power1">
+            <type>powerW</type>
+            <sensorId>P1_OUTLET_POWER_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="pf1">
+            <type>num/powerfactor</type>
+            <sensorId>P1_OUTLET_POWER_FACTOR_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.42578.20.1.4.0</getOid></op>
+                    <op>0.001</op>
+                </mult>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Power Factor</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energy1">
+            <type>num/kwatthr</type>
+            <sensorId>_OUTPUT_ENERGY_TOTAL_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.5.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Energy</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="frequency1">
+            <type>frequency</type>
+            <sensorId>PDU_RCP_FREQUENCY_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.42578.20.1.6.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Frequency</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temperatrue1">
+            <type>temp</type>
+            <sensorId>_RPDU_TEMP_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.42578.20.1.7.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="humidity1">
+            <type>humidity</type>
+            <sensorId>_RPDU_HUMIDITY_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.42578.20.1.8.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="minvol">
+            <type>voltage</type>
+            <sensorId>_MINIMUM_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.9.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Minimum Voltage</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="maxvol">
+            <type>voltage</type>
+            <sensorId>_MAXIMUM_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.10.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Maximum Voltage</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mincur">
+            <type>amperage</type>
+            <sensorId>_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.11.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Minimum Current</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="maxcur">
+            <type>amperage</type>
+            <sensorId>_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.12.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Maximum Current</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mintemp">
+            <type>temp</type>
+            <sensorId>_MINIMUM_TEMPERATURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.13.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Minimum Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="maxtemp">
+            <type>temp</type>
+            <sensorId>_MAXIMUM_TEMPERATURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.14.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Maximum Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="minhum">
+            <type>humidity</type>
+            <sensorId>_MINIMUM_HUMIDITY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.15.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Minimum Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="maxhum">
+            <type>humidity</type>
+            <sensorId>_MAXIMUM_HUMIDITY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.42578.20.1.16.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Maximum Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+
+	</device>
+</APC_DDF>

@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!-- UPS MIB (RFC1628) DDF -->
 <APC_DDF
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-	ddfid="upsmib"
-	ddfname="UPS MIB"
-	ddfversion="15">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="upsmib"
+  ddfname="UPS MIB"
+  ddfversion="18">
   <schemaVersion>1.6</schemaVersion>
   <!-- UPS  MIB specific functionality -->
 
@@ -23,20 +23,20 @@
     <setProductData ruleid="modeldata" field="model">
       <getOid>.1.3.6.1.2.1.33.1.1.2.0</getOid>
     </setProductData>
-	
+
   </device>
-  
+
   <device deviceid="upsmibserialnum_easyUPSonly">
 	<oidMustExist ruleid="mib2objidtest" oid=".1.3.6.1.2.1.33.1.1.1.0"/>
 	<oidMustMatch ruleid="easyUPSsysobjid" oid=".1.3.6.1.2.1.1.2.0">
 		<valueList>
-			<value>.1.3.6.1.4.1.935.*</value> <!-- Check is Easy UPS device -->
+			<value>.1.3.6.1.4.1.935.*</value> <!-- Check if Easy UPS device -->
 		</valueList>
 	</oidMustMatch>
-	
-	<!-- Verifies first character at .1.3.6.1.2.1.33.1.1.1.0 is not a letter [A-Z] or blank-->
-	<!-- If not a letter [A-Z] or blank then read .1.3.6.1.2.1.33.1.1.1.0 for serial number -->
-	<valueMap ruleid="isSerialNum-vm">
+
+    <!-- Verifies first character at .1.3.6.1.2.1.33.1.1.1.0 is not a letter [A-Z] or blank-->
+    <!-- If not a letter [A-Z] or blank then read .1.3.6.1.2.1.33.1.1.1.0 for serial number -->
+    <valueMap ruleid="isSerialNum-vm">
 		<valueIn>0</valueIn><valueOut>1</valueOut>
 		<valueIn>1</valueIn><valueOut>1</valueOut>
 		<valueIn>2</valueIn><valueOut>1</valueOut>
@@ -50,7 +50,7 @@
 		<valueIn></valueIn><valueOut>0</valueOut>
 		<valueIn>*</valueIn><valueOut>0</valueOut>
 	</valueMap>
-	
+
 	<setProductData ruleid="serialnumber" field="serial_num">
 		<if>
 			<op>
@@ -68,7 +68,22 @@
 		</if>
 	</setProductData>
    </device>
-  
+
+  <device deviceid="upsmibserialnum_easyUpsSrvOnly">
+    <oidMustExist ruleid="mib2objidtest" oid=".1.3.6.1.2.1.33.1.1.1.0"/>
+    <oidMustExist ruleid="srvOidExists" oid=".1.3.6.1.4.1.21111.1" istree="yes"/>
+    <oidMustMatch ruleid="srvModelCheck" oid=".1.3.6.1.2.1.33.1.1.2.0">
+      <valueList>
+        <value>SRV*</value> <!-- Check if SRV UPS device -->
+      </valueList>
+    </oidMustMatch>
+
+    <setProductData ruleid="typedata" field="type">UPS</setProductData>
+    <setProductData ruleid="serialnumber" field="serial_num">
+      <getOid>.1.3.6.1.2.1.33.1.1.5.0</getOid>
+    </setProductData>
+   </device>
+
   <!-- UPS Type -->
   <device deviceid="upsmibdisctypedata">
     <oidMustExist ruleid="mib2objidtest" oid=".1.3.6.1.2.1.33.1.1.1.0"/>
@@ -78,7 +93,7 @@
         <value>.1.3.6.1.2.1.33.*</value> <!-- UPS device -->
       </valueList>
     </oidMustMatch>
-    
+
     <suppressRule ruleid="stompmib2type" suppressid="core/mib2data/typedata"/>
     <setProductData ruleid="typedata" field="type">UPS</setProductData>
 
@@ -90,11 +105,16 @@
     </setProductData>
 
   </device>
-  
+
   <device deviceid="upsmib">
     <oidMustExist ruleid="upsMibDetect" oid=".1.3.6.1.2.1.33.1" istree="yes"/>
 
-  <!-- upsBattery section -->
+		<valueMap ruleid="deleteNull-vm">
+			<valueIn>65535</valueIn><valueOut>[false]</valueOut>
+			<valueIn>*</valueIn><valueOut>true</valueOut>
+		</valueMap>
+
+    <!-- upsBattery section -->
     <!-- upsBatteryStatus	-->
     <stateSensor ruleid="upsBatteryStatus">
       <type>state/battstatus</type>
@@ -130,7 +150,7 @@
       <sensorId>_TIME_ON_BATT</sensorId>
       <value>
 		<!-- doesn't show up in DCO unless displaying in minutes -->
-		<div>
+        <div>
         <op><getOid>.1.3.6.1.2.1.33.1.2.2.0</getOid></op>
 		<op>60</op>
 		</div>
@@ -142,6 +162,11 @@
 
     <!-- upsEstimatedMinutesRemaining -->
     <numSensor ruleid="upsEstimatedMinutesRemaining">
+			<rowTest>
+				<mapValue mapid="deleteNull-vm">
+				  <getOid>.1.3.6.1.2.1.33.1.2.3.0</getOid>
+				</mapValue>
+			</rowTest>
       <type>timeinmin/timeremainingonbatt</type>
       <sensorId>TIME_REMAINING_ON_BATT</sensorId>
       <value>
@@ -207,7 +232,7 @@
       <sensorSet>UPS Battery Status</sensorSet>
     </numSensor>
 
-  <!-- upsInput -->
+    <!-- upsInput -->
     <!-- upsInputFrequency -->
     <numSensor ruleid="upsInputFrequency" index=".1.3.6.1.2.1.33.1.3.3.1.2">
       <type>frequency/inputfrequency</type>
@@ -223,9 +248,9 @@
       <label>Input Frequency - Phase <rowIndex/></label>
       <sensorSet>Input - Phase <rowIndex/></sensorSet>
     </numSensor>
-    
+
     <!-- upsInputVoltage -->
-    <numSensor ruleid="upsInputVoltage" index=".1.3.6.1.2.1.33.1.3.3.1.2">
+    <numSensor ruleid="upsInputVoltage" index=".1.3.6.1.2.1.33.1.3.3.1.3">
       <type>voltageAC/input/phase</type>
       <sensorId>_INPUT_VOLTAGE_<rowIndex/></sensorId>
       <value>
@@ -236,7 +261,7 @@
     </numSensor>
 
     <!-- upsInputCurrent -->
-    <numSensor ruleid="upsInputCurrent" index=".1.3.6.1.2.1.33.1.3.3.1.2">
+    <numSensor ruleid="upsInputCurrent" index=".1.3.6.1.2.1.33.1.3.3.1.4">
       <type>amperage/input/phase</type>
       <sensorId>_INPUT_AMPS_<rowIndex/></sensorId>
       <value>
@@ -252,7 +277,7 @@
     </numSensor>
 
     <!-- upsInputTruePower -->
-    <numSensor ruleid="upsInputTruePower" index=".1.3.6.1.2.1.33.1.3.3.1.2">
+    <numSensor ruleid="upsInputTruePower" index=".1.3.6.1.2.1.33.1.3.3.1.5">
       <type>powerW/outputpower/phase</type>
       <sensorId>INPUT_POWER_PHASE<rowIndex/></sensorId>
       <value>
@@ -262,7 +287,7 @@
       <sensorSet>Input - Phase <rowIndex/></sensorSet>
     </numSensor>
 
-  <!-- upsOutput -->
+    <!-- upsOutput -->
     <!-- upsOutputSource -->
     <stateSensor ruleid="upsOutputSource">
       <type>state/outputsource</type>
@@ -301,7 +326,7 @@
       <label>Output Frequency</label>
       <sensorSet>UPS Output</sensorSet>
     </numSensor>
-    
+
     <!-- upsOutputVoltage -->
     <numSensor ruleid="upsOutputVoltage" index=".1.3.6.1.2.1.33.1.4.4.1.2">
       <type>voltageAC/output/phase</type>
@@ -314,7 +339,7 @@
     </numSensor>
 
     <!-- upsOutputCurrent -->
-    <numSensor ruleid="upsOutputCurrent" index=".1.3.6.1.2.1.33.1.4.4.1.2">
+    <numSensor ruleid="upsOutputCurrent" index=".1.3.6.1.2.1.33.1.4.4.1.3">
       <type>amperage/output/phase</type>
       <sensorId>_OUTPUT_AMPS_<rowIndex/></sensorId>
       <value>
@@ -328,9 +353,9 @@
       <label>Output Current - Phase <rowIndex/></label>
       <sensorSet>Output - Phase <rowIndex/></sensorSet>
     </numSensor>
-    
+
     <!-- upsOutputPower -->
-    <numSensor ruleid="upsOutputPower" index=".1.3.6.1.2.1.33.1.4.4.1.2">
+    <numSensor ruleid="upsOutputPower" index=".1.3.6.1.2.1.33.1.4.4.1.4">
       <type>powerW/inputpower/phase</type>
       <sensorId>_OUTPUT_POWER_<rowIndex/></sensorId>
       <value>
@@ -339,9 +364,9 @@
       <label>Output Power - Phase <rowIndex/></label>
       <sensorSet>Output - Phase <rowIndex/></sensorSet>
     </numSensor>
-    
+
     <!-- upsOutputPercentLoad -->
-    <numSensor ruleid="upsOutputPercentLoad" index=".1.3.6.1.2.1.33.1.4.4.1.2">
+    <numSensor ruleid="upsOutputPercentLoad" index=".1.3.6.1.2.1.33.1.4.4.1.5">
       <type>pctofcapacity/outputload/phase</type>
       <sensorId>_OUTPUT_LOAD_<rowIndex/></sensorId>
       <value>
@@ -352,7 +377,7 @@
       <sensorSet>Output - Phase <rowIndex/></sensorSet>
     </numSensor>
 
-  <!-- upsBypass -->
+    <!-- upsBypass -->
     <!-- upsBypassFrequency -->
     <numSensor ruleid="upsBypassFrequency">
       <type>frequency/bypassfrequency</type>
@@ -381,7 +406,7 @@
     </numSensor>
 
     <!-- upsBypassCurrent -->
-    <numSensor ruleid="upsBypassCurrent" index=".1.3.6.1.2.1.33.1.5.3.1.2">
+    <numSensor ruleid="upsBypassCurrent" index=".1.3.6.1.2.1.33.1.5.3.1.3">
       <type>amperage/bypass/phase</type>
       <sensorId>_INPUT_CURRENT_2_1_<rowIndex/></sensorId>
       <value>
@@ -397,7 +422,7 @@
     </numSensor>
 
     <!-- upsBypassPower -->
-    <numSensor ruleid="upsBypassPower" index=".1.3.6.1.2.1.33.1.5.3.1.2">
+    <numSensor ruleid="upsBypassPower" index=".1.3.6.1.2.1.33.1.5.3.1.4">
       <type>powerW/bypasspower/phase</type>
       <sensorId>BYPASS_POWER_PHASE<rowIndex/></sensorId>
       <value>
@@ -405,7 +430,7 @@
       </value>
       <label>Bypass Power - Phase <rowIndex/></label>
       <sensorSet>Bypass - Phase <rowIndex/></sensorSet>
-    </numSensor>  
+    </numSensor>
 
     <!-- Total Output Power Sensor -->
     <numSensor ruleid="totalPowerOutputSensor">
@@ -871,6 +896,7 @@
       <valueIn>.1.3.6.1.2.1.33.1.6.3.22</valueIn>    <valueOut>22</valueOut>
       <valueIn>.1.3.6.1.2.1.33.1.6.3.23</valueIn>    <valueOut>23</valueOut>
       <valueIn>.1.3.6.1.2.1.33.1.6.3.24</valueIn>    <valueOut>24</valueOut>
+	  <valueIn>*</valueIn>   					     <valueOut>0</valueOut>
     </valueMap>
     
   </device>
@@ -1134,12 +1160,12 @@
 			<sensorSet>Sensor Man</sensorSet>
 		</stateSensor>
 	</device>
-	
-	<!-- aux -->
-	
-	
-	<!-- sts -->
-	<device deviceid="sts">
+
+  <!-- aux -->
+
+
+  <!-- sts -->
+  <device deviceid="sts">
 		<oidMustExist ruleid="sts_exists" istree="yes" oid=".1.3.6.1.2.1.33.1.13"/>
 	
 		<enumMap ruleid="no_yes-em">

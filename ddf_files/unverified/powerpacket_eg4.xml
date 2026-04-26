@@ -1,94 +1,1350 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<APC_DDF 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd" 
-	ddfid="powerpacket_eg4" 
-	ddfname="PowerPacket eg4" 
-	ddfversion="5" 
+
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="powerpacket_eg4"
+	ddfname="PacketPower Ethernet Gateway Version 4"
+	ddfversion="6"
 	canremove="yes">
-	
+
 	<schemaVersion>1.6</schemaVersion>
-	
+
 	<device deviceid="powerpacket_eg4">
-		<setProductData ruleid="vendordata" field="vendor">PowerPacket</setProductData>
-		<setProductData ruleid="modeldata" field="model">EG4</setProductData>
-		<setProductData ruleid="typedata" field="type">Generic Device</setProductData>
+		<oidMustExist ruleid="power_packet_eg4_exists" oid=".1.3.6.1.4.1.33688.4" istree="yes"/>
 
-		<oidMustExist ruleid="power_packet_eg4_exists" oid=".1.3.6.1.4.1.33688" istree="yes"/> 
+		<setProductData ruleid="vendordata" field="vendor">PacketPower</setProductData>
+		<setProductData ruleid="modeldata" field="model">Ethernet Gateway Version 4</setProductData>
 
-		<numSensor ruleid="powerpacketeg4" index=".1.3.6.1.4.1.33688.4.1.1.12">
-			<type>
-				<mapValue mapid="sensor_type_vm">
-					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.13</getRowOid>
-				</mapValue>
-			</type>
-			<units>
-				<mapValue mapid="units_type_vm">
-					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.13</getRowOid>
-				</mapValue>
-			</units>
-			<sensorId>_ROOM_TEMPERATURE_<rowIndex />
-			</sensorId>
+		<!--
+			NOTICE
+			Previous versions of this DDF had no device type set ("Generic Device"); this was changed for DCO/ITA compatibility.
+
+			This device can be configured as either an Environmental Monitor or a Power Meter, depending on the devices attached.
+			You will need to manually comment/uncomment the below <setProductData> depending on customer configuration.
+
+			Future sensors for which ITA mapping is not supported should be included in this device section ('powerpacket_eg4').
+			Sensors for which ITA mapping is supported should be included in the type-appropriate section:
+				powerpacket_eg4_environmental
+				powerpacket_eg4_powermeter
+		-->
+		<setProductData ruleid="typedata" field="type">Environmental Monitor</setProductData>
+		<!--<setProductData ruleid="typedata" field="type">Power Meter</setProductData>-->
+
+		<valueMap ruleid="contact-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="contact-em">
+			<label>Open</label>
+			<label>Closed</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<numSensor ruleid="eg4_vdd" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.190$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>EG4_VDD_<rowIndex/></sensorId>
 			<value>
-				<mult>
-					<op>
-						<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
-					</op>
-					<op>				
-						<mapValue mapid="scaling_value_vm">
-							<getRowOid>.1.3.6.1.4.1.33688.4.1.1.13</getRowOid>
-						</mapValue>
-					</op>
-				</mult>
-			</value>	
-			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid>
-				<space/>
-				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid>
-				
-			</label>
-			<sensorSet>Node <substring start="0" end="4">
-					<rowIndex/>
-				</substring>
-			</sensorSet>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+	</device>
+
+	<device deviceid="powerpacket_eg4_environmental">
+		<oidMustExist ruleid="power_packet_eg4_exists" oid=".1.3.6.1.4.1.33688.4" istree="yes"/>
+
+		<numSensor ruleid="eg4_temperature0" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.100$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP0</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature1" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.101$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP1</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature2" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.102$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP2</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature3" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.103$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP3</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature4" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.104$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP4</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature5" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.105$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP5</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature6" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.106$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP6</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature7" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.107$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP7</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature8" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.108$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP8</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature9" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.109$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP9</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature10" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.110$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP10</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature11" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.111$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP11</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_temperature12" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.112$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_TEMP12</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
 		</numSensor>
 
-		<valueMap ruleid="sensor_type_vm">
-			<valueIn>Wh</valueIn>
-			<valueOut>num/kdisprealenergy</valueOut>
-			<valueIn>W</valueIn>
-			<valueOut>powerW</valueOut> 
-			<valueIn>mA</valueIn>
-			<valueOut>num</valueOut>
-			<valueIn>mV</valueIn>
-			<valueOut>voltage</valueOut>
-			<valueIn>mHz</valueIn>
-			<valueOut>frequency</valueOut>
-			<valueIn>deg</valueIn>
-			<valueOut>num</valueOut> 
-			<valueIn>ddegC</valueIn>
-			<valueOut>temp</valueOut>
-			<valueIn>VA</valueIn>
-			<valueOut>powerVA/powerVAR</valueOut>		
-			<valueIn>*</valueIn>
-			<valueOut>num</valueOut>
-		</valueMap>
+		<numSensor ruleid="eg4_humidity" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.191$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_0</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_dewpoint" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.193$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_DEWPOINT_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
 
-		<valueMap ruleid="units_type_vm"> 
-			<valueIn>mA</valueIn>
-			<valueOut>milliamps</valueOut>	
-			<valueIn>*</valueIn>
-			<valueOut/>
-		</valueMap>	
-		
-		<valueMap ruleid="scaling_value_vm"> 
-			<valueIn>mHz</valueIn>
-			<valueOut>0.001</valueOut>	
-			<valueIn>mV</valueIn>
-			<valueOut>0.001</valueOut>
-			<valueIn>ddegC</valueIn>
-			<valueOut>0.1</valueOut>
-			<valueIn>*</valueIn>
-			<valueOut>1</valueOut>	
-		</valueMap>		
+		<stateSensor ruleid="eg4_contact1" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.211$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT1_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact2" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.212$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT2_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact3" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.213$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT3_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact4" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.214$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT4_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact5" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.215$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT5_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact6" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.216$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT6_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact7" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.217$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT7_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact8" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.218$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT8_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact9" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.219$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT9_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact10" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.220$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT10_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact11" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.233$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT11_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="eg4_contact12" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.234$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>state</type>
+			<sensorId>EG4_CONTACT12_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="powerpacket_eg4/powerpacket_eg4/contact-vm">
+					<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<enum>powerpacket_eg4/powerpacket_eg4/contact-em</enum>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</stateSensor>
+
+		<numSensor ruleid="eg4_humidity1" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.320$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_1</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity2" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.321$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_2</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity3" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.322$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_3</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity4" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.323$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_4</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity5" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.324$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_5</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity6" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.325$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_6</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity7" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.326$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_7</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity8" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.327$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_8</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity9" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.328$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_9</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity10" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.329$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_10</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity11" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.330$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_11</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_humidity12" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.331$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>EG4_<rowIndex/>_PROBE_HUMIDITY_PERCENTAGE_12</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+
+	</device>
+
+	<device deviceid="powerpacket_eg4_powermeter">
+		<oidMustExist ruleid="power_packet_eg4_exists" oid=".1.3.6.1.4.1.33688.4" istree="yes"/>
+
+		<numSensor ruleid="eg4_energy" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.1$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>EG4_<rowIndex/>_TOTAL_ENERGY_KWH_1</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_energya" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.2$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>EG4_ENERGYA_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_energyb" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.3$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>EG4_ENERGYB_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_energyc" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.4$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>EG4_ENERGYC_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_power" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.10$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>EG4_<rowIndex/>_TOTAL_POWER_KW_1</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_powera" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.11$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>EG4_<rowIndex/>_REAL_POWER_1</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_powerb" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.12$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>EG4_<rowIndex/>_REAL_POWER_2</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_powerc" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.13$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>EG4_<rowIndex/>_REAL_POWER_3</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_current" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.20$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>EG4_CURRENT_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_currenta" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.21$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>EG4_<rowIndex/>_CURRENT_1</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_currentb" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.22$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>EG4_<rowIndex/>_CURRENT_2</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_currentc" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.23$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>EG4_<rowIndex/>_CURRENT_3</sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_currentn" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.248$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>EG4_CURRENTN_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_voltage" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.30$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>EG4_VOLTAGE_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_voltagea" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.31$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>EG4_VOLTAGEA_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_voltageb" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.32$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>EG4_VOLTAGEB_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_voltagec" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.33$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>EG4_VOLTAGEC_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_frequency" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.50$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>frequency</type>
+			<sensorId>EG4_FREQUENCY_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_phaseanglea" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.51$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>num</type>
+			<units>degreesAngle</units>
+			<sensorId>EG4_PHASEANGLEA_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_phaseangleb" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.52$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>num</type>
+			<units>degreesAngle</units>
+			<sensorId>EG4_PHASEANGLEB_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_phaseanglec" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.53$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>num</type>
+			<units>degreesAngle</units>
+			<sensorId>EG4_PHASEANGLEC_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="eg4_temperature" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.60$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>EG4_TEMPERATURE_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_var" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.70$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>powerVA/powerVAR</type>
+			<sensorId>EG4_VAR_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_vara" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.71$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>powerVA/powerVAR</type>
+			<sensorId>EG4_VARA_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_varb" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.72$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>powerVA/powerVAR</type>
+			<sensorId>EG4_VARB_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_varc" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.73$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>powerVA/powerVAR</type>
+			<sensorId>EG4_VARC_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="eg4_voltageab" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.260$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>EG4_VOLTAGEAB_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_voltagebc" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.261$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>EG4_VOLTAGEBC_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_voltageca" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.262$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>EG4_VOLTAGECA_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="eg4_vmax" index=".1.3.6.1.4.1.33688.4.1.1.12">
+			<rowTest>
+				<regex>
+					<op>\d+\.\d+\.\d+\.\d+\.402$</op>
+					<op><rowIndex/></op>
+					<op>[true]</op>
+					<op>[false]</op>
+				</regex>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>EG4_VMAX_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.33688.4.1.1.12</getRowOid></op><op>0.001</op></mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid><space/>-<space/><getRowOid>.1.3.6.1.4.1.33688.4.1.1.8</getRowOid></label>
+			<sensorSet>Node <getRowOid>.1.3.6.1.4.1.33688.4.1.1.6</getRowOid></sensorSet>
+		</numSensor>
+
 	</device>
 </APC_DDF>

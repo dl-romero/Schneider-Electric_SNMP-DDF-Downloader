@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <APC_DDF
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-	ddfid="coolit_chx750"
-	ddfname="CoolIT CHx750"
-	ddfversion="5"
-	canremove="yes">
-	
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="coolit_chx750"
+  ddfname="Cooltera FS400/CoolIT CHx750 CDU"
+  ddfversion="7"
+  canremove="yes">
+
 	<!--
 		SOURCE
 		/snmp/resources/mibs/coolit/CHx750v5.mib
 		/snmp/resources/mibs/coolit/Cooltera Global.mib
-		
+
 		24 January 2020
 	-->
-		 
-	<schemaVersion>1.6</schemaVersion>
+
+  <schemaVersion>1.6</schemaVersion>
 	<device deviceid="cdu_discovery">
-		<oidMustExist ruleid="cdu_exists" oid=".1.3.6.1.4.1.51077.1" istree="yes"/> 
-		
+		<oidMustExist ruleid="cdu_exists" oid=".1.3.6.1.4.1.51077.1" istree="yes"/>
+
         <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
         <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
         <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
 
-		<setProductData ruleid="vendordata" field="vendor">CoolIT</setProductData>
-		<setProductData ruleid="modeldata" field="model">CHx750</setProductData>
+		<setProductData ruleid="vendordata" field="vendor">Coolterra/CoolIT</setProductData>
+		<setProductData ruleid="modeldata" field="model">FS400/CHx750</setProductData>
 		<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
 	</device>
-	
+
 	<device deviceid="commonValueMaps">
-		<oidMustExist ruleid="cduRdhx_exists" oid=".1.3.6.1.4.1.51077.1" istree="yes"/> 
-		
+		<oidMustExist ruleid="cduRdhx_exists" oid=".1.3.6.1.4.1.51077.1" istree="yes"/>
+
 		<valueMap ruleid="2state-vm">
 			<valueIn>*</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
 			<valueIn>2</valueIn><valueOut>2</valueOut>
 		</valueMap>
-		
+
 		<enumMap ruleid="rdAlarmStatus-em">
 			<label>Unknown</label>
 			<label>Inactive</label>
 			<label>Active</label>
 		</enumMap>
-		
+
 		<valueMap ruleid="3state-vm">
 			<valueIn>*</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
 			<valueIn>2</valueIn><valueOut>2</valueOut>
 			<valueIn>3</valueIn><valueOut>3</valueOut>
 		</valueMap>
-		
+
 		<enumMap ruleid="cduStatusCurrentPump-em">
 			<label>Unknown</label>
 			<label>Pump 1 and 2</label>
 			<label>Pump 1</label>
 			<label>Pump 2</label>
 		</enumMap>
-		
+
 		<valueMap ruleid="4state-vm">
 			<valueIn>*</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -64,7 +64,7 @@
 			<valueIn>3</valueIn><valueOut>3</valueOut>
 			<valueIn>4</valueIn><valueOut>4</valueOut>
 		</valueMap>
-		
+
 		<enumMap ruleid="cduStatusGroupMode-em">
 			<label>Unknown</label>
 			<label>Standalone</label>
@@ -72,7 +72,7 @@
 			<label>Slave</label>
 			<label>Independent</label>
 		</enumMap>
-		
+
 		<valueMap ruleid="9state-vm">
 			<valueIn>*</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -85,7 +85,7 @@
 			<valueIn>8</valueIn><valueOut>8</valueOut>
 			<valueIn>9</valueIn><valueOut>9</valueOut>
 		</valueMap>
-		
+
 		<enumMap ruleid="rdStatusMode-em">
 			<label>Unknown</label>
 			<label>Not Configured</label>
@@ -98,7 +98,7 @@
 			<label>Comms Failure</label>
 			<label>Not Connected</label>
 		</enumMap>
-		
+
 		<valueMap ruleid="10state-vm">
 			<valueIn>*</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -112,7 +112,7 @@
 			<valueIn>9</valueIn><valueOut>9</valueOut>
 			<valueIn>10</valueIn><valueOut>10</valueOut>
 		</valueMap>
-		
+
 		<enumMap ruleid="cduStatusMode-em">
 			<label>Unknown</label>
 			<label>Not Configured</label>
@@ -126,12 +126,12 @@
 			<label>Fault Shutdown</label>
 			<label>Group Standby</label>
 		</enumMap>
-		
+
 	</device>
-	
+
 	<device deviceid="statusSI">
 		<oidMustExist ruleid="statusSI_exists" oid=".1.3.6.1.4.1.51077.1.1" istree="yes"/>
-		
+
 		<valueMap ruleid="delete_null_sensor-vm">
 			<valueIn>32767</valueIn><valueOut>[false]</valueOut>
 			<valueIn>*</valueIn><valueOut>[true]</valueOut>
@@ -758,23 +758,26 @@
         </numSensor>
 
 	</device>
-	
+
 	<device deviceid="statusRearDoors">
 		<oidMustExist ruleid="statusRearDoors_exists" oid=".1.3.6.1.4.1.51077.1.7" istree="yes"/>
-		
+
 		<valueMap ruleid="delete_null_sensor-vm">
-			<valueIn>9</valueIn><valueOut>[false]</valueOut>
-			<valueIn>*</valueIn><valueOut>[true]</valueOut>
+			<valueIn>1</valueIn><valueOut>[false]</valueOut> <!-- rdmodeNotConfigured -->
+      <valueIn>9</valueIn><valueOut>[false]</valueOut> <!-- rdmodeNotConnected -->
+      <valueIn>*</valueIn><valueOut>[true]</valueOut>
 		</valueMap>
-		
+
         <stateSensor ruleid="rdStatusMode" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
-			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+			<!--  commenting out this rowTest as door not configured/not connected
+                  information could be useful for user troubleshooting
+
+            <rowTest>
+                <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
-			</rowTest>
-            <type>state</type>
+			</rowTest> -->
+          <type>state</type>
             <sensorId>OPERATING_MODE_<rowIndex/></sensorId>
             <value>
                 <mapValue mapid="coolit_chx750/commonValueMaps/9state-vm">
@@ -787,8 +790,8 @@
         </stateSensor>
         <stateSensor ruleid="rdAlarmStatus" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -802,12 +805,12 @@
             <label>RDHx <getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.1</getRowOid> Alarm Status</label>
             <enum>coolit_chx750/commonValueMaps/rdAlarmStatus-em</enum>
             <sensorSet>Rear Door</sensorSet>
-        </stateSensor>		
+        </stateSensor>
 
         <numSensor ruleid="rdStatusRDHxExitTempT1" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -825,8 +828,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusServerExitTempT2" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -844,8 +847,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusServerInletTempT3" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -863,8 +866,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusDiffPressure" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -882,8 +885,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusFanSpeed" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -898,8 +901,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusValveDemand" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -914,8 +917,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusRDHxExitTempT1a" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -933,8 +936,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusRDHxExitTempT1b" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -952,8 +955,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusRDHxExitTempT1c" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -971,8 +974,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusServerExitTempT2a" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -990,8 +993,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusServerExitTempT2b" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -1009,8 +1012,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusServerExitTempT2c" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -1028,8 +1031,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusServerInletTempT3a" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -1047,8 +1050,8 @@
         </numSensor>
         <numSensor ruleid="rdStatusServerInletTempT3b" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
 			<rowTest>
-				<!-- do not show if RDHx is not connected -->
-				<mapValue mapid="delete_null_sensor-vm">
+				<!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm">
 					<getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -1066,6 +1069,9 @@
         </numSensor>
 
         <alarmFlags2 ruleid="rdAlarmStatusA01" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.18</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1081,6 +1087,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA02" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.19</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1096,6 +1105,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA03" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.20</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1111,6 +1123,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA04" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.21</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1126,6 +1141,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA05" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.22</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1141,6 +1159,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA06" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.23</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1156,6 +1177,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA07" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.24</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1171,6 +1195,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA08" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.25</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1186,6 +1213,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA09" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.26</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1201,6 +1231,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA10" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.27</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1216,6 +1249,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA11" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.28</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1231,6 +1267,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA12" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.29</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1246,6 +1285,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA13" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.30</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1261,6 +1303,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA14" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.31</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1276,6 +1321,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA15" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.32</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1291,6 +1339,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA16" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.33</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1306,6 +1357,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA17" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.34</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1321,6 +1375,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA18" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.35</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1336,6 +1393,9 @@
             </alarmFlagsTest>
         </alarmFlags2>
         <alarmFlags2 ruleid="rdAlarmStatusA19" index=".1.3.6.1.4.1.51077.1.7.1.1.1">
+			<rowTest> <!-- do not show if RDHx is not configured/connected -->
+        <mapValue mapid="delete_null_sensor-vm"><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.2</getRowOid></mapValue>
+			</rowTest>
             <value><getRowOid>.1.3.6.1.4.1.51077.1.7.1.1.36</getRowOid></value>
             <alarmFlagsTest match="2">
                 <name>
@@ -1350,6 +1410,849 @@
                 </description>
             </alarmFlagsTest>
         </alarmFlags2>
-	
+	</device>
+	<device deviceid="cduAlarms">
+		<oidMustExist ruleid="cduAlarms_exists" oid=".1.3.6.1.4.1.51077.1.8" istree="yes"/>
+
+        <alarmFlags ruleid="cduAlarmStatusA01_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.1.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A01 - T1 Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A01 - T1 Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A01 - T1 Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A01 - T1 Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA02_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.2.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A02 - T2a Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A02 - T2a Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A02 - T2a Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A02 - T2a Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA03_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.3.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A03 - T2b Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A03 - T2b Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A03 - T2b Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A03 - T2b Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA04_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.4.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A04 - T2c Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A04 - T2c Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A04 - T2c Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A04 - T2c Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA05_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.5.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A05 - T3a Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A05 - T3a Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A05 - T3a Temperature Sensor Fault Alarm</activeText>
+                    <inactiveText>CDU Alarm A05 - T3a Temperature Sensor Fault Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA06_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.6.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A06 Alarm</activeText>
+                    <inactiveText>CDU Alarm A06 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A06 Alarm</activeText>
+                    <inactiveText>CDU Alarm A06 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA07_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.7.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A07 Alarm</activeText>
+                    <inactiveText>CDU Alarm A07 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A07 Alarm</activeText>
+                    <inactiveText>CDU Alarm A07 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA08_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.8.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A08 Alarm</activeText>
+                    <inactiveText>CDU Alarm A08 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A08 Alarm</activeText>
+                    <inactiveText>CDU Alarm A08 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA09_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.9.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A09 Alarm</activeText>
+                    <inactiveText>CDU Alarm A09 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A09 Alarm</activeText>
+                    <inactiveText>CDU Alarm A09 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA10_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.10.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A10 Alarm</activeText>
+                    <inactiveText>CDU Alarm A10 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A10 Alarm</activeText>
+                    <inactiveText>CDU Alarm A10 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA11_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.11.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A11 Alarm</activeText>
+                    <inactiveText>CDU Alarm A11 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A11 Alarm</activeText>
+                    <inactiveText>CDU Alarm A11 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA12_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.12.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A12 Alarm</activeText>
+                    <inactiveText>CDU Alarm A12 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A12 Alarm</activeText>
+                    <inactiveText>CDU Alarm A12 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA13_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.13.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A13 Alarm</activeText>
+                    <inactiveText>CDU Alarm A13 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A13 Alarm</activeText>
+                    <inactiveText>CDU Alarm A13 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA14_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.14.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A14 Alarm</activeText>
+                    <inactiveText>CDU Alarm A14 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A14 Alarm</activeText>
+                    <inactiveText>CDU Alarm A14 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA15_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.15.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A15 Alarm</activeText>
+                    <inactiveText>CDU Alarm A15 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A15 Alarm</activeText>
+                    <inactiveText>CDU Alarm A15 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA16_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.16.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A16 Alarm</activeText>
+                    <inactiveText>CDU Alarm A16 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A16 Alarm</activeText>
+                    <inactiveText>CDU Alarm A16 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA17_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.17.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A17 Alarm</activeText>
+                    <inactiveText>CDU Alarm A17 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A17 Alarm</activeText>
+                    <inactiveText>CDU Alarm A17 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA18_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.18.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A18 Alarm</activeText>
+                    <inactiveText>CDU Alarm A18 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A18 Alarm</activeText>
+                    <inactiveText>CDU Alarm A18 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA19_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.19.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A19 Alarm</activeText>
+                    <inactiveText>CDU Alarm A19 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A19 Alarm</activeText>
+                    <inactiveText>CDU Alarm A19 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA20_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.20.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A20 Alarm</activeText>
+                    <inactiveText>CDU Alarm A20 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A20 Alarm</activeText>
+                    <inactiveText>CDU Alarm A20 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA21_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.21.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A21 Alarm</activeText>
+                    <inactiveText>CDU Alarm A21 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A21 Alarm</activeText>
+                    <inactiveText>CDU Alarm A21 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA22_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.22.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A22 Alarm</activeText>
+                    <inactiveText>CDU Alarm A22 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A22 Alarm</activeText>
+                    <inactiveText>CDU Alarm A22 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA23_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.23.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A23 Alarm</activeText>
+                    <inactiveText>CDU Alarm A23 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A23 Alarm</activeText>
+                    <inactiveText>CDU Alarm A23 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA24_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.24.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A24 Alarm</activeText>
+                    <inactiveText>CDU Alarm A24 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A24 Alarm</activeText>
+                    <inactiveText>CDU Alarm A24 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA25_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.25.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A25 Alarm</activeText>
+                    <inactiveText>CDU Alarm A25 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A25 Alarm</activeText>
+                    <inactiveText>CDU Alarm A25 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA26_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.26.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A26 Alarm</activeText>
+                    <inactiveText>CDU Alarm A26 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A26 Alarm</activeText>
+                    <inactiveText>CDU Alarm A26 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA27_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.27.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A27 Alarm</activeText>
+                    <inactiveText>CDU Alarm A27 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A27 Alarm</activeText>
+                    <inactiveText>CDU Alarm A27 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA28_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.28.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A28 Alarm</activeText>
+                    <inactiveText>CDU Alarm A28 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A28 Alarm</activeText>
+                    <inactiveText>CDU Alarm A28 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA29_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.29.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A29 Alarm</activeText>
+                    <inactiveText>CDU Alarm A29 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A29 Alarm</activeText>
+                    <inactiveText>CDU Alarm A29 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA30_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.30.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A30 Alarm</activeText>
+                    <inactiveText>CDU Alarm A30 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A30 Alarm</activeText>
+                    <inactiveText>CDU Alarm A30 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA31_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.31.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A31 Alarm</activeText>
+                    <inactiveText>CDU Alarm A31 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A31 Alarm</activeText>
+                    <inactiveText>CDU Alarm A31 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA32_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.32.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A32 Alarm</activeText>
+                    <inactiveText>CDU Alarm A32 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A32 Alarm</activeText>
+                    <inactiveText>CDU Alarm A32 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA33_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.33.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A33 Alarm</activeText>
+                    <inactiveText>CDU Alarm A33 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A33 Alarm</activeText>
+                    <inactiveText>CDU Alarm A33 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA34_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.34.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A34 Alarm</activeText>
+                    <inactiveText>CDU Alarm A34 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A34 Alarm</activeText>
+                    <inactiveText>CDU Alarm A34 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA35_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.35.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A35 Alarm</activeText>
+                    <inactiveText>CDU Alarm A35 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A35 Alarm</activeText>
+                    <inactiveText>CDU Alarm A35 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA36_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.36.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A36 Alarm</activeText>
+                    <inactiveText>CDU Alarm A36 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A36 Alarm</activeText>
+                    <inactiveText>CDU Alarm A36 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA37_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.37.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A37 Alarm</activeText>
+                    <inactiveText>CDU Alarm A37 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A37 Alarm</activeText>
+                    <inactiveText>CDU Alarm A37 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA38_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.38.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A38 Alarm</activeText>
+                    <inactiveText>CDU Alarm A38 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A38 Alarm</activeText>
+                    <inactiveText>CDU Alarm A38 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA39_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.39.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A39 Alarm</activeText>
+                    <inactiveText>CDU Alarm A39 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A39 Alarm</activeText>
+                    <inactiveText>CDU Alarm A39 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA40_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.40.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A40 Alarm</activeText>
+                    <inactiveText>CDU Alarm A40 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A40 Alarm</activeText>
+                    <inactiveText>CDU Alarm A40 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA41_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.41.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A41 Alarm</activeText>
+                    <inactiveText>CDU Alarm A41 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A41 Alarm</activeText>
+                    <inactiveText>CDU Alarm A41 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA42_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.42.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A42 Alarm</activeText>
+                    <inactiveText>CDU Alarm A42 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A42 Alarm</activeText>
+                    <inactiveText>CDU Alarm A42 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA43_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.43.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A43 Alarm</activeText>
+                    <inactiveText>CDU Alarm A43 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A43 Alarm</activeText>
+                    <inactiveText>CDU Alarm A43 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA44_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.44.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A44 Alarm</activeText>
+                    <inactiveText>CDU Alarm A44 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A44 Alarm</activeText>
+                    <inactiveText>CDU Alarm A44 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA45_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.45.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A45 Alarm</activeText>
+                    <inactiveText>CDU Alarm A45 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A45 Alarm</activeText>
+                    <inactiveText>CDU Alarm A45 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA46_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.46.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A46 Alarm</activeText>
+                    <inactiveText>CDU Alarm A46 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A46 Alarm</activeText>
+                    <inactiveText>CDU Alarm A46 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA47_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.47.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A47 Alarm</activeText>
+                    <inactiveText>CDU Alarm A47 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A47 Alarm</activeText>
+                    <inactiveText>CDU Alarm A47 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA48_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.48.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A48 Alarm</activeText>
+                    <inactiveText>CDU Alarm A48 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A48 Alarm</activeText>
+                    <inactiveText>CDU Alarm A48 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA49_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.49.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A49 Alarm</activeText>
+                    <inactiveText>CDU Alarm A49 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A49 Alarm</activeText>
+                    <inactiveText>CDU Alarm A49 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA50_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.50.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A50 Alarm</activeText>
+                    <inactiveText>CDU Alarm A50 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A50 Alarm</activeText>
+                    <inactiveText>CDU Alarm A50 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA51_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.51.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A51 Alarm</activeText>
+                    <inactiveText>CDU Alarm A51 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A51 Alarm</activeText>
+                    <inactiveText>CDU Alarm A51 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA52_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.52.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A52 Alarm</activeText>
+                    <inactiveText>CDU Alarm A52 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A52 Alarm</activeText>
+                    <inactiveText>CDU Alarm A52 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA53_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.53.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A53 Alarm</activeText>
+                    <inactiveText>CDU Alarm A53 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A53 Alarm</activeText>
+                    <inactiveText>CDU Alarm A53 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA54_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.54.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A54 Alarm</activeText>
+                    <inactiveText>CDU Alarm A54 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A54 Alarm</activeText>
+                    <inactiveText>CDU Alarm A54 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA55_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.55.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A55 Alarm</activeText>
+                    <inactiveText>CDU Alarm A55 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A55 Alarm</activeText>
+                    <inactiveText>CDU Alarm A55 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cduAlarmStatusA56_alarm">
+            <value><getOid>.1.3.6.1.4.1.51077.1.8.56.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>CDU Alarm A56 Alarm</activeText>
+                    <inactiveText>CDU Alarm A56 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU Alarm A56 Alarm</activeText>
+                    <inactiveText>CDU Alarm A56 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
 	</device>
 </APC_DDF>

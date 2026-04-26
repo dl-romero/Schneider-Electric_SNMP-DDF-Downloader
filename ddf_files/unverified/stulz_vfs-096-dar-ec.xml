@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="stulz_vfs-096-dar-ec"
-	ddfname="Stulz VFS-096-DAR-EC [pcoWeb]"
+	ddfname="Stulz VFS-096-DAR-EC [pcoWeb][SNMP]"
 	ddfversion="2"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>

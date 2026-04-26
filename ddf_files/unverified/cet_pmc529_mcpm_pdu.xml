@@ -1,0 +1,4869 @@
+<?xml version="1.0"?>
+<APC_DDF
+
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="cet_pmc529_mcpm_pdu"
+	ddfname="CET PMC-529 MCPM PDU"
+	ddfversion="1"
+	canremove="yes">
+
+ <!--
+		SOURCE:
+		/snmp/resources/mibs/cet/CET-PMC592-MIB_V12.mib
+		
+		2 August 2024
+	-->
+	
+	<schemaVersion>1.6</schemaVersion>
+ 
+
+	
+	<!--device discovery-->
+    <device deviceid="cet_pmc529_mcpm_pdu_discovery">
+        <oidMustExist ruleid="cet_pmc529_mcpm_pdu_exists" oid=".1.3.6.1.4.1.40849.1" istree="yes"/>
+		
+        <setProductData ruleid="vendordata" field="vendor">CET</setProductData>
+		<setProductData ruleid="modeldata" field="model">PMC-529 MCPM</setProductData>
+		<setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+		<setProductData ruleid="serialNumber" field="serial_num">
+			<getOid>.1.3.6.1.4.1.40849.1.1.2.2.0</getOid>
+		</setProductData>
+		<setProductData ruleid="productVersion" field="appversion">
+			<getOid>.1.3.6.1.4.1.40849.1.1.2.3.0</getOid>
+		</setProductData>
+		<setDefaultLabel ruleid="labeldata">
+			<getOid>.1.3.6.1.4.1.40849.1.1.2.6.0</getOid>
+		</setDefaultLabel>
+		<setDefaultLabel ruleid="labelpanel1data">
+			<getOid>.1.3.6.1.4.1.40849.1.1.2.7.0</getOid>
+		</setDefaultLabel>
+		<setDefaultLabel ruleid="labelpanel2data">
+			<getOid>.1.3.6.1.4.1.40849.1.1.2.8.0</getOid>
+		</setDefaultLabel>
+
+		<numSensor ruleid="infoBranchNum">
+			<type>num</type>
+			<sensorId>INFO_BRANCH_NUM</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.40849.1.1.2.4.0</getOid>
+			</value>
+			<label>Device branches number</label>
+			<sensorSet>Device Info</sensorSet>
+		</numSensor>
+		<numSensor ruleid="infoTimeOfPowerUp">
+			<type>timeinsec</type>
+			<sensorId>INFO_TIME_OF_POWER_UP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.40849.1.1.2.5.0</getOid>
+			</value>
+			<label>Device branches number</label>
+			<sensorSet>Device Info</sensorSet>
+		</numSensor>
+
+		<!-- event data-->
+		<stateSensor ruleid="eventType">
+			<type>state</type>
+			<sensorId>EVENT_TYPE</sensorId>
+			<value>
+				<mapValue mapid="eventType-vm">
+					<getOid>.1.3.6.1.4.1.40849.1.1.2.9.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>Event Type</label>
+			<enum>eventType-em</enum>
+			<sensorSet>Device Info</sensorSet>
+		</stateSensor>
+
+		<numSensor ruleid="eventSubType">
+			<type>num</type>
+			<sensorId>EVENT_SUB_TYPE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.40849.1.1.2.9.2.0</getOid>
+			</value>
+			<label>Event Sub Type</label>
+			<sensorSet>Device Info</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eventChannel">
+			<type>num</type>
+			<sensorId>EVENT_CHANNEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.40849.1.1.2.9.3.0</getOid>
+			</value>
+			<label>Event Channel</label>
+			<sensorSet>Device Info</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eventValue">
+			<type>num</type>
+			<sensorId>EVENT_VALUE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.40849.1.1.2.9.4.0</getOid>
+			</value>
+			<label>Event Value</label>
+			<sensorSet>Device Info</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eventTimeSec">
+			<type>timeinsec</type>
+			<sensorId>EVENT_TIME_SEC</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.40849.1.1.2.9.5.0</getOid>
+			</value>
+			<label>Event Time Sec</label>
+			<sensorSet>Device Info</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eventTimeMsec">
+			<type>num</type>
+			<sensorId>EVENT_TIME_MSEC</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.40849.1.1.2.9.6.0</getOid>
+			</value>
+			<label>Event Time Milli Second</label>
+			<sensorSet>Device Info</sensorSet>
+		</numSensor>
+
+		<valueMap ruleid="eventType-vm">
+			<valueIn>0</valueIn>
+			<valueOut>0</valueOut>
+			<valueIn>1</valueIn>
+			<valueOut>1</valueOut>
+			<valueIn>2</valueIn>
+			<valueOut>2</valueOut>
+			<valueIn>3</valueIn>
+			<valueOut>3</valueOut>
+			<valueIn>4</valueIn>
+			<valueOut>4</valueOut>
+		</valueMap>
+		<enumMap ruleid="eventType-em">
+			<label>di</label>
+			<label>do</label>
+			<label>alarm</label>
+			<label>operation</label>
+			<label>checkself</label>
+		</enumMap>
+		
+    </device>
+	
+	
+	
+	<!--DIAGNOSTIC STATUS-->
+	<device deviceid="diagnostic">
+		<oidMustExist ruleid="diagnostic_exists" oid=".1.3.6.1.4.1.40849.1.1.3" istree="yes"/>
+		
+		<valueMap ruleid="2state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+		</valueMap>	
+		
+		<enumMap ruleid="InactiveActive-em">
+			<label>Ok</label>
+			<label>Error</label>			
+		</enumMap>
+		
+		
+		
+		<stateSensor ruleid="checkNvram">
+			<type>state</type>
+			<sensorId>CHECK_NVRAM</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.40849.1.1.3.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>NVRAM check result</label>
+			<enum>InactiveActive-em</enum>
+			<sensorSet>PDU status</sensorSet>
+		</stateSensor>	
+		
+		<stateSensor ruleid="checkDisk">
+			<type>state</type>
+			<sensorId>CHECK_DISK</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.40849.1.1.3.2.0</getOid>
+				</mapValue>
+			</value>
+			<label>Onboard disk check result</label>
+			<enum>InactiveActive-em</enum>
+			<sensorSet>PDU status</sensorSet>
+		</stateSensor>	
+		
+		<stateSensor ruleid="checkADC">
+			<type>state</type>
+			<sensorId>CHECK_ADC</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.40849.1.1.3.3.0</getOid>
+				</mapValue>
+			</value>
+			<label>A/D Convertor check result</label>
+			<enum>InactiveActive-em</enum>
+			<sensorSet>PDU status</sensorSet>
+		</stateSensor>	
+		
+		<stateSensor ruleid="checkCTStrip">
+			<type>state</type>
+			<sensorId>CHECK_CT_STRIP</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.40849.1.1.3.4.0</getOid>
+				</mapValue>
+			</value>
+			<label>CT strip check result</label>
+			<enum>InactiveActive-em</enum>
+			<sensorSet>PDU status</sensorSet>
+		</stateSensor>	
+		
+		<stateSensor ruleid="checkPower">
+			<type>state</type>
+			<sensorId>CHECK_POWER</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.40849.1.1.3.5.0</getOid>
+				</mapValue>
+			</value>
+			<label>Device's internal power supply check result</label>
+			<enum>InactiveActive-em</enum>
+			<sensorSet>PDU status</sensorSet>
+		</stateSensor>	
+		
+		<stateSensor ruleid="checkBattery">
+			<type>state</type>
+			<sensorId>CHECK_BATTERY</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.40849.1.1.3.6.0</getOid>
+				</mapValue>
+			</value>
+			<label>Onboard RTC(real time clock) battery check result</label>
+			<enum>InactiveActive-em</enum>
+			<sensorSet>PDU status</sensorSet>
+		</stateSensor>	
+		
+		<stateSensor ruleid="checkDSP">
+			<type>state</type>
+			<sensorId>CHECK_DSP</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.40849.1.1.3.7.0</getOid>
+				</mapValue>
+			</value>
+			<label>DSP check result</label>
+			<enum>InactiveActive-em</enum>
+			<sensorSet>PDU status</sensorSet>
+		</stateSensor>	
+		
+		<stateSensor ruleid="checkSettings">
+			<type>state</type>
+			<sensorId>CHECK_SETTINGS</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.40849.1.1.3.8.0</getOid>
+				</mapValue>
+			</value>
+			<label>Configurations check result</label>
+			<enum>InactiveActive-em</enum>
+			<sensorSet>PDU status</sensorSet>
+		</stateSensor>
+		
+	</device>
+
+
+
+	<!--ALARM STATUS-->
+	<device deviceid="alarm">
+		<oidMustExist ruleid="alarm_exists" oid=".1.3.6.1.4.1.40849.1.1.4" istree="yes"/>
+
+		<alarmFlags ruleid="Global_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.1.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Global Alarm</activeText>
+					<inactiveText>Global Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Global Alarm</activeText>
+					<inactiveText>Global Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1Global_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.2.0</getOid></value>
+						<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1, Global Alarm</activeText>
+					<inactiveText>Main 1, Global Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1, Global Alarm</activeText>
+					<inactiveText>Main 1, Global Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2Global_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.3.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2, Global Alarm</activeText>
+					<inactiveText>Main 2, Global Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2, Global Alarm</activeText>
+					<inactiveText>Main 2, Global Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		
+		<alarmFlags ruleid="Main1Ia_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.4.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 Ia, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ia, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 Ia, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ia, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 1 Ia, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ia, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 1 Ia, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ia, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1Ib_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.5.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 Ib, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ib, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 Ib, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ib, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 1 Ib, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ib, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 1 Ib, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ib, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1Ic_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.6.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 Ic, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ic, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 Ic, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ic, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 1 Ic, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ic, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 1 Ic, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ic, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1In_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.7.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 In, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 In, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 In, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 In, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 In, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 In, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 In, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 In, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 1 In, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 In, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 In, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 In, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 1 In, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 In, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 In, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 In, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1Ir_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.8.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 Ir, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ir, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ir, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ir, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 Ir, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ir, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ir, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ir, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 1 Ir, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ir, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ir, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ir, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 1 Ir, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ir, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ir, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ir, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1IaDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.9.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 Ia Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ia Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 Ia Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ia Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 1 Ia Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ia Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 1 Ia Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ia Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ia Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1IbDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.10.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 Ib Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ib Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 Ib Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ib Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 1 Ib Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ib Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 1 Ib Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ib Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ib Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1IcDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.11.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 Ic Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ic Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 Ic Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ic Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 1 Ic Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ic Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 1 Ic Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 Ic Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 1 Ic Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2Ia_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.12.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 Ia, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ia, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 Ia, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ia, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 2 Ia, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ia, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 2 Ia, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ia, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2Ib_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.13.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 Ib, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ib, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 Ib, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ib, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 2 Ib, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ib, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 2 Ib, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ib, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2Ic_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.14.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 Ic, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ic, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 Ic, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ic, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 2 Ic, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ic, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 2 Ic, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ic, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2In_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.15.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 In, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 In, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 In, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 In, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 In, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 In, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 In, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 In, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 2 In, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 In, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 In, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 In, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 2 In, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 In, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 In, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 In, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2Ir_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.16.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 Ir, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ir, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ir, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ir, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 Ir, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ir, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ir, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ir, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 2 Ir, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ir, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ir, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ir, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 2 Ir, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ir, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ir, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ir, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2IaDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.17.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 Ia Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ia Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 Ia Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ia Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 2 Ia Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ia Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 2 Ia Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ia Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ia Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2IbDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.18.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 Ib Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ib Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 Ib Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ib Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 2 Ib Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ib Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 2 Ib Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ib Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ib Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2IcDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.19.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 Ic Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ic Dmd, HH Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic Dmd, HH Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 Ic Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ic Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Main 2 Ic Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ic Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Main 2 Ic Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 Ic Dmd, LL Alarm Alarm</activeText>
+					<inactiveText>Main 2 Ic Dmd, LL Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		
+		<alarmFlags ruleid="Voltage1Ua_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.20.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 1 Ua, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ua, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Ua, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ua, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 1 Ua, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ua, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Ua, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ua, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage1Ub_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.21.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 1 Ub, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ub, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Ub, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ub, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 1 Ub, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ub, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Ub, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ub, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage1Uc_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.22.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 1 Uc, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uc, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Uc, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uc, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 1 Uc, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uc, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Uc, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uc, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage1Uab_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.23.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 1 Uab, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uab, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Uab, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uab, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 1 Uab, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uab, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Uab, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uab, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage1Ubc_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.24.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 1 Ubc, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ubc, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Ubc, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ubc, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 1 Ubc, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ubc, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Ubc, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Ubc, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage1Uca_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.25.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 1 Uca, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uca, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Uca, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uca, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 1 Uca, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uca, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 1 Uca, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 1 Uca, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage2Ua_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.26.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 2 Ua, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ua, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Ua, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ua, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 2 Ua, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ua, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Ua, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ua, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage2Ub_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.27.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 2 Ub, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ub, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Ub, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ub, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 2 Ub, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ub, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Ub, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ub, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage2Uc_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.28.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 2 Uc, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uc, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Uc, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uc, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 2 Uc, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uc, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Uc, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uc, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage2Uab_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.29.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 2 Uab, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uab, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Uab, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uab, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 2 Uab, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uab, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Uab, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uab, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage2Ubc_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.30.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 2 Ubc, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ubc, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Ubc, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ubc, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 2 Ubc, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ubc, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Ubc, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Ubc, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage2Uca_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.31.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Voltage 2 Uca, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uca, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Uca, H Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uca, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Voltage 2 Uca, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uca, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Voltage 2 Uca, L Alarm Alarm</activeText>
+					<inactiveText>Voltage 2 Uca, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Freq_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.32.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Frequency, H Alarm Alarm</activeText>
+					<inactiveText>Frequency, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Frequency, H Alarm Alarm</activeText>
+					<inactiveText>Frequency, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Frequency, L Alarm Alarm</activeText>
+					<inactiveText>Frequency, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Frequency, L Alarm Alarm</activeText>
+					<inactiveText>Frequency, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1kW_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.33.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 kW, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kW, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kW, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kW, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 kW, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kW, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kW, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kW, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1kvar_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.34.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 kvar, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvar, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kvar, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvar, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 kvar, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvar, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kvar, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvar, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1kVA_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.35.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 kvVA, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvVA, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kvVA, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvVA, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 kvVA, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvVA, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kvVA, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvVA, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1PF_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.36.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 PF, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 PF, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 PF, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 PF, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 PF, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 PF, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 PF, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 PF, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1kWDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.37.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 kW Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kW Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kW Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kW Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 kW Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kW Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kW Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kW Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1kvarDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.38.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 kvar Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvar Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kvar Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvar Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 kvar Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvar Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kvar Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kvar Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main1kVADmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.39.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1 kVA Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kVA Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kVA Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 1 kVA Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1 kVA Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kVA Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1 kVA Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 1 kVA Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2kW_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.40.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 kW, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kW, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kW, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kW, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 kW, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kW, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kW, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kW, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2kvar_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.41.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 kvar, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kvar, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kvar, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kvar, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 kvar, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kvar, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kvar, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kvar, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2kVA_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.42.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 kVA, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kVA, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kVA, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kVA, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 kVA, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kVA, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kVA, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kVA, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2PF_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.43.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 PF, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 PF, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 PF, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 PF, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 PF, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 PF, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 PF, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 PF, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2kWDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.44.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 kW Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kW Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kW Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kW Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 kW Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kW Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kW Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kW Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2kvarDmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.45.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 kvar Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kvar Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kvar Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kvar Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 kvar Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kvar Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kvar Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kvar Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2kVADmd_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.46.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2 kVA Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kVA Dmd, H Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kVA Dmd, H Alarm Alarm</activeText>
+					<inactiveText>Main 2 kVA Dmd, H Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2 kVA Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kVA Dmd, L Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2 kVA Dmd, L Alarm Alarm</activeText>
+					<inactiveText>Main 2 kVA Dmd, L Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Current1Unbalance_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.47.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Mains 1, I Unbalance Alarm</activeText>
+					<inactiveText>Mains 1, I Unbalance Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Mains 1, I Unbalance Alarm</activeText>
+					<inactiveText>Mains 1, I Unbalance Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Current2Unbalance_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.48.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Mains 2, I Unbalance Unbalance Alarm</activeText>
+					<inactiveText>Mains 2, I Unbalance Unbalance Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Mains 2, I Unbalance Unbalance Alarm</activeText>
+					<inactiveText>Mains 2, I Unbalance Unbalance Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage1Unbalance_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.49.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Mains 1, U Unbalance Unbalance Alarm</activeText>
+					<inactiveText>Mains 1, U Unbalance Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Mains 1, U Unbalance Alarm</activeText>
+					<inactiveText>Mains 1, U Unbalance Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Voltage2Unbalance_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.50.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Mains 2, U Unbalance Alarm</activeText>
+					<inactiveText>Mains 2, U Unbalance Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Mains 2, U Unbalance Alarm</activeText>
+					<inactiveText>Mains 2, U Unbalance Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		
+		<alarmFlags ruleid="HarCurrent1Ia_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.51.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Current 1 Ia, THD Alarm</activeText>
+					<inactiveText>Har Current 1 Ia, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 1 Ia, THD Alarm</activeText>
+					<inactiveText>Har Current 1 Ia, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Current 1 Ia, TOHD  Alarm</activeText>
+					<inactiveText>Har Current 1 Ia, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 1 Ia, TOHD Alarm</activeText>
+					<inactiveText>Har Current 1 Ia, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Current 1 Ia, TEHD Alarm</activeText>
+					<inactiveText>Har Current 1 Ia, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 1 Ia, TEHD Alarm</activeText>
+					<inactiveText>Har Current 1 Ia, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarCurrent1Ib_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.52.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Current 1 Ib, THD Alarm</activeText>
+					<inactiveText>Har Current 1 Ib, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 1 Ib, THD Alarm</activeText>
+					<inactiveText>Har Current 1 Ib, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Current 1 Ib, TOHD  Alarm</activeText>
+					<inactiveText>Har Current 1 Ib, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 1 Ib, TOHD Alarm</activeText>
+					<inactiveText>Har Current 1 Ib, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Current 1 Ib, TEHD Alarm</activeText>
+					<inactiveText>Har Current 1 Ib, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 1 Ib, TEHD Alarm</activeText>
+					<inactiveText>Har Current 1 Ib, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarCurrent1Ic_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.53.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Current 1 Ic, THD Alarm</activeText>
+					<inactiveText>Har Current 1 Ic, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 1 Ic, THD Alarm</activeText>
+					<inactiveText>Har Current 1 Ic, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Current 1 Ic, TOHD  Alarm</activeText>
+					<inactiveText>Har Current 1 Ic, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 1 Ic, TOHD Alarm</activeText>
+					<inactiveText>Har Current 1 Ic, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Current 1 Ic, TEHD Alarm</activeText>
+					<inactiveText>Har Current 1 Ic, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 1 Ic, TEHD Alarm</activeText>
+					<inactiveText>Har Current 1 Ic, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarCurrent2Ia_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.54.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Current 2 Ia, THD Alarm</activeText>
+					<inactiveText>Har Current 2 Ia, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 2 Ia, THD Alarm</activeText>
+					<inactiveText>Har Current 2 Ia, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Current 2 Ia, TOHD  Alarm</activeText>
+					<inactiveText>Har Current 2 Ia, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 2 Ia, TOHD Alarm</activeText>
+					<inactiveText>Har Current 2 Ia, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Current 2 Ia, TEHD Alarm</activeText>
+					<inactiveText>Har Current 2 Ia, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 2 Ia, TEHD Alarm</activeText>
+					<inactiveText>Har Current 2 Ia, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarCurrent2Ib_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.55.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Current 2 Ib, THD Alarm</activeText>
+					<inactiveText>Har Current 2 Ib, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 2 Ib, THD Alarm</activeText>
+					<inactiveText>Har Current 2 Ib, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Current 2 Ib, TOHD  Alarm</activeText>
+					<inactiveText>Har Current 2 Ib, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 2 Ib, TOHD Alarm</activeText>
+					<inactiveText>Har Current 2 Ib, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Current 2 Ib, TEHD Alarm</activeText>
+					<inactiveText>Har Current 2 Ib, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 2 Ib, TEHD Alarm</activeText>
+					<inactiveText>Har Current 2 Ib, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarCurrent2Ic_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.56.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Current 2 Ic, THD Alarm</activeText>
+					<inactiveText>Har Current 2 Ic, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 2 Ic, THD Alarm</activeText>
+					<inactiveText>Har Current 2 Ic, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Current 2 Ic, TOHD  Alarm</activeText>
+					<inactiveText>Har Current 2 Ic, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 2 Ic, TOHD Alarm</activeText>
+					<inactiveText>Har Current 2 Ic, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Current 2 Ic, TEHD Alarm</activeText>
+					<inactiveText>Har Current 2 Ic, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Current 2 Ic, TEHD Alarm</activeText>
+					<inactiveText>Har Current 2 Ic, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarVoltage1Ua_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.57.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Voltage 1 Ua, THD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ua, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 1 Ua, THD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ua, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Voltage 1 Ua, TOHD  Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ua, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 1 Ua, TOHD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ua, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Voltage 1 Ua, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ua, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 1 Ua, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ua, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarVoltage1Ub_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.58.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Voltage 1 Ub, THD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ub, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 1 Ub, THD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ub, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Voltage 1 Ub, TOHD  Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ub, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 1 Ub, TOHD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ub, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Voltage 1 Ub, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ub, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 1 Ub, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Ub, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarVoltage1Uc_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.59.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Voltage 1 Uc, THD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Uc, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 1 Uc, THD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Uc, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Voltage 1 Uc, TOHD  Alarm</activeText>
+					<inactiveText>Har Voltage 1 Uc, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 1 Uc, TOHD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Uc, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Voltage 1 Uc, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Uc, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 1 Uc, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 1 Uc, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarVoltage2Ua_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.60.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Voltage 2 Ua, THD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ua, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 2 Ua, THD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ua, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Voltage 2 Ua, TOHD  Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ua, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 2 Ua, TOHD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ua, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Voltage 2 Ua, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ua, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 2 Ua, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ua, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarVoltage2Ub_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.61.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Voltage 2 Ub, THD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ub, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 2 Ub, THD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ub, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Voltage 2 Ub, TOHD  Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ub, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 2 Ub, TOHD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ub, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Voltage 2 Ub, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ub, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 2 Ub, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Ub, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="HarVoltage2Uc_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.62.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Har Voltage 2 Uc, THD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Uc, THD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 2 Uc, THD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Uc, THD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Har Voltage 2 Uc, TOHD  Alarm</activeText>
+					<inactiveText>Har Voltage 2 Uc, TOHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 2 Uc, TOHD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Uc, TOHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Har Voltage 2 Uc, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Uc, TEHD Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Har Voltage 2 Uc, TEHD Alarm</activeText>
+					<inactiveText>Har Voltage 2 Uc, TEHD Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		
+		<alarmFlags ruleid="Temperature1_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.63.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Temperature 1, HH Alarm</activeText>
+					<inactiveText>Temperature 1, HH Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Temperature 1, HH Alarm</activeText>
+					<inactiveText>Temperature 1, HH Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Temperature 1, H Alarm</activeText>
+					<inactiveText>Temperature 1, H Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Temperature 1, H Alarm</activeText>
+					<inactiveText>Temperature 1, H Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Temperature2_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.64.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Temperature 2, HH Alarm</activeText>
+					<inactiveText>Temperature 2, HH Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Temperature 2, HH Alarm</activeText>
+					<inactiveText>Temperature 2, HH Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Temperature 2, H Alarm</activeText>
+					<inactiveText>Temperature 2, H Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Temperature 2, H Alarm</activeText>
+					<inactiveText>Temperature 2, H Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		
+		<alarmFlags ruleid="Main1RevSeq_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.65.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 1, Voltage Phase Reversal Alarm Alarm</activeText>
+					<inactiveText>Main 1, Voltage Phase Reversal Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1, Voltage Phase Reversal Alarm Alarm</activeText>
+					<inactiveText>Main 1, Voltage Phase Reversal Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 1, Current Phase Reversal Alarm Alarm</activeText>
+					<inactiveText>Main 1, Current Phase Reversal Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 1, Current Phase Reversal Alarm Alarm</activeText>
+					<inactiveText>Main 1, Current Phase Reversal Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2RevSeq_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.66.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Main 2, Voltage Phase Reversal Alarm Alarm</activeText>
+					<inactiveText>Main 2, Voltage Phase Reversal Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2, Voltage Phase Reversal Alarm Alarm</activeText>
+					<inactiveText>Main 2, Voltage Phase Reversal Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Main 2, Current Phase Reversal Alarm Alarm</activeText>
+					<inactiveText>Main 2, Current Phase Reversal Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Main 2, Current Phase Reversal Alarm Alarm</activeText>
+					<inactiveText>Main 2, Current Phase Reversal Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		
+		<alarmFlags ruleid="Main1PhaseLoss_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.67.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Mains 1, Phase Loss Alarm Alarm</activeText>
+					<inactiveText>Mains 1, Phase Loss Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Mains 1, Phase Loss Alarm Alarm</activeText>
+					<inactiveText>Mains 1, Phase Loss Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="Main2PhaseLoss_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.68.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Mains 2, Phase Loss Alarm Alarm</activeText>
+					<inactiveText>Mains 2, Phase Loss Alarm Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Mains 2, Phase Loss Alarm Alarm</activeText>
+					<inactiveText>Mains 2, Phase Loss Alarm Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="DI1_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.69.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>DI1 Alarm</activeText>
+					<inactiveText>DI1 Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>DI1 Alarm</activeText>
+					<inactiveText>DI1 Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="DI2_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.70.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>DI2 Alarm</activeText>
+					<inactiveText>DI2 Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>DI2 Alarm</activeText>
+					<inactiveText>DI2 Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="DI3_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.71.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>DI3 Alarm</activeText>
+					<inactiveText>DI3 Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>DI3 Alarm</activeText>
+					<inactiveText>DI3 Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		<alarmFlags ruleid="DI4_alarm">
+			<value><getOid>.1.3.6.1.4.1.40849.1.1.4.72.0</getOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>DI4 Alarm</activeText>
+					<inactiveText>DI4 Alarm Cleared</inactiveText>
+				</name>
+				<severity>Critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>DI4 Alarm</activeText>
+					<inactiveText>DI4 Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+		
+		<numSensor ruleid="alarmBranchNum">
+			<type>num</type>
+			<sensorId>ALARM_BRANCH_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.4.73.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of branches in this device</label>
+			<sensorSet>Alarms</sensorSet>
+		</numSensor>
+
+		<alarmFlags2 ruleid="alarmBranchStatus" index=".1.3.6.1.4.1.40849.1.1.4.74.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.40849.1.1.4.74.1.2</getRowOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Branch Status, HH Alarm</activeText>
+					<inactiveText>Branch Status, HH Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Branch Status, HH Alarm</activeText>
+					<inactiveText>Branch Status, HH Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Branch Status, H Alarm</activeText>
+					<inactiveText>Branch Status, H Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Branch Status, H Alarm</activeText>
+					<inactiveText>Branch Status, H Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Branch Status, L Alarm</activeText>
+					<inactiveText>Branch Status, L Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Branch Status, L Alarm</activeText>
+					<inactiveText>Branch Status, L Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Branch Status, LL Alarm</activeText>
+					<inactiveText>Branch Status, LL Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Branch Status, LL Alarm</activeText>
+					<inactiveText>Branch Status, LL Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>	
+
+	</device>	
+
+
+
+	<!--MEASUREMENT-->
+	<device deviceid="measure">
+		<oidMustExist ruleid="measure_exists" oid=".1.3.6.1.4.1.40849.1.1.5" istree="yes"/>
+		
+		<!--MAIN MEASUREMENT-->
+		<numSensor ruleid="measMainFreq">
+			<type>frequency</type>
+			<sensorId>MEAS_MAIN_FREQ</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.5.1.1.0</getOid></op>
+				<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The frequency of Voltage-I phase A</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainNum">
+			<type>num</type>
+			<sensorId>MEAS_MAIN_FREQ</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.5.1.2.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of Mains in this device</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		
+		<!--MAIN VOLTAGE MEASUREMENT-->		
+		<numSensor ruleid="measMainUa" index=".1.3.6.1.4.1.40849.1.1.5.1.3.1.1">
+			<type>voltage</type>
+			<sensorId>MEAS_MAIN_UA</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.3.1.2</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The line-to-neutral RMS voltage of phase A</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainUb" index=".1.3.6.1.4.1.40849.1.1.5.1.3.1.1">
+			<type>voltage</type>
+			<sensorId>MEAS_MAIN_UB</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.3.1.3</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label> The line-to-neutral RMS voltage of phase B</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainUc" index=".1.3.6.1.4.1.40849.1.1.5.1.3.1.1">
+			<type>voltage</type>
+			<sensorId>MEAS_MAIN_UC</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.3.1.4</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The line-to-neutral RMS voltage of phase C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+	
+		<numSensor ruleid="measMainUlnAvg" index=".1.3.6.1.4.1.40849.1.1.5.1.3.1.1">
+			<type>voltage</type>
+			<sensorId>MEAS_MAIN_ULN_AVG</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.3.1.5</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The average line-to-neutral RMS voltage of 3 phases</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainUab" index=".1.3.6.1.4.1.40849.1.1.5.1.3.1.1">
+			<type>voltage</type>
+			<sensorId>MEAS_MAIN_UAB</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.3.1.6</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The line-to-line RMS voltage of phase A</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainUbc" index=".1.3.6.1.4.1.40849.1.1.5.1.3.1.1">
+			<type>voltage</type>
+			<sensorId>MEAS_MAIN_UBC</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.3.1.7</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The line-to-line RMS voltage of phase B</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainUca" index=".1.3.6.1.4.1.40849.1.1.5.1.3.1.1">
+			<type>voltage</type>
+			<sensorId>MEAS_MAIN_UCA</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.3.1.8</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The line-to-line RMS voltage of phase C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainUllAvg" index=".1.3.6.1.4.1.40849.1.1.5.1.3.1.1">
+			<type>voltage</type>
+			<sensorId>MEAS_MAIN_ULL_AVG</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.3.1.9</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The average line-to-line RMS voltage of 3 phases</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainVoltageUnbalance" index=".1.3.6.1.4.1.40849.1.1.5.1.3.1.1">
+			<type>voltage</type>
+			<sensorId>MEAS_MAIN_VOLTAGE_UNBALANCE</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.3.1.10</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The degree of voltage unbalancedness</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		
+		<!--MAIN CURRENT MEASUREMENT-->			
+		<numSensor ruleid="measMainIa" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_IA</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.2</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The RMS current of phase A</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainIb" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_IB</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.3</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The RMS current of phase B</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainIc" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_IC</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.4</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The RMS current of phase C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainIn" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_IN</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.5</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The RMS current of neutral current</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainIr" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_IR</sensorId>
+			<value>				
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.6</getRowOid>
+				<op>1000</op>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The RMS current of residual current</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainIavg" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_IAVG</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.7</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The average current of phase-A/B/C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainLoadA" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>loadFactor</type>
+			<sensorId>MEAS_MAIN_LOAD_A</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.8</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The load factor ot phase A</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainLoadB" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>loadFactor</type>
+			<sensorId>MEAS_MAIN_LOAD_B</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.9</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The load factor ot phase B</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainLoadC" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>loadFactor</type>
+			<sensorId>MEAS_MAIN_LOAD_C</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.10</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The load factor ot phase C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainCurrentUnbalance" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_CURRENT_UNBALANCE</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.11</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The degree of current unbalancedness</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainCurrentIaDmd" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_CURRENT_IA_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.12</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The current demand of phase A</label>
+			<sensorSet>Mains demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainCurrentIbDmd" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_CURRENT_IB_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.13</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The current demand of phase B</label>
+			<sensorSet>Mains demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainCurrentIcDmd" index=".1.3.6.1.4.1.40849.1.1.5.1.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_MAIN_CURRENT_IC_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.4.1.14</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The current demand of phase C</label>
+			<sensorSet>Mains demand</sensorSet>
+		</numSensor>
+
+		
+		<!--MAIN POWER MEASUREMENT-->			
+		<numSensor ruleid="measMainPa" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_PA</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.2</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The power of phase A</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainPb" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_PB</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.3</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The power of phase B</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainPc" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_PC</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.4</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The power of phase C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainPt" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_PT</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.5</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total kW of phase A/B/C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainQa" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_QA</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.6</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The reactive power of phase A</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainQb" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_QB</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.7</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The reactive power of phase B</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainQc" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_QC</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.8</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The reactive power of phase C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainQt" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_QT</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.9</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total kvar of phase A/B/C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainSa" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_SA</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.10</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The apparent power of phase A</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainSb" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_SB</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.11</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The apparent power of phase B</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainSc" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_SC</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.12</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The apparent power of phase C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainSt" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_ST</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.13</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total kVA of phase A/B/C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainPFa" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>powerFactor</type>
+			<sensorId>MEAS_MAIN_PFA</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.14</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The power factor of phase A</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainPFb" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>powerFactor</type>
+			<sensorId>MEAS_MAIN_PFB</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.15</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The power factor of phase B</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainPFc" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>powerFactor</type>
+			<sensorId>MEAS_MAIN_PFC</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.16</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The power factor of phase C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainPFt" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>powerFactor</type>
+			<sensorId>MEAS_MAIN_PFT</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.17</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total PF of phase A/B/C</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainPtDmd" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_PT_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.18</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total kW Demand</label>
+			<sensorSet>Mains demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainQtDmd" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_QT_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.19</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total kvar Demand</label>
+			<sensorSet>Mains demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="measMainStDmd" index=".1.3.6.1.4.1.40849.1.1.5.1.5.1.1">
+			<type>power</type>
+			<sensorId>MEAS_MAIN_ST_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.1.5.1.20</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total kVA Demand</label>
+		<sensorSet>Mains demand</sensorSet>
+		</numSensor>
+	
+	
+		<!--1PH MEASUREMENT-->	
+		<numSensor ruleid="meas1phNum">
+			<type>num</type>
+			<sensorId>MEAS_1PH_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.5.2.1.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of 1-phase meters</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+	
+		<numSensor ruleid="meas1phI" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>current</type>
+			<sensorId>MEAS_1_PH_I</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.2</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The RMS current of the phase-1 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas1phP" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>power</type>
+			<sensorId>MEAS_1_PH_P</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.3</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The active power of the phase-1 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas1phQ" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>power</type>
+			<sensorId>MEAS_1_PH_Q</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.4</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The reactive power of the phase-1 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas1phS" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>power</type>
+			<sensorId>MEAS_1_PH_S</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.5</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The apparent power of the phase-1 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas1phPF" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>powerFactor</type>
+			<sensorId>MEAS_1_PH_PF</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.6</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The power factor of the phase-1 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas1phLoad" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>loadFactor</type>
+			<sensorId>MEAS_1_PH_LOAD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.7</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The load factor of the phase-1 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas1phIDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>power</type>
+			<sensorId>MEAS_1_PH_I_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.8</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The current demand of phase-1 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas1phPDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>power</type>
+			<sensorId>MEAS_1_PH_P_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.9</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The active power demand of phase-1 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas1phQDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>power</type>
+			<sensorId>MEAS_1_PH_Q_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.10</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The reactive power demand of phase-1 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="meas1phSDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.2.1.1">
+			<type>power</type>
+			<sensorId>MEAS_1_PH_S_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.2.1.11</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The apparent power demand of the phase-1 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+	
+	
+		<!--2PH MEASUREMENT-->	
+		<numSensor ruleid="meas2phNum">
+			<type>num</type>
+			<sensorId>MEAS_2PH_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.5.2.3.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of 2-phase meters</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>	
+	
+		<numSensor ruleid="meas2phI" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>current</type>
+			<sensorId>MEAS_2_PH_I</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.2</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The average RMS current of the phase-2 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas2phP" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>power</type>
+			<sensorId>MEAS_2_PH_P</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.3</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>he total active power of the phase-2 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+	
+		<numSensor ruleid="meas2phQ" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>power</type>
+			<sensorId>MEAS_2_PH_Q</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.4</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total reactive power of the phase-2 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas2phS" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>power</type>
+			<sensorId>MEAS_2_PH_S</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.5</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total apparent power of the phase-2 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas2phPF" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>powerFactor</type>
+			<sensorId>MEAS_2_PH_PF</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.6</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total power factor of the phase-2 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas2phLoad" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>loadFactor</type>
+			<sensorId>MEAS_2_PH_LOAD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.7</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The total load factor of the phase-2 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas2phIDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>power</type>
+			<sensorId>MEAS_2_PH_I_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.8</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The average current demand of phase-2 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas2phPDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>power</type>
+			<sensorId>MEAS_2_PH_P_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.9</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total active power demand of phase-2 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas2phQDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>power</type>
+			<sensorId>MEAS_2_PH_Q_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.10</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total active power demand of phase-2 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas2phSDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.4.1.1">
+			<type>power</type>
+			<sensorId>MEAS_2_PH_S_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.4.1.11</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total apparent power demand of the phase-2 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+
+	
+		<!--3PH MEASUREMENT-->	
+		<numSensor ruleid="meas3phNum">
+			<type>num</type>
+			<sensorId>MEAS_3PH_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.5.2.5.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of 3-phase meters</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="meas3phI" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>current</type>
+			<sensorId>MEAS_3_PH_I</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.2</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The average RMS current of the phase-3 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+	
+		<numSensor ruleid="meas3phP" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>power</type>
+			<sensorId>MEAS_3_PH_P</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.3</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total active power of the phase-3 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+	
+		<numSensor ruleid="meas3phQ" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>power</type>
+			<sensorId>MEAS_3_PH_Q</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.4</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total reactive power of the phase-3 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="meas3phS" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>power</type>
+			<sensorId>MEAS_3_PH_S</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.5</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total apparent power of the phase-3 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas3phPF" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>powerFactor</type>
+			<sensorId>MEAS_3_PH_PF</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.6</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total power factor of the phase-3 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="meas3phLoad" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>loadFactor</type>
+			<sensorId>MEAS_3_PH_LOAD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.7</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The average load factor of the phase-3 meter</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas3phIDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>power</type>
+			<sensorId>MEAS_3_PH_I_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.8</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The average current demand of phase-2 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas3phPDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>power</type>
+			<sensorId>MEAS_3_PH_P_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.9</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total active power demand of the phase-3 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="meas3phQDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>power</type>
+			<sensorId>MEAS_3_PH_Q_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.10</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total reactive power demand of the phase-2 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="meas3phSDmd" index=".1.3.6.1.4.1.40849.1.1.5.2.6.1.1">
+			<type>power</type>
+			<sensorId>MEAS_3_PH_S_DMD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.2.6.1.11</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total apparent power demand of the phase-3 meter</label>
+			<sensorSet>SM demand</sensorSet>
+		</numSensor>
+		
+	
+		<!--VM MEASUREMENT-->	
+		<numSensor ruleid="measVirtualNum">
+			<type>num</type>
+			<sensorId>MEAS_VIRTUAL_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.5.3.1.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of virtual-meters</label>
+			<sensorSet>SM measurements</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="measVirtualP" index=".1.3.6.1.4.1.40849.1.1.5.3.2.1.1">
+			<type>power</type>
+			<sensorId>MEAS_VIRTUAL_P</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.5.3.2.1.2</getRowOid></op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>The total power of virtual-meters</label>
+			<sensorSet>VM kW Measurements</sensorSet>
+		</numSensor>
+
+	
+		<!--TEMPERATURE MEASUREMENT-->			
+		<numSensor ruleid="temp1">
+			<type>temp</type>
+			<sensorId>TEMP_1</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.40849.1.1.5.4.1.0</getOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Temp 1</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="temp2">
+			<type>temp</type>
+			<sensorId>TEMP_2</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.5.4.2.0</getOid></op>
+				<op>10</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Temp 2</label>
+			<sensorSet>Mains measurement</sensorSet>
+		</numSensor>
+
+	</device>	
+	
+	
+	
+	<!--ENERGY MAIN MEASUREMENT-->		
+	<device deviceid="energy">
+		<oidMustExist ruleid="energy_exists" oid=".1.3.6.1.4.1.40849.1.1.6" istree="yes"/>
+
+		<numSensor ruleid="energyMainNum">
+			<type>num</type>
+			<sensorId>ENERGY_MAIN_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.6.1.1.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of mains</label>
+			<sensorSet>Mains energy</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="energyMainKWHpos" index=".1.3.6.1.4.1.40849.1.1.6.1.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_MAIN_KWH_POSITIVE</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.1.2.1.2</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kW energy</label>
+			<sensorSet>Mains energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energyMainKWHneg" index=".1.3.6.1.4.1.40849.1.1.6.1.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_MAIN_KWH_NEGATIVE</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.1.2.1.3</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The negative(export) kW energy</label>
+			<sensorSet>Mains energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energyMainKVARHpos" index=".1.3.6.1.4.1.40849.1.1.6.1.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_MAIN_KVARH_POSITIVE</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.1.2.1.4</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kvar energy</label>
+			<sensorSet>Mains energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energyMainKVARHneg" index=".1.3.6.1.4.1.40849.1.1.6.1.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_MAIN_KVARH_NEGATIVE</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.1.2.1.5</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The negative(export) kvar energy</label>
+			<sensorSet>Mains energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energyMainKVAH" index=".1.3.6.1.4.1.40849.1.1.6.1.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_MAIN_KVAH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.1.2.1.6</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The kVA energy of the main</label>
+			<sensorSet>Mains energy</sensorSet>
+		</numSensor>
+	
+
+		<!--ENERGY 1PH MEASUREMENT-->	
+		<numSensor ruleid="energy1phNum">
+			<type>num</type>
+			<sensorId>ENERGY_1PH_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.6.2.1.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of 1-phase meters</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energy1phKWH" index=".1.3.6.1.4.1.40849.1.1.6.2.2.1.1">
+		
+			<type>energy</type>
+			<sensorId>ENERGY_1_PH_KWH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.2.2.1.2</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kW energy</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energy1phKVARH" index=".1.3.6.1.4.1.40849.1.1.6.2.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_1_PH_KVARH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.2.2.1.3</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kvar energy</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energy1phKVAH" index=".1.3.6.1.4.1.40849.1.1.6.2.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_1_PH_KVAH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.2.2.1.4</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kVA energy</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+
+		<!--ENERGY 2PH MEASUREMENT-->
+		<numSensor ruleid="energy12phNum">
+			<type>num</type>
+			<sensorId>ENERGY_2PH_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.6.2.3.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of 2-phase meters</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energy2phKWH" index=".1.3.6.1.4.1.40849.1.1.6.2.4.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_2_PH_KWH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.2.4.1.2</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kW energy</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energy2phKVARH" index=".1.3.6.1.4.1.40849.1.1.6.2.4.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_2_PH_KVARH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.2.4.1.3</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kvar energy</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energy2phKVAH" index=".1.3.6.1.4.1.40849.1.1.6.2.4.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_2_PH_KVAH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.2.4.1.4</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kVA energy</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+
+		<!--ENERGY 3PH MEASUREMENT-->
+		<numSensor ruleid="energy3phNum">
+			<type>num</type>
+			<sensorId>ENERGY_3PH_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.6.2.5.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of 3-phase meters</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energy3phKWH" index=".1.3.6.1.4.1.40849.1.1.6.2.6.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_3_PH_KWH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.2.6.1.2</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kW energy</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energy3phKVARH" index=".1.3.6.1.4.1.40849.1.1.6.2.6.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_3_PH_KVARH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.2.6.1.3</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kvar energy</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energy3phKVAH" index=".1.3.6.1.4.1.40849.1.1.6.2.6.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_3_PH_KVAH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.2.6.1.4</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kVA energy</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+
+	
+		<!--ENERGY VM MEASUREMENT-->	
+		<numSensor ruleid="energyVirtualNum">
+			<type>num</type>
+			<sensorId>ENERGY_VIRTUAL_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.6.3.1.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of virtual-meters</label>
+			<sensorSet>SM energy</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="energyVirtualKWH" index=".1.3.6.1.4.1.40849.1.1.6.3.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_VIRTUAL_KWH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.3.2.1.2</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kW energy</label>
+			<sensorSet>VM Energy Measurements</sensorSet>
+		</numSensor>
+		
+		<numSensor ruleid="energyVirtualKVARH" index=".1.3.6.1.4.1.40849.1.1.6.3.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_VIRTUAL_KVARH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.3.2.1.3</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kvar energy</label>
+			<sensorSet>VM Energy Measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="energyVirtualKVAH" index=".1.3.6.1.4.1.40849.1.1.6.3.2.1.1">
+			<type>energy</type>
+			<sensorId>ENERGY_VIRTUAL_KVAH</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.6.3.2.1.4</getRowOid></op>
+					<op>10</op>
+				</mult>
+			</value>
+			<minValue>0.0</minValue>
+			<maxValue>99999999.9</maxValue>
+			<valueInc>0.1</valueInc>
+			<label>The positive(import) kVA energy</label>
+			<sensorSet>VM Energy Measurements</sensorSet>
+		</numSensor>
+
+	</device>	
+
+
+
+	<!--POWER QUALITY MEASUREMENT-->
+	<device deviceid="power_quality">
+		<oidMustExist ruleid="powerQuality_exists" oid=".1.3.6.1.4.1.40849.1.1.7" istree="yes"/>
+
+		<numSensor ruleid="mainHarmonicsNum">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.7.1.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of Harmonic channels</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>		
+		
+		<stringSensor ruleid="mainHarChannel" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>string</type>
+			<sensorId>MAIN_HAR_CHANNEL<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+			</value>
+			<label>The channel name of this row</label>
+			<sensorSet><getRowOid>Mains harmonic measurements</getRowOid></sensorSet>
+		</stringSensor>
+		
+		<numSensor ruleid="mainHarmonicsTHD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_THD</sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.3</getRowOid></op>
+				<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+			<space/>THD
+			</label>
+				<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonicsTOHD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_TOHD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.4</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>TOHD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonicsTEHD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_TEHD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.5</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>TEHD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics2HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_2_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.6</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>2 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics3HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_3_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.7</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>3 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics4HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_4_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.8</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>4 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics5HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_5_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.9</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>5 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics6HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_6_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.10</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>6 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics7HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_7_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.11</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>7 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics8HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_8_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.12</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>8 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics9HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_9_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.13</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>9 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics10HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_10_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.14</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>10 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics11HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_11_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.15</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>11 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics12HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_12_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.16</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>12 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics13HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_13_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.17</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>13 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics14HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_14_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.18</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>14 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics15HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_15_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.19</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>15 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics16HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_16_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.20</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>16 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics17HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_17_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.21</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>17 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics18HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_18_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.22</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>18 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics19HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_19_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.23</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>19 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics20HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_20_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.24</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>20 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics21HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_21_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.25</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>21 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics22HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_22_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.26</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>22 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics23HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_23_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.27</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>23 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics24HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_24_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.28</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>24 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics25HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_25_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.29</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>25 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics26HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_26_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.30</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>26 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics27HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_27_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.31</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>27 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics28HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_28_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.32</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>28 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics29HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_29_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.33</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>29 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics30HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_30_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.34</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>30 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainHarmonics31HD" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_HARMONICS_31_HD</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.35</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>31 HD
+			</label>
+			<sensorSet>Mains harmonic measurements</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="mainKFactor" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.36</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>num</type>
+			<sensorId>MAIN_K_FACTOR</sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.36</getRowOid></op>
+				<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+			<space/>K Factor
+			</label>
+				<sensorSet>Mains K Factor</sensorSet>
+		</numSensor>
+
+		<valueMap ruleid="delete_null_sensor">
+		<!--omitsensorsreturning-1-->
+		<valueIn>-1</valueIn><valueOut>[false]</valueOut>
+		<!--includetherest-->
+		<valueIn>*</valueIn><valueOut>[true]</valueOut>
+		</valueMap>
+
+		<numSensor ruleid="mainCFactor" index=".1.3.6.1.4.1.40849.1.1.7.2.1.1">
+			<type>num</type>
+			<sensorId>MAIN_C_FACTOR</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.37</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.40849.1.1.7.2.1.2</getRowOid>
+				<space/>Crest Factor
+			</label>
+			<sensorSet>Mains Crest Factor</sensorSet>
+		</numSensor>
+
+
+		<!--BRANCH THD MEASUREMENT-->
+		<numSensor ruleid="branchTHDNum">
+			<type>num</type>
+			<sensorId>BRANCH_THD_NUM</sensorId>
+			<value>
+				<op><getOid>.1.3.6.1.4.1.40849.1.1.7.3.0</getOid></op>
+			</value>
+			<valueInc>1</valueInc>
+			<label>The number of branches</label>
+			<sensorSet>SM THD measurements</sensorSet>
+		</numSensor>		
+
+		<numSensor ruleid="branchTHDValue" index=".1.3.6.1.4.1.40849.1.1.7.4.1.1">
+			<type>num</type>
+			<sensorId>BRANCH_THD_VALUE</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.40849.1.1.7.4.1.2</getRowOid></op>
+					<op>100</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>The Total Harmonic Distortion(THD) of the branch</label>
+			<sensorSet>SM THD measurements</sensorSet>
+		</numSensor>
+
+	</device>	
+
+</APC_DDF>

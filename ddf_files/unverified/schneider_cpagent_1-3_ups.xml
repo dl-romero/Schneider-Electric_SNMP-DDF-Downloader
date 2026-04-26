@@ -3,9 +3,9 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="schneider_cpagent_1-3_ups"
 	ddfname="Schneider CP Agent 1-3 UPS"
-	ddfversion="1"
+	ddfversion="2"
 	canremove="yes">
-		 
+
 	<schemaVersion>1.6</schemaVersion>
 
 	<device deviceid="schneider_cpagent_1-3_ups">
@@ -17,8 +17,8 @@
 		<setProductData ruleid="modeldata" field="model">CP Agents 1-3</setProductData>
 		<setProductData ruleid="typedata" field="type">UPS</setProductData>
 
-		<oidMustExist ruleid="schneider_cpagent_1-3" oid="1.3.6.1.4.1.3778.1" istree="yes" /> 
-        
+		<oidMustExist ruleid="schneider_cpagent_1-3" oid="1.3.6.1.4.1.3778.1" istree="yes" />
+
         <suppressRule ruleid="suppressbatterystatus" suppressid="upsmib/upsmib/upsBatteryStatus" />
         <suppressRule ruleid="suppressbatteryvoltage" suppressid="upsmib/upsmib/upsBatteryVoltage" />
         <suppressRule ruleid="suppressbatterycurrent" suppressid="upsmib/upsmib/upsBatteryCurrent" />
@@ -129,7 +129,7 @@
             <sensorSet>cpUpsInput</sensorSet>
         </numSensor>
 	<numSensor ruleid="cpUpsInputTotalPowerVA">
-            <type>powerVA</type>
+            <type>num/powerKVA</type>
             <sensorId>CP_UPS_INPUT_TOTAL_POWER_VA</sensorId>
             <value>
                 <div>
@@ -165,7 +165,7 @@
             <sensorSet>cpUpsInput</sensorSet>
         </numSensor>
 	<numSensor ruleid="cpUpsInputPowerW" index=".1.3.6.1.4.1.3778.1.3.5.1.4" >
-            <type>powerW</type>
+            <type>num/powerKW</type>
             <sensorId>CP_UPS_INPUT_POWER_W_<rowNumber/></sensorId>
             <value>
                 <div>
@@ -177,7 +177,7 @@
             <sensorSet>cpUpsInput</sensorSet>
         </numSensor>
 	<numSensor ruleid="cpUpsInputPowerVA" index=".1.3.6.1.4.1.3778.1.3.5.1.5" >
-            <type>powerVA</type>
+            <type>num/powerKVA</type>
             <sensorId>CP_UPS_INPUT_POWER_VA_<rowNumber/></sensorId>
             <value>
                 <div>
@@ -189,7 +189,7 @@
             <sensorSet>cpUpsInput</sensorSet>
         </numSensor>
 	<numSensor ruleid="cpUpsInputTotalPowerW" >
-            <type>powerW</type>
+            <type>num/powerKW</type>
             <sensorId>CP_UPS_INPUT_TOTAL_POWER_W</sensorId>
             <value>
                 <div>
@@ -213,7 +213,7 @@
             <sensorSet>cpUpsOutput</sensorSet>
         </numSensor>
 	<numSensor ruleid="cpUpsOutputTotalPowerVA" >
-            <type>powerVA</type>
+            <type>num/powerKVA</type>
             <sensorId>CP_UPS_OUTPUT_TOTAL_POWER_VA</sensorId>
             <value>
                 <div>
@@ -262,7 +262,7 @@
             <sensorSet>cpUpsOutput</sensorSet>
         </numSensor>
 	<numSensor ruleid="cpUpsOutputPowerW" index=".1.3.6.1.4.1.3778.1.4.5.1.4">
-            <type>powerW</type>
+            <type>num/powerKW</type>
             <sensorId>CP_UPS_OUTPUT_POWER_W_<rowNumber/></sensorId>
             <value>
                 <div>
@@ -274,7 +274,7 @@
             <sensorSet>cpUpsOutput</sensorSet>
         </numSensor>
 	<numSensor ruleid="cpUpsOutputPowerVA" index=".1.3.6.1.4.1.3778.1.4.5.1.5">
-            <type>powerVA</type>
+            <type>num/powerKVA</type>
             <sensorId>CP_UPS_OUTPUT_POWER_VA_<rowNumber/></sensorId>
             <value>
                 <div>
@@ -286,7 +286,7 @@
             <sensorSet>cpUpsOutput</sensorSet>
         </numSensor>
 	<numSensor ruleid="cpUpsOutputTotalPowerW" >
-            <type>powerW</type>
+            <type>num/powerKW</type>
             <sensorId>CP_UPS_OUTPUT_TOTAL_POWER_W</sensorId>
             <value>
                 <div>

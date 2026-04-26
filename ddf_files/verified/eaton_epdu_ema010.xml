@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <APC_DDF
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-	ddfid ="eaton_epdu_ema010"
-    ddfname="Eaton ePDU"
-    ddfversion="14"
-    canremove="yes">
-	
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid ="eaton_epdu_ema010"
+  ddfname="Eaton ePDU"
+  ddfversion="19"
+  canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
+  <!--
 
-	<device deviceid="eaton_epdu_discovery">
+	  SOURCE
+	  \snmp\resources\mibs\eaton\EATON-EPDU-MIB.txt
+	  \snmp\resources\mibs\eaton\EATON-OIDS.txt
+	  \snmp\resources\mibs\eaton\EATON-SENSOR-MIB.txt
+
+	  WALKFILES
+	  \snmp\resources\sapro\walkfiles\eaton\epdu\*
+
+  -->
+  <device deviceid="eaton_epdu_discovery">
 		<oidMustExist ruleid="is_eaton_epdu" oid=".1.3.6.1.4.1.534.6.6.7" istree="yes"/>
-		
+
 		<suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
         <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
         <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
@@ -19,7 +28,7 @@
 		<setProductData ruleid="vendordata" field="vendor">Eaton</setProductData>
 		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.534.6.6.7.1.2.1.2.0</getOid></setProductData>
 		<setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
-		
+
 		<setProductData ruleid="firmware_version" field="appversion">
 			<getOid>.1.3.6.1.4.1.534.6.6.7.1.2.1.5.0</getOid>
 		</setProductData>
@@ -32,7 +41,7 @@
 			<valueIn>2</valueIn><valueOut>2</valueOut>
 			<valueIn>*</valueIn><valueOut>3</valueOut>
 		</valueMap>
-		
+
 		<setProductData ruleid="inputphasecount" field="inputphasecount">
 			<mapValue mapid="inputPhases-vm">
 				<getOid>.1.3.6.1.4.1.534.6.6.7.3.1.1.2.0.1</getOid>
@@ -43,9 +52,9 @@
 				<getOid>.1.3.6.1.4.1.534.6.6.7.3.1.1.2.0.1</getOid>
 			</mapValue>
 		</setProductData>
-		
+
 	</device>
-	
+
 	<device deviceid="inputs">
 		<oidMustExist ruleid="inputs_exists" oid=".1.3.6.1.4.1.534.6.6.7.3" istree="yes"/>
 
@@ -63,7 +72,7 @@
 			<enum>comm_status-em</enum>
 			<sensorSet>Status</sensorSet>
 		</stateSensor>
-		
+
 		<valueMap ruleid="comm_status-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -89,7 +98,7 @@
 			<enum>internal_status-em</enum>
 			<sensorSet>Status</sensorSet>
 		</stateSensor>
-		
+
 		<valueMap ruleid="internal_status-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -422,12 +431,352 @@
 			</label>
 			<sensorSet>Inputs - Power</sensorSet>
 		</numSensor>
-		
+
 	</device>
-	
+
+
+	<device deviceid="groups">
+		<oidMustExist ruleid="groups_exists" oid=".1.3.6.1.4.1.534.6.6.7.5" istree="yes"/>
+
+		<stateSensor ruleid="groupType" index=".1.3.6.1.4.1.534.6.6.7.5.1.1.4">
+			<type>state</type>
+			<sensorId>GROUP_TYPE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="group_type-vm">
+					<formatNumber>
+						<getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.4</getRowOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Group Type</label>
+			<enum>group_type-em</enum>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="group_type-vm">
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+		</valueMap>
+		<enumMap ruleid="group_type-em">
+			<label>Unknown</label>
+			<label>Breaker - 1 Pole</label>
+			<label>Breaker - 2 Pole</label>
+			<label>Breaker - 3 Pole</label>
+			<label>Outlet Section</label>
+			<label>User Defined</label>
+		</enumMap>
+
+		<stateSensor ruleid="groupBreakerStatus" index=".1.3.6.1.4.1.534.6.6.7.5.1.1.5">
+			<type>state</type>
+			<sensorId>GROUP_BREAKER_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="breaker_status-vm">
+					<formatNumber>
+						<getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.5</getRowOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Group Breaker Status</label>
+			<enum>breaker_status-em</enum>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="breaker_status-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="breaker_status-em">
+			<label>Not Applicable</label>
+			<label>On</label>
+			<label>Off</label>
+		</enumMap>
+
+		<numSensor ruleid="groupVoltage" index=".1.3.6.1.4.1.534.6.6.7.5.3.1.3">
+			<type>voltage</type>
+			<sensorId>GROUP_VOLTAGE_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.3.1.3</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Voltage</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="groupVoltageThStatus" index=".1.3.6.1.4.1.534.6.6.7.5.3.1.4">
+			<type>state</type>
+			<sensorId>GROUP_VOLTAGE_THRESHOLD_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="threshold_status-vm">
+					<formatNumber>
+						<getRowOid>.1.3.6.1.4.1.534.6.6.7.5.3.1.4</getRowOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Voltage Threshold Status</label>
+			<enum>threshold_status-em</enum>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="threshold_status-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+		</valueMap>
+		<enumMap ruleid="threshold_status-em">
+			<label>Good</label>
+			<label>Low Warning</label>
+			<label>Low Critical</label>
+			<label>High Warning</label>
+			<label>High Critical</label>
+		</enumMap>
+
+		<numSensor ruleid="groupCurrent" index=".1.3.6.1.4.1.534.6.6.7.5.4.1.3">
+			<type>amperage</type>
+			<sensorId>GROUP_CURRENT_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.4.1.3</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Current</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="groupCurrentThStatus" index=".1.3.6.1.4.1.534.6.6.7.5.4.1.4">
+			<type>state</type>
+			<sensorId>GROUP_CURRENT_THRESHOLD_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="threshold_status-vm">
+					<formatNumber>
+						<getRowOid>.1.3.6.1.4.1.534.6.6.7.5.4.1.4</getRowOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Current Threshold Status</label>
+			<enum>threshold_status-em</enum>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="groupVA" index=".1.3.6.1.4.1.534.6.6.7.5.5.1.2">
+			<rowTest>
+				<if>
+					<op>
+						<lt>
+							<op><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.5.1.2</getRowOid></op>
+							<op>0</op>
+						</lt>
+					</op>
+					<op>[false]</op>
+					<op>[true]</op>
+				</if>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>GROUP_POWER_VA_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.534.6.6.7.5.5.1.2</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Apparent Power</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="groupWatts" index=".1.3.6.1.4.1.534.6.6.7.5.5.1.3">
+			<rowTest>
+				<if>
+					<op>
+						<lt>
+							<op><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.5.1.3</getRowOid></op>
+							<op>0</op>
+						</lt>
+					</op>
+					<op>[false]</op>
+					<op>[true]</op>
+				</if>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>GROUP_POWER_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.534.6.6.7.5.5.1.3</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Power</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="groupWh" index=".1.3.6.1.4.1.534.6.6.7.5.5.1.4">
+			<type>num/kwatthr</type>
+			<sensorId><rowIndex/>GROUP_ENERGY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.5.1.4</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Energy (Since Last Reset)</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="groupPowerFactor" index=".1.3.6.1.4.1.534.6.6.7.5.5.1.6">
+			<rowTest>
+				<if>
+					<op>
+						<lt>
+							<op><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.5.1.6</getRowOid></op>
+							<op>0</op>
+						</lt>
+					</op>
+					<op>[false]</op>
+					<op>[true]</op>
+				</if>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId><rowIndex/>GROUP_POWER_FACTOR_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.5.1.6</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Power Factor</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="groupVAR" index=".1.3.6.1.4.1.534.6.6.7.5.5.1.7">
+			<rowTest>
+				<if>
+					<op>
+						<lt>
+							<op><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.5.1.7</getRowOid></op>
+							<op>0</op>
+						</lt>
+					</op>
+					<op>[false]</op>
+					<op>[true]</op>
+				</if>
+			</rowTest>
+			<type>powerVA/powerVAR</type>
+			<sensorId>GROUP_POWER_VAR_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.534.6.6.7.5.5.1.7</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Reactive Power</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Sensors</sensorSet>
+		</numSensor>
+
+		<alarmFlags2 ruleid="groupVoltageThStatusAlarm" index=".1.3.6.1.4.1.534.6.6.7.5.3.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.3.1.4</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Voltage Threshold Violation (Warning)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Voltage Threshold Violation (Warning) Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Group</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Voltage Threshold Violation (Warning)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Voltage Threshold Violation (Warning) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Voltage Threshold Violation (Critical)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Voltage Threshold Violation (Critical) Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Group</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Voltage Threshold Violation (Critical)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Voltage Threshold Violation (Critical) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Voltage Threshold Violation (Warning)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Voltage Threshold Violation (Warning) Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Group</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Voltage Threshold Violation (Warning)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Voltage Threshold Violation (Warning) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Voltage Threshold Violation (Critical)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Voltage Threshold Violation (Critical) Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Group</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Voltage Threshold Violation (Critical)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Voltage Threshold Violation (Critical) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="groupCurrentThStatusAlarm" index=".1.3.6.1.4.1.534.6.6.7.5.4.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.4.1.4</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Current Threshold Violation (Warning)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Current Threshold Violation (Warning) Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Group</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Current Threshold Violation (Warning)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Current Threshold Violation (Warning) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Current Threshold Violation (Critical)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Current Threshold Violation (Critical) Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Group</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Current Threshold Violation (Critical)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> Low Current Threshold Violation (Critical) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Current Threshold Violation (Warning)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Current Threshold Violation (Warning) Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Group</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Current Threshold Violation (Warning)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Current Threshold Violation (Warning) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Current Threshold Violation (Critical)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Current Threshold Violation (Critical) Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Group</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Current Threshold Violation (Critical)</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.6.7.5.1.1.3</getRowOid> High Current Threshold Violation (Critical) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+
+	</device>
 	<device deviceid="outlets">
 		<oidMustExist ruleid="outlets_exists" oid=".1.3.6.1.4.1.534.6.6.7.6" istree="yes"/>
-		
+
 		<stateSensor ruleid="outletType" index=".1.3.6.1.4.1.534.6.6.7.6.1.1.5">
 			<type>state</type>
 			<sensorId>OUTLET_TYPE_<rowIndex/></sensorId>
@@ -440,30 +789,34 @@
 			<enum>outletType-em</enum>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.6.7.6.1.1.3</getRowOid></sensorSet>
 		</stateSensor>
-		
+
 		<valueMap ruleid="outletType-vm">
 			<valueIn>*</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
 			<valueIn>2</valueIn><valueOut>2</valueOut>
-			<valueIn>10</valueIn><valueOut>3</valueOut>
-			<valueIn>11</valueIn><valueOut>4</valueOut>
-			<valueIn>12</valueIn><valueOut>5</valueOut>
-			<valueIn>20</valueIn><valueOut>6</valueOut>
-			<valueIn>21</valueIn><valueOut>7</valueOut>
-			<valueIn>22</valueIn><valueOut>8</valueOut>
-			<valueIn>23</valueIn><valueOut>9</valueOut>
-			<valueIn>24</valueIn><valueOut>10</valueOut>
-			<valueIn>25</valueIn><valueOut>11</valueOut>
-			<valueIn>26</valueIn><valueOut>12</valueOut>
-			<valueIn>27</valueIn><valueOut>13</valueOut>
-			<valueIn>28</valueIn><valueOut>14</valueOut>
-			<valueIn>29</valueIn><valueOut>15</valueOut>
-			<valueIn>30</valueIn><valueOut>16</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>10</valueIn><valueOut>4</valueOut>
+			<valueIn>11</valueIn><valueOut>5</valueOut>
+			<valueIn>12</valueIn><valueOut>6</valueOut>
+			<valueIn>20</valueIn><valueOut>7</valueOut>
+			<valueIn>21</valueIn><valueOut>8</valueOut>
+			<valueIn>22</valueIn><valueOut>9</valueOut>
+			<valueIn>23</valueIn><valueOut>10</valueOut>
+			<valueIn>24</valueIn><valueOut>11</valueOut>
+			<valueIn>25</valueIn><valueOut>12</valueOut>
+			<valueIn>26</valueIn><valueOut>13</valueOut>
+			<valueIn>27</valueIn><valueOut>14</valueOut>
+			<valueIn>28</valueIn><valueOut>15</valueOut>
+			<valueIn>29</valueIn><valueOut>16</valueOut>
+			<valueIn>30</valueIn><valueOut>17</valueOut>
+			<valueIn>31</valueIn><valueOut>18</valueOut>
+			<valueIn>32</valueIn><valueOut>19</valueOut>
 		</valueMap>
 		<enumMap ruleid="outletType-em">
 			<label>Unknown Type</label>
 			<label>IEC C13</label>
 			<label>IEC C19</label>
+			<label>Combo C39</label>
 			<label>UK</label>
 			<label>French</label>
 			<label>Schuko</label>
@@ -478,6 +831,8 @@
 			<label>NEMA L6-30</label>
 			<label>NEMA L7-15</label>
 			<label>RF-203P 277V</label>
+			<label>SDG300</label>
+			<label>SDG400</label>
 		</enumMap>
 
 		<numSensor ruleid="outlet_voltage" index=".1.3.6.1.4.1.534.6.6.7.6.3.1.2">
@@ -662,7 +1017,6 @@
 
 		<numSensor ruleid="temperatureValue" index=".1.3.6.1.4.1.534.6.6.7.7.1.1.4">
 			<rowTest>
-				<!-- temperatureProbeStatus -->
 				<mapValue mapid="delete_null_probe">
 					<getRowOid>.1.3.6.1.4.1.534.6.6.7.7.1.1.3</getRowOid>
 				</mapValue>
@@ -674,21 +1028,21 @@
 					<op>
 						<eq>
 							<!-- temperatureScale -->
-							<op><getOid>.1.3.6.1.4.1.534.6.6.7.1.2.1.9.0</getOid></op>
+						  <op><getOid>.1.3.6.1.4.1.534.6.6.7.1.2.1.9.0</getOid></op>
 							<op>0</op>
 						</eq>
 					</op>
 					<op>
 						<mult>
 							<!-- celsius -->
-							<op><getRowOid>.1.3.6.1.4.1.534.6.6.7.7.1.1.4</getRowOid></op>
+						  <op><getRowOid>.1.3.6.1.4.1.534.6.6.7.7.1.1.4</getRowOid></op>
 							<op>0.1</op>
 						</mult>
 					</op>
 					<op>
 						<mult>
 							<!-- Convert fahrenheit to celcius -->
-							<op>
+						  <op>
 								<sub>
 									<op>
 										<mult>
@@ -721,7 +1075,7 @@
 		<numSensor ruleid="humidityValue" index=".1.3.6.1.4.1.534.6.6.7.7.2.1.4">
 			<rowTest>
 				<!-- humidityProbeStatus -->
-				<mapValue mapid="delete_null_probe">
+			  <mapValue mapid="delete_null_probe">
 					<getRowOid>.1.3.6.1.4.1.534.6.6.7.7.2.1.3</getRowOid>
 				</mapValue>
 			</rowTest>
@@ -742,7 +1096,7 @@
 			</label>
 			<sensorSet>Environmentals</sensorSet>
 		</numSensor>
-		
+
 		<valueMap ruleid="delete_null_contact">
 			<valueIn>*</valueIn><valueOut>[true]</valueOut>
 			<valueIn>-1</valueIn><valueOut>[false]</valueOut>
@@ -773,7 +1127,7 @@
 			<enum>contact_status-em</enum>
 			<sensorSet>Contacts</sensorSet>
 		</stateSensor>
-		
+
 		<valueMap ruleid="contact_status-vm">
 			<valueIn>-1</valueIn><valueOut>0</valueOut>
 			<valueIn>0</valueIn><valueOut>1</valueOut>
@@ -786,7 +1140,7 @@
 			<label>Closed</label>
 			<label>Unknown</label>
 		</enumMap>
-		
+
 		<stateSensor ruleid="contactState" index=".1.3.6.1.4.1.534.6.6.7.7.3.1.4">
 			<rowTest>
 				<mapValue mapid="delete_null_contact">
@@ -814,4 +1168,437 @@
 		</stateSensor>
 
 	</device>
+  <!--
+
+	  Device section "sensorAgent_temp" is using the ePDU OID branch .1.3.6.1.4.1.534.6.6.7
+	  to prevent interferring with the Eaton UPS which shares the sensorAgent OID branch
+
+  -->
+  <device deviceid="sensorAgent_temp">
+		<oidMustExist ruleid="ePDUBranch_exists" oid=".1.3.6.1.4.1.534.6.6.7" istree="yes"/>
+
+		<alarmFlags2 ruleid="temperatureAlarm" index=".1.3.6.1.4.1.534.6.8.1.2.3.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.534.6.8.1.2.3.1.1</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Probe Temperature Low Warning</activeText>
+					<inactiveText>Probe Temperature Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Temperature</op></regex><space/>
+						Low Warning condition exists.
+					</activeText>
+					<inactiveText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Temperature</op></regex><space/>
+						Low Warning condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Probe Temperature Low Critical</activeText>
+					<inactiveText>Probe Temperature Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Temperature</op></regex><space/>
+						Low Critical condition exists.
+					</activeText>
+					<inactiveText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Temperature</op></regex><space/>
+						Low Critical condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Probe Temperature High Warning</activeText>
+					<inactiveText>Probe Temperature High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Temperature</op></regex><space/>
+						High Warning condition exists.
+					</activeText>
+					<inactiveText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Temperature</op></regex><space/>
+						High Warning condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Probe Temperature High Critical</activeText>
+					<inactiveText>Probe Temperature High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Temperature</op></regex><space/>
+						High Critical condition exists.
+					</activeText>
+					<inactiveText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Temperature</op></regex><space/>
+						High Critical condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<numSensor ruleid="temperatureValue2" index=".1.3.6.1.4.1.534.6.8.1.2.3.1.3">
+			<rowTest>
+				<neq><!-- temperatureCommunicationStatus, default to 0 if OID not present -->
+				  <op><getRowOid default="0">.1.3.6.1.4.1.534.6.8.1.2.3.1.4</getRowOid></op>
+					<op>3</op>
+				</neq>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>_RPDU_TEMP_<rowNumber/></sensorId>
+			<value>
+				<if>
+					<op>
+						<eq>
+							<!-- temperatureUnit -->
+						  <op><getOid>.1.3.6.1.4.1.534.6.8.1.2.5.0</getOid></op>
+							<op>0</op><!-- Kelvin -->
+						</eq>
+					</op>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getRowOid>.1.3.6.1.4.1.534.6.8.1.2.3.1.3</getRowOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>273.15</op>
+						</sub>
+					</op>
+					<op>
+						<if>
+							<op>
+								<eq>
+									<!-- temperatureUnit -->
+								  <op><getOid>.1.3.6.1.4.1.534.6.8.1.2.5.0</getOid></op>
+									<op>2</op><!-- Fahrenheit -->
+								</eq>
+							</op>
+							<op>
+								<mult>
+									<op>
+										<sub>
+											<op>
+												<mult>
+													<op><getRowOid>.1.3.6.1.4.1.534.6.8.1.2.3.1.3</getRowOid></op>
+													<op>0.1</op>
+												</mult>
+											</op>
+											<op>32</op>
+										</sub>
+									</op>
+									<op>
+										<div>
+											<op>5</op>
+											<op>9</op>
+										</div>
+									</op>
+								</mult>
+							</op>
+							<op>
+								<mult>
+									<op><getRowOid>.1.3.6.1.4.1.534.6.8.1.2.3.1.3</getRowOid></op>
+									<op>0.1</op><!-- Celsius -->
+								</mult>
+							</op>
+						</if>
+					</op>
+				</if>
+			</value>
+			<label>
+				<regex>
+					<op>\d+\.(\d+)</op>
+					<op><rowIndex/></op>
+					<op>Probe %1$s Temperature</op>
+				</regex>
+			</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+
+		<alarmFlags2 ruleid="humidityAlarm" index=".1.3.6.1.4.1.534.6.8.1.3.3.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.534.6.8.1.3.3.1.1</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Probe Humidity Low Warning</activeText>
+					<inactiveText>Probe Humidity Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Humidity</op></regex><space/>
+						Low Warning condition exists.
+					</activeText>
+					<inactiveText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Humidity</op></regex><space/>
+						Low Warning condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Probe Humidity Low Critical</activeText>
+					<inactiveText>Probe Humidity Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Humidity</op></regex><space/>
+						Low Critical condition exists.
+					</activeText>
+					<inactiveText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Humidity</op></regex><space/>
+						Low Critical condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Probe Humidity High Warning</activeText>
+					<inactiveText>Probe Humidity High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Humidity</op></regex><space/>
+						High Warning condition exists.
+					</activeText>
+					<inactiveText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Humidity</op></regex><space/>
+						High Warning condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Probe Humidity High Critical</activeText>
+					<inactiveText>Probe Humidity High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Humidity</op></regex><space/>
+						High Critical condition exists.
+					</activeText>
+					<inactiveText>
+						A <regex><op>\d+\.(\d+)</op><op><rowIndex/></op><op>Probe %1$s Humidity</op></regex><space/>
+						High Critical condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<numSensor ruleid="humidityValue2" index=".1.3.6.1.4.1.534.6.8.1.3.3.1.3">
+			<rowTest>
+				<neq><!-- humidityCommunicationStatus, default to 0 if OID not present -->
+				  <op><getRowOid default="0">.1.3.6.1.4.1.534.6.8.1.3.3.1.4</getRowOid></op>
+					<op>3</op>
+				</neq>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>_RPDU_HUMIDITY_<rowNumber/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.534.6.8.1.3.3.1.3</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>
+				<regex>
+					<op>\d+\.(\d+)</op>
+					<op><rowIndex/></op>
+					<op>Probe %1$s Humidity</op>
+				</regex>
+			</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+
+	</device>
+
+	<device deviceid="sensorAgent_digital_input">
+		<oidMustExist ruleid="ePDUBranch_exists" oid=".1.3.6.1.4.1.534.6.6.7" istree="yes"/>
+
+		<stateSensor ruleid="digitalInputConnectionType" index=".1.3.6.1.4.1.534.6.8.1.4.1.1.3">
+			<type>state</type>
+			<sensorId>DI_TYPE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="contact_status-vm">
+					<formatNumber>
+						<getRowOid>.1.3.6.1.4.1.534.6.8.1.4.1.1.3</getRowOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Connection Type</label>
+			<enum>di_type-em</enum>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid></sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="di_type-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<enumMap ruleid="di_type-em">
+			<label>Undefined</label>
+			<label>Internal</label>
+			<label>Wired</label>
+			<label>Wireless</label>
+		</enumMap>
+
+		<stateSensor ruleid="digitalInputAlarm" index=".1.3.6.1.4.1.534.6.8.1.4.3.1.1">
+			<type>state</type>
+			<sensorId>DI_ALARM_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="alarm_status-vm">
+					<formatNumber>
+						<getRowOid>.1.3.6.1.4.1.534.6.8.1.4.3.1.1</getRowOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Alarm Status</label>
+			<enum>alarm_status-em</enum>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid></sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="alarm_status-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<enumMap ruleid="alarm_status-em">
+			<label>Good</label>
+			<label>Informational</label>
+			<label>Warning</label>
+			<label>Critical</label>
+		</enumMap>
+
+		<stateSensor ruleid="digitalInputState" index=".1.3.6.1.4.1.534.6.8.1.4.3.1.3">
+			<type>state</type>
+			<sensorId>DI_STATE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="di_status-vm">
+					<formatNumber>
+						<getRowOid>.1.3.6.1.4.1.534.6.8.1.4.3.1.3</getRowOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> State</label>
+			<enum>di_status-em</enum>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid></sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="di_status-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+		</valueMap>
+		<enumMap ruleid="di_status-em">
+			<label>Inactive</label>
+			<label>Active</label>
+		</enumMap>
+
+		<stateSensor ruleid="digitalInputCommunicationStatus" index=".1.3.6.1.4.1.534.6.8.1.4.3.1.5">
+			<type>state</type>
+			<sensorId>DI_COMM_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="comm_status-vm">
+					<formatNumber>
+						<getRowOid>.1.3.6.1.4.1.534.6.8.1.4.3.1.5</getRowOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Communication Status</label>
+			<enum>comm_status-em</enum>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid></sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="comm_status-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="comm_status-em">
+			<label>Unknown</label>
+			<label>Okay</label>
+			<label>Communication Lost</label>
+		</enumMap>
+
+		<alarmFlags2 ruleid="digitalInputAlarm-af" index=".1.3.6.1.4.1.534.6.8.1.4.3.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.3.1.1</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Informational Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Informational Alarm Cleared</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>Digital Input</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Informational Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Informational Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Warning Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Warning Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Digital Input</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Warning Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Warning Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Critical Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Critical Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Digital Input</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Critical Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Critical Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="digitalInputCommunicationStatus-af" index=".1.3.6.1.4.1.534.6.8.1.4.3.1.5">
+			<value><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.3.1.5</getRowOid></value>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Communication Lost Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Communication Lost Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Digital Input</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Communication Lost Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.534.6.8.1.4.2.1.1</getRowOid> Communication Lost Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+	</device>
+
 </APC_DDF>

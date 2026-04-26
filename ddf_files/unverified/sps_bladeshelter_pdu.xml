@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="sps_bladeshelter_pdu"
+	ddfname="BladeShelter PDU"
+	ddfversion="3"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<device deviceid="pduIdent">
+		<oidMustExist oid=".1.3.6.1.4.1.42610.1.4.1" ruleid="pwt2" istree="yes" />
+
+		<setProductData field="vendor" ruleid="vendordata">Superior Power Systems Co. Ltd.</setProductData>
+		<setProductData field="model" ruleid="modeldata">Bladeshelter PDU</setProductData>
+		<setProductData field="type" ruleid="typedata">Rack PDU</setProductData>
+
+		<setProductData field="appversion" ruleid="pduIdentAgentSoftwareVersion">
+			<getOid>.1.3.6.1.4.1.42610.1.4.1.1.1.1.0</getOid>
+		</setProductData>
+		<setProductData field="serial_num" ruleid="pduIdentSerialNumber">
+			<getOid>.1.3.6.1.4.1.42610.1.4.1.1.1.2.0</getOid>
+		</setProductData>
+
+		<valueMap ruleid="relayStatus-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="relayStatus-em">
+			<label>Unknown</label>
+			<label>Off</label>
+			<label>On</label>
+		</enumMap>
+	</device>
+
+	<device deviceid="pduDevMonInlet">
+		<oidMustExist oid=".1.3.6.1.4.1.42610.1.4.1.1.2" ruleid="pduDevMon" istree="yes" />
+
+		<numSensor ruleid="pduDevMonInletVoltPh1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>INLET_<rowIndex/>_VOLT_PH1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.5</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Voltage Phase 1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletVoltPh2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>INLET_<rowIndex/>_VOLT_PH2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.6</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Voltage Phase 2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletVoltPh3" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>INLET_<rowIndex/>_VOLT_PH3</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.7</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Voltage Phase 3</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="pduDevMonInletPfPh1B1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>INLET_<rowIndex/>_PF_PH1_B1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.8</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Inlet <rowIndex/> - Power Factor Phase 1B1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletPfPh2B1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>INLET_<rowIndex/>_PF_PH2_B1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.9</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Inlet <rowIndex/> - Power Factor Phase 2B1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletPfPh3B1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>INLET_<rowIndex/>_PF_PH3_B1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.10</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Inlet <rowIndex/> - Power Factor Phase 3B1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletPfPh1B2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>INLET_<rowIndex/>_PF_PH1_B2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.11</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Inlet <rowIndex/> - Power Factor Phase 1B2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletPfPh2B2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>INLET_<rowIndex/>_PF_PH2_B2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.12</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Inlet <rowIndex/> - Power Factor Phase 2B2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletPfPh3B2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>INLET_<rowIndex/>_PF_PH3_B2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.13</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Inlet <rowIndex/> - Power Factor Phase 3B2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="pduDevMonInletCurrentPh1B1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>INLET_<rowIndex/>_CURRENT_PH1_B1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.14</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Current Phase 1B1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletCurrentPh2B1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>INLET_<rowIndex/>_CURRENT_PH2_B1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.15</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Current Phase 2B1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletCurrentPh3B1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>INLET_<rowIndex/>_CURRENT_PH3_B1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.16</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Current Phase 3B1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletCurrentPh1B2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>INLET_<rowIndex/>_CURRENT_PH1_B2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.17</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Current Phase 1B2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletCurrentPh2B2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>INLET_<rowIndex/>_CURRENT_PH2_B2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.18</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Current Phase 2B2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletCurrentPh3B2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>INLET_<rowIndex/>_CURRENT_PH3_B2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.19</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Current Phase 3B2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="pduDevMonInletActPowerPh1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>INLET_<rowIndex/>_ACT_POWER_PH1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.20</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Active Power Phase 1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletActPowerPh2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>INLET_<rowIndex/>_ACT_POWER_PH2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.21</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Active Power Phase 2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletActPowerPh3" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>INLET_<rowIndex/>_ACT_POWER_PH3</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.22</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Active Power Phase 3</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="pduDevMonInletAppPowerPh1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>INLET_<rowIndex/>_APP_POWER_PH1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.23</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Apparent Power Phase 1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletAppPowerPh2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>INLET_<rowIndex/>_APP_POWER_PH2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.24</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Apparent Power Phase 2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletAppPowerPh3" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>INLET_<rowIndex/>_APP_POWER_PH3</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.25</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Apparent Power Phase 3</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="pduDevMonInletEnergyPh1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>INLET_<rowIndex/>_ENERGY_PH1</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.26</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Energy Phase 1</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletEnergyPh2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>INLET_<rowIndex/>_ENERGY_PH2</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.27</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Energy Phase 2</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonInletEnergyPh3" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>INLET_<rowIndex/>_ENERGY_PH3</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.28</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Inlet <rowIndex/> - Energy Phase 3</label>
+			<sensorSet>Inlet <rowIndex/> (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.2</getRowOid>) </sensorSet>
+		</numSensor>
+
+		<alarmFlags2 ruleid="pduDevMonInletEvtOverload" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.33">
+			<value><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.33</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Inlet <rowIndex/> Overload</activeText>
+					<inactiveText>Inlet <rowIndex/> Overload Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Current</category>
+				<description>
+					<activeText>Inlet <rowIndex/>: An Overload condition is present.</activeText>
+					<inactiveText>Inlet <rowIndex/>: Overload condition is no longer present.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Inlet <rowIndex/> Overload</activeText>
+					<inactiveText>Inlet <rowIndex/> Overload Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Current</category>
+				<description>
+					<activeText>Inlet <rowIndex/>: An Overload condition is present.</activeText>
+					<inactiveText>Inlet <rowIndex/>: Overload condition is no longer present.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="pduDevMonInletEvtStatusPh1" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.34">
+			<value><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.34</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Inlet <rowIndex/> Phase 1 Warning</activeText>
+					<inactiveText>Inlet <rowIndex/> Phase 1 Normal</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Current</category>
+				<description>
+					<activeText>Inlet <rowIndex/>: Phase 1 is in warning condition.</activeText>
+					<inactiveText>Inlet <rowIndex/>: Phase 1 has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Inlet <rowIndex/> Phase 1 Critical</activeText>
+					<inactiveText>Inlet <rowIndex/> Phase 1 Normal</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Current</category>
+				<description>
+					<activeText>Inlet <rowIndex/>: Phase 1 is in critical condition.</activeText>
+					<inactiveText>Inlet <rowIndex/>: Phase 1 has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="pduDevMonInletEvtStatusPh2" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.35">
+			<value><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.35</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Inlet <rowIndex/> Phase 2 Warning</activeText>
+					<inactiveText>Inlet <rowIndex/> Phase 2 Normal</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Current</category>
+				<description>
+					<activeText>Inlet <rowIndex/>: Phase 2 is in warning condition.</activeText>
+					<inactiveText>Inlet <rowIndex/>: Phase 2 has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Inlet <rowIndex/> Phase 2 Critical</activeText>
+					<inactiveText>Inlet <rowIndex/> Phase 2 Normal</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Current</category>
+				<description>
+					<activeText>Inlet <rowIndex/>: Phase 2 is in critical condition.</activeText>
+					<inactiveText>Inlet <rowIndex/>: Phase 2 has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="pduDevMonInletEvtStatusPh3" index=".1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.36">
+			<value><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.1.1.1.36</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Inlet <rowIndex/> Phase 3 Warning</activeText>
+					<inactiveText>Inlet <rowIndex/> Phase 3 Normal</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Current</category>
+				<description>
+					<activeText>Inlet <rowIndex/>: Phase 3 is in warning condition.</activeText>
+					<inactiveText>Inlet <rowIndex/>: Phase 3 has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Inlet <rowIndex/> Phase 3 Critical</activeText>
+					<inactiveText>Inlet <rowIndex/> Phase 3 Normal</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Current</category>
+				<description>
+					<activeText>Inlet <rowIndex/>: Phase 3 is in critical condition.</activeText>
+					<inactiveText>Inlet <rowIndex/>: Phase 3 has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+	</device>
+	<device deviceid="pduDevMonOutletMaster">
+		<oidMustExist oid=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1" ruleid="pduDevMonOutletMaster" istree="yes" />
+		<oidMustNotMatch oid=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1.1.0" ruleid="pduDevOutletMasterPortSize">
+			<valueList>
+				<value>0</value>
+			</valueList>
+		</oidMustNotMatch>
+
+		<stateSensor ruleid="pduDevMonOutletMasterPortRlyState" index=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.3">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.3</getRowOid></op><op>0</op></neq>
+			</rowTest>
+			<type>state</type>
+			<sensorId>MASTER_PORT_OUTLET_<rowIndex/>_RLY_STATE</sensorId>
+			<value>
+				<mapValue mapid="sps_bladeshelter_pdu/pduIdent/relayStatus-vm">
+					<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.5</getRowOid>
+				</mapValue>
+			</value>
+			<label>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid> - Relay Status</label>
+			<enum>sps_bladeshelter_pdu/pduIdent/relayStatus-em</enum>
+			<sensorSet>Master Port Outlets</sensorSet>
+		</stateSensor>
+		<alarmFlags2 ruleid="pduDevMonOutletMasterPortEvtStatus" index=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.6">
+			<value><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.6</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid>: Warning</activeText>
+					<inactiveText>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid>: Normal</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Outlet</category>
+				<description>
+					<activeText>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid>: A warning condition is present.</activeText>
+					<inactiveText>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid>: Condition has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid>: Critical</activeText>
+					<inactiveText>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid>: Normal</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Outlet</category>
+				<description>
+					<activeText>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid>: A critical condition is present.</activeText>
+					<inactiveText>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid>: Condition has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<numSensor ruleid="pduDevMonOutletMasterPortVolt" index=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.3">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.3.2.1.2.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>MASTER_PORT_OUTLET_<rowIndex/>_VOLT</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.7</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid> - Voltage</label>
+			<sensorSet>Master Port Outlets</sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonOutletMasterPortCurrent" index=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.3">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.3.2.1.2.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>MASTER_PORT_OUTLET_<rowIndex/>_CURRENT</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.8</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid> - Current</label>
+			<sensorSet>Master Port Outlets</sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonOutletMasterPortPf" index=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.3">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.3.2.1.2.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>MASTER_PORT_OUTLET_<rowIndex/>_PF</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.9</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid> - Power Factor</label>
+			<sensorSet>Master Port Outlets</sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonOutletMasterPortActPower" index=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.3">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.3.2.1.2.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>MASTER_PORT_OUTLET_<rowIndex/>_ACT_POWER</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.10</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid> - Active Power</label>
+			<sensorSet>Master Port Outlets</sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonOutletMasterPortAppPower" index=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.3">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.3.2.1.2.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>MASTER_PORT_OUTLET_<rowIndex/>_APP_POWER</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.11</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid> - Apparent Power</label>
+			<sensorSet>Master Port Outlets</sensorSet>
+		</numSensor>
+		<numSensor ruleid="pduDevMonOutletMasterPortEnergy" index=".1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.3">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.3.2.1.2.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>MASTER_PORT_OUTLET_<rowIndex/>_ENERGY</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.12</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Master Port - <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.2.1.2.1.2</getRowOid> - Energy</label>
+			<sensorSet>Master Port Outlets</sensorSet>
+		</numSensor>
+	</device>
+    <device deviceid="pduDevMonEmdMaster">
+		<oidMustExist oid=".1.3.6.1.4.1.42610.1.4.1.1.2.3.1" ruleid="pduDevMonEmdMaster" istree="yes" />
+
+        <numSensor ruleid="pduDevMonEmdMasterTemp" index=".1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.1">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+            <type>temp</type>
+            <sensorId>PDU_DEV_MON_EMD_MASTER_TEMP_<rowIndex/></sensorId>
+            <value>
+                <mult>
+                    <op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.9</getRowOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+			<valueInc>0.1</valueInc>
+			<label>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>)</label>
+            <sensorSet>Environment</sensorSet>
+        </numSensor>
+        <numSensor ruleid="pduDevMonEmdMasterHumi" index=".1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.1">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+            <type>humidity</type>
+            <sensorId>PDU_DEV_MON_EMD_MASTER_HUMI_<rowIndex/></sensorId>
+            <value>
+                <mult>
+                    <op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.10</getRowOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+			<valueInc>0.1</valueInc>
+			<label>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>)</label>
+            <sensorSet>Environment</sensorSet>
+        </numSensor>
+        <stateSensor ruleid="pduDevMonEmdMasterTempSt" index=".1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.1">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+            <type>state</type>
+            <sensorId>PDU_DEV_MON_EMD_MASTER_TEMP_STATUS_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="th_status_vm">
+                    <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.11</getRowOid>
+                </mapValue>
+            </value>
+			<label>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature Status (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>)</label>
+            <enum>th_status_em</enum>
+            <sensorSet>Environment</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="pduDevMonEmdMasterHumiSt" index=".1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.1">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+            <type>state</type>
+            <sensorId>PDU_DEV_MON_EMD_MASTER_HUMI_STATUS_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="th_status_vm">
+                    <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.12</getRowOid>
+                </mapValue>
+            </value>
+			<label>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity Status (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>)</label>
+            <enum>th_status_em</enum>
+            <sensorSet>Environment</sensorSet>
+        </stateSensor>
+        <valueMap ruleid="th_status_vm">
+            <valueIn>1</valueIn><valueOut>0</valueOut>
+            <valueIn>2</valueIn><valueOut>1</valueOut>
+            <valueIn>3</valueIn><valueOut>2</valueOut>
+            <valueIn>4</valueIn><valueOut>3</valueOut>
+            <valueIn>5</valueIn><valueOut>4</valueOut>
+            <valueIn>*</valueIn><valueOut>5</valueOut>
+        </valueMap>
+        <enumMap ruleid="th_status_em">
+            <label>Normal</label>
+            <label>High Warning</label>
+            <label>Low Warning</label>
+            <label>High Critical</label>
+            <label>Low Critical</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <alarmFlags2 ruleid="pduDevMonEmdMasterTempAlarm" index=".1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.1">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+			<value><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.11</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): High Warning Threshold Violation</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): Normal</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Environment</category>
+				<description>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): A high warning threshold violation is present.</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): threshold violation has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): Low Warning Threshold Violation</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): Normal</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Environment</category>
+				<description>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): A low warning threshold violation is present.</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): threshold violation has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): High Critical Threshold Violation</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): Normal</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Environment</category>
+				<description>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): A high critical threshold violation is present.</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): threshold violation has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5">
+				<name>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): Low Critical Threshold Violation</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): Normal</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Environment</category>
+				<description>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): A low critical threshold violation is present.</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Temperature (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.5</getRowOid>): threshold violation has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+        <alarmFlags2 ruleid="pduDevMonEmdMasterHumiAlarm" index=".1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.1">
+			<rowTest>
+				<eq><op><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.2</getRowOid></op><op>2</op></eq>
+			</rowTest>
+			<value><getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.12</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): High Warning Threshold Violation</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): Normal</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Environment</category>
+				<description>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): A high warning threshold violation is present.</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): threshold violation has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): Low Warning Threshold Violation</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): Normal</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Environment</category>
+				<description>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): A low warning threshold violation is present.</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): threshold violation has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): High Critical Threshold Violation</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): Normal</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Environment</category>
+				<description>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): A high critical threshold violation is present.</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): threshold violation has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5">
+				<name>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): Low Critical Threshold Violation</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): Normal</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Environment</category>
+				<description>
+					<activeText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): A low critical threshold violation is present.</activeText>
+					<inactiveText>Master <getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.4</getRowOid> Humidity (<getRowOid>.1.3.6.1.4.1.42610.1.4.1.1.2.3.1.1.1.6</getRowOid>): threshold violation has returned to normal.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+    </device>
+</APC_DDF>

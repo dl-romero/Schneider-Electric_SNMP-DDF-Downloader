@@ -1,0 +1,3045 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="benning_invmcu"
+	ddfname="Benning INVMCU"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+	
+		SOURCE
+		\snmp\resources\mibs\benning\INVMCU_MIB.txt
+		
+		INVERTER-MIB | 20 April 2021
+		
+		WALKFILES
+		\snmp\resources\sapro\walkfiles\benning\INVMCU_walk_file.walk
+		
+	-->
+	<device deviceid="inverterIdent">
+		<oidMustExist ruleid="inverterIdent_exists" oid=".1.3.6.1.4.1.27383.3.1.1" istree="yes"/> 
+		
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Benning</setProductData>
+		<setProductData ruleid="modeldata" field="model">INVMCU</setProductData>
+		<setProductData ruleid="software_version" field="appversion"><getOid>.1.3.6.1.4.1.27383.3.1.1.6.0</getOid></setProductData>
+		<setProductData ruleid="typedata" field="type">PDU</setProductData>
+		
+	</device>
+	
+	<device deviceid="commonValueMaps">
+		<oidMustExist ruleid="inverterObjects_exists" oid=".1.3.6.1.4.1.27383.3.1" istree="yes"/> 
+		
+		<valueMap ruleid="3state-vm">
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		
+		<valueMap ruleid="4state-vm">
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="outputSource-em">
+			<label>Unknown</label>
+			<label>Bypass</label>
+			<label>Inverter</label>
+		</enumMap>
+		
+		<enumMap ruleid="batteryStatus-em">
+			<label>Unknown</label>
+			<label>Normal</label>
+			<label>Low</label>
+			<label>Depleted</label>
+		</enumMap>
+		
+		<enumMap ruleid="activeNotActive-em">
+			<label>Unknown</label>
+			<label>Active</label>
+			<label>Not Active</label>
+		</enumMap>
+		
+	</device>
+	
+	<device deviceid="inverterSystem">
+		<oidMustExist ruleid="inverterSystem_exists" oid=".1.3.6.1.4.1.27383.3.1.2" istree="yes"/>
+		
+		<setProductData ruleid="inputphasecount" field="inputphasecount"><getOid>.1.3.6.1.4.1.27383.3.1.2.7.2.0</getOid></setProductData>
+		<setProductData ruleid="outputphasecount" field="outputphasecount"><getOid>.1.3.6.1.4.1.27383.3.1.2.7.1.0</getOid></setProductData>
+
+        <numSensor ruleid="inverterSystemBypassVoltageL1N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>INPUT_VOLTAGE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Voltage L1-N</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemBypassVoltageL2N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>INPUT_VOLTAGE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Voltage L2-N</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemBypassVoltageL3N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>INPUT_VOLTAGE_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Voltage L3-N</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemBypassVoltageL1L2">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.4.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>INPUT_VOLTAGE_4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.4.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Voltage L1-L2</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemBypassVoltageL2L3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.5.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>INPUT_VOLTAGE_5</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.5.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Voltage L2-L3</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemBypassVoltageL1L3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.6.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>INPUT_VOLTAGE_6</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.1.6.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Voltage L3-L1</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemBypassCurrentL1N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.2.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>PDU_INPUT_CURRENT_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.2.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Current L1-N</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemBypassCurrentL2N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.2.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>PDU_INPUT_CURRENT_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.2.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Current L2-N</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemBypassCurrentL3N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.2.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>PDU_INPUT_CURRENT_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.2.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Current L3-N</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemBypassFrequency">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.1.3.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>frequency</type>
+            <sensorId>_PDU_INPUT_FREQ_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.1.3.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Bypass Input Frequency</label>
+            <sensorSet>System Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputVoltageL1N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_VOLTAGE_LN_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Voltage L1-N</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputVoltageL2N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_VOLTAGE_LN_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Voltage L2-N</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputVoltageL3N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_VOLTAGE_LN_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Voltage L3-N</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputVoltageL1L2">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.4.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_VOLTAGE_LL_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.4.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Voltage L1-L2</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputVoltageL2L3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.5.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_VOLTAGE_LL_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.5.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Voltage L2-L3</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputVoltageL1L3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.6.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_VOLTAGE_LL_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.1.6.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Voltage L3-L1</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputCurrentL1N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.2.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_CURRENT_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.2.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Current L1-N</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputCurrentL2N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.2.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_CURRENT_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.2.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Current L2-N</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputCurrentL3N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.2.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_CURRENT_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.2.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Current L3-N</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemInverterOutputFrequency">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.2.3.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>frequency</type>
+            <sensorId>_SYSTEM_INVERTER_OUTPUT_FREQUENCY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.2.3.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Inverter Output Frequency</label>
+            <sensorSet>System Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputVoltageL1N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_OUTPUT_VOLTAGE_L2N_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Voltage L1-N</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputVoltageL2N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_OUTPUT_VOLTAGE_L2N_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Voltage L2-N</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputVoltageL3N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_OUTPUT_VOLTAGE_L2N_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Voltage L3-N</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputVoltageL1L2">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.4.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_OUTPUT_VOLTAGE_L2L_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.4.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Voltage L1-L2</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputVoltageL2L3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.5.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_OUTPUT_VOLTAGE_L2L_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.5.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Voltage L2-L3</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputVoltageL1L3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.6.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_OUTPUT_VOLTAGE_L2L_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.1.6.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Voltage L3-L1</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputCurrentL1N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.2.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_OUTPUT_CURRENT_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.2.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Current L1-N</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputCurrentL2N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.2.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_OUTPUT_CURRENT_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.2.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Current L2-N</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputCurrentL3N">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.2.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_OUTPUT_CURRENT_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.2.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Current L3-N</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputRealPowerL1">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.3.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_PDU_OUTPUT_POWER_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.3.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Real Power L1</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputRealPowerL2">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.3.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_PDU_OUTPUT_POWER_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.3.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Real Power L2</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputRealPowerL3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.3.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_PDU_OUTPUT_POWER_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.3.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Real Power L3</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputReactivePowerL1">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.4.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>num/kVAR</type>
+            <sensorId>_PDU_POWER_KVAR_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.4.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Reactive Power L1</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputReactivePowerL2">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.4.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>num/kVAR</type>
+            <sensorId>_PDU_POWER_KVAR_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.4.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Reactive Power L2</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputReactivePowerL3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.4.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>num/kVAR</type>
+            <sensorId>_PDU_POWER_KVAR_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.4.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Reactive Power L3</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputApparentPowerL1">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.5.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_OUTPUT_APPARENT_POWER_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.5.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Apparent Power L1</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputApparentPowerL2">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.5.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_OUTPUT_APPARENT_POWER_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.5.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Apparent Power L2</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputApparentPowerL3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.5.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_OUTPUT_APPARENT_POWER_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.5.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Apparent Power L3</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputPercentLoadL1">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.6.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>_OUTPUT_PERCENT_LOAD_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.6.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Percent Load L1</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputPercentLoadL2">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.6.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>_OUTPUT_PERCENT_LOAD_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.6.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Percent Load L2</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputPercentLoadL3">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.6.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>_OUTPUT_PERCENT_LOAD_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.6.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Percent Load L3</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputFrequency">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.7.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>frequency</type>
+            <sensorId>_OUTPUT_FREQ</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.7.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output Frequency</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterSystemOutputCosPHI">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.8.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>num</type>
+            <sensorId>_OUTPUT_COS_PHI</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.3.8.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Output cos PHI</label>
+            <sensorSet>System Output Measurements</sensorSet>
+        </numSensor>
+
+        <stateSensor ruleid="inverterSystemOutputSource">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.3.9.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_SYSTEM_OUTPUT_SOURCE</sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getOid>.1.3.6.1.4.1.27383.3.1.2.3.9.1.0</getOid>
+                </mapValue>
+            </value>
+            <label>System Output Source</label>
+            <enum>commonValueMaps/outputSource-em</enum>
+            <sensorSet>System Output Measurements</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="inverterSystemBatteryVoltage">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.4.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_SYSTEM_BATTERY_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.4.1.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Battery Voltage</label>
+            <sensorSet>System Battery Measurements</sensorSet>
+        </numSensor>
+
+        <stateSensor ruleid="inverterSystemBatteryStatus">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.4.2.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_SYSTEM_BATTERY_STATUS</sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/4state-vm">
+                    <getOid>.1.3.6.1.4.1.27383.3.1.2.4.2.0</getOid>
+                </mapValue>
+            </value>
+            <label>System Battery Status</label>
+            <enum>commonValueMaps/batteryStatus-em</enum>
+            <sensorSet>System Battery Measurements</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="inverterSystemBatteryTemperature">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.4.3.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>_SYSTEM_BATTERY_TEMPERATURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.27383.3.1.2.4.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>System Battery Temperature</label>
+            <sensorSet>System Battery Measurements</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="inverterSystemErrorAlarmAgentCommunication">
+            <value><getOid>.1.3.6.1.4.1.27383.3.1.2.5.1.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Agent To Inverter System Communication Error</activeText>
+                    <inactiveText>Agent To Inverter System Communication Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Agent To Inverter System Communication Error condition exists.</activeText>
+                    <inactiveText>Agent To Inverter System Communication Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="inverterSystemErrorAddressRedundancy">
+            <value><getOid>.1.3.6.1.4.1.27383.3.1.2.5.2.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>System Address Redundancy Error</activeText>
+                    <inactiveText>System Address Redundancy Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>System Address Redundancy Error condition exists.</activeText>
+                    <inactiveText>System Address Redundancy Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="inverterSystemErrorPowerRedundancy">
+            <value><getOid>.1.3.6.1.4.1.27383.3.1.2.5.3.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>System Power Redundancy Error</activeText>
+                    <inactiveText>System Power Redundancy Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>System Power Redundancy Error condition exists.</activeText>
+                    <inactiveText>System Power Redundancy Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+		
+		<enumMap ruleid="operationState-em">
+			<label>Unknown</label>
+			<label>Inverter Operation Active</label>
+			<label>Bypass Operation Active</label>
+			<label>Manual Bypass Switch Closed</label>
+		</enumMap>
+
+        <stateSensor ruleid="inverterSystemOperationState">
+            <rowTest>
+                <gt>
+                    <op><getOid>.1.3.6.1.4.1.27383.3.1.2.6.1.0</getOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_SYSTEM_OPERATION_STATE</sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/4state-vm">
+                    <getOid>.1.3.6.1.4.1.27383.3.1.2.6.1.0</getOid>
+                </mapValue>
+            </value>
+            <label>System Operation State</label>
+            <enum>operationState-em</enum>
+            <sensorSet>System State Information</sensorSet>
+        </stateSensor>
+
+        <alarmFlags ruleid="inverterSystemStateAlarmFromINVMCU">
+            <value><getOid>.1.3.6.1.4.1.27383.3.1.2.6.2.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>System Inverter MCU Alarm</activeText>
+                    <inactiveText>System Inverter MCU Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>System Inverter MCU Alarm condition exists.</activeText>
+                    <inactiveText>System Inverter MCU Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+		
+	</device>
+		
+	<device deviceid="inverterModules">
+		<oidMustExist ruleid="inverterModules_exists" oid=".1.3.6.1.4.1.27383.3.1.3" istree="yes"/>
+
+        <numSensor ruleid="inverterModuleBypassVoltageL1N" index=".1.3.6.1.4.1.27383.3.1.3.1.1.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_VOLTAGE_L1_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Voltage L1-N</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleBypassVoltageL2N" index=".1.3.6.1.4.1.27383.3.1.3.1.1.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_VOLTAGE_L2_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Voltage L2-N</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleBypassVoltageL3N" index=".1.3.6.1.4.1.27383.3.1.3.1.1.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_VOLTAGE_L3_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Voltage L3-N</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleBypassVoltageL1L2" index=".1.3.6.1.4.1.27383.3.1.3.1.1.1.1.5">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.5</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_VOLTAGE_L1_L2_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.5</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Voltage L1-L2</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleBypassVoltageL2L3" index=".1.3.6.1.4.1.27383.3.1.3.1.1.1.1.6">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.6</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_VOLTAGE_L2_L3_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.6</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Voltage L2-L3</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleBypassVoltageL1L3" index=".1.3.6.1.4.1.27383.3.1.3.1.1.1.1.7">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.7</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_VOLTAGE_L3_L1_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.1.1.1.7</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Voltage L3-L1</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleBypassCurrentL1N" index=".1.3.6.1.4.1.27383.3.1.3.1.2.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.2.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_CURRENT_L1_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.2.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Current L1-N</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleBypassCurrentL2N" index=".1.3.6.1.4.1.27383.3.1.3.1.2.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.2.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_CURRENT_L2_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.2.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Current L2-N</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleBypassCurrentL3N" index=".1.3.6.1.4.1.27383.3.1.3.1.2.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.2.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_CURRENT_L3_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.2.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Current L3-N</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleBypassFrequency" index=".1.3.6.1.4.1.27383.3.1.3.1.3.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.3.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>frequency</type>
+            <sensorId>_MODULE_INVERTER_BYPASS_INPUT_FREQUENCY_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.1.3.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Bypass Input Frequency</label>
+            <sensorSet>Module Inverter Bypass Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputVoltageL1N" index=".1.3.6.1.4.1.27383.3.1.3.2.1.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_VOLTAGE_L1_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Voltage L1-N</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputVoltageL2N" index=".1.3.6.1.4.1.27383.3.1.3.2.1.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_VOLTAGE_L2_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Voltage L2-N</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputVoltageL3N" index=".1.3.6.1.4.1.27383.3.1.3.2.1.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_VOLTAGE_L3_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Voltage L3-N</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputVoltageL1L2" index=".1.3.6.1.4.1.27383.3.1.3.2.1.1.1.5">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.5</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_VOLTAGE_L1_L2_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.5</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Voltage L1-L2</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputVoltageL2L3" index=".1.3.6.1.4.1.27383.3.1.3.2.1.1.1.6">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.6</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_VOLTAGE_L2_L3_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.6</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Voltage L2-L3</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputVoltageL1L3" index=".1.3.6.1.4.1.27383.3.1.3.2.1.1.1.7">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.7</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_VOLTAGE_L3_L1_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.1.1.1.7</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Voltage L3-L1</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputCurrentL1N" index=".1.3.6.1.4.1.27383.3.1.3.2.2.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.2.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_CURRENT_L1_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.2.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Current L1-N</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputCurrentL2N" index=".1.3.6.1.4.1.27383.3.1.3.2.2.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.2.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_CURRENT_L2_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.2.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Current L2-N</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputCurrentL3N" index=".1.3.6.1.4.1.27383.3.1.3.2.2.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.2.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_CURRENT_L3_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.2.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Current L3-N</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleInverterOutputFrequency" index=".1.3.6.1.4.1.27383.3.1.3.2.3.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.3.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>frequency</type>
+            <sensorId>_MODULE_INVERTER_OUTPUT_FREQUENCY_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.2.3.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Inverter Output Frequency</label>
+            <sensorSet>Module Inverter Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputVoltageL1N" index=".1.3.6.1.4.1.27383.3.1.3.3.1.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_OUTPUT_VOLTAGE_L1_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Voltage L1-N</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputVoltageL2N" index=".1.3.6.1.4.1.27383.3.1.3.3.1.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_OUTPUT_VOLTAGE_L2_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Voltage L2-N</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputVoltageL3N" index=".1.3.6.1.4.1.27383.3.1.3.3.1.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_OUTPUT_VOLTAGE_L3_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Voltage L3-N</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputVoltageL1L2" index=".1.3.6.1.4.1.27383.3.1.3.3.1.1.1.5">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.5</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_OUTPUT_VOLTAGE_L1_L2_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.5</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Voltage L1-L2</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputVoltageL2L3" index=".1.3.6.1.4.1.27383.3.1.3.3.1.1.1.6">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.6</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_OUTPUT_VOLTAGE_L2_L3_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.6</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Voltage L2-L3</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputVoltageL1L3" index=".1.3.6.1.4.1.27383.3.1.3.3.1.1.1.7">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.7</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_OUTPUT_VOLTAGE_L3_L1_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.1.1.1.7</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Voltage L3-L1</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputCurrentL1N" index=".1.3.6.1.4.1.27383.3.1.3.3.2.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.2.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_MODULE_OUTPUT_CURRENT_L1_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.2.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Current L1-N</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputCurrentL2N" index=".1.3.6.1.4.1.27383.3.1.3.3.2.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.2.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_MODULE_OUTPUT_CURRENT_L2_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.2.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Current L2-N</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputCurrentL3N" index=".1.3.6.1.4.1.27383.3.1.3.3.2.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.2.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>_MODULE_OUTPUT_CURRENT_L3_N_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.2.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Current L3-N</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputRealPowerL1" index=".1.3.6.1.4.1.27383.3.1.3.3.3.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.3.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_MODULE_OUTPUT_REAL_POWER_L1_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.3.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Real Power L1</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputRealPowerL2" index=".1.3.6.1.4.1.27383.3.1.3.3.3.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.3.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_MODULE_OUTPUT_REAL_POWER_L2_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.3.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Real Power L2</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputRealPowerL3" index=".1.3.6.1.4.1.27383.3.1.3.3.3.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.3.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_MODULE_OUTPUT_REAL_POWER_L3_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.3.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Real Power L3</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputReactivePowerL1" index=".1.3.6.1.4.1.27383.3.1.3.3.4.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.4.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>num/kVAR</type>
+            <sensorId>_MODULE_OUTPUT_REACTIVE_POWER_L1_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.4.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Reactive Power L1</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputReactivePowerL2" index=".1.3.6.1.4.1.27383.3.1.3.3.4.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.4.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>num/kVAR</type>
+            <sensorId>_MODULE_OUTPUT_REACTIVE_POWER_L2_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.4.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Reactive Power L2</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputReactivePowerL3" index=".1.3.6.1.4.1.27383.3.1.3.3.4.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.4.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>num/kVAR</type>
+            <sensorId>_MODULE_OUTPUT_REACTIVE_POWER_L3_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.4.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Reactive Power L3</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputApparentPowerL1" index=".1.3.6.1.4.1.27383.3.1.3.3.5.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.5.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_MODULE_OUTPUT_APPARENT_POWER_L1_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.5.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Apparent Power L1</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputApparentPowerL2" index=".1.3.6.1.4.1.27383.3.1.3.3.5.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.5.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_MODULE_OUTPUT_APPARENT_POWER_L2_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.5.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Apparent Power L2</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputApparentPowerL3" index=".1.3.6.1.4.1.27383.3.1.3.3.5.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.5.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_MODULE_OUTPUT_APPARENT_POWER_L3_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.5.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Apparent Power L3</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputPercentLoadL1" index=".1.3.6.1.4.1.27383.3.1.3.3.6.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.6.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>_MODULE_OUTPUT_PERCENT_LOAD_L1_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.6.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Percent Load L1</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputPercentLoadL2" index=".1.3.6.1.4.1.27383.3.1.3.3.6.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.6.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>_MODULE_OUTPUT_PERCENT_LOAD_L2_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.6.1.1.3</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Percent Load L2</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputPercentLoadL3" index=".1.3.6.1.4.1.27383.3.1.3.3.6.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.6.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>pctofcapacity</type>
+            <sensorId>_MODULE_OUTPUT_PERCENT_LOAD_L3_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.6.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Percent Load L3</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputFrequency" index=".1.3.6.1.4.1.27383.3.1.3.3.7.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.7.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>frequency</type>
+            <sensorId>_MODULE_OUTPUT_FREQUENCY_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.7.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output Frequency</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inverterModuleOutputCosPHI" index=".1.3.6.1.4.1.27383.3.1.3.3.8.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.8.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>num</type>
+            <sensorId>_MODULE_OUTPUT_COS_PHI_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.8.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Output cos PHI</label>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </numSensor>
+		
+        <stateSensor ruleid="inverterModuleOutputSource" index=".1.3.6.1.4.1.27383.3.1.3.3.9.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.9.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_OUTPUT_SOURCE_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.3.9.1.1.2</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Output Source</label>
+            <enum>commonValueMaps/outputSource-em</enum>
+            <sensorSet>Module Output Measurements</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="inverterModuleBatteryVoltage" index=".1.3.6.1.4.1.27383.3.1.3.4.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.4.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>_MODULE_BATTERY_VOLTAGE_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.4.1.1.2</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Battery Voltage</label>
+            <sensorSet>Module Battery Measurements</sensorSet>
+        </numSensor>
+
+        <stateSensor ruleid="inverterModuleBatteryStatus" index=".1.3.6.1.4.1.27383.3.1.3.4.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.4.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_BATTERY_STATUS_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/4state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.4.1.1.3</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Battery Status</label>
+            <enum>commonValueMaps/batteryStatus-em</enum>
+            <sensorSet>Module Battery Measurements</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="inverterModuleBatteryTemperature" index=".1.3.6.1.4.1.27383.3.1.3.4.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.4.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>_MODULE_BATTERY_TEMPERATURE_<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.27383.3.1.3.4.1.1.4</getRowOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Module <rowIndex/> Battery Temperature</label>
+            <sensorSet>Module Battery Measurements</sensorSet>
+        </numSensor>
+
+        <alarmFlags2 ruleid="inverterModuleConfigurationError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.2">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.2</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Configuration Error</activeText>
+                    <inactiveText>Module Configuration Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Configuration Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Configuration Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleContactError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.3">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.3</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Contact Error</activeText>
+                    <inactiveText>Module Contact Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Contact Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Contact Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleCANMasterErrorBusOff" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.4">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.4</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module CAN Master In Bus Off State</activeText>
+                    <inactiveText>Module CAN Master In Bus Off State Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> CAN Master In Bus Off State condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> CAN Master In Bus Off State condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleSyncErrorMaster" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.5">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.5</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Master Sync Error</activeText>
+                    <inactiveText>Module Master Sync Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Master Sync Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Master Sync Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleResetMasteruC" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.6">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.6</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Reset Master Controller</activeText>
+                    <inactiveText>Module Reset Master Controller Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Module <rowIndex/> Reset Master Controller condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Reset Master Controller condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleResetSlaveuC" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.7">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.7</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Reset Slave Controller</activeText>
+                    <inactiveText>Module Reset Slave Controller Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Module <rowIndex/> Reset Slave Controller condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Reset Slave Controller condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleCANMessageLostMaster" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.8">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.8</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Master CAN Message Lost</activeText>
+                    <inactiveText>Module Master CAN Message Lost Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Module <rowIndex/> Master CAN Message Lost condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Master CAN Message Lost condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleCANMessageLostSlave" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.9">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.9</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Slave CAN Message Lost</activeText>
+                    <inactiveText>Module Slave CAN Message Lost Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Module <rowIndex/> Slave CAN Message Lost condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Slave CAN Message Lost condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleOverloadInverter" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.10">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.10</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Inverter Overload</activeText>
+                    <inactiveText>Module Inverter Overload Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Module <rowIndex/> Inverter Overload condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Inverter Overload condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleOverloadBypass" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.11">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.11</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Bypass Overload</activeText>
+                    <inactiveText>Module Bypass Overload Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Bypass</category>
+                <description>
+                    <activeText>Module <rowIndex/> Bypass Overload condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Bypass Overload condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleOvertermperature" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.12">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.12</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Over Temperature</activeText>
+                    <inactiveText>Module Over Temperature Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Module <rowIndex/> Over Temperature condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Over Temperature condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleLoadVoltageOutOfRange" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.13">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.13</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Load Voltage Out Of Range</activeText>
+                    <inactiveText>Module Load Voltage Out Of Range Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Module <rowIndex/> Load Voltage Out Of Range condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Load Voltage Out Of Range condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleInverterVoltageOutOfRange" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.14">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.14</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Inverter Voltage Out Of Range</activeText>
+                    <inactiveText>Module Inverter Voltage Out Of Range Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Module <rowIndex/> Inverter Voltage Out Of Range condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Inverter Voltage Out Of Range condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleBypassInputOutOfRange" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.15">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.15</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Bypass Input Out Of Range</activeText>
+                    <inactiveText>Module Bypass Input Out Of Range Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Bypass</category>
+                <description>
+                    <activeText>Module <rowIndex/> Bypass Input Out Of Range condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Bypass Input Out Of Range condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleBatteryVoltageOutOfRange" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.16">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.16</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Battery Voltage Out Of Range</activeText>
+                    <inactiveText>Module Battery Voltage Out Of Range Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Battery</category>
+                <description>
+                    <activeText>Module <rowIndex/> Battery Voltage Out Of Range condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Battery Voltage Out Of Range condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleDCLinkVoltageOutOfRange" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.17">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.17</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module DC Link Voltage Out Of Range</activeText>
+                    <inactiveText>Module DC Link Voltage Out Of Range Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Module <rowIndex/> DC Link Voltage Out Of Range condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> DC Link Voltage Out Of Range condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleACRegulationError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.18">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.18</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module AC Regulation Error</activeText>
+                    <inactiveText>Module AC Regulation Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> AC Regulation Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> AC Regulation Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleDCLinkRegulationError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.19">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.19</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module DC Link Regulation Error</activeText>
+                    <inactiveText>Module DC Link Regulation Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> DC Link Regulation Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> DC Link Regulation Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleBackfeedError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.20">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.20</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Backfeed Error</activeText>
+                    <inactiveText>Module Backfeed Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Backfeed Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Backfeed Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleOutputContactError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.21">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.21</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Output Contact Error</activeText>
+                    <inactiveText>Module Output Contact Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Output Contact Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Output Contact Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleAlarmFromBackfeedModule" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.22">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.22</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Alarm From Backfeed Module</activeText>
+                    <inactiveText>Module Alarm From Backfeed Module Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Module <rowIndex/> Alarm From Backfeed Module condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Alarm From Backfeed Module condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleBatteryBoosterError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.23">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.23</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Battery Booster Error</activeText>
+                    <inactiveText>Module Battery Booster Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Battery Booster Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Battery Booster Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleInverterError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.24">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.24</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Inverter Error</activeText>
+                    <inactiveText>Module Inverter Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Inverter Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Inverter Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleBypassError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.25">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.25</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Bypass Error</activeText>
+                    <inactiveText>Module Bypass Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Bypass Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Bypass Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleProcessorPeripheralErrorMaster" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.26">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.26</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Processor/Peripheral Error Master</activeText>
+                    <inactiveText>Module Processor/Peripheral Error Master Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Processor/Peripheral Error Master condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Processor/Peripheral Error Master condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleProcessorPeripheralErrorSlave" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.27">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.27</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Processor/Peripheral Error Slave</activeText>
+                    <inactiveText>Module Processor/Peripheral Error Slave Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Processor/Peripheral Error Slave condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Processor/Peripheral Error Slave condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModulePeripheralModuleLostError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.28">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.28</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Peripheral Module Lost Error</activeText>
+                    <inactiveText>Module Peripheral Module Lost Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Peripheral Module <rowIndex/> Lost Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Peripheral Module <rowIndex/> Lost Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleIPCRXTimeout" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.29">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.29</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module IPC RX Timeout Error</activeText>
+                    <inactiveText>Module IPC RX Timeout Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Module <rowIndex/> IPC RX Timeout Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> IPC RX Timeout Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleInternalSoftwareError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.30">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.30</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Internal Software Error</activeText>
+                    <inactiveText>Module Internal Software Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> Internal Software Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Internal Software Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleCANAddressError" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.31">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.31</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module CAN Address Error</activeText>
+                    <inactiveText>Module CAN Address Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module <rowIndex/> CAN Address Error condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> CAN Address Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleCANMembertableMismatch" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.32">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.32</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module CAN Member Table Mismatch</activeText>
+                    <inactiveText>Module CAN Member Table Mismatch Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Module <rowIndex/> CAN Member Table Mismatch condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> CAN Member Table Mismatch condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleBatteryVoltageWarningLevelReached" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.33">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.33</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Battery Voltage Warning Level Reached</activeText>
+                    <inactiveText>Module Battery Voltage Warning Level Reached Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Battery</category>
+                <description>
+                    <activeText>Module <rowIndex/> Battery Voltage Warning Level Reached condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Battery Voltage Warning Level Reached condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="inverterModuleBatteryVoltageCriticalLevelReached" index=".1.3.6.1.4.1.27383.3.1.3.6.1.1.34">
+            <value><getRowOid>.1.3.6.1.4.1.27383.3.1.3.6.1.1.34</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Module Battery Voltage Critical Level Reached</activeText>
+                    <inactiveText>Module Battery Voltage Critical Level Reached Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Battery</category>
+                <description>
+                    <activeText>Module <rowIndex/> Battery Voltage Critical Level Reached condition exists.</activeText>
+                    <inactiveText>Module <rowIndex/> Battery Voltage Critical Level Reached condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <stateSensor ruleid="inverterModuleStateInverterOffBySwitch" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.2">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.2</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_INVERTER_OFF_BY_SWITCH_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.2</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Inverter Off By Switch</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateBoosterEnabled" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.3">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.3</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_BOOSTER_ENABLED_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.3</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Booster Enabled</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateInputVoltageDCLinkOk" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.4">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.4</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_INPUT_VOLTAGE_DC_LINK_OK_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.4</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Input Voltage DC Link OK</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateInverterEnabled" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.5">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.5</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_INVERTER_ENABLED_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.5</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Inverter Enabled</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateOutputVoltagesInverterLineNeutralOk" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.6">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.6</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_INVERTER_VOLTAGE_L_N_STATUS_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.6</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Inverter Voltage L-N Status</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateOutputVoltagesInverterLineLineOk" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.7">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.7</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_INVERTER_VOLTAGE_L_L_STATUS_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.7</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Inverter Voltage L-L Status</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateReadyToMakePower" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.8">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.8</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_INVERTER_MODULE_READY_TO_MAKE_POWER_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.8</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Inverter Module Ready To Make Power</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateSwitchingOutputContactorPossible" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.9">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.9</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_SWITCHING_OUTPUT_CONTACTOR_POSSIBLE_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.9</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Switching Output Contactor Possible</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStatePLLLocked" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.10">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.10</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_PLL_LOCKED_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.10</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> PLL Locked</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateOutputContactorClosed" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.11">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.11</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_OUTPUT_CONTACTOR_CLOSED_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.11</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Output Contactor Closed</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateModuleBecameCANMaster" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.12">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.12</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_INVERTER_MODULE_BECAME_CAN_MASTER_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.12</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Inverter Module Became CAN Master</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateGeneratorOperation" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.13">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.13</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_GENERATOR_OPERATION_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.13</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Generator Operation</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateRemotePowerOff" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.14">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.14</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_REMOTE_POWER_OFF_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.14</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Remote Power Off</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateConfigurationDataSyncInProgress" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.15">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.15</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_CONFIGURATION_DATA_SYNC_IN_PROGRESS_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.15</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Configuration Data Sync In Progress</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="inverterModuleStateModuleErrorRelayActive" index=".1.3.6.1.4.1.27383.3.1.3.7.1.1.16">
+            <rowTest>
+                <gt>
+                    <op><getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.16</getRowOid></op>
+                    <op>-32768</op>
+                </gt>
+            </rowTest>
+            <type>state</type>
+            <sensorId>_MODULE_ACTIVE_RELAY_ERROR_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="commonValueMaps/3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.3.1.3.7.1.1.16</getRowOid>
+                </mapValue>
+            </value>
+            <label>Module <rowIndex/> Active Relay Error</label>
+            <enum>commonValueMaps/activeNotActive-em</enum>
+            <sensorSet>Module State Information</sensorSet>
+        </stateSensor>
+
+	</device>
+	
+	<device deviceid="inverterAlarm">
+		<oidMustExist ruleid="inverterAlarm_exists" oid=".1.3.6.1.4.1.27383.3.1.5" istree="yes"/> 
+		
+		<valueMap ruleid="wellKnownAlarms-vm">
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.1</valueIn> <valueOut>1</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.2</valueIn> <valueOut>2</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.3</valueIn> <valueOut>3</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.4</valueIn> <valueOut>4</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.5</valueIn> <valueOut>5</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.6</valueIn> <valueOut>6</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.7</valueIn> <valueOut>7</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.8</valueIn> <valueOut>8</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.9</valueIn> <valueOut>9</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.10</valueIn><valueOut>10</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.11</valueIn><valueOut>11</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.12</valueIn><valueOut>12</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.13</valueIn><valueOut>13</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.14</valueIn><valueOut>14</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.15</valueIn><valueOut>15</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.16</valueIn><valueOut>16</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.17</valueIn><valueOut>17</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.18</valueIn><valueOut>18</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.19</valueIn><valueOut>19</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.20</valueIn><valueOut>20</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.21</valueIn><valueOut>21</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.22</valueIn><valueOut>22</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.23</valueIn><valueOut>23</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.24</valueIn><valueOut>24</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.25</valueIn><valueOut>25</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.26</valueIn><valueOut>26</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.27</valueIn><valueOut>27</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.28</valueIn><valueOut>28</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.29</valueIn><valueOut>29</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.30</valueIn><valueOut>30</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.31</valueIn><valueOut>31</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.32</valueIn><valueOut>32</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.33</valueIn><valueOut>33</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.34</valueIn><valueOut>34</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.35</valueIn><valueOut>35</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.36</valueIn><valueOut>36</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.37</valueIn><valueOut>37</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.38</valueIn><valueOut>38</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.39</valueIn><valueOut>39</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.40</valueIn><valueOut>40</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.41</valueIn><valueOut>41</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.42</valueIn><valueOut>42</valueOut>
+			<valueIn>.1.3.6.1.4.1.27383.3.1.5.3.43</valueIn><valueOut>43</valueOut>		
+		</valueMap>
+		
+		<valueMap ruleid="alarmSeverity-vm">
+			<valueIn>*</valueIn><valueOut>critical</valueOut>
+			<valueIn>1</valueIn><valueOut>warning</valueOut>
+			<valueIn>2</valueIn><valueOut>critical</valueOut>
+			<valueIn>3</valueIn><valueOut>informational</valueOut>
+		</valueMap>
+		
+		<alarmFlags2 ruleid="inverterAlarm_alarm" index=".1.3.6.1.4.1.27383.3.1.5.2.1.2">
+			<value>
+				<baseNToInt base="16">
+					<mapValue mapid="wellKnownAlarms-vm">
+						<getRowOid usegetnext="yes">.1.3.6.1.4.1.27383.3.1.5.2.1.2</getRowOid>
+					</mapValue>
+				</baseNToInt>
+			</value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Agent To Inverter Communication Alarm</activeText>
+                    <inactiveText>Agent To Inverter Communication Alarm Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Agent To Inverter Communication Alarm condition exists.</activeText>
+                    <inactiveText>Agent To Inverter Communication Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Module Configuration Error</activeText>
+                    <inactiveText>Module Configuration Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module Configuration Error condition exists.</activeText>
+                    <inactiveText>Module Configuration Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText>Module Backplane Contact Error</activeText>
+                    <inactiveText>Module Backplane Contact Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module Backplane Contact Error condition exists.</activeText>
+                    <inactiveText>Module Backplane Contact Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="4">
+                <name>
+                    <activeText>CAN Master In Bus Off State</activeText>
+                    <inactiveText>CAN Master In Bus Off State Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>CAN Master In Bus Off State condition exists.</activeText>
+                    <inactiveText>CAN Master In Bus Off State condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="5">
+                <name>
+                    <activeText>Inverter Module Master Synch Error</activeText>
+                    <inactiveText>Inverter Module Master Synch Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Inverter Module Master Synch Error condition exists.</activeText>
+                    <inactiveText>Inverter Module Master Synch Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="6">
+                <name>
+                    <activeText>Inverter Module Master Controller Reset Alarm</activeText>
+                    <inactiveText>Inverter Module Master Controller Reset Alarm Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Inverter Module Master Controller Reset Alarm condition exists.</activeText>
+                    <inactiveText>Inverter Module Master Controller Reset Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="7">
+                <name>
+                    <activeText>Inverter Module Slave Controller Reset Alarm</activeText>
+                    <inactiveText>Inverter Module Slave Controller Reset Alarm Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Inverter Module Slave Controller Reset Alarm condition exists.</activeText>
+                    <inactiveText>Inverter Module Slave Controller Reset Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="8">
+                <name>
+                    <activeText>Module Master Lost CAN Message Alarm</activeText>
+                    <inactiveText>Module Master Lost CAN Message Alarm Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module Master Lost CAN Message Alarm condition exists.</activeText>
+                    <inactiveText>Module Master Lost CAN Message Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="9">
+                <name>
+                    <activeText>Module Slave Lost CAN Message Alarm</activeText>
+                    <inactiveText>Module Slave Lost CAN Message Alarm Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Module Slave Lost CAN Message Alarm condition exists.</activeText>
+                    <inactiveText>Module Slave Lost CAN Message Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="10">
+                <name>
+                    <activeText>Module Inverter Overload</activeText>
+                    <inactiveText>Module Inverter Overload Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Module Inverter Overload condition exists.</activeText>
+                    <inactiveText>Module Inverter Overload condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="11">
+                <name>
+                    <activeText>Module Bypass Overload</activeText>
+                    <inactiveText>Module Bypass Overload Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Bypass</category>
+                <description>
+                    <activeText>Module Bypass Overload condition exists.</activeText>
+                    <inactiveText>Module Bypass Overload condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="12">
+                <name>
+                    <activeText>Inverter Module Over Temperature</activeText>
+                    <inactiveText>Inverter Module Over Temperature Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Inverter Module Over Temperature condition exists.</activeText>
+                    <inactiveText>Inverter Module Over Temperature condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="13">
+                <name>
+                    <activeText>Load Voltage Out Of Range Error</activeText>
+                    <inactiveText>Load Voltage Out Of Range Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Load Voltage Out Of Range Error condition exists.</activeText>
+                    <inactiveText>Load Voltage Out Of Range Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="14">
+                <name>
+                    <activeText>Inverter Out Of Range Error</activeText>
+                    <inactiveText>Inverter Out Of Range Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Inverter Out Of Range Error condition exists.</activeText>
+                    <inactiveText>Inverter Out Of Range Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="15">
+                <name>
+                    <activeText>Bypass Input Out Of Range Error</activeText>
+                    <inactiveText>Bypass Input Out Of Range Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Bypass</category>
+                <description>
+                    <activeText>Bypass Input Out Of Range Error condition exists.</activeText>
+                    <inactiveText>Bypass Input Out Of Range Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="16">
+                <name>
+                    <activeText>Battery Voltage Out Of Range Error</activeText>
+                    <inactiveText>Battery Voltage Out Of Range Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Battery</category>
+                <description>
+                    <activeText>Battery Voltage Out Of Range Error condition exists.</activeText>
+                    <inactiveText>Battery Voltage Out Of Range Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="17">
+                <name>
+                    <activeText>DC Link Voltage Out Of Range Error</activeText>
+                    <inactiveText>DC Link Voltage Out Of Range Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Power</category>
+                <description>
+                    <activeText>DC Link Voltage Out Of Range Error condition exists.</activeText>
+                    <inactiveText>DC Link Voltage Out Of Range Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="18">
+                <name>
+                    <activeText>AC Regulation Error</activeText>
+                    <inactiveText>AC Regulation Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Power</category>
+                <description>
+                    <activeText>AC Regulation Error condition exists.</activeText>
+                    <inactiveText>AC Regulation Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="19">
+                <name>
+                    <activeText>DC Link Regulation Error</activeText>
+                    <inactiveText>DC Link Regulation Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Power</category>
+                <description>
+                    <activeText>DC Link Regulation Error condition exists.</activeText>
+                    <inactiveText>DC Link Regulation Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="20">
+                <name>
+                    <activeText>Backfeed Error</activeText>
+                    <inactiveText>Backfeed Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Backfeed Error condition exists.</activeText>
+                    <inactiveText>Backfeed Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="21">
+                <name>
+                    <activeText>Output Contact Error</activeText>
+                    <inactiveText>Output Contact Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Output</category>
+                <description>
+                    <activeText>Output Contact Error condition exists.</activeText>
+                    <inactiveText>Output Contact Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="22">
+                <name>
+                    <activeText>Backfeed Module Alarm</activeText>
+                    <inactiveText>Backfeed Module Alarm Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Backfeed Module Alarm condition exists.</activeText>
+                    <inactiveText>Backfeed Module Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="23">
+                <name>
+                    <activeText>Battery Booster Error</activeText>
+                    <inactiveText>Battery Booster Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Battery</category>
+                <description>
+                    <activeText>Battery Booster Error condition exists.</activeText>
+                    <inactiveText>Battery Booster Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="24">
+                <name>
+                    <activeText>Inverter Error</activeText>
+                    <inactiveText>Inverter Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Inverter Error condition exists.</activeText>
+                    <inactiveText>Inverter Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="25">
+                <name>
+                    <activeText>Bypass Error</activeText>
+                    <inactiveText>Bypass Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Bypass</category>
+                <description>
+                    <activeText>Bypass Error condition exists.</activeText>
+                    <inactiveText>Bypass Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="26">
+                <name>
+                    <activeText>Processor/Peripheral Error Detected By Master</activeText>
+                    <inactiveText>Processor/Peripheral Error Detected By Master Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Processor/Peripheral Error Detected By Master condition exists.</activeText>
+                    <inactiveText>Processor/Peripheral Error Detected By Master condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="27">
+                <name>
+                    <activeText>Processor/Peripheral Error Detected By Slave</activeText>
+                    <inactiveText>Processor/Peripheral Error Detected By Slave Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Processor/Peripheral Error Detected By Slave condition exists.</activeText>
+                    <inactiveText>Processor/Peripheral Error Detected By Slave condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="28">
+                <name>
+                    <activeText>Address Redundancy Error</activeText>
+                    <inactiveText>Address Redundancy Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Address Redundancy Error condition exists.</activeText>
+                    <inactiveText>Address Redundancy Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="29">
+                <name>
+                    <activeText>Power Redundancy Error</activeText>
+                    <inactiveText>Power Redundancy Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Power Redundancy Error condition exists.</activeText>
+                    <inactiveText>Power Redundancy Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="30">
+                <name>
+                    <activeText>Lost Peripheral Device</activeText>
+                    <inactiveText>Lost Peripheral Device Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Lost Peripheral Device condition exists.</activeText>
+                    <inactiveText>Lost Peripheral Device condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="31">
+                <name>
+                    <activeText>IPC RX Timeout Error</activeText>
+                    <inactiveText>IPC RX Timeout Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>IPC RX Timeout Error condition exists.</activeText>
+                    <inactiveText>IPC RX Timeout Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="32">
+                <name>
+                    <activeText>Internal Software Error</activeText>
+                    <inactiveText>Internal Software Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Internal Software Error condition exists.</activeText>
+                    <inactiveText>Internal Software Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="33">
+                <name>
+                    <activeText>CAN Address Error</activeText>
+                    <inactiveText>CAN Address Error Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>CAN Address Error condition exists.</activeText>
+                    <inactiveText>CAN Address Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="34">
+                <name>
+                    <activeText>CAN Member Table Mismatch</activeText>
+                    <inactiveText>CAN Member Table Mismatch Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>CAN Member Table Mismatch condition exists.</activeText>
+                    <inactiveText>CAN Member Table Mismatch condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="35">
+                <name>
+                    <activeText>Battery Voltage Warning Level Reached</activeText>
+                    <inactiveText>Battery Voltage Warning Level Reached Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Battery</category>
+                <description>
+                    <activeText>Battery Voltage Warning Level Reached condition exists.</activeText>
+                    <inactiveText>Battery Voltage Warning Level Reached condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="36">
+                <name>
+                    <activeText>Battery Voltage Critical Level Reached</activeText>
+                    <inactiveText>Battery Voltage Critical Level Reached Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Battery</category>
+                <description>
+                    <activeText>Battery Voltage Critical Level Reached condition exists.</activeText>
+                    <inactiveText>Battery Voltage Critical Level Reached condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="37">
+                <name>
+                    <activeText>Inverter Off By Switch Alarm</activeText>
+                    <inactiveText>Inverter Off By Switch Alarm Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Inverter Off By Switch Alarm condition exists.</activeText>
+                    <inactiveText>Inverter Off By Switch Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="38">
+                <name>
+                    <activeText>System In Inverter Operation</activeText>
+                    <inactiveText>System In Inverter Operation Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Device</category>
+                <description>
+                    <activeText>System In Inverter Operation condition exists.</activeText>
+                    <inactiveText>System In Inverter Operation condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="39">
+                <name>
+                    <activeText>System In Bypass Operation</activeText>
+                    <inactiveText>System In Bypass Operation Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Device</category>
+                <description>
+                    <activeText>System In Bypass Operation condition exists.</activeText>
+                    <inactiveText>System In Bypass Operation condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="40">
+                <name>
+                    <activeText>Manual Bypass Switch Closed</activeText>
+                    <inactiveText>Manual Bypass Switch Closed Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Bypass</category>
+                <description>
+                    <activeText>Manual Bypass Switch Closed condition exists.</activeText>
+                    <inactiveText>Manual Bypass Switch Closed condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="41">
+                <name>
+                    <activeText>Generator Operation</activeText>
+                    <inactiveText>Generator Operation Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Generator Operation condition exists.</activeText>
+                    <inactiveText>Generator Operation condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="42">
+                <name>
+                    <activeText>Remote Power Off</activeText>
+                    <inactiveText>Remote Power Off Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Remote Power Off condition exists.</activeText>
+                    <inactiveText>Remote Power Off condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="43">
+                <name>
+                    <activeText>Urgent/Non-Urgent Alarm From Inverter MCU</activeText>
+                    <inactiveText>Urgent/Non-Urgent Alarm From Inverter MCU Cleared</inactiveText>
+                </name>
+                <severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.27383.3.1.5.2.1.4</getRowOid></mapValue></severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Urgent/Non-Urgent Alarm From Inverter MCU condition exists.</activeText>
+                    <inactiveText>Urgent/Non-Urgent Alarm From Inverter MCU condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+		</alarmFlags2>
+      
+	</device>
+</APC_DDF>

@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <!-- APC DDF for environmental data -->
 <APC_DDF
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-	ddfid="apcenv"
-	ddfname="APC Environmental"
-	ddfversion="23">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="apcenv"
+  ddfname="APC Environmental"
+  ddfversion="26"
+  canremove="yes">
   <schemaVersion>1.6</schemaVersion>
 
   <!-- measureUPS sensor data -->
@@ -69,23 +70,23 @@
       <enum>mups-contact-state</enum>
       <sensorSet>User Input Status</sensorSet>
     </stateSensor>
-    
+
     <valueMap ruleid="mups-contact-state-map">
       <valueIn>1</valueIn><valueOut>0</valueOut>
       <valueIn>2</valueIn><valueOut>1</valueOut>
       <valueIn>3</valueIn><valueOut>2</valueOut>
       <valueIn>*</valueIn><valueOut>0</valueOut>
     </valueMap>
-    
+
     <enumMap ruleid="mups-contact-state">
-      <label>Unknown/Disabled</label>
+      <label>Disabled</label>
       <label>No Fault</label>
       <label>Fault</label>
     </enumMap>
-    
+
     <!-- END measureUPS data -->
   </device>
-  
+
   <!-- External Environmental Monitor (EM) data -->
   <device deviceid="emenvironmentdata">
     <oidMustExist oid=".1.3.6.1.4.1.318.1.1.10.1.3.3.1.1" istree="yes"/>
@@ -116,7 +117,7 @@
                   <op>
                     <sub>
                      <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.1.3.3.1.4</getRowOid></op> <!-- fahrenheit -->
-                     <op>32</op>
+                      <op>32</op>
                     </sub>
                   </op>
                   <op>5</op>
@@ -131,7 +132,7 @@
       <label>Temperature -<space/><getRowOid>.1.3.6.1.4.1.318.1.1.10.1.3.3.1.2</getRowOid></label>
       <sensorSet>Environmental Status</sensorSet>
     </numSensor>
-    
+
     <suppressRule ruleid="dropmupshumidity1" suppressid="apcenv/measureups_sensors_contacts/measureups_humiditysensor1"/>
     <suppressRule ruleid="dropmupshumidity2" suppressid="apcenv/measureups_sensors_contacts/measureups_humiditysensor2"/>
     <numSensor ruleid="emprobehumidity" index=".1.3.6.1.4.1.318.1.1.10.1.3.3.1.1">
@@ -162,19 +163,19 @@
       <enum>em-contact-state</enum>
 	 <sensorSet>User Input Status</sensorSet>
     </stateSensor>
-    
+
     <valueMap ruleid="isItCelsius">
       <valueIn>1</valueIn><valueOut>[true]</valueOut>
       <valueIn>*</valueIn><valueOut>[false]</valueOut>
     </valueMap>
-    
+
     <valueMap ruleid="em-contact-state-map">
       <valueIn>1</valueIn><valueOut>1</valueOut>
       <valueIn>2</valueIn><valueOut>2</valueOut>
       <valueIn>3</valueIn><valueOut>0</valueOut>
       <valueIn>*</valueIn><valueOut>0</valueOut>
     </valueMap>
-    
+
     <enumMap ruleid="em-contact-state">
       <label>Unknown/Disabled</label>
       <label>No Fault</label>
@@ -183,9 +184,9 @@
 
   </device>
 
-<!-- END EM DATA -->
+  <!-- END EM DATA -->
 
-  
+
   <!-- Integrated Environmental Manager data -->
   <device deviceid="iemenvironmentdata">
     <oidMustExist oid=".1.3.6.1.4.1.318.1.1.10.2.3.2.1.1" istree="yes"/>
@@ -214,7 +215,7 @@
                   <op>
                     <sub>
                      <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.2.3.2.1.4</getRowOid></op> <!-- fahrenheit -->
-                     <op>32</op>
+                      <op>32</op>
                     </sub>
                   </op>
                   <op>5</op>
@@ -271,7 +272,7 @@
       <valueIn>*</valueIn><valueOut>0</valueOut>
     </valueMap>
     <enumMap ruleid="iem-contact-state">
-      <label>Unknown/Disabled</label>
+      <label>Disabled</label>
       <label>No Fault</label>
       <label>Fault</label>
     </enumMap>
@@ -337,7 +338,7 @@
                   <op>
                     <sub>
                      <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid></op> <!-- fahrenheit -->
-                     <op>32</op>
+                      <op>32</op>
                     </sub>
                   </op>
                   <op>5</op>
@@ -347,7 +348,7 @@
             </div>
            </op>
          </if>
- <!--       </round>  -->
+        <!--       </round>  -->
       </value>
       <label>Temperature -<space/><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid></label>
       <sensorSet>Temperature Sensors</sensorSet>
@@ -394,26 +395,44 @@
       <label>Alarm Status -<space/><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid></label>
       <sensorSet>Sensor Alarm Status</sensorSet>
     </stateSensor>
-    
+
+    <numSensor ruleid="memvoltagesensor" index=".1.3.6.1.4.1.318.1.1.10.4.2.3.1.2">
+      <rowTest>
+        <mapValue mapid="apcenv/commonrules/delete_null_sensor">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.10</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage</type>
+      <sensorId>MEM_VOLTAGE_<rowIndex/></sensorId>
+      <value>
+        <mult>
+				  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.10</getRowOid></op>
+				  <op>0.1</op>
+				</mult>
+      </value>
+      <label>Voltage -<space/><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid></label>
+      <sensorSet>Voltage Sensors</sensorSet>
+    </numSensor>
+
     <valueMap ruleid="isItCelsius">
       <valueIn>1</valueIn><valueOut>[true]</valueOut>
       <valueIn>*</valueIn><valueOut>[false]</valueOut>
     </valueMap>
-    
+
     <valueMap ruleid="comm-status-map">
       <valueIn>1</valueIn><valueOut>0</valueOut>
       <valueIn>2</valueIn><valueOut>1</valueOut>
       <valueIn>3</valueIn><valueOut>2</valueOut>
       <valueIn>*</valueIn><valueOut>0</valueOut>
     </valueMap>
-    
+
     <valueMap ruleid="alarm-status-map">
       <valueIn>1</valueIn><valueOut>1</valueOut>
       <valueIn>2</valueIn><valueOut>2</valueOut>
       <valueIn>3</valueIn><valueOut>3</valueOut>
       <valueIn>*</valueIn><valueOut>0</valueOut>
     </valueMap>
-    
+
     <enumMap ruleid="comm-status">
       <label>Not Installed</label>
       <label>COMM OK</label>
@@ -421,7 +440,7 @@
     </enumMap>
   </device>
 
-  
+
   <!-- EMU3 user inputs -->
   <device deviceid="apcmeminputs">
     <oidMustMatch ruleid="memsysid" oid=".1.3.6.1.2.1.1.2.0">
@@ -434,7 +453,7 @@
     <oidMustNotMatch oid=".1.3.6.1.4.1.318.1.1.10.4.3.1.0">
     	<valueList><value>0</value></valueList>
     </oidMustNotMatch>
-    
+
     <!-- mem input alarm status -->
     <stateSensor ruleid="apcmeminputalarmstatus" index=".1.3.6.1.4.1.318.1.1.10.4.3.2.1.2">
       <type>devstatus</type>
@@ -504,40 +523,40 @@
         <space/>(<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.3.4.1.20</getRowOid>)</label>
       <sensorSet>User Input Status</sensorSet>
     </numSensor>
-    
+
     <valueMap ruleid="contact-relay-map">
       <valueIn>1</valueIn><valueOut>1</valueOut>
       <valueIn>2</valueIn><valueOut>0</valueOut>
       <valueIn>*</valueIn><valueOut>2</valueOut>
     </valueMap>
-    
+
     <valueMap ruleid="input-status-map">
       <valueIn>1</valueIn><valueOut>1</valueOut>
       <valueIn>2</valueIn><valueOut>2</valueOut>
       <valueIn>3</valueIn><valueOut>3</valueOut>
       <valueIn>*</valueIn><valueOut>0</valueOut>
     </valueMap>
-    
+
     <valueMap ruleid="digital-state-map">
       <valueIn>1</valueIn><valueOut>1</valueOut>
       <valueIn>2</valueIn><valueOut>0</valueOut>
       <valueIn>*</valueIn><valueOut>2</valueOut>
     </valueMap>
-    
+
     <valueMap ruleid="contactinputonly">
       <!-- include only sensors returning 2 -->
       <valueIn>2</valueIn><valueOut>[true]</valueOut>
       <!-- ignore the rest -->
       <valueIn>*</valueIn><valueOut>[false]</valueOut>
     </valueMap>
-    
+
     <valueMap ruleid="digitalinputonly">
       <!-- include only sensors returning 3 -->
       <valueIn>3</valueIn><valueOut>[true]</valueOut>
       <!-- ignore the rest -->
       <valueIn>*</valueIn><valueOut>[false]</valueOut>
     </valueMap>
-    
+
     <valueMap ruleid="analoginputonly">
       <!-- include only sensors returning 5 -->
       <valueIn>5</valueIn><valueOut>[true]</valueOut>
@@ -545,27 +564,27 @@
       <!-- ignore the rest -->
       <valueIn>*</valueIn><valueOut>[false]</valueOut>
     </valueMap>
-        
+
     <enumMap ruleid="digitalcontactrelay">
       <label>Low</label>
       <label>High</label>
       <label>N/A</label>
     </enumMap>
-    
+
     <enumMap ruleid="memdrycontact">
       <label>Open</label>
       <label>Closed</label>
       <label>Unknown</label>
     </enumMap>
-    
+
   </device>
-        
+
   <!-- rack manager user inputs -->
   <device deviceid="apcrackmanagerinputs">
     <oidMustMatch ruleid="rackmgrsysid" oid=".1.3.6.1.2.1.1.2.0">
       <valueList>
         <value>.1.3.6.1.4.1.318.1.3.8.4.1.3.2.*</value> <!-- RMD1 -->
-	<value>.1.3.6.1.4.1.318.1.3.8.4.1.3.5.*</value> <!-- RMSY -->
+        <value>.1.3.6.1.4.1.318.1.3.8.4.1.3.5.*</value> <!-- RMSY -->
       </valueList>
     </oidMustMatch>
     <oidMustExist oid=".1.3.6.1.4.1.318.1.1.10.4.3.1.0"/> <!-- MEM input table size -->
@@ -576,9 +595,9 @@
       <valueList>
         <value>.1.3.6.1.4.1.318.1.3.8.4.1.3.2.*</value> <!-- RMD1 -->
         <value>.1.3.6.1.4.1.318.1.3.8.4.1.3.5.*</value> <!-- RMSY -->
-      </valueList> 		
+      </valueList>
     </oidMustMatch>
-    
+
     <!-- rack manager input alarm status -->
     <stateSensor ruleid="apcrackmaninputalarmstatus" index=".1.3.6.1.4.1.318.1.1.10.4.3.2.1.2">
       <type>devstatus</type>
@@ -610,7 +629,7 @@
       <enum>apcenv/apcmeminputs/digitalcontactrelay</enum>
       <sensorSet>User Input Status</sensorSet>
     </stateSensor>
-    
+
     <!-- Rack Manager dry contact -->
     <stateSensor ruleid="rackmanusercontact" index=".1.3.6.1.4.1.318.1.1.10.4.3.2.1.2">
       <rowTest>
@@ -814,6 +833,99 @@
 	  <label>Open</label>
 	  <label>Not Applicable</label>
 	</enumMap>
+  </device>
+
+  <device deviceid="universal_io_fluid_sensors">
+    <oidMustExist ruleid="uio_fluid_sensor_table_exists" oid=".1.3.6.1.4.1.318.1.1.25.4.1.0"/>
+    <oidMustNotMatch ruleid="uio_fluid_sensor_table_count" oid=".1.3.6.1.4.1.318.1.1.25.4.1.0">
+      <valueList><value>0</value></valueList>
+    </oidMustNotMatch>
+
+    <stateSensor ruleid="uio_fluid_sensor" index=".1.3.6.1.4.1.318.1.1.25.4.2.1.1">
+      <type>state</type>
+      <sensorId>UIO_FLUID_SENSOR_<rowIndex/></sensorId>
+      <value>
+      <mapValue mapid="uio_fluid_sensor_map">
+        <getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.5</getRowOid>
+      </mapValue>
+      </value>
+      <label>Spot Fluid Sensor - Port<space/><getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.1</getRowOid>:Sensor<space/>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.2</getRowOid>
+      <space/>(<getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.3</getRowOid>)</label>
+      <enum>uio_fluid_sensor_states</enum>
+      <sensorSet></sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="uio_fluid_sensor_map">
+      <valueIn>1</valueIn><valueOut>0</valueOut>
+      <valueIn>2</valueIn><valueOut>1</valueOut>
+      <valueIn>3</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>3</valueOut>
+    </valueMap>
+    <enumMap ruleid="uio_fluid_sensor_states">
+      <label>Fluid Detected</label>
+      <label>No Fluid</label>
+      <label>No Communication</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <stateSensor ruleid="uio_fluid_sensor_alarm_status" index=".1.3.6.1.4.1.318.1.1.25.4.2.1.1">
+      <type>state</type>
+      <sensorId>UIO_FLUID_SENSOR_ALARM_STATUS_<rowIndex/></sensorId>
+      <value>
+      <mapValue mapid="uio_fluid_alarm_status_map">
+        <getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.6</getRowOid>
+      </mapValue>
+      </value>
+      <label>Spot Fluid Sensor Alarm Status - Port<space/><getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.1</getRowOid>:Sensor<space/>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.2</getRowOid>
+      <space/>(<getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.3</getRowOid>)</label>
+      <enum>uio_fluid_alarm_status_states</enum>
+      <sensorSet></sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="uio_fluid_alarm_status_map">
+      <valueIn>1</valueIn><valueOut>0</valueOut>
+      <valueIn>2</valueIn><valueOut>1</valueOut>
+      <valueIn>3</valueIn><valueOut>2</valueOut>
+      <valueIn>4</valueIn><valueOut>3</valueOut>
+      <valueIn>*</valueIn><valueOut>4</valueOut>
+    </valueMap>
+    <enumMap ruleid="uio_fluid_alarm_status_states">
+      <label>Normal</label>
+      <label>Critical</label>
+      <label>No Communication</label>
+      <label>Disabled</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <stateSensor ruleid="uio_fluid_sensor_comm_status" index=".1.3.6.1.4.1.318.1.1.25.4.2.1.1">
+      <type>state</type>
+      <sensorId>UIO_FLUID_SENSOR_COMM_STATUS_<rowIndex/></sensorId>
+      <value>
+      <mapValue mapid="uio_fluid_comm_status_map">
+        <getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.7</getRowOid>
+      </mapValue>
+      </value>
+      <label>Spot Fluid Sensor Comm. Status - Port<space/><getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.1</getRowOid>:Sensor<space/>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.2</getRowOid>
+      <space/>(<getRowOid>.1.3.6.1.4.1.318.1.1.25.4.2.1.3</getRowOid>)</label>
+      <enum>uio_fluid_comm_status_states</enum>
+      <sensorSet></sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="uio_fluid_comm_status_map">
+      <valueIn>1</valueIn><valueOut>0</valueOut>
+      <valueIn>2</valueIn><valueOut>1</valueOut>
+      <valueIn>3</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>2</valueOut>
+    </valueMap>
+    <enumMap ruleid="uio_fluid_comm_status_states">
+      <label>Not Installed</label>
+      <label>Comms OK</label>
+      <label>Comms Lost</label>
+    </enumMap>
+
   </device>
 
   <device deviceid="memDiscreteSensors">

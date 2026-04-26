@@ -1,0 +1,2997 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="apc_ddf_1_6.xsl"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="apcEasyMdc"
+  ddfname="APC Easy Micro Data Center"
+  ddfversion="1"
+  canremove="yes">
+
+  <!--
+    Manufacturer:					APC by Schneider Electric
+    Model:								Easy Micro Data Center
+
+    Reference:						APC PowerNet MIB (powernet438X.mib)
+    Reference Location:		/snmp/resources/mibs/apc/powernet438X.mib
+
+    Scope:								(modEnvMgr) .1.3.6.1.4.1.318.1.1.10.4.*
+                          (pmmInput) .1.3.6.1.4.1.318.1.1.28.3.1.*
+                          (ePDU) .1.3.6.1.4.1.318.1.1.30.*
+                          (mdc) .1.3.6.1.4.1.318.1.1.31.*
+
+    Walkfiles:						/snmp/resources/sapro/walkfiles/apc/mdc/apc_mdc_pf_696_an1_692g.walk
+  -->
+  <schemaVersion>1.6</schemaVersion>
+  <device deviceid="easy_mdc_discovery">
+    <oidMustMatch ruleid="easyMdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.2</value>
+      </valueList>
+    </oidMustMatch>
+
+    <setProductData ruleid="vendordata" field="vendor">APC by Schneider Electric</setProductData>
+
+    <setProductData ruleid="typedata" field="type">Micro Data Center</setProductData>
+
+    <setProductData ruleid="modelNumber" field="model">
+      <getOid>.1.3.6.1.4.1.318.1.1.31.1.8.0</getOid>
+    </setProductData>
+
+    <setProductData ruleid="serialNumber" field="serial_num">
+      <getOid>.1.3.6.1.4.1.318.1.1.31.1.9.0</getOid>
+    </setProductData>
+
+  </device>
+  <device deviceid="mdcEMS">
+    <oidMustMatch ruleid="easyMdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.2</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="mdcEMSExists" oid=".1.3.6.1.4.1.318.1.1.10.4" istree="yes"/>
+    <suppressRule ruleid="stompMemFluidSensorState" suppressid="apcenv/memDiscreteSensors/memFluidSensorState"/>
+    <suppressRule ruleid="stompMemSmokeSensorState" suppressid="apcenv/memDiscreteSensors/memSmokeSensorState"/>
+    <suppressRule ruleid="stompMemSmokeSensorState" suppressid="apcenv/memDiscreteSensors/memDoorSensorState"/>
+    <suppressRule ruleid="stompMemSmokeSensorState" suppressid="apcenv/apcmemenvsensors/memsensoralarmstatus"/>
+    <suppressRule ruleid="stompMemSmokeSensorState" suppressid="apcenv/apcmemenvsensors/memhumiditysensor"/>
+    <suppressRule ruleid="stompMemSmokeSensorState" suppressid="apcenv/apcmemenvsensors/memsensorcommstatus"/>
+
+    <valueMap ruleid="invalid_minusOne-vm">
+      <valueIn>-1</valueIn><valueOut>[false]</valueOut>
+      <valueIn>*</valueIn><valueOut>[true]</valueOut>
+    </valueMap>
+
+    <numSensor ruleid="mdcMemSensorsTemperature" index=".1.3.6.1.4.1.318.1.1.10.4.2.3.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_TEMPERATURE_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid>
+      </value>
+      <label>Probe Temperature (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid>)</label>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcMemSensorsHumidity" index=".1.3.6.1.4.1.318.1.1.10.4.2.3.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_HUMIDITY_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid>
+      </value>
+      <label>Probe Humidity (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid>)</label>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </numSensor>
+
+    <stateSensor ruleid="mdcMemSensorsCommStatus" index=".1.3.6.1.4.1.318.1.1.10.4.2.3.1.7">
+      <type>state/memsensorstate</type>
+      <sensorId>MEM_SENSORS_COMM_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="probeCommStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.7</getRowOid>
+        </mapValue>
+      </value>
+      <label>Probe Comm Status (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid>)</label>
+      <enum>commStatus-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="probeCommStatus-vm">
+      <valueIn>2</valueIn><valueOut>1</valueOut>
+      <valueIn>3</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+
+    <valueMap ruleid="smokeDetectorStatus-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="smokeDetectorStatus-em">
+      <label>Unknown</label>
+      <label>Smoke Detected</label>
+      <label>No Smoke</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcSmokeSensorStatusSensorState" index=".1.3.6.1.4.1.318.1.1.10.4.7.2.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state/memsensorstate</type>
+      <sensorId>MEM_SMOKE_SENSOR_STATE_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="smokeDetectorStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.5</getRowOid>
+        </mapValue>
+      </value>
+      <label>Smoke Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Status</label>
+      <enum>smokeDetectorStatus-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="alarmStatus-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>3</valueIn><valueOut>3</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="alarmStatus-em">
+      <label>Unknown</label>
+      <label>Normal</label>
+      <label>Warning</label>
+      <label>Critical</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcSmokeSensorStatusAlarmStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.2.1.7">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_SMOKE_SENSOR_ALARM_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="alarmStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.7</getRowOid>
+        </mapValue>
+      </value>
+      <label>Smoke Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Alarm Status</label>
+      <enum>alarmStatus-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="fluidDetectorStatus-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="fluidDetectorStatus-em">
+      <label>Unknown</label>
+      <label>Fluid Detected</label>
+      <label>No Fluid</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcSmokeSensorCommStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.2.1.8">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.8</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_SMOKE_SENSOR_COMM_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="commStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.8</getRowOid>
+        </mapValue>
+      </value>
+      <label>Smoke Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Comm Status</label>
+      <enum>commStatus-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+
+    <stateSensor ruleid="mdcFluidSensorStatusSensorState" index=".1.3.6.1.4.1.318.1.1.10.4.7.6.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state/memsensorstate</type>
+      <sensorId>MEM_FLUID_SENSOR_STATE_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="fluidDetectorStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.5</getRowOid>
+        </mapValue>
+      </value>
+      <label>Fluid Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Status</label>
+      <enum>fluidDetectorStatus-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcFluidSensorStatusAlarmStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.6.1.7">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_FLUID_SENSOR_ALARM_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="alarmStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.7</getRowOid>
+        </mapValue>
+      </value>
+      <label>Fluid Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Alarm Status</label>
+      <enum>alarmStatus-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="disabledEnabled-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="disabledEnabled-em">
+      <label>Unknown</label>
+      <label>Disabled</label>
+      <label>Enabled</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcFluidSensorCommStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.6.1.8">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.8</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_FLUID_SENSOR_COMM_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="commStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.8</getRowOid>
+        </mapValue>
+      </value>
+      <label>Fluid Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Comm Status</label>
+      <enum>commStatus-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+
+    <stateSensor ruleid="mdcMemDoorSensorState" index=".1.3.6.1.4.1.318.1.1.10.4.7.8.1.5">
+      <type>state/memsensorstate</type>
+      <sensorId>MEM_DOOR_SENSOR_STATE_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="discreteState-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.5</getRowOid>
+        </mapValue>
+      </value>
+      <label>Door Sensor State - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid></label>
+      <enum>doorState-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="discreteState-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="doorState-em">
+      <label>Unknown</label>
+      <label>Open</label>
+      <label>Closed</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcMemDoorStatusAlarmStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.8.1.7">
+      <type>state/memsensorstate</type>
+      <sensorId>MEM_DOOR_ALARM_STATE_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="alarmStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.7</getRowOid>
+        </mapValue>
+      </value>
+      <label>Door Alarm Status - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid></label>
+      <enum>alarmStatus-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+
+    <stateSensor ruleid="mdcMemDoorSensorCommStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.8.1.8">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.8</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state/memsensorstate</type>
+      <sensorId>MEM_DOOR_COMM_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="commStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.8</getRowOid>
+        </mapValue>
+      </value>
+      <label>Door Sensor Comm Status - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid></label>
+      <enum>commStatus-em</enum>
+      <sensorSet>Easy MDC EMS</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="commStatus-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="commStatus-em">
+      <label>Unknown</label>
+      <label>Comm Okay</label>
+      <label>Comm Lost</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcProbeAlarmGeneration" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_TEMPERATURE_ALARM_GENERATION_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="disabledEnabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Alarm Generation</label>
+      <enum>disabledEnabled-em</enum>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </stateSensor>
+
+    <numSensor ruleid="mdcProbeMaxTempThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_MAX_TEMPERATURE_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.6</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Maximum Temperature Threshold</label>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeHighTempThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.7">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_HIGH_TEMPERATURE_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.7</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> High Temperature Threshold</label>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeLowTempThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.8">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.8</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_LOW_TEMPERATURE_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.8</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Low Temperature Threshold</label>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeMinTempThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.9">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.9</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_MIN_TEMPERATURE_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.9</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Minimum Temperature Threshold</label>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeMaxHumidityThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.19">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.19</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_MAX_HUMIDITY_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.19</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Maximum Humidity Threshold</label>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeHighHumidityThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.20">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.20</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_HIGH_HUMIDITY_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.20</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> High Humidity Threshold</label>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeLowHumidityThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.21">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.21</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_LOW_HUMIDITY_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.21</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Low Humidity Threshold</label>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeMinHumidityThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.22">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.22</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_MIN_HUMIDITY_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.22</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Minimum Humidity Threshold</label>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </numSensor>
+    <stateSensor ruleid="mdcFluidSensorConfigAlarmGeneration" index=".1.3.6.1.4.1.318.1.1.10.4.7.11.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.11.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_FLUID_SENSOR_ALARM_GENERATION_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="disabledEnabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.11.1.6</getRowOid>
+        </mapValue>
+      </value>
+      <label>Fluid Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Alarm Generation</label>
+      <enum>disabledEnabled-em</enum>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcSmokeSensorConfigAlarmGeneration" index=".1.3.6.1.4.1.318.1.1.10.4.7.9.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.9.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_SMOKE_SENSOR_ALARM_GENERATION_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="disabledEnabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.9.1.6</getRowOid>
+        </mapValue>
+      </value>
+      <label>Smoke Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Alarm Generation</label>
+      <enum>disabledEnabled-em</enum>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcDoorSensorConfigAlarmGeneration" index=".1.3.6.1.4.1.318.1.1.10.4.7.12.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.12.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_DOOR_SENSOR_ALARM_GENERATION_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="disabledEnabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.12.1.6</getRowOid>
+        </mapValue>
+      </value>
+      <label>Door Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Alarm Generation</label>
+      <enum>disabledEnabled-em</enum>
+      <sensorSet>Easy MDC EMS Configuration</sensorSet>
+    </stateSensor>
+
+
+
+    <valueMap ruleid="alarmGeneration-vm">
+      <valueIn>1</valueIn><valueOut>[false]</valueOut>
+      <valueIn>*</valueIn><valueOut>[true]</valueOut>
+    </valueMap>
+
+    <alarmFlags2 ruleid="mdcSensorsTempMaxThresh" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.2">
+      <rowTest>
+        <mapValue mapid="alarmGeneration-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <gt>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid></op><!-- value -->
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.6</getRowOid></op><!-- maxThreshold -->
+            </gt>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>Maximum Temperature Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid></activeText>
+          <inactiveText>Maximum Temperature Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid> Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Temperature</category>
+        <description>
+          <activeText>Maximum temperature threshold violation for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</activeText>
+          <inactiveText>Maximum temperature threshold violation cleared for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Make sure the threshold is set correctly at the device, and the air conditioning system is functioning properly. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcSensorsTempHighThresh" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.2">
+      <rowTest>
+        <mapValue mapid="alarmGeneration-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <and>
+              <op>
+                <lt>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid></op><!-- value -->
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.6</getRowOid></op><!-- maxThreshold -->
+                </lt>
+              </op>
+              <op>
+                <ge>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid></op><!-- value -->
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.7</getRowOid></op><!-- highThreshold -->
+                </ge>
+              </op>
+            </and>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>High Temperature Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid></activeText>
+          <inactiveText>High Temperature Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid> Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>Temperature</category>
+        <description>
+          <activeText>High temperature threshold violation for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</activeText>
+          <inactiveText>High temperature threshold violation cleared for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Make sure the threshold is set correctly at the device, and the air conditioning system is functioning properly. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcSensorsTempLowThresh" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.2">
+      <rowTest>
+        <mapValue mapid="alarmGeneration-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <and>
+              <op>
+                <le>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid></op><!-- value -->
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.8</getRowOid></op><!-- lowThreshold -->
+                </le>
+              </op>
+              <op>
+                <gt>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid></op><!-- value -->
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.9</getRowOid></op><!-- minThreshold -->
+                </gt>
+              </op>
+            </and>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>Low Temperature Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid></activeText>
+          <inactiveText>Low Temperature Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid> Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>Temperature</category>
+        <description>
+          <activeText>Low temperature threshold violation for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</activeText>
+          <inactiveText>Low temperature threshold violation cleared for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Make sure the threshold is set correctly at the device, and the air conditioning system is functioning properly. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcSensorsTempMinThresh" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.2">
+      <rowTest>
+        <mapValue mapid="alarmGeneration-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <le>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid></op><!-- value -->
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.9</getRowOid></op><!-- minThreshold -->
+            </le>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>Minimum Temperature Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid></activeText>
+          <inactiveText>Minimum Temperature Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid> Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Temperature</category>
+        <description>
+          <activeText>Minimum temperature threshold violation for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</activeText>
+          <inactiveText>Minimum temperature threshold violation cleared for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Make sure the threshold is set correctly at the device, and the air conditioning system is functioning properly. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcSensorsHumidityMaxThresh" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.2">
+      <rowTest>
+        <mapValue mapid="alarmGeneration-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <gt>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid></op><!-- value -->
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.19</getRowOid></op><!-- maxThreshold -->
+            </gt>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>Maximum Humidity Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid></activeText>
+          <inactiveText>Maximum Humidity Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid> Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Humidity</category>
+        <description>
+          <activeText>Maximum humidity threshold violation for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</activeText>
+          <inactiveText>Maximum humidity threshold violation cleared for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Make sure the threshold is set correctly at the device, and the air conditioning system is functioning properly. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcSensorsHumidityHighThresh" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.2">
+      <rowTest>
+        <mapValue mapid="alarmGeneration-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <and>
+              <op>
+                <lt>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid></op><!-- value -->
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.19</getRowOid></op><!-- maxThreshold -->
+                </lt>
+              </op>
+              <op>
+                <ge>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid></op><!-- value -->
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.20</getRowOid></op><!-- highThreshold -->
+                </ge>
+              </op>
+            </and>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>High Humidity Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid></activeText>
+          <inactiveText>High Humidity Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid> Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>Humidity</category>
+        <description>
+          <activeText>High humidity threshold violation for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</activeText>
+          <inactiveText>High humidity threshold violation cleared for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Make sure the threshold is set correctly at the device, and the air conditioning system is functioning properly. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcSensorsHumidityLowThresh" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.2">
+      <rowTest>
+        <mapValue mapid="alarmGeneration-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <and>
+              <op>
+                <le>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid></op><!-- value -->
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.21</getRowOid></op><!-- lowThreshold -->
+                </le>
+              </op>
+              <op>
+                <gt>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid></op><!-- value -->
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.22</getRowOid></op><!-- minThreshold -->
+                </gt>
+              </op>
+            </and>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>Low Humidity Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid></activeText>
+          <inactiveText>Low Humidity Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid> Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>Humidity</category>
+        <description>
+          <activeText>Low humidity threshold violation for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</activeText>
+          <inactiveText>Low humidity threshold violation cleared for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Make sure the threshold is set correctly at the device, and the air conditioning system is functioning properly. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcSensorsHumidityMinThresh" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.2">
+      <rowTest>
+        <mapValue mapid="alarmGeneration-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <le>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid></op><!-- value -->
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.22</getRowOid></op><!-- minThreshold -->
+            </le>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>Minimum Humidity Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid></activeText>
+          <inactiveText>Minimum Humidity Threshold Violation - <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid> Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Humidity</category>
+        <description>
+          <activeText>Minimum humidity threshold violation for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</activeText>
+          <inactiveText>Minimum humidity threshold violation cleared for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.3</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Make sure the threshold is set correctly at the device, and the air conditioning system is functioning properly. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+
+    <alarmFlags2 ruleid="mdcSensorsCommStatus" index=".1.3.6.1.4.1.318.1.1.10.4.2.3.1.2">
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.7</getRowOid>
+      </value>
+      <alarmFlagsTest match="3">
+        <name>
+          <activeText><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid> Lost Communication</activeText>
+          <inactiveText><getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid> Established Communication or Communication Status Reset</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Communication</category>
+        <description>
+          <activeText>Lost communication for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid>.</activeText>
+          <inactiveText>Established communication or communication status reset for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.3</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Identify and correct the problem that activated this fault. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+
+    <alarmFlags2 ruleid="mdcSmokeStatusAlarmStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.2.1.2">
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.7</getRowOid>
+      </value>
+      <alarmFlagsTest match="2">
+        <name>
+          <activeText>Smoke Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Warning Condition Present</activeText>
+          <inactiveText>Smoke Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Warning Condition Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>Rack Access</category>
+        <description>
+          <activeText>A smoke warning condition is present for smoke sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid>.</activeText>
+          <inactiveText>The smoke warning condition for smoke sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> has been cleared.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Check for the presence of smoke in the rack. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+      <alarmFlagsTest match="3">
+        <name>
+          <activeText>Smoke Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Critical Condition Present</activeText>
+          <inactiveText>Smoke Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Critical Condition Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Rack Access</category>
+        <description>
+          <activeText>A smoke critical condition is present for smoke sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid>.</activeText>
+          <inactiveText>The smoke critical condition for smoke sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> has been cleared.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Check for the presence of smoke in the rack. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcSmokeSensorCommStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.2.1.2">
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.8</getRowOid>
+      </value>
+      <alarmFlagsTest match="2">
+        <name>
+          <activeText>Smoke Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Lost Communication</activeText>
+          <inactiveText>Smoke Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Established Communication or Communication Status Reset</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Communication</category>
+        <description>
+          <activeText>Lost communication for smoke sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid>.</activeText>
+          <inactiveText>Established communication or communication status reset for smoke sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Identify and correct the problem that activated this fault. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+
+    <alarmFlags2 ruleid="mdcFluidStatusAlarmStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.6.1.2">
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.7</getRowOid>
+      </value>
+      <alarmFlagsTest match="2">
+        <name>
+          <activeText>Fluid Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Warning Condition Present</activeText>
+          <inactiveText>Fluid Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Warning Condition Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>Rack Access</category>
+        <description>
+          <activeText>A fluid warning condition is present for fluid sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid>.</activeText>
+          <inactiveText>The fluid warning condition for fluid sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> has been cleared.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Identify the source of the leak. Isolate the leak by shutting off the valve. For assistance, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+      <alarmFlagsTest match="3">
+        <name>
+          <activeText>Fluid Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Critical Condition Present</activeText>
+          <inactiveText>Fluid Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Critical Condition Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Rack Access</category>
+        <description>
+          <activeText>A fluid critical condition is present for fluid sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid>.</activeText>
+          <inactiveText>The fluid critical condition for fluid sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> has been cleared.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Identify the source of the leak. Isolate the leak by shutting off the valve. For assistance, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcFluidSensorCommStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.6.1.2">
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.8</getRowOid>
+      </value>
+      <alarmFlagsTest match="2">
+        <name>
+          <activeText>Fluid Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Lost Communication</activeText>
+          <inactiveText>Fluid Sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Established Communication or Communication Status Reset</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Communication</category>
+        <description>
+          <activeText>Lost communication for fluid sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid>.</activeText>
+          <inactiveText>Established communication or communication status reset for fluid sensor <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid>.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Identify and correct the problem that activated this fault. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+
+    <alarmFlags2 ruleid="mdcDoorStatusAlarmStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.8.1.2">
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.7</getRowOid>
+      </value>
+      <alarmFlagsTest match="2">
+        <name>
+          <activeText>Door Warning Condition Present (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>)</activeText>
+          <inactiveText>Door Warning Condition Cleared (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>)</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>Rack Access</category>
+        <description>
+          <activeText>A door warning condition is present for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>.</activeText>
+          <inactiveText>The door warning condition for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid> has been cleared.</inactiveText>
+        </description>
+      </alarmFlagsTest>
+      <alarmFlagsTest match="3">
+        <name>
+          <activeText>Door Critical Condition Present (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>)</activeText>
+          <inactiveText>Door Critical Condition Cleared (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>)</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Rack Access</category>
+        <description>
+          <activeText>A door critical condition is present for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>.</activeText>
+          <inactiveText>The door critical condition for <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid> has been cleared.</inactiveText>
+        </description>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcDoorSensorCommStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.8.1.2">
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.8</getRowOid>
+      </value>
+      <alarmFlagsTest match="2">
+        <name>
+          <activeText>Door Sensor Lost Communication (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>)</activeText>
+          <inactiveText>Door Sensor Established Communication or Communication Status Reset (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>)</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Communication</category>
+        <description>
+          <activeText>Lost communication for door sensor (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>).</activeText>
+          <inactiveText>Established communication or communication status reset for door sensor (<getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.8.1.3</getRowOid>).</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Identify and correct the problem that activated this fault. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+
+  </device>
+
+  <device deviceid="mdcPMM">
+    <oidMustMatch ruleid="easyMdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.2</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="mdcPMMExists" oid=".1.3.6.1.4.1.318.1.1.28.3" istree="yes"/>
+
+    <numSensor ruleid="mdcPmmInputFrequency" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.2">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>frequency</type>
+      <sensorId>PMM_INPUT_FREQUENCY_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.2</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Frequency</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmActiveEnergyReceived" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.7">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>num/kwatthr</type>
+      <sensorId>PMM_INPUT_ACTIVE_ENERGY_RECEIVED_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.7</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Active Energy Received</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputMinVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.12">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.12</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_MIN_VOLT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.12</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Minimum Voltage Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmLowVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.13">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.13</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_LOW_VOLT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.13</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Low Voltage Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmHighVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.14">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.14</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_HIGH_VOLT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.14</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input High Voltage Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmMaxVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.15">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.15</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_MAX_VOLT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.15</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Maximum Voltage Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputMinCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.16">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.16</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_MIN_CURRENT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.16</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Minimum Current Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmLowCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.17">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.17</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_LOW_CURRENT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.17</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Low Current Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmHighCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.18">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.18</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_HIGH_CURRENT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.18</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input High Current Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmMaxCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.19">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.19</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_MAX_CURRENT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.19</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Maximum Current Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+
+
+    <stateSensor ruleid="mdcPmmMinVoltAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.12">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.12</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_MIN_VOLTAGE_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <if>
+            <op>
+              <gt>
+                <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.12</getRowOid></op>
+                <op>0</op>
+              </gt>
+            </op>
+            <op>1</op>
+            <op>2</op>
+          </if>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Minimum Voltage Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmLowVoltAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.13">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.13</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_LOW_VOLTAGE_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <if>
+            <op>
+              <gt>
+                <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.13</getRowOid></op>
+                <op>0</op>
+              </gt>
+            </op>
+            <op>1</op>
+            <op>2</op>
+          </if>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Low Voltage Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmHighVoltAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.14">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.14</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_HIGH_VOLTAGE_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <if>
+            <op>
+              <gt>
+                <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.14</getRowOid></op>
+                <op>0</op>
+              </gt>
+            </op>
+            <op>1</op>
+            <op>2</op>
+          </if>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input High Voltage Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmMaxVoltAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.15">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.15</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_MAX_VOLTAGE_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <if>
+            <op>
+              <gt>
+                <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.15</getRowOid></op>
+                <op>0</op>
+              </gt>
+            </op>
+            <op>1</op>
+            <op>2</op>
+          </if>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Maximum Voltage Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmMinCurrentAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.16">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.16</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_MIN_CURRENT_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <if>
+            <op>
+              <gt>
+                <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.16</getRowOid></op>
+                <op>0</op>
+              </gt>
+            </op>
+            <op>1</op>
+            <op>2</op>
+          </if>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Minimum Current Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmLowCurrentAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.17">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.17</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_LOW_CURRENT_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <if>
+            <op>
+              <gt>
+                <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.17</getRowOid></op>
+                <op>0</op>
+              </gt>
+            </op>
+            <op>1</op>
+            <op>2</op>
+          </if>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Low Current Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmHighCurrentAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.18">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.18</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_HIGH_CURRENT_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <if>
+            <op>
+              <gt>
+                <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.18</getRowOid></op>
+                <op>0</op>
+              </gt>
+            </op>
+            <op>1</op>
+            <op>2</op>
+          </if>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input High Current Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmMaxCurrentAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.19">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.19</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_MAX_CURRENT_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <if>
+            <op>
+              <gt>
+                <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.19</getRowOid></op>
+                <op>0</op>
+              </gt>
+            </op>
+            <op>1</op>
+            <op>2</op>
+          </if>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Maximum Current Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="enabledDisabled-vm">
+      <valueIn>1</valueIn><valueOut>0</valueOut>
+      <valueIn>2</valueIn><valueOut>1</valueOut>
+      <valueIn>*</valueIn><valueOut>2</valueOut>
+    </valueMap>
+    <enumMap ruleid="enabledDisabled-em">
+      <label>Enabled</label>
+      <label>Disabled</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <numSensor ruleid="mdcPmmInputVoltageLtoN" index=".1.3.6.1.4.1.318.1.1.28.3.1.3.1.4">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage</type>
+      <sensorId>PMM_INPUT_VOLTAGE_LN_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.1</getRowOid> Input Voltage L-N</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputPhaseCurrent" index=".1.3.6.1.4.1.318.1.1.28.3.1.3.1.5">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>amperage</type>
+      <sensorId>PMM_INPUT_CURRENT_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.1</getRowOid> Input Current</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputActivePower" index=".1.3.6.1.4.1.318.1.1.28.3.1.3.1.6">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>powerW</type>
+      <sensorId>PMM_INPUT_ACTIVE_POWER_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.6</getRowOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.1</getRowOid> Input Active Power</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputApparentPower" index=".1.3.6.1.4.1.318.1.1.28.3.1.3.1.7">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>powerVA</type>
+      <sensorId>PMM_INPUT_APPARENT_POWER_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.7</getRowOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.1</getRowOid> Input Apparent Power</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+
+    <valueMap ruleid="invalid_threshold-vm">
+      <valueIn>0</valueIn><valueOut>[false]</valueOut>
+      <valueIn>*</valueIn><valueOut>[true]</valueOut>
+    </valueMap>
+
+    <alarmFlags2 ruleid="pmmInputMinVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.1">
+      <rowTest>
+        <mapValue mapid="invalid_threshold-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.12</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <le>
+              <op>
+                <mult> <!-- calculate percent deviation -->
+                  <op>
+                    <div>
+                      <op>
+                        <mult>
+                          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid></op><!-- pmmInputVoltageLtoN -->
+                          <op>0.1</op>
+                        </mult>
+                      </op>
+                      <op><getOid>.1.3.6.1.4.1.318.1.1.28.2.1.0</getOid></op><!-- pmmDeviceNominalInputVoltage -->
+                    </div>
+                  </op>
+                  <op>100</op>
+                </mult>
+              </op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.12</getRowOid></op><!-- minThreshold -->
+            </le>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>PMM Input Voltage Below Minimum Threshold</activeText>
+          <inactiveText>PMM Input Voltage Below Minimum Threshold Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>PMM Voltage</category>
+        <description>
+          <activeText>PMM input voltage is below minimum threshold.</activeText>
+          <inactiveText>PMM input voltage is no longer below minimum threshold.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Correct the input power problem, if possible, or wait for the input power problem to clear. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="pmmInputLowVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.1">
+      <rowTest>
+        <mapValue mapid="invalid_threshold-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.13</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <and>
+              <op>
+                <gt>
+                  <op>
+                    <mult> <!-- calculate percent deviation -->
+                      <op>
+                        <div>
+                          <op>
+                            <mult>
+                              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid></op><!-- pmmInputVoltageLtoN -->
+                              <op>0.1</op>
+                            </mult>
+                          </op>
+                          <op><getOid>.1.3.6.1.4.1.318.1.1.28.2.1.0</getOid></op><!-- pmmDeviceNominalInputVoltage -->
+                        </div>
+                      </op>
+                      <op>100</op>
+                    </mult>
+                  </op>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.12</getRowOid></op><!-- minThreshold -->
+                </gt>
+              </op>
+              <op>
+                <le>
+                  <op>
+                    <mult> <!-- calculate percent deviation -->
+                      <op>
+                        <div>
+                          <op>
+                            <mult>
+                              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid></op><!-- pmmInputVoltageLtoN -->
+                              <op>0.1</op>
+                            </mult>
+                          </op>
+                          <op><getOid>.1.3.6.1.4.1.318.1.1.28.2.1.0</getOid></op><!-- pmmDeviceNominalInputVoltage -->
+                        </div>
+                      </op>
+                      <op>100</op>
+                    </mult>
+                  </op>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.13</getRowOid></op><!-- lowThreshold -->
+                </le>
+              </op>
+            </and>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>PMM Input Voltage Below Low Threshold</activeText>
+          <inactiveText>PMM Input Voltage Below Low Threshold Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>PMM Voltage</category>
+        <description>
+          <activeText>PMM input voltage is below low threshold.</activeText>
+          <inactiveText>PMM input voltage is no longer below low threshold.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Correct the input power problem, if possible, or wait for the input power problem to clear. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="pmmInputHighVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.1">
+      <rowTest>
+        <mapValue mapid="invalid_threshold-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.14</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <and>
+              <op>
+                <lt>
+                  <op>
+                    <mult> <!-- calculate percent deviation -->
+                      <op>
+                        <div>
+                          <op>
+                            <mult>
+                              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid></op><!-- pmmInputVoltageLtoN -->
+                              <op>0.1</op>
+                            </mult>
+                          </op>
+                          <op><getOid>.1.3.6.1.4.1.318.1.1.28.2.1.0</getOid></op><!-- pmmDeviceNominalInputVoltage -->
+                        </div>
+                      </op>
+                      <op>100</op>
+                    </mult>
+                  </op>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.15</getRowOid></op><!-- maxThreshold -->
+                </lt>
+              </op>
+              <op>
+                <ge>
+                  <op>
+                    <mult> <!-- calculate percent deviation -->
+                      <op>
+                        <div>
+                          <op>
+                            <mult>
+                              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid></op><!-- pmmInputVoltageLtoN -->
+                              <op>0.1</op>
+                            </mult>
+                          </op>
+                          <op><getOid>.1.3.6.1.4.1.318.1.1.28.2.1.0</getOid></op><!-- pmmDeviceNominalInputVoltage -->
+                        </div>
+                      </op>
+                      <op>100</op>
+                    </mult>
+                  </op>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.14</getRowOid></op><!-- highThreshold -->
+                </ge>
+              </op>
+            </and>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>PMM Input Voltage Above High Threshold</activeText>
+          <inactiveText>PMM Input Voltage Above High Threshold Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>PMM Voltage</category>
+        <description>
+          <activeText>PMM input voltage is above high threshold.</activeText>
+          <inactiveText>PMM input voltage is no longer above high threshold.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Correct the input power problem, if possible, or wait for the input power problem to clear. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="pmmInputMaxVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.1">
+      <rowTest>
+        <mapValue mapid="invalid_threshold-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.15</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <ge>
+              <op>
+                <mult> <!-- calculate percent deviation -->
+                  <op>
+                    <div>
+                      <op>
+                        <mult>
+                          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid></op><!-- pmmInputVoltageLtoN -->
+                          <op>0.1</op>
+                        </mult>
+                      </op>
+                      <op><getOid>.1.3.6.1.4.1.318.1.1.28.2.1.0</getOid></op><!-- pmmDeviceNominalInputVoltage -->
+                    </div>
+                  </op>
+                  <op>100</op>
+                </mult>
+              </op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.15</getRowOid></op><!-- maxThreshold -->
+            </ge>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>PMM Input Voltage Above Maximum Threshold</activeText>
+          <inactiveText>PMM Input Voltage Above Maximum Threshold Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>PMM Voltage</category>
+        <description>
+          <activeText>PMM input voltage is above maximum threshold.</activeText>
+          <inactiveText>PMM input voltage is no longer above maximum threshold.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Correct the input power problem, if possible, or wait for the input power problem to clear. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+
+    <alarmFlags2 ruleid="pmmInputMinCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.1">
+      <rowTest>
+        <mapValue mapid="invalid_threshold-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.16</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <le>
+              <op>
+                <mult> <!-- calculate percent deviation -->
+                  <op>
+                    <div>
+                      <op>
+                        <mult>
+                          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid></op><!-- pmmInputPhaseCurrent -->
+                          <op>0.1</op>
+                        </mult>
+                      </op>
+                      <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.37</getRowOid></op><!-- pmmInputBreakerRating -->
+                    </div>
+                  </op>
+                  <op>100</op>
+                </mult>
+              </op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.16</getRowOid></op><!-- minThreshold -->
+            </le>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>PMM Input Current Below Minimum Threshold</activeText>
+          <inactiveText>PMM Input Current Below Minimum Threshold Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>PMM Current</category>
+        <description>
+          <activeText>PMM input current is below minimum threshold.</activeText>
+          <inactiveText>PMM input current is no longer below minimum threshold.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Correct the input power problem, if possible, or wait for the input power problem to clear. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="pmmInputLowCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.1">
+      <rowTest>
+        <mapValue mapid="invalid_threshold-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.17</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <and>
+              <op>
+                <gt>
+                  <op>
+                    <mult> <!-- calculate percent deviation -->
+                      <op>
+                        <div>
+                          <op>
+                            <mult>
+                              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid></op><!-- pmmInputPhaseCurrent -->
+                              <op>0.1</op>
+                            </mult>
+                          </op>
+                          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.37</getRowOid></op><!-- pmmInputBreakerRating -->
+                        </div>
+                      </op>
+                      <op>100</op>
+                    </mult>
+                  </op>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.16</getRowOid></op><!-- minThreshold -->
+                </gt>
+              </op>
+              <op>
+                <le>
+                  <op>
+                    <mult> <!-- calculate percent deviation -->
+                      <op>
+                        <div>
+                          <op>
+                            <mult>
+                              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid></op><!-- pmmInputPhaseCurrent -->
+                              <op>0.1</op>
+                            </mult>
+                          </op>
+                          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.37</getRowOid></op><!-- pmmInputBreakerRating -->
+                        </div>
+                      </op>
+                      <op>100</op>
+                    </mult>
+                  </op>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.17</getRowOid></op><!-- lowThreshold -->
+                </le>
+              </op>
+            </and>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>PMM Input Current Below Low Threshold</activeText>
+          <inactiveText>PMM Input Current Below Low Threshold Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>PMM Current</category>
+        <description>
+          <activeText>PMM input current is below low threshold.</activeText>
+          <inactiveText>PMM input current is no longer below low threshold.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Correct the input power problem, if possible, or wait for the input power problem to clear. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="pmmInputHighCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.1">
+      <rowTest>
+        <mapValue mapid="invalid_threshold-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.18</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <and>
+              <op>
+                <lt>
+                  <op>
+                    <mult> <!-- calculate percent deviation -->
+                      <op>
+                        <div>
+                          <op>
+                            <mult>
+                              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid></op><!-- pmmInputPhaseCurrent -->
+                              <op>0.1</op>
+                            </mult>
+                          </op>
+                          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.37</getRowOid></op><!-- pmmInputBreakerRating -->
+                        </div>
+                      </op>
+                      <op>100</op>
+                    </mult>
+                  </op>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.19</getRowOid></op><!-- maxThreshold -->
+                </lt>
+              </op>
+              <op>
+                <ge>
+                  <op>
+                    <mult> <!-- calculate percent deviation -->
+                      <op>
+                        <div>
+                          <op>
+                            <mult>
+                              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid></op><!-- pmmInputPhaseCurrent -->
+                              <op>0.1</op>
+                            </mult>
+                          </op>
+                          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.37</getRowOid></op><!-- pmmInputBreakerRating -->
+                        </div>
+                      </op>
+                      <op>100</op>
+                    </mult>
+                  </op>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.18</getRowOid></op><!-- highThreshold -->
+                </ge>
+              </op>
+            </and>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>PMM Input Current Above High Threshold</activeText>
+          <inactiveText>PMM Input Current Above High Threshold Cleared</inactiveText>
+        </name>
+        <severity>warning</severity>
+        <category>PMM Current</category>
+        <description>
+          <activeText>PMM input current is above high threshold.</activeText>
+          <inactiveText>PMM input current is no longer above high threshold.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Correct the input power problem, if possible, or wait for the input power problem to clear. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="pmmInputMaxCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.1">
+      <rowTest>
+        <mapValue mapid="invalid_threshold-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.19</getRowOid>
+        </mapValue>
+      </rowTest>
+      <value>
+        <if>
+          <op>
+            <ge>
+              <op>
+                <mult> <!-- calculate percent deviation -->
+                  <op>
+                    <div>
+                      <op>
+                        <mult>
+                          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid></op><!-- pmmInputPhaseCurrent -->
+                          <op>0.1</op>
+                        </mult>
+                      </op>
+                      <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.37</getRowOid></op><!-- pmmInputBreakerRating -->
+                    </div>
+                  </op>
+                  <op>100</op>
+                </mult>
+              </op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.19</getRowOid></op><!-- maxThreshold -->
+            </ge>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>PMM Input Current Above Maximum Threshold</activeText>
+          <inactiveText>PMM Input Current Above Maximum Threshold Cleared</inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>PMM Current</category>
+        <description>
+          <activeText>PMM input current is above maximum threshold.</activeText>
+          <inactiveText>PMM input current is no longer above maximum threshold.</inactiveText>
+        </description>
+		<alarmRecommendedActions>
+				<recommendedActionId>Correct the input power problem, if possible, or wait for the input power problem to clear. If the problem persists, contact Schneider Electric Support.</recommendedActionId>
+		</alarmRecommendedActions>
+      </alarmFlagsTest>
+    </alarmFlags2>
+
+  </device>
+
+  <device deviceid="easyMdcRpdu">
+    <oidMustMatch ruleid="easyMdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.2</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="has_epdu" oid=".1.3.6.1.4.1.318.1.1.30" istree="yes"/>
+
+    <valueMap ruleid="invalid_minusOne-vm">
+      <valueIn>-1</valueIn><valueOut>[false]</valueOut>
+      <valueIn>*</valueIn><valueOut>[true]</valueOut>
+    </valueMap>
+
+    <valueMap ruleid="phaseCount-vm">
+      <valueIn>1</valueIn><valueOut>[false]</valueOut>
+      <valueIn>*</valueIn><valueOut>[true]</valueOut>
+    </valueMap>
+
+    <numSensor ruleid="mdcEPDUDeviceStatusActivePower" index=".1.3.6.1.4.1.318.1.1.30.2.1.1.7">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>powerW</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid>_OUTPUT_POWER_TOTAL</sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.7</getRowOid>
+      </value>
+      <valueInc>1</valueInc>
+      <label>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid> Active Power Total</label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid></sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcEPDUDeviceStatusPowerFactor" index=".1.3.6.1.4.1.318.1.1.30.2.1.1.10">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.10</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>num/powerfactor</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid>_OUTPUT_POWER_FACTOR_TOTAL</sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.10</getRowOid></op>
+          <op>0.001</op>
+        </mult>
+      </value>
+      <valueInc>0.001</valueInc>
+      <label>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid> Power Factor Total</label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid></sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcEPDUDeviceStatusEnergy" index=".1.3.6.1.4.1.318.1.1.30.2.1.1.11">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.11</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>num/kwatthr</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid>TOTAL_ENERGY_<getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.11</getRowOid></op>
+          <op>0.001</op>
+        </mult>
+      </value>
+      <valueInc>0.001</valueInc>
+      <label>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid> Energy Total</label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid></sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcEPDUDeviceStatusFrequency" index=".1.3.6.1.4.1.318.1.1.30.2.1.1.12">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.12</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>frequency</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid>_FREQUENCY</sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.12</getRowOid></op>
+          <op>0.001</op>
+        </mult>
+      </value>
+      <valueInc>0.001</valueInc>
+      <label>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid> Frequency</label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.2</getRowOid></sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="mdcEPDUPhaseConfigOverVoltageThreshold" index=".1.3.6.1.4.1.318.1.1.30.4.1.1.4">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>_PHASE_CONFIG_OVER_VOLTAGE_THRESHOLD_<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.4</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <valueInc>0.1</valueInc>
+      <label>
+        RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+        <if>
+          <op>
+            <eq>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+              <op>1</op>
+            </eq>
+          </op>
+          <op></op>
+          <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid></op>
+        </if><space/>Over Voltage Threshold</label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid></sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcEPDUPhaseConfigLowVoltageThreshold" index=".1.3.6.1.4.1.318.1.1.30.4.1.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>_PHASE_CONFIG_LOW_VOLTAGE_THRESHOLD_<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.5</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <valueInc>0.1</valueInc>
+      <label>
+        RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+        <if>
+          <op>
+            <eq>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+              <op>1</op>
+            </eq>
+          </op>
+          <op></op>
+          <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid></op>
+        </if><space/>Low Voltage Threshold</label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid></sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcEPDUPhaseConfigOverCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.30.4.1.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>amperage</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>_PHASE_CONFIG_OVER_CURRENT_THRESHOLD_<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.6</getRowOid></op>
+          <op>0.01</op>
+        </mult>
+      </value>
+      <valueInc>0.01</valueInc>
+      <label>
+        RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+        <if>
+          <op>
+            <eq>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+              <op>1</op>
+            </eq>
+          </op>
+          <op></op>
+          <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid></op>
+        </if><space/>Over Current Threshold</label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid></sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcEPDUPhaseConfigLowCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.30.4.1.1.7">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>amperage</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>_PHASE_CONFIG_LOW_CURRENT_THRESHOLD_<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.7</getRowOid></op>
+          <op>0.01</op>
+        </mult>
+      </value>
+      <valueInc>0.01</valueInc>
+      <label>
+        RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+        <if>
+          <op>
+            <eq>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+              <op>1</op>
+            </eq>
+          </op>
+          <op></op>
+          <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid></op>
+        </if><space/>Low Current Threshold</label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid></sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="mdcEPDUPhaseStatusVoltage" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.4">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid>_INPUT_VOLTAGE_L2N_<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.4</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <valueInc>0.1</valueInc>
+      <label>
+        RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid> Voltage<space/>
+        <if>
+          <op>
+            <eq>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+              <op>1</op>
+            </eq>
+          </op>
+          <op></op>
+          <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></op>
+        </if>
+      </label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid></sensorSet>
+    </numSensor>
+
+    <alarmFlags2 ruleid="mdcEPDUPhaseConfigOverVoltageThreshold" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.4">
+      <value>
+        <if>
+          <op>
+            <gt>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.4</getRowOid></op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.4</getRowOid></op>
+            </gt>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>Over Voltage
+          </activeText>
+          <inactiveText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>Over Voltage Cleared
+          </inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Voltage</category>
+        <description>
+          <activeText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>voltage has exceeded the over voltage threshold.
+          </activeText>
+          <inactiveText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>voltage has returned to normal.
+          </inactiveText>
+        </description>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcEPDUPhaseConfigLowVoltageThreshold" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.4">
+      <value>
+        <if>
+          <op>
+            <lt>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.4</getRowOid></op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.5</getRowOid></op>
+            </lt>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>Low Voltage
+          </activeText>
+          <inactiveText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>Low Voltage Cleared
+          </inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Voltage</category>
+        <description>
+          <activeText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>voltage is below the low voltage threshold.
+          </activeText>
+          <inactiveText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>voltage has returned to normal.
+          </inactiveText>
+        </description>
+      </alarmFlagsTest>
+    </alarmFlags2>
+
+    <numSensor ruleid="mdcEPDUPhaseStatusCurrent" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>amperage</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid>_INPUT_CURRENT_<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.5</getRowOid></op>
+          <op>0.01</op>
+        </mult>
+      </value>
+      <valueInc>0.01</valueInc>
+      <label>
+        RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid> Current<space/>
+        <if>
+          <op>
+            <eq>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+              <op>1</op>
+            </eq>
+          </op>
+          <op></op>
+          <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></op>
+        </if>
+      </label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid></sensorSet>
+    </numSensor>
+
+    <alarmFlags2 ruleid="mdcEPDUPhaseConfigOverCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.5">
+      <value>
+        <if>
+          <op>
+            <gt>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.5</getRowOid></op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.6</getRowOid></op>
+            </gt>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>Over Current
+          </activeText>
+          <inactiveText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>Over Current Cleared
+          </inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Current</category>
+        <description>
+          <activeText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>current has exceeded the over current threshold.
+          </activeText>
+          <inactiveText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>current has returned to normal.
+          </inactiveText>
+        </description>
+      </alarmFlagsTest>
+    </alarmFlags2>
+    <alarmFlags2 ruleid="mdcEPDUPhaseConfigLowCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.5">
+      <value>
+        <if>
+          <op>
+            <lt>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.5</getRowOid></op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.7</getRowOid></op>
+            </lt>
+          </op>
+          <op>1</op>
+          <op>0</op>
+        </if>
+      </value>
+      <alarmFlagsTest match="1">
+        <name>
+          <activeText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>Low Current
+          </activeText>
+          <inactiveText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>Low Current Cleared
+          </inactiveText>
+        </name>
+        <severity>critical</severity>
+        <category>Current</category>
+        <description>
+          <activeText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>current is below the low current threshold.
+          </activeText>
+          <inactiveText>
+            RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid><space/>
+            <if>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+              <op></op>
+              <op>phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.3</getRowOid><space/></op>
+            </if>current has returned to normal.
+          </inactiveText>
+        </description>
+      </alarmFlagsTest>
+    </alarmFlags2>
+
+    <numSensor ruleid="mdcEPDUPhaseStatusActivePower" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.6">
+      <rowTest>
+        <if>
+          <op>
+            <or>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.6</getRowOid></op>
+                  <op>-1</op>
+                </eq>
+              </op>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+            </or>
+          </op>
+          <op>[false]</op>
+          <op>[true]</op>
+        </if>
+      </rowTest>
+      <type>powerW</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid>_RPDU_OUTPUT_POWER_<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.6</getRowOid>
+      </value>
+      <valueInc>1</valueInc>
+      <label>
+        RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid> Active Power<space/>
+        <if>
+          <op>
+            <eq>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+              <op>1</op>
+            </eq>
+          </op>
+          <op></op>
+          <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></op>
+        </if>
+      </label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid></sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcEPDUPhaseStatusPowerFactor" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.9">
+      <rowTest>
+        <if>
+          <op>
+            <or>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.9</getRowOid></op>
+                  <op>-1</op>
+                </eq>
+              </op>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+            </or>
+          </op>
+          <op>[false]</op>
+          <op>[true]</op>
+        </if>
+      </rowTest>
+      <type>num/powerfactor</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid>_OUTPUT_POWER_FACTOR_<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.9</getRowOid></op>
+          <op>0.001</op>
+        </mult>
+      </value>
+      <valueInc>0.001</valueInc>
+      <label>
+        RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid> Power Factor<space/>
+        <if>
+          <op>
+            <eq>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+              <op>1</op>
+            </eq>
+          </op>
+          <op></op>
+          <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></op>
+        </if>
+      </label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid></sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcEPDUPhaseStatusEnergy" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.10">
+      <rowTest>
+        <if>
+          <op>
+            <or>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.10</getRowOid></op>
+                  <op>-1</op>
+                </eq>
+              </op>
+              <op>
+                <eq>
+                  <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+                  <op>1</op>
+                </eq>
+              </op>
+            </or>
+          </op>
+          <op>[false]</op>
+          <op>[true]</op>
+        </if>
+      </rowTest>
+      <type>num/kwatthr</type>
+      <sensorId>MODULE<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid>_OUTPUT_ENERGY_<getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.10</getRowOid></op>
+          <op>0.001</op>
+        </mult>
+      </value>
+      <valueInc>0.001</valueInc>
+      <label>
+        RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid> Energey<space/>
+        <if>
+          <op>
+            <eq>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6</getRowOid></op>
+              <op>1</op>
+            </eq>
+          </op>
+          <op></op>
+          <op>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></op>
+        </if>
+      </label>
+      <sensorSet>RPDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid></sensorSet>
+    </numSensor>
+
+  </device>
+
+  <device deviceid="mdcUPS">
+    <oidMustMatch ruleid="easyMdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.2</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="mdcUPSExists" oid=".1.3.6.1.4.1.318.1.1.31.2" istree="yes"/>
+
+    <numSensor ruleid="mdcUpsInputVoltage" index=".1.3.6.1.4.1.318.1.1.31.2.2.1.1.2">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.2.1.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage/inputvoltage</type>
+      <sensorId>INPUT_VOLTAGE_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.2.1.1.2</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.2.1.1.1</getRowOid> Input Voltage</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="mdcUpsOutputVoltage" index=".1.3.6.1.4.1.318.1.1.31.2.3.1.1.2">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage/outputvoltage</type>
+      <sensorId>OUTPUT_VOLTAGE_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.2</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.1</getRowOid> Output Voltage</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcUpsOutputCurrent" index=".1.3.6.1.4.1.318.1.1.31.2.3.1.1.3">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>amperage</type>
+      <sensorId>UPSOUTPUTCURRENT_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.3</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.1</getRowOid><space/>Output Current</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcUpsOutputActivePower" index=".1.3.6.1.4.1.318.1.1.31.2.3.1.1.4">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>powerW</type>
+      <sensorId>TOTAL_OUTPUT_ACTIVE_POWER_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.4</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.1</getRowOid> Output Active Power</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcUpsOutputFrequency" index=".1.3.6.1.4.1.318.1.1.31.2.3.1.1.5">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>frequency/outputfrequency</type>
+      <sensorId>OUTPUT_FREQ_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.5</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.1</getRowOid> Output Frequency</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="mdcUpsBatteryRunTimeRemaining" index=".1.3.6.1.4.1.318.1.1.31.2.4.1.1.2">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>timeinmin/timeremainingonbatt</type>
+      <sensorId>TIME_REMAINING_ON_BATT_<rowNumber/></sensorId>
+      <value>
+        <round increment="0.1">
+          <div>
+            <op>
+              <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.2</getRowOid>
+            </op>
+            <op>6000</op>
+          </div>
+        </round>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.1</getRowOid> Battery Time Remaining</label>
+      <sensorSet>UPS Battery</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcUpsBatteryCapacity" index=".1.3.6.1.4.1.318.1.1.31.2.4.1.1.3">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity/pctofbatt</type>
+      <sensorId>BATT_CAPACITY_LEFT</sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.3</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.1</getRowOid> Battery Capacity Remaining</label>
+      <sensorSet>UPS Battery</sensorSet>
+    </numSensor>
+  </device>
+
+  <device deviceid="mdcCrac">
+    <oidMustMatch ruleid="easyMdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.2</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="mdcCracExists" oid=".1.3.6.1.4.1.318.1.1.31.3" istree="yes"/>
+
+    <numSensor ruleid="mdcCoolingStatusSupplyAirTemp" index=".1.3.6.1.4.1.318.1.1.31.3.2.1.1.2">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>SUPPLY_AIR_TEMP_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.2</getRowOid>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.1</getRowOid> Supply Air Temperature</label>
+      <sensorSet>Cooling Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcCoolingStatusReturnAirTemp" index=".1.3.6.1.4.1.318.1.1.31.3.2.1.1.3">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>_RETURN_AIR_TEMP_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.3</getRowOid>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.1</getRowOid> Return Air Temperature</label>
+      <sensorSet>Cooling Status</sensorSet>
+    </numSensor>
+
+    <valueMap ruleid="operateMode-vm">
+      <valueIn>2</valueIn><valueOut>0</valueOut>
+      <valueIn>3</valueIn><valueOut>1</valueOut>
+      <valueIn>4</valueIn><valueOut>2</valueOut>
+      <valueIn>5</valueIn><valueOut>3</valueOut>
+      <valueIn>6</valueIn><valueOut>4</valueOut>
+      <valueIn>7</valueIn><valueOut>5</valueOut>
+      <valueIn>8</valueIn><valueOut>6</valueOut>
+      <valueIn>*</valueIn><valueOut>7</valueOut>
+    </valueMap>
+    <enumMap ruleid="operateMode-em">
+      <label>Cooling</label>
+      <label>Dehumidification</label>
+      <label>BMS Shutdown</label>
+      <label>HMI Shutdown</label>
+      <label>Fault Shutdown</label>
+      <label>Remote Shutdown</label>
+      <label>Cooling/Auxiliary Heating</label>
+      <label>UNKNOWN</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcCoolingStatusOperateMode" index=".1.3.6.1.4.1.318.1.1.31.3.2.1.1.4">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>_OPERATING_MODE_<rowNumber/></sensorId>
+      <value>
+        <mapValue mapid="operateMode-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.4</getRowOid>
+        </mapValue>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.1</getRowOid> Operating Mode</label>
+      <enum>operateMode-em</enum>
+      <sensorSet>Cooling Status</sensorSet>
+    </stateSensor>
+
+    <numSensor ruleid="mdcCoolingConfigRackMaxTemp">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.1.0</getOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>RACK_MAX_TEMP</sensorId>
+      <value>
+        <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.1.0</getOid>
+      </value>
+      <label>CRAC Rack Maximum Temperature Setpoint</label>
+      <sensorSet>Cooling Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcCoolingConfigRackMinHum">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.2.0</getOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>RACK_MAX_HUMIDITY</sensorId>
+      <value>
+        <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.2.0</getOid>
+      </value>
+      <label>CRAC Rack Minimum Humidity Setpoint</label>
+      <sensorSet>Cooling Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcCoolingConfigUPSMinLoad">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.3.0</getOid>
+        </mapValue>
+      </rowTest>
+      <type>powerW</type>
+      <sensorId>CRAC_UPS_MIN_LOAD</sensorId>
+      <value>
+        <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.3.0</getOid>
+      </value>
+      <label>CRAC UPS Minimum Load Setpoint</label>
+      <sensorSet>Cooling Configuration</sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="mdcCoolingConfigOutletAirTemp" index=".1.3.6.1.4.1.318.1.1.31.3.3.4.1.2">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>OUTLET_AIR_TEMP_SETPOINT_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.2</getRowOid>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.1</getRowOid> Outlet Air Temperature Setpoint</label>
+      <sensorSet>Cooling Configuration</sensorSet>
+    </numSensor>
+
+    <valueMap ruleid="activeInactive-vm">
+      <valueIn>2</valueIn><valueOut>0</valueOut>
+      <valueIn>3</valueIn><valueOut>1</valueOut>
+      <valueIn>*</valueIn><valueOut>2</valueOut>
+    </valueMap>
+    <enumMap ruleid="activeInactive-em">
+      <label>Active</label>
+      <label>Inactive</label>
+      <label>UNKNOWN</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcCoolingConfigPTCHeater" index=".1.3.6.1.4.1.318.1.1.31.3.3.4.1.3">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PTC_HEATER_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="activeInactive-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.3</getRowOid>
+        </mapValue>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.1</getRowOid> PTC Heater Status</label>
+      <enum>activeInactive-em</enum>
+      <sensorSet>Cooling Status</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcCoolingConfigCondensationPump" index=".1.3.6.1.4.1.318.1.1.31.3.3.4.1.4">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>CONDENSATION_PUMP_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="activeInactive-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.4</getRowOid>
+        </mapValue>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.1</getRowOid> Condensation Pump Status</label>
+      <enum>activeInactive-em</enum>
+      <sensorSet>Cooling Status</sensorSet>
+    </stateSensor>
+  </device>
+
+  <device deviceid="mdcStatus">
+    <oidMustMatch ruleid="easyMdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.2</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="mdcStatusExists" oid=".1.3.6.1.4.1.318.1.1.31.4" istree="yes"/>
+
+    <numSensor ruleid="mdcStatusPowerUsageEffectiveness">
+      <rowTest>
+        <mapValue mapid="apcEasyMdc/mdcEMS/invalid_minusOne-vm">
+          <getOid>.1.3.6.1.4.1.318.1.1.31.4.1.0</getOid>
+        </mapValue>
+      </rowTest>
+      <type>num</type>
+      <sensorId>MDC_POWER_USAGE_EFFECTIVENESS</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.318.1.1.31.4.1.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <valueInc>0.1</valueInc>
+      <label>Power Usage Effectiveness</label>
+      <sensorSet>MDC Status</sensorSet>
+    </numSensor>
+  </device>
+
+</APC_DDF>

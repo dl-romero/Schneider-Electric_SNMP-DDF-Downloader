@@ -1,0 +1,1522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="nvent_rdhx_chiller"
+	ddfname="NVent RDHX Chiller"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+		SOURCE
+		\snmp\resources\mibs\nvent\20191212_nVent_MIB_53.mib
+		
+		CAREL-sNMP-MIB | 23 November 2020
+	-->
+	<device deviceid="nvent_rdhx_chiller">
+		<oidMustExist ruleid="snmpVariables_exists" oid=".1.3.6.1.4.1.16394.200.1.1" istree="yes"/> 
+		
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">NVent</setProductData>
+		<setProductData ruleid="modeldata" field="model">NVent RDHX</setProductData>
+		<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+		<!--
+			valueMap/enumMaps
+		-->
+		<valueMap ruleid="1state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="offOn-em">
+			<label>Off</label>
+			<label>On</label>
+		</enumMap>
+		
+		<enumMap ruleid="okAlarm-em">
+			<label>OK</label>
+			<label>Alarm</label>
+		</enumMap>
+		
+		<enumMap ruleid="closedOpen-em">
+			<label>Closed</label>
+			<label>Open</label>
+		</enumMap>
+		<!--
+			Sensors
+		-->
+        <numSensor ruleid="hourCount-System-udi">
+            <type>timeinhrs</type>
+            <sensorId>_OPERATING_HOUR_COUNTER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.9.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Operating Hour Counter</label>
+            <sensorSet>Status</sensorSet>
+        </numSensor>
+
+        <stateSensor ruleid="eN-Option-Air-Sensor">
+            <type>state</type>
+            <sensorId>_ENABLE_OPTION_ADDITIONAL_AIR_SENSORS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.10.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Option Additional Air Sensors</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="eN-Option-Water">
+            <type>state</type>
+            <sensorId>_ENABLE_OPTION_WATER_SENSORS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.11.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Option Water Sensors</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="eN-Option-Air">
+            <type>state</type>
+            <sensorId>_ENABLE_OPTION_AIR_CONTROL</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.12.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Option Air Control</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="eN-Option-CondPumpe">
+            <type>state</type>
+            <sensorId>_ENABLE_OPTION_CONDENSATION_PUMP</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.13.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Option Condensation Pump</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="eN-Option-DoorSwitch">
+            <type>state</type>
+            <sensorId>_ENABLE_OPTION_DOOR_SWITCH</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.14.0</getOid>
+                </mapValue>
+            </value>
+            <label>Enable Option Door Switch</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="unitOn">
+            <type>state</type>
+            <sensorId>_UNIT_ON_OFF_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.51.0</getOid>
+                </mapValue>
+            </value>
+            <label>Unit On/Off Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="unit-Alarm">
+            <type>state</type>
+            <sensorId>_AGGREGATED_ALARM_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.52.0</getOid>
+                </mapValue>
+            </value>
+            <label>Aggregated Alarm Status</label>
+            <enum>okAlarm-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+		
+        <alarmFlags ruleid="unit-Alarm">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.52.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Aggregated Alarm Status</activeText>
+                    <inactiveText>Aggregated Alarm Status Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Aggregated Alarm Status condition exists.</activeText>
+                    <inactiveText>Aggregated Alarm Status condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>		
+		
+        <stateSensor ruleid="door-Open">
+            <type>state</type>
+            <sensorId>_DOOR_OPEN_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.53.0</getOid>
+                </mapValue>
+            </value>
+            <label>Door Open Status</label>
+            <enum>closedOpen-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="waterLevel-High">
+            <type>state</type>
+            <sensorId>_WATER_LEVEL_HIGH_ALARM</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.54.0</getOid>
+                </mapValue>
+            </value>
+            <label>Water Level High Alarm</label>
+            <enum>okAlarm-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="dO-Alarm3-Val">
+            <type>state</type>
+            <sensorId>_DIGITAL_OUTPUT_ALARM_3</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.55.0</getOid>
+                </mapValue>
+            </value>
+            <label>Digital Output Alarm 3</label>
+            <enum>okAlarm-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="dO-Alarm4-Val">
+            <type>state</type>
+            <sensorId>_DIGITAL_OUTPUT_ALARM_4</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.56.0</getOid>
+                </mapValue>
+            </value>
+            <label>Digital Output Alarm 4</label>
+            <enum>okAlarm-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="dO-Alarm5-Val">
+            <type>state</type>
+            <sensorId>_DIGITAL_OUTPUT_ALARM_5</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.57.0</getOid>
+                </mapValue>
+            </value>
+            <label>Digital Output Alarm 5</label>
+            <enum>okAlarm-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+
+        <alarmFlags ruleid="waterLevel-High">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.54.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Water Level High Alarm</activeText>
+                    <inactiveText>Water Level High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Water Level High Alarm condition exists.</activeText>
+                    <inactiveText>Water Level High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="dO-Alarm3-Val">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.55.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Digital Output Alarm 3</activeText>
+                    <inactiveText>Digital Output Alarm 3 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Output</category>
+                <description>
+                    <activeText>Digital Output Alarm 3 condition exists.</activeText>
+                    <inactiveText>Digital Output Alarm 3 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="dO-Alarm4-Val">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.56.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Digital Output Alarm 4</activeText>
+                    <inactiveText>Digital Output Alarm 4 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Output</category>
+                <description>
+                    <activeText>Digital Output Alarm 4 condition exists.</activeText>
+                    <inactiveText>Digital Output Alarm 4 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="dO-Alarm5-Val">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.57.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Digital Output Alarm 5</activeText>
+                    <inactiveText>Digital Output Alarm 5 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Output</category>
+                <description>
+                    <activeText>Digital Output Alarm 5 condition exists.</activeText>
+                    <inactiveText>Digital Output Alarm 5 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+		
+		<stateSensor ruleid="pOU-Unit-Mng-BmsOn">
+            <type>state</type>
+            <sensorId>_UNIT_ON_OFF_STATUS_BY_BMS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.16394.200.1.1.101.0</getOid>
+                </mapValue>
+            </value>
+            <label>Unit On/Off Status By BMS</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="vALVE-ACT-REQ-r">
+            <type>num</type>
+            <sensorId>_VALVE_OPENING_REQUEST</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.201.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Valve Opening Request</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-ACT-REQ-r">
+            <type>num</type>
+            <sensorId>_FAN_SPEED_REQUEST</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.202.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Speed Request</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="q-ACTUAL-r">
+            <type>num</type>
+            <sensorId>_CURRENT_COOLING_PERFORMANCE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.203.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Current Cooling Performance</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="q-TOTAL-r">
+            <type>num</type>
+            <sensorId>_HEAT_METER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.204.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Heat Meter</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="t-Air-OUT-Top-r">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_COLD_AIR_TOP</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.205.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Cold Air Top</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="t-Air-OUT-Bottom-r">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_COLD_AIR_BOTTOM</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.206.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Cold Air Bottom</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="t-Air-IN-Top-r">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_WARM_AIR_TOP</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.207.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Warm Air Top</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="t-Air-IN-Bottom-r">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_WARM_AIR_BOTTOM</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.208.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Warm Air Bottom</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="air-Diff-Pressure-r">
+            <type>pressure</type>
+            <sensorId>_AIR_DIFFERENTIAL_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.209.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Air Differential Pressure</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="t-Water-IN-r">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_WATER_INLET</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.210.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Water Inlet</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="t-Water-OUT-r">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_WATER_OUTLET</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.211.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Water Outlet</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="water-Flow-r">
+            <type>fluidflow</type>
+            <sensorId>_WATER_FLOW_RATE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.212.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Water Flow Rate</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="water-Pressure-r">
+            <type>pressure</type>
+            <sensorId>_WATER_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.213.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Water Pressure</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-ACT-RPM-ui-1">
+            <type>fanspeed</type>
+            <sensorId>_FAN_SPEED_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.251.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Speed 1</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-ACT-RPM-ui-2">
+            <type>fanspeed</type>
+            <sensorId>_FAN_SPEED_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.252.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Speed 2</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-ACT-RPM-ui-3">
+            <type>fanspeed</type>
+            <sensorId>_FAN_SPEED_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.253.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Speed 3</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-ACT-RPM-ui-4">
+            <type>fanspeed</type>
+            <sensorId>_FAN_SPEED_4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.254.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Speed 4</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-HOURS-CNT-di-1">
+            <type>timeinhrs</type>
+            <sensorId>_FAN_HOURS_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.255.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Hours 1</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-HOURS-CNT-di-2">
+            <type>timeinhrs</type>
+            <sensorId>_FAN_HOURS_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.256.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Hours 2</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-HOURS-CNT-di-3">
+            <type>timeinhrs</type>
+            <sensorId>_FAN_HOURS_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.257.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Hours 3</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-HOURS-CNT-di-4">
+            <type>timeinhrs</type>
+            <sensorId>_FAN_HOURS_4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.258.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Fan Hours 4</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-ACT-PWR-ui">
+            <type>num</type>
+            <sensorId>_SUM_OF_CURRENT_FAN_POWER_CONSUMPTION</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.259.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Sum Of Current Fan Power Consumption</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fAN-TACHO-r">
+            <type>num</type>
+            <sensorId>_ANALOG_FAN_SPEED_FEEDBACK</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.16394.200.1.1.260.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Analog Fan Speed Feedback</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="aL-retain-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.301.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Warning Retain Write Alarm</activeText>
+                    <inactiveText>Warning Retain Write Alarm Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Warning Retain Write Alarm condition exists.</activeText>
+                    <inactiveText>Warning Retain Write Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Err-retain-write-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.302.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Alarm Retain Write Alarm</activeText>
+                    <inactiveText>Alarm Retain Write Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Alarm Retain Write Alarm condition exists.</activeText>
+                    <inactiveText>Alarm Retain Write Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Sensor-ColdAir-Top-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.303.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Sensor Cold Air Top Alarm</activeText>
+                    <inactiveText>Sensor Cold Air Top Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Cooling</category>
+                <description>
+                    <activeText>Sensor Cold Air Top Alarm condition exists.</activeText>
+                    <inactiveText>Sensor Cold Air Top Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Sensor-ColdAir-Bottom-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.304.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Sensor Cold Air Bottom Alarm</activeText>
+                    <inactiveText>Sensor Cold Air Bottom Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Cooling</category>
+                <description>
+                    <activeText>Sensor Cold Air Bottom Alarm condition exists.</activeText>
+                    <inactiveText>Sensor Cold Air Bottom Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Sensor-WarmAir-Top-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.305.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Sensor Warm Air Top Alarm</activeText>
+                    <inactiveText>Sensor Warm Air Top Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Cooling</category>
+                <description>
+                    <activeText>Sensor Warm Air Top Alarm condition exists.</activeText>
+                    <inactiveText>Sensor Warm Air Top Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Sensor-WarmAir-Bottom-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.306.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Sensor Warm Air Bottom Alarm</activeText>
+                    <inactiveText>Sensor Warm Air Bottom Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Cooling</category>
+                <description>
+                    <activeText>Sensor Warm Air Bottom Alarm condition exists.</activeText>
+                    <inactiveText>Sensor Warm Air Bottom Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Sensor-FLOW-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.307.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Sensor Water Flow Alarm</activeText>
+                    <inactiveText>Sensor Water Flow Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Cooling</category>
+                <description>
+                    <activeText>Sensor Water Flow Alarm condition exists.</activeText>
+                    <inactiveText>Sensor Water Flow Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Sensor-Water-Press-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.308.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Sensor Water Pressure Alarm</activeText>
+                    <inactiveText>Sensor Water Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Cooling</category>
+                <description>
+                    <activeText>Sensor Water Pressure Alarm condition exists.</activeText>
+                    <inactiveText>Sensor Water Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Sensor-T-WaterIN-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.309.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Sensor Temperature Water IN Alarm</activeText>
+                    <inactiveText>Sensor Temperature Water IN Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Sensor Temperature Water IN Alarm condition exists.</activeText>
+                    <inactiveText>Sensor Temperature Water IN Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Sensor-T-WaterOut-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.310.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Sensor Temperature Water OUT Alarm</activeText>
+                    <inactiveText>Sensor Temperature Water OUT Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Sensor Temperature Water OUT Alarm condition exists.</activeText>
+                    <inactiveText>Sensor Temperature Water OUT Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Sensor-Air-dP-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.311.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Sensor Air Pressure Alarm</activeText>
+                    <inactiveText>Sensor Air Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Sensor Air Pressure Alarm condition exists.</activeText>
+                    <inactiveText>Sensor Air Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-SPEED-FAN1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.312.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Speed Too Low Alarm</activeText>
+                    <inactiveText>Fan 1 Speed Too Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 1 Speed Too Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Speed Too Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-SPEED-FAN2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.313.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Speed Too Low Alarm</activeText>
+                    <inactiveText>Fan 2 Speed Too Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 2 Speed Too Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Speed Too Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-SPEED-FAN3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.314.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Speed Too Low Alarm</activeText>
+                    <inactiveText>Fan 3 Speed Too Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 3 Speed Too Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Speed Too Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-SPEED-FAN4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.315.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Speed Too Low Alarm</activeText>
+                    <inactiveText>Fan 4 Speed Too Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 4 Speed Too Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Speed Too Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-WarmAir-High-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.316.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Temperature Warm Air High Alarm</activeText>
+                    <inactiveText>Temperature Warm Air High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Temperature Warm Air High Alarm condition exists.</activeText>
+                    <inactiveText>Temperature Warm Air High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-ColdAir-High-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.317.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Temperature Cold Air High Alarm</activeText>
+                    <inactiveText>Temperature Cold Air High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Temperature Cold Air High Alarm condition exists.</activeText>
+                    <inactiveText>Temperature Cold Air High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Control-Margin-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.318.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Control Margin Exceeded Alarm</activeText>
+                    <inactiveText>Control Margin Exceeded Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Control Margin Exceeded Alarm condition exists.</activeText>
+                    <inactiveText>Control Margin Exceeded Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aL-Water-IN-High-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.319.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Temperature Water In High Alarm</activeText>
+                    <inactiveText>Temperature Water In High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Temperature Water In High Alarm condition exists.</activeText>
+                    <inactiveText>Temperature Water In High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Water-OUT-High-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.320.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Temperature Water Out High Alarm</activeText>
+                    <inactiveText>Temperature Water Out High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Temperature Water Out High Alarm condition exists.</activeText>
+                    <inactiveText>Temperature Water Out High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Water-Pressure-High-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.321.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Water Pressure High Alarm</activeText>
+                    <inactiveText>Water Pressure High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Water Pressure High Alarm condition exists.</activeText>
+                    <inactiveText>Water Pressure High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Water-Flow-High-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.322.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Water Flow High Alarm</activeText>
+                    <inactiveText>Water Flow High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Cooling</category>
+                <description>
+                    <activeText>Water Flow High Alarm condition exists.</activeText>
+                    <inactiveText>Water Flow High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.351.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Offline Alarm</activeText>
+                    <inactiveText>Fan 1 Offline Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 1 Offline Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Offline Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-ComErr-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.352.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Communication Error Alarm</activeText>
+                    <inactiveText>Fan 1 Communication Error Alarm Cleared</inactiveText>
+                </name>
+                <severity>error</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Fan 1 Communication Error Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Communication Error Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-GenericErr-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.353.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Generic Error Alarm</activeText>
+                    <inactiveText>Fan 1 Generic Error Alarm Cleared</inactiveText>
+                </name>
+                <severity>error</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Fan 1 Generic Error Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Generic Error Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-MotorBlocked-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.354.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Motor Blocked Alarm</activeText>
+                    <inactiveText>Fan 1 Motor Blocked Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 1 Motor Blocked Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Motor Blocked Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-DC-VolatageLow-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.355.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 DC Voltage Low Alarm</activeText>
+                    <inactiveText>Fan 1 DC Voltage Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 1 DC Voltage Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 DC Voltage Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wMotHighTemp-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.356.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Motor Temperature High Alarm</activeText>
+                    <inactiveText>Fan 1 Motor Temperature High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Fan 1 Motor Temperature High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Motor Temperature High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wInternalHighTemp-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.357.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Circuit Temperature High Alarm</activeText>
+                    <inactiveText>Fan 1 Circuit Temperature High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Fan 1 Circuit Temperature High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Circuit Temperature High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wDC-VoltageLow-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.358.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 DC Voltage Low Alarm</activeText>
+                    <inactiveText>Fan 1 DC Voltage Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 1 DC Voltage Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 DC Voltage Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wSpeed-Low-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.359.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Speed Low Alarm</activeText>
+                    <inactiveText>Fan 1 Speed Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 1 Speed Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Speed Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wLineImpHigh-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.360.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Line Imp High Alarm</activeText>
+                    <inactiveText>Fan 1 Line Imp High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 1 Line Imp High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Line Imp High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wDC-VoltageHigh-FAN-1-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.361.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 DC Voltage High Alarm</activeText>
+                    <inactiveText>Fan 1 DC Voltage High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 1 DC Voltage High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 DC Voltage High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.362.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Offline Alarm</activeText>
+                    <inactiveText>Fan 2 Offline Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 2 Offline Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Offline Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-ComErr-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.363.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Communication Error Alarm</activeText>
+                    <inactiveText>Fan 2 Communication Error Alarm Cleared</inactiveText>
+                </name>
+                <severity>error</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Fan 2 Communication Error Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Communication Error Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-GenericErr-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.364.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Generic Error Alarm</activeText>
+                    <inactiveText>Fan 2 Generic Error Alarm Cleared</inactiveText>
+                </name>
+                <severity>error</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Fan 2 Generic Error Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Generic Error Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-MotorBlocked-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.365.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Motor Blocked Alarm</activeText>
+                    <inactiveText>Fan 2 Motor Blocked Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 2 Motor Blocked Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Motor Blocked Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-DC-VolatageLow-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.366.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 DC Voltage Low Alarm</activeText>
+                    <inactiveText>Fan 2 DC Voltage Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 2 DC Voltage Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 DC Voltage Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wMotHighTemp-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.367.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Motor Temperature High Alarm</activeText>
+                    <inactiveText>Fan 2 Motor Temperature High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Fan 2 Motor Temperature High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Motor Temperature High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wInternalHighTemp-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.368.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Circ Temperature High Alarm</activeText>
+                    <inactiveText>Fan 2 Circ Temperature High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Fan 2 Circ Temperature High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Circ Temperature High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wDC-VoltageLow-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.369.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 DC Voltage Low Alarm</activeText>
+                    <inactiveText>Fan 2 DC Voltage Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 2 DC Voltage Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 DC Voltage Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wSpeed-Low-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.370.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Speed Low Alarm</activeText>
+                    <inactiveText>Fan 2 Speed Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 2 Speed Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Speed Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wLineImpHigh-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.371.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Line Imp High Alarm</activeText>
+                    <inactiveText>Fan 2 Line Imp High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 2 Line Imp High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Line Imp High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wDC-VoltageHigh-FAN-2-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.372.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 DC Voltage High Alarm</activeText>
+                    <inactiveText>Fan 2 DC Voltage High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 2 DC Voltage High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 DC Voltage High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.373.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Offline Alarm</activeText>
+                    <inactiveText>Fan 3 Offline Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 3 Offline Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Offline Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-ComErr-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.374.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Communication Error Alarm</activeText>
+                    <inactiveText>Fan 3 Communication Error Alarm Cleared</inactiveText>
+                </name>
+                <severity>error</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Fan 3 Communication Error Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Communication Error Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-GenericErr-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.375.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Generic Error Alarm</activeText>
+                    <inactiveText>Fan 3 Generic Error Alarm Cleared</inactiveText>
+                </name>
+                <severity>error</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Fan 3 Generic Error Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Generic Error Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-MotorBlocked-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.376.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Motor Blocked Alarm</activeText>
+                    <inactiveText>Fan 3 Motor Blocked Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 3 Motor Blocked Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Motor Blocked Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-DC-VolatageLow-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.377.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 DC Voltage Low Alarm</activeText>
+                    <inactiveText>Fan 3 DC Voltage Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 3 DC Voltage Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 DC Voltage Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wMotHighTemp-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.378.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Motor Temperature High Alarm</activeText>
+                    <inactiveText>Fan 3 Motor Temperature High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Fan 3 Motor Temperature High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Motor Temperature High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wInternalHighTemp-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.379.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Circ Temperature High Alarm</activeText>
+                    <inactiveText>Fan 3 Circ Temperature High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Fan 3 Circ Temperature High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Circ Temperature High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wDC-VoltageLow-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.380.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 DC Voltage Low Alarm</activeText>
+                    <inactiveText>Fan 3 DC Voltage Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 3 DC Voltage Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 DC Voltage Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wSpeed-Low-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.381.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Speed Low Alarm</activeText>
+                    <inactiveText>Fan 3 Speed Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 3 Speed Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Speed Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wLineImpHigh-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.382.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Line Imp High Alarm</activeText>
+                    <inactiveText>Fan 3 Line Imp High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 3 Line Imp High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Line Imp High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wDC-VoltageHigh-FAN-3-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.383.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 DC Voltage High Alarm</activeText>
+                    <inactiveText>Fan 3 DC Voltage High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 3 DC Voltage High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 DC Voltage High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.384.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Offline Alarm</activeText>
+                    <inactiveText>Fan 4 Offline Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 4 Offline Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Offline Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-ComErr-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.385.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Communication Error Alarm</activeText>
+                    <inactiveText>Fan 4 Communication Error Alarm Cleared</inactiveText>
+                </name>
+                <severity>error</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Fan 4 Communication Error Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Communication Error Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-GenericErr-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.386.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Generic Error Alarm</activeText>
+                    <inactiveText>Fan 4 Generic Error Alarm Cleared</inactiveText>
+                </name>
+                <severity>error</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Fan 4 Generic Error Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Generic Error Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-MotorBlocked-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.387.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Motor Blocked Alarm</activeText>
+                    <inactiveText>Fan 4 Motor Blocked Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 4 Motor Blocked Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Motor Blocked Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-DC-VolatageLow-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.388.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 DC Voltage Low Alarm</activeText>
+                    <inactiveText>Fan 4 DC Voltage Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 4 DC Voltage Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 DC Voltage Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wMotHighTemp-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.389.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Motor Temperature High Alarm</activeText>
+                    <inactiveText>Fan 4 Motor Temperature High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Fan 4 Motor Temperature High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Motor Temperature High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wInternalHighTemp-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.390.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Circ Temperature High Alarm</activeText>
+                    <inactiveText>Fan 4 Circ Temperature High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Fan 4 Circ Temperature High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Circ Temperature High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wDC-VoltageLow-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.391.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 DC Voltage Low Alarm</activeText>
+                    <inactiveText>Fan 4 DC Voltage Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 4 DC Voltage Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 DC Voltage Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wSpeed-Low-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.392.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Speed Low Alarm</activeText>
+                    <inactiveText>Fan 4 Speed Low Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 4 Speed Low Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Speed Low Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wLineImpHigh-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.393.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Line Imp High Alarm</activeText>
+                    <inactiveText>Fan 4 Line Imp High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 4 Line Imp High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Line Imp High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-wDC-VoltageHigh-FAN-4-Active">
+            <value><getOid>.1.3.6.1.4.1.16394.200.1.1.394.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 DC Voltage High Alarm</activeText>
+                    <inactiveText>Fan 4 DC Voltage High Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Fan 4 DC Voltage High Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 DC Voltage High Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+		
+	</device>
+</APC_DDF>

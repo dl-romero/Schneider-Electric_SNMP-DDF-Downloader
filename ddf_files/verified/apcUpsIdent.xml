@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="apcUpsIdent"
+  ddfname="APC UPS Identification"
+  ddfversion="2"
+  canremove="yes">
+  <schemaVersion>1.6</schemaVersion>
+  <!--
+  The purpose of this DDF is to help identify devices that may be affected
+  by the vulnerabilities found on certain APC Smart-UPS models/firmware.
+
+  More information:
+  https://www.se.com/ww/en/download/document/SEVD-2022-067-02/
+  -->
+  <device deviceid="apcUpsIdent">
+    <oidMustExist ruleid="apcUpsIdent" oid=".1.3.6.1.4.1.318.1.1.1.1" istree="yes"/>
+
+		<stringSensor ruleid="apcUpsBasicIdentModel">
+			<type>string</type>
+			<sensorId>APC_UPS_BASIC_IDENT_MODEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.1.1.0</getOid>
+			</value>
+			<label>UPS Model</label>
+			<sensorSet>UPS Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="apcUpsBasicIdentModelType">
+			<type>string</type>
+			<sensorId>APC_UPS_BASIC_IDENT_MODEL_TYPE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.1.4.0</getOid>
+			</value>
+			<label>UPS Model Type</label>
+			<sensorSet>UPS Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="apcUpsAdvIdentFirmwareRevision">
+			<type>string</type>
+			<sensorId>APC_UPS_ADV_IDENT_FIRMWARE_REVISION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.1.0</getOid>
+			</value>
+			<label>UPS Firmware Revision</label>
+			<sensorSet>UPS Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="apcUpsAdvIdentSerialNumber">
+			<type>string</type>
+			<sensorId>APC_UPS_ADV_IDENT_SERIAL_NUMBER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.3.0</getOid>
+			</value>
+			<label>UPS Serial Number</label>
+			<sensorSet>UPS Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="apcUpsAdvIdentSkuNumber">
+			<type>string</type>
+			<sensorId>APC_UPS_ADV_IDENT_SKU_NUMBER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.5.0</getOid>
+			</value>
+			<label>UPS SKU Number</label>
+			<sensorSet>UPS Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="apcUpsAdvIdentHardwareRevision">
+			<type>string</type>
+			<sensorId>APC_UPS_ADV_IDENT_HARDWARE_REVISION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.6.0</getOid>
+			</value>
+			<label>UPS Hardware Revision</label>
+			<sensorSet>UPS Identification</sensorSet>
+		</stringSensor>
+ </device>
+</APC_DDF>

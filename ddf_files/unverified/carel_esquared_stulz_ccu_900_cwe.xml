@@ -5,7 +5,7 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	canremove="yes"
 	ddfid="carel_esquared_stulz_ccu_900_cwe"
-	ddfname="Carel ESquared Stulz CCU 900 CWE [pcoWeb]"
+	ddfname="Carel ESquared Stulz CCU 900 CWE [pcoWeb][SNMP]"
 	ddfversion="8">
   <schemaVersion>1.6</schemaVersion>
 

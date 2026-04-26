@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <APC_DDF
-	ddfid="ibm_pdu"
-	ddfname="IBM PDU"
-	ddfversion="5"
-	canremove="yes">
+  ddfid="ibm_pdu"
+  ddfname="IBM PDU"
+  ddfversion="6"
+  canremove="yes">
 <schemaVersion>1.6</schemaVersion>
 
     <device deviceid="ibm_pdu">
@@ -12,8 +12,8 @@
 		<setProductData ruleid="vendordata" field="vendor">IBM</setProductData>
 		<setProductData ruleid="typedata" field="type">PDU</setProductData>
 		<setProductData ruleid="modeldata" field="model">
-			<getOid>.1.3.6.1.4.1.2.6.223.7.4.0</getOid>		
-		</setProductData>		
+			<getOid>.1.3.6.1.4.1.2.6.223.7.4.0</getOid>
+		</setProductData>
 		<setProductData ruleid="appversion" field="appversion">
 			<getOid>.1.3.6.1.4.1.2.6.223.7.3.0</getOid>
 		</setProductData>
@@ -33,8 +33,8 @@
 			<getOid>.1.3.6.1.4.1.2.6.223.8.3.1.0</getOid>
 		</setProductData>
 
-		<!-- IBM PDU State -->
-		<stateSensor ruleid="ibmPduState">
+	  <!-- IBM PDU State -->
+	  <stateSensor ruleid="ibmPduState">
 			<type>state</type>
 			<sensorId>IBM_PDU_STATE</sensorId>
 			<value>
@@ -64,9 +64,9 @@
 			<label>Delayed Off</label>
 			<label>Unknown</label>
 		</enumMap>
- 
- 		<!-- IBM PDU Buffer Tag Value -->
-		<numSensor ruleid="ibmPduBufferTagValue">
+
+	  <!-- IBM PDU Buffer Tag Value -->
+	  <numSensor ruleid="ibmPduBufferTagValue">
 			<type>num</type>
 			<sensorId>IBM_PDU_BUFFER_TAG_VALUE</sensorId>
 			<value>
@@ -74,18 +74,18 @@
 			</value>
 			<label>Buffer Tag Value</label>
 			<sensorSet>PDU</sensorSet>
-		</numSensor>		
- 
- 		<!-- IBM PDU Outlet Type -->
-		<stateSensor ruleid="ibmPduOutletType" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.3">
+		</numSensor>
+
+	  <!-- IBM PDU Outlet Type -->
+	  <stateSensor ruleid="ibmPduOutletType" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.3">
 			<type>state</type>
-			<sensorId>IBM_PDU_OUTLET_TYPE_<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></sensorId>
+			<sensorId>IBM_PDU_OUTLET_TYPE_<rowIndex/></sensorId>
 			<value>
 				<mapValue mapid="outlet_type-vm">
 					<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.3</getRowOid>
 				</mapValue>
 			</value>
-			<label>Outlet Type - Outlet <getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></label>
+			<label>Outlet Type - Outlet <rowIndex/></label>
 			<enum>outlet_type-em</enum>
 			<sensorSet>Outlet</sensorSet>
 		</stateSensor>
@@ -102,10 +102,10 @@
 			<label>Unknown</label>
 		</enumMap>
 
-		<!-- IBM PDU Outlet Current -->
-		<numSensor ruleid="ibmPduOutletCurrent" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.7">
+	  <!-- IBM PDU Outlet Current -->
+	  <numSensor ruleid="ibmPduOutletCurrent" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.7">
 			<type>amperage</type>
-			<sensorId>IBM_PDU_OUTLET_CURRENT_<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></sensorId>
+			<sensorId>IBM_PDU_OUTLET_CURRENT_<rowIndex/></sensorId>
 			<value>
 				<mult>
 					<op><getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.7</getRowOid></op>
@@ -113,14 +113,14 @@
 				</mult>
 			</value>
 			<valueInc>0.001</valueInc>
-			<label>Current - Outlet <getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></label>
+			<label>Current - Outlet <rowIndex/></label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 
-		<!-- IBM PDU Outlet Max Capacity -->
-		<numSensor ruleid="ibmPduOutletMaxCapacity" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.8">
+	  <!-- IBM PDU Outlet Max Capacity -->
+	  <numSensor ruleid="ibmPduOutletMaxCapacity" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.8">
 			<type>amperage</type>
-			<sensorId>IBM_PDU_OUTLET_MAX_CAPACITY_<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></sensorId>
+			<sensorId>IBM_PDU_OUTLET_MAX_CAPACITY_<rowIndex/></sensorId>
 			<value>
 				<mult>
 					<op><getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.8</getRowOid></op>
@@ -128,14 +128,14 @@
 				</mult>
 			</value>
 			<valueInc>0.001</valueInc>
-			<label>Max Capacity Current - Outlet <getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></label>
+			<label>Max Capacity Current - Outlet <rowIndex/></label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 
-		<!-- IBM PDU Outlet Current Threshold Warning -->
-		<numSensor ruleid="ibmPduOutletCurrentThresholdWarning" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.9">
+	  <!-- IBM PDU Outlet Current Threshold Warning -->
+	  <numSensor ruleid="ibmPduOutletCurrentThresholdWarning" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.9">
 			<type>amperage</type>
-			<sensorId>IBM_PDU_OUTLET_CURRENT_THRESHOLD_WARNING_<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></sensorId>
+			<sensorId>IBM_PDU_OUTLET_CURRENT_THRESHOLD_WARNING_<rowIndex/></sensorId>
 			<value>
 				<mult>
 					<op><getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.9</getRowOid></op>
@@ -143,14 +143,14 @@
 				</mult>
 			</value>
 			<valueInc>0.001</valueInc>
-			<label>Current Threshold Warning - Outlet <getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></label>
+			<label>Current Threshold Warning - Outlet <rowIndex/></label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 
-		<!-- IBM PDU Outlet Current Threshold Critical -->
-		<numSensor ruleid="ibmPduOutletCurrentThresholdCritical" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.10">
+	  <!-- IBM PDU Outlet Current Threshold Critical -->
+	  <numSensor ruleid="ibmPduOutletCurrentThresholdCritical" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.10">
 			<type>amperage</type>
-			<sensorId>IBM_PDU_OUTLET_CURRENT_THRESHOLD_CRITICAL_<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></sensorId>
+			<sensorId>IBM_PDU_OUTLET_CURRENT_THRESHOLD_CRITICAL_<rowIndex/></sensorId>
 			<value>
 				<mult>
 					<op><getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.10</getRowOid></op>
@@ -158,20 +158,20 @@
 				</mult>
 			</value>
 			<valueInc>0.001</valueInc>
-			<label>Current Threshold Critical - Outlet <getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></label>
+			<label>Current Threshold Critical - Outlet <rowIndex/></label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
- 
- 		<!-- IBM PDU Outlet Status -->
-		<stateSensor ruleid="ibmPduOutletStatus" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.11">
+
+	  <!-- IBM PDU Outlet Status -->
+	  <stateSensor ruleid="ibmPduOutletStatus" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.11">
 			<type>state</type>
-			<sensorId>IBM_PDU_OUTLET_STATUS_<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></sensorId>
+			<sensorId>IBM_PDU_OUTLET_STATUS_<rowIndex/></sensorId>
 			<value>
 				<mapValue mapid="outlet_status-vm">
 					<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.11</getRowOid>
 				</mapValue>
 			</value>
-			<label>Outlet Status - Outlet <getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></label>
+			<label>Outlet Status - Outlet <rowIndex/></label>
 			<enum>outlet_status-em</enum>
 			<sensorSet>Outlet</sensorSet>
 		</stateSensor>
@@ -198,20 +198,20 @@
 			<label>Unknown</label>
 		</enumMap>
 
-		<!-- IBM PDU Outlet Last Power Reading -->
-		<numSensor ruleid="ibmPduOutletLastPowerReading" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.13">
+	  <!-- IBM PDU Outlet Last Power Reading -->
+	  <numSensor ruleid="ibmPduOutletLastPowerReading" index=".1.3.6.1.4.1.2.6.223.8.2.2.1.13">
 			<type>powerW</type>
-			<sensorId>IBM_PDU_OUTLET_LAST_POWER_READING_<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></sensorId>
+			<sensorId>IBM_PDU_OUTLET_LAST_POWER_READING_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.13</getRowOid>
 			</value>
 			<valueInc>0.1</valueInc>
-			<label>Last Power Reading - Outlet <getRowOid>.1.3.6.1.4.1.2.6.223.8.2.2.1.1</getRowOid></label>
+			<label>Last Power Reading - Outlet <rowIndex/></label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 
-		<!-- IBM PDU Phase Last Power Reading -->
-		<numSensor ruleid="ibmPduPhaseLastPowerReading" index=".1.3.6.1.4.1.2.6.223.8.3.2.1.4">
+	  <!-- IBM PDU Phase Last Power Reading -->
+	  <numSensor ruleid="ibmPduPhaseLastPowerReading" index=".1.3.6.1.4.1.2.6.223.8.3.2.1.4">
 			<type>powerW</type>
 			<sensorId>IBM_PDU_PHASE_LAST_POWER_READING_<rowIndex/></sensorId>
 			<value>

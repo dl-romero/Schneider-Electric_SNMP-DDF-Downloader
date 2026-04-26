@@ -1,0 +1,1800 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="Uniflair_Leogen2"
+	ddfname="Uniflair Room Cooling (Gen2)"
+	ddfversion="3"
+	canremove="yes">
+  <schemaVersion>1.6</schemaVersion>
+  
+  <device deviceid="Uniflair_Room_Cooling_Gen2">
+	<setProductData ruleid="vendordata" field="vendor">Uniflair</setProductData>
+	<setProductData ruleid="modeldata" field="model">Leogen2</setProductData>
+	<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+	<setProductData ruleid="sernumdata" field="serial_num"><getOid>.1.3.6.1.4.1.318.1.1.27.1.3.2.1.3.1.1</getOid></setProductData>
+	<setProductData ruleid="firmwaredata" field="appversion"><getOid>.1.3.6.1.4.1.318.1.1.27.1.3.2.1.3.1.2</getOid></setProductData>
+	<setProductData ruleid="bootverdata" field="bootversion"><getOid>.1.3.6.1.4.1.318.1.1.27.1.3.2.1.3.1.4</getOid></setProductData>
+	<oidMustExist ruleid="apc_cooling" oid="1.3.6.1.4.1.318.1.1.27" istree="yes"/>
+	<oidMustMatch ruleid="airLeoGen2Series" oid=".1.3.6.1.2.1.1.2.0">
+		<valueList>
+			<value>.1.3.6.1.4.1.318.1.3.14.25</value>
+		</valueList>
+	</oidMustMatch>
+	<stringSensor ruleid="bios_version">
+			<type>string</type>
+			<sensorId>_BIOS_VERSION</sensorId>
+			<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.3.2.1.3.1.3</getOid>
+			</value>
+			<label>BIOS version</label>
+			<sensorSet>Generic</sensorSet>
+	</stringSensor>
+	<numSensor ruleid="room_air_temp">
+		<type>temp</type>
+		<sensorId>ROOM_AIR_TEMPERATURE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.2</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.2</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Room Air Temperature</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="outdoorAirTemp">
+		<type>temp</type>
+		<sensorId>OUTDOOR_AIR_TEMP</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.4</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.4</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Outdoor Air Temperature</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="supplyAirTemp">
+		<type>temp</type>
+		<sensorId>SUPPLY_AIR_TEMPERATURE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.6</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.6</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Supply Air Temperature</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="outdoorHumidity">
+		<type>humidity</type>
+		<sensorId>OUTDOOR_HUMIDITY</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.7</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.7</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Outdoor Humidity</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="room_air_relative_humidity">
+		<type>humidity</type>
+		<sensorId>ROOM_AIR_RELATIVE_HUMIDITY</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.8</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.8</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Room Air Relative Humidity</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="enthalpy">
+		<type>num</type>
+		<sensorId>ENTHALBY</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.10</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.10</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Enthalpy (kJ/kg)</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="circuit1EvaporatingPressure">
+		<type>pressure</type>
+		<sensorId>CIRCUIT_1_EVAPORATING_PRESSURE</sensorId>
+		<value>
+			<mult>
+				<op>
+					<div>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.11</getOid>
+						</op>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.11</getOid>
+						</op>
+					</div>
+				</op>
+				<op>6.89475729</op> <!-- (psi to kPa) -->
+			</mult>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Circuit 1 Evaporating Pressure</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="circuit1SuctionTemperature">
+		<type>temp</type>
+		<sensorId>CIRCUIT_1_SUCTION_TEMPERATURE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.14</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.14</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Circuit 1 Suction Temperature</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="circuit1EvaporatingTemperature">
+		<type>temp</type>
+		<sensorId>CIRCUIT_1_EVAPORATING_TEMPERATURE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.16</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.16</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Circuit 1 Evaporating Temperature</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="circuit1Superheat">
+		<type>temp</type>
+		<sensorId>CIRCUIT_1_SUPERHEAT</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.18</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.18</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Circuit 1 Superheat</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="evaporatorFanSpeed">
+		<type>pctofcapacity</type>
+		<sensorId>EVAPORATOR_FAN_SPEED</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.19</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.19</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Evaporating Fan(s) Speed</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="thermal_load_speed_request">
+		<type>pctofcapacity</type>
+		<sensorId>THERMAL_LOAD_SPEED_REQUEST</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.20</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.20</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Thermal Load Speed Request</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="inverter_speed_request">
+		<type>pctofcapacity</type>
+		<sensorId>INVERTER_SPEED_REQUEST</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.21</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.21</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Inverter Speed Request</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressor_inverter_voltage">
+		<type>voltage</type>
+		<sensorId>COMPRESSOR_INVERTER_VOLTAGE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.22</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.22</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Compressor Inverter Voltage</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressor_inverter_current">
+		<type>current</type>
+		<sensorId>COMPRESSOR_INVERTER_CURRENT</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.23</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.23</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Compressor Inverter Current</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressor_inverter_torque">
+		<type>num</type>
+		<sensorId>COMPRESSOR_INVERTER_TORQUE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.24</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.24</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Compressor Inverter Torque (N.M)</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressor_inverter_power">
+		<type>num/powerKW</type>
+		<sensorId>COMPRESSOR_INVERTER_POWER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.25</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.25</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Compressor Inverter Power</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressor_inverter_frequency">
+		<type>frequency</type>
+		<sensorId>COMPRESSOR_INVERTER_FREQUENCY</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.26</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.26</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Compressor Inverter Frequency</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="room_air_pressure">
+		<type>pressure</type>
+		<sensorId>ROOM_AIR_PRESSURE</sensorId>
+		<value>
+			<mult>
+				<op>
+					<div>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.28</getOid>
+						</op>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.28</getOid>
+						</op>
+					</div>
+				</op>
+				<op>0.001</op>
+			</mult>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Room Air Pressure</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="circuit1DischargePressure">
+		<type>pressure</type>
+		<sensorId>CIRCUIT_1_DISCHARGE_PRESSURE</sensorId>
+		<value>
+			<mult>
+				<op>
+					<div>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.31</getOid>
+						</op>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.31</getOid>
+						</op>
+					</div>
+				</op>
+				<op>6.89475729</op> <!-- (psi to kPa) -->
+			</mult>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Circuit 1 Discharge Pressure</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="evaporating_temperature">
+		<type>temp</type>
+		<sensorId>EVAPORATING_TEMPERATURE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.34</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.34</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Evaporating Temperature</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="condensing_temperature">
+		<type>temp</type>
+		<sensorId>CONDENSING_TEMPERATURE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.36</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.36</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Condensing Temperature</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="phase1_current">
+		<type>current</type>
+		<sensorId>PHASE1_CURRENT</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.37</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.37</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Current - Phase 1</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="phase2_current">
+		<type>current</type>
+		<sensorId>PHASE2_CURRENT</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.38</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.38</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Current - Phase 2</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="phase3_current">
+		<type>current</type>
+		<sensorId>PHASE3_CURRENT</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.39</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.39</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Current - Phase 3</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="neutral_current">
+		<type>current</type>
+		<sensorId>NEUTRAL_CURRENT</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.40</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.40</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Neutral Current</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="fan1_absorbed_power">
+		<type>powerW</type>
+		<sensorId>FAN1_ABSORBED_POWER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.41</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.41</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Fan 1 Absorbed Power</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="fan2_absorbed_power">
+		<type>powerW</type>
+		<sensorId>FAN2_ABSORBED_POWER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.42</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.42</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Fan 2 Absorbed Power</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="fan3_absorbed_power">
+		<type>powerW</type>
+		<sensorId>FAN3_ABSORBED_POWER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.43</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.43</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Fan 3 Absorbed Power</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="fan4_absorbed_power">
+		<type>powerW</type>
+		<sensorId>FAN4_ABSORBED_POWER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.44</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.44</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Fan 4 Absorbed Power</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="fan1_speed">
+		<type>num</type>
+		<units>rpm</units>
+		<sensorId>FAN1_SPEED</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.45</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.45</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Fan 1 Speed</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="fan2_speed">
+		<type>num</type>
+		<units>rpm</units>
+		<sensorId>FAN2_SPEED</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.46</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.46</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Fan 2 Speed</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="fan3_speed">
+		<type>num</type>
+		<units>rpm</units>
+		<sensorId>FAN3_SPEED</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.47</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.47</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Fan 3 Speed</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="fan4_speed">
+		<type>num</type>
+		<units>rpm</units>
+		<sensorId>FAN4_SPEED</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.48</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.48</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Fan 4 Speed</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="ultracapacitorRechargeTime">
+		<type>timeinsec</type>
+		<sensorId>ULTRACAPACITOR_Recharge_TIME</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.49</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.49</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Ultracapacitor Recharge Time</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="ultracapacitorInUseTime">
+		<type>timeinsec</type>
+		<sensorId>ULTRACAPACITOR_IN_USE_TIME</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.50</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.50</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Ultracapacitor In Use Time</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="coolingCapacity">
+		<type>pctofcapacity</type>
+		<sensorId>COOLING_CAPACITY</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.51</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.51</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Cooling Capacity</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="expansion_valve_position">
+		<type>num</type>
+		<sensorId>EXPANSION_VALVE_POSITION</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.52</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.52</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Expansion Valve Position (Step)</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="expansion_valve_opening">
+		<type>pctofcapacity</type>
+		<sensorId>EXPANSION_VALVE_OPENING</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.53</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.53</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Expansion Valve Opening</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="dehumidificationRunHours">
+		<type>runhours</type>
+		<sensorId>DEHUMIDIFICATION_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.54</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.54</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Dehumidification Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="standbyRunHours">
+		<type>runhours</type>
+		<sensorId>STANDBY_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.55</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.55</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Stand-By Mode Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="airFilterRunHours">
+		<type>runhours</type>
+		<sensorId>AIR_FILTER_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.56</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.56</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Air Filter Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressor1_run_hours">
+		<type>runhours</type>
+		<sensorId>COMPRESSOR1_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.57</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.57</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Compressor 1 Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressor_run_hours">
+		<type>runhours</type>
+		<sensorId>COMPRESSOR_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.58</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.58</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Compressor Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="heater1RunHours">
+		<type>runhours</type>
+		<sensorId>HEATER_1_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.59</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.59</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Heater 1 Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="heater_run_hours">
+		<type>runhours</type>
+		<sensorId>HEATER_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.60</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.60</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Heater Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="heater2RunHours">
+		<type>runhours</type>
+		<sensorId>HEATER_2_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.61</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.61</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Heater 2 Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="humidifierRunHours">
+		<type>runhours</type>
+		<sensorId>HUMIDIFIER_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.62</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.62</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Humidifier Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="unitRunHours">
+		<type>runhours</type>
+		<sensorId>UNIT_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.63</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.63</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Unit Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressorRunMinutes">
+		<type>timeinmin</type>
+		<sensorId>COMPRESSOR_RUN_MINUTES</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.70</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.70</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Compressor Run Minutes</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="electricalHeaterRunMinutes">
+		<type>timeinmin</type>
+		<sensorId>ELECTRICAL_HEATER_RUN_MINUTES</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.71</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.71</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Electrical Heater Run Minutes</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="freeCoolingRunHours">
+		<type>runhours</type>
+		<sensorId>FREE_COOLING_RUN_HOURS</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.72</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.72</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Freecooling Run Hours</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="active_total_energy">
+		<type>num/kwatthr</type>
+		<sensorId>ACTIVE_TOTAL_ENERGY</sensorId>
+		<value>
+			<mult>
+				<op>
+					<div>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.73</getOid>
+						</op>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.73</getOid>
+						</op>
+					</div>
+				</op>
+				<op>0.001</op> <!-- (WH to kKWH) -->
+			</mult>
+    </value>
+		<label>Total Active Energy</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="reactive_total_energy">
+		<type>num/kVARhr</type>
+		<sensorId>REACTIVE_TOTAL_ENERGY</sensorId>
+		<value>
+			<mult>
+				<op>
+					<div>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.74</getOid>
+						</op>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.74</getOid>
+						</op>
+					</div>
+				</op>
+				<op>0.001</op> <!-- (VARH to kVARh) -->
+			</mult>
+		</value>
+		<label>Total Reactive Energy</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="emissionOfCO2">
+		<type>num</type>
+		<sensorId>EMISSION_OF_CO2</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.76</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.76</getOid>
+				</op>
+			</div>
+		</value>
+		<label>CO2 Emissions (Kg)</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="line1-2_voltage">
+		<type>voltage</type>
+		<sensorId>LINE1-2_VOLTAGE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.77</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.77</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Voltage - Phase 1-2</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="line2-3_voltage">
+		<type>voltage</type>
+		<sensorId>LINE2-3_VOLTAGE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.78</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.78</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Voltage - Phase 2-3</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="line3-1_voltage">
+		<type>voltage</type>
+		<sensorId>LINE3-1_VOLTAGE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.79</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.79</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Voltage - Phase 3-1</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+  <numSensor ruleid="line1-N_voltage">
+		<type>voltage</type>
+		<sensorId>LINE1-N_VOLTAGE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.80</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.80</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Voltage - Phase 1-N</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="line2-N_voltage">
+		<type>voltage</type>
+		<sensorId>LINE2-N_VOLTAGE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.81</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.81</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Voltage - Phase 2-N</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="line3-N_voltage">
+		<type>voltage</type>
+		<sensorId>LINE3-N_VOLTAGE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.82</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.82</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Voltage - Phase 3-N</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="supply_frequency">
+		<type>frequency</type>
+		<sensorId>SUPPLY_FREQUENCY</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.83</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.83</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Supply Frequency</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="active_total_power">
+		<type>num/powerKW</type>
+		<sensorId>ACTIVE_TOTAL_POWER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.84</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.84</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Total Active Power</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="reactive_total_power">
+		<type>num/powerKVAR</type>
+		<sensorId>REACTIVE_TOTAL_POWER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.85</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.85</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Total Reactive Power</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="apparent_total_power">
+		<type>num/powerKVA</type>
+		<sensorId>APPARENT_TOTAL_POWER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.86</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.86</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>Total Apparent Power</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="total_power_factor">
+		<type>num/powerfactor</type>
+		<sensorId>TOTAL_POWER_FACTOR</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.87</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.87</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.01</valueInc>
+		<label>Total Power Factor</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="lan_average_air_temperature">
+		<type>temp</type>
+		<sensorId>LAN_AVERAGE_AIR_TEMPERATURE</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.94</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.94</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>LAN Average Room Air Temperature</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="lan_average_relative_humidity">
+		<type>humidity</type>
+		<sensorId>LAN_AVERAGE_RELATIVE_HUMIDITY</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.95</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.95</getOid>
+				</op>
+			</div>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>LAN Average Relative Humidity</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressorSpeed">
+		<type>num</type>
+		<units>rpm</units>
+		<sensorId>COMPRESSOR_SPEED</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.96</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.96</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Compressor Speed</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="room_air_relative_humidity_Adjusted">
+		<type>humidity</type>
+		<sensorId>ROOM_AIR_RELATIVE_HUMIDITY_ADJUSTED</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.97</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.97</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Room Air Relative Humidity (Adjusted)</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="unit_cycle_counter">
+		<type>num</type>
+		<sensorId>UNIT_CYCLE_COUNTER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.98</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.98</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Unit Cycle Counter</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressor1_cycle_counter">
+		<type>num</type>
+		<sensorId>COMPRESSOR1_CYCLE_COUNTER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.99</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.99</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Compressor 1 Cycle Counter</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="compressor_cycle_counter">
+		<type>num</type>
+		<sensorId>COMPRESSOR_CYCLE_COUNTER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.100</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.100</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Compressor Cycle Counter</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="heater1_cycle_counter">
+		<type>num</type>
+		<sensorId>HEATER1_CYCLE_COUNTER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.101</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.101</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Heater 1 Cycle Counter</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="heater_cycle_counter">
+		<type>num</type>
+		<sensorId>HEATER_CYCLE_COUNTER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.102</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.102</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Heater Cycle Counter</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="heater2_cycle_counter">
+		<type>num</type>
+		<sensorId>HEATER2_CYCLE_COUNTER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.103</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.103</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Heater 2 Cycle Counter</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<numSensor ruleid="humidifier_cycle_counter">
+		<type>num</type>
+		<sensorId>HUMIDIFIER_CYCLE_COUNTER</sensorId>
+		<value>
+			<div>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.104</getOid>
+				</op>
+				<op>
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.5.1.104</getOid>
+				</op>
+			</div>
+		</value>
+		<label>Humidifier Cycle Counter</label>
+		<sensorSet>Status - Analog</sensorSet>
+	</numSensor>
+	<stateSensor ruleid="fansStatus">
+		<type>state</type>
+		<sensorId>FANS_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.1</getOid>
+			</mapValue>
+		</value>
+		<label>System / Fans Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="compressor1Status">
+		<type>state</type>
+		<sensorId>COMPRESSOR_1_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.2</getOid>
+			</mapValue>
+		</value>
+		<label>Compressor 1 Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="compressorStatus">
+		<type>state</type>
+		<sensorId>COMPRESSOR_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.3</getOid>
+			</mapValue>
+		</value>
+		<label>Compressor Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="electrical_heater_status">
+		<type>state</type>
+		<sensorId>ELECTRICAL_HEATER_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.4</getOid>
+			</mapValue>
+		</value>
+		<label>Electrical Heater Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="electrical_heater1_status">
+		<type>state</type>
+		<sensorId>ELECTRICAL_HEATER1_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.5</getOid>
+			</mapValue>
+		</value>
+		<label>Electrical Heater 1 Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="electrical_heater2_status">
+		<type>state</type>
+		<sensorId>ELECTRICAL_HEATER2_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.6</getOid>
+			</mapValue>
+		</value>
+		<label>Electrical Heater 2 Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="heating_status">
+		<type>state</type>
+		<sensorId>HEATING_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.7</getOid>
+			</mapValue>
+		</value>
+		<label>Heating Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="stage_heating">
+		<type>state</type>
+		<sensorId>STAGE_HEATING</sensorId>
+		<value>
+			<mapValue mapid="stageHeating-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.8</getOid>
+			</mapValue>
+		</value>
+		<label>Stage Heating</label>
+		<enum>stageHeating-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="dehumidification_status">
+		<type>state</type>
+		<sensorId>DEHUMIDIFICATION_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.9</getOid>
+			</mapValue>
+		</value>
+		<label>Dehumidification Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="humidification_status">
+		<type>state</type>
+		<sensorId>HUMIDIFICATION_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.10</getOid>
+			</mapValue>
+		</value>
+		<label>Humidification Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="request">
+		<type>state</type>
+		<sensorId>REQUEST</sensorId>
+		<value>
+			<mapValue mapid="requestStatus-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.11</getOid>
+			</mapValue>
+		</value>
+		<label>Request</label>
+		<enum>requestStatus-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="compressorMotorStatus">
+		<type>state</type>
+		<sensorId>COMPRESSOR_MOTOR_STATUS</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.12</getOid>
+			</mapValue>
+		</value>
+		<label>Compressor Motor Status</label>
+		<enum>stopRunning-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="emergencyWorking">
+		<type>state</type>
+		<sensorId>EMERGENCY_WORKING</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.13</getOid>
+			</mapValue>
+		</value>
+		<label>Emergency Working Status</label>
+		<enum>onOff-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="linea_power_source_available">
+		<type>state</type>
+		<sensorId>LINEA_POWER_SOURCE_AVAILABLE</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.14</getOid>
+			</mapValue>
+		</value>
+		<label>Line A Power Source Available</label>
+		<enum>noyes-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="linea_power_source_active">
+		<type>state</type>
+		<sensorId>LINEA_POWER_SOURCE_ACTIVE</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.15</getOid>
+			</mapValue>
+		</value>
+		<label>Line A Power Source Active</label>
+		<enum>noyes-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="lineb_power_source_available">
+		<type>state</type>
+		<sensorId>LINEB_POWER_SOURCE_AVAILABLE</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.16</getOid>
+			</mapValue>
+		</value>
+		<label>Line B Power Source Available</label>
+		<enum>noyes-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="lineb_power_source_active">
+		<type>state</type>
+		<sensorId>LINEB_POWER_SOURCE_ACTIVE</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.17</getOid>
+			</mapValue>
+		</value>
+		<label>Line B Power Source Active</label>
+		<enum>noyes-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="activeFeed">
+		<type>state</type>
+		<sensorId>ACTIVE_FEED</sensorId>
+		<value>
+			<mapValue mapid="activeFeed-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.18</getOid>
+			</mapValue>
+		</value>
+		<label>Active Feed</label>
+		<enum>activeFeed-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="forcedMode">
+		<type>state</type>
+		<sensorId>FORCED_MODE</sensorId>
+		<value>
+			<mapValue mapid="1state-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.74</getOid>
+			</mapValue>
+		</value>
+		<label>Unit on Forced Mode</label>
+		<enum>forcedMode-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="ultracapacitor_status">
+		<type>state</type>
+		<sensorId>ULTRACAPACITOR_STATUS</sensorId>
+		<value>
+			<mapValue mapid="UCAP-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.147</getOid>
+			</mapValue>
+		</value>
+		<label>Ultracapacitor Status</label>
+		<enum>UCAP-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="envelope_operating_zone">
+		<type>state</type>
+		<sensorId>ENVELOPE_OPERATING_ZONE</sensorId>
+		<value>
+			<mapValue mapid="operatingZone-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.148</getOid>
+			</mapValue>
+		</value>
+		<label>Envelope Operating Zone</label>
+		<enum>operatingZone-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="expansion_valve_status">
+		<type>state</type>
+		<sensorId>EXPANSION_VALVE_STATUS</sensorId>
+		<value>
+			<mapValue mapid="expansionValve-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.149</getOid>
+			</mapValue>
+		</value>
+		<label>Expansion Valve Status</label>
+		<enum>expansionValve-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="envelope_operating_zone_vzh">
+		<type>state</type>
+		<sensorId>ENVELOPE_OPERATING_ZONE_VZH</sensorId>
+		<value>
+			<mapValue mapid="operatingZoneVZH-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.6.2.2.1.4.1.1</getOid>
+			</mapValue>
+		</value>
+		<label>Envelope Operating Zone VZH 1</label>
+		<enum>operatingZoneVZH-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+	<stateSensor ruleid="unit_control_mode">
+		<type>state</type>
+		<sensorId>Unit_Control_Mode</sensorId>
+		<value>
+			<mapValue mapid="controlMode-vm">
+				<getOid>1.3.6.1.4.1.318.1.1.27.1.6.2.2.1.4.1.2</getOid>
+			</mapValue>
+		</value>
+		<label>Unit ON/OFF Control Mode</label>
+		<enum>controlMode-em</enum>
+		<sensorSet>Status - Discrete</sensorSet>
+	</stateSensor>
+
+
+	<valueMap ruleid="1state-vm">
+		<valueIn>0</valueIn><valueOut>0</valueOut>
+		<valueIn>1</valueIn><valueOut>1</valueOut>
+		<valueIn>*</valueIn><valueOut>0</valueOut>
+	</valueMap>
+	<valueMap ruleid="stageHeating-vm">
+		<valueIn>0</valueIn><valueOut>0</valueOut>
+		<valueIn>1</valueIn><valueOut>1</valueOut>
+		<valueIn>2</valueIn><valueOut>2</valueOut>
+		<valueIn>3</valueIn><valueOut>3</valueOut>
+	</valueMap>
+	<valueMap ruleid="UCAP-vm">
+		<valueIn>0</valueIn><valueOut>0</valueOut>
+		<valueIn>1</valueIn><valueOut>1</valueOut>
+		<valueIn>2</valueIn><valueOut>2</valueOut>
+	</valueMap>
+	<valueMap ruleid="requestStatus-vm">
+		<valueIn>0</valueIn><valueOut>0</valueOut>
+		<valueIn>1</valueIn><valueOut>1</valueOut>
+		<valueIn>2</valueIn><valueOut>2</valueOut>
+	</valueMap>
+	<valueMap ruleid="activeFeed-vm">
+		<valueIn>0</valueIn><valueOut>0</valueOut>
+		<valueIn>1</valueIn><valueOut>1</valueOut>
+		<valueIn>2</valueIn><valueOut>2</valueOut>
+		<valueIn>3</valueIn><valueOut>3</valueOut>
+	</valueMap>
+	<valueMap ruleid="operatingZone-vm">
+		<valueIn>0</valueIn><valueOut>0</valueOut>
+		<valueIn>1</valueIn><valueOut>1</valueOut>
+		<valueIn>2</valueIn><valueOut>2</valueOut>
+		<valueIn>3</valueIn><valueOut>3</valueOut>
+		<valueIn>4</valueIn><valueOut>4</valueOut>
+		<valueIn>5</valueIn><valueOut>5</valueOut>
+		<valueIn>6</valueIn><valueOut>6</valueOut>
+		<valueIn>7</valueIn><valueOut>7</valueOut>
+		<valueIn>8</valueIn><valueOut>8</valueOut>
+		<valueIn>9</valueIn><valueOut>9</valueOut>
+		<valueIn>10</valueIn><valueOut>10</valueOut>
+	</valueMap>
+	<valueMap ruleid="expansionValve-vm">
+		<valueIn>0</valueIn><valueOut>0</valueOut>
+		<valueIn>1</valueIn><valueOut>1</valueOut>
+		<valueIn>2</valueIn><valueOut>2</valueOut>
+		<valueIn>3</valueIn><valueOut>3</valueOut>
+		<valueIn>4</valueIn><valueOut>4</valueOut>
+		<valueIn>5</valueIn><valueOut>5</valueOut>
+		<valueIn>6</valueIn><valueOut>6</valueOut>
+		<valueIn>7</valueIn><valueOut>7</valueOut>
+		<valueIn>8</valueIn><valueOut>8</valueOut>
+		<valueIn>9</valueIn><valueOut>9</valueOut>
+		<valueIn>10</valueIn><valueOut>10</valueOut>
+		<valueIn>11</valueIn><valueOut>11</valueOut>
+		<valueIn>12</valueIn><valueOut>12</valueOut>
+		<valueIn>13</valueIn><valueOut>13</valueOut>
+		<valueIn>14</valueIn><valueOut>14</valueOut>
+		<valueIn>15</valueIn><valueOut>15</valueOut>
+		<valueIn>16</valueIn><valueOut>16</valueOut>
+		<valueIn>17</valueIn><valueOut>17</valueOut>
+	</valueMap>
+	<valueMap ruleid="operatingZoneVZH-vm">
+		<valueIn>0</valueIn><valueOut>0</valueOut>
+		<valueIn>1</valueIn><valueOut>1</valueOut>
+		<valueIn>2</valueIn><valueOut>2</valueOut>
+		<valueIn>3</valueIn><valueOut>3</valueOut>
+		<valueIn>4</valueIn><valueOut>4</valueOut>
+		<valueIn>5</valueIn><valueOut>5</valueOut>
+		<valueIn>6</valueIn><valueOut>6</valueOut>
+		<valueIn>7</valueIn><valueOut>7</valueOut>
+		<valueIn>8</valueIn><valueOut>8</valueOut>
+		<valueIn>9</valueIn><valueOut>9</valueOut>
+		<valueIn>10</valueIn><valueOut>10</valueOut>
+	</valueMap>
+	<valueMap ruleid="controlMode-vm">
+		<valueIn>0</valueIn><valueOut>0</valueOut>
+		<valueIn>1</valueIn><valueOut>1</valueOut>
+		<valueIn>2</valueIn><valueOut>2</valueOut>
+		<valueIn>3</valueIn><valueOut>3</valueOut>
+		<valueIn>4</valueIn><valueOut>4</valueOut>
+		<valueIn>5</valueIn><valueOut>5</valueOut>
+	</valueMap>
+
+	<enumMap ruleid="onOff-em">
+		<label>Off</label>
+		<label>On</label>
+	</enumMap>
+	<enumMap ruleid="requestStatus-em">
+		<label>Stationary</label>
+		<label>Increase</label>
+		<label>Reduce</label>
+	</enumMap>
+	<enumMap ruleid="stageHeating-em">
+		<label>Off</label>
+		<label>Stage 1</label>
+		<label>Stage 2</label>
+		<label>Stage 3</label>
+	</enumMap>
+	<enumMap ruleid="okAlarm-em">
+		<label>OK</label>
+		<label>Alarm</label>
+	</enumMap>
+	<enumMap ruleid="noyes-em">
+		<label>No</label>
+		<label>Yes</label>
+	</enumMap>
+	<enumMap ruleid="stopRunning-em">
+		<label>Stop</label>
+		<label>Running</label>
+	</enumMap>
+	<enumMap ruleid="UCAP-em">
+		<label>Power Supply Fail (UCAP On Working)</label>
+		<label>UCAP in Charge</label>
+		<label>UCAP Full Charge</label>
+	</enumMap>
+	<enumMap ruleid="forcedMode-em">
+		<label>Normal</label>
+		<label>Forced Mode</label>
+	</enumMap>
+	<enumMap ruleid="activeFeed-em">
+		<label>Off</label>
+		<label>Line A</label>
+		<label>Line B</label>
+		<label>Line A-B</label>
+	</enumMap>
+	<enumMap ruleid="operatingZone-em">
+		<label>None</label>
+		<label>ZONE 01 - Inside of Envelope</label>
+		<label>ZONE 02 - Inside of Envelope</label>
+		<label>ZONE 03 - Inside of Envelope</label>
+		<label>ZONE 04 - Outside of Envelope</label>
+		<label>ZONE 05 - Outside of Envelope</label>
+		<label>ZONE 06 - Outside of Envelope</label>
+		<label>ZONE 07 - Outside of Envelope</label>
+		<label>ZONE 08 - Outside of Envelope</label>
+		<label>ZONE 09 - Outside of Envelope</label>
+		<label>ZONE 10 - Outside of Envelope</label>
+	</enumMap>
+	<enumMap ruleid="expansionValve-em">
+		<label>N/A</label>
+		<label>Closed</label>
+		<label>Closed</label>
+		<label>Stand-By</label>
+		<label>Pos</label>
+		<label>Pos</label>
+		<label>Wait</label>
+		<label>On</label>
+		<label>On</label>
+		<label>On</label>
+		<label>On</label>
+		<label>On</label>
+		<label>On</label>
+		<label>On</label>
+		<label>Init</label>
+		<label>On</label>
+		<label>Pos</label>
+		<label>Pos</label>
+	</enumMap>
+	<enumMap ruleid="operatingZoneVZH-em">
+		<label>None</label>
+		<label>None</label>
+		<label>Low Evaporating Temperature</label>
+		<label>High Condensing Temperature</label>
+		<label>Generic Out Of Envelope</label>
+		<label>Low Evaporating Temperature</label>
+		<label>Low Condensing Temperature</label>
+		<label>Low Condensing Temperature</label>
+		<label>High Condensing Temperature</label>
+		<label>High Condensing Temperature</label>
+		<label>High Condensing Temperature</label>
+	</enumMap>
+	<enumMap ruleid="controlMode-em">
+		<label>Standby</label>
+		<label>On</label>
+		<label>Forced Off</label>
+		<label>Forced On</label>
+		<label>Remote On/Off Control</label>
+		<label>Group Control</label>
+	</enumMap>
+
+</device>
+</APC_DDF>

@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="apc_ddf_1_6.xsd"
 	ddfid="denco"
-	ddfname="Denco [pcoWeb]"
+	ddfname="Denco [pcoWeb][SNMP]"
 	ddfversion="3"
 	canremove="yes">
   <schemaVersion>1.6</schemaVersion>

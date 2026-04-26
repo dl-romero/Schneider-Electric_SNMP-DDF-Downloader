@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <!-- IDAV_SNMP_CCU -->
-<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-        ddfid ="uniflair_IDAV_SNMP_CCU_imperial" ddfname="IDAV_SNMP_CCU_Imperial_Version"
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="uniflair_IDAV_SNMP_CCU_imperial"
+  ddfname="Uniflair IDAV CCU [pcoWeb][SNMP][Imperial units]"
         ddfversion ="1" canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 

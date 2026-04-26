@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="nti_enviromux_e_1w"
+	ddfname="NTI ENVIROMUX E-1W"
+	ddfversion="2"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+
+	<device deviceid="nti_enviromux_e_1w">
+		<!-- 
+			The E-1W and E-MICRO-T return the same OIDs. Even though the E-1W is not equipped to support the intSensors OID table (.1.3.6.1.4.1.3699.1.1.12.1.1.x),
+			it still returns these OIDs. These oidMustMatch rules check to see if the OIDs for internal temp, humidity, and dew point all return "0" to avoid DDFs
+			overlapping one another.
+		-->
+		<oidMustMatch ruleid="microTCheck1" oid=".1.3.6.1.4.1.3699.1.1.12.1.1.1.1.4.1"><valueList><value>0</value></valueList></oidMustMatch>
+		<oidMustMatch ruleid="microTCheck2" oid=".1.3.6.1.4.1.3699.1.1.12.1.1.1.1.4.2"><valueList><value>0</value></valueList></oidMustMatch>
+		<oidMustMatch ruleid="microTCheck3" oid=".1.3.6.1.4.1.3699.1.1.12.1.1.1.1.4.3"><valueList><value>0</value></valueList></oidMustMatch>
+
+		<setProductData ruleid="vendordata" field="vendor">NTI</setProductData>
+		<setProductData ruleid="modeldata" field="model">ENVIROMUX E-1W</setProductData>
+		<setProductData ruleid="typedata" field="type">Environmental Monitor</setProductData>
+
+
+		<stateSensor ruleid="dig_input_value" index=".1.3.6.1.4.1.3699.1.1.12.1.3.1.1.1">
+			<type>state</type>
+			<sensorId>DIG_INPUT_VALUE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="closeOpen-vm">
+					<getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.3.1.1.3</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.3.1.1.2</getRowOid> Status</label>
+			<enum>closeOpen-em</enum>
+			<sensorSet>General</sensorSet>
+		</stateSensor>
+		<valueMap ruleid="closeOpen-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="closeOpen-em">
+			<label>Close</label>
+			<label>Open</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<valueMap ruleid="skip_null_alarm">
+			<valueIn>0</valueIn><valueOut>[false]</valueOut>
+			<valueIn>*</valueIn><valueOut>[true]</valueOut>
+		</valueMap>
+
+		<alarmFlags2 ruleid="alert_status_alarm" index=".1.3.6.1.4.1.3699.1.1.12.1.5.1.1.1">			
+			<rowTest>
+				<mapValue mapid="skip_null_alarm"><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.2</getRowOid></mapValue> <!-- confirm alarm is enabled -->
+			</rowTest>
+			<value><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.7</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Entering Critical Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Entering Critical Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Entering Critical alarm condition exists.</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Entering Critical alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Critical Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Critical Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Critical alarm condition exists.</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Critical alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Alarm Awaiting Acknowledgment/Dismissal</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Alarm Awaiting Acknowledgment/Dismissal Cleared</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> alarm awaiting acknowledgment/dismissal.</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> alarm awaiting acknowledgment/dismissal condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Disconnected Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Disconnected Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Disconnected alarm condition exists.</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3699.1.1.12.1.5.1.1.3</getRowOid> Disconnected alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+	</device>
+</APC_DDF>

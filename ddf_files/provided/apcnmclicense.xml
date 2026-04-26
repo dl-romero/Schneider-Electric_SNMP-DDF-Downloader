@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="apc_ddf_1_6.xsl"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="apcnmclicense"
+	ddfname="APC NMC Licensing"
+	ddfversion="1"
+	canremove="yes">
+
+	<!--
+		SOURCE
+		/snmp/resources/mibs/apc/powernet442X.mib
+		PowerNet MIB 4.4.2.X | 08 Jan 2022
+
+		SCOPE
+		.1.3.6.1.4.1.318.1.4.2.14.* | apc/products/experimental/apcDiscovery/apcDiscoveryLicenseTable
+	-->
+
+	<schemaVersion>1.6</schemaVersion>
+	<device deviceid="apclicense">
+		<oidMustExist ruleid="has_licenseTable" oid=".1.3.6.1.4.1.318.1.4.2.14" istree="yes"/>
+
+		<valueMap ruleid="apcDiscoveryDeviceLicenseLevel-vm">
+			<valueIn>None</valueIn><valueOut>0</valueOut>
+			<valueIn>Basic</valueIn><valueOut>1</valueOut>
+			<valueIn>Standard</valueIn><valueOut>2</valueOut>
+			<valueIn>Premium</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>4</valueOut>
+		</valueMap>
+		<enumMap ruleid="apcDiscoveryDeviceLicenseLevel-em">
+			<label>None</label>
+			<label>Basic</label>
+			<label>Standard</label>
+			<label>Premium</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<stateSensor ruleid="apcDiscoveryDeviceLicenseLevel" index=".1.3.6.1.4.1.318.1.4.2.14.1.1">
+			<type>state</type>
+			<sensorId>LICENSE_<rowIndex/>_LEVEL</sensorId>
+			<value>
+				<mapValue mapid="apcDiscoveryDeviceLicenseLevel-vm">
+				<getRowOid>.1.3.6.1.4.1.318.1.4.2.14.1.2</getRowOid>
+				</mapValue>
+			</value>
+			<enum>apcDiscoveryDeviceLicenseLevel-em</enum>
+			<label>License <getRowOid>.1.3.6.1.4.1.318.1.4.2.14.1.1</getRowOid> - Level</label>
+			<sensorSet>NMC Licensing</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="apcDiscoveryDeviceLicenseStatus-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>4</valueOut>
+		</valueMap>
+		<enumMap ruleid="apcDiscoveryDeviceLicenseStatus-em">
+			<label>Default</label>
+			<label>Processing</label>
+			<label>Active</label>
+			<label>Expired</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<stateSensor ruleid="apcDiscoveryDeviceLicenseStatus" index=".1.3.6.1.4.1.318.1.4.2.14.1.1">
+			<type>state</type>
+			<sensorId>LICENSE_<rowIndex/>_STATUS</sensorId>
+			<value>
+				<mapValue mapid="apcDiscoveryDeviceLicenseStatus-vm">
+				<formatNumber printffmt="%1.0f">
+				<getRowOid>.1.3.6.1.4.1.318.1.4.2.14.1.4</getRowOid>
+				</formatNumber>
+				</mapValue>
+			</value>
+			<enum>apcDiscoveryDeviceLicenseStatus-em</enum>
+			<label>License <getRowOid>.1.3.6.1.4.1.318.1.4.2.14.1.1</getRowOid> - Status</label>
+			<sensorSet>NMC Licensing</sensorSet>
+		</stateSensor>
+  </device>
+</APC_DDF>

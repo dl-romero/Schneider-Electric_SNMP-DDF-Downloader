@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="emicon_ed-x_642_dkc"
-	ddfname="Emicon ED.X 642 DKc"
+	ddfname="Emicon ED.X 642 DKc [pcoWeb][SNMP]"
 	ddfversion="1"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>

@@ -1,0 +1,2412 @@
+<?xml version="1.0"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid ="eaton_flex_pdu"
+  ddfname="Eaton Flex PDU"
+  ddfversion="3"
+  canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+
+    <device deviceid="eaton_flex_pdu_header">
+        <oidMustExist ruleid="eaton_flex_pdu_header_exists" oid=".1.3.6.1.4.1.534.6.6.8.1" istree="yes"/>
+
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+        <setProductData ruleid="vendordata" field="vendor">Eaton</setProductData>
+        <setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+        <setDefaultLabel><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid></setDefaultLabel>
+        <setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.534.6.6.8.1.2.0</getOid></setProductData>
+        <setProductData ruleid="appversiondata" field="appversion"><getOid>.1.3.6.1.4.1.534.6.6.8.1.3.0</getOid></setProductData>
+
+        <!-- Checking mVoltageB for a valid voltage value. If 0, assume 1 phase. Otherwise, assume 3 phase. -->
+        <setProductData ruleid="inputphasecount" field="inputphasecount">
+          <mapValue mapid="phaseCount-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.2.11.0</getOid></mapValue>
+        </setProductData>
+        <setProductData ruleid="outputphasecount" field="outputphasecount">
+          <mapValue mapid="phaseCount-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.2.11.0</getOid></mapValue>
+        </setProductData>
+        <valueMap ruleid="phaseCount-vm">
+            <valueIn>0</valueIn><valueOut>1</valueOut>
+            <valueIn>*</valueIn><valueOut>3</valueOut>
+        </valueMap>
+    </device>
+
+    <device deviceid="eaton_flex_pdu_host">
+        <oidMustExist ruleid="eaton_flex_pdu_exists" oid=".1.3.6.1.4.1.534.6.6.8" istree="yes"/>
+        <oidMustNotMatch ruleid="host_pdu_check" oid=".1.3.6.1.4.1.534.6.6.8.12.1.0">
+            <valueList>
+                <value>0</value>
+            </valueList>
+        </oidMustNotMatch>
+
+        <valueMap ruleid="nullSensorCheck-vm">
+            <valueIn>0</valueIn><valueOut>[false]</valueOut>
+            <valueIn>*</valueIn><valueOut>[true]</valueOut>
+        </valueMap>
+
+        <numSensor ruleid="mInputVoltage">
+            <type>voltage</type>
+            <sensorId>_INPUT_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.1.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Input Voltage</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mVoltageA">
+            <type>voltage</type>
+            <sensorId>RPDU_OUTPUT_VOLTAGE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.6.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Voltage Phase 1</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mVoltageB">
+            <type>voltage</type>
+            <sensorId>RPDU_OUTPUT_VOLTAGE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.11.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Voltage Phase 2</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mVoltageC">
+            <type>voltage</type>
+            <sensorId>RPDU_OUTPUT_VOLTAGE_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.16.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Voltage Phase 3</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mCurrentA">
+            <type>amperage</type>
+            <sensorId>_OUTPUT_CURRENT_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.1.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Current Phase 1</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mCurrentB">
+            <type>amperage</type>
+            <sensorId>_OUTPUT_CURRENT_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.6.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Current Phase 2</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mCurrentC">
+            <type>amperage</type>
+            <sensorId>_OUTPUT_CURRENT_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.11.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Current Phase 3</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mActPowerA">
+            <type>powerW</type>
+            <sensorId>_RPDU_OUTPUT_POWER_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.1.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Active Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mActPowerB">
+            <type>powerW</type>
+            <sensorId>_RPDU_OUTPUT_POWER_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.6.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Active Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mActPowerC">
+            <type>powerW</type>
+            <sensorId>_RPDU_OUTPUT_POWER_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.11.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Active Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mAppPowerA">
+            <type>powerVA</type>
+            <sensorId>_RPDU_OUTPUT_APPARENT_POWER_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.1.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Apparent Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mAppPowerB">
+            <type>powerVA</type>
+            <sensorId>_RPDU_OUTPUT_APPARENT_POWER_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.6.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Apparent Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mAppPowerC">
+            <type>powerVA</type>
+            <sensorId>_RPDU_OUTPUT_APPARENT_POWER_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.11.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Apparent Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mEnergyA">
+            <type>num/kwatthr</type>
+            <sensorId>ENERGY_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.1.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Energy Phase 1</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mEnergyB">
+            <type>num/kwatthr</type>
+            <sensorId>ENERGY_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.6.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Energy Phase 2</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mEnergyC">
+            <type>num/kwatthr</type>
+            <sensorId>ENERGY_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.11.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Energy Phase 3</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mTemperature">
+            <rowTest>
+                <mapValue mapid="nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.6.0</getOid></mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>_EM_TEMP_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.6.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mHumidity">
+            <rowTest>
+                <mapValue mapid="nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.11.0</getOid></mapValue>
+            </rowTest>
+            <type>humidity</type>
+            <sensorId>_EM_HUMIDITY_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.11.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mTotalActPower">
+            <type>powerW</type>
+            <sensorId>_OUTPUT_POWER_TOTAL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.1.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Total Active Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="mTotalAppPower">
+            <type>powerVA</type>
+            <sensorId>_OUTPUT_APPARENT_POWER_TOTAL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.6.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Total Apparent Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="mVolAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.1.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mVolAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.6.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mVolAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.11.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mCurAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.1.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mCurAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.6.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mCurAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.11.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mTemAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.1.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mHumAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.6.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> Low Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> High Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+    </device>
+
+    <device deviceid="eaton_flex_pdu_s1">
+        <oidMustExist ruleid="eaton_flex_pdu_exists" oid=".1.3.6.1.4.1.534.6.6.8" istree="yes"/>
+        <oidMustNotMatch ruleid="s1_pdu_check" oid=".1.3.6.1.4.1.534.6.6.8.12.2.0">
+            <valueList>
+                <value>0</value>
+            </valueList>
+        </oidMustNotMatch>
+
+        <numSensor ruleid="s1InputVoltage">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S1_INPUT_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.2.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Input Voltage</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1VoltageA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S1_VOLTAGE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.7.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Voltage Phase 1</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1VoltageB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S1_VOLTAGE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.12.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Voltage Phase 2</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1VoltageC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S1_VOLTAGE_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.17.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Voltage Phase 3</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1CurrentA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S1_CURRENT_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.2.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Current Phase 1</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1CurrentB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S1_CURRENT_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.7.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Current Phase 2</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1CurrentC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S1_CURRENT_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.12.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Current Phase 3</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1ActPowerA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S1_POWER_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.2.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Active Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1ActPowerB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S1_POWER_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.7.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Active Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1ActPowerC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S1_POWER_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.12.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Active Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1AppPowerA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S1_POWER_VA_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.2.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Apparent Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1AppPowerB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S1_POWER_VA_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.7.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Apparent Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1AppPowerC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S1_POWER_VA_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.12.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Apparent Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1EnergyA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S1_ENERGY_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.2.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Energy Phase 1</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1EnergyB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S1_ENERGY_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.7.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Energy Phase 2</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1EnergyC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S1_ENERGY_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.12.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Energy Phase 3</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1Temperature">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.7.0</getOid></mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>_EM_TEMP_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.7.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1Humidity">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.12.0</getOid></mapValue>
+            </rowTest>
+            <type>humidity</type>
+            <sensorId>_EM_HUMIDITY_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.12.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1TotalActPower">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_OUTPUT_POWER_TOTAL_S1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.2.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Total Active Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s1TotalAppPower">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.2.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_OUTPUT_APPARENT_POWER_TOTAL_S1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.7.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Total Apparent Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="s1VolAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.2.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s1VolAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.7.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s1VolAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.12.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s1CurAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.2.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s1CurAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.7.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s1CurAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.12.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s1TemAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.2.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s1HumAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.7.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) Low Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 1) High Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+    </device>
+
+    <device deviceid="eaton_flex_pdu_s2">
+        <oidMustExist ruleid="eaton_flex_pdu_exists" oid=".1.3.6.1.4.1.534.6.6.8" istree="yes"/>
+        <oidMustNotMatch ruleid="s2_pdu_check" oid=".1.3.6.1.4.1.534.6.6.8.12.3.0">
+            <valueList>
+                <value>0</value>
+            </valueList>
+        </oidMustNotMatch>
+
+        <numSensor ruleid="s2InputVoltage">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S2_INPUT_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.3.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Input Voltage</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2VoltageA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S2_VOLTAGE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.8.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Voltage Phase 1</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2VoltageB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S2_VOLTAGE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.13.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Voltage Phase 2</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2VoltageC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S2_VOLTAGE_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.18.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Voltage Phase 3</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2CurrentA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S2_CURRENT_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.3.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Current Phase 1</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2CurrentB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S2_CURRENT_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.8.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Current Phase 2</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2CurrentC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S2_CURRENT_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.13.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Current Phase 3</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2ActPowerA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S2_POWER_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.3.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Active Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2ActPowerB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S2_POWER_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.8.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Active Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2ActPowerC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S2_POWER_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.13.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Active Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2AppPowerA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S2_POWER_VA_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.3.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Apparent Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2AppPowerB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S2_POWER_VA_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.8.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Apparent Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2AppPowerC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S2_POWER_VA_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.13.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Apparent Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2EnergyA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S2_ENERGY_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.3.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Energy Phase 1</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2EnergyB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S2_ENERGY_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.8.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Energy Phase 2</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2EnergyC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S2_ENERGY_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.13.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Energy Phase 3</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2Temperature">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.8.0</getOid></mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>_EM_TEMP_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.8.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2Humidity">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.13.0</getOid></mapValue>
+            </rowTest>
+            <type>humidity</type>
+            <sensorId>_EM_HUMIDITY_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.13.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2TotalActPower">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_OUTPUT_POWER_TOTAL_S2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.3.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Total Active Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s2TotalAppPower">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.3.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_OUTPUT_APPARENT_POWER_TOTAL_S2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.8.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Total Apparent Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="s2VolAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.3.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s2VolAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.8.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s2VolAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.13.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s2CurAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.3.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s2CurAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.8.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s2CurAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.13.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s2TemAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.3.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s2HumAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.8.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) Low Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 2) High Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+    </device>
+
+    <device deviceid="eaton_flex_pdu_s3">
+        <oidMustExist ruleid="eaton_flex_pdu_exists" oid=".1.3.6.1.4.1.534.6.6.8" istree="yes"/>
+        <oidMustNotMatch ruleid="s3_pdu_check" oid=".1.3.6.1.4.1.534.6.6.8.12.4.0">
+            <valueList>
+                <value>0</value>
+            </valueList>
+        </oidMustNotMatch>
+
+        <numSensor ruleid="s3InputVoltage">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S3_INPUT_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.4.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Input Voltage</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3VoltageA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S3_VOLTAGE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.9.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Voltage Phase 1</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3VoltageB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S3_VOLTAGE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.14.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Voltage Phase 2</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3VoltageC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S3_VOLTAGE_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.19.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Voltage Phase 3</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3CurrentA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S3_CURRENT_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.4.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Current Phase 1</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3CurrentB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S3_CURRENT_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.9.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Current Phase 2</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3CurrentC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S3_CURRENT_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.14.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Current Phase 3</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3ActPowerA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S3_POWER_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.4.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Active Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3ActPowerB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S3_POWER_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.9.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Active Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3ActPowerC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S3_POWER_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.14.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Active Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3AppPowerA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S3_POWER_VA_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.4.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Apparent Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3AppPowerB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S3_POWER_VA_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.9.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Apparent Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3AppPowerC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S3_POWER_VA_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.14.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Apparent Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3EnergyA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S3_ENERGY_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.4.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Energy Phase 1</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3EnergyB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S3_ENERGY_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.9.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Energy Phase 2</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3EnergyC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S3_ENERGY_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.14.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Energy Phase 3</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3Temperature">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.9.0</getOid></mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>_EM_TEMP_4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.9.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3Humidity">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.14.0</getOid></mapValue>
+            </rowTest>
+            <type>humidity</type>
+            <sensorId>_EM_HUMIDITY_4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.14.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3TotalActPower">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_OUTPUT_POWER_TOTAL_S3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.4.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Total Active Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s3TotalAppPower">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.4.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_OUTPUT_APPARENT_POWER_TOTAL_S3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.9.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Total Apparent Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="s3VolAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.4.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s3VolAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.9.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s3VolAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.14.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s3CurAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.4.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s3CurAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.9.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s3CurAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.14.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s3TemAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.4.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s3HumAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.9.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) Low Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 3) High Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+    </device>
+
+    <device deviceid="eaton_flex_pdu_s4">
+        <oidMustExist ruleid="eaton_flex_pdu_exists" oid=".1.3.6.1.4.1.534.6.6.8" istree="yes"/>
+        <oidMustNotMatch ruleid="s4_pdu_check" oid=".1.3.6.1.4.1.534.6.6.8.12.5.0">
+            <valueList>
+                <value>0</value>
+            </valueList>
+        </oidMustNotMatch>
+
+        <numSensor ruleid="s4InputVoltage">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S4_INPUT_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.5.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Input Voltage</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4VoltageA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S4_VOLTAGE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.10.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Voltage Phase 1</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4VoltageB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S4_VOLTAGE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.15.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Voltage Phase 2</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4VoltageC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>voltage</type>
+            <sensorId>S4_VOLTAGE_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.2.20.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Voltage Phase 3</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4CurrentA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S4_CURRENT_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.5.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Current Phase 1</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4CurrentB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S4_CURRENT_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.10.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Current Phase 2</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4CurrentC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>amperage</type>
+            <sensorId>S4_CURRENT_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.3.15.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Current Phase 3</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4ActPowerA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S4_POWER_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.5.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Active Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4ActPowerB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S4_POWER_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.10.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Active Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4ActPowerC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>S4_POWER_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.4.15.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Active Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4AppPowerA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S4_POWER_VA_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.5.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Apparent Power Phase 1</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4AppPowerB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S4_POWER_VA_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.10.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Apparent Power Phase 2</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4AppPowerC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>S4_POWER_VA_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.5.15.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Apparent Power Phase 3</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4EnergyA">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S4_ENERGY_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.5.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Energy Phase 1</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4EnergyB">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S4_ENERGY_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.10.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Energy Phase 2</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4EnergyC">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>num/kwatthr</type>
+            <sensorId>S4_ENERGY_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.534.6.6.8.6.15.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Energy Phase 3</label>
+            <sensorSet>Energy</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4Temperature">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.10.0</getOid></mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>_EM_TEMP_5</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.10.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4Humidity">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.7.15.0</getOid></mapValue>
+            </rowTest>
+            <type>humidity</type>
+            <sensorId>_EM_HUMIDITY_5</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.7.15.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4TotalActPower">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>powerW</type>
+            <sensorId>_OUTPUT_POWER_TOTAL_S4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.5.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Total Active Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="s4TotalAppPower">
+            <rowTest>
+                <mapValue mapid="eaton_flex_pdu_host/nullSensorCheck-vm"><getOid>.1.3.6.1.4.1.534.6.6.8.12.5.0</getOid></mapValue>
+            </rowTest>
+            <type>powerVA</type>
+            <sensorId>_OUTPUT_APPARENT_POWER_TOTAL_S4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.534.6.6.8.11.10.0</getOid>
+            </value>
+            <label><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Total Apparent Power</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="s4VolAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.5.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s4VolAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.10.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s4VolAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.8.15.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Voltage</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Voltage Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s4CurAlarmA">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.5.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 1 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 1 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s4CurAlarmB">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.10.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 2 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 2 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s4CurAlarmC">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.9.15.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 3 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Current</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 3 Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Current Phase 3 Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s4TemAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.5.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Temperature Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Temperature Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="s4HumAlarm">
+            <value><getOid>.1.3.6.1.4.1.534.6.6.8.10.10.0</getOid></value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) Low Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Humidity Alarm</activeText>
+                    <inactiveText><getOid>.1.3.6.1.4.1.534.6.6.8.1.1.0</getOid> (Guest 4) High Humidity Alarm Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+    </device>
+</APC_DDF>

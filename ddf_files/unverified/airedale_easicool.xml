@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="airedale_easicool"
-	ddfname="AIREDALE DF31XEZRE"
+	ddfname="AIREDALE DF31XEZRE [pcoWeb][SNMP]"
 	ddfversion="1"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>

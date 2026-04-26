@@ -3,12 +3,23 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="comap_intelilitent_amf25"
 	ddfname="ComAp InteliLiteNT AMF 25"
-	ddfversion="1"
+	ddfversion="2"
 	canremove="yes">
 		 
 	<schemaVersion>1.6</schemaVersion>
 
 	<device deviceid="intelilitent_amf25">
+
+    <!--
+			ZD159656:
+
+			It seems the OID branch after ".1.3.6.1.4.1.28634.6." varies from device to device
+			or model to model. A customer had a device with .1.3.6.1.4.1.28634.6.1671693074 for the
+			OIDs instead of .1.3.6.1.4.1.28634.6.1990460433 like in this DDF. However, the MIB lined
+			up perfectly, minus the slightly different OID. Be on the lookout for more devices like
+			this in the future.
+		-->
+
 		<oidMustExist ruleid="intelilitent_amf25" oid=".1.3.6.1.4.1.28634.6" istree="yes" /> 
 
         <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>

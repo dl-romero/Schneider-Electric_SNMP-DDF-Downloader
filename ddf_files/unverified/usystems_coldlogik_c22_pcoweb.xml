@@ -1,0 +1,2701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="usystems_coldlogik_c22_pcoweb"
+	ddfname="USystems Ltd. ColdLogik C22 [pcoWeb][SNMP]"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+		SOURCE
+		\snmp\resources\mibs\carel\SNMP_UKUSYmFANN_ver1.0.046.mib
+		
+		CAREL-sNMP-MIB | 25 November 2020
+	-->
+	<device deviceid="usystems_coldlogik_c22">
+		<oidMustExist ruleid="snmpVariables_exists" oid=".1.3.6.1.4.1.9839.1.2" istree="yes"/> 
+		
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">USystems Ltd.</setProductData>
+		<setProductData ruleid="modeldata" field="model">ColdLogik C22</setProductData>
+		<setProductData ruleid="typedata" field="type">Generic Device</setProductData>
+		<!--
+			valueMap/enumMaps
+		-->
+		<valueMap ruleid="1state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="offOn-em">
+			<label>Off</label>
+			<label>On</label>
+		</enumMap>
+		
+		<enumMap ruleid="noYes-em">
+			<label>No</label>
+			<label>Yes</label>
+		</enumMap>
+		<!--
+			Sensors
+		-->
+        <stateSensor ruleid="unitOn">
+            <type>state</type>
+            <sensorId>_UNIT_ON_OFF_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.54.0</getOid>
+                </mapValue>
+            </value>
+            <label>Unit On/Off Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+		
+        <alarmFlags ruleid="global-Al">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.55.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Global Alarm</activeText>
+                    <inactiveText>Global Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Global Alarm condition exists.</activeText>
+                    <inactiveText>Global Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+		
+        <stateSensor ruleid="status-DOUT01">
+            <type>state</type>
+            <sensorId>_DIGITAL_OUTPUT_1_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.56.0</getOid>
+                </mapValue>
+            </value>
+            <label>Digital Output 1 Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="status-DOUT02">
+            <type>state</type>
+            <sensorId>_DIGITAL_OUTPUT_2_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.57.0</getOid>
+                </mapValue>
+            </value>
+            <label>Digital Output 2 Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="status-DOUT03">
+            <type>state</type>
+            <sensorId>_DIGITAL_OUTPUT_3_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.58.0</getOid>
+                </mapValue>
+            </value>
+            <label>Digital Output 3 Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="status-DOUT04">
+            <type>state</type>
+            <sensorId>_DIGITAL_OUTPUT_4_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.59.0</getOid>
+                </mapValue>
+            </value>
+            <label>Digital Output 4 Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="status-DOUT05">
+            <type>state</type>
+            <sensorId>_DIGITAL_OUTPUT_5_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.60.0</getOid>
+                </mapValue>
+            </value>
+            <label>Digital Output 5 Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="status-DOUT06">
+            <type>state</type>
+            <sensorId>_DIGITAL_OUTPUT_6_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.61.0</getOid>
+                </mapValue>
+            </value>
+            <label>Digital Output 6 Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+
+        <alarmFlags ruleid="en-CustomAlrm-DIN02">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.62.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Digital Input 2 Enabled as Custom Alarm</activeText>
+                    <inactiveText>Digital Input 2 Enabled as Custom Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>Digital Input 2 Enabled as Custom Alarm condition exists.</activeText>
+                    <inactiveText>Digital Input 2 Enabled as Custom Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="en-ColdAisleAlrm-DIN02">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.63.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Digital Input 2 Enabled as Cold Aisle Alarm</activeText>
+                    <inactiveText>Digital Input 2 Enabled as Cold Aisle Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>Digital Input 2 Enabled as Cold Aisle Alarm condition exists.</activeText>
+                    <inactiveText>Digital Input 2 Enabled as Cold Aisle Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <stateSensor ruleid="en-SPRB01">
+            <type>state</type>
+            <sensorId>_SERIAL_PROBE_SPRB01_ENABLED_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.64.0</getOid>
+                </mapValue>
+            </value>
+            <label>Serial Probe SPRB01 Enabled Status</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="en-SPRB02">
+            <type>state</type>
+            <sensorId>_SERIAL_PROBE_SPRB02_ENABLED_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.65.0</getOid>
+                </mapValue>
+            </value>
+            <label>Serial Probe SPRB02 Enabled Status</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="en-SPRB03">
+            <type>state</type>
+            <sensorId>_SERIAL_PROBE_SPRB03_ENABLED_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.66.0</getOid>
+                </mapValue>
+            </value>
+            <label>Serial Probe SPRB03 Enabled Status</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="en-SPRB04">
+            <type>state</type>
+            <sensorId>_SERIAL_PROBE_SPRB04_ENABLED_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.67.0</getOid>
+                </mapValue>
+            </value>
+            <label>Serial Probe SPRB04 Enabled Status</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="en-SPRB05">
+            <type>state</type>
+            <sensorId>_SERIAL_PROBE_SPRB05_ENABLED_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.68.0</getOid>
+                </mapValue>
+            </value>
+            <label>Serial Probe SPRB05 Enabled Status</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="en-SPRB06">
+            <type>state</type>
+            <sensorId>_SERIAL_PROBE_SPRB06_ENABLED_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.69.0</getOid>
+                </mapValue>
+            </value>
+            <label>Serial Probe SPRB06 Enabled Status</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="en-SPRB07">
+            <type>state</type>
+            <sensorId>_SERIAL_PROBE_SPRB07_ENABLED_STATUS</sensorId>
+            <value>
+                <mapValue mapid="1state-vm">
+                    <getOid>.1.3.6.1.4.1.9839.1.2.70.0</getOid>
+                </mapValue>
+            </value>
+            <label>Serial Probe SPRB07 Enabled Status</label>
+            <enum>noYes-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+
+        <alarmFlags ruleid="al-HT-CFront-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.72.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>HT Cabinet Front Alarm</activeText>
+                    <inactiveText>HT Cabinet Front Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>HT Cabinet Front Alarm condition exists.</activeText>
+                    <inactiveText>HT Cabinet Front Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Clock-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.73.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Clock Alarm</activeText>
+                    <inactiveText>Clock Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Clock Alarm condition exists.</activeText>
+                    <inactiveText>Clock Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-RetainMem-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.74.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Retain Memory Alarm - Automatic Generated By Alarm Editor</activeText>
+                    <inactiveText>Retain Memory Alarm - Automatic Generated By Alarm Editor Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Retain Memory Alarm - Automatic Generated By Alarm Editor condition exists.</activeText>
+                    <inactiveText>Retain Memory Alarm - Automatic Generated By Alarm Editor condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PwrChg-Line-UPS-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.75.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Power Change From Line To UPS Power Failure</activeText>
+                    <inactiveText>Power Change From Line To UPS Power Failure Cleared</inactiveText>
+                </name>
+                <severity>failure</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Power Change From Line To UPS Power Failure condition exists.</activeText>
+                    <inactiveText>Power Change From Line To UPS Power Failure condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PwrChg-UPS-Line-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.76.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Power Switched From UPS To Line</activeText>
+                    <inactiveText>Power Switched From UPS To Line Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Power Switched From UPS To Line condition exists.</activeText>
+                    <inactiveText>Power Switched From UPS To Line condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Leak-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.77.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Leak Detection Alarm</activeText>
+                    <inactiveText>Leak Detection Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Leak Detection Alarm condition exists.</activeText>
+                    <inactiveText>Leak Detection Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-SpeedFan1-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.78.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Not Working At Expected Speed Alarm</activeText>
+                    <inactiveText>Fan 1 Not Working At Expected Speed Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 1 Not Working At Expected Speed Alarm condition exists.</activeText>
+                    <inactiveText>Fan 1 Not Working At Expected Speed Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-SpeedFan2-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.79.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Not Working At Expected Speed Alarm</activeText>
+                    <inactiveText>Fan 2 Not Working At Expected Speed Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 2 Not Working At Expected Speed Alarm condition exists.</activeText>
+                    <inactiveText>Fan 2 Not Working At Expected Speed Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-SpeedFan3-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.80.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 3 Not Working At Expected Speed Alarm</activeText>
+                    <inactiveText>Fan 3 Not Working At Expected Speed Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 3 Not Working At Expected Speed Alarm condition exists.</activeText>
+                    <inactiveText>Fan 3 Not Working At Expected Speed Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-SpeedFan4-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.81.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 4 Not Working At Expected Speed Alarm</activeText>
+                    <inactiveText>Fan 4 Not Working At Expected Speed Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 4 Not Working At Expected Speed Alarm condition exists.</activeText>
+                    <inactiveText>Fan 4 Not Working At Expected Speed Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-SpeedFan5-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.82.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 5 Not Working At Expected Speed Alarm</activeText>
+                    <inactiveText>Fan 5 Not Working At Expected Speed Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 5 Not Working At Expected Speed Alarm condition exists.</activeText>
+                    <inactiveText>Fan 5 Not Working At Expected Speed Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-SpeedFan6-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.83.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 6 Not Working At Expected Speed Alarm</activeText>
+                    <inactiveText>Fan 6 Not Working At Expected Speed Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan 6 Not Working At Expected Speed Alarm condition exists.</activeText>
+                    <inactiveText>Fan 6 Not Working At Expected Speed Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN01-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.84.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN01 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN01 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN01 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN01 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN02-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.85.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN02 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN02 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN02 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN02 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN03-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.86.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN03 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN03 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN03 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN03 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN04-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.87.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN04 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN04 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN04 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN04 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN05-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.88.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN05 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN05 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN05 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN05 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN06-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.89.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN06 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN06 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN06 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN06 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN07-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.90.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN07 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN07 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN07 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN07 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN08-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.91.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN08 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN08 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN08 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN08 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN09-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.92.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN09 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN09 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN09 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN09 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-AIN10-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.93.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>AIN010 Broken Or Disconnected Alarm</activeText>
+                    <inactiveText>AIN010 Broken Or Disconnected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>AIN010 Broken Or Disconnected Alarm condition exists.</activeText>
+                    <inactiveText>AIN010 Broken Or Disconnected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-HT-Z1-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.94.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Temperature Zone 1 Alarm</activeText>
+                    <inactiveText>High Temperature Zone 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>High Temperature Zone 1 Alarm condition exists.</activeText>
+                    <inactiveText>High Temperature Zone 1 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-HT-Z2-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.95.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Temperature Zone 2 Alarm</activeText>
+                    <inactiveText>High Temperature Zone 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>High Temperature Zone 2 Alarm condition exists.</activeText>
+                    <inactiveText>High Temperature Zone 2 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-LT-Z1-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.96.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Temperature Zone 1 Alarm</activeText>
+                    <inactiveText>Low Temperature Zone 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Low Temperature Zone 1 Alarm condition exists.</activeText>
+                    <inactiveText>Low Temperature Zone 1 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-LT-Z2-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.97.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Temperature Zone 2 Alarm</activeText>
+                    <inactiveText>Low Temperature Zone 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Low Temperature Zone 2 Alarm condition exists.</activeText>
+                    <inactiveText>Low Temperature Zone 2 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-CleanWrng-Coil-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.98.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Coil Clean Warning</activeText>
+                    <inactiveText>Coil Clean Warning Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Coil Clean Warning condition exists.</activeText>
+                    <inactiveText>Coil Clean Warning condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Wrng-Fan-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.99.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan Check Warning</activeText>
+                    <inactiveText>Fan Check Warning Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fan Check Warning condition exists.</activeText>
+                    <inactiveText>Fan Check Warning condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Wrng-Filter-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.100.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Filter Clean Warning</activeText>
+                    <inactiveText>Filter Clean Warning Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Filter Clean Warning condition exists.</activeText>
+                    <inactiveText>Filter Clean Warning condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Wrng-Service-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.101.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Service Contract Warning</activeText>
+                    <inactiveText>Service Contract Warning Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Service Contract Warning condition exists.</activeText>
+                    <inactiveText>Service Contract Warning condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Wrng-Vlv-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.102.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Valve Check Warning</activeText>
+                    <inactiveText>Valve Check Warning Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Valve Check Warning condition exists.</activeText>
+                    <inactiveText>Valve Check Warning condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Wrng-Custom-1-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.103.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Warning 1</activeText>
+                    <inactiveText>Custom Warning 1 Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Custom Warning 1 condition exists.</activeText>
+                    <inactiveText>Custom Warning 1 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Wrng-Custom-2-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.104.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Warning 2</activeText>
+                    <inactiveText>Custom Warning 2 Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Custom Warning 2 condition exists.</activeText>
+                    <inactiveText>Custom Warning 2 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Wrng-Custom-3-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.105.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Warning 3</activeText>
+                    <inactiveText>Custom Warning 3 Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Custom Warning 3 condition exists.</activeText>
+                    <inactiveText>Custom Warning 3 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-SPRB01-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.106.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Offline Serial Probe SPRB01 Alarm</activeText>
+                    <inactiveText>Offline Serial Probe SPRB01 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Offline Serial Probe SPRB01 Alarm condition exists.</activeText>
+                    <inactiveText>Offline Serial Probe SPRB01 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-SPRB02-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.107.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Offline Serial Probe SPRB02 Alarm</activeText>
+                    <inactiveText>Offline Serial Probe SPRB02 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Offline Serial Probe SPRB02 Alarm condition exists.</activeText>
+                    <inactiveText>Offline Serial Probe SPRB02 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-SPRB03-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.108.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Offline Serial Probe SPRB03 Alarm</activeText>
+                    <inactiveText>Offline Serial Probe SPRB03 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Offline Serial Probe SPRB03 Alarm condition exists.</activeText>
+                    <inactiveText>Offline Serial Probe SPRB03 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-SPRB04-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.109.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Offline Serial Probe SPRB04 Alarm</activeText>
+                    <inactiveText>Offline Serial Probe SPRB04 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Offline Serial Probe SPRB04 Alarm condition exists.</activeText>
+                    <inactiveText>Offline Serial Probe SPRB04 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-SPRB05-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.110.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Offline Serial Probe SPRB05 Alarm</activeText>
+                    <inactiveText>Offline Serial Probe SPRB05 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Offline Serial Probe SPRB05 Alarm condition exists.</activeText>
+                    <inactiveText>Offline Serial Probe SPRB05 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-SPRB06-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.111.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Offline Serial Probe SPRB06 Alarm</activeText>
+                    <inactiveText>Offline Serial Probe SPRB06 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Offline Serial Probe SPRB06 Alarm condition exists.</activeText>
+                    <inactiveText>Offline Serial Probe SPRB06 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-SPRB07-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.112.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Offline Serial Probe SPRB07 Alarm</activeText>
+                    <inactiveText>Offline Serial Probe SPRB07 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Offline Serial Probe SPRB07 Alarm condition exists.</activeText>
+                    <inactiveText>Offline Serial Probe SPRB07 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbHumBrk-SPRB01-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.113.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB01 Alarm</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB01 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB01 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB01 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbHumBrk-SPRB02-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.114.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB02 Alarm</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB02 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB02 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB02 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbHumBrk-SPRB03-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.115.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB03 Alarm</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB03 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB03 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB03 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbHumBrk-SPRB04-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.116.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB04 Alarm</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB04 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB04 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB04 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbHumBrk-SPRB05-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.117.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB05 Alarm</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB05 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB05 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB05 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbHumBrk-SPRB06-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.118.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB06 Alarm</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB06 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB06 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB06 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbHumBrk-SPRB07-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.119.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB07 Alarm</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB07 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>Broken Humidity Sensor Serial Probe SPRB07 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Humidity Sensor Serial Probe SPRB07 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbTempBrk-SPRB01-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.120.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB01 Alarm</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB01 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB01 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB01 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbTempBrk-SPRB02-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.121.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB02 Alarm</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB02 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB02 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB02 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbTempBrk-SPRB03-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.122.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB03 Alarm</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB03 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB03 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB03 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbTempBrk-SPRB04-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.123.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB04 Alarm</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB04 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB04 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB04 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbTempBrk-SPRB05-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.124.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB05 Alarm</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB05 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB05 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB05 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbTempBrk-SPRB06-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.125.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB06 Alarm</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB06 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB06 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB06 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-PrbTempBrk-SPRB07-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.126.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB07 Alarm</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB07 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Broken Temperature Sensor Serial Probe SPRB07 Alarm condition exists.</activeText>
+                    <inactiveText>Broken Temperature Sensor Serial Probe SPRB07 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Fdbk-Vlv-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.127.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Valve Not At Required Position Alarm</activeText>
+                    <inactiveText>Valve Not At Required Position Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Valve Not At Required Position Alarm condition exists.</activeText>
+                    <inactiveText>Valve Not At Required Position Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Err-retain-write-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.128.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Error In Retain Memory Writings</activeText>
+                    <inactiveText>Error In Retain Memory Writings Cleared</inactiveText>
+                </name>
+                <severity>error</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Error In Retain Memory Writings condition exists.</activeText>
+                    <inactiveText>Error In Retain Memory Writings condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-TempCtrlComp-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.129.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Temperature Control Compensation Active Alarm</activeText>
+                    <inactiveText>Temperature Control Compensation Active Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Temperature Control Compensation Active Alarm condition exists.</activeText>
+                    <inactiveText>Temperature Control Compensation Active Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-HumLow-SPRBS-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.130.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Serial Probe Low Humidity Alarm</activeText>
+                    <inactiveText>Serial Probe Low Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>Serial Probe Low Humidity Alarm condition exists.</activeText>
+                    <inactiveText>Serial Probe Low Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-HumHigh-SPRBS-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.131.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Serial Probe High Humidity Alarm</activeText>
+                    <inactiveText>Serial Probe High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>Serial Probe High Humidity Alarm condition exists.</activeText>
+                    <inactiveText>Serial Probe High Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Fan-Global-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.132.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fans Global Alarm</activeText>
+                    <inactiveText>Fans Global Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Fans Global Alarm condition exists.</activeText>
+                    <inactiveText>Fans Global Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-NoAvbl-AirOff-SPRBS-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.133.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>No Serial Probes As Air Off Available Alarm</activeText>
+                    <inactiveText>No Serial Probes As Air Off Available Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>No Serial Probes As Air Off Available Alarm condition exists.</activeText>
+                    <inactiveText>No Serial Probes As Air Off Available Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-NoAvbl-CFront-SPRBS-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.134.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>No Serial Probes As Cabinet Front Available Alarm</activeText>
+                    <inactiveText>No Serial Probes As Cabinet Front Available Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>No Serial Probes As Cabinet Front Available Alarm condition exists.</activeText>
+                    <inactiveText>No Serial Probes As Cabinet Front Available Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-NoAvbl-InAisle-SPRBS-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.135.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>No Serial Probes As Humidity Available Alarm</activeText>
+                    <inactiveText>No Serial Probes As Humidity Available Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>No Serial Probes As Humidity Available Alarm condition exists.</activeText>
+                    <inactiveText>No Serial Probes As Humidity Available Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-NoAvbl-Hum-SPRBS-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.136.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>No Serial Probes As Humidity Available Alarm</activeText>
+                    <inactiveText>No Serial Probes As Humidity Available Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>No Serial Probes As Humidity Available Alarm condition exists.</activeText>
+                    <inactiveText>No Serial Probes As Humidity Available Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-CustomAlrm-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.137.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Alarm Active</activeText>
+                    <inactiveText>Custom Alarm Active Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Custom Alarm Active condition exists.</activeText>
+                    <inactiveText>Custom Alarm Active condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-DIN-ColdAisle-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.138.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Cold Aisle Alarm Active By DIN</activeText>
+                    <inactiveText>Cold Aisle Alarm Active By DIN Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Cold Aisle Alarm Active By DIN condition exists.</activeText>
+                    <inactiveText>Cold Aisle Alarm Active By DIN condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-HT-AirOff-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.139.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Temperature Air Off</activeText>
+                    <inactiveText>High Temperature Air Off Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>High Temperature Air Off condition exists.</activeText>
+                    <inactiveText>High Temperature Air Off condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-LT-AirOff-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.140.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Temperature Air Off</activeText>
+                    <inactiveText>Low Temperature Air Off Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Low Temperature Air Off condition exists.</activeText>
+                    <inactiveText>Low Temperature Air Off condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-MaxSpeed-ColdAisle-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.141.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Cold Aisle Alarm Active By Max Speed</activeText>
+                    <inactiveText>Cold Aisle Alarm Active By Max Speed Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Cold Aisle Alarm Active By Max Speed condition exists.</activeText>
+                    <inactiveText>Cold Aisle Alarm Active By Max Speed condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Offline-Belimo-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.142.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Offline Belimo Alarm</activeText>
+                    <inactiveText>Offline Belimo Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Offline Belimo Alarm condition exists.</activeText>
+                    <inactiveText>Offline Belimo Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Exce-Util-Belimo-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.143.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Excessive Utilisation Belimo Alarm</activeText>
+                    <inactiveText>Excessive Utilisation Belimo Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Excessive Utilisation Belimo Alarm condition exists.</activeText>
+                    <inactiveText>Excessive Utilisation Belimo Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Mech-Travel-Incr-Belimo-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.144.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Mechanical Travel Increased Belimo Alarm</activeText>
+                    <inactiveText>Mechanical Travel Increased Belimo Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Mechanical Travel Increased Belimo Alarm condition exists.</activeText>
+                    <inactiveText>Mechanical Travel Increased Belimo Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Mech-Overload-Belimo-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.145.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Mechanical Overload Belimo Alarm</activeText>
+                    <inactiveText>Mechanical Overload Belimo Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Mechanical Overload Belimo Alarm condition exists.</activeText>
+                    <inactiveText>Mechanical Overload Belimo Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Safety-Rel-Belimo-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.146.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Safety Relevant Fault Fire Protection Only Belimo Alarm</activeText>
+                    <inactiveText>Safety Relevant Fault Fire Protection Only Belimo Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Safety Relevant Fault Fire Protection Only Belimo Alarm condition exists.</activeText>
+                    <inactiveText>Safety Relevant Fault Fire Protection Only Belimo Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Damp-test-err-Belimo-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.147.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Damper Test Error Fire Protection Only Belimo Alarm</activeText>
+                    <inactiveText>Damper Test Error Fire Protection Only Belimo Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Damper Test Error Fire Protection Only Belimo Alarm condition exists.</activeText>
+                    <inactiveText>Damper Test Error Fire Protection Only Belimo Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Duct-Temp-High-Belimo-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.148.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Duct Temperature Too High Fire Protection Only Belimo Alarm</activeText>
+                    <inactiveText>Duct Temperature Too High Fire Protection Only Belimo Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Duct Temperature Too High Fire Protection Only Belimo Alarm condition exists.</activeText>
+                    <inactiveText>Duct Temperature Too High Fire Protection Only Belimo Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-Smoke-Dect-Trip-Belimo-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.149.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Smoke Detector Tripped Fire Protection Only Belimo Alarm</activeText>
+                    <inactiveText>Smoke Detector Tripped Fire Protection Only Belimo Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Smoke Detector Tripped Fire Protection Only Belimo Alarm condition exists.</activeText>
+                    <inactiveText>Smoke Detector Tripped Fire Protection Only Belimo Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <numSensor ruleid="delay-Alrm-HT-CFront">
+            <type>timeinsec</type>
+            <sensorId>_DELAY_HT_CABINET_FRONT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.246.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Delay HT Cabinet Front</label>
+            <sensorSet>Alarm</sensorSet>
+        </numSensor>
+        <numSensor ruleid="generalMng-Second">
+            <type>timeinsec</type>
+            <sensorId>_ACTUAL_SECOND</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.247.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Actual Second</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="generalMng-Minute">
+            <type>timeinmin</type>
+            <sensorId>_ACTUAL_MINUTE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.248.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Actual Minute</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="generalMng-Hour">
+            <type>timeinhrs</type>
+            <sensorId>_ACTUAL_HOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.249.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Actual Hour</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="generalMng-Day">
+            <type>timeindays</type>
+            <sensorId>_ACTUAL_DAY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.250.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Actual Day</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hoursCounterMng-UnitLifeT">
+            <type>timeinhrs</type>
+            <sensorId>_UNIT_LIFE_UPDATE_IN_HOURS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.253.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Unit Life Update In Hours</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-PhaseSeq-EM3SE">
+            <type>num</type>
+            <sensorId>_PHASE_SEQUENCE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.254.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Phase Sequence</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase1Dev-Phase-NextPhaseVoltage">
+            <type>voltage</type>
+            <sensorId>VOLTAGE_LL_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.255.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Voltage L1-L2</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase1Dev-Phase-NeutralVoltage">
+            <type>voltage</type>
+            <sensorId>_VOLTAGE_L1_N</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.256.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Voltage L1-N</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase1Dev-Current">
+            <type>amperage</type>
+            <sensorId>_CURRENT_L1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.257.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Current L1</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase1Dev-Power">
+            <type>powerW</type>
+            <sensorId>_ACTIVE_POWER_L1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.258.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Active Power L1</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase1Dev-ApparentPower">
+            <type>powerVA</type>
+            <sensorId>_APPARENT_POWER_L1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.259.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Apparent Power L1</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase1Dev-PowerFactor">
+            <type>num/powerfactor</type>
+            <sensorId>SINGLE_PHASE_PF_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.260.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Power Factor L1</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase2Dev-Phase-NextPhaseVoltage">
+            <type>voltage</type>
+            <sensorId>VOLTAGE_LL_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.261.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Voltage L2-L3</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase2Dev-Phase-NeutralVoltage">
+            <type>voltage</type>
+            <sensorId>_VOLTAGE_L2_N</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.262.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Voltage L2-N</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase2Dev-Current">
+            <type>amperage</type>
+            <sensorId>_CURRENT_L2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.263.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Current L2</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase2Dev-Power">
+            <type>powerW</type>
+            <sensorId>_ACTIVE_POWER_L2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.264.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Active Power L2</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase2Dev-ApparentPower">
+            <type>powerVA</type>
+            <sensorId>_APPARENT_POWER_L2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.265.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Apparent Power L2</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase2Dev-PowerFactor">
+            <type>num/powerfactor</type>
+            <sensorId>SINGLE_PHASE_PF_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.267.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Power Factor L2</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase3Dev-Phase-NextPhaseVoltage">
+            <type>voltage</type>
+            <sensorId>VOLTAGE_LL_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.268.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Voltage L3-L1</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase3Dev-Phase-NeutralVoltage">
+            <type>voltage</type>
+            <sensorId>_VOLTAGE_L3_N</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.269.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Voltage L3-N</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase3Dev-Current">
+            <type>amperage</type>
+            <sensorId>_CURRENT_L3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.270.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Current L3</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase3Dev-Power">
+            <type>powerW</type>
+            <sensorId>_ACTIVE_POWER_L3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.271.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Active Power L3</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase3Dev-ApparentPower">
+            <type>powerVA</type>
+            <sensorId>_APPARENT_POWER_L3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.272.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Apparent Power L3</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-Phase3Dev-PowerFactor">
+            <type>num/powerfactor</type>
+            <sensorId>SINGLE_PHASE_PF_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.274.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Power Factor L3</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-TotalDev-Phase-NextPhaseVoltage">
+            <type>voltage</type>
+            <sensorId>VOLTAGE_LL_AVG</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.275.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Voltage L-L Average</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-TotalDev-Phase-NeutralVoltage">
+            <type>voltage</type>
+            <sensorId>_VOLTAGE_L_N_AVERAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.276.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Voltage L-N Average</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-TotalDev-Current">
+            <type>amperage</type>
+            <sensorId>_CURRENT_TOTAL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.277.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Current Total</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-TotalDev-Power">
+            <type>powerW</type>
+            <sensorId>_ACTIVE_POWER_TOTAL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.278.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Active Power Total</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-TotalDev-ApparentPower">
+            <type>powerVA</type>
+            <sensorId>_APPARENT_POWER_TOTAL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.279.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Apparent Power Total</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-TotalDev-PowerFactor">
+            <type>num/powerfactor</type>
+            <sensorId>_POWER_FACTOR_TOTAL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.281.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Power Factor Total</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-TotalEnergyDev-EnergyH">
+            <type>num/kwatthr</type>
+            <sensorId>_ENERGY_TOTAL_KWH_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.282.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Total Energy</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="energyMeter3SE-Mng-EnergyMeter3SE-1-TotalEnergyDev-ReactiveEnergy">
+            <type>num/kVARhr</type>
+            <sensorId>_TOTAL_REACTIVE_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.283.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Total Reactive Energy</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Z1-Air-AvVlv">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_CONTROL_ZONE_1_AIR_AVERAGE_VALVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.284.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Control Zone 1 Air Average Valve</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Z2-Wat-AvFan">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_CONTROL_ZONE_2_WATER_AVERAGE_FAN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.285.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Control Zone 2 Water Average Fan</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-CFront-Room">
+            <type>temp</type>
+            <sensorId>_CABINET_FRONT_ROOM_TEMPERATURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.286.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Cabinet Front Room Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="req-Fan01">
+            <type>fanspeed</type>
+            <sensorId>_REQUESTED_SPEED_FAN_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.287.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Requested Speed Fan 1</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="req-Fan02">
+            <type>fanspeed</type>
+            <sensorId>_REQUESTED_SPEED_FAN_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.288.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Requested Speed Fan 2</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="req-Fan03">
+            <type>fanspeed</type>
+            <sensorId>_REQUESTED_SPEED_FAN_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.289.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Requested Speed Fan 3</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="req-Fan04">
+            <type>fanspeed</type>
+            <sensorId>_REQUESTED_SPEED_FAN_4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.290.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Requested Speed Fan 4</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="req-Fan05">
+            <type>fanspeed</type>
+            <sensorId>_REQUESTED_SPEED_FAN_5</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.291.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Requested Speed Fan 5</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="req-Fan06">
+            <type>fanspeed</type>
+            <sensorId>_REQUESTED_SPEED_FAN_6</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.292.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Requested Speed Fan 6</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="correctredFdbk-Fan01">
+            <type>num</type>
+            <sensorId>_CORRECTED_FEEDBACK_FAN_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.293.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Corrected Feedback Fan 1</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="correctredFdbk-Fan02">
+            <type>num</type>
+            <sensorId>_CORRECTED_FEEDBACK_FAN_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.294.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Corrected Feedback Fan 2</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="correctredFdbk-Fan03">
+            <type>num</type>
+            <sensorId>_CORRECTED_FEEDBACK_FAN_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.295.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Corrected Feedback Fan 3</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="correctredFdbk-Fan04">
+            <type>num</type>
+            <sensorId>_CORRECTED_FEEDBACK_FAN_4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.296.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Corrected Feedback Fan 4</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="correctredFdbk-Fan05">
+            <type>num</type>
+            <sensorId>_CORRECTED_FEEDBACK_FAN_5</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.297.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Corrected Feedback Fan 5</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="correctredFdbk-Fan06">
+            <type>num</type>
+            <sensorId>_CORRECTED_FEEDBACK_FAN_6</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.298.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Corrected Feedback Fan 6</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="aout1-val">
+            <type>num</type>
+            <sensorId>_ANALOG_OUTPUT_1_VALUE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.300.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Analog Output 1 Value</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="aout2-val">
+            <type>num</type>
+            <sensorId>_ANALOG_OUTPUT_2_VALUE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.301.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Analog Output 2 Value</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-SPRB01">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_SPRB01</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.305.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature SPRB01</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-SPRB02">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_SPRB02</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.306.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature SPRB02</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-SPRB03">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_SPRB03</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.307.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature SPRB03</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-SPRB04">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_SPRB04</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.308.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature SPRB04</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-SPRB05">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_SPRB05</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.309.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature SPRB05</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-SPRB06">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_SPRB06</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.310.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature SPRB06</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-SPRB07">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_SPRB07</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.311.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature SPRB07</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hum-SPRB01">
+            <type>humidity</type>
+            <sensorId>_HUMIDITY_SPRB01</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.312.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Humidity SPRB01</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hum-SPRB02">
+            <type>humidity</type>
+            <sensorId>_HUMIDITY_SPRB02</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.313.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Humidity SPRB02</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hum-SPRB03">
+            <type>humidity</type>
+            <sensorId>_HUMIDITY_SPRB03</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.314.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Humidity SPRB03</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hum-SPRB04">
+            <type>humidity</type>
+            <sensorId>_HUMIDITY_SPRB04</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.315.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Humidity SPRB04</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hum-SPRB05">
+            <type>humidity</type>
+            <sensorId>_HUMIDITY_SPRB05</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.316.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Humidity SPRB05</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hum-SPRB06">
+            <type>humidity</type>
+            <sensorId>_HUMIDITY_SPRB06</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.317.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Humidity SPRB06</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hum-SPRB07">
+            <type>humidity</type>
+            <sensorId>_HUMIDITY_SPRB07</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.318.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Humidity SPRB07</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="humAvg-SPRBS">
+            <type>humidity</type>
+            <sensorId>_HUMIDITY_AVERAGE_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.319.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Humidity Average SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-InAisle-SPRB01">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_IN_AISLE_SPRB01</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.320.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature In Aisle SPRB01</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-InAisle-SPRB02">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_IN_AISLE_SPRB02</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.321.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature In Aisle SPRB02</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-InAisle-SPRB03">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_IN_AISLE_SPRB03</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.322.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature In Aisle SPRB03</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-InAisle-SPRB04">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_IN_AISLE_SPRB04</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.323.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature In Aisle SPRB04</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-InAisle-SPRB05">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_IN_AISLE_SPRB05</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.324.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature In Aisle SPRB05</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-InAisle-SPRB06">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_IN_AISLE_SPRB06</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.325.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature In Aisle SPRB06</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-InAisle-SPRB07">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_IN_AISLE_SPRB07</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.326.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature In Aisle SPRB07</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="avgTemp-InAisle-SPRBS">
+            <type>temp</type>
+            <sensorId>_AVERAGE_TEMPERATURE_IN_AISLE_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.327.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Average Temperature In Aisle SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-InAisle-Max-SPRBS">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_IN_AISLE_MAXIMUM_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.328.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature In Aisle Maximum SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOff-SPRB01">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_OFF_SPRB01</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.329.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air Off SPRB01</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOff-SPRB02">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_OFF_SPRB02</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.330.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air Off SPRB02</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOff-SPRB03">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_OFF_SPRB03</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.331.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air Off SPRB03</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOff-SPRB04">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_OFF_SPRB04</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.332.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air Off SPRB04</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOff-SPRB05">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_OFF_SPRB05</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.333.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air Off SPRB05</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOff-SPRB06">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_OFF_SPRB06</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.334.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air Off SPRB06</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOff-SPRB07">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_OFF_SPRB07</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.335.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air Off SPRB07</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="avgTemp-AirOff-SPRBS">
+            <type>temp</type>
+            <sensorId>_AVERAGE_TEMPERATURE_AIR_OFF_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.336.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Average Temperature Air Off SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOff-Max-SPRBS">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_OFF_MAXIMUM_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.337.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air Off Maximum SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-CFront-SPRB01">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_C_FRONT_SPRB01</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.338.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature C Front SPRB01</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-CFront-SPRB02">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_C_FRONT_SPRB02</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.339.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature C Front SPRB02</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-CFront-SPRB03">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_C_FRONT_SPRB03</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.340.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature C Front SPRB03</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-CFront-SPRB04">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_C_FRONT_SPRB04</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.341.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature C Front SPRB04</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-CFront-SPRB05">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_C_FRONT_SPRB05</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.342.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature C Front SPRB05</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-CFront-SPRB06">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_C_FRONT_SPRB06</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.343.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature C Front SPRB06</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-CFront-SPRB07">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_C_FRONT_SPRB07</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.344.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature C Front SPRB07</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="avgTemp-CFront-SPRBS">
+            <type>temp</type>
+            <sensorId>_AVERAGE_TEMPERATURE_C_FRONT_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.345.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Average Temperature C Front SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-CFront-Max-SPRBS">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_C_FRONT_MAXIMUM_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.346.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature C Front Maximum SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dewP-SPRB01">
+            <type>temp</type>
+            <sensorId>_DEW_POINT_SPRB01</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.347.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Dew Point SPRB01</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dewP-SPRB02">
+            <type>temp</type>
+            <sensorId>_DEW_POINT_SPRB02</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.348.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Dew Point SPRB02</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dewP-SPRB03">
+            <type>temp</type>
+            <sensorId>_DEW_POINT_SPRB03</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.349.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Dew Point SPRB03</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dewP-SPRB04">
+            <type>temp</type>
+            <sensorId>_DEW_POINT_SPRB04</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.350.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Dew Point SPRB04</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dewP-SPRB05">
+            <type>temp</type>
+            <sensorId>_DEW_POINT_SPRB05</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.351.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Dew Point SPRB05</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dewP-SPRB06">
+            <type>temp</type>
+            <sensorId>_DEW_POINT_SPRB06</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.352.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Dew Point SPRB06</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dewP-SPRB07">
+            <type>temp</type>
+            <sensorId>_DEW_POINT_SPRB07</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.353.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Dew Point SPRB07</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="avgDewP-SPRBS">
+            <type>temp</type>
+            <sensorId>_AVERAGE_DEW_POINT_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.354.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Average Dew Point SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Room-SPRB01">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ROOM_SPRB01</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.355.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Room SPRB01</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Room-SPRB02">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ROOM_SPRB02</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.356.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Room SPRB02</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Room-SPRB03">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ROOM_SPRB03</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.357.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Room SPRB03</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Room-SPRB04">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ROOM_SPRB04</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.358.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Room SPRB04</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Room-SPRB05">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ROOM_SPRB05</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.359.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Room SPRB05</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Room-SPRB06">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ROOM_SPRB06</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.360.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Room SPRB06</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Room-SPRB07">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ROOM_SPRB07</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.361.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Room SPRB07</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="avgTemp-Room-SPRBS">
+            <type>temp</type>
+            <sensorId>_AVERAGE_TEMPERATURE_ROOM_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.362.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Average Temperature Room SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Room-Max-SPRBS">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ROOM_MAXIMUM_SPRBS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.363.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Room Maximum SPRBS</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="relative-Pos-Belimo-msk">
+            <type>num</type>
+            <sensorId>_RELATIVE_POSITION_BELIMO_MSK</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.364.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Relative Position Belimo MSK</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="belimo-Absolute-Flow-Belimo-msk">
+            <type>num</type>
+            <sensorId>_BELIMO_ABSOLUTE_FLOW_BELIMO_MSK</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.365.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Belimo Absolute Flow Belimo MSK</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOn">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_ON</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.366.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air On</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-AirOff">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_AIR_OFF</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.367.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Air Off</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Z1">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ZONE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.368.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Zone 1</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Z2">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ZONE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.369.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Zone 2</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="temp-Z3">
+            <type>temp</type>
+            <sensorId>_TEMPERATURE_ZONE_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.370.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Temperature Zone 3</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="al-Offline-TQS3-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.375.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Offline TQS3 Probe Alarm</activeText>
+                    <inactiveText>Offline TQS3 Probe Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Offline TQS3 Probe Alarm condition exists.</activeText>
+                    <inactiveText>Offline TQS3 Probe Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <numSensor ruleid="papouchTQS3-MNG-Ret-Water-Temp">
+            <type>temp</type>
+            <sensorId>_TQS3_MNG_RETURN_WATER_TEMPERATURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.376.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>TQS3-MNG Return Water Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fdbk-Fan01">
+            <type>num</type>
+            <sensorId>_FEEDBACK_SPEED_FAN_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.379.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Feedback Speed Fan 1</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fdbk-Fan02">
+            <type>num</type>
+            <sensorId>_FEEDBACK_SPEED_FAN_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.380.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Feedback Speed Fan 2</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fdbk-Fan03">
+            <type>num</type>
+            <sensorId>_FEEDBACK_SPEED_FAN_3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.381.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Feedback Speed Fan 3</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fdbk-Fan04">
+            <type>num</type>
+            <sensorId>_FEEDBACK_SPEED_FAN_4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.382.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Feedback Speed Fan 4</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fdbk-Fan05">
+            <type>num</type>
+            <sensorId>_FEEDBACK_SPEED_FAN_5</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.383.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Feedback Speed Fan 5</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="fdbk-Fan06">
+            <type>num</type>
+            <sensorId>_FEEDBACK_SPEED_FAN_6</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.1.2.384.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Feedback Speed Fan 6</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="al-LeakAlrm-Active">
+            <value><getOid>.1.3.6.1.4.1.9839.1.2.385.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Leak Detected Alarm</activeText>
+                    <inactiveText>Leak Detected Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>Leak Detected Alarm condition exists.</activeText>
+                    <inactiveText>Leak Detected Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+		
+	</device>
+</APC_DDF>

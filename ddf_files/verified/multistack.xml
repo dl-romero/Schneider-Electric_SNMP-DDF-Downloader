@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
 <!-- Multistack (Carel) DDF -->
-<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-         ddfid ="multistack" ddfname="Multistack" ddfversion="4" canremove="yes">
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="multistack"
+  ddfname="Multistack [pcoWeb][SNMP]"
+  ddfversion="4"
+  canremove="yes">
   <schemaVersion>1.6</schemaVersion>
   <!-- Multistack specific functionality -->
   

@@ -567,7 +567,7 @@
 				</mapValue>
 			</rowTest>
 			<type>num</type>
-			<sensorId>EER_<rowIndex/></sensorId>
+			<sensorId>COOLING_POWER_<rowIndex/></sensorId>
 			<value>
 					<mult><op><getRowOid>.1.3.6.1.4.1.29462.10.2.1.1.1.5.1.1.1741</getRowOid></op><op>1</op></mult>
 			</value>
@@ -594,7 +594,9 @@
 			<type>state</type>
 			<sensorId>COMPR_1_RUNNING_<rowIndex/></sensorId>
 			<value>
-					<mult><op><getRowOid>.1.3.6.1.4.1.29462.10.2.1.1.2.1.1.1.1.4403</getRowOid></op><op>.1</op></mult>
+				<mapValue mapid="on_off-vm">
+			  		<getRowOid>.1.3.6.1.4.1.29462.10.2.1.1.2.1.1.1.1.4403</getRowOid>
+				</mapValue>
 			</value>
 			<label><getOid><regex><op>(\d+)\.(\d+)\.\d+</op><op><rowIndex/></op><op>.1.3.6.1.4.1.29462.10.1.1.6.1.1.393221.%1$s.%2$s</op></regex></getOid> Compressor 1 Running</label>
 			<enum>on_off-em</enum>
@@ -604,7 +606,9 @@
 			<type>state</type>
 			<sensorId>COMPR_2_RUNNING_<rowIndex/></sensorId>
 			<value>
-					<mult><op><getRowOid>.1.3.6.1.4.1.29462.10.2.1.1.2.1.1.1.1.4503</getRowOid></op><op>.1</op></mult>
+				<mapValue mapid="on_off-vm">
+					<getRowOid>.1.3.6.1.4.1.29462.10.2.1.1.2.1.1.1.1.4503</getRowOid>
+				</mapValue>
 			</value>
 			<label><getOid><regex><op>(\d+)\.(\d+)\.\d+</op><op><rowIndex/></op><op>.1.3.6.1.4.1.29462.10.1.1.6.1.1.393221.%1$s.%2$s</op></regex></getOid> Compressor 2 Running</label>
 			<enum>on_off-em</enum>

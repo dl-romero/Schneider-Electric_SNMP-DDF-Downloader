@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="airedale_sc22d059-2x2c"
-	ddfname="Airedale SC22D059-2X2C [pcoWeb]"
+	ddfname="Airedale SC22D059-2X2C [pcoWeb][SNMP]"
 	ddfversion="2"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>

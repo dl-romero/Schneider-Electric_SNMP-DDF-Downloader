@@ -4,18 +4,18 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="geist_imdpdu"
 	ddfname="Geist IMDPDU"
-	ddfversion="10"
+	ddfversion="13"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
-	
+
 	<!--
 		SOURCE
 		\snmp\resources\mibs\geist\geist_imd_mib.mib
 		\snmp\resources\mibs\geist\geist_v5_mibsheet.csv
-		
-		GEIST IMD MIB | 31 March 2020
+
+		GEIST IMD MIB | 13 July 2022
 	-->
-	
+
 	<device deviceid="Geist_IMDPDU_discovery">
 		<oidMustExist ruleid="geist_IMDPDU" oid="1.3.6.1.4.1.21239.5.2" istree="yes" />
 
@@ -36,16 +36,17 @@
 		</setProductData>
 
 	</device>
-	
+
 	<device deviceid="Geist_IMDPDU_1phase">
+		<oidMustExist ruleid="is_geist" oid="1.3.6.1.4.1.21239.5.2" istree="yes" />
 		<oidMustNotExist ruleid="geist_IMDPDU" oid="1.3.6.1.4.1.21239.5.2.3.2.1.2.3" istree="no" />
-		
+
 		<setProductData ruleid="geist_imdpdu_inputphasecount" field="inputphasecount">1</setProductData>
 		<setProductData ruleid="geist_imdpdu_outputphasecount" field="outputphasecount">1</setProductData>
 	</device>
 	<device deviceid="Geist_IMDPDU_3phase">
 		<oidMustExist ruleid="geist_IMDPDU" oid="1.3.6.1.4.1.21239.5.2.3.2.1.2.3" istree="no" />
-		
+
 		<!-- Verifies whether first character at .1.3.6.1.4.1.21239.5.2.3.2.1.2.3 indicates a Phase or Circuit -->
 		<!-- if first character == C then this OID is a Circuit and does not indicate a 3rd Phase -->
 		<valueMap ruleid="isCircuitOrPhase-vm">
@@ -53,7 +54,7 @@
 			<valueIn>C</valueIn><valueOut>0</valueOut>
 			<valueIn>*</valueIn><valueOut>1</valueOut>
 		</valueMap>
-		
+
 		<setProductData ruleid="geist_imdpdu_inputphasecount" field="inputphasecount">
 			<if>
 				<op>
@@ -87,7 +88,7 @@
 			</if>
 		</setProductData>
 	</device>
-	
+
 	<device deviceid="Geist_IMDPDU">
 		<oidMustExist ruleid="geist_IMDPDU" oid="1.3.6.1.4.1.21239.5.2" istree="yes" />
 		<!--
@@ -336,7 +337,7 @@
 			<valueIn>9</valueIn><valueOut>09</valueOut>
 			<valueIn>*</valueIn><valueOut>*</valueOut>
 		</valueMap>
-		
+
 		<numSensor ruleid="pduOutletMeterRealPower" index=".1.3.6.1.4.1.21239.5.2.3.6.1.12">
 			<type>powerW</type>
 			<sensorId>PDU_OUTLET_METER_REAL_POWER_<rowIndex/></sensorId>
@@ -353,7 +354,7 @@
 					<op>%1$s</op>
 				</regex>
 				</mapValue><space/>
-				Real Power
+				Real Power (<getRowOid>.1.3.6.1.4.1.21239.5.2.3.6.1.3</getRowOid>)
 			</label>
 			<sensorSet>
 				Outlet<space/>
@@ -415,6 +416,234 @@
 			<valueInc>0.1</valueInc>
 			<label><getRowOid>.1.3.6.1.4.1.21239.5.2.4.1.3</getRowOid> Temperature</label>
 			<sensorSet>Temp Sensors</sensorSet>
+		</numSensor>
+		<!--
+			airFlowSensorTable
+		-->
+		<numSensor ruleid="airFlowSensorTemp" index=".1.3.6.1.4.1.21239.5.2.5.1.5">
+			<rowTest>
+				<mapValue mapid="avail-vm"><getRowOid>.1.3.6.1.4.1.21239.5.2.5.1.4</getRowOid></mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>AIRFLOW_RPDU_TEMP_<rowIndex/></sensorId>
+			<value>
+				<if>
+				<op>
+					<neq>
+					<op><getOid>.1.3.6.1.4.1.21239.5.2.1.7.0</getOid></op>
+					<op>1</op>
+					</neq>
+				</op>
+				<op>
+					<mult>
+					<op>
+						<sub>
+						<op>
+							<mult>
+							<op><getRowOid>.1.3.6.1.4.1.21239.5.2.5.1.5</getRowOid></op>
+							<op>0.1</op>
+							</mult>
+						</op>
+						<op>32</op>
+						</sub>
+					</op>
+					<op><div><op>5</op><op>9</op></div></op>
+					</mult>
+				</op>
+				<op>
+					<mult>
+					<op><getRowOid>.1.3.6.1.4.1.21239.5.2.5.1.5</getRowOid></op>
+					<op>0.1</op>
+					</mult>
+				</op>
+				</if>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.21239.5.2.5.1.3</getRowOid> Temperature</label>
+			<sensorSet>Airflow Sensors</sensorSet>
+		</numSensor>
+		<!--
+			t3hdSensorTable
+		-->
+		<numSensor ruleid="t3hdSensorIntTemp" index=".1.3.6.1.4.1.21239.5.2.8.1.6">
+			<rowTest>
+				<mapValue mapid="avail-vm"><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.4</getRowOid></mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>RPDU_T3HD_INT_TEMP_<rowIndex/></sensorId>
+			<value>
+				<if>
+					<op>
+						<neq>
+						<op><getOid>.1.3.6.1.4.1.21239.5.2.1.7.0</getOid></op>
+						<op>1</op>
+						</neq>
+					</op>
+					<op>
+						<mult>
+						<op>
+							<sub>
+							<op>
+								<mult>
+								<op><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.6</getRowOid></op>
+								<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+							</sub>
+						</op>
+						<op><div><op>5</op><op>9</op></div></op>
+						</mult>
+					</op>
+					<op>
+						<mult>
+						<op><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.6</getRowOid></op>
+						<op>0.1</op>
+						</mult>
+					</op>
+				</if>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.3</getRowOid> Temperature</label>
+			<sensorSet>T3HD Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="t3hdSensorIntHumidity" index=".1.3.6.1.4.1.21239.5.2.8.1.7">
+			<rowTest>
+				<mapValue mapid="avail-vm"><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.4</getRowOid></mapValue>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>RPDU_T3HD_INT_HUMIDITY_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.7</getRowOid>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.3</getRowOid> Humidity</label>
+			<sensorSet>T3HD Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="t3hdSensorIntDewPoint" index=".1.3.6.1.4.1.21239.5.2.8.1.8">
+			<rowTest>
+				<mapValue mapid="avail-vm"><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.4</getRowOid></mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>RPDU_T3HD_INT_DEW_POINT_<rowIndex/></sensorId>
+			<value>
+				<if>
+					<op>
+						<neq>
+						<op><getOid>.1.3.6.1.4.1.21239.5.2.1.7.0</getOid></op>
+						<op>1</op>
+						</neq>
+					</op>
+					<op>
+						<mult>
+						<op>
+							<sub>
+							<op>
+								<mult>
+								<op><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.8</getRowOid></op>
+								<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+							</sub>
+						</op>
+						<op><div><op>5</op><op>9</op></div></op>
+						</mult>
+					</op>
+					<op>
+						<mult>
+						<op><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.8</getRowOid></op>
+						<op>0.1</op>
+						</mult>
+					</op>
+				</if>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.3</getRowOid> Dew Point</label>
+			<sensorSet>T3HD Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="t3hdSensorExtATemp" index=".1.3.6.1.4.1.21239.5.2.8.1.11">
+			<rowTest>
+				<mapValue mapid="avail-vm"><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.9</getRowOid></mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>RPDU_T3HD_EXT_A_TEMP_<rowIndex/></sensorId>
+			<value>
+				<if>
+					<op>
+						<neq>
+						<op><getOid>.1.3.6.1.4.1.21239.5.2.1.7.0</getOid></op>
+						<op>1</op>
+						</neq>
+					</op>
+					<op>
+						<mult>
+						<op>
+							<sub>
+							<op>
+								<mult>
+								<op><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.11</getRowOid></op>
+								<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+							</sub>
+						</op>
+						<op><div><op>5</op><op>9</op></div></op>
+						</mult>
+					</op>
+					<op>
+						<mult>
+						<op><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.11</getRowOid></op>
+						<op>0.1</op>
+						</mult>
+					</op>
+				</if>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.10</getRowOid> Temperature</label>
+			<sensorSet>T3HD Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="t3hdSensorExtBTemp" index=".1.3.6.1.4.1.21239.5.2.8.1.14">
+			<rowTest>
+				<mapValue mapid="avail-vm"><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.12</getRowOid></mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>RPDU_T3HD_EXT_B_TEMP_<rowIndex/></sensorId>
+			<value>
+				<if>
+					<op>
+						<neq>
+						<op><getOid>.1.3.6.1.4.1.21239.5.2.1.7.0</getOid></op>
+						<op>1</op>
+						</neq>
+					</op>
+					<op>
+						<mult>
+						<op>
+							<sub>
+							<op>
+								<mult>
+								<op><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.14</getRowOid></op>
+								<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+							</sub>
+						</op>
+						<op><div><op>5</op><op>9</op></div></op>
+						</mult>
+					</op>
+					<op>
+						<mult>
+						<op><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.14</getRowOid></op>
+						<op>0.1</op>
+						</mult>
+					</op>
+				</if>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.21239.5.2.8.1.13</getRowOid> Temperature</label>
+			<sensorSet>T3HD Sensors</sensorSet>
 		</numSensor>
 		<!--
 			thdSensorTable

@@ -3,30 +3,119 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid ="akcp_envmonitor"
 	ddfname="AKCP Environmental Monitor"
-	ddfversion="2"
+	ddfversion="5"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
-
+	<!--
+		SOURCE
+		\snmp\resources\mibs\akcp\akcp.mib
+		
+		SPAGENT-MIB | 11 February 2021
+	-->
 	<device deviceid="akcp_envmonitor">
-	
 		<oidMustExist ruleid="akcp_envmonitor_detect" oid=".1.3.6.1.4.1.3854.1.2.2.1" istree="yes" />
+		
+		<suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
 
-        <setProductData ruleid="vendordata" field="vendor">
-			<getOid>.1.3.6.1.4.1.3854.1.1.2.0</getOid>
-		</setProductData>
-        <setProductData ruleid="modeldata" field="model">
-			<getOid>.1.3.6.1.4.1.3854.1.1.8.0</getOid>
-		</setProductData>
-
+        <setProductData ruleid="vendordata" field="vendor">AKCP</setProductData>
+        <setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.3854.1.1.8.0</getOid></setProductData>
         <setProductData ruleid="typedata" field="type">Environmental Monitor</setProductData>
+		
+		<valueMap ruleid="isItCelsius">
+			<valueIn>0</valueIn><valueOut>[false]</valueOut>
+			<valueIn>*</valueIn><valueOut>[true]</valueOut>
+		</valueMap>
+	
+		<valueMap ruleid="isOnline">
+			<valueIn>1</valueIn><valueOut>[true]</valueOut>
+			<valueIn>*</valueIn><valueOut>[false]</valueOut>
+		</valueMap>
+		
+		<valueMap ruleid="7state1-vm">
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>7</valueIn><valueOut>7</valueOut>
+		</valueMap>
+		
+		<valueMap ruleid="7state2-vm">
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>6</valueIn><valueOut>4</valueOut>
+			<valueIn>7</valueIn><valueOut>5</valueOut>
+			<valueIn>8</valueIn><valueOut>6</valueOut>
+			<valueIn>9</valueIn><valueOut>7</valueOut>
+		</valueMap>
+		
+		<valueMap ruleid="12state-vm">
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>8</valueIn><valueOut>7</valueOut>
+			<valueIn>9</valueIn><valueOut>8</valueOut>
+			<valueIn>10</valueIn><valueOut>9</valueOut>
+			<valueIn>12</valueIn><valueOut>10</valueOut>
+			<valueIn>13</valueIn><valueOut>11</valueOut>
+			<valueIn>14</valueIn><valueOut>12</valueOut>
+		</valueMap>
+	
+		<enumMap ruleid="sensorProbeStatus1-em">
+			<label>Unknown</label>
+			<label>No Status</label>
+			<label>Normal</label>
+			<label>High Warning</label>
+			<label>High Critical</label>
+			<label>Low Warning</label>
+			<label>Low Critical</label>
+			<label>Sensor Error</label>
+		</enumMap>
+		
+		<enumMap ruleid="sensorProbeStatus2-em">
+			<label>Unknown</label>
+			<label>No Status</label>
+			<label>Normal</label>
+			<label>High Critical</label>
+			<label>Low Critical</label>
+			<label>Sensor Error</label>
+			<label>Relay On</label>
+			<label>Relay Off</label>
+		</enumMap>
+		
+		<enumMap ruleid="switchType-em">
+			<label>Unknown</label>
+			<label>Temperature</label>
+			<label>4-20 mA</label>
+			<label>Humidity</label>
+			<label>Water</label>
+			<label>A-D</label>
+			<label>Security</label>
+			<label>Air Flow</label>
+			<label>Siren</label>
+			<label>Dry Contact</label>		
+			<label>Voltage</label>
+			<label>Relay</label>
+			<label>Motion</label>
+		</enumMap>
 
 		<!-- sensorProbeTempDegree -->
 		<numSensor ruleid="sensorProbeTempDegree" index=".1.3.6.1.4.1.3854.1.2.2.1.16.1.3">
-			<type>temp</type>
-			<sensorId>TEMP_<rowIndex/></sensorId>
 			<rowTest>
 				<mapValue mapid="isOnline"><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.5</getRowOid></mapValue>
 			</rowTest>
+			<type>temp</type>
+			<sensorId>TEMP_<rowIndex/></sensorId>
 			<value>
 				<round increment="1">
 					<if>
@@ -61,54 +150,97 @@
 			</label>
 			<sensorSet>Temperature</sensorSet>
 		</numSensor>
-
-		<valueMap ruleid="isItCelsius">
-			<valueIn>0</valueIn><valueOut>[false]</valueOut>
-			<valueIn>*</valueIn><valueOut>[true]</valueOut>
-		</valueMap>
-	
-		<valueMap ruleid="isOnline">
-			<valueIn>1</valueIn><valueOut>[true]</valueOut>
-			<valueIn>*</valueIn><valueOut>[false]</valueOut>
-		</valueMap>
 		
 		<!-- sensorProbeTempDegree -->
 		<stateSensor ruleid="sensorProbeStatus" index=".1.3.6.1.4.1.3854.1.2.2.1.16.1.4">
-			<type>state</type>
-			<sensorId>TEMP_STATE_<rowIndex/></sensorId>
 			<rowTest>
 				<mapValue mapid="isOnline"><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.5</getRowOid></mapValue>
 			</rowTest>
+			<type>state</type>
+			<sensorId>TEMP_STATE_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.4</getRowOid>
+				<mapValue mapid="7state1-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.4</getRowOid>
+				</mapValue>
 			</value>
 			<label>
 				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid><space/>Status
 			</label>
-			<enum>sensorProbeStatus-em</enum>
+			<enum>sensorProbeStatus1-em</enum>
 			<sensorSet>Temperature</sensorSet>
 		</stateSensor>
-	
-		<enumMap ruleid="sensorProbeStatus-em">
-			<label>Unknown</label>
-			<label>No Status</label>
-			<label>Normal</label>
-			<label>High Warning</label>
-			<label>High Critical</label>
-			<label>Low Warning</label>
-			<label>Low Critical</label>
-			<label>Sensor Error</label>
-			<label>Relay On</label>
-			<label>Relay Off</label>
-		</enumMap>
+		
+		<alarmFlags2 ruleid="sensorProbeStatus_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.16.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.4</getRowOid></value>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Temperature Probe High Warning</activeText>
+					<inactiveText>Temperature Probe High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A Temperature Probe High Warning condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</activeText>
+					<inactiveText>A Temperature Probe High Warning condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Temperature Probe High Critical</activeText>
+					<inactiveText>Temperature Probe High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A Temperature Probe High Critical condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</activeText>
+					<inactiveText>A Temperature Probe High Critical condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5">
+				<name>
+					<activeText>Temperature Probe Low Warning</activeText>
+					<inactiveText>Temperature Probe Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A Temperature Probe Low Warning condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</activeText>
+					<inactiveText>A Temperature Probe Low Warning condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Temperature Probe Low Critical</activeText>
+					<inactiveText>Temperature Probe Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A Temperature Probe Low Critical condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</activeText>
+					<inactiveText>A Temperature Probe Low Critical condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Temperature Probe Sensor Error</activeText>
+					<inactiveText>Temperature Probe Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A Temperature Probe Sensor Error condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</activeText>
+					<inactiveText>A Temperature Probe Sensor Error condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.16.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
 
 		<!-- sensorProbeHumidityPercent -->
 		<numSensor ruleid="sensorProbeHumidityPercent" index=".1.3.6.1.4.1.3854.1.2.2.1.17.1.3">
-			<type>humidity</type>
-			<sensorId>HUMIDITY_<rowIndex/></sensorId>
 			<rowTest>
 				<mapValue mapid="isOnline"><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.5</getRowOid></mapValue>
 			</rowTest>
+			<type>humidity</type>
+			<sensorId>HUMIDITY_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.3</getRowOid>
 			</value>
@@ -120,45 +252,157 @@
 		
 		<!-- sensorProbeHumidityStatus -->
 		<stateSensor ruleid="sensorProbeHumidityStatus" index=".1.3.6.1.4.1.3854.1.2.2.1.17.1.4">
-			<type>state</type>
-			<sensorId>HUMIDITY_STATE_<rowIndex/></sensorId>
 			<rowTest>
 				<mapValue mapid="isOnline"><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.5</getRowOid></mapValue>
 			</rowTest>
+			<type>state</type>
+			<sensorId>HUMIDITY_STATE_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.4</getRowOid>
+				<mapValue mapid="7state1-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.4</getRowOid>
+				</mapValue>
 			</value>
 			<label>
 				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid><space/>Status
 			</label>
-			<enum>sensorProbeStatus-em</enum>
+			<enum>sensorProbeStatus1-em</enum>
 			<sensorSet>Humidity</sensorSet>
 		</stateSensor>
-
+		
+		<alarmFlags2 ruleid="sensorProbeHumidityStatus_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.17.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.4</getRowOid></value>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Humidity Probe High Warning</activeText>
+					<inactiveText>Humidity Probe High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A Humidity Probe High Warning condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</activeText>
+					<inactiveText>A Humidity Probe High Warning condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Humidity Probe High Critical</activeText>
+					<inactiveText>Humidity Probe High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A Humidity Probe High Critical condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</activeText>
+					<inactiveText>A Humidity Probe High Critical condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5">
+				<name>
+					<activeText>Humidity Probe Low Warning</activeText>
+					<inactiveText>Humidity Probe Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A Humidity Probe Low Warning condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</activeText>
+					<inactiveText>A Humidity Probe Low Warning condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Humidity Probe Low Critical</activeText>
+					<inactiveText>Humidity Probe Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A Humidity Probe Low Critical condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</activeText>
+					<inactiveText>A Humidity Probe Low Critical condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Humidity Probe Sensor Error</activeText>
+					<inactiveText>Humidity Probe Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A Humidity Probe Sensor Error condition exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</activeText>
+					<inactiveText>A Humidity Probe Sensor Error condition no longer exists for <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.17.1.1</getRowOid>.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2> 
+		
+		<!-- sensorProbeSwitchStatus -->
 		<stateSensor ruleid="sensorProbeSwitchStatus" index=".1.3.6.1.4.1.3854.1.2.2.1.18.1.3">
-			<type>state</type>
-			<sensorId>SWITCH_STATE_<rowIndex/></sensorId>
 			<rowTest>
 				<mapValue mapid="isOnline"><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.4</getRowOid></mapValue>
 			</rowTest>
+			<type>state</type>
+			<sensorId>SWITCH_STATE_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.3</getRowOid>
+				<mapValue mapid="7state2-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.3</getRowOid>
+				</mapValue>
 			</value>
 			<label>
 				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.1</getRowOid><space/>Status
 			</label>
-			<enum>sensorProbeStatus-em</enum>
+			<enum>sensorProbeStatus2-em</enum>
 			<sensorSet>Switches</sensorSet>
 		</stateSensor>
+		
+		<alarmFlags2 ruleid="sensorProbeSwitchStatus_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.18.1.3">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.3</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Switch Probe High Critical</activeText>
+					<inactiveText>Switch Probe High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.1</getRowOid> Switch Probe High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.1</getRowOid> Switch Probe High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Switch Probe Low Critical</activeText>
+					<inactiveText>Switch Probe Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.1</getRowOid> Switch Probe Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.1</getRowOid> Switch Probe Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Switch Probe Sensor Error</activeText>
+					<inactiveText>Switch Probe Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.1</getRowOid> Switch Probe Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.1</getRowOid> Switch Probe Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
 
+		<!-- sensorProbeSensorType -->
 		<stateSensor ruleid="sensorProbeSensorType" index=".1.3.6.1.4.1.3854.1.2.2.1.18.1.3">
-			<type>state</type>
-			<sensorId>SWITCH_TYPE_<rowIndex/></sensorId>
 			<rowTest>
 				<mapValue mapid="isOnline"><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.4</getRowOid></mapValue>
 			</rowTest>
+			<type>state</type>
+			<sensorId>SWITCH_TYPE_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.9</getRowOid>
+				<mapValue mapid="12state-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.9</getRowOid>
+				</mapValue>
 			</value>
 			<label>
 				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.18.1.1</getRowOid><space/>Sensor Type
@@ -166,24 +410,494 @@
 			<enum>switchType-em</enum>
 			<sensorSet>Switches</sensorSet>
 		</stateSensor>
-		<enumMap ruleid="switchType-em">
-			<label>Unknown</label>
-			<label>Temperature</label>
-			<label>4-20 mA</label>
-			<label>Humidity</label>
-			<label>Water</label>
-			<label>A-D</label>
-			<label>Security</label>
-			<label>Unknown</label>
-			<label>Air Flow</label>
-			<label>Siren</label>
-			<label>Dry Contact</label>
-			<label>Unknown</label>			
-			<label>Voltage</label>
-			<label>Relay</label>
-			<label>Motion</label>
-		</enumMap>
+		
+		<!-- sensorProbeDrycontactArrayPort1Status -->
+		<stateSensor ruleid="sensorProbeDrycontactArrayPort1Status" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.4">
+			<rowTest>
+				<mapValue mapid="isOnline">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>DRY_CONTACT_ARRAY_STATUS_PORT1_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="7state2-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.2</getRowOid><space/>Dry Contact Array Port 1 Status
+			</label>
+			<enum>sensorProbeStatus2-em</enum>
+			<sensorSet>Dry Contact Array</sensorSet>
+		</stateSensor>
+		
+		<alarmFlags2 ruleid="sensorProbeDrycontactArrayPort1Status_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Dry Contact Array Port 1 High Critical</activeText>
+					<inactiveText>Dry Contact Array Port 1 High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.1</getRowOid> Dry Contact Array Port 1 High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.1</getRowOid> Dry Contact Array Port 1 High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Dry Contact Array Port 1 Low Critical</activeText>
+					<inactiveText>Dry Contact Array Port 1 Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.1</getRowOid> Dry Contact Array Port 1 Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.1</getRowOid> Dry Contact Array Port 1 Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Dry Contact Array Port 1 Sensor Error</activeText>
+					<inactiveText>Dry Contact Array Port 1 Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.1</getRowOid> Dry Contact Array Port 1 Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.1.2.1.1</getRowOid> Dry Contact Array Port 1 Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
+		<!-- sensorProbeDrycontactArrayPort2Status -->
+		<stateSensor ruleid="sensorProbeDrycontactArrayPort2Status" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.4">
+			<rowTest>
+				<mapValue mapid="isOnline">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>DRY_CONTACT_ARRAY_STATUS_PORT2_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="7state2-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.2</getRowOid><space/>Dry Contact Array Port 2 Status
+			</label>
+			<enum>sensorProbeStatus2-em</enum>
+			<sensorSet>Dry Contact Array</sensorSet>
+		</stateSensor>
+		
+		<alarmFlags2 ruleid="sensorProbeDrycontactArrayPort2Status_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Dry Contact Array Port 2 High Critical</activeText>
+					<inactiveText>Dry Contact Array Port 2 High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.1</getRowOid> Dry Contact Array Port 2 High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.1</getRowOid> Dry Contact Array Port 2 High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Dry Contact Array Port 2 Low Critical</activeText>
+					<inactiveText>Dry Contact Array Port 2 Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.1</getRowOid> Dry Contact Array Port 2 Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.1</getRowOid> Dry Contact Array Port 2 Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Dry Contact Array Port 2 Sensor Error</activeText>
+					<inactiveText>Dry Contact Array Port 2 Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.1</getRowOid> Dry Contact Array Port 2 Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.2.2.1.1</getRowOid> Dry Contact Array Port 2 Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
+		<!-- sensorProbeDrycontactArrayPort3Status -->
+		<stateSensor ruleid="sensorProbeDrycontactArrayPort3Status" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.4">
+			<rowTest>
+				<mapValue mapid="isOnline">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>DRY_CONTACT_ARRAY_STATUS_PORT3_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="7state2-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.2</getRowOid><space/>Dry Contact Array Port 3 Status
+			</label>
+			<enum>sensorProbeStatus2-em</enum>
+			<sensorSet>Dry Contact Array</sensorSet>
+		</stateSensor>
+		
+		<alarmFlags2 ruleid="sensorProbeDrycontactArrayPort3Status_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Dry Contact Array Port 3 High Critical</activeText>
+					<inactiveText>Dry Contact Array Port 3 High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.1</getRowOid> Dry Contact Array Port 3 High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.1</getRowOid> Dry Contact Array Port 3 High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Dry Contact Array Port 3 Low Critical</activeText>
+					<inactiveText>Dry Contact Array Port 3 Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.1</getRowOid> Dry Contact Array Port 3 Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.1</getRowOid> Dry Contact Array Port 3 Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Dry Contact Array Port 3 Sensor Error</activeText>
+					<inactiveText>Dry Contact Array Port 3 Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.1</getRowOid> Dry Contact Array Port 3 Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.3.2.1.1</getRowOid> Dry Contact Array Port 3 Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
+		<!-- sensorProbeDrycontactArrayPort4Status -->
+		<stateSensor ruleid="sensorProbeDrycontactArrayPort4Status" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.4">
+			<rowTest>
+				<mapValue mapid="isOnline">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>DRY_CONTACT_ARRAY_STATUS_PORT4_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="7state2-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.2</getRowOid><space/>Dry Contact Array Port 4 Status
+			</label>
+			<enum>sensorProbeStatus2-em</enum>
+			<sensorSet>Dry Contact Array</sensorSet>
+		</stateSensor>
+		
+		<alarmFlags2 ruleid="sensorProbeDrycontactArrayPort4Status_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Dry Contact Array Port 4 High Critical</activeText>
+					<inactiveText>Dry Contact Array Port 4 High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.1</getRowOid> Dry Contact Array Port 4 High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.1</getRowOid> Dry Contact Array Port 4 High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Dry Contact Array Port 4 Low Critical</activeText>
+					<inactiveText>Dry Contact Array Port 4 Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.1</getRowOid> Dry Contact Array Port 4 Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.1</getRowOid> Dry Contact Array Port 4 Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Dry Contact Array Port 4 Sensor Error</activeText>
+					<inactiveText>Dry Contact Array Port 4 Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.1</getRowOid> Dry Contact Array Port 4 Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.4.2.1.1</getRowOid> Dry Contact Array Port 4 Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
+		<!-- sensorProbeDrycontactArrayPort5Status -->
+		<stateSensor ruleid="sensorProbeDrycontactArrayPort5Status" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.4">
+			<rowTest>
+				<mapValue mapid="isOnline">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>DRY_CONTACT_ARRAY_STATUS_PORT5_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="7state2-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.2</getRowOid><space/>Dry Contact Array Port 5 Status
+			</label>
+			<enum>sensorProbeStatus2-em</enum>
+			<sensorSet>Dry Contact Array</sensorSet>
+		</stateSensor>
+		
+		<alarmFlags2 ruleid="sensorProbeDrycontactArrayPort5Status_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Dry Contact Array Port 5 High Critical</activeText>
+					<inactiveText>Dry Contact Array Port 5 High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.1</getRowOid> Dry Contact Array Port 5 High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.1</getRowOid> Dry Contact Array Port 5 High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Dry Contact Array Port 5 Low Critical</activeText>
+					<inactiveText>Dry Contact Array Port 5 Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.1</getRowOid> Dry Contact Array Port 5 Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.1</getRowOid> Dry Contact Array Port 5 Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Dry Contact Array Port 5 Sensor Error</activeText>
+					<inactiveText>Dry Contact Array Port 5 Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.1</getRowOid> Dry Contact Array Port 5 Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.5.2.1.1</getRowOid> Dry Contact Array Port 5 Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
+		<!-- sensorProbeDrycontactArrayPort6Status -->
+		<stateSensor ruleid="sensorProbeDrycontactArrayPort6Status" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.4">
+			<rowTest>
+				<mapValue mapid="isOnline">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>DRY_CONTACT_ARRAY_STATUS_PORT6_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="7state2-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.2</getRowOid><space/>Dry Contact Array Port 6 Status
+			</label>
+			<enum>sensorProbeStatus2-em</enum>
+			<sensorSet>Dry Contact Array</sensorSet>
+		</stateSensor>
+		
+		<alarmFlags2 ruleid="sensorProbeDrycontactArrayPort6Status_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Dry Contact Array Port 6 High Critical</activeText>
+					<inactiveText>Dry Contact Array Port 6 High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.1</getRowOid> Dry Contact Array Port 6 High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.1</getRowOid> Dry Contact Array Port 6 High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Dry Contact Array Port 6 Low Critical</activeText>
+					<inactiveText>Dry Contact Array Port 6 Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.1</getRowOid> Dry Contact Array Port 6 Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.1</getRowOid> Dry Contact Array Port 6 Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Dry Contact Array Port 6 Sensor Error</activeText>
+					<inactiveText>Dry Contact Array Port 6 Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.1</getRowOid> Dry Contact Array Port 6 Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.6.2.1.1</getRowOid> Dry Contact Array Port 6 Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
+		<!-- sensorProbeDrycontactArrayPort7Status -->
+		<stateSensor ruleid="sensorProbeDrycontactArrayPort7Status" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.4">
+			<rowTest>
+				<mapValue mapid="isOnline">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>DRY_CONTACT_ARRAY_STATUS_PORT7_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="7state2-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.2</getRowOid><space/>Dry Contact Array Port 7 Status
+			</label>
+			<enum>sensorProbeStatus2-em</enum>
+			<sensorSet>Dry Contact Array</sensorSet>
+		</stateSensor>
+		
+		<alarmFlags2 ruleid="sensorProbeDrycontactArrayPort7Status_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Dry Contact Array Port 7 High Critical</activeText>
+					<inactiveText>Dry Contact Array Port 7 High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.1</getRowOid> Dry Contact Array Port 7 High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.1</getRowOid> Dry Contact Array Port 7 High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Dry Contact Array Port 7 Low Critical</activeText>
+					<inactiveText>Dry Contact Array Port 7 Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.1</getRowOid> Dry Contact Array Port 7 Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.1</getRowOid> Dry Contact Array Port 7 Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Dry Contact Array Port 7 Sensor Error</activeText>
+					<inactiveText>Dry Contact Array Port 7 Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.1</getRowOid> Dry Contact Array Port 7 Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.7.2.1.1</getRowOid> Dry Contact Array Port 7 Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
+		<!-- sensorProbeDrycontactArrayPort8Status -->
+		<stateSensor ruleid="sensorProbeDrycontactArrayPort8Status" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.4">
+			<rowTest>
+				<mapValue mapid="isOnline">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>DRY_CONTACT_ARRAY_STATUS_PORT8_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="7state2-vm">
+					<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.2</getRowOid><space/>Dry Contact Array Port 8 Status
+			</label>
+			<enum>sensorProbeStatus2-em</enum>
+			<sensorSet>Dry Contact Array</sensorSet>
+		</stateSensor>
+		
+		<alarmFlags2 ruleid="sensorProbeDrycontactArrayPort8Status_alarm" index=".1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Dry Contact Array Port 8 High Critical</activeText>
+					<inactiveText>Dry Contact Array Port 8 High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.1</getRowOid> Dry Contact Array Port 8 High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.1</getRowOid> Dry Contact Array Port 8 High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Dry Contact Array Port 8 Low Critical</activeText>
+					<inactiveText>Dry Contact Array Port 8 Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.1</getRowOid> Dry Contact Array Port 8 Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.1</getRowOid> Dry Contact Array Port 8 Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Dry Contact Array Port 8 Sensor Error</activeText>
+					<inactiveText>Dry Contact Array Port 8 Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.1</getRowOid> Dry Contact Array Port 8 Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.1.2.2.1.19.37.8.2.1.1</getRowOid> Dry Contact Array Port 8 Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
 
-	</device> 
-	 
+	</device>
 </APC_DDF>

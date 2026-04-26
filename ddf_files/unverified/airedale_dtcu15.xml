@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	canremove="yes"
 	ddfid="airedale_dtcu15"
-	ddfname="Airedale_DTCU15"
+	ddfname="Airedale_DTCU15 [pcoWeb][SNMP]"
 	ddfversion="3"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd">
 	<schemaVersion>1.6</schemaVersion>

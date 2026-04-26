@@ -1,26 +1,29 @@
 <APC_DDF
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-	ddfid="liebert_ita2"
-	ddfname="Liebert ITA2"
-	ddfversion="3"
-	canremove="yes">
-		 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="liebert_ita2"
+  ddfname="Liebert ITA2"
+  ddfversion="4"
+  canremove="yes">
+
 	<schemaVersion>1.6</schemaVersion>
 
 	<device deviceid="liebert_ita2">
 		<oidMustExist ruleid="liebert_ita2_exists" oid=".1.3.6.1.4.1.13400.2.54.2" istree="yes" />
-		
+
         <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
         <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
         <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+		<suppressRule ruleid="suppresscorelocationdata" suppressid="core/mib2data/locationdata"/>
 
-		<!-- Device Vendor -->
-		<setProductData ruleid="vendordata" field="vendor"><getOid>.1.3.6.1.4.1.13400.2.54.1.1.0</getOid></setProductData>
-		<!-- Device Model -->
-		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.13400.2.54.1.2.0</getOid></setProductData>
-		<!-- Device Type -->
-		<setProductData ruleid="typedata" field="type">UPS</setProductData> 
+        <!-- Device Vendor -->
+        <setProductData ruleid="vendordata" field="vendor"><getOid>.1.3.6.1.4.1.13400.2.54.1.1.0</getOid></setProductData>
+        <!-- Device Model -->
+        <setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.13400.2.54.1.2.0</getOid></setProductData>
+        <!-- Device Type -->
+        <setProductData ruleid="typedata" field="type">UPS</setProductData>
+        <!-- Serial Number -->
+        <setProductData ruleid="sernumdata" field="serial_num"><getOid>.1.3.6.1.4.1.13400.2.54.1.3.0</getOid></setProductData>
 
         <numSensor ruleid="inputPhaseVoltageA">
             <type>voltage</type>
@@ -35,6 +38,12 @@
             <sensorSet>Input</sensorSet>
         </numSensor>
         <numSensor ruleid="inputPhaseVoltageB">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.2.2.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>voltage</type>
             <sensorId>INPUT_PHASE_VOLTAGE_B</sensorId>
             <value>
@@ -47,6 +56,12 @@
             <sensorSet>Input</sensorSet>
         </numSensor>
         <numSensor ruleid="inputPhaseVoltageC">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.2.3.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>voltage</type>
             <sensorId>INPUT_PHASE_VOLTAGE_C</sensorId>
             <value>
@@ -83,6 +98,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputPhaseVoltageB">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.2.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>voltage</type>
             <sensorId>OUTPUT_PHASE_VOLTAGE_B</sensorId>
             <value>
@@ -95,6 +116,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputPhaseVoltageC">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.3.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>voltage</type>
             <sensorId>OUTPUT_PHASE_VOLTAGE_C</sensorId>
             <value>
@@ -119,6 +146,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputCurrentB">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.2.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>amperage</type>
             <sensorId>OUTPUT_CURRENT_B</sensorId>
             <value>
@@ -131,6 +164,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputCurrentC">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.3.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>amperage</type>
             <sensorId>OUTPUT_CURRENT_C</sensorId>
             <value>
@@ -167,6 +206,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputActivePowerB">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.2.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>powerW</type>
             <sensorId>OUTPUT_ACTIVE_POWER_B</sensorId>
             <value>
@@ -179,6 +224,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputActivePowerC">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.3.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>powerW</type>
             <sensorId>OUTPUT_ACTIVE_POWER_C</sensorId>
             <value>
@@ -203,6 +254,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputApparentPowerB">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.2.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>powerVA</type>
             <sensorId>OUTPUT_APPARENT_POWER_B</sensorId>
             <value>
@@ -215,6 +272,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputApparentPowerC">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.3.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>powerVA</type>
             <sensorId>OUTPUT_APPARENT_POWER_C</sensorId>
             <value>
@@ -239,6 +302,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputLoadB">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.2.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>pctofcapacity</type>
             <sensorId>OUTPUT_LOAD_B</sensorId>
             <value>
@@ -251,6 +320,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputLoadC">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.3.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>pctofcapacity</type>
             <sensorId>OUTPUT_LOAD_C</sensorId>
             <value>
@@ -275,6 +350,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputPowerFactorB">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.2.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>num/powerfactor</type>
             <sensorId>OUTPUT_POWER_FACTOR_B</sensorId>
             <value>
@@ -287,6 +368,12 @@
             <sensorSet>Output</sensorSet>
         </numSensor>
         <numSensor ruleid="outputPowerFactorC">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.3.3.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>num/powerfactor</type>
             <sensorId>OUTPUT_POWER_FACTOR_C</sensorId>
             <value>
@@ -311,6 +398,12 @@
             <sensorSet>Bypass</sensorSet>
         </numSensor>
         <numSensor ruleid="bypassVoltageB">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.4.2.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>voltage</type>
             <sensorId>BYPASS_VOLTAGE_B</sensorId>
             <value>
@@ -323,6 +416,12 @@
             <sensorSet>Bypass</sensorSet>
         </numSensor>
         <numSensor ruleid="bypassVoltageC">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.4.3.0</getOid></op>
+					<op>0</op> <!-- 0V should indicate phase not present -->
+				</neq>
+			</rowTest>
             <type>voltage</type>
             <sensorId>BYPASS_VOLTAGE_C</sensorId>
             <value>
@@ -419,7 +518,7 @@
             <sensorSet>Battery</sensorSet>
         </numSensor>
         <numSensor ruleid="batteryRemainsTime">
-            <type>timeinmins</type>
+            <type>timeinmin</type>
             <sensorId>BATTERY_REMAINS_TIME</sensorId>
             <value>
                 <mult>
@@ -431,6 +530,12 @@
             <sensorSet>Battery</sensorSet>
         </numSensor>
         <numSensor ruleid="batteryTemperature">
+			<rowTest>
+				<neq>
+					<op><getOid>.1.3.6.1.4.1.13400.2.54.2.5.8.0</getOid></op>
+					<op>-1000</op>
+				</neq>
+			</rowTest>
             <type>temp</type>
             <sensorId>BATTERY_TEMPERATURE</sensorId>
             <value>
@@ -469,6 +574,7 @@
             <value>
                 <getOid>.1.3.6.1.4.1.13400.2.54.2.5.11.0</getOid>
             </value>
+            <valueInc>1</valueInc>
             <label>Battery Discharge Times</label>
             <sensorSet>Battery</sensorSet>
         </numSensor>
@@ -510,7 +616,7 @@
 			<label>Critical</label>
 			<label>Unknown</label>
 		</enumMap>
-		
+
 		<valueMap ruleid="pwr_supply_status-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -527,7 +633,7 @@
 			<label>UPS On Utility and Battery</label>
 			<label>Unknown</label>
 		</enumMap>
-		
+
 		<valueMap ruleid="isAlarm-vm">
 			<valueIn>0</valueIn><valueOut>1</valueOut>
 			<valueIn>*</valueIn><valueOut>0</valueOut>
@@ -557,15 +663,15 @@
 				<description>
 					<activeText>
 						<!-- Alarm Id -->
-						<getRowOid>.1.3.6.1.4.1.13400.2.54.3.1.6</getRowOid>:<space/>
-						<!-- Alarm Description -->
-						<getRowOid>.1.3.6.1.4.1.13400.2.54.3.1.5</getRowOid>.
+                        <getRowOid>.1.3.6.1.4.1.13400.2.54.3.1.6</getRowOid>:<space/>
+                        <!-- Alarm Description -->
+                        <getRowOid>.1.3.6.1.4.1.13400.2.54.3.1.5</getRowOid>.
 					</activeText>
 					<inactiveText>
 						<!-- Alarm Id -->
-						<getRowOid>.1.3.6.1.4.1.13400.2.54.3.1.6</getRowOid>:<space/>
-						<!-- Alarm Description -->
-						<getRowOid>.1.3.6.1.4.1.13400.2.54.3.1.5</getRowOid><space/>
+                        <getRowOid>.1.3.6.1.4.1.13400.2.54.3.1.6</getRowOid>:<space/>
+                        <!-- Alarm Description -->
+                        <getRowOid>.1.3.6.1.4.1.13400.2.54.3.1.5</getRowOid><space/>
 						condition no longer exists.
 					</inactiveText>
 				</description>

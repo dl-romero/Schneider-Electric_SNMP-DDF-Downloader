@@ -1,0 +1,3911 @@
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="arctiv_mpdu"
+	ddfname="ARCTIV MPDU"
+	ddfversion="1"
+	canremove="yes">
+		 
+	<schemaVersion>1.6</schemaVersion>
+
+    <!--
+      SOURCE
+      \snmp\resources\mibs\arctiv\Gmpdu-lock.mib
+
+      WALKFILES
+		  \snmp\resources\sapro\walkfiles\arctiv\ARCTIVE ATIPDUMI3342-3606.txt
+    -->
+
+	<device deviceid="arctiv_mpdu_device">
+		<oidMustExist ruleid="arctiv_mpdu_exists" oid=".1.3.6.1.4.1.30966.8" istree="yes" />
+
+    <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+    <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+    <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">ARCTIV</setProductData>
+		<setProductData ruleid="modeldata" field="model">Modular PDU (ATIPDUMI3342-3606)</setProductData>
+		<setProductData ruleid="typedata" field="type">PDU</setProductData>
+    <setProductData ruleid="labeldata" field="label"><setDefaultLabel><getOid>.1.3.6.1.4.1.30966.8.1.1.1.0</getOid></setDefaultLabel></setProductData>
+    <setProductData ruleid="mac_address" field="mac_addr"><getOid>.1.3.6.1.4.1.30966.8.1.1.4.0</getOid></setProductData>
+    <setProductData ruleid="firmware_version" field="appversion"><getOid>.1.3.6.1.4.1.30966.8.1.1.5.0</getOid></setProductData>
+
+        <numSensor ruleid="masterPhaseOneCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH1_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.1.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Current Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOneVoltage">
+            <type>voltage</type>
+            <sensorId>MASTER_PH1_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.2.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Voltage Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOnePower">
+            <type>num/powerKW</type>
+            <sensorId>MASTER_PH1_POWER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.3.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Master - Power Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOnePF">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_PH1_PF</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.4.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Power Factor Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOneEnergy">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_PH1_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Energy Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOneMinimumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH1_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.6.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Minimum Current Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOneMinimumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH1_MINIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Minimum Critical Current Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOneMaximumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH1_MAXIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Maximum Critical Current Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOneMaximumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH1_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Maximum Current Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOneMinimumVoltage">
+            <type>voltage</type>
+            <sensorId>MASTER_PH1_MINIMUM_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.10.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Minimum Voltage Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseOneMaximumVoltage">
+            <type>voltage</type>
+            <sensorId>MASTER_PH1_MAXIMUM_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.1.13.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Maximum Voltage Phase 1</label>
+            <sensorSet>Master Phase 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH2_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.1.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Current Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoVoltage">
+            <type>voltage</type>
+            <sensorId>MASTER_PH2_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.2.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Voltage Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoPower">
+            <type>num/powerKW</type>
+            <sensorId>MASTER_PH2_POWER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.3.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Master - Power Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoPF">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_PH2_PF</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.4.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Power Factor Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoEnergy">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_PH2_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Energy Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoMinimumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH2_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.6.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Minimum Current Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoMinimumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH2_MINIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Minimum Critical Current Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoMaximumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH2_MAXIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Maximum Critical Current Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoMaximumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH2_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Maximum Current Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoMinimumVoltage">
+            <type>voltage</type>
+            <sensorId>MASTER_PH2_MINIMUM_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.10.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Minimum Voltage Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseTwoMaximumVoltage">
+            <type>voltage</type>
+            <sensorId>MASTER_PH2_MAXIMUM_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.2.13.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Maximum Voltage Phase 2</label>
+            <sensorSet>Master Phase 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreeCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH3_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.1.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Current Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreeVoltage">
+            <type>voltage</type>
+            <sensorId>MASTER_PH3_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.2.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Voltage Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreePower">
+            <type>num/powerKW</type>
+            <sensorId>MASTER_PH3_POWER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.3.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Master - Power Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreePF">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_PH3_PF</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.4.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Power Factor Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreeEnergy">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_PH3_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Energy Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreeMinimumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH3_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.6.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Minimum Current Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreeMinimumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH3_MINIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Minimum Critical Current Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreeMaximumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH3_MAXIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Maximum Critical Current Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreeMaximumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_PH3_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master - Maximum Current Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreeMinimumVoltage">
+            <type>voltage</type>
+            <sensorId>MASTER_PH3_MINIMUM_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.10.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Minimum Voltage Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterPhaseThreeMaximumVoltage">
+            <type>voltage</type>
+            <sensorId>MASTER_PH3_MAXIMUM_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.2.3.13.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master - Maximum Voltage Phase 3</label>
+            <sensorSet>Master Phase 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB1Current">
+            <type>amperage</type>
+            <sensorId>MASTER_CB1_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.1.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 1 - Current</label>
+            <sensorSet>Master Circuit Breaker 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB1Voltage">
+            <type>voltage</type>
+            <sensorId>MASTER_CB1_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.1.4.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 1 - Voltage</label>
+            <sensorSet>Master Circuit Breaker 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB1Energy">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_CB1_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.1.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 1 - Energy</label>
+            <sensorSet>Master Circuit Breaker 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB1Power">
+            <type>num/powerKW</type>
+            <sensorId>MASTER_CB1_POWER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.1.6.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Master Circuit Breaker 1 - Power</label>
+            <sensorSet>Master Circuit Breaker 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB1MinimumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB1_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.1.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 1 - Minimum Current</label>
+            <sensorSet>Master Circuit Breaker 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB1MinimumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB1_MINIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.1.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 1 - Minimum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB1MaximumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB1_MAXIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.1.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 1 - Maximum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB1MaximumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB1_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.1.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 1 - Maximum Current</label>
+            <sensorSet>Master Circuit Breaker 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB2Current">
+            <type>amperage</type>
+            <sensorId>MASTER_CB2_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.2.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 2 - Current</label>
+            <sensorSet>Master Circuit Breaker 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB2Voltage">
+            <type>voltage</type>
+            <sensorId>MASTER_CB2_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.2.4.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 2 - Voltage</label>
+            <sensorSet>Master Circuit Breaker 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB2Energy">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_CB2_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.2.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 2 - Energy</label>
+            <sensorSet>Master Circuit Breaker 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB2Power">
+            <type>num/powerKW</type>
+            <sensorId>MASTER_CB2_POWER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.2.6.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Master Circuit Breaker 2 - Power</label>
+            <sensorSet>Master Circuit Breaker 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB2MinimumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB2_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.2.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 2 - Minimum Current</label>
+            <sensorSet>Master Circuit Breaker 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB2MinimumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB2_MINIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.2.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 2 - Minimum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB2MaximumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB2_MAXIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.2.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 2 - Maximum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB2MaximumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB2_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.2.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 2 - Maximum Current</label>
+            <sensorSet>Master Circuit Breaker 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB3Current">
+            <type>amperage</type>
+            <sensorId>MASTER_CB3_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.3.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 3 - Current</label>
+            <sensorSet>Master Circuit Breaker 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB3Voltage">
+            <type>voltage</type>
+            <sensorId>MASTER_CB3_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.3.4.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 3 - Voltage</label>
+            <sensorSet>Master Circuit Breaker 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB3Energy">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_CB3_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.3.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 3 - Energy</label>
+            <sensorSet>Master Circuit Breaker 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB3Power">
+            <type>num/powerKW</type>
+            <sensorId>MASTER_CB3_POWER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.3.6.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Master Circuit Breaker 3 - Power</label>
+            <sensorSet>Master Circuit Breaker 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB3MinimumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB3_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.3.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 3 - Minimum Current</label>
+            <sensorSet>Master Circuit Breaker 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB3MinimumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB3_MINIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.3.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 3 - Minimum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB3MaximumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB3_MAXIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.3.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 3 - Maximum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB3MaximumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB3_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.3.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 3 - Maximum Current</label>
+            <sensorSet>Master Circuit Breaker 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB4Current">
+            <type>amperage</type>
+            <sensorId>MASTER_CB4_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.4.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 4 - Current</label>
+            <sensorSet>Master Circuit Breaker 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB4Voltage">
+            <type>voltage</type>
+            <sensorId>MASTER_CB4_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.4.4.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 4 - Voltage</label>
+            <sensorSet>Master Circuit Breaker 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB4Energy">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_CB4_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.4.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 4 - Energy</label>
+            <sensorSet>Master Circuit Breaker 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB4Power">
+            <type>num/powerKW</type>
+            <sensorId>MASTER_CB4_POWER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.4.6.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Master Circuit Breaker 4 - Power</label>
+            <sensorSet>Master Circuit Breaker 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB4MinimumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB4_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.4.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 4 - Minimum Current</label>
+            <sensorSet>Master Circuit Breaker 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB4MinimumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB4_MINIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.4.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 4 - Minimum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB4MaximumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB4_MAXIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.4.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 4 - Maximum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB4MaximumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB4_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.4.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 4 - Maximum Current</label>
+            <sensorSet>Master Circuit Breaker 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB5Current">
+            <type>amperage</type>
+            <sensorId>MASTER_CB5_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.5.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 5 - Current</label>
+            <sensorSet>Master Circuit Breaker 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB5Voltage">
+            <type>voltage</type>
+            <sensorId>MASTER_CB5_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.5.4.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 5 - Voltage</label>
+            <sensorSet>Master Circuit Breaker 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB5Energy">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_CB5_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.5.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 5 - Energy</label>
+            <sensorSet>Master Circuit Breaker 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB5Power">
+            <type>num/powerKW</type>
+            <sensorId>MASTER_CB5_POWER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.5.6.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Master Circuit Breaker 5 - Power</label>
+            <sensorSet>Master Circuit Breaker 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB5MinimumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB5_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.5.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 5 - Minimum Current</label>
+            <sensorSet>Master Circuit Breaker 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB5MinimumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB5_MINIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.5.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 5 - Minimum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB5MaximumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB5_MAXIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.5.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 5 - Maximum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB5MaximumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB5_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.5.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 5 - Maximum Current</label>
+            <sensorSet>Master Circuit Breaker 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB6Current">
+            <type>amperage</type>
+            <sensorId>MASTER_CB6_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.6.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 6 - Current</label>
+            <sensorSet>Master Circuit Breaker 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB6Voltage">
+            <type>voltage</type>
+            <sensorId>MASTER_CB6_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.6.4.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 6 - Voltage</label>
+            <sensorSet>Master Circuit Breaker 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB6Energy">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_CB6_ENERGY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.6.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Circuit Breaker 6 - Energy</label>
+            <sensorSet>Master Circuit Breaker 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB6Power">
+            <type>num/powerKW</type>
+            <sensorId>MASTER_CB6_POWER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.6.6.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Master Circuit Breaker 6 - Power</label>
+            <sensorSet>Master Circuit Breaker 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB6MinimumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB6_MINIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.6.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 6 - Minimum Current</label>
+            <sensorSet>Master Circuit Breaker 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB6MinimumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB6_MINIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.6.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 6 - Minimum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB6MaximumCriticalCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB6_MAXIMUM_CRITICAL_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.6.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 6 - Maximum Critical Current</label>
+            <sensorSet>Master Circuit Breaker 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterCB6MaximumCurrent">
+            <type>amperage</type>
+            <sensorId>MASTER_CB6_MAXIMUM_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.3.6.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Circuit Breaker 6 - Maximum Current</label>
+            <sensorSet>Master Circuit Breaker 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorTemperature1">
+            <type>temp</type>
+            <sensorId>MASTER_SENSOR_TEMPERATURE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.1.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 1 - Temperature</label>
+            <sensorSet>Master Temperature Sensor 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorTemperature2">
+            <type>temp</type>
+            <sensorId>MASTER_SENSOR_TEMPERATURE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.2.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 2 - Temperature</label>
+            <sensorSet>Master Temperature Sensor 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorHumidity1">
+            <type>humidity</type>
+            <sensorId>MASTER_SENSOR_HUMIDITY_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.3.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 1 - Humidity</label>
+            <sensorSet>Master Humidity Sensor 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorHumidity2">
+            <type>humidity</type>
+            <sensorId>MASTER_SENSOR_HUMIDITY_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.4.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 2 - Humidity</label>
+            <sensorSet>Master Humidity Sensor 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorTemperature1Min">
+            <type>temp</type>
+            <sensorId>MASTER_SENSOR_MINIMUM_TEMPERATURE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.9.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 1 - Minimum Temperature</label>
+            <sensorSet>Master Temperature Sensor 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorTemperature1Max">
+            <type>temp</type>
+            <sensorId>MASTER_SENSOR_MAXIMUM_TEMPERATURE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.12.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 1 - Maximum Temperature</label>
+            <sensorSet>Master Temperature Sensor 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorTemperature2Min">
+            <type>temp</type>
+            <sensorId>MASTER_SENSOR_MINIMUM_TEMPERATURE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.13.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 2 - Minimum Temperature</label>
+            <sensorSet>Master Temperature Sensor 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorTemperature2Max">
+            <type>temp</type>
+            <sensorId>MASTER_SENSOR_MAXIMUM_TEMPERATURE_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.16.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 2 - Maximum Temperature</label>
+            <sensorSet>Master Temperature Sensor 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorHumidity1Min">
+            <type>humidity</type>
+            <sensorId>MASTER_SENSOR_MINIMUM_HUMIDITY_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.17.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 1 - Minimum Humidity</label>
+            <sensorSet>Master Humidity Sensor 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorHumidity1Max">
+            <type>humidity</type>
+            <sensorId>MASTER_SENSOR_MAXIMUM_HUMIDITY_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.20.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 1 - Maximum Humidity</label>
+            <sensorSet>Master Humidity Sensor 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorHumidity2Min">
+            <type>humidity</type>
+            <sensorId>MASTER_SENSOR_MINIMUM_HUMIDITY_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.21.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 2 - Minimum Humidity</label>
+            <sensorSet>Master Humidity Sensor 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="masterSensorHumidity2Max">
+            <type>humidity</type>
+            <sensorId>MASTER_SENSOR_MAXIMUM_HUMIDITY_2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.4.24.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Sensor 2 - Maximum Humidity</label>
+            <sensorSet>Master Humidity Sensor 1</sensorSet>
+        </numSensor>
+         <numSensor ruleid="master_output_current_one">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_ONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.1.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 1 - Current</label>
+            <sensorSet>Master Output 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_two">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.2.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 2 - Current</label>
+            <sensorSet>Master Output 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_three">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 3 - Current</label>
+            <sensorSet>Master Output 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_four">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_FOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.4.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 4 - Current</label>
+            <sensorSet>Master Output 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_five">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_FIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.5.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 5 - Current</label>
+            <sensorSet>Master Output 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_six">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_SIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.6.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 6 - Current</label>
+            <sensorSet>Master Output 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_seven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_SEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 7 - Current</label>
+            <sensorSet>Master Output 7</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_eight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_EIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 8 - Current</label>
+            <sensorSet>Master Output 8</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_nine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_NINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 9 - Current</label>
+            <sensorSet>Master Output 9</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_ten">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 10 - Current</label>
+            <sensorSet>Master Output 10</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_eleven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_ELEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.11.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 11 - Current</label>
+            <sensorSet>Master Output 11</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twel">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWEL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.12.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 12 - Current</label>
+            <sensorSet>Master Output 12</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.13.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 13 - Current</label>
+            <sensorSet>Master Output 13</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_fourteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_FOURTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.14.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 14 - Current</label>
+            <sensorSet>Master Output 14</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_fifteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_FIFTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.15.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 15 - Current</label>
+            <sensorSet>Master Output 15</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_sixteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_SIXTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.16.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 16 - Current</label>
+            <sensorSet>Master Output 16</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_seventeen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_SEVENTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.17.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 17 - Current</label>
+            <sensorSet>Master Output 17</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_eighteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_EIGHTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.18.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 18 - Current</label>
+            <sensorSet>Master Output 18</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_nineteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_NINETEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.19.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 19 - Current</label>
+            <sensorSet>Master Output 19</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twenty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.20.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 20 - Current</label>
+            <sensorSet>Master Output 20</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twentyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.21.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 21 - Current</label>
+            <sensorSet>Master Output 21</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twentyonetwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTYONETWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.22.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 22 - Current</label>
+            <sensorSet>Master Output 22</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twentythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.23.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 23 - Current</label>
+            <sensorSet>Master Output 23</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twentyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.24.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 24 - Current</label>
+            <sensorSet>Master Output 24</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twentyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.25.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 25 - Current</label>
+            <sensorSet>Master Output 25</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twentysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.26.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 26 - Current</label>
+            <sensorSet>Master Output 26</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twentyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.27.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 27 - Current</label>
+            <sensorSet>Master Output 27</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twentyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.28.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 28 - Current</label>
+            <sensorSet>Master Output 28</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_twentynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_TWENTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.29.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 29 - Current</label>
+            <sensorSet>Master Output 29</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.30.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 30 - Current</label>
+            <sensorSet>Master Output 30</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.31.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 31 - Current</label>
+            <sensorSet>Master Output 31</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.32.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 32 - Current</label>
+            <sensorSet>Master Output 32</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirtythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.33.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 33 - Current</label>
+            <sensorSet>Master Output 33</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirtyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.34.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 34 - Current</label>
+            <sensorSet>Master Output 34</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirtyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.35.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 35 - Current</label>
+            <sensorSet>Master Output 35</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirtysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.36.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 36 - Current</label>
+            <sensorSet>Master Output 36</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirtyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.37.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 37 - Current</label>
+            <sensorSet>Master Output 37</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirtyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.38.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 38 - Current</label>
+            <sensorSet>Master Output 38</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_thirtynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_THIRTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.39.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 39 - Current</label>
+            <sensorSet>Master Output 39</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_fourty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_FOURTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.40.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 40 - Current</label>
+            <sensorSet>Master Output 40</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_fourtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_FOURTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.41.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 41 - Current</label>
+            <sensorSet>Master Output 41</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_current_fourtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_CURRENT_FOURTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.1.42.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 42 - Current</label>
+            <sensorSet>Master Output 42</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_one">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_ONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.1.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 1 - Minimum Current</label>
+            <sensorSet>Master Output 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_two">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.2.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 2 - Minimum Current</label>
+            <sensorSet>Master Output 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_three">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 3 - Minimum Current</label>
+            <sensorSet>Master Output 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_four">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_FOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.4.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 4 - Minimum Current</label>
+            <sensorSet>Master Output 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_five">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_FIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.5.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 5 - Minimum Current</label>
+            <sensorSet>Master Output 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_six">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_SIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.6.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 6 - Minimum Current</label>
+            <sensorSet>Master Output 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_seven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_SEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 7 - Minimum Current</label>
+            <sensorSet>Master Output 7</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_eight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_EIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 8 - Minimum Current</label>
+            <sensorSet>Master Output 8</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_nine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_NINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 9 - Minimum Current</label>
+            <sensorSet>Master Output 9</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_ten">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 10 - Minimum Current</label>
+            <sensorSet>Master Output 10</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_eleven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_ELEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.11.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 11 - Minimum Current</label>
+            <sensorSet>Master Output 11</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twel">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWEL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.12.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 12 - Minimum Current</label>
+            <sensorSet>Master Output 12</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.13.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 13 - Minimum Current</label>
+            <sensorSet>Master Output 13</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_fourteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_FOURTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.14.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 14 - Minimum Current</label>
+            <sensorSet>Master Output 14</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_fifteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_FIFTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.15.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 15 - Minimum Current</label>
+            <sensorSet>Master Output 15</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_sixteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_SIXTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.16.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 16 - Minimum Current</label>
+            <sensorSet>Master Output 16</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_seventeen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_SEVENTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.17.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 17 - Minimum Current</label>
+            <sensorSet>Master Output 17</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_eighteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_EIGHTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.18.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 18 - Minimum Current</label>
+            <sensorSet>Master Output 18</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_nineteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_NINETEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.19.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 19 - Minimum Current</label>
+            <sensorSet>Master Output 19</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twenty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.20.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 20 - Minimum Current</label>
+            <sensorSet>Master Output 20</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twentyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.21.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 21 - Minimum Current</label>
+            <sensorSet>Master Output 21</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twentyonetwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTYONETWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.22.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 22 - Minimum Current</label>
+            <sensorSet>Master Output 22</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twentythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.23.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 23 - Minimum Current</label>
+            <sensorSet>Master Output 23</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twentyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.24.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 24 - Minimum Current</label>
+            <sensorSet>Master Output 24</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twentyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.25.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 25 - Minimum Current</label>
+            <sensorSet>Master Output 25</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twentysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.26.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 26 - Minimum Current</label>
+            <sensorSet>Master Output 26</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twentyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.27.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 27 - Minimum Current</label>
+            <sensorSet>Master Output 27</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twentyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.28.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 28 - Minimum Current</label>
+            <sensorSet>Master Output 28</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_twentynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_TWENTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.29.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 29 - Minimum Current</label>
+            <sensorSet>Master Output 29</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.30.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 30 - Minimum Current</label>
+            <sensorSet>Master Output 30</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.31.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 31 - Minimum Current</label>
+            <sensorSet>Master Output 31</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.32.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 32 - Minimum Current</label>
+            <sensorSet>Master Output 32</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirtythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.33.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 33 - Minimum Current</label>
+            <sensorSet>Master Output 33</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirtyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.34.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 34 - Minimum Current</label>
+            <sensorSet>Master Output 34</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirtyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.35.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 35 - Minimum Current</label>
+            <sensorSet>Master Output 35</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirtysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.36.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 36 - Minimum Current</label>
+            <sensorSet>Master Output 36</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirtyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.37.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 37 - Minimum Current</label>
+            <sensorSet>Master Output 37</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirtyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.38.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 38 - Minimum Current</label>
+            <sensorSet>Master Output 38</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_thirtynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_THIRTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.39.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 39 - Minimum Current</label>
+            <sensorSet>Master Output 39</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_fourty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_FOURTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.40.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 40 - Minimum Current</label>
+            <sensorSet>Master Output 40</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_fourtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_FOURTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.41.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 41 - Minimum Current</label>
+            <sensorSet>Master Output 41</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_current_fourtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CURRENT_FOURTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.2.42.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 42 - Minimum Current</label>
+            <sensorSet>Master Output 42</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_one">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_ONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.1.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 1 - Minimum Critical Current</label>
+            <sensorSet>Master Output 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_two">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.2.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 2 - Minimum Critical Current</label>
+            <sensorSet>Master Output 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_three">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 3 - Minimum Critical Current</label>
+            <sensorSet>Master Output 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_four">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_FOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.4.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 4 - Minimum Critical Current</label>
+            <sensorSet>Master Output 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_five">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_FIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.5.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 5 - Minimum Critical Current</label>
+            <sensorSet>Master Output 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_six">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_SIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.6.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 6 - Minimum Critical Current</label>
+            <sensorSet>Master Output 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_seven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_SEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 7 - Minimum Critical Current</label>
+            <sensorSet>Master Output 7</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_eight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_EIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 8 - Minimum Critical Current</label>
+            <sensorSet>Master Output 8</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_nine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_NINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 9 - Minimum Critical Current</label>
+            <sensorSet>Master Output 9</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_ten">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 10 - Minimum Critical Current</label>
+            <sensorSet>Master Output 10</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_eleven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_ELEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.11.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 11 - Minimum Critical Current</label>
+            <sensorSet>Master Output 11</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twel">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWEL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.12.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 12 - Minimum Critical Current</label>
+            <sensorSet>Master Output 12</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.13.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 13 - Minimum Critical Current</label>
+            <sensorSet>Master Output 13</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_fourteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_FOURTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.14.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 14 - Minimum Critical Current</label>
+            <sensorSet>Master Output 14</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_fifteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_FIFTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.15.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 15 - Minimum Critical Current</label>
+            <sensorSet>Master Output 15</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_sixteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_SIXTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.16.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 16 - Minimum Critical Current</label>
+            <sensorSet>Master Output 16</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_seventeen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_SEVENTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.17.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 17 - Minimum Critical Current</label>
+            <sensorSet>Master Output 17</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_eighteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_EIGHTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.18.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 18 - Minimum Critical Current</label>
+            <sensorSet>Master Output 18</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_nineteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_NINETEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.19.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 19 - Minimum Critical Current</label>
+            <sensorSet>Master Output 19</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twenty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.20.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 20 - Minimum Critical Current</label>
+            <sensorSet>Master Output 20</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twentyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.21.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 21 - Minimum Critical Current</label>
+            <sensorSet>Master Output 21</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twentyonetwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTYONETWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.22.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 22 - Minimum Critical Current</label>
+            <sensorSet>Master Output 22</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twentythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.23.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 23 - Minimum Critical Current</label>
+            <sensorSet>Master Output 23</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twentyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.24.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 24 - Minimum Critical Current</label>
+            <sensorSet>Master Output 24</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twentyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.25.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 25 - Minimum Critical Current</label>
+            <sensorSet>Master Output 25</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twentysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.26.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 26 - Minimum Critical Current</label>
+            <sensorSet>Master Output 26</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twentyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.27.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 27 - Minimum Critical Current</label>
+            <sensorSet>Master Output 27</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twentyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.28.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 28 - Minimum Critical Current</label>
+            <sensorSet>Master Output 28</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_twentynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_TWENTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.29.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 29 - Minimum Critical Current</label>
+            <sensorSet>Master Output 29</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.30.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 30 - Minimum Critical Current</label>
+            <sensorSet>Master Output 30</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.31.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 31 - Minimum Critical Current</label>
+            <sensorSet>Master Output 31</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.32.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 32 - Minimum Critical Current</label>
+            <sensorSet>Master Output 32</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirtythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.33.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 33 - Minimum Critical Current</label>
+            <sensorSet>Master Output 33</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirtyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.34.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 34 - Minimum Critical Current</label>
+            <sensorSet>Master Output 34</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirtyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.35.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 35 - Minimum Critical Current</label>
+            <sensorSet>Master Output 35</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirtysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.36.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 36 - Minimum Critical Current</label>
+            <sensorSet>Master Output 36</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirtyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.37.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 37 - Minimum Critical Current</label>
+            <sensorSet>Master Output 37</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirtyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.38.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 38 - Minimum Critical Current</label>
+            <sensorSet>Master Output 38</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_thirtynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_THIRTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.39.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 39 - Minimum Critical Current</label>
+            <sensorSet>Master Output 39</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_fourty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_FOURTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.40.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 40 - Minimum Critical Current</label>
+            <sensorSet>Master Output 40</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_fourtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_FOURTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.41.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 41 - Minimum Critical Current</label>
+            <sensorSet>Master Output 41</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_minimum_critical_current_fourtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MINIMUM_CRITICAL_CURRENT_FOURTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.3.42.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 42 - Minimum Critical Current</label>
+            <sensorSet>Master Output 42</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_one">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_ONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.1.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 1 - Maximum Critical Current</label>
+            <sensorSet>Master Output 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_two">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.2.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 2 - Maximum Critical Current</label>
+            <sensorSet>Master Output 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_three">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 3 - Maximum Critical Current</label>
+            <sensorSet>Master Output 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_four">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_FOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.4.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 4 - Maximum Critical Current</label>
+            <sensorSet>Master Output 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_five">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_FIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.5.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 5 - Maximum Critical Current</label>
+            <sensorSet>Master Output 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_six">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_SIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.6.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 6 - Maximum Critical Current</label>
+            <sensorSet>Master Output 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_seven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_SEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 7 - Maximum Critical Current</label>
+            <sensorSet>Master Output 7</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_eight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_EIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 8 - Maximum Critical Current</label>
+            <sensorSet>Master Output 8</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_nine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_NINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 9 - Maximum Critical Current</label>
+            <sensorSet>Master Output 9</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_ten">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 10 - Maximum Critical Current</label>
+            <sensorSet>Master Output 10</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_eleven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_ELEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.11.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 11 - Maximum Critical Current</label>
+            <sensorSet>Master Output 11</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twel">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWEL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.12.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 12 - Maximum Critical Current</label>
+            <sensorSet>Master Output 12</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.13.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 13 - Maximum Critical Current</label>
+            <sensorSet>Master Output 13</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_fourteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_FOURTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.14.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 14 - Maximum Critical Current</label>
+            <sensorSet>Master Output 14</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_fifteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_FIFTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.15.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 15 - Maximum Critical Current</label>
+            <sensorSet>Master Output 15</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_sixteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_SIXTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.16.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 16 - Maximum Critical Current</label>
+            <sensorSet>Master Output 16</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_seventeen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_SEVENTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.17.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 17 - Maximum Critical Current</label>
+            <sensorSet>Master Output 17</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_eighteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_EIGHTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.18.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 18 - Maximum Critical Current</label>
+            <sensorSet>Master Output 18</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_nineteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_NINETEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.19.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 19 - Maximum Critical Current</label>
+            <sensorSet>Master Output 19</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twenty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.20.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 20 - Maximum Critical Current</label>
+            <sensorSet>Master Output 20</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twentyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.21.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 21 - Maximum Critical Current</label>
+            <sensorSet>Master Output 21</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twentyonetwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTYONETWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.22.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 22 - Maximum Critical Current</label>
+            <sensorSet>Master Output 22</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twentythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.23.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 23 - Maximum Critical Current</label>
+            <sensorSet>Master Output 23</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twentyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.24.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 24 - Maximum Critical Current</label>
+            <sensorSet>Master Output 24</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twentyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.25.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 25 - Maximum Critical Current</label>
+            <sensorSet>Master Output 25</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twentysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.26.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 26 - Maximum Critical Current</label>
+            <sensorSet>Master Output 26</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twentyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.27.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 27 - Maximum Critical Current</label>
+            <sensorSet>Master Output 27</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twentyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.28.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 28 - Maximum Critical Current</label>
+            <sensorSet>Master Output 28</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_twentynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_TWENTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.29.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 29 - Maximum Critical Current</label>
+            <sensorSet>Master Output 29</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.30.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 30 - Maximum Critical Current</label>
+            <sensorSet>Master Output 30</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.31.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 31 - Maximum Critical Current</label>
+            <sensorSet>Master Output 31</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.32.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 32 - Maximum Critical Current</label>
+            <sensorSet>Master Output 32</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirtythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.33.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 33 - Maximum Critical Current</label>
+            <sensorSet>Master Output 33</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirtyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.34.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 34 - Maximum Critical Current</label>
+            <sensorSet>Master Output 34</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirtyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.35.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 35 - Maximum Critical Current</label>
+            <sensorSet>Master Output 35</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirtysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.36.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 36 - Maximum Critical Current</label>
+            <sensorSet>Master Output 36</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirtyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.37.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 37 - Maximum Critical Current</label>
+            <sensorSet>Master Output 37</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirtyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.38.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 38 - Maximum Critical Current</label>
+            <sensorSet>Master Output 38</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_thirtynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_THIRTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.39.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 39 - Maximum Critical Current</label>
+            <sensorSet>Master Output 39</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_fourty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_FOURTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.40.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 40 - Maximum Critical Current</label>
+            <sensorSet>Master Output 40</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_fourtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_FOURTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.41.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 41 - Maximum Critical Current</label>
+            <sensorSet>Master Output 41</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_critical_current_fourtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CRITICAL_CURRENT_FOURTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.4.42.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 42 - Maximum Critical Current</label>
+            <sensorSet>Master Output 42</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_one">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_ONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.1.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 1 - Maximum Current</label>
+            <sensorSet>Master Output 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_two">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.2.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 2 - Maximum Current</label>
+            <sensorSet>Master Output 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_three">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 3 - Maximum Current</label>
+            <sensorSet>Master Output 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_four">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_FOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.4.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 4 - Maximum Current</label>
+            <sensorSet>Master Output 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_five">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_FIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.5.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 5 - Maximum Current</label>
+            <sensorSet>Master Output 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_six">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_SIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.6.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 6 - Maximum Current</label>
+            <sensorSet>Master Output 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_seven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_SEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 7 - Maximum Current</label>
+            <sensorSet>Master Output 7</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_eight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_EIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 8 - Maximum Current</label>
+            <sensorSet>Master Output 8</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_nine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_NINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 9 - Maximum Current</label>
+            <sensorSet>Master Output 9</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_ten">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 10 - Maximum Current</label>
+            <sensorSet>Master Output 10</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_eleven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_ELEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.11.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 11 - Maximum Current</label>
+            <sensorSet>Master Output 11</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twel">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWEL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.12.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 12 - Maximum Current</label>
+            <sensorSet>Master Output 12</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.13.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 13 - Maximum Current</label>
+            <sensorSet>Master Output 13</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_fourteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_FOURTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.14.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 14 - Maximum Current</label>
+            <sensorSet>Master Output 14</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_fifteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_FIFTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.15.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 15 - Maximum Current</label>
+            <sensorSet>Master Output 15</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_sixteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_SIXTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.16.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 16 - Maximum Current</label>
+            <sensorSet>Master Output 16</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_seventeen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_SEVENTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.17.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 17 - Maximum Current</label>
+            <sensorSet>Master Output 17</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_eighteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_EIGHTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.18.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 18 - Maximum Current</label>
+            <sensorSet>Master Output 18</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_nineteen">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_NINETEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.19.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 19 - Maximum Current</label>
+            <sensorSet>Master Output 19</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twenty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.20.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 20 - Maximum Current</label>
+            <sensorSet>Master Output 20</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twentyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.21.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 21 - Maximum Current</label>
+            <sensorSet>Master Output 21</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twentyonetwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTYONETWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.22.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 22 - Maximum Current</label>
+            <sensorSet>Master Output 22</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twentythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.23.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 23 - Maximum Current</label>
+            <sensorSet>Master Output 23</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twentyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.24.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 24 - Maximum Current</label>
+            <sensorSet>Master Output 24</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twentyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.25.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 25 - Maximum Current</label>
+            <sensorSet>Master Output 25</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twentysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.26.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 26 - Maximum Current</label>
+            <sensorSet>Master Output 26</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twentyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.27.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 27 - Maximum Current</label>
+            <sensorSet>Master Output 27</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twentyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.28.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 28 - Maximum Current</label>
+            <sensorSet>Master Output 28</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_twentynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_TWENTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.29.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 29 - Maximum Current</label>
+            <sensorSet>Master Output 29</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.30.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 30 - Maximum Current</label>
+            <sensorSet>Master Output 30</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.31.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 31 - Maximum Current</label>
+            <sensorSet>Master Output 31</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.32.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 32 - Maximum Current</label>
+            <sensorSet>Master Output 32</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirtythree">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.33.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 33 - Maximum Current</label>
+            <sensorSet>Master Output 33</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirtyfour">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.34.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 34 - Maximum Current</label>
+            <sensorSet>Master Output 34</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirtyfive">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.35.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 35 - Maximum Current</label>
+            <sensorSet>Master Output 35</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirtysix">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.36.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 36 - Maximum Current</label>
+            <sensorSet>Master Output 36</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirtyseven">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.37.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 37 - Maximum Current</label>
+            <sensorSet>Master Output 37</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirtyeight">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.38.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 38 - Maximum Current</label>
+            <sensorSet>Master Output 38</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_thirtynine">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_THIRTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.39.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 39 - Maximum Current</label>
+            <sensorSet>Master Output 39</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_fourty">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_FOURTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.40.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 40 - Maximum Current</label>
+            <sensorSet>Master Output 40</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_fourtyone">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_FOURTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.41.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 41 - Maximum Current</label>
+            <sensorSet>Master Output 41</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_maximum_current_fourtytwo">
+            <type>amperage</type>
+            <sensorId>MASTER_OUTPUT_MAXIMUM_CURRENT_FOURTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.8.5.42.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 42 - Maximum Current</label>
+            <sensorSet>Master Output 42</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_one">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_ONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.1.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 1 - Power Factor</label>
+            <sensorSet>Master Output 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_two">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.2.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 2 - Power Factor</label>
+            <sensorSet>Master Output 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_three">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 3 - Power Factor</label>
+            <sensorSet>Master Output 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_four">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_FOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.4.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 4 - Power Factor</label>
+            <sensorSet>Master Output 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_five">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_FIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.5.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 5 - Power Factor</label>
+            <sensorSet>Master Output 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_six">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_SIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.6.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 6 - Power Factor</label>
+            <sensorSet>Master Output 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_seven">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_SEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.7.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 7 - Power Factor</label>
+            <sensorSet>Master Output 7</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_eight">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_EIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.8.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 8 - Power Factor</label>
+            <sensorSet>Master Output 8</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_nine">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_NINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.9.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 9 - Power Factor</label>
+            <sensorSet>Master Output 9</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_ten">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.10.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 10 - Power Factor</label>
+            <sensorSet>Master Output 10</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_eleven">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_ELEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.11.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 11 - Power Factor</label>
+            <sensorSet>Master Output 11</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twel">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWEL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.12.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 12 - Power Factor</label>
+            <sensorSet>Master Output 12</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirteen">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.13.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 13 - Power Factor</label>
+            <sensorSet>Master Output 13</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_fourteen">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_FOURTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.14.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 14 - Power Factor</label>
+            <sensorSet>Master Output 14</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_fifteen">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_FIFTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.15.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 15 - Power Factor</label>
+            <sensorSet>Master Output 15</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_sixteen">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_SIXTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.16.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 16 - Power Factor</label>
+            <sensorSet>Master Output 16</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_seventeen">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_SEVENTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.17.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 17 - Power Factor</label>
+            <sensorSet>Master Output 17</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_eighteen">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_EIGHTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.18.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 18 - Power Factor</label>
+            <sensorSet>Master Output 18</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_nineteen">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_NINETEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.19.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 19 - Power Factor</label>
+            <sensorSet>Master Output 19</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twenty">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.20.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 20 - Power Factor</label>
+            <sensorSet>Master Output 20</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twentyone">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.21.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 21 - Power Factor</label>
+            <sensorSet>Master Output 21</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twentyonetwo">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTYONETWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.22.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 22 - Power Factor</label>
+            <sensorSet>Master Output 22</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twentythree">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.23.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 23 - Power Factor</label>
+            <sensorSet>Master Output 23</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twentyfour">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.24.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 24 - Power Factor</label>
+            <sensorSet>Master Output 24</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twentyfive">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.25.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 25 - Power Factor</label>
+            <sensorSet>Master Output 25</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twentysix">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.26.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 26 - Power Factor</label>
+            <sensorSet>Master Output 26</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twentyseven">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.27.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 27 - Power Factor</label>
+            <sensorSet>Master Output 27</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twentyeight">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.28.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 28 - Power Factor</label>
+            <sensorSet>Master Output 28</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_twentynine">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_TWENTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.29.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 29 - Power Factor</label>
+            <sensorSet>Master Output 29</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirty">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.30.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 30 - Power Factor</label>
+            <sensorSet>Master Output 30</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirtyone">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.31.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 31 - Power Factor</label>
+            <sensorSet>Master Output 31</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirtytwo">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.32.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 32 - Power Factor</label>
+            <sensorSet>Master Output 32</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirtythree">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.33.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 33 - Power Factor</label>
+            <sensorSet>Master Output 33</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirtyfour">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.34.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 34 - Power Factor</label>
+            <sensorSet>Master Output 34</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirtyfive">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.35.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 35 - Power Factor</label>
+            <sensorSet>Master Output 35</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirtysix">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.36.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 36 - Power Factor</label>
+            <sensorSet>Master Output 36</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirtyseven">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.37.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 37 - Power Factor</label>
+            <sensorSet>Master Output 37</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirtyeight">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.38.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 38 - Power Factor</label>
+            <sensorSet>Master Output 38</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_thirtynine">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_THIRTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.39.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 39 - Power Factor</label>
+            <sensorSet>Master Output 39</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_fourty">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_FOURTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.40.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 40 - Power Factor</label>
+            <sensorSet>Master Output 40</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_fourtyone">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_FOURTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.41.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 41 - Power Factor</label>
+            <sensorSet>Master Output 41</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_power_factor_fourtytwo">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_OUTPUT_POWER_FACTOR_FOURTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.9.42.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Master Output 42 - Power Factor</label>
+            <sensorSet>Master Output 42</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_one">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_ONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.1.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 1 - Energy</label>
+            <sensorSet>Master Output 1</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_two">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.2.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 2 - Energy</label>
+            <sensorSet>Master Output 2</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_three">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.3.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 3 - Energy</label>
+            <sensorSet>Master Output 3</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_four">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_FOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.4.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 4 - Energy</label>
+            <sensorSet>Master Output 4</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_five">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_FIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.5.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 5 - Energy</label>
+            <sensorSet>Master Output 5</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_six">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_SIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.6.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 6 - Energy</label>
+            <sensorSet>Master Output 6</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_seven">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_SEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.7.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 7 - Energy</label>
+            <sensorSet>Master Output 7</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_eight">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_EIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.8.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 8 - Energy</label>
+            <sensorSet>Master Output 8</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_nine">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_NINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.9.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 9 - Energy</label>
+            <sensorSet>Master Output 9</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_ten">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.10.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 10 - Energy</label>
+            <sensorSet>Master Output 10</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_eleven">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_ELEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.11.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 11 - Energy</label>
+            <sensorSet>Master Output 11</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twel">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWEL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.12.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 12 - Energy</label>
+            <sensorSet>Master Output 12</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirteen">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.13.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 13 - Energy</label>
+            <sensorSet>Master Output 13</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_fourteen">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_FOURTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.14.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 14 - Energy</label>
+            <sensorSet>Master Output 14</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_fifteen">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_FIFTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.15.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 15 - Energy</label>
+            <sensorSet>Master Output 15</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_sixteen">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_SIXTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.16.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 16 - Energy</label>
+            <sensorSet>Master Output 16</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_seventeen">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_SEVENTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.17.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 17 - Energy</label>
+            <sensorSet>Master Output 17</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_eighteen">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_EIGHTEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.18.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 18 - Energy</label>
+            <sensorSet>Master Output 18</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_nineteen">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_NINETEEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.19.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 19 - Energy</label>
+            <sensorSet>Master Output 19</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twenty">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.20.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 20 - Energy</label>
+            <sensorSet>Master Output 20</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twentyone">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.21.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 21 - Energy</label>
+            <sensorSet>Master Output 21</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twentyonetwo">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTYONETWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.22.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 22 - Energy</label>
+            <sensorSet>Master Output 22</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twentythree">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.23.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 23 - Energy</label>
+            <sensorSet>Master Output 23</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twentyfour">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.24.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 24 - Energy</label>
+            <sensorSet>Master Output 24</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twentyfive">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.25.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 25 - Energy</label>
+            <sensorSet>Master Output 25</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twentysix">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.26.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 26 - Energy</label>
+            <sensorSet>Master Output 26</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twentyseven">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.27.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 27 - Energy</label>
+            <sensorSet>Master Output 27</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twentyeight">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.28.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 28 - Energy</label>
+            <sensorSet>Master Output 28</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_twentynine">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_TWENTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.29.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 29 - Energy</label>
+            <sensorSet>Master Output 29</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirty">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.30.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 30 - Energy</label>
+            <sensorSet>Master Output 30</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirtyone">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.31.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 31 - Energy</label>
+            <sensorSet>Master Output 31</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirtytwo">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.32.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 32 - Energy</label>
+            <sensorSet>Master Output 32</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirtythree">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTYTHREE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.33.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 33 - Energy</label>
+            <sensorSet>Master Output 33</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirtyfour">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTYFOUR</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.34.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 34 - Energy</label>
+            <sensorSet>Master Output 34</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirtyfive">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTYFIVE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.35.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 35 - Energy</label>
+            <sensorSet>Master Output 35</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirtysix">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTYSIX</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.36.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 36 - Energy</label>
+            <sensorSet>Master Output 36</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirtyseven">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTYSEVEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.37.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 37 - Energy</label>
+            <sensorSet>Master Output 37</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirtyeight">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTYEIGHT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.38.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 38 - Energy</label>
+            <sensorSet>Master Output 38</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_thirtynine">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_THIRTYNINE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.39.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 39 - Energy</label>
+            <sensorSet>Master Output 39</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_fourty">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_FOURTY</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.40.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 40 - Energy</label>
+            <sensorSet>Master Output 40</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_fourtyone">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_FOURTYONE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.41.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 41 - Energy</label>
+            <sensorSet>Master Output 41</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_output_energy_fourtytwo">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_OUTPUT_ENERGY_FOURTYTWO</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30966.8.1.10.42.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Master Output 42 - Energy</label>
+            <sensorSet>Master Output 42</sensorSet>
+        </numSensor>
+        <valueMap ruleid="invalid_value-vm">
+          <valueIn>--</valueIn><valueOut>[false]</valueOut>
+          <valueIn>-- </valueIn><valueOut>[false]</valueOut>
+          <valueIn>*</valueIn><valueOut>[true]</valueOut>
+        </valueMap>
+
+	</device>
+
+</APC_DDF>

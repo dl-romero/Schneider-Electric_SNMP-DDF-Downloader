@@ -1,0 +1,1441 @@
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="pcoWeb_carnot_irc12_condensing_unit"
+	ddfname="[pcoWeb] Carnot IRC12 Condensing Unit"
+	ddfversion="2"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+	
+		SOURCE
+		\snmp\resources\mibs\carel\carnot\CoolPack_V1_014_MIB.MIB
+		\snmp\resources\mibs\carel\carnot\CoolPack_V1_014_WBMIB.MIB
+	
+		CAREL-coolpack-MIB | 08 September 2021
+	
+	-->
+	<device deviceid="pcoWeb_carnot_irc12_condensing_unit">
+		<oidMustExist ruleid="coolpackMIB_exists" oid=".1.3.6.1.4.1.9839.2.1" istree="yes"/>
+		<oidMustMatch ruleid="mib2objidtest" oid=".1.3.6.1.2.1.1.2.0">
+			<valueList>
+				<value>.1.3.6.1.4.1.8072.3.2.10</value>
+			</valueList>
+		</oidMustMatch>
+	
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Carnot</setProductData>
+		<setProductData ruleid="modeldata" field="model">IRC12 Condensing Unit</setProductData>
+		<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+
+        <alarmFlags ruleid="inrowunit_fault">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.5.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>In-Row Unit Fault</activeText>
+                    <inactiveText>In-Row Unit Fault Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>An In-Row Unit Fault condition exists.</activeText>
+                    <inactiveText>An In-Row Unit Fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cmp_discharge_hp">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.10.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Discharge Pressure Cut-Off</activeText>
+                    <inactiveText>High Discharge Pressure Cut-Off Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A High Discharge Pressure Cut-Off condition exists.</activeText>
+                    <inactiveText>A High Discharge Pressure Cut-Off condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cmp_proof_signal">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.11.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Proof Signal From VFD</activeText>
+                    <inactiveText>Compressor Proof Signal From VFD Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Compressor Proof Signal From VFD condition exists.</activeText>
+                    <inactiveText>A Compressor Proof Signal From VFD condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="freecool_off">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.31.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Free Cooling Disabled</activeText>
+                    <inactiveText>Free Cooling Disabled Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Free Cooling Disabled condition exists.</activeText>
+                    <inactiveText>A Free Cooling Disabled condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="serious_alarm_supervisor">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.32.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Supervisor Serious Alarm</activeText>
+                    <inactiveText>Supervisor Serious Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Supervisor Serious Alarm condition exists.</activeText>
+                    <inactiveText>A Supervisor Serious Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="phase_loss_relay">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.33.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Phase Loss Relay</activeText>
+                    <inactiveText>Phase Loss Relay Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Phase Loss Relay condition exists.</activeText>
+                    <inactiveText>A Phase Loss Relay condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="rcv_liquid_level">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.34.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Receiver Liquid Level Too High</activeText>
+                    <inactiveText>Receiver Liquid Level Too High Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Receiver Liquid Level Too High condition exists.</activeText>
+                    <inactiveText>A Receiver Liquid Level Too High condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cmp_oil">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.37.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Oil Level Warning</activeText>
+                    <inactiveText>Compressor Oil Level Warning Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Compressor Oil Level Warning condition exists.</activeText>
+                    <inactiveText>A Compressor Oil Level Warning condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cmp_manual_off">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.38.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Off by Digital Input (Physical Switch)</activeText>
+                    <inactiveText>Compressor Off by Digital Input (Physical Switch) Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>A Compressor Off by Digital Input (Physical Switch) condition exists.</activeText>
+                    <inactiveText>A Compressor Off by Digital Input (Physical Switch) condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cmp_freecooling">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.39.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Stopped in Free Cooling Mode</activeText>
+                    <inactiveText>Compressor Stopped in Free Cooling Mode Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Compressor Stopped in Free Cooling Mode condition exists.</activeText>
+                    <inactiveText>A Compressor Stopped in Free Cooling Mode condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cmp_status_off_pressure">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.40.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Off by Low Pressure</activeText>
+                    <inactiveText>Compressor Off by Low Pressure Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Compressor Off by Low Pressure condition exists.</activeText>
+                    <inactiveText>A Compressor Off by Low Pressure condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cmp_status_off_temperature">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.41.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Off by Low Temperature</activeText>
+                    <inactiveText>Compressor Off by Low Temperature Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Compressor Off by Low Temperature condition exists.</activeText>
+                    <inactiveText>A Compressor Off by Low Temperature condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cmp_pumpdown">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.42.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor in Pump Down Mode</activeText>
+                    <inactiveText>Compressor in Pump Down Mode Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Compressor in Pump Down Mode condition exists.</activeText>
+                    <inactiveText>A Compressor in Pump Down Mode condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="vfd_fault_di">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.44.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>VFD Fault by Digital Input Signal</activeText>
+                    <inactiveText>VFD Fault by Digital Input Signal Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>A VFD Fault by Digital Input Signal condition exists.</activeText>
+                    <inactiveText>A VFD Fault by Digital Input Signal condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="fc_bypass_feedback1">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.46.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Free Cooling Ball Valve Feedback Position 1</activeText>
+                    <inactiveText>Free Cooling Ball Valve Feedback Position 1 Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Free Cooling Ball Valve Feedback Position 1 condition exists.</activeText>
+                    <inactiveText>A Free Cooling Ball Valve Feedback Position 1 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="fc_bypass_feedback2">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.49.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Free Cooling Ball Valve Feedback Position 2</activeText>
+                    <inactiveText>Free Cooling Ball Valve Feedback Position 2 Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Free Cooling Ball Valve Feedback Position 2 condition exists.</activeText>
+                    <inactiveText>A Free Cooling Ball Valve Feedback Position 2 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="gc_fan_di_fault">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.53.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Gas Cooler Fan Fault by Digital Input</activeText>
+                    <inactiveText>Gas Cooler Fan Fault by Digital Input Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Input</category>
+                <description>
+                    <activeText>A Gas Cooler Fan Fault by Digital Input condition exists.</activeText>
+                    <inactiveText>A Gas Cooler Fan Fault by Digital Input condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_cmp_sla">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.54.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Safety Line Alarm</activeText>
+                    <inactiveText>Safety Line Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>A Safety Line Alarm condition exists.</activeText>
+                    <inactiveText>A Safety Line Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_cmp_oil">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.55.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Oil Alarm</activeText>
+                    <inactiveText>Compressor Oil Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Compressor Oil Alarm condition exists.</activeText>
+                    <inactiveText>A Compressor Oil Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_discharge_hp">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.56.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Pressure Alarm</activeText>
+                    <inactiveText>High Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A High Pressure Alarm condition exists.</activeText>
+                    <inactiveText>A High Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_rcv_hp">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.57.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Receiver Pressure Alarm</activeText>
+                    <inactiveText>High Receiver Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A High Receiver Pressure Alarm condition exists.</activeText>
+                    <inactiveText>A High Receiver Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_high_disch_tp">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.58.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Discharge Temperature Alarm</activeText>
+                    <inactiveText>High Discharge Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High Discharge Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High Discharge Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_low_disch_tp">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.59.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Discharge Temperature Alarm</activeText>
+                    <inactiveText>Low Discharge Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low Discharge Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low Discharge Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_rcv_lp">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.62.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Receiver Pressure Alarm</activeText>
+                    <inactiveText>Low Receiver Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Low Receiver Pressure Alarm condition exists.</activeText>
+                    <inactiveText>A Low Receiver Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_cmp_lp">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.63.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Low Pressure Alarm</activeText>
+                    <inactiveText>Compressor Low Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Compressor Low Pressure Alarm condition exists.</activeText>
+                    <inactiveText>A Compressor Low Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_low_superheat">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.64.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Superheat at Compressor Alarm</activeText>
+                    <inactiveText>Low Superheat at Compressor Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low Superheat at Compressor Alarm condition exists.</activeText>
+                    <inactiveText>A Low Superheat at Compressor Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_high_superheat">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.65.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Superheat at Compressor Alarm</activeText>
+                    <inactiveText>High Superheat at Compressor Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High Superheat at Compressor Alarm condition exists.</activeText>
+                    <inactiveText>A High Superheat at Compressor Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_high_rcv_level">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.66.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Liquid Level in Receiver Alarm</activeText>
+                    <inactiveText>High Liquid Level in Receiver Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A High Liquid Level in Receiver Alarm condition exists.</activeText>
+                    <inactiveText>A High Liquid Level in Receiver Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_cmp_no_proof">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.68.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor No Proof Alarm</activeText>
+                    <inactiveText>Compressor No Proof Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>A Compressor No Proof Alarm condition exists.</activeText>
+                    <inactiveText>A Compressor No Proof Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_gc_fan_fault">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.72.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Gas Cooler Fan Alarm</activeText>
+                    <inactiveText>Gas Cooler Fan Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>A Gas Cooler Fan Alarm condition exists.</activeText>
+                    <inactiveText>A Gas Cooler Fan Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_vfd_fault">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.73.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>VFD Fault Alarm</activeText>
+                    <inactiveText>VFD Fault Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>A VFD Fault Alarm condition exists.</activeText>
+                    <inactiveText>A VFD Fault Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_phase_loss_relay">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.74.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Phase Loss Alarm (Phases Unbalanced or Inverted)</activeText>
+                    <inactiveText>Phase Loss Alarm (Phases Unbalanced or Inverted) Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>A Phase Loss Alarm (Phases Unbalanced or Inverted) condition exists.</activeText>
+                    <inactiveText>A Phase Loss Alarm (Phases Unbalanced or Inverted) condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_prev_high_superheat">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.76.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Superheat Prevent Alarm</activeText>
+                    <inactiveText>High Superheat Prevent Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High Superheat Prevent Alarm condition exists.</activeText>
+                    <inactiveText>A High Superheat Prevent Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_bypassvalve1">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.85.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Bypass Valve 1 Alarm</activeText>
+                    <inactiveText>Bypass Valve 1 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Bypass</category>
+                <description>
+                    <activeText>A Bypass Valve 1 Alarm condition exists.</activeText>
+                    <inactiveText>A Bypass Valve 1 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_bypassvalve2">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.87.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Bypass Valve 2 Alarm</activeText>
+                    <inactiveText>Bypass Valve 2 Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Bypass</category>
+                <description>
+                    <activeText>A Bypass Valve 2 Alarm condition exists.</activeText>
+                    <inactiveText>A Bypass Valve 2 Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_cmp_lowdeltap">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.95.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Low Differential Pressure Alarm</activeText>
+                    <inactiveText>Compressor Low Differential Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Compressor Low Differential Pressure Alarm condition exists.</activeText>
+                    <inactiveText>A Compressor Low Differential Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_low_control_temp">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.96.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Control Temperature Alarm</activeText>
+                    <inactiveText>Low Control Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low Control Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low Control Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_high_control_temp">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.97.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Control Temperature Alarm</activeText>
+                    <inactiveText>High Control Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High Control Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High Control Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al_inrowonline">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.111.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>In-Row Unit Modbus Offline</activeText>
+                    <inactiveText>In-Row Unit Modbus Offline Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>An In-Row Unit Modbus Offline condition exists.</activeText>
+                    <inactiveText>An In-Row Unit Modbus Offline condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cmp_sla_stopped">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.112.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Compressor Stopped on SLA</activeText>
+                    <inactiveText>Compressor Stopped on SLA Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Compressor Stopped on SLA condition exists.</activeText>
+                    <inactiveText>A Compressor Stopped on SLA condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <numSensor ruleid="process_td">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.3.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>TD on Process Temperature</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cmp_out_msk">
+            <type>num</type>
+            <sensorId>_CMP_OUT_MSK</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.4.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Compressor Speed Output</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="control_temperature">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.22.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Control Temperature</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_return_temp">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.26.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>In-Row Cooling Return Temperature</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_supply_temp">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_4</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.27.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>In-Row Cooling Supply Temperature</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="supply_tp_msk">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_5</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.91.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Supply Temperature</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cmp_an_out">
+            <type>num</type>
+            <sensorId>_CMP_AN_OUT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.92.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Compressor Command to VFD</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="suction_setpoint_msk">
+            <type>pressure</type>
+            <sensorId>_SUCTION_SETPOINT_MSK</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.93.0</getOid></op>
+                    <op>10</op><!-- convert Bar to kPa | assumed original scaling is 0.1 -->
+                </mult>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Compressor Suction Pressure Setpoint</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="return_temperature_msk">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_6</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.94.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Return Temperature</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="suction_pressure_msk">
+            <type>pressure</type>
+            <sensorId>_SUCTION_PRESSURE_MSK</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.95.0</getOid></op>
+                    <op>10</op><!-- convert Bar to kPa | assumed original scaling is 0.1 -->
+                </mult>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Compressor Suction Pressure</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cmp_suction_temp_msk">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_7</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.96.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Compressor Suction Temperature</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cmp_superheat_msk">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_8</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.97.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Compressor Suction Superheat</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="discharge_pressure_msk">
+            <type>pressure</type>
+            <sensorId>_DISCHARGE_PRESSURE_MSK</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.98.0</getOid></op>
+                    <op>10</op><!-- convert Bar to kPa | assumed original scaling is 0.1 -->
+                </mult>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Compressor Discharge Pressure</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="discharge_temperature_msk">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_9</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.99.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Compressor Discharge Temperature</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="eev_suction_temp_msk">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_10</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.101.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Evaporator Suction Temperature</label>
+            <sensorSet>Evaporator</sensorSet>
+        </numSensor>
+        <numSensor ruleid="eev_superheat_msk">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_11</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.102.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Evaporator Superheat</label>
+            <sensorSet>Evaporator</sensorSet>
+        </numSensor>
+        <numSensor ruleid="eev_regulation_out_msk">
+            <type>pctofcapacity</type>
+            <sensorId>_EEV_REGULATION_OUT_MSK</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.103.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>EEV Percent Opening</label>
+            <sensorSet>EEV</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hpv_setpoint_msk">
+            <type>pressure</type>
+            <sensorId>_HPV_SETPOINT_MSK</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.104.0</getOid></op>
+                    <op>10</op><!-- convert Bar to kPa | assumed original scaling is 0.1 -->
+                </mult>
+            </value>
+            <valueInc>1</valueInc>
+            <label>HPV Pressure Setpoint</label>
+            <sensorSet>HPV</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hpv_regulation_out_msk">
+            <type>pctofcapacity</type>
+            <sensorId>_HPV_REGULATION_OUT_MSK</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.105.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>HPV Percent Opening</label>
+            <sensorSet>HPV</sensorSet>
+        </numSensor>
+        <numSensor ruleid="rcv_pressure_msk">
+            <type>pressure</type>
+            <sensorId>_RCV_PRESSURE_MSK</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.106.0</getOid></op>
+                    <op>10</op><!-- convert Bar to kPa | assumed original scaling is 0.1 -->
+                </mult>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Receiver Pressure</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="rcv_temperature_msk">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_12</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.107.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Receiver Liquid Temperature</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="rprv_regulation_out_msk">
+            <type>pctofcapacity</type>
+            <sensorId>_RPRV_REGULATION_OUT_MSK</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.108.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>RPRV Percent Opening</label>
+            <sensorSet>RPRV</sensorSet>
+        </numSensor>
+        <numSensor ruleid="freecoolingbypassopen">
+            <type>pctofcapacity</type>
+            <sensorId>_FREECOOLINGBYPASSOPEN</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.109.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Free Cooling Bypass Percent Open</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="gc_out">
+            <type>num</type>
+            <sensorId>_GC_OUT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.110.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Gas Cooler Output Signal</label>
+            <sensorSet>Gas Cooler</sensorSet>
+        </numSensor>
+        <numSensor ruleid="gc_temperature_msk">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_13</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.111.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Gas Cooler Return Temperature</label>
+            <sensorSet>Gas Cooler</sensorSet>
+        </numSensor>
+        <numSensor ruleid="oat_msk">
+            <type>temp</type>
+            <sensorId>OUTDOOR_AIR_TEMPERATURE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.112.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>External Temperature</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="emeter_power">
+            <type>num/powerKW</type>
+            <sensorId>SINGLE_PHASE_KW_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.115.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Energy Meter Power</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="gc_fc_pgain">
+            <type>num</type>
+            <sensorId>_GC_FC_PGAIN</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.121.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Gas Cooler Prop Gain in Free Cooling</label>
+            <sensorSet>Gas Cooler</sensorSet>
+        </numSensor>
+        <numSensor ruleid="control_temp_p_band">
+            <type>temp</type>
+            <sensorId>_CONTROL_TEMP_P_BAND</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.130.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Control Temperature Proportional Band</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="control_temperature_stpt">
+            <type>temp</type>
+            <sensorId>_CONTROL_TEMPERATURE_STPT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.132.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Control Temperature Setpoint</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_main">
+            <type>amperage</type>
+            <sensorId>CURRENT_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.133.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Main Line Current</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_cmp1">
+            <type>amperage</type>
+            <sensorId>CURRENT_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.134.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Compressor 1 Current</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_cmp2">
+            <type>amperage</type>
+            <sensorId>CURRENT_3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.135.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Compressor 2 Current</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_fan1">
+            <type>amperage</type>
+            <sensorId>CURRENT_4</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.136.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Fan 1 Current</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_fan2">
+            <type>amperage</type>
+            <sensorId>CURRENT_5</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.137.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Fan 2 Current</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_fan3">
+            <type>amperage</type>
+            <sensorId>CURRENT_6</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.138.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Fan 3 Current</label>
+            <sensorSet>Fan</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_gc">
+            <type>amperage</type>
+            <sensorId>CURRENT_7</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.139.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Gas Cooler Current</label>
+            <sensorSet>Gas Cooler</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_gcfan1">
+            <type>amperage</type>
+            <sensorId>CURRENT_8</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.140.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Gas Cooler Fan 1 Current</label>
+            <sensorSet>Gas Cooler</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_gcfan2">
+            <type>amperage</type>
+            <sensorId>CURRENT_9</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.141.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Gas Cooler Fan 2 Current</label>
+            <sensorSet>Gas Cooler</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ct_gcfan3">
+            <type>amperage</type>
+            <sensorId>CURRENT_10</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.142.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Gas Cooler Fan 3 Current</label>
+            <sensorSet>Gas Cooler</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_fan_speed">
+            <type>pctofcapacity</type>
+            <sensorId>_UNIT_FAN_SPEED</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.150.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>In-Row Unit Fan Speed</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_co2_liquid_pressure">
+            <type>pressure</type>
+            <sensorId>_INROW_CO2_LIQUID_PRESSURE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.151.0</getOid></op>
+                    <op>10</op><!-- convert Bar to kPa | assumed original scaling is 0.1 -->
+                </mult>
+            </value>
+            <valueInc>1</valueInc>
+            <label>In-Row Unit CO2 Pressure</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_cool_setpoint">
+            <type>temp</type>
+            <sensorId>_INROW_COOL_SETPOINT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.152.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>In-Row Unit Cooling Setpoint</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_supply_air_setpoint">
+            <type>temp</type>
+            <sensorId>_INROW_SUPPLY_AIR_SETPOINT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.153.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>In-Row Unit Supply Air Setpoint</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_supply_air_temp">
+            <type>temp</type>
+            <sensorId>SUPPLY_AIR_TEMPERATURE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.154.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>In-Row Unit Supply Air Temperature</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_return_air_temp">
+            <type>temp</type>
+            <sensorId>RETURN_AIR_TEMPERATURE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.155.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>In-Row Unit Return Air Temperature</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_co2_supply_liquid_temp">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_14</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.156.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>In-Row Unit CO2 Supply Temperature</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_co2_return_gas_temp">
+            <type>temp</type>
+            <sensorId>UNIT_OUTSIDE_AIR_TEMPERATURE_1_1_15</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.157.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>In-Row Unit CO2 Return Temperature</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cmp_deltap">
+            <type>pressure</type>
+            <sensorId>_CMP_DELTAP</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.161.0</getOid></op>
+                    <op>10</op><!-- convert Bar to kPa | assumed original scaling is 0.1 -->
+                </mult>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Compressor Pressure Differential</label>
+            <sensorSet>Compressor</sensorSet>
+        </numSensor>
+        <numSensor ruleid="emeter_energy_l">
+            <type>num/kwatthr</type>
+            <sensorId>_EMETER_ENERGY_L</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.3.8.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Energy Meter Energy</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="oilcount_total">
+            <type>num</type>
+            <sensorId>_OILCOUNT_TOTAL</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.3.50.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Count of Low Oil Level in Last 24h</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="eev_step_position">
+            <type>num</type>
+            <sensorId>_EEV_STEP_POSITION</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.3.51.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>EEV Position in Step</label>
+            <sensorSet>EEV</sensorSet>
+        </numSensor>
+
+		<valueMap ruleid="hpv_status-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>7</valueIn><valueOut>7</valueOut>
+			<valueIn>8</valueIn><valueOut>8</valueOut>
+			<valueIn>*</valueIn><valueOut>9</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="hpv_status-em">
+			<label>TC Zone2</label>
+			<label>TC Zone1</label>
+			<label>Transition Down</label>
+			<label>Transition Up</label>
+			<label>SC Zone</label>
+			<label>Subcool Optimization</label>
+			<label>Low Temp Zone</label>
+			<label>High Pressure Zone</label>
+			<label>RPRV Overide</label>
+			<label>Unknown</label>
+		</enumMap>
+
+        <stateSensor ruleid="hpv_status">
+            <type>state</type>
+            <sensorId>_HPV_STATUS</sensorId>
+            <value>
+                <mapValue mapid="hpv_status-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.3.52.0</getOid>
+                </mapValue>
+            </value>
+            <label>HPV Regulation Status</label>
+            <enum>hpv_status-em</enum>
+            <sensorSet>HPV</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="hpv_step_position">
+            <type>num</type>
+            <sensorId>_HPV_STEP_POSITION</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.3.53.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>HPV Position in Steps</label>
+            <sensorSet>HPV</sensorSet>
+        </numSensor>
+        <numSensor ruleid="rprv_step_position">
+            <type>num</type>
+            <sensorId>_RPRV_STEP_POSITION</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.3.54.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>RPRV Step Position</label>
+            <sensorSet>RPRV</sensorSet>
+        </numSensor>
+        <numSensor ruleid="gc_fan_rpm_out">
+            <type>fanspeed</type>
+            <sensorId>_GC_FAN_RPM_OUT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.9839.2.1.3.57.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Calculated RPM of Gas Cooler Fan</label>
+            <sensorSet>Gas Cooler</sensorSet>
+        </numSensor>
+        <numSensor ruleid="emeter_voltage">
+            <type>voltage</type>
+            <sensorId>_EMETER_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.3.64.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Energy Meter Voltage</label>
+            <sensorSet>Energy Meter</sensorSet>
+        </numSensor>
+        <numSensor ruleid="totalwgt">
+            <type>temp</type>
+            <sensorId>_TOTALWGT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.3.69.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Control Temperature: Total Weighted Average Calculation</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="inrow_unit_air_flow">
+            <type>volairflow</type>
+            <sensorId>_INROW_UNIT_AIR_FLOW</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.3.88.0</getOid></op>
+                    <op>28.31685</op><!-- convert cfm to L/m -->
+                </mult>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>In-Row Unit Air Flow</label>
+            <sensorSet>In-Row Cooling</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cmp_lowdeltap_count">
+            <type>num</type>
+            <sensorId>_CMP_LOWDELTAP_COUNT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.3.91.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Count of Low CMP Delta P</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+
+	</device>
+</APC_DDF>

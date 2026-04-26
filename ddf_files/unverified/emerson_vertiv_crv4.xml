@@ -1,0 +1,1808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid ="emerson_vertiv_crv4" 		
+	ddfname="Emerson Vertiv CRV4" 	
+	ddfversion="1" 					
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+		DATE: December 2024
+		SOURCE: ENP_AC_CRV4[COM]-MIB.mib
+		WALKFILES: Vertiv_CRV4_SIC_G2.walk 
+
+	-->
+	<device deviceid="emerson_vertiv_crv4">
+		<oidMustExist ruleid="emerson_vertiv_crv4_mustexist" oid=".1.3.6.1.4.1.13400.2.382" istree="yes"/>
+		
+		<suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+		
+		<setProductData ruleid="vendordata" field="vendor"><getOid>.1.3.6.1.4.1.13400.2.382.1.1.0</getOid></setProductData>
+		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.13400.2.382.1.2.0</getOid></setProductData>
+       	<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+		
+		<setLocationData ruleid="devicenumber" field="NOTES"><getOid>.1.3.6.1.4.1.13400.2.382.1.3.0</getOid></setLocationData>
+		
+		<valueMap ruleid="monitoringState-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>*</valueIn><valueOut>1</valueOut>
+		</valueMap>
+		<valueMap ruleid="2state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<valueMap ruleid="3state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<valueMap ruleid="5state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>*</valueIn><valueOut>5</valueOut>
+		</valueMap>
+		<valueMap ruleid="9state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>7</valueIn><valueOut>7</valueOut>
+			<valueIn>8</valueIn><valueOut>8</valueOut>
+			<valueIn>*</valueIn><valueOut>9</valueOut>
+		</valueMap>
+		
+		<enumMap ruleid="monitoringOn-em">
+			<label>On</label>
+			<label>Unknown</label>
+		</enumMap>
+		<enumMap ruleid="monitoringOff-em">
+			<label>Off</label>
+			<label>Unknown</label>
+		</enumMap>
+		<enumMap ruleid="normalAlarm-em">
+			<label>Normal</label>
+			<label>Alarm</label>
+			<label>Unknown</label>
+		</enumMap>
+		<enumMap ruleid="offOn-em">
+			<label>Off</label>
+			<label>On</label>
+			<label>Unknown</label>
+		</enumMap>
+		<enumMap ruleid="operatingState-em">
+			<label>Run</label>
+			<label>Turn off</label>
+			<label>Standby</label>
+			<label>Unknown</label>
+		</enumMap>		
+		<enumMap ruleid="turnOffType-em">
+			<label>Run</label>
+			<label>Standby</label>
+			<label>Display off</label>
+			<label>Remote off</label>
+			<label>Monitoring off</label>
+			<label>Unknown</label>
+		</enumMap>		
+		<enumMap ruleid="teamworkStatus-em">
+			<label>Single</label>
+			<label>Teamwork mode 0</label>
+			<label>Teamwork mode 1</label>
+			<label>Teamwork mode 2</label>
+			<label>Teamwork mode 3</label>
+			<label>Unknown</label>
+		</enumMap>
+		<enumMap ruleid="controlMode-em">
+			<label>Return air average temperature</label>
+			<label>Return air maximum temperature</label>
+			<label>Return air minimum temperature</label>
+			<label>Air supply average temperature</label>
+			<label>Supply air maximum temperature</label>
+			<label>Supply air minimum temperature</label>
+			<label>Remote average temperature</label>
+			<label>Remote maximum temperature</label>
+			<label>Remote minimum temperature</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<stateSensor ruleid="cooling_status">
+			<type>state</type>
+			<sensorId>COOLING</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.2.104.0</getOid>
+				</mapValue>
+			</value>
+			<label>Cooling</label>
+			<enum>offOn-em</enum>
+			<sensorSet>System - Group 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="heating_status">
+			<type>state</type>
+			<sensorId>HEATING</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.2.105.0</getOid>
+				</mapValue>
+			</value>
+			<label>Heating</label>
+			<enum>offOn-em</enum>
+			<sensorSet>System - Group 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="humidifying_status">
+			<type>state</type>
+			<sensorId>HUMIDIFYING</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.2.106.0</getOid>
+				</mapValue>
+			</value>
+			<label>Humidifying</label>
+			<enum>offOn-em</enum>
+			<sensorSet>System - Group 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="dehumidifying_status">
+			<type>state</type>
+			<sensorId>DEHUMIDIFYING</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.2.107.0</getOid>
+				</mapValue>
+			</value>
+			<label>Dehumidifying</label>
+			<enum>offOn-em</enum>
+			<sensorSet>System - Group 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="systemoperatingstate">
+			<type>state</type>
+			<sensorId>SYSTEM_OPERATING_STATE</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.2.108.0</getOid>
+				</mapValue>
+			</value>
+			<label>System Operating State</label>
+			<enum>operatingState-em</enum>
+			<sensorSet>System - Group 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="teamworkstatus">
+			<type>state</type>
+			<sensorId>TEAMWORK_STATUS</sensorId>
+			<value>
+				<mapValue mapid="5state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.2.109.0</getOid>
+				</mapValue>
+			</value>
+			<label>Teamwork Status</label>
+			<enum>teamworkStatus-em</enum>
+			<sensorSet>System - Group 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="turnofftype">
+			<type>state</type>
+			<sensorId>TURN_OFF_TYPE</sensorId>
+			<value>
+				<mapValue mapid="5state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.2.110.0</getOid>
+				</mapValue>
+			</value>
+			<label>Turn Off Type</label>
+			<enum>turnOffType-em</enum>
+			<sensorSet>System - Group 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="fancontrolmode">
+			<type>state</type>
+			<sensorId>FAN_CONTROL_MODE</sensorId>
+			<value>
+				<mapValue mapid="9state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.2.111.0</getOid>
+				</mapValue>
+			</value>
+			<label>Fan Control Mode</label>
+			<enum>controlMode-em</enum>
+			<sensorSet>System - Group 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="compressorcontrolmode">
+			<type>state</type>
+			<sensorId>COMPRESSOR_CONTROL_MODE</sensorId>
+			<value>
+				<mapValue mapid="9state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.2.112.0</getOid>
+				</mapValue>
+			</value>
+			<label>Compressor Control Mode</label>
+			<enum>controlMode-em</enum>
+			<sensorSet>System - Group 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="monitoringon">
+			<type>state</type>
+			<sensorId>MONITORING_ON</sensorId>
+			<value>
+				<mapValue mapid="monitoringState-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.3.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>Monitoring On</label>
+			<enum>monitoringOn-em</enum>
+			<sensorSet>System - Group 3</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="monitoringoff">
+			<type>state</type>
+			<sensorId>MONITORING_OFF</sensorId>
+			<value>
+				<mapValue mapid="monitoringState-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.382.2.3.2.0</getOid>
+				</mapValue>
+			</value>
+			<label>Monitoring Off</label>
+			<enum>monitoringOff-em</enum>
+			<sensorSet>System - Group 3</sensorSet>
+		</stateSensor>
+
+		<numSensor ruleid="phaseavoltage">
+			<type>voltage</type>
+			<sensorId>PHASE_A_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.63.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Phase A Voltage</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="phasebvoltage">
+			<type>voltage</type>
+			<sensorId>PHASE_B_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.64.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Phase B Voltage</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="phasecvoltage">
+			<type>voltage</type>
+			<sensorId>PHASE_C_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.65.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Phase C Voltage</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="powerfrequency">
+			<type>frequency</type>
+			<sensorId>POWER_FREQUENCY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.66.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Power Frequency</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="returnairtemperature1">
+			<type>temp</type>
+			<sensorId>RETURN_AIR_TEMPERATURE_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.67.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Return Air Temperature 1</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="returnairtemperature2">
+			<type>temp</type>
+			<sensorId>RETURN_AIR_TEMPERATURE_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.68.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Return Air Temperature 2</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="returnairtemperature3">
+			<type>temp</type>
+			<sensorId>RETURN_AIR_TEMPERATURE_3</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.69.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Return Air Temperature 3</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="returnairhumidity1">
+			<type>humidity</type>
+			<sensorId>RETURN_AIR_HUMIDITY_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.70.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Return Air Humidity 1</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="returnairhumidity2">
+			<type>humidity</type>
+			<sensorId>RETURN_AIR_HUMIDITY_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.71.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Return Air Humidity 2</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="returnairhumidity3">
+			<type>humidity</type>
+			<sensorId>RETURN_AIR_HUMIDITY_3</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.72.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Return Air Humidity 3</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="supplyairtemperature1">
+			<type>temp</type>
+			<sensorId>SUPPLY_AIR_TEMPERATURE_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.73.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Supply Air Temperature 1</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="supplyairtemperature2">
+			<type>temp</type>
+			<sensorId>SUPPLY_AIR_TEMPERATURE_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.74.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Supply Air Temperature 2</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="supplyairtemperature3">
+			<type>temp</type>
+			<sensorId>SUPPLY_AIR_TEMPERATURE_3</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.75.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Supply Air Temperature 3</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="supplyairhumidity1">
+			<type>humidity</type>
+			<sensorId>SUPPLY_AIR_HUMIDITY_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.76.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Supply Air Humidity 1</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="supplyairhumidity2">
+			<type>humidity</type>
+			<sensorId>SUPPLY_AIR_HUMIDITY_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.77.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Supply Air Humidity 2</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="supplyairhumidity3">
+			<type>humidity</type>
+			<sensorId>SUPPLY_AIR_HUMIDITY_3</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.78.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Supply Air Humidity 3</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature1">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.79.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 1</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature2">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.80.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 2</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature3">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_3</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.81.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 3</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature4">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_4</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.82.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 4</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature5">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_5</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.83.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 5</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature6">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_6</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.84.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 6</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature7">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_7</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.85.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 7</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature8">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_8</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.86.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 8</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature9">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_9</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.87.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 9</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperature10">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_10</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.88.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature 10</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity1">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.89.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 1</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity2">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.90.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 2</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity3">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_3</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.91.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 3</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity4">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_4</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.92.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 4</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity5">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_5</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.93.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 5</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity6">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_6</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.94.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 6</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity7">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_7</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.95.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 7</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity8">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_8</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.96.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 8</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity9">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_9</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.97.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 9</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairhumidity10">
+			<type>humidity</type>
+			<sensorId>REMOTE_AIR_HUMIDITY_10</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.98.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Humidity 10</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="staticpressure1">
+			<type>pressure</type>
+			<sensorId>STATIC_PRESSURE_1</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.382.2.2.99.0</getOid></op>
+					<op>x0.001</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Static Pressure 1</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="staticpressure2">
+			<type>pressure</type>
+			<sensorId>STATIC_PRESSURE_2</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.382.2.2.100.0</getOid></op>
+					<op>x0.001</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Static Pressure 2</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="fanspeed1">
+			<type>fanspeed</type>
+			<sensorId>FAN_SPEED_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.101.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Fan Speed 1</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="fanspeed2">
+			<type>fanspeed</type>
+			<sensorId>FAN_SPEED_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.102.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Fan Speed 2</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="compressorcapacity1">
+			<type>num</type>
+			<sensorId>COMPRESSOR_CAPACITY_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.103.0 </getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Compressor Capacity 1</label>
+			<sensorSet>System - Group 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="returnairtemperaturesetpoint">
+			<type>temp</type>
+			<sensorId>RETURN_AIR_TEMPERATURE_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.1.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Return Air Temperature Setpoint</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+		<numSensor ruleid="supplyairtemperaturesetpoint">
+			<type>temp</type>
+			<sensorId>SUPPLY_AIR_TEMPERATURE_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.2.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Supply Air Temperature Setpoint</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remoteairtemperaturesetpoint">
+			<type>temp</type>
+			<sensorId>REMOTE_AIR_TEMPERATURE_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.3.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Air Temperature Setpoint</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+		<numSensor ruleid="humiditysetpoint">
+			<type>humidity</type>
+			<sensorId>HUMIDITY_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.4.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Humidity Setpoint</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+		<numSensor ruleid="temperatureproportionalband">
+			<type>temp</type>
+			<sensorId>TEMPERATURE_PROPORTIONAL_BAND</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.5.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Temperature Proportional Band</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+		<numSensor ruleid="humidityproportionalband">
+			<type>humidity</type>
+			<sensorId>HUMIDITY_PROPORTIONAL_BAND</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.6.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Humidity Proportional Band</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+		<numSensor ruleid="returnairhumiditysetpoint">
+			<type>humidity</type>
+			<sensorId>RETURN_AIR_HUMIDITY_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.7.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Return Air Humidity Setpoint</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remotehumiditysetpoint">
+			<type>humidity</type>
+			<sensorId>REMOTE_HUMIDITY_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.8.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Remote Humidity Setpoint</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+		<numSensor ruleid="fantemperaturedifferencesetpoint">
+			<type>temp</type>
+			<units></units>
+			<sensorId>FAN_TEMPERATURE_DIFFERENCE_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.9.0</getOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Fan Temperature Difference Setpoint</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+		<numSensor ruleid="lognumberset">
+			<type>num</type>
+			<units></units>
+			<sensorId>LOG_NUMBER_SET</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.4.10.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Log Number Set</label>
+			<sensorSet>System - Group 4</sensorSet>
+		</numSensor>
+
+		<alarmFlags ruleid="remoteshutdownalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.1.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Remote Shutdown Alarm Present</activeText>
+					<inactiveText>Remote Shutdown Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Remote Shutdown Alarm Present</activeText>
+					<inactiveText>Remote Shutdown Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="waterunderflooralarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.2.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Water Under Floor Alarm Present</activeText>
+					<inactiveText>Water Under Floor Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Water Under Floor Alarm Present</activeText>
+					<inactiveText>Water Under Floor Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="smokealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.3.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Smoke Alarm Present</activeText>
+					<inactiveText>Smoke Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Smoke Alarm Present</activeText>
+					<inactiveText>Smoke Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="firealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.4.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Fire Alarm Present</activeText>
+					<inactiveText>Fire Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Fire Alarm Present</activeText>
+					<inactiveText>Fire Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="surgeprotectiondevicealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.5.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Surge Protection Device Alarm Present</activeText>
+					<inactiveText>Surge Protection Device Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Surge Protection Device Alarm Present</activeText>
+					<inactiveText>Surge Protection Device Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="customalarm1">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.6.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Custom Alarm 1 Present</activeText>
+					<inactiveText>Custom Alarm 1 Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Custom Alarm 1 Present</activeText>
+					<inactiveText>Custom Alarm 1 Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="customalarm2">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.7.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Custom Alarm 2 Present</activeText>
+					<inactiveText>Custom Alarm 2 Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Custom Alarm 2 Present</activeText>
+					<inactiveText>Custom Alarm 2 Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lossofpoweralarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.8.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Loss Of Power Alarm Present</activeText>
+					<inactiveText>Loss Of Power Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Loss Of Power Alarm Present</activeText>
+					<inactiveText>Loss Of Power Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="powerovervoltagealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.9.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Power Over Voltage Alarm Present</activeText>
+					<inactiveText>Power Over Voltage Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Power Over Voltage Alarm Present</activeText>
+					<inactiveText>Power Over Voltage Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="powerundervoltagealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.10.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Power Under Voltage Alarm Present</activeText>
+					<inactiveText>Power Under Voltage Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Power Under Voltage Alarm Present</activeText>
+					<inactiveText>Power Under Voltage Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="powerfrequencyoffsetalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.11.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Power Frequency Offset Alarm Present</activeText>
+					<inactiveText>Power Frequency Offset Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Power Frequency Offset Alarm Present</activeText>
+					<inactiveText>Power Frequency Offset Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="powerlossofphasealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.12.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Power Loss Of Phase Alarm Present</activeText>
+					<inactiveText>Power Loss Of Phase Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Power Loss Of Phase Alarm Present</activeText>
+					<inactiveText>Power Loss Of Phase Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="poweroppositephasealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.13.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Power Opposite Phase Alarm Present</activeText>
+					<inactiveText>Power Opposite Phase Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Power Opposite Phase Alarm Present</activeText>
+					<inactiveText>Power Opposite Phase Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="filtermaintenancealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.14.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Filter Maintenance Alarm Present</activeText>
+					<inactiveText>Filter Maintenance Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Filter Maintenance Alarm Present</activeText>
+					<inactiveText>Filter Maintenance Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="fanfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.15.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Fan Failure Present</activeText>
+					<inactiveText>Fan Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Fan Failure Present</activeText>
+					<inactiveText>Fan Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="electricheateralarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.16.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Electric Heater Alarm Present</activeText>
+					<inactiveText>Electric Heater Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Electric Heater Alarm Present</activeText>
+					<inactiveText>Electric Heater Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="humidifierfailurealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.17.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Humidifier Failure Alarm Present</activeText>
+					<inactiveText>Humidifier Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Humidifier Failure Alarm Present</activeText>
+					<inactiveText>Humidifier Failure Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="filtercloggingalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.18.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Filter Clogging Alarm Present</activeText>
+					<inactiveText>Filter Clogging Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Filter Clogging Alarm Present</activeText>
+					<inactiveText>Filter Clogging Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lossofairflow">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.19.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Loss Of Air Flow Present</activeText>
+					<inactiveText>Loss Of Air Flow Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Loss Of Air Flow Present</activeText>
+					<inactiveText>Loss Of Air Flow Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="condensationhighwaterlevelalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.20.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Condensation High Water Level Alarm Present</activeText>
+					<inactiveText>Condensation High Water Level Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Condensation High Water Level Alarm Present</activeText>
+					<inactiveText>Condensation High Water Level Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highreturnairtemperaturealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.21.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Return Air Temperature Alarm Present</activeText>
+					<inactiveText>High Return Air Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Return Air Temperature Alarm Present</activeText>
+					<inactiveText>High Return Air Temperature Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowreturnairtemperaturealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.22.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Return Air Temperature Alarm Present</activeText>
+					<inactiveText>Low Return Air Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Return Air Temperature Alarm Present</activeText>
+					<inactiveText>Low Return Air Temperature Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highsupplyairtemperaturealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.23.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Supply Air Temperature Alarm Present</activeText>
+					<inactiveText>High Supply Air Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Supply Air Temperature Alarm Present</activeText>
+					<inactiveText>High Supply Air Temperature Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowsupplyairtemperaturealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.24.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Supply Air Temperature Alarm Present</activeText>
+					<inactiveText>Low Supply Air Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Supply Air Temperature Alarm Present</activeText>
+					<inactiveText>Low Supply Air Temperature Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highremoteairtemperaturealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.25.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Remote Air Temperature Alarm Present</activeText>
+					<inactiveText>High Remote Air Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Remote Air Temperature Alarm Present</activeText>
+					<inactiveText>High Remote Air Temperature Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowremoteairtemperaturealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.26.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Remote Air Temperature Alarm Present</activeText>
+					<inactiveText>Low Remote Air Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Remote Air Temperature Alarm Present</activeText>
+					<inactiveText>Low Remote Air Temperature Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highreturnairhumidityalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.27.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Return Air Humidity Alarm Present</activeText>
+					<inactiveText>High Return Air Humidity Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Return Air Humidity Alarm Present</activeText>
+					<inactiveText>High Return Air Humidity Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowreturnairhumidityalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.28.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Return Air Humidity Alarm Present</activeText>
+					<inactiveText>Low Return Air Humidity Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Return Air Humidity Alarm Present</activeText>
+					<inactiveText>Low Return Air Humidity Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highremoteairhumidityalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.29.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Remote Air Humidity Alarm Present</activeText>
+					<inactiveText>High Remote Air Humidity Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Remote Air Humidity Alarm Present</activeText>
+					<inactiveText>High Remote Air Humidity Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowremoteairhumidityalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.30.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Remote Air Humidity Alarm Present</activeText>
+					<inactiveText>Low Remote Air Humidity Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Remote Air Humidity Alarm Present</activeText>
+					<inactiveText>Low Remote Air Humidity Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="returnairtemperaturesensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.31.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Return Air Temperature Sensor Failure Present</activeText>
+					<inactiveText>Return Air Temperature Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Return Air Temperature Sensor Failure Present</activeText>
+					<inactiveText>Return Air Temperature Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="returnairhumiditysensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.32.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Return Air Humidity Sensor Failure Present</activeText>
+					<inactiveText>Return Air Humidity Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Return Air Humidity Sensor Failure Present</activeText>
+					<inactiveText>Return Air Humidity Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="supplyairtemperaturesensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.33.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Supply Air Temperature Sensor Failure Present</activeText>
+					<inactiveText>Supply Air Temperature Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Supply Air Temperature Sensor Failure Present</activeText>
+					<inactiveText>Supply Air Temperature Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="airsupplyhumiditysensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.34.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Air Supply Humidity Sensor Failure Present</activeText>
+					<inactiveText>Air Supply Humidity Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Air Supply Humidity Sensor Failure Present</activeText>
+					<inactiveText>Air Supply Humidity Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="remoteairtemperaturesensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.35.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Remote Air Temperature Sensor Failure Present</activeText>
+					<inactiveText>Remote Air Temperature Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Remote Air Temperature Sensor Failure Present</activeText>
+					<inactiveText>Remote Air Temperature Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="remoteairhumiditysensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.36.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Remote Air Humidity Sensor Failure Present</activeText>
+					<inactiveText>Remote Air Humidity Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Remote Air Humidity Sensor Failure Present</activeText>
+					<inactiveText>Remote Air Humidity Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highpressuresensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.39.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Pressure Sensor Failure Present</activeText>
+					<inactiveText>High Pressure Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Pressure Sensor Failure Present</activeText>
+					<inactiveText>High Pressure Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowpressuresensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.40.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Pressure Sensor Failure Present</activeText>
+					<inactiveText>Low Pressure Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Pressure Sensor Failure Present</activeText>
+					<inactiveText>Low Pressure Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="dischargetemperaturesensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.41.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Discharge Temperature Sensor Failure Present</activeText>
+					<inactiveText>Discharge Temperature Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Discharge Temperature Sensor Failure Present</activeText>
+					<inactiveText>Discharge Temperature Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="suctiontemperaturesensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.42.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Suction Temperature Sensor Failure Present</activeText>
+					<inactiveText>Suction Temperature Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Suction Temperature Sensor Failure Present</activeText>
+					<inactiveText>Suction Temperature Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="staticpressuresensorfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.43.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Static Pressure Sensor Failure Present</activeText>
+					<inactiveText>Static Pressure Sensor Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Static Pressure Sensor Failure Present</activeText>
+					<inactiveText>Static Pressure Sensor Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highpressurealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.44.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Pressure Alarm Present</activeText>
+					<inactiveText>High Pressure Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Pressure Alarm Present</activeText>
+					<inactiveText>High Pressure Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highvoltagelockalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.45.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Voltage Lock Alarm Present</activeText>
+					<inactiveText>High Voltage Lock Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Voltage Lock Alarm Present</activeText>
+					<inactiveText>High Voltage Lock Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowpressurealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.46.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Pressure Alarm Present</activeText>
+					<inactiveText>Low Pressure Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Pressure Alarm Present</activeText>
+					<inactiveText>Low Pressure Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowpressurelockoutalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.47.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Pressure Lockout Alarm Present</activeText>
+					<inactiveText>Low Pressure Lockout Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Pressure Lockout Alarm Present</activeText>
+					<inactiveText>Low Pressure Lockout Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highdischargetemperaturealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.48.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Discharge Temperature Alarm Present</activeText>
+					<inactiveText>High Discharge Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Discharge Temperature Alarm Present</activeText>
+					<inactiveText>High Discharge Temperature Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highdischargetemperaturelockoutalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.49.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Discharge Temperature Lockout Alarm Present</activeText>
+					<inactiveText>High Discharge Temperature Lockout Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Discharge Temperature Lockout Alarm Present</activeText>
+					<inactiveText>High Discharge Temperature Lockout Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowdischargesuperheatalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.50.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Discharge Superheat Alarm Present</activeText>
+					<inactiveText>Low Discharge Superheat Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Discharge Superheat Alarm Present</activeText>
+					<inactiveText>Low Discharge Superheat Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lowdischargesuperheatlockoutalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.51.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Low Discharge Superheat Lockout Alarm Present</activeText>
+					<inactiveText>Low Discharge Superheat Lockout Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Discharge Superheat Lockout Alarm Present</activeText>
+					<inactiveText>Low Discharge Superheat Lockout Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="highpressureabnormalalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.52.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>High Pressure Abnormal Alarm Present</activeText>
+					<inactiveText>High Pressure Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>High Pressure Abnormal Alarm Present</activeText>
+					<inactiveText>High Pressure Abnormal Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="eevdrivecommunicationfailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.53.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Eev Drive Communication Failure Present</activeText>
+					<inactiveText>Eev Drive Communication Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Eev Drive Communication Failure Present</activeText>
+					<inactiveText>Eev Drive Communication Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="eevdrivefailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.54.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Eev Drive Failure Present</activeText>
+					<inactiveText>Eev Drive Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Eev Drive Failure Present</activeText>
+					<inactiveText>Eev Drive Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="compressordrivecommunication">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.55.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Compressor Drive Communication Present</activeText>
+					<inactiveText>Compressor Drive Communication Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Compressor Drive Communication Present</activeText>
+					<inactiveText>Compressor Drive Communication Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="compressordrivefailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.56.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Compressor Drive Failure Present</activeText>
+					<inactiveText>Compressor Drive Failure Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Compressor Drive Failure Present</activeText>
+					<inactiveText>Compressor Drive Failure Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="compressordrivefailurelockout">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.57.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Compressor Drive Failure Lockout Present</activeText>
+					<inactiveText>Compressor Drive Failure Lockout Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Compressor Drive Failure Lockout Present</activeText>
+					<inactiveText>Compressor Drive Failure Lockout Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="fandetectionboardcommunication">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.58.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Fan Detection Board Communication Present</activeText>
+					<inactiveText>Fan Detection Board Communication Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Fan Detection Board Communication Present</activeText>
+					<inactiveText>Fan Detection Board Communication Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="compressordrivercommunication">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.59.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Compressor Driver Communication Present</activeText>
+					<inactiveText>Compressor Driver Communication Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Compressor Driver Communication Present</activeText>
+					<inactiveText>Compressor Driver Communication Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lossofteamworkmasteralarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.60.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Loss Of Teamwork Master Alarm Present</activeText>
+					<inactiveText>Loss Of Teamwork Master Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Loss Of Teamwork Master Alarm Present</activeText>
+					<inactiveText>Loss Of Teamwork Master Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="lossofteamworkslavealarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.61.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Loss Of Teamwork Slave Alarm Present</activeText>
+					<inactiveText>Loss Of Teamwork Slave Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Loss Of Teamwork Slave Alarm Present</activeText>
+					<inactiveText>Loss Of Teamwork Slave Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="repeatedteamworkaddressalarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.62.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Repeated Teamwork Address Alarm Present</activeText>
+					<inactiveText>Repeated Teamwork Address Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Repeated Teamwork Address Alarm Present</activeText>
+					<inactiveText>Repeated Teamwork Address Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="communicatestatus">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.382.2.2.113.0</getOid>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Communicate Status Present</activeText>
+					<inactiveText>Communicate Status Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Communicate Status Present</activeText>
+					<inactiveText>Communicate Status Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+	</device>
+</APC_DDF>

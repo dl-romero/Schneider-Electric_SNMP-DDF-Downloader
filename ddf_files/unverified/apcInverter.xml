@@ -1,0 +1,709 @@
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="apcInverter"
+	ddfname="APC Gutor Inverter"
+	ddfversion="5"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<device deviceid="apc_gutor_inverter">
+		<oidMustMatch ruleid="has_apc_gutor_inverter" oid=".1.3.6.1.2.1.1.2.0">
+			<valueList>
+				<value>.1.3.6.1.4.1.318.1.3.21.9</value>
+			</valueList>
+		</oidMustMatch>
+		<!-- type -->
+		<setProductData ruleid="typedata" field="type">UPS</setProductData>
+		<!-- vendor -->
+		<setProductData ruleid="vendordata" field="vendor">APC by Schneider Electric</setProductData>
+		<!-- model -->
+		<suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsBasicIdentModel"/>
+		<setProductData ruleid="modeldata" field="model">
+			<getOid>.1.3.6.1.4.1.318.1.1.1.1.1.1.0</getOid>
+		</setProductData>
+		<setProductData ruleid="submodeldata" field="submodel">
+			<getOid>.1.3.6.1.4.1.318.1.1.1.1.1.4.0</getOid>
+		</setProductData>
+		<!-- firmware -->
+		<suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsAdvIdentFirmwareRevision"/>
+		<setProductData ruleid="firmware" field="appversion">
+			<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.1.0</getOid>
+		</setProductData>
+		<!-- serial -->
+		<suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsAdvIdentSerialNumber"/>
+		<suppressRule suppressid="core/apcdiscdata/serialnum"/>
+		<suppressRule suppressid="core/apcdiscdata/serialnum2"/>
+		<setProductData ruleid="serialnum" field="serial_num">
+			<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.3.0</getOid>
+		</setProductData>
+
+    <suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsBasicIdentModelType"/>
+		<suppressRule suppressid="apcsmartups/upsIdent/upsAdvIdentDateOfManufacture"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsBasicBatteryStatus"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsBasicBatteryLastReplaceDate"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsAdvBatteryCapacity"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsAdvBatteryTemperature"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsAdvBatteryBreakerStatus"/>
+		<suppressRule suppressid="apcsmartups/upsConfig/upsAdvConfigBattCabAmpHour"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecInput/upsHighPrecInputBypassVoltage"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecInput/upsHighPrecInputFrequency"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecBatteryTemperature/upsHighPrecBatteryTemperature"/>
+		<suppressRule suppressid="apcsmartups/upsAdvInput/upsAdvInputFrequency"/>
+		<suppressRule suppressid="apcsmartups/upsAdvInput/upsAdvInputTotalActivePower"/>
+		<suppressRule suppressid="apcsmartups/upsAdvOutput/upsAdvOutputActivePower"/>
+    <suppressRule suppressid="apcsmartups/upsAdvOutput/upsAdvOutputVoltage"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecOutput/upsHighPrecOutputVoltage"/>
+		<suppressRule suppressid="apcsmartups/upsAdvOutput/upsAdvOutputFrequency"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecOutput/upsHighPrecOutputFrequency"/>
+		<suppressRule suppressid="apcsmartups/upsPhaseOutput/upsPhaseOutputFrequency"/>
+		<suppressRule suppressid="apcsmartups/upsAdvOutput/upsAdvOutputApparentPower"/>
+    <suppressRule suppressid="apcsmartups/upsAdvOutput/upsAdvOutputCurrent"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecOutput/upsHighPrecOutputCurrent"/>
+		<suppressRule suppressid="apcsmartups/upsComm/upsCommStatus"/>
+		<suppressRule suppressid="apcsmartups/upsTest/upsAdvTestBatteryLastDate"/>
+		<suppressRule suppressid="apcsmartups/upsTest/chargerAdvTestBatteryProcessStatus"/>
+		<suppressRule suppressid="apcsmartups/upsTest/chargerAdvTestBatteryConditionStatus"/>
+		<suppressRule suppressid="core/apcdiscdata/modeldata"/>
+
+
+		<numSensor ruleid="upsAdvIdentDateOfManufacture">
+			<type>timeindays</type>
+			<sensorId>UPS_AGE</sensorId>
+			<value>
+				<round increment="1">
+					<div>
+						<op>
+							<sub>
+								<op>
+									<curUTCTime/>
+								</op>
+								<op>
+									<parseDate>
+										<if>
+											<op>
+												<!-- does the value use 3-char months? -->
+												<regex>
+													<op>([a-zA-Z]{3})</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+													</op>
+													<op>[true]</op>
+													<op>[false]</op>
+												</regex>
+											</op>
+											<op>
+												<!-- yes it does use 3-char months-->
+												<if>
+													<op>
+														<!-- does date or month come first? -->
+														<regex>
+															<op>(\d\d)-([a-zA-Z]{3})-(\d\d)</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<op>[true]</op>
+															<op>[false]</op>
+														</regex>
+													</op>
+													<op>
+														<!-- date comes before month -->
+														<mapValue mapid="parseMonth-vm">
+															<regex>
+																<op>\d\d-([a-zA-Z]{3})-\d\d</op>
+																<op>
+																	<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+																</op>
+																<op>%1$s</op>
+																<op>Nul</op>
+															</regex>
+														</mapValue>
+														-
+														<regex>
+															<op>(\d\d)-[a-zA-Z]{3}-\d\d</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<op>%1$s</op>
+															<op>00</op>
+														</regex>
+													</op>
+													<!-- DD-Mon... -->
+													<op>
+														<!-- month comes before date -->
+														<mapValue mapid="parseMonth-vm">
+															<regex>
+																<op>([a-zA-Z]{3})-\d\d-\d\d</op>
+																<op>
+																	<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+																</op>
+																<op>%1$s</op>
+																<op>Nul</op>
+															</regex>
+														</mapValue>
+														-
+														<regex>
+															<op>[a-zA-Z]{3}-(\d\d)-\d\d</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<op>%1$s</op>
+															<op>00</op>
+														</regex>
+													</op>
+													<!-- Mon-DD... -->
+												</if>
+												-
+												<!-- and year always comes last when 3-char months are used -->
+												<regex>
+													<op>-(\d\d)$</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+													</op>
+													<op>%1$s</op>
+													<op>00</op>
+												</regex>
+												<!-- ...YY -->
+											</op>
+											<op>
+												<!-- does not use 3-char months, just need to rearrange terms -->
+												<regex>
+													<op>(\d\d\d\d)-(\d\d)-(\d\d)</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+													</op>
+													<op>%2$s\/%3$s\/%1$s</op>
+													<!-- YYYY-MM-DD -->
+													<op>
+														<regex>
+															<op>^(\d\d)\.(\d\d)\.(\d\d\d\d)$</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<!-- DD.MM.YYYY -->
+															<op>%2$s\/%1$s\/%3$s</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<!-- MM/DD/YYYY -->
+														</regex>
+													</op>
+												</regex>
+											</op>
+										</if>
+									</parseDate>
+								</op>
+							</sub>
+						</op>
+						<op>86400</op>
+					</div>
+				</round>
+			</value>
+			<minValue>0</minValue>
+			<valueInc>1</valueInc>
+			<label>UPS Age</label>
+			<sensorSet>Inverter Status</sensorSet>
+		</numSensor>
+		<valueMap ruleid="parseMonth-vm">
+			<valueIn>Jan</valueIn>	<valueOut>01</valueOut>
+			<valueIn>Feb</valueIn>	<valueOut>02</valueOut>
+			<valueIn>Mar</valueIn>	<valueOut>03</valueOut>
+			<valueIn>Apr</valueIn>	<valueOut>04</valueOut>
+			<valueIn>May</valueIn>	<valueOut>05</valueOut>
+			<valueIn>Jun</valueIn>	<valueOut>06</valueOut>
+			<valueIn>Jul</valueIn>	<valueOut>07</valueOut>
+			<valueIn>Aug</valueIn>	<valueOut>08</valueOut>
+			<valueIn>Sep</valueIn>	<valueOut>09</valueOut>
+			<valueIn>Oct</valueIn>	<valueOut>10</valueOut>
+			<valueIn>Nov</valueIn>	<valueOut>11</valueOut>
+			<valueIn>Dec</valueIn>	<valueOut>12</valueOut>
+			<valueIn>*</valueIn>		<valueOut>00</valueOut>
+		</valueMap>
+
+    <stringSensor ruleid="inverterBasicIdentModel">
+			<type>string</type>
+			<sensorId>INVERTER_BASIC_IDENT_MODEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.1.1.0</getOid>
+			</value>
+			<label>Model</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+    <stringSensor ruleid="inverterBasicIdentModelType">
+			<type>string</type>
+			<sensorId>INVERTER_BASIC_IDENT_MODEL_TYPE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.1.4.0</getOid>
+			</value>
+			<label>Model Type</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="inverterAdvIdentFirmwareRevision">
+			<type>string</type>
+			<sensorId>INVERTER_ADV_IDENT_FIRMWARE_REVISION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.1.0</getOid>
+			</value>
+			<label>Firmware Revision</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="inverterUpsAdvIdentSerialNumber">
+			<type>string</type>
+			<sensorId>INVERTER_ADV_IDENT_SERIAL_NUMBER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.3.0</getOid>
+			</value>
+			<label>Serial Number</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+
+		<valueMap ruleid="invalid_minusOne-vm">
+			<valueIn>-1</valueIn><valueOut>[false]</valueOut>
+			<valueIn>*</valueIn><valueOut>[true]</valueOut>
+		</valueMap>
+	</device>
+	<device deviceid="inverterComm">
+		<oidMustExist ruleid="has_inverterComm" oid=".1.3.6.1.4.1.318.1.1.1.8" istree="yes" />
+		<oidMustMatch ruleid="has_apc_gutor_inverter" oid=".1.3.6.1.2.1.1.2.0">
+			<valueList>
+				<value>.1.3.6.1.4.1.318.1.3.21.9</value>
+			</valueList>
+		</oidMustMatch>
+
+		<enumMap ruleid="inverterCommStatus-em">
+			<label>Unknown</label>
+			<label>OK</label>
+			<label>No Communication</label>
+		</enumMap>
+		<stateSensor ruleid="inverterCommStatus">
+			<rowTest>
+				<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.8.1.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>INVERTER_COMM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="inverterCommStatus-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.8.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Communication Status</label>
+			<enum>inverterCommStatus-em</enum>
+			<sensorSet>Inverter Status</sensorSet>
+		</stateSensor>
+		<valueMap ruleid="inverterCommStatus-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+	</device>
+
+  <device deviceid="inverterAdvInput">
+		  <oidMustExist ruleid="has_AdvInput" oid=".1.3.6.1.4.1.318.1.1.1.3.2" istree="yes" />
+			<oidMustMatch ruleid="has_apc_gutor_inverter" oid=".1.3.6.1.2.1.1.2.0">
+				<valueList>
+					<value>.1.3.6.1.4.1.318.1.3.21.9</value>
+				</valueList>
+			</oidMustMatch>
+
+			<numSensor ruleid="inverterAdvInputDCVoltage">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.3.2.16.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>voltage</type>
+				<sensorId>INVERTER_ADV_INPUT_DC_VOLTAGE</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.3.2.16.0</getOid>
+				</value>
+				<label>Inverter Input Voltage</label>
+				<sensorSet>Input Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterAdvInputDCCurrent">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.3.2.17.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>amperage</type>
+				<sensorId>INVERTER_ADV_INPUT_DC_CURRENT</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.3.2.17.0</getOid>
+				</value>
+				<label>Inverter Input Current</label>
+				<sensorSet>Input Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterAdvInputNominalDCVoltage">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.3.2.18.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>voltage</type>
+				<sensorId>INVERTER_ADV_INPUT_DC_NOMINAL_VOLTAGE</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.3.2.18.0</getOid>
+				</value>
+				<label>Inverter Nominal Input Voltage</label>
+				<sensorSet>Input Status</sensorSet>
+			</numSensor>
+		</device>
+
+		<device deviceid="inverterAdvOutput">
+			<oidMustExist ruleid="has_AdvOutput" oid=".1.3.6.1.4.1.318.1.1.1.4.2" istree="yes" />
+			<oidMustMatch ruleid="has_apc_gutor_inverter" oid=".1.3.6.1.2.1.1.2.0">
+				<valueList>
+					<value>.1.3.6.1.4.1.318.1.3.21.9</value>
+				</valueList>
+			</oidMustMatch>
+			    <!-- Update sensor name as per QA team request, Using (Inverter_Sensor_Names.xlsx) as a reference-->
+			<numSensor ruleid="inverterAdvTotalOutputActivePower">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.17.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>num/powerKW</type>
+				<sensorId>ADV_OUTPUT_INVERTER_ACTIVE_POWER</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.17.0</getOid>
+				</value>
+				<label>Inverter Maximum Output Active Power</label>
+				<sensorSet>Output Status</sensorSet>
+			</numSensor>
+			   <!-- Update sensor name as per QA team request, Using (Inverter_Sensor_Names.xlsx) as a reference-->
+			<numSensor ruleid="inverterAdvOutputReactivePower">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.20.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>powerVA/powerVAR</type>
+				<sensorId>ADV_OUTPUT_INVERTER_REACTIVE_POWER</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.20.0</getOid>
+				</value>
+				<label>SSW Output Reactive Power</label>
+				<sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterAdvOutputInverterLoad">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.15.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>pctofcapacity</type>
+				<sensorId>ADV_OUTPUT_INVERTER_LOAD</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.15.0</getOid>
+				</value>
+				<label>Inverter Relative Output Active Power</label>
+				<sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<!-- Update sensor name as per QA team request, Using (Inverter_Sensor_Names.xlsx) as a reference-->
+			<numSensor ruleid="inverterAdvOutputPercentPower">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.16.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>pctofcapacity</type>
+				<sensorId>ADV_OUTPUT_INVERTER_PERCENT_POWER</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.16.0</getOid>
+				</value>
+				<label>SSW Relative Output Active Power</label>
+				<sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<!-- Update sensor name as per QA team request, Using (Inverter_Sensor_Names.xlsx) as a reference-->
+			<numSensor ruleid="inverterAdvOutputPercentLoad">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.18.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>pctofcapacity</type>
+				<sensorId>ADV_OUTPUT_INVERTER_PERCENT_LOAD</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.18.0</getOid>
+				</value>
+				<label>SSW Relative Output Apparent Power</label>
+				<sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterAdvOutputInverterCurrent">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.19.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>amperage</type>
+				<sensorId>ADV_OUTPUT_INVERTER_CURRENT</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.19.0</getOid>
+				</value>
+				<label>Inverter Output Current</label>
+				<sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterAdvOutputInverterVoltage">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.21.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>voltage</type>
+				<sensorId>ADV_OUTPUT_INVERTER_VOLTAGE</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.21.0</getOid>
+				</value>
+				<label>Inverter Output Voltage</label>
+				<sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterAdvOutputVoltage">
+			 <rowTest>
+				<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+				 <getOid>.1.3.6.1.4.1.318.1.1.1.4.2.1.0</getOid>
+				</mapValue>
+			 </rowTest>
+			 <type>voltage</type>
+			 <sensorId>INVERTER_ADV_OUTPUT_VOLTAGE</sensorId>
+			 <value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.1.0</getOid>
+			 </value>
+			 <label>Output Voltage</label>
+			 <sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterAdvOutputCurrent">
+			 <rowTest>
+				<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+				 <getOid>.1.3.6.1.4.1.318.1.1.1.4.2.4.0</getOid>
+				</mapValue>
+			 </rowTest>
+			 <type>amperage</type>
+			 <sensorId>INVERTER_ADV_OUTPUT_CURRENT</sensorId>
+			 <value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.4.0</getOid>
+			 </value>
+			 <label>Output Current</label>
+			 <sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterAdvOutputFrequency">
+			 <rowTest>
+				<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+				 <getOid>.1.3.6.1.4.1.318.1.1.1.4.2.2.0</getOid>
+				</mapValue>
+			 </rowTest>
+			 <type>frequency</type>
+			 <sensorId>INVERTER_ADV_OUTPUT_FREQUENCY</sensorId>
+			 <value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.2.0</getOid>
+			 </value>
+			 <label>Output Frequency</label>
+			 <sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterAdvOutputActivePower">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.8.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>powerW</type>
+				<sensorId>INVERTER_TOTAL_OUTPUT_ACTIVE_POWER</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.8.0</getOid>
+				</value>
+				<valueInc>1</valueInc>
+				<label>Output Active Power</label>
+				<sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<!-- Update sensor name as per QA team request, Using (Inverter_Sensor_Names.xlsx) as a reference-->
+			<numSensor ruleid="inverterAdvOutputApparentPower">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.9.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>powerVA</type>
+				<sensorId>INVERTER_TOTAL_OUTPUT_APPARENT_POWER</sensorId>
+				<value>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.9.0</getOid>
+				</value>
+				<valueInc>1</valueInc>
+				<label>SSW Output Apparent Power</label>
+				<sensorSet>Output Status</sensorSet>
+			</numSensor>
+	</device>
+	<device deviceid="inverterHighPrecInput">
+			<oidMustExist ruleid="has_HighPrecInput" oid=".1.3.6.1.4.1.318.1.1.1.3.3" istree="yes" />
+			<oidMustMatch ruleid="has_apc_gutor_inverter" oid=".1.3.6.1.2.1.1.2.0">
+				<valueList>
+					<value>.1.3.6.1.4.1.318.1.3.21.9</value>
+				</valueList>
+			</oidMustMatch>
+
+			<suppressRule ruleid="stompInverterAdvInputDCVoltage" suppressid="apcInverter/inverterAdvInput/inverterAdvInputDCVoltage"/>
+			<suppressRule ruleid="stompInverterAdvInputDCCurrent" suppressid="apcInverter/inverterAdvInput/inverterAdvInputDCCurrent"/>
+
+			<numSensor ruleid="inverterHighPrecInputDCVoltage">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.3.3.8.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>voltage</type>
+				<sensorId>INVERTER_HIGH_PREC_INPUTDC_VOLTAGE</sensorId>
+				<value>
+					<mult>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.1.3.3.8.0</getOid>
+						</op>
+						<op>0.1</op>
+					</mult>
+				</value>
+				<valueInc>0.1</valueInc>
+				<label>Inverter Input DC Voltage</label>
+				<sensorSet>Input Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterHighPrecInputDCCurrent">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.3.3.9.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>amperage</type>
+				<sensorId>INVERTER_HIGH_PREC_INPUT_DC_CURRENT</sensorId>
+				<value>
+					<mult>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.1.3.3.9.0</getOid>
+						</op>
+						<op>0.1</op>
+					</mult>
+				</value>
+				<valueInc>0.1</valueInc>
+				<label>Inverter Input DC Current</label>
+				<sensorSet>Input Status</sensorSet>
+			</numSensor>
+		   <!-- Update sensor name as per QA team request, Using (Inverter_Sensor_Names.xlsx) as a reference-->
+			<numSensor ruleid="inverterHighPrecInputBypassVoltage">
+				<rowTest>
+					<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+						<getOid>.1.3.6.1.4.1.318.1.1.1.3.3.6.0</getOid>
+					</mapValue>
+				</rowTest>
+				<type>voltage/bypassvoltage</type>
+				<sensorId>INVERTER_HIGH_PREC_INPUT_BYPASS_VOLTAGE</sensorId>
+				<value>
+					<mult>
+						<op>
+							<getOid>.1.3.6.1.4.1.318.1.1.1.3.3.6.0</getOid>
+						</op>
+						<op>0.1</op>
+					</mult>
+				</value>
+				<valueInc>0.1</valueInc>
+				<label>SSW Bypass Input Voltage</label>
+				<sensorSet>Input Status</sensorSet>
+			</numSensor>
+		</device>
+
+		<device deviceid="inverterHighPrecOutput">
+			<oidMustExist ruleid="has_HighPrecOutput" oid=".1.3.6.1.4.1.318.1.1.1.4.3" istree="yes" />
+		<oidMustMatch ruleid="has_apc_gutor_inverter" oid=".1.3.6.1.2.1.1.2.0">
+			<valueList>
+				<value>.1.3.6.1.4.1.318.1.3.21.9</value>
+			</valueList>
+		</oidMustMatch>
+
+
+			<suppressRule ruleid="stompInverterAdvOutputVoltage" suppressid="apcInverter/inverterAdvOutput/inverterAdvOutputVoltage"/>
+			<suppressRule ruleid="stompInverterAdvOutputCurrent" suppressid="apcInverter/inverterAdvOutput/inverterAdvOutputCurrent"/>
+			<suppressRule ruleid="stompInverterAdvOutputFrequency" suppressid="apcInverter/inverterAdvOutput/inverterAdvOutputFrequency"/>
+
+			<numSensor ruleid="inverterHighPrecOutputVoltage">
+			 <rowTest>
+				<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+				 <getOid>.1.3.6.1.4.1.318.1.1.1.4.3.1.0</getOid>
+				</mapValue>
+			 </rowTest>
+			 <type>voltage</type>
+			 <sensorId>INVERTER_HIGH_PREC_OUTPUT_VOLTAGE</sensorId>
+			 <value>
+				<mult>
+				 <op>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.3.1.0</getOid>
+				 </op>
+				 <op>0.1</op>
+				</mult>
+			 </value>
+			 <label>Output Voltage</label>
+			 <sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterHighPrecOutputCurrent">
+			 <rowTest>
+				<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+				 <getOid>.1.3.6.1.4.1.318.1.1.1.4.3.4.0</getOid>
+				</mapValue>
+			 </rowTest>
+			 <type>amperage</type>
+			 <sensorId>INVERTER_HIGH_PREC_OUTPUT_CURRENT</sensorId>
+			 <value>
+				<mult>
+				 <op>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.3.4.0</getOid>
+				 </op>
+				 <op>0.1</op>
+				</mult>
+			 </value>
+			 <label>Output Current</label>
+			 <sensorSet>Output Status</sensorSet>
+			</numSensor>
+			<numSensor ruleid="inverterHighPrecOutputFrequency">
+			 <rowTest>
+				<mapValue mapid="apcInverter/apc_gutor_inverter/invalid_minusOne-vm">
+				 <getOid>.1.3.6.1.4.1.318.1.1.1.4.3.2.0</getOid>
+				</mapValue>
+			 </rowTest>
+			 <type>frequency</type>
+			 <sensorId>INVERTER_HIGH_PREC_OUTPUT_FREQUENCY</sensorId>
+			 <value>
+				<mult>
+				 <op>
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.3.2.0</getOid>
+				 </op>
+				 <op>0.1</op>
+				</mult>
+			 </value>
+			 <label>Output Frequency</label>
+			 <sensorSet>Output Status</sensorSet>
+			</numSensor>
+	</device>
+	<device deviceid="inverterdiscdatastate">
+		<oidMustExist ruleid="statetest" oid=".1.3.6.1.4.1.318.1.4.2.2.1.4.1"/>
+		<oidMustMatch ruleid="has_apc_gutor_inverter" oid=".1.3.6.1.2.1.1.2.0">
+			<valueList>
+				<value>.1.3.6.1.4.1.318.1.3.21.9</value>
+			</valueList>
+		</oidMustMatch>
+	  <suppressRule suppressid="core/apcdiscdatastate/apcDiscoveryStatus_row1"/>
+		<suppressRule suppressid="apcsmartups/apcsmartups_discovery/apcDiscoveryStatus_row1"/>
+		<stateSensor ruleid="apcDiscoveryStatus_row1" index=".1.3.6.1.4.1.318.1.4.2.2.1.1">
+			<type>devstatus</type>
+			<sensorId>DEVSTATUS_<rowIndex/></sensorId>
+			<value><mapValue mapid="devstatus-to-index"><getRowOid>.1.3.6.1.4.1.318.1.4.2.2.1.4</getRowOid></mapValue></value>
+			<label>Device Status -<space/><getRowOid>.1.3.6.1.4.1.318.1.4.2.2.1.5</getRowOid></label>
+			<sensorSet>Inverter Status</sensorSet>
+		</stateSensor>
+		<valueMap ruleid="devstatus-to-index">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+	</device>
+
+
+
+
+</APC_DDF>

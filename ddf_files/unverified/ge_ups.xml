@@ -1,42 +1,51 @@
 <?xml version="1.0"?>
-<!-- raritan_pdu -->
-<APC_DDF ddfid ="ge_ups" ddfname="GE UPS" ddfversion="1" canremove="yes">
-<schemaVersion>1.6</schemaVersion>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="apc_ddf_1_6.xsd"
+	ddfid ="ge_ups"
+	ddfname="GE UPS"
+	ddfversion="3"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
 
-    <!--DDF Headers -->
-    <device deviceid="ge_ups">
-        <oidMustExist ruleid="ge_ups" istree="yes" oid=".1.3.6.1.4.1.818.1.1.10"/>
+	<!--DDF Headers -->
+	<device deviceid="ge_ups">
+		<oidMustExist ruleid="ge_ups" istree="yes" oid=".1.3.6.1.4.1.818.1.1.10"/>
+
+		<suppressRule ruleid="stompmib2model" suppressid="core/mib2data/modeldata"/>
+		<suppressRule ruleid="stompmib2vendor" suppressid="core/mib2data/vendordata"/>
+		<suppressRule ruleid="stompmib2type" suppressid="core/mib2data/typedata"/>
 
         <setProductData ruleid="typedata" field="type">UPS</setProductData>
-		
-		<!-- Set Vendor -->
-		<setProductData ruleid="vendordata" field="vendor">
-			<getOid>.1.3.6.1.4.1.818.1.1.10.1.1.0</getOid>
-		</setProductData>
+		<setProductData ruleid="vendordata" field="vendor"><getOid>.1.3.6.1.4.1.818.1.1.10.1.1.0</getOid></setProductData>
+        <setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.818.1.1.10.1.2.0</getOid></setProductData>
+        <setProductData ruleid="bootversiondata" field="bootversion"><getOid>.1.3.6.1.4.1.818.1.1.10.1.3.0</getOid></setProductData>
+        <setProductData ruleid="appversiondata" field="appversion"><getOid>.1.3.6.1.4.1.818.1.1.10.1.4.0</getOid></setProductData>
+        <setProductData ruleid="serialdata" field="serial_num"><getOid>.1.3.6.1.4.1.818.1.1.10.1.7.0</getOid></setProductData>
 
-		<!-- Model -->
-        <suppressRule ruleid="stompmib2model" suppressid="core/mib2data/modeldata"/>
-        <setProductData ruleid="modeldata" field="model">
-            <getOid>.1.3.6.1.4.1.818.1.1.10.1.2.0</getOid>
-        </setProductData>
+		<!-- suppress upsmib sensor rules -->
+		<suppressRule suppressid="upsmib/upsmib/upsBatteryStatus"/>
+		<suppressRule suppressid="upsmib/upsmib/upsEstimatedMinutesRemaining"/>
+		<suppressRule suppressid="upsmib/upsmib/upsEstimatedChargeRemaining"/>
+		<suppressRule suppressid="upsmib/upsmib/upsBatteryVoltage"/>
+		<suppressRule suppressid="upsmib/upsmib/upsBatteryCurrent"/>
+		<suppressRule suppressid="upsmib/upsmib/upsBatteryTemperature"/>
+		<suppressRule suppressid="upsmib/upsmib/upsInputFrequency"/>
+		<suppressRule suppressid="upsmib/upsmib/upsInputVoltage"/>
+		<suppressRule suppressid="upsmib/upsmib/upsInputCurrent"/>
+		<suppressRule suppressid="upsmib/upsmib/upsInputTruePower"/>
+		<suppressRule suppressid="upsmib/upsmib/upsOutputSource"/>
+		<suppressRule suppressid="upsmib/upsmib/upsOutputFrequency"/>
+		<suppressRule suppressid="upsmib/upsmib/upsOutputVoltage"/>
+		<suppressRule suppressid="upsmib/upsmib/upsOutputCurrent"/>
+		<suppressRule suppressid="upsmib/upsmib/upsOutputPower"/>
+		<suppressRule suppressid="upsmib/upsmib/upsOutputPercentLoad"/>
+		<suppressRule suppressid="upsmib/upsmib/upsBypassFrequency"/>
+		<suppressRule suppressid="upsmib/upsmib/upsBypassVoltage"/>
+		<suppressRule suppressid="upsmib/upsmib/upsBypassCurrent"/>
+		<suppressRule suppressid="upsmib/upsmib/upsBypassPower"/>
 
-        <!-- Boot Version -->
-        <setProductData ruleid="bootversiondata" field="bootversion">
-            <getOid>.1.3.6.1.4.1.818.1.1.10.1.3.0</getOid>
-        </setProductData>
 
-        <!-- App Version -->
-        <setProductData ruleid="appversiondata" field="appversion">
-            <getOid>.1.3.6.1.4.1.818.1.1.10.1.4.0</getOid>
-        </setProductData>
-
-        <!-- Serial Number -->
-        <setProductData ruleid="serialdata" field="serial_num">
-            <getOid>.1.3.6.1.4.1.818.1.1.10.1.7.0</getOid>
-        </setProductData>
-		
-		
-		<!-- This is already supported in UPS MIB
 		<stateSensor ruleid="battery_status">
 			<type>state</type>
 			<sensorId>BATTERY_STATUS</sensorId>
@@ -47,11 +56,10 @@
 					</formatNumber>
 				</mapValue>
 			</value>
-			<enum>battery_status-em</enum>
 			<label>Battery Status</label>
-			<sensorSet>Status</sensorSet>
+			<enum>battery_status-em</enum>
+			<sensorSet>Battery Status</sensorSet>
 		</stateSensor>
-		
 
 		<valueMap ruleid="battery_status-vm">
 			<valueIn>1</valueIn><valueOut>0</valueOut>
@@ -60,7 +68,6 @@
 			<valueIn>4</valueIn><valueOut>3</valueOut>
 			<valueIn>*</valueIn><valueOut>4</valueOut>
 		</valueMap>
-
 		<enumMap ruleid="battery_status-em">
 			<label>Unknown</label>
 			<label>Battery Normal</label>
@@ -68,8 +75,7 @@
 			<label>Battery Depleted</label>
 			<label>Unknown</label>
 		</enumMap>
-		-->
-		
+
 		<numSensor ruleid="seconds_on_battery">
 			<type>num</type>
 			<units>sec</units>
@@ -79,9 +85,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Seconds On Battery</label>
-			<sensorSet>Time</sensorSet>
+			<sensorSet>Battery Status</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="estimated_minutes_remaining">
 			<type>num</type>
 			<units>min</units>
@@ -91,9 +96,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Estimated Minutes Remaining</label>
-			<sensorSet>Time</sensorSet>
+			<sensorSet>Battery Status</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="estimated_charge_remaining">
 			<type>num</type>
 			<units>percent</units>
@@ -103,10 +107,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Estimated Charge Remaining</label>
-			<sensorSet>Power</sensorSet>
+			<sensorSet>Battery Status</sensorSet>
 		</numSensor>
-
-		<!-- This is already supported in UPS MIB
 		<numSensor ruleid="battery_voltage">
 			<type>voltage</type>
 			<sensorId>BATTERY_VOLTAGE</sensorId>
@@ -120,10 +122,8 @@
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Battery Voltage</label>
-			<sensorSet>Voltage</sensorSet>
+			<sensorSet>Battery Status</sensorSet>
 		</numSensor>
-		-->
-
 		<numSensor ruleid="battery_current">
 			<type>amperage</type>
 			<sensorId>BATTERY_CURRENT</sensorId>
@@ -137,10 +137,8 @@
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Battery Current</label>
-			<sensorSet>Current</sensorSet>
+			<sensorSet>Battery Status</sensorSet>
 		</numSensor>
-
-		<!-- This is already supported in UPS MIB
 		<numSensor ruleid="battery_temperature">
 			<type>temp</type>
 			<sensorId>BATTERY_TEMPERATURE</sensorId>
@@ -149,10 +147,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Battery Temperature</label>
-			<sensorSet>Environment</sensorSet>
+			<sensorSet>Battery Status</sensorSet>
 		</numSensor>
-		-->
-
 		<numSensor ruleid="input_line_bads">
 			<type>num</type>
 			<sensorId>INPUT_LINE_BADS</sensorId>
@@ -161,8 +157,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Input Line Bads</label>
+			<sensorSet>UPS Input</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="input_num_lines">
 			<type>num</type>
 			<sensorId>INPUT_NUM_LINES</sensorId>
@@ -171,8 +167,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Input Num Lines</label>
+			<sensorSet>UPS Input</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="input_frequency_ph" index=".1.3.6.1.4.1.818.1.1.10.3.3.1.2">
 			<type>frequency</type>
 			<sensorId>INPUT_FREQUENCY_PH<rowIndex/></sensorId>
@@ -186,10 +182,8 @@
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Input Frequency - Phase <rowIndex/></label>
-			<sensorSet>Frequency</sensorSet>
+			<sensorSet>UPS Input</sensorSet>
 		</numSensor>
-
-		<!-- This is already supported in UPS MIB
 		<numSensor ruleid="input_voltage_ph" index=".1.3.6.1.4.1.818.1.1.10.3.3.1.3">
 			<type>voltage</type>
 			<sensorId>INPUT_VOLTAGE_PH<rowIndex/></sensorId>
@@ -198,10 +192,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Input Voltage - Phase <rowIndex/></label>
-			<sensorSet>Voltage</sensorSet>
+			<sensorSet>UPS Input</sensorSet>
 		</numSensor>
-		-->
-
 		<numSensor ruleid="input_current_ph" index=".1.3.6.1.4.1.818.1.1.10.3.3.1.4">
 			<type>amperage</type>
 			<sensorId>INPUT_CURRENT_PH<rowIndex/></sensorId>
@@ -215,20 +207,18 @@
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Input Current - Phase <rowIndex/></label>
-			<sensorSet>Current</sensorSet>
+			<sensorSet>UPS Input</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="input_true_power_ph" index=".1.3.6.1.4.1.818.1.1.10.3.3.1.5">
-			<type>num/powerKW</type>
+			<type>powerW</type>
 			<sensorId>INPUT_TRUE_POWER_PH<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.818.1.1.10.3.3.1.5</getRowOid>
 			</value>
 			<valueInc>1</valueInc>
 			<label>Input True Power - Phase <rowIndex/></label>
-			<sensorSet>Power</sensorSet>
+			<sensorSet>UPS Input</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="input_voltage_min_ph" index=".1.3.6.1.4.1.818.1.1.10.3.3.1.6">
 			<type>voltage</type>
 			<sensorId>INPUT_VOLTAGE_MIN_PH<rowIndex/></sensorId>
@@ -237,9 +227,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Input Voltage Min - Phase <rowIndex/></label>
-			<sensorSet>Voltage</sensorSet>
+			<sensorSet>UPS Input</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="input_voltage_max_ph" index=".1.3.6.1.4.1.818.1.1.10.3.3.1.7">
 			<type>voltage</type>
 			<sensorId>INPUT_VOLTAGE_MAX_PH<rowIndex/></sensorId>
@@ -248,9 +237,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Input Voltage Max - Phase <rowIndex/></label>
-			<sensorSet>Voltage</sensorSet>
+			<sensorSet>UPS Input</sensorSet>
 		</numSensor>
-
 		<stateSensor ruleid="output_source">
 			<type>state</type>
 			<sensorId>OUTPUT_SOURCE</sensorId>
@@ -261,9 +249,9 @@
 					</formatNumber>
 				</mapValue>
 			</value>
-			<enum>output_source-em</enum>
 			<label>Output Source</label>
-			<sensorSet>Status</sensorSet>
+			<enum>output_source-em</enum>
+			<sensorSet>UPS Output</sensorSet>
 		</stateSensor>
 
 		<valueMap ruleid="output_source-vm">
@@ -276,7 +264,6 @@
 			<valueIn>7</valueIn><valueOut>6</valueOut>
 			<valueIn>*</valueIn><valueOut>7</valueOut>
 		</valueMap>
-
 		<enumMap ruleid="output_source-em">
 			<label>Other</label>
 			<label>None</label>
@@ -301,9 +288,8 @@
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Output Frequency</label>
-			<sensorSet>Frequency</sensorSet>
+			<sensorSet>UPS Output</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="output_num_lines">
 			<type>num</type>
 			<sensorId>OUTPUT_NUM_LINES</sensorId>
@@ -312,9 +298,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Output Num Lines</label>
+			<sensorSet>UPS Output</sensorSet>
 		</numSensor>
-
-		<!-- This is already supported in UPS MIB
 		<numSensor ruleid="output_voltage_ph" index=".1.3.6.1.4.1.818.1.1.10.4.4.1.2">
 			<type>voltage</type>
 			<sensorId>OUTPUT_VOLTAGE_PH<rowIndex/></sensorId>
@@ -323,11 +308,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Output Voltage - Phase <rowIndex/></label>
-			<sensorSet>Voltage</sensorSet>
+			<sensorSet>UPS Output</sensorSet>
 		</numSensor>
-		-->
-
-		<!-- This is already supported in UPS MIB
 		<numSensor ruleid="output_current_ph" index=".1.3.6.1.4.1.818.1.1.10.4.4.1.3">
 			<type>amperage</type>
 			<sensorId>OUTPUT_CURRENT_PH<rowIndex/></sensorId>
@@ -341,22 +323,18 @@
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Output Current - Phase <rowIndex/></label>
-			<sensorSet>Current</sensorSet>
+			<sensorSet>UPS Output</sensorSet>
 		</numSensor>
-		-->
-
 		<numSensor ruleid="output_power_ph" index=".1.3.6.1.4.1.818.1.1.10.4.4.1.4">
-			<type>num/powerKW</type>
+			<type>powerW</type>
 			<sensorId>OUTPUT_POWER_PH<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.818.1.1.10.4.4.1.4</getRowOid>
 			</value>
 			<valueInc>1</valueInc>
 			<label>Output Power - Phase <rowIndex/></label>
-			<sensorSet>Power</sensorSet>
+			<sensorSet>UPS Output</sensorSet>
 		</numSensor>
-
-		<!-- This is already supported in UPS MIB
 		<numSensor ruleid="output_percent_load_ph" index=".1.3.6.1.4.1.818.1.1.10.4.4.1.5">
 			<type>num</type>
 			<units>percent</units>
@@ -366,9 +344,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Output Percent Load - Phase <rowIndex/></label>
+			<sensorSet>UPS Output</sensorSet>
 		</numSensor>
-		-->
-
 		<numSensor ruleid="bypass_frequency">
 			<type>frequency</type>
 			<sensorId>BYPASS_FREQUENCY</sensorId>
@@ -382,9 +359,8 @@
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Bypass Frequency</label>
-			<sensorSet>Frequency</sensorSet>
+			<sensorSet>UPS Bypass</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="bypass_num_lines">
 			<type>num</type>
 			<sensorId>BYPASS_NUM_LINES</sensorId>
@@ -393,9 +369,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Bypass Num Lines</label>
+			<sensorSet>UPS Bypass</sensorSet>
 		</numSensor>
-
-		<!-- This is already supported in UPS MIB
 		<numSensor ruleid="bypass_voltage_ph" index=".1.3.6.1.4.1.818.1.1.10.5.3.1.2">
 			<type>voltage</type>
 			<sensorId>BYPASS_VOLTAGE_PH<rowIndex/></sensorId>
@@ -404,10 +379,8 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Bypass Voltage - Phase <rowIndex/></label>
-			<sensorSet>Voltage</sensorSet>
+			<sensorSet>UPS Bypass</sensorSet>
 		</numSensor>
-		-->
-
 		<numSensor ruleid="bypass_current_ph" index=".1.3.6.1.4.1.818.1.1.10.5.3.1.3">
 			<type>amperage</type>
 			<sensorId>BYPASS_CURRENT_PH<rowIndex/></sensorId>
@@ -421,22 +394,18 @@
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Bypass Current - Phase <rowIndex/></label>
-			<sensorSet>Current</sensorSet>
+			<sensorSet>UPS Bypass</sensorSet>
 		</numSensor>
-
 		<numSensor ruleid="bypass_power_ph" index=".1.3.6.1.4.1.818.1.1.10.5.3.1.4">
-			<type>num/powerKW</type>
+			<type>powerW</type>
 			<sensorId>BYPASS_POWER_PH<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.818.1.1.10.5.3.1.4</getRowOid>
 			</value>
 			<valueInc>1</valueInc>
 			<label>Bypass Power - Phase <rowIndex/></label>
-			<sensorSet>Power</sensorSet>
+			<sensorSet>UPS Bypass</sensorSet>
 		</numSensor>
-		
-		
-		
 
 		<alarmFlags2 ruleid="ge_ups_alarms" index=".1.3.6.1.4.1.818.1.1.10.6.2.1.2">
 			<value>
@@ -446,7 +415,6 @@
 					</mapValue>
 				</baseNToInt>
 			</value>
-
 			<!-- upsAlarmBatteryBad -->
 			<alarmFlagsTest match="1" log="no">
 				<name>
@@ -463,7 +431,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmOnBattery -->
 			<alarmFlagsTest match="2" log="no">
 				<name>
@@ -480,7 +447,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmLowBattery -->
 			<alarmFlagsTest match="3" log="no">
 				<name>
@@ -497,7 +463,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmDepletedBattery -->
 			<alarmFlagsTest match="4" log="no">
 				<name>
@@ -514,7 +479,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmTempBad -->
 			<alarmFlagsTest match="5" log="no">
 				<name>
@@ -531,7 +495,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmInputBad -->
 			<alarmFlagsTest match="6" log="no">
 				<name>
@@ -548,7 +511,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmOutputBad -->
 			<alarmFlagsTest match="7" log="no">
 				<name>
@@ -565,7 +527,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmOutputOverload -->
 			<alarmFlagsTest match="8" log="no">
 				<name>
@@ -582,7 +543,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmOnBypass -->
 			<alarmFlagsTest match="9" log="no">
 				<name>
@@ -599,7 +559,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmBypassBad -->
 			<alarmFlagsTest match="10" log="no">
 				<name>
@@ -616,7 +575,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmOutputOffAsRequested -->
 			<alarmFlagsTest match="11" log="no">
 				<name>
@@ -633,7 +591,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmUpsOffAsRequested -->
 			<alarmFlagsTest match="12" log="no">
 				<name>
@@ -650,7 +607,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmChargerFailed -->
 			<alarmFlagsTest match="13" log="no">
 				<name>
@@ -667,7 +623,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmUpsOutputOff -->
 			<alarmFlagsTest match="14" log="no">
 				<name>
@@ -684,7 +639,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmUpsSystemOff -->
 			<alarmFlagsTest match="15" log="no">
 				<name>
@@ -701,7 +655,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmFanFailure -->
 			<alarmFlagsTest match="16" log="no">
 				<name>
@@ -718,7 +671,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmFuseFailure -->
 			<alarmFlagsTest match="17" log="no">
 				<name>
@@ -735,7 +687,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmGeneralFault -->
 			<alarmFlagsTest match="18" log="no">
 				<name>
@@ -752,7 +703,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmDiagnosticTestFailed -->
 			<alarmFlagsTest match="19" log="no">
 				<name>
@@ -769,7 +719,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmCommunicationsLost -->
 			<alarmFlagsTest match="20" log="no">
 				<name>
@@ -786,7 +735,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmAwaitingPower -->
 			<alarmFlagsTest match="21" log="no">
 				<name>
@@ -803,7 +751,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmShutdownPending -->
 			<alarmFlagsTest match="22" log="no">
 				<name>
@@ -820,7 +767,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmShutdownImminent -->
 			<alarmFlagsTest match="23" log="no">
 				<name>
@@ -837,7 +783,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmTestInProgress -->
 			<alarmFlagsTest match="24" log="no">
 				<name>
@@ -854,7 +799,6 @@
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
 			</alarmFlagsTest>
-
 			<!-- upsAlarmReceptacleOff -->
 			<alarmFlagsTest match="25" log="no">
 				<name>
@@ -870,6 +814,84 @@
 				<alarmRecommendedActions>
 					<recommendedActionId></recommendedActionId>
 				</alarmRecommendedActions>
+			</alarmFlagsTest>
+			<!-- upsAlarmHighSpeedBusFailuregen -->
+			<alarmFlagsTest match="26" log="no">
+				<name>
+					<activeText>High Speed Bus Communication Error</activeText>
+					<inactiveText>High Speed Bus Communication Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Well Known Alarms</category>
+				<description>
+					<activeText>High Speed Bus Communication Error</activeText>
+					<inactiveText>High Speed Bus Communication Error Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<!-- upsAlarmHighSpeedBusJACRCFailuregen -->
+			<alarmFlagsTest match="27" log="no">
+				<name>
+					<activeText>High Speed Bus CRC Failure on Bus JA</activeText>
+					<inactiveText>High Speed Bus CRC Failure on Bus JA Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Well Known Alarms</category>
+				<description>
+					<activeText>High Speed Bus CRC Failure on Bus JA</activeText>
+					<inactiveText>High Speed Bus CRC Failure on Bus JA Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<!-- upsAlarmConnectivityBusFailuregen -->
+			<alarmFlagsTest match="28" log="no">
+				<name>
+					<activeText>Connectivity Bus Communication Error</activeText>
+					<inactiveText>Connectivity Bus Communication Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Well Known Alarms</category>
+				<description>
+					<activeText>Connectivity Bus Communication Error</activeText>
+					<inactiveText>Connectivity Bus Communication Error Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<!-- upsAlarmHighSpeedBusJBCRCFailuregen -->
+			<alarmFlagsTest match="29" log="no">
+				<name>
+					<activeText>High Speed Bus CRC Failure on Bus JB</activeText>
+					<inactiveText>High Speed Bus CRC Failure on Bus JB Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Well Known Alarms</category>
+				<description>
+					<activeText>High Speed Bus CRC Failure on Bus JB</activeText>
+					<inactiveText>High Speed Bus CRC Failure on Bus JB Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<!-- upsAlarmCurrentSharinggen -->
+			<alarmFlagsTest match="30" log="no">
+				<name>
+					<activeText>Parallel System High Current</activeText>
+					<inactiveText>Parallel System High Current Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Well Known Alarms</category>
+				<description>
+					<activeText>Parallel System High Current</activeText>
+					<inactiveText>Parallel System High Current Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<!-- upsAlarmDCRipplegen -->
+			<alarmFlagsTest match="31" log="no">
+				<name>
+					<activeText>DC Link High Ripple Voltage</activeText>
+					<inactiveText>DC Link High Ripple Voltage Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Well Known Alarms</category>
+				<description>
+					<activeText>DC Link High Ripple Voltage</activeText>
+					<inactiveText>DC Link High Ripple Voltage Cleared</inactiveText>
+				</description>
 			</alarmFlagsTest>
 
 		</alarmFlags2>
@@ -900,6 +922,12 @@
 			<valueIn>.1.3.6.1.4.1.818.1.1.10.6.3.23</valueIn><valueOut>23</valueOut>
 			<valueIn>.1.3.6.1.4.1.818.1.1.10.6.3.24</valueIn><valueOut>24</valueOut>
 			<valueIn>.1.3.6.1.4.1.818.1.1.10.6.3.25</valueIn><valueOut>25</valueOut>
+			<valueIn>.1.3.6.1.4.1.818.1.1.10.6.3.26</valueIn><valueOut>26</valueOut>
+			<valueIn>.1.3.6.1.4.1.818.1.1.10.6.3.27</valueIn><valueOut>27</valueOut>
+			<valueIn>.1.3.6.1.4.1.818.1.1.10.6.3.28</valueIn><valueOut>28</valueOut>
+			<valueIn>.1.3.6.1.4.1.818.1.1.10.6.3.29</valueIn><valueOut>29</valueOut>
+			<valueIn>.1.3.6.1.4.1.818.1.1.10.6.3.30</valueIn><valueOut>30</valueOut>
+			<valueIn>.1.3.6.1.4.1.818.1.1.10.6.3.31</valueIn><valueOut>31</valueOut>
 		</valueMap>
     </device>
 

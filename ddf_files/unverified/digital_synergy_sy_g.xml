@@ -2,7 +2,7 @@
 <APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid ="digital_synergy_sy_g"
-	ddfname="Digital Synergy SY-G Cooling [pcoWeb]"
+	ddfname="Digital Synergy SY-G Cooling [pcoWeb][SNMP]"
 	ddfversion="1"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>

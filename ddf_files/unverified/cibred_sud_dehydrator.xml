@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+         ddfid="cibred_sud_dehydrator"
+         ddfname="Cibred SUD Dehydrator"
+         ddfversion="1"
+         canremove="yes">
+    <schemaVersion>1.6</schemaVersion>
+
+    <!--
+		SOURCE
+		/snmp/resources/mibs/Cibred/Dehydrator_MIB_2023_03.mib
+	
+	-->
+
+    <device deviceid="cibred_sud_dehydrator">
+        <oidMustExist ruleid="system_exists" oid=".1.3.6.1.4.1.48157.1" istree="yes"/>
+
+        <setProductData ruleid="vendordata" field="vendor">Cibred</setProductData>
+        <setProductData ruleid="modeldata" field="model">Dehydrator</setProductData>
+        <setProductData ruleid="typedata" field="type">Generic Device</setProductData>
+
+        <numSensor ruleid="current_pressure">
+            <type>pressure</type>
+            <sensorId>CURRENT_PRESSURE</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.48157.1.1.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Current Pressure</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <valueMap ruleid="invalid_values-vm">
+            <valueIn>-1</valueIn><valueOut>[false]</valueOut>
+            <valueIn>65535</valueIn><valueOut>[false]</valueOut>
+            <valueIn>*</valueIn><valueOut>[true]</valueOut>
+        </valueMap>
+
+        <numSensor ruleid="output_air_flow">
+            <rowTest>
+                <mapValue mapid="invalid_values-vm">
+                    <getOid>.1.3.6.1.4.1.48157.1.5.1.0</getOid>
+                </mapValue>
+            </rowTest>
+            <type>volairflow</type>
+            <sensorId>OUTPUT_AIR_FLOW</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.48157.1.5.1.0</getOid></op>
+                    <op>60</op>
+                </div>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Output Air Flow</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hour_meter">
+            <type>runhours</type>
+            <sensorId>HOUR_METER</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.48157.1.6.0</getOid>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Hour Meter</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <valueMap ruleid="alarm_code-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>4</valueIn><valueOut>4</valueOut>
+            <valueIn>5</valueIn><valueOut>5</valueOut>
+            <valueIn>*</valueIn><valueOut>6</valueOut>
+        </valueMap>
+        <enumMap ruleid="alarm_code-em">
+            <label>No Alarm</label>
+            <label>Low Pressure</label>
+            <label>High Pressure</label>
+            <label>High Humidity</label>
+            <label>Low Pressure and High Humidity</label>
+            <label>High Pressure and High Humidity</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <stateSensor ruleid="alarm_code">
+            <type>state</type>
+            <sensorId>alarm_code</sensorId>
+            <value>
+                <mapValue mapid="alarm_code-vm">
+                    <getOid>.1.3.6.1.4.1.48157.1.7.0</getOid>
+                </mapValue>
+            </value>
+            <label>Alarm Code</label>
+            <enum>alarm_code-em</enum>
+            <sensorSet>Digital Sensors</sensorSet>
+        </stateSensor>
+
+        <valueMap ruleid="general_alarm_code-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>*</valueIn><valueOut>2</valueOut>
+        </valueMap>
+        <enumMap ruleid="general_alarm_code-em">
+            <label>No Alarm</label>
+            <label>Alarm Running</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <stateSensor ruleid="general_alarm_code">
+            <type>state</type>
+            <sensorId>general_alarm_code</sensorId>
+            <value>
+                <mapValue mapid="general_alarm_code-vm">
+                    <getOid>.1.3.6.1.4.1.48157.1.8.0</getOid>
+                </mapValue>
+            </value>
+            <label>General Alarm Code</label>
+            <enum>general_alarm_code-em</enum>
+            <sensorSet>Digital Sensors</sensorSet>
+        </stateSensor>
+
+        <valueMap ruleid="failure_code-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>4</valueIn><valueOut>3</valueOut>
+            <valueIn>8</valueIn><valueOut>4</valueOut>
+            <valueIn>16</valueIn><valueOut>5</valueOut>
+            <valueIn>*</valueIn><valueOut>6</valueOut>
+        </valueMap>
+        <enumMap ruleid="failure_code-em">
+            <label>No Failure</label>
+            <label>Heater 1 Not Working</label>
+            <label>Heater 2 Not Working</label>
+            <label>Pump 1 Not Working</label>
+            <label>Pump 2 Not Working</label>
+            <label>Humidity Sensor No Signal</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <stateSensor ruleid="failure_code">
+            <type>state</type>
+            <sensorId>failure_code</sensorId>
+            <value>
+                <mapValue mapid="failure_code-vm">
+                    <getOid>.1.3.6.1.4.1.48157.1.11.0</getOid>
+                </mapValue>
+            </value>
+            <label>Failure Code</label>
+            <enum>failure_code-em</enum>
+            <sensorSet>Digital Sensors</sensorSet>
+        </stateSensor>
+
+        <alarmFlags ruleid="alarm_code_alarms">
+            <value><getOid>.1.3.6.1.4.1.48157.1.7.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Pressure Alarm Active</activeText>
+                    <inactiveText>Low Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Low Pressure Alarm condition exists.</activeText>
+                    <inactiveText>Low Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>High Pressure Alarm Active</activeText>
+                    <inactiveText>High Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>High Pressure Alarm condition exists.</activeText>
+                    <inactiveText>High Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText>High Humidity Alarm Active</activeText>
+                    <inactiveText>High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>High Humidity Alarm condition exists.</activeText>
+                    <inactiveText>High Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="4">
+                <name>
+                    <activeText>Low Pressure and High Humidity Alarm Active</activeText>
+                    <inactiveText>Low Pressure and High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Low Pressure and High Humidity Alarm condition exists.</activeText>
+                    <inactiveText>Low Pressure and High Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="5">
+                <name>
+                    <activeText>High Pressure and High Humidity Alarm Active</activeText>
+                    <inactiveText>High Pressure and High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>High Pressure and High Humidity Alarm condition exists.</activeText>
+                    <inactiveText>High Pressure and High Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="general_alarm_alarms">
+            <value><getOid>.1.3.6.1.4.1.48157.1.8.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>General Alarm Active</activeText>
+                    <inactiveText>General Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>General Alarm condition exists.</activeText>
+                    <inactiveText>General Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="failure_code_alarms">
+            <value><getOid>.1.3.6.1.4.1.48157.1.11.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Heater 1 Not Working Alarm Active</activeText>
+                    <inactiveText>Heater 1 Not Working Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Heater 1 Not Working Alarm condition exists.</activeText>
+                    <inactiveText>Heater 1 Not Working Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Heater 2 Not Working Alarm Active</activeText>
+                    <inactiveText>Heater 2 Not Working Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Heater 2 Not Working Alarm condition exists.</activeText>
+                    <inactiveText>Heater 2 Not Working Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="4">
+                <name>
+                    <activeText>Pump 1 Not Working Alarm Active</activeText>
+                    <inactiveText>Pump 1 Not Working Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Pump 1 Not Working Alarm condition exists.</activeText>
+                    <inactiveText>Pump 1 Not Working Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="8">
+                <name>
+                    <activeText>Pump 2 Not Working Alarm Active</activeText>
+                    <inactiveText>Pump 2 Not Working Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Pump 2 Not Working Alarm condition exists.</activeText>
+                    <inactiveText>Pump 2 Not Working Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="10">
+                <name>
+                    <activeText>Humidity Sensor No Signal Alarm Active</activeText>
+                    <inactiveText>Humidity Sensor No Signal Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Humidity Sensor No Signal Alarm condition exists.</activeText>
+                    <inactiveText>Humidity Sensor No Signal Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+    </device>
+</APC_DDF>

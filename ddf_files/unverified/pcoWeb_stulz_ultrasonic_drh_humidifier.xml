@@ -1,0 +1,1735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="pcoWeb_stulz_ultrasonic_drh_humidifier"
+	ddfname="[pcoWeb] Stulz Ultrasonic DRH Humidifier"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+	
+		SOURCE
+		\snmp\resources\mibs\carel\stulz\pCOWeb MIB ULS ver 1_23.mib
+		
+		CAREL-eultra-full-MIB | 09 June 2021
+		
+		WALKFILES
+		\snmp\resources\sapro\walkfiles\carel\stulz\stulz_drh_snmp_walk.txt
+	
+	-->
+	<device deviceid="pcoWeb_stulz_ultrasonic_drh_humidifier">
+		<oidMustExist ruleid="eultra-fullMIB_exists" oid=".1.3.6.1.4.1.9839.2.1" istree="yes"/> 
+		
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Stulz</setProductData>
+		<setProductData ruleid="modeldata" field="model">Ultrasonic DRH Humidifier</setProductData>
+		<setProductData ruleid="typedata" field="type">Generic Device</setProductData>
+
+        <alarmFlags ruleid="glb-alarm-on">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.1.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Global Alarm</activeText>
+                    <inactiveText>Global Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Global Alarm condition exists.</activeText>
+                    <inactiveText>A Global Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+		<valueMap ruleid="binaryDefaultZero-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="offOn-em">
+			<label>Off</label>
+			<label>On</label>
+		</enumMap>
+
+        <stateSensor ruleid="sys-on-act">
+            <type>state</type>
+            <sensorId>_SYSTEM_ON_OFF_STATUS</sensorId>
+            <value>
+                <mapValue mapid="binaryDefaultZero-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.2.0</getOid>
+                </mapValue>
+            </value>
+            <label>System On/Off Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+
+        <alarmFlags ruleid="airflow-ok">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.3.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Airflow Has Been Proven</activeText>
+                    <inactiveText>Airflow Has Been Proven Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>An Airflow Has Been Proven condition exists.</activeText>
+                    <inactiveText>An Airflow Has Been Proven condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <stateSensor ruleid="hum-on">
+            <type>state</type>
+            <sensorId>_HUMIDIFICATION_ON_OFF_STATUS</sensorId>
+            <value>
+                <mapValue mapid="binaryDefaultZero-vm">
+                    <getOid>.1.3.6.1.4.1.9839.2.1.1.4.0</getOid>
+                </mapValue>
+            </value>
+            <label>Humidification On/Off Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Status</sensorSet>
+        </stateSensor>
+
+        <alarmFlags ruleid="al-cond-pan">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.7.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Condensate Pan Overflow Alarm</activeText>
+                    <inactiveText>Condensate Pan Overflow Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Condensate Pan Overflow Alarm condition exists.</activeText>
+                    <inactiveText>A Condensate Pan Overflow Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="airflow-sw">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.8.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Airflow Proven</activeText>
+                    <inactiveText>Airflow Proven Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>An Airflow Proven condition exists.</activeText>
+                    <inactiveText>An Airflow Proven condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-water">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.9.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Water Leak Detection Alarm</activeText>
+                    <inactiveText>Water Leak Detection Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Water Leak Detection Alarm condition exists.</activeText>
+                    <inactiveText>A Water Leak Detection Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="hi-limit">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.10.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Humidity Limit Reached</activeText>
+                    <inactiveText>High Humidity Limit Reached Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>A High Humidity Limit Reached condition exists.</activeText>
+                    <inactiveText>A High Humidity Limit Reached condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="al-smoke">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.11.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Smoke Alarm</activeText>
+                    <inactiveText>Smoke Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Smoke Alarm condition exists.</activeText>
+                    <inactiveText>A Smoke Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="custom-al1">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.14.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Alarm 1</activeText>
+                    <inactiveText>Custom Alarm 1 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Custom Alarm 1 condition exists.</activeText>
+                    <inactiveText>A Custom Alarm 1 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="custom-al2">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.15.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Alarm 2</activeText>
+                    <inactiveText>Custom Alarm 2 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Custom Alarm 2 condition exists.</activeText>
+                    <inactiveText>A Custom Alarm 2 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="custom-al3">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.16.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Alarm 3</activeText>
+                    <inactiveText>Custom Alarm 3 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Custom Alarm 3 condition exists.</activeText>
+                    <inactiveText>A Custom Alarm 3 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="custom-al4">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.17.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Alarm 4</activeText>
+                    <inactiveText>Custom Alarm 4 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Custom Alarm 4 condition exists.</activeText>
+                    <inactiveText>A Custom Alarm 4 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="blower1-out">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.18.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Cabinet Fan - Blower 1 Out</activeText>
+                    <inactiveText>Cabinet Fan - Blower 1 Out Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Cabinet Fan - Blower 1 Out condition exists.</activeText>
+                    <inactiveText>A Cabinet Fan - Blower 1 Out condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="high-t-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.19.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Control Temperature Alarm</activeText>
+                    <inactiveText>High Control Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High Control Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High Control Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="low-t-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.20.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Control Temperature Alarm</activeText>
+                    <inactiveText>Low Control Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low Control Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low Control Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="high-h-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.21.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Control Humidity Alarm</activeText>
+                    <inactiveText>High Control Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>A High Control Humidity Alarm condition exists.</activeText>
+                    <inactiveText>A High Control Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="low-h-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.22.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Control Humidity Alarm</activeText>
+                    <inactiveText>Low Control Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>A Low Control Humidity Alarm condition exists.</activeText>
+                    <inactiveText>A Low Control Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cab1-hi-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.23.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Cabinet Temperature Alarm</activeText>
+                    <inactiveText>High Cabinet Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High Cabinet Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High Cabinet Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cab1-lo-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.24.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Cabinet Temperature Alarm</activeText>
+                    <inactiveText>Low Cabinet Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low Cabinet Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low Cabinet Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cab2-hi-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.25.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High NTC2 Temperature Alarm</activeText>
+                    <inactiveText>High NTC2 Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High NTC2 Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High NTC2 Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cab2-lo-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.26.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low NTC2 Temperature Alarm</activeText>
+                    <inactiveText>Low NTC2 Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low NTC2 Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low NTC2 Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cab3-hi-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.27.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High NTC3 Temperature Alarm</activeText>
+                    <inactiveText>High NTC3 Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High NTC3 Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High NTC3 Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cab3-lo-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.28.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low NTC3 Temperature Alarm</activeText>
+                    <inactiveText>Low NTC3 Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low NTC3 Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low NTC3 Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cab4-hi-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.29.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High NTC4 Temperature Alarm</activeText>
+                    <inactiveText>High NTC4 Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High NTC4 Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High NTC4 Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="cab4-lo-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.30.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low NTC4 Temperature Alarm</activeText>
+                    <inactiveText>Low NTC4 Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low NTC4 Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low NTC4 Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="ret-t-fail">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.31.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Return Temperature Sensor Failure Alarm</activeText>
+                    <inactiveText>Return Temperature Sensor Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Return Temperature Sensor Failure Alarm condition exists.</activeText>
+                    <inactiveText>A Return Temperature Sensor Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="ret-h-fail">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.32.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Return Humidity Sensor Failure Alarm</activeText>
+                    <inactiveText>Return Humidity Sensor Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>A Return Humidity Sensor Failure Alarm condition exists.</activeText>
+                    <inactiveText>A Return Humidity Sensor Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="rem-t-fail">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.33.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Remote Temperature Sensor Failure Alarm</activeText>
+                    <inactiveText>Remote Temperature Sensor Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Remote Temperature Sensor Failure Alarm condition exists.</activeText>
+                    <inactiveText>A Remote Temperature Sensor Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="rem-h-fail">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.34.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Remote Humidity Sensor Failure Alarm</activeText>
+                    <inactiveText>Remote Humidity Sensor Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>A Remote Humidity Sensor Failure Alarm condition exists.</activeText>
+                    <inactiveText>A Remote Humidity Sensor Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="conduct-fail">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.35.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Conductivity Sensor Failure Alarm</activeText>
+                    <inactiveText>Conductivity Sensor Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>A Conductivity Sensor Failure Alarm condition exists.</activeText>
+                    <inactiveText>A Conductivity Sensor Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="airspeed-fail">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.36.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Airspeed Sensor Out Of Range</activeText>
+                    <inactiveText>Airspeed Sensor Out Of Range Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>An Airspeed Sensor Out Of Range condition exists.</activeText>
+                    <inactiveText>An Airspeed Sensor Out Of Range condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mal-cond-pre">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.37.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Conductivity Pre-Alarm</activeText>
+                    <inactiveText>Conductivity Pre-Alarm Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>A Conductivity Pre-Alarm condition exists.</activeText>
+                    <inactiveText>A Conductivity Pre-Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mal-cond">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.38.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Conductivity Alarm</activeText>
+                    <inactiveText>Conductivity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>A Conductivity Alarm condition exists.</activeText>
+                    <inactiveText>A Conductivity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="high-a-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.43.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Airflow Alarm</activeText>
+                    <inactiveText>High Airflow Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A High Airflow Alarm condition exists.</activeText>
+                    <inactiveText>A High Airflow Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="low-a-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.44.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Airflow Alarm</activeText>
+                    <inactiveText>Low Airflow Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Low Airflow Alarm condition exists.</activeText>
+                    <inactiveText>A Low Airflow Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="high-lim-t-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.45.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Limit Temperature Alarm</activeText>
+                    <inactiveText>High Limit Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High Limit Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High Limit Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="low-lim-t-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.46.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Limit Temperature Alarm</activeText>
+                    <inactiveText>Low Limit Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low Limit Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low Limit Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="high-lim-h-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.49.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Limit Humidity Alarm</activeText>
+                    <inactiveText>High Limit Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>A High Limit Humidity Alarm condition exists.</activeText>
+                    <inactiveText>A High Limit Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="low-lim-h-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.52.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Limit Humidity Alarm</activeText>
+                    <inactiveText>Low Limit Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>A Low Limit Humidity Alarm condition exists.</activeText>
+                    <inactiveText>A Low Limit Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="airflow-shutdown">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.57.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Shutdown By Airflow Alarm</activeText>
+                    <inactiveText>Shutdown By Airflow Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Shutdown By Airflow Alarm condition exists.</activeText>
+                    <inactiveText>A Shutdown By Airflow Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mal-freeze-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.59.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Humidifier Lockout From BMS Alarm</activeText>
+                    <inactiveText>Humidifier Lockout From BMS Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A Humidifier Lockout From BMS Alarm condition exists.</activeText>
+                    <inactiveText>A Humidifier Lockout From BMS Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mal-cab2-fail">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.61.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>NTC2 Sensor Failure</activeText>
+                    <inactiveText>NTC2 Sensor Failure Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>An NTC2 Sensor Failure condition exists.</activeText>
+                    <inactiveText>An NTC2 Sensor Failure condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mal-cab3-fail">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.62.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>NTC3 Sensor Failure</activeText>
+                    <inactiveText>NTC3 Sensor Failure Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>An NTC3 Sensor Failure condition exists.</activeText>
+                    <inactiveText>An NTC3 Sensor Failure condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="mal-cab4-fail">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.63.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>NTC4 Sensor Failure</activeText>
+                    <inactiveText>NTC4 Sensor Failure Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>An NTC4 Sensor Failure condition exists.</activeText>
+                    <inactiveText>An NTC4 Sensor Failure condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="high-dp-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.68.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Control Temperature Alarm</activeText>
+                    <inactiveText>High Control Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High Control Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High Control Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="low-dp-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.69.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Control Temperature Alarm</activeText>
+                    <inactiveText>Low Control Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low Control Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low Control Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="lim-high-dp-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.70.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Control Temperature Alarm</activeText>
+                    <inactiveText>High Control Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A High Control Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A High Control Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="lim-low-dp-al">
+            <value><getOid>.1.3.6.1.4.1.9839.2.1.1.71.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Control Temperature Alarm</activeText>
+                    <inactiveText>Low Control Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>A Low Control Temperature Alarm condition exists.</activeText>
+                    <inactiveText>A Low Control Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <numSensor ruleid="ret-t-disp">
+            <type>temp</type>
+            <sensorId>_RETURN_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.3.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Return Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ret-h-disp">
+            <type>humidity</type>
+            <sensorId>_RETURN_HUMIDITY</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.4.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Return Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="rem-t-disp">
+            <type>temp</type>
+            <sensorId>_LIMIT_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.6.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Limit Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="rem-h-disp">
+            <type>humidity</type>
+            <sensorId>_LIMIT_HUMIDITY</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.7.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Limit Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dp-rem-disp">
+            <type>temp</type>
+            <sensorId>_DEW_POINT_FROM_CONTROL_TEMPERATURE_AND_HUMIDTY_SENSORS</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.8.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Dew Point From Control Temperature and Humidty Sensors</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="airspeed-disp">
+            <type>airspeed</type>
+            <sensorId>_AIRSPEED</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.9.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Airspeed</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cab1-temp-disp">
+            <type>temp</type>
+            <sensorId>_CABINET_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.10.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Cabinet Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cab2-temp-disp">
+            <type>temp</type>
+            <sensorId>_NTC2_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.11.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>NTC2 Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cab3-temp-disp">
+            <type>temp</type>
+            <sensorId>_NTC3_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.12.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>NTC3 Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cab4-temp-disp">
+            <type>temp</type>
+            <sensorId>_NTC4_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.13.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>NTC4 Temperature</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="conduct-disp">
+            <type>num</type>
+            <sensorId>_CONDUCTIVITY</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.14.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Conductivity</label>
+            <sensorSet>General</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-1">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_1_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.15.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 01Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-1">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_1_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.16.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 01Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-2">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_2_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.17.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 02 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-2">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_2_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.18.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 02 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-3">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_3_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.19.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 03 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-3">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_3_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.20.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 03 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-4">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_4_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.21.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 04 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-4">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_4_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.22.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 04 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-5">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_5_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.23.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 05 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-5">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_5_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.24.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 05 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-6">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_6_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+				<!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.25.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 06 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-6">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_6_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.26.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 06 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-7">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_7_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.27.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 07 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-7">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_7_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.28.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 07 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-8">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_8_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.29.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 08 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-8">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_8_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.30.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 08 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-9">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_9_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.31.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 09 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-9">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_9_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.32.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 09 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-10">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_10_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.33.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 10 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-10">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_10_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.34.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 10 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-11">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_11_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.35.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 11 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-11">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_11_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.36.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 11 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-12">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_12_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.37.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 12 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-12">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_12_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.38.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 12 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-13">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_13_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.39.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 13 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-13">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_13_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.40.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 13 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-14">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_14_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.41.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 14 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-14">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_14_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.42.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 14 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-15">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_15_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.43.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 15 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-15">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_15_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.44.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 15 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-temperature-16">
+            <type>temp</type>
+            <sensorId>_HUMIDIFIER_16_NEBULIZER_TEMPERATURE</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.45.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 16 Nebulizer Temperature</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="bms-humidifier-voltage-16">
+            <type>voltage</type>
+            <sensorId>_HUMIDIFIER_16_INPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.9839.2.1.2.46.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidifier 16 Input Voltage</label>
+            <sensorSet>Humidifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dp-limit-act">
+            <type>temp</type>
+            <sensorId>_DEW_POINT_LIMIT</sensorId>
+            <value>
+                <!-- convert Fahrenheit to Celsius -->
+				<mult>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.9839.2.1.2.50.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Dew Point Limit</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+
+	</device>
+</APC_DDF>

@@ -1,0 +1,315 @@
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="multitel_io_gateway"
+  ddfname="Multitel iO Gateway"
+  ddfversion="3"
+  canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+  <!--
+
+	  SOURCE
+	  \snmp\resources\mibs\multitel\MULTITEL-iO.MIB
+
+	  MULTITEL-iO | 03 March 2022
+
+	  WALKFILES
+	  \snmp\resources\sapro\walkfiles\multitel\*
+
+  -->
+  <device deviceid="multitel_io_gateway">
+		<oidMustExist ruleid="iO_exists" oid=".1.3.6.1.4.1.5946.3.3" istree="yes"/>
+
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Multitel</setProductData>
+		<setProductData ruleid="modeldata" field="model">iO Gateway</setProductData>
+		<setProductData ruleid="typedata" field="type">Generic Device</setProductData>
+
+		<valueMap ruleid="ioAnalogUnit-vm">
+			<valueIn>A</valueIn><valueOut>amperage</valueOut>
+			<valueIn>C</valueIn><valueOut>temp</valueOut>
+			<valueIn>S</valueIn><valueOut>timeinsec</valueOut>
+			<valueIn>%</valueIn><valueOut>pctofcapacity</valueOut>
+			<valueIn>h</valueIn><valueOut>runhours</valueOut>
+			<valueIn>W</valueIn><valueOut>powerW</valueOut>
+			<valueIn>kW</valueIn><valueOut>num/powerKW</valueOut>
+			<valueIn>V</valueIn><valueOut>voltage</valueOut>
+			<valueIn>*</valueIn><valueOut>num</valueOut>
+		</valueMap>
+
+		<valueMap ruleid="isFahrenheit-vm">
+			<valueIn>F</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+
+		<valueMap ruleid="ioAnalogUnit_sensorId-vm">
+			<valueIn>A</valueIn><valueOut>_CURRENT</valueOut>
+			<valueIn>C</valueIn><valueOut>_EXTERNAL_TEMPERATURE</valueOut>
+			<valueIn>%</valueIn><valueOut>_PERCENT</valueOut>
+			<valueIn>h</valueIn><valueOut>_RUNHOURS</valueOut>
+			<valueIn>W</valueIn><valueOut>_POWER_WATTS</valueOut>
+			<valueIn>kW</valueIn><valueOut>_POWER_KW</valueOut>
+			<valueIn>V</valueIn><valueOut>_VOLTAGE</valueOut>
+			<valueIn>*</valueIn><valueOut>_NUMERIC</valueOut>
+		</valueMap>
+
+		<valueMap ruleid="ioAnalogDecimalFactor-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>10</valueIn><valueOut>0.1</valueOut>
+			<valueIn>100</valueIn><valueOut>0.01</valueOut>
+			<valueIn>1000</valueIn><valueOut>0.001</valueOut>
+			<valueIn>10000</valueIn><valueOut>0.0001</valueOut>
+			<valueIn>100000</valueIn><valueOut>0.00001</valueOut>
+			<valueIn>*</valueIn><valueOut>1</valueOut>
+		</valueMap>
+
+		<numSensor ruleid="ioAnalogValue" index=".1.3.6.1.4.1.5946.3.3.1.1.5">
+			<rowTest>
+				<and>
+					<op>
+						<eq>
+							<op><getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.6</getRowOid></op>
+							<op>1</op><!-- ioAnalogStatus | value of 1 == ok -->
+						</eq>
+					</op>
+					<op>
+						<neq>
+							<op>
+								<mapValue mapid="isFahrenheit-vm">
+									<getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.8</getRowOid>
+								</mapValue>
+							</op>
+							<op>1</op>
+						</neq>
+					</op>
+				</and>
+			</rowTest>
+            <type>
+				<mapValue mapid="ioAnalogUnit-vm">
+					<getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.8</getRowOid>
+				</mapValue>
+			</type>
+            <sensorId>
+				MULTITEL_IOGATEWAY
+				<mapValue mapid="ioAnalogUnit_sensorId-vm">
+					<getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.8</getRowOid>
+				</mapValue>_<rowIndex/>
+			</sensorId>
+            <value>
+                <mult>
+					<op><getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.5</getRowOid></op>
+					<op>
+						<mapValue mapid="ioAnalogDecimalFactor-vm">
+							<getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.9</getRowOid>
+						</mapValue>
+					</op>
+				</mult>
+            </value>
+			<valueInc>
+				<mapValue mapid="ioAnalogDecimalFactor-vm">
+					<getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.9</getRowOid>
+				</mapValue>
+			</valueInc>
+            <label>
+				<!-- ioAnalogName -->
+			  <getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.4</getRowOid>
+			</label>
+            <sensorSet>iO Analog</sensorSet>
+        </numSensor>
+		<numSensor ruleid="ioAnalogValue_fahrenheit" index=".1.3.6.1.4.1.5946.3.3.1.1.5">
+			<rowTest>
+				<and>
+					<op>
+						<eq>
+							<op><getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.6</getRowOid></op>
+							<op>1</op><!-- ioAnalogStatus | value of 1 == ok -->
+						</eq>
+					</op>
+					<op>
+						<eq>
+							<op>
+								<mapValue mapid="isFahrenheit-vm">
+									<getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.8</getRowOid>
+								</mapValue>
+							</op>
+							<op>1</op>
+						</eq>
+					</op>
+				</and>
+			</rowTest>
+            <type>temp</type>
+            <sensorId>MULTITEL_IOGATEWAY_EXTERNAL_TEMPERATURE_<rowIndex/></sensorId>
+            <value>
+				<mult><!-- convert Fahrenheit to Celsius -->
+				  <op>
+						<sub>
+							<op>
+								<mult>
+									<op><getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.5</getRowOid></op>
+									<op>
+										<mapValue mapid="ioAnalogDecimalFactor-vm">
+											<getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.9</getRowOid>
+										</mapValue>
+									</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>
+						<div>
+							<op>5</op>
+							<op>9</op>
+						</div>
+					</op>
+				</mult>
+            </value>
+			<valueInc>0.1</valueInc>
+            <label>
+				<!-- ioAnalogName -->
+			  <getRowOid>.1.3.6.1.4.1.5946.3.3.1.1.4</getRowOid>
+			</label>
+            <sensorSet>iO Analog</sensorSet>
+        </numSensor>
+
+		<stateSensor ruleid="ioBinaryValue" index=".1.3.6.1.4.1.5946.3.3.2.1.5">
+			<rowTest>
+				<eq>
+					<op><getRowOid>.1.3.6.1.4.1.5946.3.3.2.1.6</getRowOid></op>
+					<op>1</op><!-- ioBinaryStatus | value of 1 == ok -->
+				</eq>
+			</rowTest>
+			<type>state</type>
+			<sensorId>MULTITEL_IOGATEWAY_OI_BINARY_VALUE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getRowOid>.1.3.6.1.4.1.5946.3.3.2.1.5</getRowOid>
+				</mapValue>
+			</value>
+			<label>
+				<!-- ioBinaryName -->
+			  <getRowOid>.1.3.6.1.4.1.5946.3.3.2.1.4</getRowOid>
+			</label>
+			<enum>falseTrue-em</enum>
+			<sensorSet>iO Binary</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="2state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="falseTrue-em">
+			<label>False</label>
+			<label>True</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<alarmFlags2 ruleid="ioAlarmValue" index=".1.3.6.1.4.1.5946.3.3.3.1.1.7">
+			<value><getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.1.7</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Binary Channel Informational Alarm</activeText>
+					<inactiveText>Binary Channel Informational Alarm Cleared</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>Device</category>
+				<description>
+					<activeText>
+						A(n)<space/>
+					  <!-- ioAlarmName -->
+					  <getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.1.4</getRowOid> condition exists.
+					</activeText>
+					<inactiveText>
+						A(n)<space/>
+					  <!-- ioAlarmName -->
+					  <getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.1.4</getRowOid> condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Binary Channel Minor Alarm</activeText>
+					<inactiveText>Binary Channel Minor Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Fault</category>
+				<description>
+					<activeText>
+						A(n)<space/>
+					  <!-- ioAlarmName -->
+					  <getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.1.4</getRowOid> Minor condition exists.
+					</activeText>
+					<inactiveText>
+						A(n)<space/>
+					  <!-- ioAlarmName -->
+					  <getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.1.4</getRowOid> Minor condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Binary Channel Major Alarm</activeText>
+					<inactiveText>Binary Channel Major Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Fault</category>
+				<description>
+					<activeText>
+						A(n)<space/>
+					  <!-- ioAlarmName -->
+					  <getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.1.4</getRowOid> Major condition exists.
+					</activeText>
+					<inactiveText>
+						A(n)<space/>
+					  <!-- ioAlarmName -->
+					  <getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.1.4</getRowOid> Major condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Binary Channel Critical Alarm</activeText>
+					<inactiveText>Binary Channel Critical Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Fault</category>
+				<description>
+					<activeText>
+						A(n)<space/>
+					  <!-- ioAlarmName -->
+					  <getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.1.4</getRowOid> Critical condition exists.
+					</activeText>
+					<inactiveText>
+						A(n)<space/>
+					  <!-- ioAlarmName -->
+					  <getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.1.4</getRowOid> Critical condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<stringSensor ruleid="ioTextValue" index=".1.3.6.1.4.1.5946.3.3.3.1.5">
+			<rowTest>
+				<eq>
+					<op><getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.6</getRowOid></op>
+					<op>1</op><!-- ioTextStatus | value of 1 == ok -->
+				</eq>
+			</rowTest>
+			<type>string</type>
+			<sensorId>MULTITEL_IOGATEWAY_OI_TEXT_VALUE_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.5</getRowOid>
+			</value>
+			<label>
+				<!-- ioTextName -->
+			  <getRowOid>.1.3.6.1.4.1.5946.3.3.3.1.4</getRowOid>
+			</label>
+			<sensorSet>iO Text</sensorSet>
+		</stringSensor>
+		
+	</device>
+</APC_DDF>

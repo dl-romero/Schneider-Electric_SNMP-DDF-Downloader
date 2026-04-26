@@ -1,0 +1,2576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+        ddfid="emerson_vertiv_crv_cr012_crac"
+        ddfname="Emerson/Vertiv CRV+/CR012 CRAC"
+        ddfversion="2"
+        canremove="yes">
+
+    <schemaVersion>1.6</schemaVersion>
+
+    <device deviceid="emerson_vertiv_crv_cr012_crac">
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+        <suppressRule ruleid="suppress_emerson_enp_env_sic" suppressid="emerson_enp_env_sic/ENP_ENV_SIC/typedata"/>
+
+        <setProductData ruleid="vendordata" field="vendor"><getOid>.1.3.6.1.4.1.13400.2.3029.1.1.0</getOid></setProductData>
+        <setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.13400.2.3029.1.2.0</getOid></setProductData>
+        <setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+
+        <oidMustExist ruleid="emerson_vertiv_crv_cr012_crac_exists" oid=".1.3.6.1.4.1.13400.2.3029.2.2" istree="yes" />
+
+
+        <numSensor ruleid="return_air_temperature">
+            <type>temp</type>
+            <sensorId>RETURN_AIR_TEMPERATURE</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.2.0</getOid></op>
+                    <op>100</op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Return Air Temperature</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="return_air_humidity">
+            <type>humidity</type>
+            <sensorId>RETURN_AIR_HUMIDITY</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.3.0</getOid></op>
+                    <op>100</op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Return Air Humidity</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="supply_air_temperature1">
+            <type>temp</type>
+            <sensorId>SUPPLY_AIR_TEMPERATURE1</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.4.0</getOid></op>
+                    <op>100</op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Supply Air Temperature 1</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+
+        <valueMap ruleid="unit_operation_status-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>*</valueIn><valueOut>4</valueOut>
+        </valueMap>
+
+        <enumMap ruleid="unit_operation_status-em">
+            <label>run</label>
+            <label>Shutdown</label>
+            <label>Standby</label>
+            <label>Locking</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <stateSensor ruleid="unit_operation_status">
+            <type>state</type>
+            <sensorId>UNIT_OPERATION_STATUS</sensorId>
+            <value>
+                <mapValue mapid="unit_operation_status-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.5.0</getOid>
+                </mapValue>
+            </value>
+            <label>Unit Operation Status</label>
+            <enum>unit_operation_status-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="supply_air_temperature2">
+            <type>temp</type>
+            <sensorId>SUPPLY_AIR_TEMPERATURE2</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.6.0</getOid></op>
+                    <op>100</op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Supply Air Temperature 1</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <valueMap ruleid="two_state-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>*</valueIn><valueOut>2</valueOut>
+        </valueMap>
+
+        <enumMap ruleid="close_enable-em">
+            <label>Output Close</label>
+            <label>Output Enable</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <enumMap ruleid="enable_close-em">
+            <label>Output Enable</label>
+            <label>Output Close</label>
+            <label>Unknown</label>
+        </enumMap>
+
+
+        <stateSensor ruleid="fan_output_status">
+            <type>state</type>
+            <sensorId>FAN_OUTPUT_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.7.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan Output Status</label>
+            <enum>close_enable-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="refrigeration">
+            <type>state</type>
+            <sensorId>REFRIGERATION</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.8.0</getOid>
+                </mapValue>
+            </value>
+            <label>Refrigeration</label>
+            <enum>enable_close-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="a_phase_voltage">
+            <type>voltage</type>
+            <sensorId>A_PHASE_VOLTAGE</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.9.0</getOid></op>
+                    <op>100</op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>A Phase Voltage</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="b_phase_voltage">
+            <type>voltage</type>
+            <sensorId>B_PHASE_VOLTAGE</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.10.0</getOid></op>
+                    <op>100</op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>B Phase Voltage</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <enumMap ruleid="no_yes-em">
+            <label>No</label>
+            <label>Yes</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <stateSensor ruleid="heating_flag">
+            <type>state</type>
+            <sensorId>HEATING_FLAG</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.11.0</getOid>
+                </mapValue>
+            </value>
+            <label>Heating Flag</label>
+            <enum>no_yes-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="humidification">
+            <type>state</type>
+            <sensorId>HUMIDIFICATION</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.12.0</getOid>
+                </mapValue>
+            </value>
+            <label>Humidification</label>
+            <enum>no_yes-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="dehumidifying">
+            <type>state</type>
+            <sensorId>DEHUMIDIFYING</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.13.0</getOid>
+                </mapValue>
+            </value>
+            <label>Dehumidifying</label>
+            <enum>no_yes-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="c_phase_voltage">
+            <type>voltage</type>
+            <sensorId>C_PHASE_VOLTAGE</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.14.0</getOid></op>
+                    <op>100</op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>C Phase Voltage</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="power_frequency">
+            <type>frequency</type>
+            <sensorId>POWER_FREQUENCY</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.15.0</getOid></op>
+                    <op>100</op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power Frequency</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <valueMap ruleid="three_state-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>*</valueIn><valueOut>3</valueOut>
+        </valueMap>
+
+        <enumMap ruleid="unit_group_control_mode-em">
+            <label>Single</label>
+            <label>Group Control</label>
+            <label>RDU Control</label>
+            <label>Unknown</label>
+        </enumMap>
+
+
+        <stateSensor ruleid="unit_group_control_mode">
+                <type>state</type>
+                <sensorId>UNIT_GROUP_CONTROL_MODE</sensorId>
+                <value>
+                    <mapValue mapid="three_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.16.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Unit Group Control Mode</label>
+                <enum>unit_group_control_mode-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <numSensor ruleid="compressor_capacity">
+                <type>pctofcapacity</type>
+                <sensorId>COMPRESSOR_CAPACITY</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.17.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Compressor Capacity</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+
+            <numSensor ruleid="fan_speed">
+                <type>pctofcapacity</type>
+                <sensorId>FAN_SPEED</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.18.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Fan Speed</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="theoritical_humidity">
+                <type>humidity</type>
+                <sensorId>THEORITICAL_HUMIDITY</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.19.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Theoritical Humidity</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature1">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE1</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.20.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 1</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature2">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE2</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.21.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 2</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature3">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE3</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.22.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 3</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature4">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE4</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.23.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 4</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature5">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE5</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.24.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 5</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature6">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE6</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.25.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 6</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature7">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE7</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.26.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 7</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature8">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE8</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.27.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 8</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature9">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE9</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.28.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 9</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="remote_temperature10">
+                <type>temp</type>
+                <sensorId>REMOTE_TEMPERATURE10</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.29.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Remote Temperature 10</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <numSensor ruleid="average_temperature">
+                <type>temp</type>
+                <sensorId>AVERAGE_TEMPERATURE</sensorId>
+                <value>
+                    <div>
+                        <op><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.30.0</getOid></op>
+                        <op>100</op>
+                    </div>
+                </value>
+                <valueInc>0.01</valueInc>
+                <label>Average Temperature</label>
+                <sensorSet>Analog Sensors</sensorSet>
+            </numSensor>
+
+            <stateSensor ruleid="soft_shutdown_status">
+                <type>state</type>
+                <sensorId>SOFT_SHUTDOWN_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.31.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Soft Shutdown Status</label>
+                <enum>no_yes-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="panel_off">
+                <type>state</type>
+                <sensorId>PANEL_OFF</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.32.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Panel Off Status</label>
+                <enum>no_yes-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="monitor_shutdown_status">
+                <type>state</type>
+                <sensorId>MONITOR_SHUTDOWN_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.33.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Monitor Shutdown Status</label>
+                <enum>no_yes-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <enumMap ruleid="normal_fault-em">
+                <label>Normal</label>
+                <label>Fault</label>
+                <label>Unknown</label>
+            </enumMap>
+
+            <stateSensor ruleid="fan_1_status">
+                <type>state</type>
+                <sensorId>FAN_1_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.34.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Fan 1 Status</label>
+                <enum>normal_fault-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="fan_2_status">
+                <type>state</type>
+                <sensorId>FAN_2_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.35.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Fan 2 Status</label>
+                <enum>normal_fault-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="fan_3_status">
+                <type>state</type>
+                <sensorId>FAN_3_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.36.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Fan 3 Status</label>
+                <enum>normal_fault-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="fan_4_status">
+                <type>state</type>
+                <sensorId>FAN_4_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.37.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Fan 4 Status</label>
+                <enum>normal_fault-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="condensate_pump_output_status">
+                <type>state</type>
+                <sensorId>CONDENSATE_PUMP_OUTPUT_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.38.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Condensate Pump Output Status</label>
+                <enum>close_enable-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="compressor_output_status">
+                <type>state</type>
+                <sensorId>COMPRESSOR_OUTPUT_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.39.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Compressor Output Status</label>
+                <enum>close_enable-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="electric_cheating_output_status">
+                <type>state</type>
+                <sensorId>ELECTRIC_CHEATING_OUTPUT_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.40.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Electric Cheating Output Status</label>
+                <enum>close_enable-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="humidifier_output_status">
+                <type>state</type>
+                <sensorId>HUMIDIFIER_OUTPUT_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.42.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Humidifier Output Status</label>
+                <enum>close_enable-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+            <stateSensor ruleid="common_alarm_output_status">
+                <type>state</type>
+                <sensorId>COMMON_ALARM_OUTPUT_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.43.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Common Alarm Output Status</label>
+                <enum>close_enable-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+
+
+            <stateSensor ruleid="common_alarm_output_status">
+                <type>state</type>
+                <sensorId>COMMON_ALARM_OUTPUT_STATUS</sensorId>
+                <value>
+                    <mapValue mapid="two_state-vm">
+                        <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.43.0</getOid>
+                    </mapValue>
+                </value>
+                <label>Common Alarm Output Status</label>
+                <enum>close_enable-em</enum>
+                <sensorSet>DIGITAL SENSORS</sensorSet>
+            </stateSensor>
+
+
+        <enumMap ruleid="normal_alarm-em">
+            <label>Normal</label>
+            <label>Alarm</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <stateSensor ruleid="common_alarm_state">
+            <type>state</type>
+            <sensorId>COMMON_ALARM_STATE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.43.0</getOid>
+                </mapValue>
+            </value>
+            <label>Common Alarm Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="high_pressure">
+            <type>state</type>
+            <sensorId>HIGH_PRESSURE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.44.0</getOid>
+                </mapValue>
+            </value>
+            <label>High Pressure</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="low_pressure">
+            <type>state</type>
+            <sensorId>LOW_PRESSURE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.45.0</getOid>
+                </mapValue>
+            </value>
+            <label>Low Pressure</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="abnormal_high_pressure">
+            <type>state</type>
+            <sensorId>ABNORMAL_HIGH_PRESSURE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.46.0</getOid>
+                </mapValue>
+            </value>
+            <label>Abnormal High Pressure</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="exhaust_temperature">
+            <type>state</type>
+            <sensorId>EXHAUST_TEMPERATURE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.47.0</getOid>
+                </mapValue>
+            </value>
+            <label>Exhaust Temperature</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="exhaust_low_superheat">
+            <type>state</type>
+            <sensorId>EXHAUST_LOW_SUPERHEAT</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.48.0</getOid>
+                </mapValue>
+            </value>
+            <label>Exhaust Low Superheat</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="return_air_high_temperature">
+            <type>state</type>
+            <sensorId>RETURN_AIR_HIGH_TEMPERATURE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.49.0</getOid>
+                </mapValue>
+            </value>
+            <label>Return Air High Temperature</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="supply_air_low_temperature">
+            <type>state</type>
+            <sensorId>SUPPLY_AIR_LOW_TEMPERATURE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.50.0</getOid>
+                </mapValue>
+            </value>
+            <label>Supply Air Low Temperature</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+
+        <stateSensor ruleid="supply_air_high_temperature">
+            <type>state</type>
+            <sensorId>SUPPLY_AIR_HIGH_TEMPERATURE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.51.0</getOid>
+                </mapValue>
+            </value>
+            <label>Supply Air High Temperature</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="return_air_high_humidity">
+            <type>state</type>
+            <sensorId>RETURN_AIR_HIGH_HUMIDITY</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.52.0</getOid>
+                </mapValue>
+            </value>
+            <label>Return Air High Humidity</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+
+        <stateSensor ruleid="return_air_low_humidity">
+            <type>state</type>
+            <sensorId>RETURN_AIR_LOW_HUMIDITY</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.53.0</getOid>
+                </mapValue>
+            </value>
+            <label>Return Air Low Humidity</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="high_pressure_lock">
+            <type>state</type>
+            <sensorId>HIGH_PRESSURE_LOCK</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.54.0</getOid>
+                </mapValue>
+            </value>
+            <label>High Pressure Lock</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="low_pressure_lock">
+            <type>state</type>
+            <sensorId>LOW_PRESSURE_LOCK</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.55.0</getOid>
+                </mapValue>
+            </value>
+            <label>Low Pressure Lock</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="lock_exhaust_temperature">
+            <type>state</type>
+            <sensorId>LOCK_EXHAUST_TEMPERATURE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.56.0</getOid>
+                </mapValue>
+            </value>
+            <label>Lock Exhaust Temperature</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+
+        <stateSensor ruleid="low_exhaust_superheat">
+            <type>state</type>
+            <sensorId>LOW_EXHAUST_SUPERHEAT</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.57.0</getOid>
+                </mapValue>
+            </value>
+            <label>Low Exhaust Superheat</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="power_loss">
+            <type>state</type>
+            <sensorId>POWER_LOSS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.58.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power Loss</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+
+        <stateSensor ruleid="power_over_voltage">
+            <type>state</type>
+            <sensorId>POWER_OVER_VOLTAGE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.59.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power Over Voltage</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+
+        <stateSensor ruleid="power_under_voltage">
+            <type>state</type>
+            <sensorId>POWER_UNDER_VOLTAGE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.60.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power Under Voltage</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="power_lose_phase">
+            <type>state</type>
+            <sensorId>POWER_LOSE_PHASE</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.61.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power Lose Phase</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="floor_overflow">
+            <type>state</type>
+            <sensorId>FLOOR_OVERFLOW</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.62.0</getOid>
+                </mapValue>
+            </value>
+            <label>Floor Overflow</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="high_water_level">
+            <type>state</type>
+            <sensorId>HIGH_WATER_LEVEL</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.63.0</getOid>
+                </mapValue>
+            </value>
+            <label>High Water Level</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="filter_clogged_status">
+            <type>state</type>
+            <sensorId>FILTER_CLOGGED_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.64.0</getOid>
+                </mapValue>
+            </value>
+            <label>Filter Clogged Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="filter_maintenance_status">
+            <type>state</type>
+            <sensorId>FILTER_MAINTENANCE_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.65.0</getOid>
+                </mapValue>
+            </value>
+            <label>Filter Maintenance Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="airflow_loss_status">
+            <type>state</type>
+            <sensorId>AIRFLOW_LOSS_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.66.0</getOid>
+                </mapValue>
+            </value>
+            <label>Airflow Loss Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="low_pressure_sensor_lock">
+            <type>state</type>
+            <sensorId>LOW_PRESSURE_SENSOR_LOCK</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.67.0</getOid>
+                </mapValue>
+            </value>
+            <label>Low Pressure Sensor Lock</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="remote_shutdown_status">
+            <type>state</type>
+            <sensorId>REMOTE_SHUTDOWN_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.68.0</getOid>
+                </mapValue>
+            </value>
+            <label>Remote Shutdown</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="group_host_loss_status">
+            <type>state</type>
+            <sensorId>GROUP_HOST_LOSS_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.69.0</getOid>
+                </mapValue>
+            </value>
+            <label>Group Host Loss Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="group_slave_loss_status">
+            <type>state</type>
+            <sensorId>GROUP_SLAVE_LOSS_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.70.0</getOid>
+                </mapValue>
+            </value>
+            <label>Group Slave Loss Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="return_air_temperature_sensor_status">
+            <type>state</type>
+            <sensorId>RETURN_AIR_TEMPERATURE_SENSOR_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.71.0</getOid>
+                </mapValue>
+            </value>
+            <label>Return Air Temperature Sensor Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="return_air_humidity_sensor_status">
+            <type>state</type>
+            <sensorId>RETURN_AIR_HUMIDITY_SENSOR_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.72.0</getOid>
+                </mapValue>
+            </value>
+            <label>Return Air Humidity Sensor Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="supply_air_temperature_difference_sensor_status">
+            <type>state</type>
+            <sensorId>SUPPLY_AIR_TEMPERATURE_DIFFERENCE_SENSOR_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.73.0</getOid>
+                </mapValue>
+            </value>
+            <label>Supply Air Temperature Difference Sensor Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="supply_air_temperature_sensor_status">
+            <type>state</type>
+            <sensorId>SUPPLY_AIR_TEMPERATURE_SENSOR_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.74.0</getOid>
+                </mapValue>
+            </value>
+            <label>Supply Air Temperature Sensor Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="remote_temperature_sensor_status">
+            <type>state</type>
+            <sensorId>REMOTE_TEMPERATURE_SENSOR_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.75.0</getOid>
+                </mapValue>
+            </value>
+            <label>Remote Temperature Sensor Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="high_pressure_sensor_status">
+            <type>state</type>
+            <sensorId>HIGH_PRESSURE_SENSOR_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.76.0</getOid>
+                </mapValue>
+            </value>
+            <label>High Pressure Sensor Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="electric_cheating_status">
+            <type>state</type>
+            <sensorId>ELECTRIC_CHEATING_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.77.0</getOid>
+                </mapValue>
+            </value>
+            <label>Electric Cheating Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="exhaust_gas_temperature_sensor_status">
+            <type>state</type>
+            <sensorId>EXHAUST_GAS_TEMPERATURE_SENSOR_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.78.0</getOid>
+                </mapValue>
+            </value>
+            <label>Exhaust Gas Temperature Sensor Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="fan_power_status">
+            <type>state</type>
+            <sensorId>FAN_POWER_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.79.0</getOid>
+                </mapValue>
+            </value>
+            <label>Fan Power Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="eev_communication_status">
+            <type>state</type>
+            <sensorId>EEV_COMMUNICATION_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.80.0</getOid>
+                </mapValue>
+            </value>
+            <label>EEV Communication Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="selected_refrigerant_status">
+            <type>state</type>
+            <sensorId>SELECTED_REFRIGERANT_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.81.0</getOid>
+                </mapValue>
+            </value>
+            <label>Selected Refrigerant Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="refrigerant_shortage_status">
+            <type>state</type>
+            <sensorId>REFRIGERANT_SHORTAGE_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.82.0</getOid>
+                </mapValue>
+            </value>
+            <label>Refrigerant Shortage Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="intake_air_temperature_sensor_status">
+            <type>state</type>
+            <sensorId>INTAKE_AIR_TEMPERATURE_SENSOR_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.83.0</getOid>
+                </mapValue>
+            </value>
+            <label>Intake Air Temperature Sensor Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="low_pressure_sensor_status">
+            <type>state</type>
+            <sensorId>LOW_PRESSURE_SENSOR_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.84.0</getOid>
+                </mapValue>
+            </value>
+            <label>Low Pressure Sensor Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_communication_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_COMMUNICATION_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.85.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Communication Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u01_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U01_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.86.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U01 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u05_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U05_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.87.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U05 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u02_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U02_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.88.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U02 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u03_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U03_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.89.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U03 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u07_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U07_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.90.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U07 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="humidifier_status">
+            <type>state</type>
+            <sensorId>HUMIDIFIER_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.91.0</getOid>
+                </mapValue>
+            </value>
+            <label>Humidifier Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="group_address_repeated_status">
+            <type>state</type>
+            <sensorId>GROUP_ADDRESS_REPEATED_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.92.0</getOid>
+                </mapValue>
+            </value>
+            <label>Group Address Repeated Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="power_frequency_deviation_status">
+            <type>state</type>
+            <sensorId>POWER_FREQUENCY_DEVIATION_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.93.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power Frequency Deviation Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u00_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U00_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.94.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U00 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u04_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U04_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.95.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U04 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u13_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U13_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.96.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U13 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+
+        <stateSensor ruleid="compressor_drive_protection_u14_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U14_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.97.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U14 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u11_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U11_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.98.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U11 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u08_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U08_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.99.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U08 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u09_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U09_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.100.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U09 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u10_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U10_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.101.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U10 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u12_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U12_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.102.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U12 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u15_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U15_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.103.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U15 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="compressor_drive_protection_u06_status">
+            <type>state</type>
+            <sensorId>COMPRESSOR_DRIVE_PROTECTION_U06_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.104.0</getOid>
+                </mapValue>
+            </value>
+            <label>Compressor Drive Protection U06 Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="communication_status">
+            <type>state</type>
+            <sensorId>COMMUNICATION_STATUS</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.3029.2.2.105.0</getOid>
+                </mapValue>
+            </value>
+            <label>Communication Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>DIGITAL SENSORS</sensorSet>
+        </stateSensor>
+
+
+
+        <alarmFlags ruleid="common_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.43.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Common Alarm Active</activeText>
+                        <inactiveText>Common Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Common Alarm condition exists.</activeText>
+                        <inactiveText>Common Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="high_pressure_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.44.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>High Pressure Alarm Active</activeText>
+                        <inactiveText>High Pressure Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>High Pressure Alarm condition exists.</activeText>
+                        <inactiveText>High Pressure Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="low_pressure_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.45.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Low Pressure Alarm Active</activeText>
+                        <inactiveText>Low Pressure Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Low Pressure Alarm condition exists.</activeText>
+                        <inactiveText>Low Pressure Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="abnormal_high_pressure_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.46.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Abnormal High Pressure Alarm Active</activeText>
+                        <inactiveText>Abnormal High Pressure Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Abnormal High Pressure Alarm condition exists.</activeText>
+                        <inactiveText>Abnormal High Pressure Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="exhaust_temperature_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.47.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Exhaust Temperature Alarm Active</activeText>
+                        <inactiveText>Exhaust Temperature Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Exhaust Temperature Alarm condition exists.</activeText>
+                        <inactiveText>Exhaust Temperature Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="exhaust_low_superheat_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.48.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Exhaust Low Superheat Alarm Active</activeText>
+                        <inactiveText>Exhaust Low Superheat Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Exhaust Low Superheat Alarm condition exists.</activeText>
+                        <inactiveText>Exhaust Low Superheat Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="return_air_high_temperature_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.49.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Return Air High Temperature Alarm Active</activeText>
+                        <inactiveText>Return Air High Temperature Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Return Air High Temperature Alarm condition exists.</activeText>
+                        <inactiveText>Return Air High Temperature Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="supply_air_low_temperature_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.50.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Supply Air Low Temperature Alarm Active</activeText>
+                        <inactiveText>Supply Air Low Temperature Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Supply Air Low Temperature Alarm condition exists.</activeText>
+                        <inactiveText>Supply Air Low Temperature Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="supply_air_high_temperature_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.51.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Supply Air High Temperature Alarm Active</activeText>
+                        <inactiveText>Supply Air High Temperature Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Supply Air High Temperature Alarm condition exists.</activeText>
+                        <inactiveText>Supply Air High Temperature Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="return_air_low_humidity_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.53.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Return Air Low Humidity Alarm Active</activeText>
+                        <inactiveText>Return Air Low Humidity Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Return Air Low Humidity Alarm condition exists.</activeText>
+                        <inactiveText>Return Air Low Humidity Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="return_air_high_humidity_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.52.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Return Air High Humidity Alarm Active</activeText>
+                        <inactiveText>Return Air High Humidity Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Return Air High Humidity Alarm condition exists.</activeText>
+                        <inactiveText>Return Air High Humidity Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+
+            <alarmFlags ruleid="high_pressure_lock_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.54.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>High Pressure Lock Alarm Active</activeText>
+                        <inactiveText>High Pressure Lock Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>High Pressure Lock Alarm condition exists.</activeText>
+                        <inactiveText>High Pressure Lock Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="low_pressure_lock_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.55.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Low Pressure Lock Alarm Active</activeText>
+                        <inactiveText>Low Pressure Lock Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Low Pressure Lock Alarm condition exists.</activeText>
+                        <inactiveText>Low Pressure Lock Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="lock_exhaust_temperature_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.56.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Lock Exhaust Temperature Alarm Active</activeText>
+                        <inactiveText>Lock Exhaust Temperature Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Lock Exhaust Temperature Alarm condition exists.</activeText>
+                        <inactiveText>Lock Exhaust Temperature Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="low_exhaust_superheat_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.57.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Low Exhaust Superheat Alarm Active</activeText>
+                        <inactiveText>Low Exhaust Superheat Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Low Exhaust Superheat Alarm condition exists.</activeText>
+                        <inactiveText>Low Exhaust Superheat Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="power_loss_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.58.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Power Loss Alarm Active</activeText>
+                        <inactiveText>Power Loss Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Power Loss Alarm condition exists.</activeText>
+                        <inactiveText>Power Loss Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="power_over_voltage_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.59.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Power Over Voltage Alarm Active</activeText>
+                        <inactiveText>Power Over Voltage Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Power Over Voltage Alarm condition exists.</activeText>
+                        <inactiveText>Power Over Voltage Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="power_under_voltage_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.60.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Power Under Voltage Alarm Active</activeText>
+                        <inactiveText>Power Under Voltage Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Power Under Voltage Alarm condition exists.</activeText>
+                        <inactiveText>Power Under Voltage Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+        <alarmFlags ruleid="power_lose_phase_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.61.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Power Lose Phase Alarm Active</activeText>
+                    <inactiveText>Power Lose Phase Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Power Lose Phase Alarm condition exists.</activeText>
+                    <inactiveText>Power Lose Phase Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+
+        <alarmFlags ruleid="floor_overflow_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.62.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Floor Overflow Alarm Active</activeText>
+                        <inactiveText>Floor Overflow Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Floor Overflow Alarm condition exists.</activeText>
+                        <inactiveText>Floor Overflow Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="high_water_level_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.63.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>High Water Level Alarm Active</activeText>
+                        <inactiveText>High Water Level Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>High Water Level Alarm condition exists.</activeText>
+                        <inactiveText>High Water Level Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="filter_clogged_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.64.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Filter Clogged Alarm Active</activeText>
+                        <inactiveText>Filter Clogged Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Filter Clogged Alarm condition exists.</activeText>
+                        <inactiveText>Filter Clogged Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="filter_maintenance_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.65.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Filter Maintenance Alarm Active</activeText>
+                        <inactiveText>Filter Maintenance Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Filter Maintenance Alarm condition exists.</activeText>
+                        <inactiveText>Filter Maintenance Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="airflow_loss_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.66.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Airflow Loss Alarm Active</activeText>
+                        <inactiveText>Airflow Loss Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Airflow Loss Alarm condition exists.</activeText>
+                        <inactiveText>Airflow Loss Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="low_pressure_sensor_lock_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.67.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Low Pressure Sensor Lock Alarm Active</activeText>
+                        <inactiveText>Low Pressure Sensor Lock Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Low Pressure Sensor Lock Alarm condition exists.</activeText>
+                        <inactiveText>Low Pressure Sensor Lock Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="remote_shutdown_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.68.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Remote Shutdown Alarm Active</activeText>
+                        <inactiveText>Remote Shutdown Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Remote Shutdown Alarm condition exists.</activeText>
+                        <inactiveText>Remote Shutdown Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="group_host_loss_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.69.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Group Host Loss Alarm Active</activeText>
+                        <inactiveText>Group Host Loss Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Group Host Loss Alarm condition exists.</activeText>
+                        <inactiveText>Group Host Loss Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="group_slave_loss_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.70.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Group Slave Loss Alarm Active</activeText>
+                        <inactiveText>Group Slave Loss Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Group Slave Loss Alarm condition exists.</activeText>
+                        <inactiveText>Group Slave Loss Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="return_air_temperature_sensor_fault">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.71.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Return Air Temperature Sensor Fault Alarm Active</activeText>
+                        <inactiveText>Return Air Temperature Sensor Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Return Air Temperature Sensor Fault Alarm condition exists.</activeText>
+                        <inactiveText>Return Air Temperature Sensor Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="return_air_humidity_sensor_fault">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.72.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Return Air Humidity Sensor Fault Alarm Active</activeText>
+                        <inactiveText>Return Air Humidity Sensor Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Return Air Humidity Sensor Fault Alarm condition exists.</activeText>
+                        <inactiveText>Return Air Humidity Sensor Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="supply_air_temperature_difference_sensor_fault">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.73.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Supply Air Temperature Difference Sensor Fault Alarm Active</activeText>
+                        <inactiveText>Supply Air Temperature Difference Sensor Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Supply Air Temperature Difference Sensor Fault Alarm condition exists.</activeText>
+                        <inactiveText>Supply Air Temperature Difference Sensor Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="supply_air_temperature_sensor_fault">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.74.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Supply Air Temperature Sensor Fault Alarm Active</activeText>
+                        <inactiveText>Supply Air Temperature Sensor Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Supply Air Temperature Sensor Fault Alarm condition exists.</activeText>
+                        <inactiveText>Supply Air Temperature Sensor Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="remote_temperature_sensor_fault">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.75.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Remote Temperature Sensor Fault Alarm Active</activeText>
+                        <inactiveText>Remote Temperature Sensor Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Remote Temperature Sensor Fault Alarm condition exists.</activeText>
+                        <inactiveText>Remote Temperature Sensor Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="high_pressure_sensor_fault_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.76.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>High Pressure Sensor Fault Alarm Active</activeText>
+                        <inactiveText>High Pressure Sensor Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>High Pressure Sensor Fault Alarm condition exists.</activeText>
+                        <inactiveText>High Pressure Sensor Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="electric_cheating_failure_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.77.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Electric Cheating Failure Alarm Active</activeText>
+                        <inactiveText>Electric Cheating Failure Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Electric Cheating Failure Alarm condition exists.</activeText>
+                        <inactiveText>Electric Cheating Failure Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="exhaust_gas_temperature_sensor_fault_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.78.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Exhaust Gas Temperature Sensor Fault Alarm Active</activeText>
+                        <inactiveText>Exhaust Gas Temperature Sensor Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Exhaust Gas Temperature Sensor Fault Alarm condition exists.</activeText>
+                        <inactiveText>Exhaust Gas Temperature Sensor Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+
+            <alarmFlags ruleid="fan_power_failure_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.79.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Fan Power Failure Alarm Active</activeText>
+                        <inactiveText>Fan Power Failure Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Fan Power Failure Alarm condition exists.</activeText>
+                        <inactiveText>Fan Power Failure Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="eev_communication_failure_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.80.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>EEV Communication Failure Alarm Active</activeText>
+                        <inactiveText>EEV Communication Failure Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>EEV Communication Failure Alarm condition exists.</activeText>
+                        <inactiveText>EEV Communication Failure Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="not_selected_refrigerant_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.81.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Not Selected Refrigerant Alarm Active</activeText>
+                        <inactiveText>Not Selected Refrigerant Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Not Selected Refrigerant Alarm condition exists.</activeText>
+                        <inactiveText>Not Selected Refrigerant Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+
+            <alarmFlags ruleid="refrigerant_shortage_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.82.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Refrigerant Shortage Alarm Active</activeText>
+                        <inactiveText>Refrigerant Shortage Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Refrigerant Shortage Alarm condition exists.</activeText>
+                        <inactiveText>Refrigerant Shortage Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="intake_air_temperature_sensor_fault_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.83.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Intake Air Temperature Sensor Fault Alarm Active</activeText>
+                        <inactiveText>Intake Air Temperature Sensor Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Intake Air Temperature Sensor Fault Alarm condition exists.</activeText>
+                        <inactiveText>Intake Air Temperature Sensor Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="low_pressure_sensor_fault_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.84.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Low Pressure Sensor Fault Alarm Active</activeText>
+                        <inactiveText>Low Pressure Sensor Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Low Pressure Sensor Fault Alarm condition exists.</activeText>
+                        <inactiveText>Low Pressure Sensor Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_communication_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.85.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Communication Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Communication Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Communication Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Communication Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u01_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.86.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U01 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U01 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U01 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U01 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u05_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.87.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U05 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U05 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U05 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U05 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u02_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.88.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U02 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U02 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U02 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U02 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u03_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.89.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U03 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U03 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U03 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U03 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u07_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.90.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U07 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U07 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U07 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U07 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="humidifier_fault_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.91.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Humidifier Fault Alarm Active</activeText>
+                        <inactiveText>Humidifier Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Humidifier Fault Alarm condition exists.</activeText>
+                        <inactiveText>Humidifier Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="group_address_repeated_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.92.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Group Address Repeated Alarm Active</activeText>
+                        <inactiveText>Group Address Repeated Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Group Address Repeated Alarm condition exists.</activeText>
+                        <inactiveText>Group Address Repeated Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="power_frequency_deviation_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.93.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Power Frequency Deviation Alarm Active</activeText>
+                        <inactiveText>Power Frequency Deviation Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Power Frequency Deviation Alarm condition exists.</activeText>
+                        <inactiveText>Power Frequency Deviation Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u00_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.94.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U00 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U00 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U00 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U00 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u04_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.95.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U04 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U04 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U04 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U04 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u13_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.96.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U13 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U13 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U13 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U13 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u14_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.97.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U14 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U14 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U14 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U14 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u11_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.98.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U11 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U11 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U11 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U11 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u08_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.99.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U08 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U08 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U08 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U08 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u09_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.100.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U09 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U09 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U09 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U09 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u10_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.101.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U10 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U10 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U10 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U10 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u12_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.102.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U12 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U12 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U12 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U12 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u15_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.103.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U15 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U15 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U15 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U15 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="compressor_drive_protection_u06_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.104.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Compressor Drive Protection U06 Alarm Active</activeText>
+                        <inactiveText>Compressor Drive Protection U06 Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Compressor Drive Protection U06 Alarm condition exists.</activeText>
+                        <inactiveText>Compressor Drive Protection U06 Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="communication_status_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.105.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Communication Status Alarm Active</activeText>
+                        <inactiveText>Communication Status Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Communication Status Alarm condition exists.</activeText>
+                        <inactiveText>Communication Status Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="fan1_status_fault_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.34.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Fan1 Status Fault Alarm Active</activeText>
+                        <inactiveText>Fan1 Status Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Fan1 Status Fault Alarm condition exists.</activeText>
+                        <inactiveText>Fan1 Status Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="fan2_status_fault_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.35.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Fan2 Status Fault Alarm Active</activeText>
+                        <inactiveText>Fan2 Status Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Fan2 Status Fault Alarm condition exists.</activeText>
+                        <inactiveText>Fan2 Status Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="fan3_status_fault_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.36.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Fan3 Status Fault Alarm Active</activeText>
+                        <inactiveText>Fan3 Status Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Fan3 Status Fault Alarm condition exists.</activeText>
+                        <inactiveText>Fan3 Status Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+            <alarmFlags ruleid="fan4_status_fault_alarm">
+                <value><getOid>.1.3.6.1.4.1.13400.2.3029.2.2.37.0</getOid></value>
+                <alarmFlagsTest match="1">
+                    <name>
+                        <activeText>Fan4 Status Fault Alarm Active</activeText>
+                        <inactiveText>Fan4 Status Fault Alarm Cleared</inactiveText>
+                    </name>
+                    <severity>critical</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText>Fan4 Status Fault Alarm condition exists.</activeText>
+                        <inactiveText>Fan4 Status Fault Alarm condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+            </alarmFlags>
+
+
+    </device>
+</APC_DDF>
+
+
+
+
+

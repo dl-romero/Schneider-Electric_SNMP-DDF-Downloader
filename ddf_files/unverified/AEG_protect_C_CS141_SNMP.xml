@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
          ddfid="AEG_protect_C_CS141_SNMP"
          ddfname="AEG protect C CS141-SNMP"
-         ddfversion="3"
+         ddfversion="4"
          canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<device deviceid="aeg_protect_c_cs141">
@@ -16,7 +16,7 @@
 		<setProductData ruleid="typedata"
 		                field="type">UPS</setProductData>
 		<setDefaultLabel ruleid="labeldata">
-			<sysHostname />- Slave<commSetting field="slaveaddress" />
+			<sysHostname />- Modbus Server<commSetting field="slaveaddress" />
 		</setDefaultLabel>
 		<numSensor ruleid="output_voltage_phase_1">
 			<type>voltage</type>

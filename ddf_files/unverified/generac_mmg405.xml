@@ -4,11 +4,11 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="generac_mmg405"
 	ddfname="Generac MMG405"
-	ddfversion="1"
+	ddfversion="2"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<device deviceid="Generac_MMG405">
-		<oidMustExist ruleid="snmpdevicetest" oid="1.3.6.1.2.1.1.2.0" />
+		<oidMustExist ruleid="mmg405_test" oid="1.3.6.1.4.1.28634.6.1355548436" istree="yes"/>
 		<setProductData ruleid="vendordata" field="vendor">Generac</setProductData>
 		<setProductData ruleid="modeldata" field="model">MMG405</setProductData>
 		<setProductData ruleid="typedata" field="type">Generator</setProductData>

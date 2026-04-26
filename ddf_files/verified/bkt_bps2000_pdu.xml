@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="bkt_bps2000_pdu"
+  ddfname="BKT BPS2000 PDU"
+  ddfversion="4"
+  canremove="yes">
+    <schemaVersion>1.6</schemaVersion>
+
+    <device deviceid="bkt_bps2000_ident">
+        <oidMustExist ruleid="bps2000_pdu_exists" oid=".1.3.6.1.4.1.47394.1.1.1.0"/>
+
+		<suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+        <suppressRule ruleid="suppresscorelabeldata" suppressid="core/mib2datalabel/labeldata"/>
+
+        <setProductData ruleid="vendordata" field="vendor">BKT</setProductData>
+        <setProductData ruleid="modeldata" field="model">BPS2000</setProductData>
+        <setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+        <setDefaultLabel ruleid="labeldata"><getOid>.1.3.6.1.4.1.47394.1.1.1.0</getOid></setDefaultLabel>
+
+        <setProductData ruleid="inputphasecount" field="inputphasecount">
+			<mapValue mapid="phaseCount-vm"><getOid>.1.3.6.1.4.1.47394.1.2.11.0</getOid></mapValue>
+		</setProductData>
+		<setProductData ruleid="outputphasecount" field="outputphasecount">
+			<mapValue mapid="phaseCount-vm"><getOid>.1.3.6.1.4.1.47394.1.2.11.0</getOid></mapValue>
+		</setProductData>
+		
+		<valueMap ruleid="phaseCount-vm">
+            <valueIn>0</valueIn><valueOut>1</valueOut>
+            <valueIn>*</valueIn><valueOut>3</valueOut>
+        </valueMap>
+    </device>
+
+
+    <device deviceid="bps2000_pdu_master_status">
+        <oidMustExist ruleid="bps2000_pdu_master_exists" oid=".1.3.6.1.4.1.47394.1.2" istree="yes"/>
+
+        <valueMap ruleid="invalid_zero-vm">
+            <valueIn>0</valueIn><valueOut>[false]</valueOut>
+            <valueIn>*</valueIn><valueOut>[true]</valueOut>
+        </valueMap>
+
+        <numSensor ruleid="master_current_l1">
+            <type>amperage</type>
+            <sensorId>MASTER_CURRENT_L1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.1.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Current L1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_voltage_l1">
+            <type>voltage</type>
+            <sensorId>MASTER_VOLTAGE_L1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.2.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Voltage L1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_power_l1">
+            <type>powerW</type>
+            <sensorId>MASTER_POWER_L1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.3.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Power L1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_reactive_power_l1">
+            <type>powerVA/powerVAR</type>
+            <sensorId>MASTER_REACTIVE_POWER_L1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.4.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Reactive Power L1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_apparent_power_l1">
+            <type>powerVA</type>
+            <sensorId>MASTER_APPARENT_POWER_L1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.5.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Apparent Power L1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_frequency_l1">
+            <type>frequency</type>
+            <sensorId>MASTER_FREQUENCY_L1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.6.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Frequency L1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_active_energy_l1">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_ACTIVE_ENERGY_L1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.7.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Active Energy L1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_apparent_energy_l1">
+            <type>num/kVAhr</type>
+            <sensorId>MASTER_APPARENT_ENERGY_L1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.8.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Apparent Energy L1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_pf_l1">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_PF_L1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.9.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power Factor L1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_current_l2">
+            <type>amperage</type>
+            <sensorId>MASTER_CURRENT_L2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.10.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Current L2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_voltage_l2">
+            <type>voltage</type>
+            <sensorId>MASTER_VOLTAGE_L2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.11.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Voltage L2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_power_l2">
+            <type>powerW</type>
+            <sensorId>MASTER_POWER_L2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.12.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Power L2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_reactive_power_l2">
+            <type>powerVA/powerVAR</type>
+            <sensorId>MASTER_REACTIVE_POWER_L2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.13.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Reactive Power L2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_apparent_power_l2">
+            <type>powerVA</type>
+            <sensorId>MASTER_APPARENT_POWER_L2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.14.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Apparent Power L2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_frequency_l2">
+            <type>frequency</type>
+            <sensorId>MASTER_FREQUENCY_L2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.15.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Frequency L2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_active_energy_l2">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_ACTIVE_ENERGY_L2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.16.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Active Energy L2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_apparent_energy_l2">
+            <type>num/kVAhr</type>
+            <sensorId>MASTER_APPARENT_ENERGY_L2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.17.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Apparent Energy L2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_pf_l2">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_PF_L2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.18.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power Factor L2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_current_l3">
+            <type>amperage</type>
+            <sensorId>MASTER_CURRENT_L3</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.19.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Current L3</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_voltage_l3">
+            <type>voltage</type>
+            <sensorId>MASTER_VOLTAGE_L3</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.20.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Voltage L3</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_power_l3">
+            <type>powerW</type>
+            <sensorId>MASTER_POWER_L3</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.21.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Power L3</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_reactive_power_l3">
+            <type>powerVA/powerVAR</type>
+            <sensorId>MASTER_REACTIVE_POWER_L3</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.22.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Reactive Power L3</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_apparent_power_l3">
+            <type>powerVA</type>
+            <sensorId>MASTER_APPARENT_POWER_L3</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.23.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Apparent Power L3</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_frequency_l3">
+            <type>frequency</type>
+            <sensorId>MASTER_FREQUENCY_L3</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.24.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Frequency L3</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_active_energy_l3">
+            <type>num/kwatthr</type>
+            <sensorId>MASTER_ACTIVE_ENERGY_L3</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.25.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Active Energy L3</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_apparent_energy_l3">
+            <type>num/kVAhr</type>
+            <sensorId>MASTER_APPARENT_ENERGY_L3</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.26.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Apparent Energy L3</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_pf_l3">
+            <type>num/powerfactor</type>
+            <sensorId>MASTER_PF_L3</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.27.0</getOid></op>
+                <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power Factor L3</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_temperature">
+            <rowTest>
+                <mapValue mapid="invalid_zero-vm"><getOid>.1.3.6.1.4.1.47394.1.2.28.0</getOid></mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>MASTER_TEMPERATURE</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.28.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Temperature</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_temperature1">
+            <rowTest>
+                <mapValue mapid="invalid_zero-vm"><getOid>.1.3.6.1.4.1.47394.1.2.29.0</getOid></mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>MASTER_TEMPERATURE1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.29.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>SensorBox Temperature 1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_temperature2">
+            <rowTest>
+                <mapValue mapid="invalid_zero-vm"><getOid>.1.3.6.1.4.1.47394.1.2.30.0</getOid></mapValue>
+            </rowTest>
+            <type>temp</type>
+            <sensorId>MASTER_TEMPERATURE2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.30.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>SensorBox Temperature 2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_humidity">
+            <rowTest>
+                <mapValue mapid="invalid_zero-vm"><getOid>.1.3.6.1.4.1.47394.1.2.31.0</getOid></mapValue>
+            </rowTest>
+            <type>humidity</type>
+            <sensorId>MASTER_HUMIDITY</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.31.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidity</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_humidity1">
+            <rowTest>
+                <mapValue mapid="invalid_zero-vm"><getOid>.1.3.6.1.4.1.47394.1.2.32.0</getOid></mapValue>
+            </rowTest>
+            <type>humidity</type>
+            <sensorId>MASTER_HUMIDITY1</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.32.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>SensorBox Humidity 1</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+        <numSensor ruleid="master_humidity2">
+            <rowTest>
+                <mapValue mapid="invalid_zero-vm"><getOid>.1.3.6.1.4.1.47394.1.2.33.0</getOid></mapValue>
+            </rowTest>
+            <type>humidity</type>
+            <sensorId>MASTER_HUMIDITY2</sensorId>
+            <value>
+                <mult>
+                <op><getOid>.1.3.6.1.4.1.47394.1.2.33.0</getOid></op>
+                <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>SensorBox Humidity 2</label>
+            <sensorSet>Measurements</sensorSet>
+        </numSensor>
+    </device>
+</APC_DDF>

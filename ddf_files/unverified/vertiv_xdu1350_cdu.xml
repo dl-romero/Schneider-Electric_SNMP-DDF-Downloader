@@ -1,0 +1,1910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid ="vertiv_xdu1350_cdu"
+  ddfname="Vertiv XDU1350 CDU"
+  ddfversion="1"
+  canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+
+    <!--
+		DDF-1647
+		SOURCE: xdu_1.walk, XDU1350B_v3.mib
+		BFO: 116052895
+	-->
+
+    <device deviceid="vertiv_xdu1350_cdu">
+		<oidMustExist ruleid="vertiv_xdu1350_cdu_mustexist" oid=".1.3.6.1.4.1.51077.20" istree="yes"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Vertiv</setProductData>
+		<setProductData ruleid="modeldata" field="model">XDU1350</setProductData>
+		<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+
+        <stateSensor ruleid="mode">
+            <type>state</type>
+            <sensorId>MODE</sensorId>
+            <value>
+            <mapValue mapid="11state-vm">
+                <getOid>.1.3.6.1.4.1.51077.20.1.1.0</getOid>
+            </mapValue>
+            </value>
+            <label>Mode</label>
+            <enum>operatingMode-em</enum>
+            <sensorSet>Status SI</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="group_mode">
+            <type>state</type>
+            <sensorId>GROUP_MODE</sensorId>
+            <value>
+            <mapValue mapid="5state-vm">
+                <getOid>.1.3.6.1.4.1.51077.20.1.2.0</getOid>
+            </mapValue>
+            </value>
+            <label>Group Mode</label>
+            <enum>groupMode-em</enum>
+            <sensorSet>Status SI</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="pump_1_speed">
+            <type>num</type>
+            <units>rpm</units>
+            <sensorId>PUMP_1_SPEED</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.3.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Pump 1 Speed</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="pump_2_speed">
+            <type>num</type>
+            <units>rpm</units>
+            <sensorId>PUMP_2_SPEED</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.4.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Pump 2 Speed</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="pump_3_speed">
+            <type>num</type>
+            <units>rpm</units>
+            <sensorId>PUMP_3_SPEED</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.5.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Pump 3 Speed</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="cooling_demand">
+            <type>pctofcapacity</type>
+            <sensorId>COOLING_DEMAND</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.6.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Cooling Demand</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="valve_1_demand">
+            <type>pctofcapacity</type>
+            <sensorId>VALVE_1_DEMAND</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.7.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Valve 1 Demand</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="valve_1_feedback">
+            <type>pctofcapacity</type>
+            <sensorId>VALVE_1_FEEDBACK</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.8.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Valve 1 Feedback</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="valve_2_demand">
+            <type>pctofcapacity</type>
+            <sensorId>VALVE_2_DEMAND</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.9.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Valve 2 Demand</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="valve_2_feedback">
+            <type>pctofcapacity</type>
+            <sensorId>VALVE_2_FEEDBACK</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.10.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Valve 2 Feedback</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="primary_temperature_t1">
+            <type>temp</type>
+            <sensorId>PRIMARY_TEMPERATURE_T1</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.1.11.0</getOid></op>
+            <op>0.1</op>
+            </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Primary Temperature T1</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_temperature_t2a">
+            <type>temp</type>
+            <sensorId>SECONDARY_TEMPERATURE_T2A</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.51077.20.1.12.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Secondary Temperature T2A</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_temperature_t2b">
+            <type>temp</type>
+            <sensorId>SECONDARY_TEMPERATURE_T2B</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.51077.20.1.13.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Secondary Temperature T2B</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_temperature_t2c">
+            <type>temp</type>
+            <sensorId>SECONDARY_TEMPERATURE_T2C</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.51077.20.1.14.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Secondary Temperature T2C</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_temperature_t2">
+            <type>temp</type>
+            <sensorId>SECONDARY_TEMPERATURE_T2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.51077.20.1.15.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Secondary Temperature T2</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="room_temperature_t3">
+            <type>temp</type>
+            <sensorId>ROOM_TEMPERATURE_T3</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.51077.20.1.16.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Room Temperature T3</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="room_rh">
+            <type>humidity</type>
+            <sensorId>ROOM_RH</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.1.17.0</getOid></op>
+            <op>0.1</op>
+            </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Room Sensor Relative Humidity</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="dewpoint">
+            <type>temp</type>
+            <sensorId>DEWPOINT</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.1.18.0</getOid></op>
+            <op>0.1</op>
+            </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Room Sensor Dewpoint</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_return_temperature_t4">
+            <type>temp</type>
+            <sensorId>SECONDARY_RETURN_TEMPERATURE_T4</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.51077.20.1.19.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Secondary Return Temperature T4</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="primary_return_temperature_t5">
+            <type>temp</type>
+            <sensorId>PRIMARY_RETURN_TEMPERATURE_T5</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.1.20.0</getOid></op>
+            <op>0.1</op>
+            </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Primary Return Temperature T5</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps1a">
+            <type>pressure</type>
+            <sensorId>PS1A</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.21.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Pressure Ps1A</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps1b">
+            <type>pressure</type>
+            <sensorId>PS1B</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.22.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Pressure Ps1B</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps1">
+            <type>pressure</type>
+            <sensorId>PS1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.23.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Pressure Ps1</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+
+        <numSensor ruleid="ps2a">
+            <type>pressure</type>
+            <sensorId>PS2A</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.24.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Pressure Ps2A</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps2b">
+            <type>pressure</type>
+            <sensorId>PS2B</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.25.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Pressure Ps2B</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps2">
+            <type>pressure</type>
+            <sensorId>PS2</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.26.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Pressure Ps2</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_differential_pressure">
+            <type>pressure</type>
+            <sensorId>SECONDARY_DIFFERENTIAL_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.27.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Differential Pressure</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps3">
+            <type>pressure</type>
+            <sensorId>PS3</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.28.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Primary Inlet Pressure Ps3</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps4">
+            <type>pressure</type>
+            <sensorId>PS4</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.29.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Primary Outlet Pressure Ps4</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="filter_differential_pressure">
+            <type>pressure</type>
+            <sensorId>FILTER_DIFFERENTIAL_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.30.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Filter Differential Pressure</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="primary_flow_rate">
+            <type>fluidflow</type>
+            <sensorId>PRIMARY_FLOW_RATE</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.31.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Primary Flow Rate</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="primary_duty">
+            <type>num/powerKW</type>
+            <sensorId>PRIMARY_DUTY</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.32.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Primary Duty</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_flow_rate">
+            <type>fluidflow</type>
+            <sensorId>SECONDARY_FLOW_RATE</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.33.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Secondary Flow Rate</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_duty">
+            <type>num/powerKW</type>
+            <sensorId>SECONDARY_DUTY</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.34.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Secondary Duty</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="current_setpoint">
+            <type>temp</type>
+            <sensorId>CURRENT_SETPOINT</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.1.35.0</getOid></op>
+            <op>0.1</op>
+            </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Current Setpoint</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="pump_runtime_p1">
+            <type>runhours</type>
+            <sensorId>PUMP_RUNTIME_P1</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.36.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Pump Runtime P1</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="pump_runtime_p2">
+            <type>runhours</type>
+            <sensorId>PUMP_RUNTIME_P2</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.37.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Pump Runtime P2</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="pump_runtime_p3">
+            <type>runhours</type>
+            <sensorId>PUMP_RUNTIME_P3</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.38.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Pump Runtime P3</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps5a">
+            <type>pressure</type>
+            <sensorId>PS5A</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.39.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Filter Inlet Pressure Ps5A</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps5b">
+            <type>pressure</type>
+            <sensorId>PS5B</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.40.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Filter Inlet Pressure Ps5B</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="ps5c">
+            <type>pressure</type>
+            <sensorId>PS5C</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.41.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Filter Inlet Pressure Ps5C</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_filter_1_differential_pressure">
+            <type>pressure</type>
+            <sensorId>SECONDARY_FILTER_1_DIFFERENTIAL_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.42.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Filter 1 Differential Pressure</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_filter_2_differential_pressure">
+            <type>pressure</type>
+            <sensorId>SECONDARY_FILTER_2_DIFFERENTIAL_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.43.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Filter 2 Differential Pressure</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="secondary_filter_3_differential_pressure">
+            <type>pressure</type>
+            <sensorId>SECONDARY_FILTER_3_DIFFERENTIAL_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.44.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Secondary Filter 3 Differential Pressure</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="pump_1_input_power">
+            <type>num/powerKW</type>
+            <sensorId>PUMP_1_INPUT_POWER</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.1.45.0</getOid></op>
+            <op>0.1</op>
+            </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Pump 1 Input Power</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="pump_2_input_power">
+            <type>num/powerKW</type>
+            <sensorId>PUMP_2_INPUT_POWER</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.1.46.0</getOid></op>
+            <op>0.1</op>
+            </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Pump 2 Input Power</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="pump_3_input_power">
+            <type>num/powerKW</type>
+            <sensorId>PUMP_3_INPUT_POWER</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.1.47.0</getOid></op>
+            <op>0.1</op>
+            </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Pump 3 Input Power</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="group_secondary_flow_rate">
+            <type>fluidflow</type>
+            <sensorId>GROUP_SECONDARY_FLOW_RATE</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.48.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Group Secondary Flow Rate</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="group_secondary_differential_pressure">
+            <type>pressure</type>
+            <sensorId>GROUP_SECONDARY_DIFFERENTIAL_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.1.49.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Group Secondary Differential Pressure</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="active_alarm_count">
+            <type>num</type>
+            <sensorId>ACTIVE_ALARM_COUNT</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.50.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Active Alarm Count</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <stateSensor ruleid="ats_status">
+            <type>state</type>
+            <sensorId>ATS_STATUS</sensorId>
+            <value>
+            <mapValue mapid="5state-vm">
+                <getOid>.1.3.6.1.4.1.51077.20.1.51.0</getOid>
+            </mapValue>
+            </value>
+            <label>ATS Status</label>
+            <enum>atsStatus-em</enum>
+            <sensorSet>Status SI</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="water_quality_turbidity">
+            <type>num</type>
+            <sensorId>WATER_QUALITY_TURBIDITY</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.52.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Water Quality Turbidity</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="water_quality_ph">
+            <type>num</type>
+            <sensorId>WATER_QUALITY_PH</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.1.53.0</getOid></op>
+            <op>0.01</op>
+            </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Water Quality PH</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="water_quality_conductivity">
+            <type>h2oconduct</type>
+            <sensorId>WATER_QUALITY_CONDUCTIVITY</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.1.54.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Water Quality Conductivity</label>
+            <sensorSet>Status SI</sensorSet>
+        </numSensor>
+
+        <valueMap ruleid="11state-vm">
+            <valueIn>*</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>4</valueIn><valueOut>4</valueOut>
+            <valueIn>5</valueIn><valueOut>5</valueOut>
+            <valueIn>6</valueIn><valueOut>6</valueOut>
+            <valueIn>7</valueIn><valueOut>7</valueOut>
+            <valueIn>8</valueIn><valueOut>8</valueOut>
+            <valueIn>9</valueIn><valueOut>9</valueOut>
+            <valueIn>10</valueIn><valueOut>10</valueOut>
+        </valueMap>
+
+
+        <valueMap ruleid="5state-vm">
+            <valueIn>*</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>4</valueIn><valueOut>4</valueOut>
+        </valueMap>
+
+        <enumMap ruleid="operatingMode-em">
+            <label>Unknown</label>
+            <label>Not Configured</label>
+            <label>Shutdown</label>
+            <label>Shutdown Network</label>
+            <label>Manual Override</label>
+            <label>Standby</label>
+            <label>Online</label>
+            <label>Online Filling</label>
+            <label>Filling</label>
+            <label>Fault Shutdown</label>
+            <label>Group Standby</label>
+        </enumMap>
+
+        <enumMap ruleid="groupMode-em">
+            <label>Unknown</label>
+            <label>Standalone</label>
+            <label>Master</label>
+            <label>Slave</label>
+            <label>Independent</label>
+        </enumMap>
+
+        <enumMap ruleid="atsStatus-em">
+            <label>Unknown</label>
+            <label>No ATS</label>
+            <label>A On, B Available</label>
+            <label>A On, B Not Available</label>
+            <label>B On</label>
+        </enumMap>
+
+        <numSensor ruleid="cooling_setpoint">
+            <type>temp</type>
+            <sensorId>COOLING_SETPOINT</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.2.1.0</getOid></op>
+            <op>0.1</op>
+            </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Cooling Setpoint</label>
+            <sensorSet>Setting SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="flow_setpoint">
+            <type>volairflow</type>
+            <sensorId>FLOW_SETPOINT</sensorId>
+            <value>
+            <getOid>.1.3.6.1.4.1.51077.20.2.2.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Flow Setpoint</label>
+            <sensorSet>Setting SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="dp_setpoint">
+            <type>pressure</type>
+            <sensorId>DP_SETPOINT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.2.3.0</getOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>DP Setpoint</label>
+            <sensorSet>Setting SI</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="firmware_version">
+            <type>num</type>
+            <sensorId>FIRMWARE_VERSION</sensorId>
+            <value>
+            <mult>
+            <op><getOid>.1.3.6.1.4.1.51077.20.2.4.0</getOid></op>
+            <op>0.01</op>
+            </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Firmware Version</label>
+            <sensorSet>Setting SI</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="alarm_status_a01">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.1.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>T1 Temperature Sensor Fault Present</activeText>
+                    <inactiveText>T1 Temperature Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>T1 temperature sensor fault condition exists.</activeText>
+                    <inactiveText>T1 temperature sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a02">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.2.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>T2a Temperature Sensor Fault Present</activeText>
+                    <inactiveText>T2a Temperature Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>T2a temperature sensor fault condition exists.</activeText>
+                    <inactiveText>T2a temperature sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a03">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.3.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>T2b Temperature Sensor Fault Present</activeText>
+                    <inactiveText>T2b Temperature Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>T2b temperature sensor fault condition exists.</activeText>
+                    <inactiveText>T2b temperature sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a04">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.4.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>T2c Temperature Sensor Fault Present</activeText>
+                    <inactiveText>T2c Temperature Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>T2c temperature sensor fault condition exists.</activeText>
+                    <inactiveText>T2c temperature sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a05">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.5.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>T3a Temperature Sensor Fault Present</activeText>
+                    <inactiveText>T3a Temperature Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>T3a temperature sensor fault condition exists.</activeText>
+                    <inactiveText>T3a temperature sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a06">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.6.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>T3b Temperature Sensor Fault Present</activeText>
+                    <inactiveText>T3b Temperature Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>T3b temperature sensor fault condition exists.</activeText>
+                    <inactiveText>T3b temperature sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a07">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.7.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>T4 Temperature Sensor Fault Present</activeText>
+                    <inactiveText>T4 Temperature Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>T4 temperature sensor fault condition exists.</activeText>
+                    <inactiveText>T4 temperature sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a08">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.8.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>RH Relative Humidity Sensor Fault Present</activeText>
+                    <inactiveText>RH Relative Humidity Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>RH relative humidity sensor fault condition exists.</activeText>
+                    <inactiveText>RH relative humidity sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a09">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.9.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS1a Pressure Sensor Fault Present</activeText>
+                    <inactiveText>PS1a Pressure Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>PS1a pressure sensor fault condition exists.</activeText>
+                    <inactiveText>PS1a pressure sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a10">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.10.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS1b Pressure Sensor Fault Present</activeText>
+                    <inactiveText>PS1b Pressure Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>PS1b pressure sensor fault condition exists.</activeText>
+                    <inactiveText>PS1b pressure sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a11">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.11.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS2a Pressure Sensor Fault Present</activeText>
+                    <inactiveText>PS2a Pressure Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>PS2a pressure sensor fault condition exists.</activeText>
+                    <inactiveText>PS2a pressure sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a12">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.12.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS2b Pressure Sensor Fault Present</activeText>
+                    <inactiveText>PS2b Pressure Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>PS2b pressure sensor fault condition exists.</activeText>
+                    <inactiveText>PS2b pressure sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a13">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.13.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS3 Pressure Sensor Fault Present</activeText>
+                    <inactiveText>PS3 Pressure Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>PS3 pressure sensor fault condition exists.</activeText>
+                    <inactiveText>PS3 pressure sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a14">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.14.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS4 Pressure Sensor Fault Present</activeText>
+                    <inactiveText>PS4 Pressure Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>PS4 pressure sensor fault condition exists.</activeText>
+                    <inactiveText>PS4 pressure sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a15">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.15.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS5a Pressure Sensor Fault Present</activeText>
+                    <inactiveText>PS5a Pressure Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>PS5a pressure sensor fault condition exists.</activeText>
+                    <inactiveText>PS5a pressure sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a16">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.16.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS5b Pressure Sensor Fault Present</activeText>
+                    <inactiveText>PS5b Pressure Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>PS5b pressure sensor fault condition exists.</activeText>
+                    <inactiveText>PS5b pressure sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a17">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.17.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS5c Pressure Sensor Fault Present</activeText>
+                    <inactiveText>PS5c Pressure Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>PS5c pressure sensor fault condition exists.</activeText>
+                    <inactiveText>PS5c pressure sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a18">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.18.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Flow Meter Sensor Fault Present</activeText>
+                    <inactiveText>Secondary Flow Meter Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Secondary flow meter sensor fault condition exists.</activeText>
+                    <inactiveText>Secondary flow meter sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a19">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.19.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Primary Flow Meter Sensor Fault Present</activeText>
+                    <inactiveText>Primary Flow Meter Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>Primary flow meter sensor fault condition exists.</activeText>
+                    <inactiveText>Primary flow meter sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a20">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.20.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>MicroSD Card Fault Present</activeText>
+                    <inactiveText>MicroSD Card Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>MicroSD card fault condition exists.</activeText>
+                    <inactiveText>MicroSD card fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a21">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.21.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Pump 1 Inverter Fault Present</activeText>
+                    <inactiveText>Pump 1 Inverter Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Inverter</category>
+                <description>
+                    <activeText>Pump 1 inverter fault condition exists.</activeText>
+                    <inactiveText>Pump 1 inverter fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a22">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.22.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Pump 2 Inverter Fault Present</activeText>
+                    <inactiveText>Pump 2 Inverter Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Inverter</category>
+                <description>
+                    <activeText>Pump 2 inverter fault condition exists.</activeText>
+                    <inactiveText>Pump 2 inverter fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a23">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.23.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Pump 3 Inverter Fault Present</activeText>
+                    <inactiveText>Pump 3 Inverter Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Inverter</category>
+                <description>
+                    <activeText>Pump 3 inverter fault condition exists.</activeText>
+                    <inactiveText>Pump 3 inverter fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a24">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.24.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Pump 1 Inverter Fault Present</activeText>
+                    <inactiveText>Pump 1 Inverter Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Inverter</category>
+                <description>
+                    <activeText>Pump 1 inverter fault condition exists.</activeText>
+                    <inactiveText>Pump 1 inverter fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a25">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.25.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Pump 2 Inverter Fault Present</activeText>
+                    <inactiveText>Pump 2 Inverter Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Inverter</category>
+                <description>
+                    <activeText>Pump 2 inverter fault condition exists.</activeText>
+                    <inactiveText>Pump 2 inverter fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a26">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.26.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Pump 3 Inverter Fault Present</activeText>
+                    <inactiveText>Pump 3 Inverter Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Inverter</category>
+                <description>
+                    <activeText>Pump 3 inverter fault condition exists.</activeText>
+                    <inactiveText>Pump 3 inverter fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a27">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.27.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Pump Low Flow Present</activeText>
+                    <inactiveText>Pump Low Flow Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Pump low flow condition exists.</activeText>
+                    <inactiveText>Pump low flow condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a28">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.28.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Valve 1 Fault Present</activeText>
+                    <inactiveText>Valve 1 Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Valve 1 fault condition exists.</activeText>
+                    <inactiveText>Valve 1 fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a29">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.29.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Valve 2 Fault Present</activeText>
+                    <inactiveText>Valve 2 Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Valve 2 fault condition exists.</activeText>
+                    <inactiveText>Valve 2 fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a30">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.30.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Primary Fluid Low Flow Present</activeText>
+                    <inactiveText>Primary Fluid Low Flow Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Primary fluid low flow condition exists.</activeText>
+                    <inactiveText>Primary fluid low flow condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a31">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.31.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Primary Fluid No Flow Present</activeText>
+                    <inactiveText>Primary Fluid No Flow Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Primary fluid no flow condition exists.</activeText>
+                    <inactiveText>Primary fluid no flow condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a32">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.32.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Primary Filter Dirty Present</activeText>
+                    <inactiveText>Primary Filter Dirty Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Primary filter dirty condition exists.</activeText>
+                    <inactiveText>Primary filter dirty condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a33">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.33.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Primary Fluid Low Temperature Present</activeText>
+                    <inactiveText>Primary Fluid Low Temperature Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Primary fluid low temperature condition exists.</activeText>
+                    <inactiveText>Primary fluid low temperature condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a34">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.34.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Primary Fluid High Temperature Present</activeText>
+                    <inactiveText>Primary Fluid High Temperature Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Primary fluid high temperature condition exists.</activeText>
+                    <inactiveText>Primary fluid high temperature condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a35">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.35.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Fluid Low Temperature Present</activeText>
+                    <inactiveText>Secondary Fluid Low Temperature Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Secondary fluid low temperature condition exists.</activeText>
+                    <inactiveText>Secondary fluid low temperature condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a36">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.36.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Fluid High Temperature Present</activeText>
+                    <inactiveText>Secondary Fluid High Temperature Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Secondary fluid high temperature condition exists.</activeText>
+                    <inactiveText>Secondary fluid high temperature condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a37">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.37.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Leak-Unit Present</activeText>
+                    <inactiveText>Leak-Unit Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Leak-unit condition exists.</activeText>
+                    <inactiveText>Leak-unit condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a38">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.38.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Leak-Under Floor Present</activeText>
+                    <inactiveText>Leak-Under Floor Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Leak-under floor condition exists.</activeText>
+                    <inactiveText>Leak-under floor condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a39">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.39.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS1 Difference Out Of Limits Present</activeText>
+                    <inactiveText>PS1 Difference Out Of Limits Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>PS1 difference out of limits condition exists.</activeText>
+                    <inactiveText>PS1 difference out of limits condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a40">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.40.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PS2 Difference Out Of Limits Present</activeText>
+                    <inactiveText>PS2 Difference Out Of Limits Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>PS2 difference out of limits condition exists.</activeText>
+                    <inactiveText>PS2 difference out of limits condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a41">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.41.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Over pressure Present</activeText>
+                    <inactiveText>Secondary Over pressure Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Secondary over pressure condition exists.</activeText>
+                    <inactiveText>Secondary over pressure condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a42">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.42.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>System Low Pressure Present</activeText>
+                    <inactiveText>System Low Pressure Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>System low pressure condition exists.</activeText>
+                    <inactiveText>System low pressure condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a43">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.43.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Insufficient Fluid Level Present</activeText>
+                    <inactiveText>Insufficient Fluid Level Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Insufficient fluid level condition exists.</activeText>
+                    <inactiveText>Insufficient fluid level condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a44">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.44.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Level Sensor - No Fluid Detected Present</activeText>
+                    <inactiveText>Level Sensor - No Fluid Detected Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Level sensor - no fluid detected condition exists.</activeText>
+                    <inactiveText>Level sensor - no fluid detected condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a45">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.45.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Invalid Fluid Sensor Condition Present</activeText>
+                    <inactiveText>Invalid Fluid Sensor Condition Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Invalid fluid sensor condition exists.</activeText>
+                    <inactiveText>Invalid fluid sensor condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a46">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.46.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Group Control Network Fault Present</activeText>
+                    <inactiveText>Group Control Network Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Group control network fault condition exists.</activeText>
+                    <inactiveText>Group control network fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a47">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.47.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Group Control Insufficient Units Present</activeText>
+                    <inactiveText>Group Control Insufficient Units Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Group control insufficient units condition exists.</activeText>
+                    <inactiveText>Group control insufficient units condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a48">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.48.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Filter 1 Dirty Present</activeText>
+                    <inactiveText>Secondary Filter 1 Dirty Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Secondary filter 1 dirty condition exists.</activeText>
+                    <inactiveText>Secondary filter 1 dirty condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a49">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.49.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Filter 2 Dirty Present</activeText>
+                    <inactiveText>Secondary Filter 2 Dirty Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Secondary filter 2 dirty condition exists.</activeText>
+                    <inactiveText>Secondary filter 2 dirty condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a50">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.50.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Filter 3 Dirty Present</activeText>
+                    <inactiveText>Secondary Filter 3 Dirty Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Secondary filter 3 dirty condition exists.</activeText>
+                    <inactiveText>Secondary filter 3 dirty condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a51">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.51.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Temperature T2a Diff Fault Present</activeText>
+                    <inactiveText>Secondary Temperature T2a Diff Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Secondary temperature T2a diff fault condition exists.</activeText>
+                    <inactiveText>Secondary temperature T2a diff fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a52">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.52.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Temperature T2b Diff Fault Present</activeText>
+                    <inactiveText>Secondary Temperature T2b Diff Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Secondary temperature T2b diff fault condition exists.</activeText>
+                    <inactiveText>Secondary temperature T2b diff fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a53">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.53.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Secondary Temperature T2c Diff Fault Present</activeText>
+                    <inactiveText>Secondary Temperature T2c Diff Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Secondary temperature T2c diff fault condition exists.</activeText>
+                    <inactiveText>Secondary temperature T2c diff fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a54">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.54.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Reservoir Tank Fluid Required Present</activeText>
+                    <inactiveText>Reservoir Tank Fluid Required Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Reservoir tank fluid required condition exists.</activeText>
+                    <inactiveText>Reservoir tank fluid required condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a55">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.55.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Reservoir Tank Empty Present</activeText>
+                    <inactiveText>Reservoir Tank Empty Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Reservoir tank empty condition exists.</activeText>
+                    <inactiveText>Reservoir tank empty condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a56">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.56.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Below Dewpoint Present</activeText>
+                    <inactiveText>Below Dewpoint Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Below dewpoint condition exists.</activeText>
+                    <inactiveText>Below dewpoint condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a57">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.57.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Auxiliary IO Communications Fault Present</activeText>
+                    <inactiveText>Auxiliary IO Communications Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Auxiliary io communications fault condition exists.</activeText>
+                    <inactiveText>Auxiliary io communications fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a58">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.58.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PH Sensor Fault Present</activeText>
+                    <inactiveText>PH Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>PH sensor fault condition exists.</activeText>
+                    <inactiveText>PH sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a59">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.59.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Conductivity Sensor Fault Present</activeText>
+                    <inactiveText>Conductivity Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Conductivity sensor fault condition exists.</activeText>
+                    <inactiveText>Conductivity sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a60">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.60.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Turbidity Sensor Fault Present</activeText>
+                    <inactiveText>Turbidity Sensor Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Turbidity sensor fault condition exists.</activeText>
+                    <inactiveText>Turbidity sensor fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a61">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.61.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>PH Out of Limits Present</activeText>
+                    <inactiveText>PH Out of Limits Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>PH out of limits condition exists.</activeText>
+                    <inactiveText>PH out of limits condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a62">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.62.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Conductivity Out of Limits Present</activeText>
+                    <inactiveText>Conductivity Out of Limits Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Conductivity out of limits condition exists.</activeText>
+                    <inactiveText>Conductivity out of limits condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="alarm_status_a63">
+            <value>
+                <getOid>.1.3.6.1.4.1.51077.20.4.63.0</getOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Turbidity Out of Limits Present</activeText>
+                    <inactiveText>Turbidity Out of Limits Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Turbidity out of limits condition exists.</activeText>
+                    <inactiveText>Turbidity out of limits condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+    </device>
+</APC_DDF>

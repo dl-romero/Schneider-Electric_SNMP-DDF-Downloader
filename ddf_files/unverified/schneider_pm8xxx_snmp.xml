@@ -1,15 +1,15 @@
 <APC_DDF
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-	ddfid="schneider_pm8xxx_snmp"
-	ddfname="Schneider PM8000"
-	ddfversion="1"
-	canremove="yes">
-		 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="schneider_pm8xxx_snmp"
+  ddfname="Schneider PM8000"
+  ddfversion="2"
+  canremove="yes">
+
 	<schemaVersion>1.6</schemaVersion>
 
 	<device deviceid="schneider_pm8xxx">
-		<oidMustExist ruleid="schneider_pm8xxx" oid=".1.3.6.1.4.1.3833.1.7.255.57" istree="yes" /> 
+		<oidMustExist ruleid="schneider_pm8xxx" oid=".1.3.6.1.4.1.3833.1.7.255.57" istree="yes" />
 
         <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
         <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
@@ -72,12 +72,12 @@
             <sensorSet>Current</sensorSet>
         </numSensor>
 		<numSensor ruleid="kW_tot">
-            <type>num/powerKW</type>
+            <type>powerW</type>
             <sensorId>REAL_POWER</sensorId>
             <value>
                 <getOid>.1.3.6.1.4.1.3833.1.7.255.57.1.25.0</getOid>
             </value>
-			<valueInc>0.1</valueInc>
+			<valueInc>100</valueInc>
             <label>Real Power Total</label>
             <sensorSet>Power</sensorSet>
         </numSensor>
@@ -266,62 +266,62 @@
         </numSensor>
 
 		<numSensor ruleid="kW_sd_mx_del">
-            <type>num/powerKW</type>
+            <type>powerW</type>
             <sensorId>KW_SD_MX_DEL</sensorId>
             <value>
                 <getOid>.1.3.6.1.4.1.3833.1.7.255.57.1.44.0</getOid>
             </value>
-			<valueInc>0.1</valueInc>
+			<valueInc>100</valueInc>
             <label>Real Power Demand Peak Delivered</label>
             <sensorSet>Power</sensorSet>
         </numSensor>
 		<numSensor ruleid="kW_sd_mx_rec">
-            <type>num/powerKW</type>
+            <type>powerW</type>
             <sensorId>KW_SD_MX_REC</sensorId>
             <value>
                 <getOid>.1.3.6.1.4.1.3833.1.7.255.57.1.45.0</getOid>
             </value>
-			<valueInc>0.1</valueInc>
+			<valueInc>100</valueInc>
             <label>Real Power Demand Peak Received</label>
             <sensorSet>Power</sensorSet>
         </numSensor>
 		<numSensor ruleid="kW_sd_mx_d-r">
-            <type>num/powerKW</type>
+            <type>powerW</type>
             <sensorId>TOTAL_PEAK_POWER_KW_1</sensorId>
             <value>
                 <getOid>.1.3.6.1.4.1.3833.1.7.255.57.1.46.0</getOid>
             </value>
-			<valueInc>0.1</valueInc>
+			<valueInc>100</valueInc>
             <label>Real Power Demand Peak Total</label>
             <sensorSet>Power</sensorSet>
         </numSensor>
 		<numSensor ruleid="kW_sd_del">
-            <type>num/powerKW</type>
+            <type>powerW</type>
             <sensorId>KW_SD_DEL</sensorId>
             <value>
                 <getOid>.1.3.6.1.4.1.3833.1.7.255.57.1.47.0</getOid>
             </value>
-			<valueInc>0.1</valueInc>
+			<valueInc>100</valueInc>
             <label>Real Power Demand Last Interval Delivered</label>
             <sensorSet>Power</sensorSet>
         </numSensor>
 		<numSensor ruleid="kW_sd_rec">
-            <type>num/powerKW</type>
+            <type>powerW</type>
             <sensorId>KW_SD_REC</sensorId>
             <value>
                 <getOid>.1.3.6.1.4.1.3833.1.7.255.57.1.48.0</getOid>
             </value>
-			<valueInc>0.1</valueInc>
+			<valueInc>100</valueInc>
             <label>Real Power Demand Last Interval Received</label>
             <sensorSet>Power</sensorSet>
         </numSensor>
 		<numSensor ruleid="kW_sd_d-r">
-            <type>num/powerKW</type>
+            <type>powerW</type>
             <sensorId>TOTAL_POWER_KW_2</sensorId>
             <value>
                 <getOid>.1.3.6.1.4.1.3833.1.7.255.57.1.49.0</getOid>
             </value>
-			<valueInc>0.1</valueInc>
+			<valueInc>100</valueInc>
             <label>Real Power Demand Last Interval Total</label>
             <sensorSet>Power</sensorSet>
         </numSensor>

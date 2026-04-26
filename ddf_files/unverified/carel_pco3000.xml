@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="apc_ddf_1_6.xsd"
 	ddfid="carel_pco3000"
-	ddfname="Carel pCO 3000"
+	ddfname="Carel pCO 3000 [pcoWeb][SNMP]"
 	ddfversion="1"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
@@ -1665,4 +1665,3 @@
 
 	</device>
 </APC_DDF>
-

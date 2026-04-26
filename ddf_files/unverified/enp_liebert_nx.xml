@@ -4,36 +4,36 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="enp_liebert_nx"
 	ddfname="ENP-Liebert-NX"
-	ddfversion="1"
+	ddfversion="2"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<!--
 		SOURCE
 		\snmp\resources\mibs\emerson\liebertnx.mib
-		
+
 		ENP-Liebert-NX-MIB | 24 July 2020
 	-->
 	<device deviceid="enp_liebert_nx">
 		<oidMustExist ruleid="liebertnxMIB_exists" oid=".1.3.6.1.4.1.13400.2.102" istree="yes"/>
-		
+
 		<suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
         <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
         <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
 		<suppressRule ruleid="suppressupsmibvendordata" suppressid="upsmib/upsmibdiscdata/vendordata"/>
         <suppressRule ruleid="suppressupsmibmodeldata" suppressid="upsmib/upsmibdiscdata/modeldata"/>
-		
+
 		<setProductData ruleid="vendordata" field="vendor"><getOid>.1.3.6.1.4.1.13400.2.102.1.1.0</getOid></setProductData>
 		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.13400.2.102.1.2.0</getOid></setProductData>
 		<setProductData ruleid="typedata" field="type">UPS</setProductData>
-		
+
 		<setProductData ruleid="inputphasecount" field="inputphasecount">3</setProductData>
 		<setProductData ruleid="outputphasecount" field="outputphasecount">3</setProductData>
-		
+
 	</device>
-	
+
 	<device deviceid="status">
 		<oidMustExist ruleid="status_exists" oid=".1.3.6.1.4.1.13400.2.102.2.1" istree="yes"/>
-		
+
 		<stateSensor ruleid="systemStatus">
 			<type>state</type>
 			<sensorId>_SYSTEM_STATUS</sensorId>
@@ -46,7 +46,7 @@
 			<enum>systemStatus-em</enum>
 			<sensorSet>Status</sensorSet>
 		</stateSensor>
-		
+
 		<valueMap ruleid="1state-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -58,7 +58,7 @@
 			<label>Warning</label>
 			<label>Critical</label>
 		</enumMap>
-		
+
 		<alarmFlags ruleid="systemStatus_alarm">
 			<value><getOid>.1.3.6.1.4.1.13400.2.102.2.1.1.0</getOid></value>
 			<alarmFlagsTest match="1">
@@ -86,12 +86,12 @@
 				</description>
 			</alarmFlagsTest>
 		</alarmFlags>
-		
+
 	</device>
-	
+
 	<device deviceid="systemdata">
 		<oidMustExist ruleid="systemdata_exists" oid=".1.3.6.1.4.1.13400.2.102.2.2" istree="yes"/>
-	
+
 		<suppressRule ruleid="suppressupsmibtotalpoweroutputsensor" suppressid="upsmib/upsmib/totalPowerOutputSensor"/>
 		<suppressRule ruleid="suppressupsmiboutputpower" suppressid="upsmib/upsmib/upsOutputPower"/>
 		<numSensor ruleid="systemOutputAcitvePowerA">
@@ -137,6 +137,29 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>System Output Active Power L3</label>
+			<sensorSet>System Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="systemOutputAcitvePowerTotal">
+			<type>powerW</type>
+			<sensorId>SYSTEM_OUTPUT_POWER_TOTAL</sensorId>
+			<value>
+				<mult>
+					<op>
+						<add>
+							<op>
+								<add>
+									<op><getOid>.1.3.6.1.4.1.13400.2.102.2.2.1.0</getOid></op>
+									<op><getOid>.1.3.6.1.4.1.13400.2.102.2.2.2.0</getOid></op>
+								</add>
+							</op>
+							<op><getOid>.1.3.6.1.4.1.13400.2.102.2.2.3.0</getOid></op>
+						</add>
+					</op>
+					<op>10</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>System Output Active Power Total (Calculated)</label>
 			<sensorSet>System Data</sensorSet>
 		</numSensor>
 		<numSensor ruleid="systemOutputAppPowerA">

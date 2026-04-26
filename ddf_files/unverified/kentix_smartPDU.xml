@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="apc_ddf_1_6.xsl"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="kentix_smartPDU"
+  ddfname="Kentix SmartPDU"
+  ddfversion="1"
+  canremove="yes">
+    <schemaVersion>1.6</schemaVersion>
+    <!--
+		SOURCE: kentixdevices_MIB.mib
+		BFO: 120306752
+		DDF-1705
+	-->
+    <device deviceid="kentix_smartPDU">
+        <oidMustExist ruleid="kentix_smartPDU" oid=".1.3.6.1.4.1.37954.5" istree="yes" />
+        <setProductData ruleid="vendordata" field="vendor">Kentix</setProductData>
+        <setProductData ruleid="modeldata" field="model">SmartPDU</setProductData>
+        <setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+        <setDefaultLabel ruleid="labeldata">
+            <getOid>.1.3.6.1.4.1.37954.5.2.1.1.2.1</getOid>
+        </setDefaultLabel>
+        <setProductData ruleid="firmwareVersion" field="appversion">
+            <getOid>.1.3.6.1.4.1.37954.5.2.1.1.4.1</getOid>
+        </setProductData>
+        <setProductData ruleid="mac_addr" field="mac_addr">
+            <getOid>.1.3.6.1.4.1.37954.5.2.1.1.10.1</getOid>
+        </setProductData>
+
+        <!-- tempTable -->
+        <valueMap ruleid="tempUnit-vm">
+            <valueIn>*</valueIn><valueOut>0</valueOut>
+            <valueIn>F</valueIn><valueOut>1</valueOut>
+        </valueMap>
+
+        <numSensor ruleid="temp_value" index=".1.3.6.1.4.1.37954.5.2.2.1.1">
+            <type>temp</type>
+            <sensorId>TEMP_VALUE<rowIndex/></sensorId>
+            <value>
+                <if><!-- if temp unit equal 0 (Celcius) -->
+                    <op>
+                        <eq>
+                            <op><mapValue mapid="tempUnit-vm"><getOid>.1.3.6.1.4.1.37954.5.1.4.1.0</getOid></mapValue></op>
+                            <op>0</op>
+                        </eq>
+                    </op>
+                    <op><!-- read temp in Celsius -->
+                        <div>
+                            <op>
+                                <getRowOid>.1.3.6.1.4.1.37954.5.2.2.1.2</getRowOid>
+                            </op>
+                            <op>
+                                <getOid>.1.3.6.1.4.1.37954.5.1.1.1.0</getOid>
+                            </op>
+                        </div>
+                    </op>
+                    <op><!-- else convert temp - Fahrenheit to Celcius -->
+                        <mult>
+                            <op>
+                                <sub>
+                                    <op>
+                                        <div>
+                                            <op>
+                                                <getRowOid>.1.3.6.1.4.1.37954.5.2.2.1.2</getRowOid>
+                                            </op>
+                                            <op>
+                                                <getOid>.1.3.6.1.4.1.37954.5.1.1.1.0</getOid>
+                                            </op>
+                                        </div>
+                                    </op>
+                                    <op>32</op>
+                                </sub>
+                            </op>
+                            <op>
+                                <div>
+                                    <op>5</op>
+                                    <op>9</op>
+                                </div>
+                            </op>
+                        </mult>
+                    </op>
+                </if>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Temperature</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="temp_alarm" index=".1.3.6.1.4.1.37954.5.2.2.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.2.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Temperature Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Temperature Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Temperature Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Temperature Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- humTable -->
+        <numSensor ruleid="hum_value" index=".1.3.6.1.4.1.37954.5.2.3.1.1">
+            <type>humidity</type>
+            <sensorId>HUM_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.3.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.2.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Humidity</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="hum_alarm" index=".1.3.6.1.4.1.37954.5.2.3.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.3.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Humidity Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Humidity Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Humidity Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Humidity Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- dewTable -->
+        <numSensor ruleid="dew_value" index=".1.3.6.1.4.1.37954.5.2.4.1.1">
+            <type>temp</type>
+            <sensorId>DEW_VALUE<rowIndex/></sensorId>
+            <value>
+                <if><!-- if temp unit equal 0 (Celcius) -->
+                    <op>
+                        <eq>
+                            <op>
+                                <mapValue mapid="tempUnit-vm">
+                                    <getOid>.1.3.6.1.4.1.37954.5.1.4.1.0</getOid>
+                                </mapValue>
+                            </op>
+                            <op>0</op>
+                        </eq>
+                    </op>
+                    <op><!-- read temp in Celsius -->
+                        <div>
+                            <op>
+                                <getRowOid>.1.3.6.1.4.1.37954.5.2.4.1.2</getRowOid>
+                            </op>
+                            <op>
+                                <getOid>.1.3.6.1.4.1.37954.5.1.1.3.0</getOid>
+                            </op>
+                        </div>
+                    </op>
+                    <op><!-- else convert temp - Fahrenheit to Celcius -->
+                        <mult>
+                            <op>
+                                <sub>
+                                    <op>
+                                        <div>
+                                            <op>
+                                                <getRowOid>.1.3.6.1.4.1.37954.5.2.4.1.2</getRowOid>
+                                            </op>
+                                            <op>
+                                                <getOid>.1.3.6.1.4.1.37954.5.1.1.3.0</getOid>
+                                            </op>
+                                        </div>
+                                    </op>
+                                    <op>32</op>
+                                </sub>
+                            </op>
+                            <op>
+                                <div>
+                                    <op>5</op>
+                                    <op>9</op>
+                                </div>
+                            </op>
+                        </mult>
+                    </op>
+                </if>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Dew Point</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="dew_alarm" index=".1.3.6.1.4.1.37954.5.2.4.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.4.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Dew Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Dew Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Dew Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Dew Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- connectionTable -->
+        <alarmFlags2 ruleid="connection_alarm" index=".1.3.6.1.4.1.37954.5.2.14.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.14.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Connection Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Connection Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Connection Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Connection Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- heatDetectionTable -->
+        <numSensor ruleid="heat_detection_value" index=".1.3.6.1.4.1.37954.5.2.18.1.1">
+            <type>num</type>
+            <sensorId>HEAT_DETECTION_VALUE<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.18.1.2</getRowOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Heat Detection</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="heat_detection_alarm" index=".1.3.6.1.4.1.37954.5.2.18.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.18.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Heat Detection Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Heat Detection Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Heat Detection Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Heat Detection Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- airQualityFireTable -->
+        <numSensor ruleid="air_quality_fire_value" index=".1.3.6.1.4.1.37954.5.2.20.1.1">
+            <type>num</type>
+            <sensorId>AIR_QUALITY_FIRE_VALUE<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.20.1.2</getRowOid>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Air Quality Fire</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="air_quality_fire_alarm" index=".1.3.6.1.4.1.37954.5.2.20.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.20.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Air Quality Fire Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Air Quality Fire Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Air Quality Fire Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Air Quality Fire Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- rcmAcTable -->
+        <numSensor ruleid="rcm_ac_value" index=".1.3.6.1.4.1.37954.5.2.23.1.1">
+            <type>amperage</type>
+            <sensorId>RCM_AC_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.23.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.14.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - RCM AC</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="rcm_ac_alarm" index=".1.3.6.1.4.1.37954.5.2.23.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.23.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>RCM AC Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>RCM AC Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>RCM AC Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>RCM AC Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- rcmDcTable -->
+        <numSensor ruleid="rcm_dc_value" index=".1.3.6.1.4.1.37954.5.2.24.1.1">
+            <type>amperage</type>
+            <sensorId>RCM_DC_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.24.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.15.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - RCM DC</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="rcm_dc_alarm" index=".1.3.6.1.4.1.37954.5.2.24.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.24.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>RCM DC Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>RCM DC Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>RCM DC Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>RCM DC Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- phase1 -->
+        <numSensor ruleid="phase1_general_voltage" index=".1.3.6.1.4.1.37954.5.2.102.1.1.1.1">
+            <type>voltage</type>
+            <sensorId>PHASE1_GENERAL_VOLTAGE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.1.1.3</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.5.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - General Voltage Phase 1</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <numSensor ruleid="phase1_general_frequency" index=".1.3.6.1.4.1.37954.5.2.102.1.1.1.1">
+            <type>frequency</type>
+            <sensorId>PHASE1_GENERAL_FREQUENCY<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.1.1.4</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.10.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - General Frequency Phase 1</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <numSensor ruleid="phase1_voltage_value" index=".1.3.6.1.4.1.37954.5.2.102.1.2.1.1">
+            <type>voltage</type>
+            <sensorId>PHASE1_VOLTAGE_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.2.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.5.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Voltage Phase 1</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase1_voltage_alarm" index=".1.3.6.1.4.1.37954.5.2.102.1.2.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.2.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Alarm Phase 1 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Alarm Phase 1 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Alarm Phase 1 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Alarm Phase 1 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase1_current_value" index=".1.3.6.1.4.1.37954.5.2.102.1.3.1.1">
+            <type>amperage</type>
+            <sensorId>PHASE1_CURRENT_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.3.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.6.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Current Phase 1</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase1_current_alarm" index=".1.3.6.1.4.1.37954.5.2.102.1.3.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.3.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Alarm Phase 1 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Alarm Phase 1 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Alarm Phase 1 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Alarm Phase 1 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase1_active_power_value" index=".1.3.6.1.4.1.37954.5.2.102.1.4.1.1">
+            <type>num/powerKW</type>
+            <sensorId>PHASE1_ACTIVE_POWER_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.4.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.7.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Active Power Phase 1</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase1_active_power_alarm" index=".1.3.6.1.4.1.37954.5.2.102.1.4.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.4.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Alarm Phase 1 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Alarm Phase 1 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Alarm Phase 1 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Alarm Phase 1 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase1_reactive_power_value" index=".1.3.6.1.4.1.37954.5.2.102.1.5.1.1">
+            <type>num/powerKVAR</type>
+            <sensorId>PHASE1_REACTIVE_POWER_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.5.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.8.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Reactive Power Phase 1</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase1_reactive_power_alarm" index=".1.3.6.1.4.1.37954.5.2.102.1.5.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.5.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Alarm Phase 1 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Alarm Phase 1 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Alarm Phase 1 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Alarm Phase 1 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase1_apparent_power_value" index=".1.3.6.1.4.1.37954.5.2.102.1.6.1.1">
+            <type>num/powerKVA</type>
+            <sensorId>PHASE1_APPARENT_POWER_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.6.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.9.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Apparent Power Phase 1</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase1_apparent_power_alarm" index=".1.3.6.1.4.1.37954.5.2.102.1.6.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.6.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Alarm Phase 1 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Alarm Phase 1 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Alarm Phase 1 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Alarm Phase 1 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase1_frequency_value" index=".1.3.6.1.4.1.37954.5.2.102.1.7.1.1">
+            <type>frequency</type>
+            <sensorId>PHASE1_FREQUENCY_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.7.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.10.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Frequency Phase 1</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase1_frequency_alarm" index=".1.3.6.1.4.1.37954.5.2.102.1.7.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.1.7.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Alarm Phase 1 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Alarm Phase 1 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Alarm Phase 1 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Alarm Phase 1 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- phase2 -->
+        <numSensor ruleid="phase2_general_voltage" index=".1.3.6.1.4.1.37954.5.2.102.2.1.1.1">
+            <type>voltage</type>
+            <sensorId>PHASE2_GENERAL_VOLTAGE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.1.1.3</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.5.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - General Voltage Phase 2</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <numSensor ruleid="phase2_general_frequency" index=".1.3.6.1.4.1.37954.5.2.102.2.1.1.1">
+            <type>frequency</type>
+            <sensorId>PHASE2_GENERAL_FREQUENCY<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.1.1.4</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.10.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - General Frequency Phase 2</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <numSensor ruleid="phase2_voltage_value" index=".1.3.6.1.4.1.37954.5.2.102.2.2.1.1">
+            <type>voltage</type>
+            <sensorId>PHASE2_VOLTAGE_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.2.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.5.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Voltage Phase 2</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase2_voltage_alarm" index=".1.3.6.1.4.1.37954.5.2.102.2.2.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.2.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Phase 2 Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Phase 2 Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Phase 2 Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Phase 2 Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase2_current_value" index=".1.3.6.1.4.1.37954.5.2.102.2.3.1.1">
+            <type>amperage</type>
+            <sensorId>PHASE2_CURRENT_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.3.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.6.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Current Phase 2</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase2_current_alarm" index=".1.3.6.1.4.1.37954.5.2.102.2.3.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.3.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Phase 2 Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Phase 2 Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Phase 2 Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Phase 2 Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase2_active_power_value" index=".1.3.6.1.4.1.37954.5.2.102.2.4.1.1">
+            <type>num/powerKW</type>
+            <sensorId>PHASE2_ACTIVE_POWER_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.4.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.7.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Active Power Phase 2</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase2_active_power_alarm" index=".1.3.6.1.4.1.37954.5.2.102.2.4.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.4.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Alarm Phase 2 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Alarm Phase 2 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Alarm Phase 2 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Alarm Phase 2 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase2_reactive_power_value" index=".1.3.6.1.4.1.37954.5.2.102.2.5.1.1">
+            <type>num/powerKVAR</type>
+            <sensorId>PHASE2_REACTIVE_POWER_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.5.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.8.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Reactive Power Phase 2</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase2_reactive_power_alarm" index=".1.3.6.1.4.1.37954.5.2.102.2.5.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.5.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Alarm Phase 2 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Alarm Phase 2 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Alarm Phase 2 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Alarm Phase 2 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase2_apparent_power_value" index=".1.3.6.1.4.1.37954.5.2.102.2.6.1.1">
+            <type>num/powerKVA</type>
+            <sensorId>PHASE2_APPARENT_POWER_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.6.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.9.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Apparent Power Phase 2</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase2_apparent_power_alarm" index=".1.3.6.1.4.1.37954.5.2.102.2.6.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.6.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Alarm Phase 2 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Alarm Phase 2 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Alarm Phase 2 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Alarm Phase 2 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase2_frequency_value" index=".1.3.6.1.4.1.37954.5.2.102.2.7.1.1">
+            <type>frequency</type>
+            <sensorId>PHASE2_FREQUENCY_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.7.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.10.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Frequency Phase 2</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase2_frequency_alarm" index=".1.3.6.1.4.1.37954.5.2.102.2.7.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.2.7.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Alarm Phase 2 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Alarm Phase 2 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Alarm Phase 2 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Alarm Phase 2 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <!-- phase3 -->
+        <numSensor ruleid="phase3_general_voltage" index=".1.3.6.1.4.1.37954.5.2.102.3.1.1.1">
+            <type>voltage</type>
+            <sensorId>PHASE3_GENERAL_VOLTAGE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.1.1.3</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.5.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - General Voltage Phase 3</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <numSensor ruleid="phase3_general_frequency" index=".1.3.6.1.4.1.37954.5.2.102.3.1.1.1">
+            <type>frequency</type>
+            <sensorId>PHASE3_GENERAL_FREQUENCY<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.1.1.4</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.10.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - General Frequency Phase 3</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="phase3_voltage_value" index=".1.3.6.1.4.1.37954.5.2.102.3.2.1.1">
+            <type>voltage</type>
+            <sensorId>PHASE3_VOLTAGE_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.2.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.5.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Voltage Phase 3</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase3_voltage_alarm" index=".1.3.6.1.4.1.37954.5.2.102.3.2.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.2.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Alarm Phase 3 - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Alarm Phase 3 - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Alarm Phase 3 - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Voltage Alarm Phase 3 - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase3_current_value" index=".1.3.6.1.4.1.37954.5.2.102.3.3.1.1">
+            <type>amperage</type>
+            <sensorId>PHASE3_CURRENT_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.3.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.6.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Current Phase 3</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase3_current_alarm" index=".1.3.6.1.4.1.37954.5.2.102.3.3.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.3.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Phase 3 Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Phase 3 Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Phase 3 Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Current Phase 3 Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase3_active_power_value" index=".1.3.6.1.4.1.37954.5.2.102.3.4.1.1">
+            <type>num/powerKW</type>
+            <sensorId>PHASE3_ACTIVE_POWER_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.4.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.7.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Active Power Phase 3</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase3_active_power_alarm" index=".1.3.6.1.4.1.37954.5.2.102.3.4.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.4.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Phase 3 Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Phase 3 Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Phase 3 Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Active Power Phase 3 Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase3_reactive_power_value" index=".1.3.6.1.4.1.37954.5.2.102.3.5.1.1">
+            <type>num/powerKVAR</type>
+            <sensorId>PHASE3_REACTIVE_POWER_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.5.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.8.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Reactive Power Phase 3</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase3_reactive_power_alarm" index=".1.3.6.1.4.1.37954.5.2.102.3.5.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.5.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Phase 3 Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Phase 3 Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Phase 3 Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Reactive Power Phase 3 Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase3_apparent_power_value" index=".1.3.6.1.4.1.37954.5.2.102.3.6.1.1">
+            <type>num/powerKVA</type>
+            <sensorId>PHASE3_APPARENT_POWER_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.6.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.9.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Apparent Power Phase 3</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase3_apparent_power_alarm" index=".1.3.6.1.4.1.37954.5.2.102.3.6.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.6.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Phase 3 Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Phase 3 Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Phase 3 Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Apparent Power Phase 3 Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+        <numSensor ruleid="phase3_frequency_value" index=".1.3.6.1.4.1.37954.5.2.102.3.7.1.1">
+            <type>frequency</type>
+            <sensorId>PHASE3_FREQUENCY_VALUE<rowIndex/></sensorId>
+            <value>
+                <div>
+                    <op>
+                        <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.7.1.2</getRowOid>
+                    </op>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.37954.5.1.1.10.0</getOid>
+                    </op>
+                </div>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><rowIndex/> - Frequency Phase 3</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid></sensorSet>
+        </numSensor>
+        <alarmFlags2 ruleid="phase3_frequency_alarm" index=".1.3.6.1.4.1.37954.5.2.102.3.7.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.37954.5.2.102.3.7.1.3</getRowOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Phase 3 Alarm - Present</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Phase 3 Alarm - Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Phase 3 Alarm - condition exists.</activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.37954.5.2.1.1.2</getRowOid><space/>Frequency Phase 3 Alarm - condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+
+    </device>
+</APC_DDF>

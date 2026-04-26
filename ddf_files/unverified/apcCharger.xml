@@ -1,0 +1,1136 @@
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="apcCharger"
+	ddfname="APC Gutor Charger"
+	ddfversion="5"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<device deviceid="apc_gutor_charger">
+		<oidMustMatch ruleid="has_apc_gutor_charger" oid=".1.3.6.1.2.1.1.2.0">
+			<valueList>
+				<value>.1.3.6.1.4.1.318.1.3.21.8</value>
+			</valueList>
+		</oidMustMatch>
+		<setProductData ruleid="typedata" field="type">UPS</setProductData>
+		<setProductData ruleid="vendordata" field="vendor">APC by Schneider Electric</setProductData>
+		<suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsBasicIdentModel"/>
+		<suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsBasicIdentModelType"/>
+		<setProductData ruleid="modeldata" field="model">
+			<getOid>.1.3.6.1.4.1.318.1.1.29.1.1.0</getOid>
+		</setProductData>
+		<suppressRule suppressid="core/apcdiscdata/serialnum"/>
+		<suppressRule suppressid="core/apcdiscdata/serialnum2"/>
+		<setProductData ruleid="serialnum" field="apc_serial_num">
+			<getOid>.1.3.6.1.4.1.318.1.1.29.1.3.0</getOid>
+		</setProductData>
+		<setProductData ruleid="submodeldata" field="submodel">
+			<getOid>.1.3.6.1.4.1.318.1.1.29.1.4.0</getOid>
+		</setProductData>
+
+
+		<suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsAdvIdentFirmwareRevision"/>
+		<suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsAdvIdentSerialNumber"/>
+		<suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsAdvIdentSkuNumber"/>
+		<suppressRule suppressid="apcUpsIdent/apcUpsIdent/apcUpsAdvIdentHardwareRevision"/>
+		<suppressRule suppressid="apcsmartups/upsIdent/upsAdvIdentDateOfManufacture"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsBasicBatteryStatus"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsBasicBatteryLastReplaceDate"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsAdvBatteryCapacity"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsAdvBatteryTemperature"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsAdvBatteryActualVoltage"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsAdvBatteryCurrent"/>
+		<suppressRule suppressid="apcsmartups/upsBattery/upsAdvBatteryBreakerStatus"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecBatteryTemperature/upsHighPrecBatteryTemperature"/>
+		<suppressRule suppressid="apcsmartups/upsAdvInput/upsAdvInputFrequency"/>
+		<suppressRule suppressid="apcsmartups/upsAdvInput/upsAdvInputTotalActivePower"/>
+		<suppressRule suppressid="apcsmartups/upsAdvOutput/upsAdvOutputActivePower"/>
+		<suppressRule suppressid="apcsmartups/upsConfig/upsAdvConfigBattCabAmpHour"/>
+    <suppressRule suppressid="apcsmartups/upsAdvOutput/upsAdvOutputCurrent"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecOutput/upsHighPrecOutputCurrent"/>
+    <suppressRule suppressid="apcsmartups/upsAdvOutput/upsAdvOutputFrequency"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecOutput/upsHighPrecOutputFrequency"/>
+		<suppressRule suppressid="apcsmartups/upsPhaseOutput/upsPhaseOutputFrequency"/>
+    <suppressRule suppressid="apcsmartups/upsAdvOutput/upsAdvOutputVoltage"/>
+		<suppressRule suppressid="apcsmartups/upsAdvOutput/inverterAdvOutputInverterCurrent"/>
+		<suppressRule suppressid="apcsmartups/upsAdvOutput/inverterAdvOutputInverterVoltage"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecOutput/upsHighPrecOutputVoltage"/>
+		<suppressRule suppressid="apcsmartups/upsHighPrecInput/upsHighPrecInputBypassVoltage"/>
+		<suppressRule suppressid="apcsmartups/upsComm/upsCommStatus"/>
+		<suppressRule suppressid="apcsmartups/upsCharger/chargerIdentModel"/>
+		<suppressRule suppressid="apcsmartups/upsCharger/chargerUpsIdentSerialNumber"/>
+		<suppressRule suppressid="apcsmartups/upsCharger/chargerBasicIdentModelType"/>
+		<suppressRule suppressid="core/apcdiscdata/modeldata"/>
+
+    <stringSensor ruleid="chargerBasicIdentModel">
+			<type>string</type>
+			<sensorId>CHARGER_BASIC_IDENT_MODEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.1.1.0</getOid>
+			</value>
+			<label>Model</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+    <stringSensor ruleid="chargerBasicIdentModelType">
+			<type>string</type>
+			<sensorId>CHARGER_BASIC_IDENT_MODEL_TYPE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.1.4.0</getOid>
+			</value>
+			<label>Model Type</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="chargerAdvIdentFirmwareRevision">
+			<type>string</type>
+			<sensorId>CHARGER_ADV_IDENT_FIRMWARE_REVISION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.1.0</getOid>
+			</value>
+			<label>Firmware Revision</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="chargerUpsAdvIdentSerialNumber">
+			<type>string</type>
+			<sensorId>CHARGER_ADV_IDENT_SERIAL_NUMBER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.3.0</getOid>
+			</value>
+			<label>Serial Number</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="chargerUpsAdvIdentSkuNumber">
+			<type>string</type>
+			<sensorId>CHARGER_ADV_IDENT_SKU_NUMBER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.5.0</getOid>
+			</value>
+			<label>SKU Number</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="chargerAdvIdentHardwareRevision">
+			<type>string</type>
+			<sensorId>CHARGER_ADV_IDENT_HARDWARE_REVISION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.6.0</getOid>
+			</value>
+			<label>Hardware Revision</label>
+			<sensorSet>Identification</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="upsAdvIdentDateOfManufacture">
+			<type>timeindays/upsage</type>
+			<sensorId>UPS_AGE</sensorId>
+			<value>
+				<round increment="1">
+					<div>
+						<op>
+							<sub>
+								<op>
+									<curUTCTime/>
+								</op>
+								<op>
+									<parseDate>
+										<if>
+											<op>
+												<!-- does the value use 3-char months? -->
+												<regex>
+													<op>([a-zA-Z]{3})</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+													</op>
+													<op>[true]</op>
+													<op>[false]</op>
+												</regex>
+											</op>
+											<op>
+												<!-- yes it does use 3-char months-->
+												<if>
+													<op>
+														<!-- does date or month come first? -->
+														<regex>
+															<op>(\d\d)-([a-zA-Z]{3})-(\d\d)</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<op>[true]</op>
+															<op>[false]</op>
+														</regex>
+													</op>
+													<op>
+														<!-- date comes before month -->
+														<mapValue mapid="parseMonth-vm">
+															<regex>
+																<op>\d\d-([a-zA-Z]{3})-\d\d</op>
+																<op>
+																	<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+																</op>
+																<op>%1$s</op>
+																<op>Nul</op>
+															</regex>
+														</mapValue>
+														-
+														<regex>
+															<op>(\d\d)-[a-zA-Z]{3}-\d\d</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<op>%1$s</op>
+															<op>00</op>
+														</regex>
+													</op>
+													<!-- DD-Mon... -->
+													<op>
+														<!-- month comes before date -->
+														<mapValue mapid="parseMonth-vm">
+															<regex>
+																<op>([a-zA-Z]{3})-\d\d-\d\d</op>
+																<op>
+																	<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+																</op>
+																<op>%1$s</op>
+																<op>Nul</op>
+															</regex>
+														</mapValue>
+														-
+														<regex>
+															<op>[a-zA-Z]{3}-(\d\d)-\d\d</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<op>%1$s</op>
+															<op>00</op>
+														</regex>
+													</op>
+													<!-- Mon-DD... -->
+												</if>
+												-
+												<!-- and year always comes last when 3-char months are used -->
+												<regex>
+													<op>-(\d\d)$</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+													</op>
+													<op>%1$s</op>
+													<op>00</op>
+												</regex>
+												<!-- ...YY -->
+											</op>
+											<op>
+												<!-- does not use 3-char months, just need to rearrange terms -->
+												<regex>
+													<op>(\d\d\d\d)[-\/](\d\d)[-\/](\d\d)</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+													</op>
+													<op>%2$s\/%3$s\/%1$s</op>
+													<!-- YYYY-MM-DD -->
+													<op>
+														<regex>
+															<op>^(\d\d)\.(\d\d)\.(\d\d\d\d)$</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<!-- DD.MM.YYYY -->
+															<op>%2$s\/%1$s\/%3$s</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.1.2.2.0</getOid>
+															</op>
+															<!-- MM/DD/YYYY -->
+														</regex>
+													</op>
+												</regex>
+											</op>
+										</if>
+									</parseDate>
+								</op>
+							</sub>
+						</op>
+						<op>86400</op>
+					</div>
+				</round>
+			</value>
+			<minValue>0</minValue>
+			<valueInc>1</valueInc>
+			<label>UPS Age</label>
+			<sensorSet>Charger Status</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="chargerBasicBatteryStatus">
+			<type>battstatus</type>
+			<sensorId>BATTSTATUS</sensorId>
+			<value>
+				<mapValue mapid="upsBasicBatteryStatus-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>Battery Status</label>
+			<enum>upsBasicBatteryStatus-em</enum>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="chargerBasicBatteryLastReplaceDate">
+			<type>timeindays/batteryage</type>
+			<rowTest>
+				<neqString>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+					</op>
+					<op>Unavailable</op>
+				</neqString>
+			</rowTest>
+			<sensorId>BATT_AGE</sensorId>
+			<value>
+				<round increment="1">
+					<div>
+						<op>
+							<sub>
+								<op>
+									<curUTCTime/>
+								</op>
+								<op>
+									<parseDate>
+										<if>
+											<op>
+												<!-- does the value use 3-char months? -->
+												<regex>
+													<op>([a-zA-Z]{3})</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+													</op>
+													<op>[true]</op>
+													<op>[false]</op>
+												</regex>
+											</op>
+											<op>
+												<!-- yes it does use 3-char months-->
+												<if>
+													<op>
+														<!-- does date or month come first? -->
+														<regex>
+															<op>(\d\d)-([a-zA-Z]{3})-(\d\d)</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+															</op>
+															<op>[true]</op>
+															<op>[false]</op>
+														</regex>
+													</op>
+													<op>
+														<!-- date comes before month -->
+														<mapValue mapid="parseMonth-vm">
+															<regex>
+																<op>\d\d-([a-zA-Z]{3})-\d\d</op>
+																<op>
+																	<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+																</op>
+																<op>%1$s</op>
+																<op>Nul</op>
+															</regex>
+														</mapValue>
+														-
+														<regex>
+															<op>(\d\d)-[a-zA-Z]{3}-\d\d</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+															</op>
+															<op>%1$s</op>
+															<op>00</op>
+														</regex>
+													</op>
+													<!-- DD-Mon... -->
+													<op>
+														<!-- month comes before date -->
+														<mapValue mapid="parseMonth-vm">
+															<regex>
+																<op>([a-zA-Z]{3})-\d\d-\d\d</op>
+																<op>
+																	<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+																</op>
+																<op>%1$s</op>
+																<op>Nul</op>
+															</regex>
+														</mapValue>
+														-
+														<regex>
+															<op>[a-zA-Z]{3}-(\d\d)-\d\d</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+															</op>
+															<op>%1$s</op>
+															<op>00</op>
+														</regex>
+													</op>
+													<!-- Mon-DD... -->
+												</if>
+												-
+												<!-- and year always comes last when 3-char months are used -->
+												<regex>
+													<op>-(\d\d)$</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+													</op>
+													<op>%1$s</op>
+													<op>00</op>
+												</regex>
+												<!-- ...YY -->
+											</op>
+											<op>
+												<!-- does not use 3-char months, just need to rearrange terms -->
+												<regex>
+													<op>(\d\d\d\d)[-\/](\d\d)[-\/](\d\d)</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+													</op>
+													<op>%2$s\/%3$s\/%1$s</op>
+													<!-- YYYY-MM-DD -->
+													<op>
+														<regex>
+															<op>^(\d\d)\.(\d\d)\.(\d\d\d\d)$</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+															</op>
+															<!-- DD.MM.YYYY -->
+															<op>%2$s\/%1$s\/%3$s</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.2.1.3.0</getOid>
+															</op>
+															<!-- MM/DD/YYYY -->
+														</regex>
+													</op>
+												</regex>
+											</op>
+										</if>
+									</parseDate>
+								</op>
+							</sub>
+						</op>
+						<op>86400</op>
+					</div>
+				</round>
+			</value>
+			<minValue>0</minValue>
+			<valueInc>1</valueInc>
+			<label>Battery Age</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ChargerAdvBatteryCapacity">
+			<type>pctofcapacity/pctofbatt</type>
+			<sensorId>BATT_CAPACITY_LEFT</sensorId>
+			<value>
+				<formatNumber printffmt="%f">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.2.2.1.0</getOid>
+				</formatNumber>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Battery Capacity Remaining</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerAdvBatteryTemperature">
+			<type>temp/batttemp</type>
+			<sensorId>BATT_TEMP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.2.2.2.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Battery Temperature</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerAdvBatteryActualVoltage">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.2.2.8.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>voltage/battvoltage</type>
+			<sensorId>BATT_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.2.2.8.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>
+				<mapValue mapid="battery-flywheel-vm">
+					<getOid default="-1">.1.3.6.1.4.1.318.1.1.1.13.5.4.1.0</getOid>
+				</mapValue><space/>Voltage
+			</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ChargerAdvBatteryCurrent">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.2.2.9.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage/battamps</type>
+			<sensorId>BATT_AMPERAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.2.2.9.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>
+				<mapValue mapid="battery-flywheel-vm">
+					<getOid default="-1">.1.3.6.1.4.1.318.1.1.1.13.5.4.1.0</getOid>
+				</mapValue><space/>Current
+			</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="ChargerAdvBatteryBreakerStatus">
+			<type>state</type>
+			<sensorId>BATTERY_BREAKER_STATUS</sensorId>
+			<value>
+				<mapValue mapid="upsAdvBatteryBreakerStatus-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.2.2.27.0</getOid>
+				</mapValue>
+			</value>
+			<label>Battery Breaker Status</label>
+			<enum>upsAdvBatteryBreakerStatus-em</enum>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="chargerAdvInputFrequency">
+			<type>frequency/inputfrequency</type>
+			<sensorId>INPUT_FREQ</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.3.2.4.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Input Frequency</label>
+			<sensorSet>Charger Input Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerAdvInputTotalActivePower">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>1.3.6.1.4.1.318.1.1.1.3.2.12.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>TOTAL_INPUT_ACTIVE_POWER</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.1.3.2.12.0</getOid>
+					</op>
+					<op>1000</op>
+				</mult>
+			</value>
+			<label>Total Input Active Power</label>
+			<sensorSet>Charger Input Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerAdvOutputActivePower">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.8.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>TOTAL_OUTPUT_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.4.2.8.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Total Output Active Power</label>
+			<sensorSet>Charger Output Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerAdvConfigBattCabAmpHour">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.5.2.17.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>num</type>
+			<units>amphours</units>
+			<sensorId>_TOTAL_BATTERY_CAPACITY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.1.5.2.17.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Total Battery Capacity</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="upsAdvTestBatteryLastDate">
+			<type>timeindays</type>
+      <rowTest>
+				<neqString>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+					</op>
+					<op>01/01/2000</op>
+				</neqString>
+			</rowTest>
+			<sensorId>ADV_TEST_BATTERY_LAST_DATE</sensorId>
+			<value>
+				<round increment="1">
+					<div>
+						<op>
+							<sub>
+								<op>
+									<curUTCTime/>
+								</op>
+								<op>
+									<parseDate>
+										<if>
+											<op>
+												<!-- does the value use 3-char months? -->
+												<regex>
+													<op>([a-zA-Z]{3})</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+													</op>
+													<op>[true]</op>
+													<op>[false]</op>
+												</regex>
+											</op>
+											<op>
+												<!-- yes it does use 3-char months-->
+												<if>
+													<op>
+														<!-- does date or month come first? -->
+														<regex>
+															<op>(\d\d)-([a-zA-Z]{3})-(\d\d)</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+															</op>
+															<op>[true]</op>
+															<op>[false]</op>
+														</regex>
+													</op>
+													<op>
+														<!-- date comes before month -->
+														<mapValue mapid="parseMonth-vm">
+															<regex>
+																<op>\d\d-([a-zA-Z]{3})-\d\d</op>
+																<op>
+																	<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+																</op>
+																<op>%1$s</op>
+																<op>Nul</op>
+															</regex>
+														</mapValue>
+														-
+														<regex>
+															<op>(\d\d)-[a-zA-Z]{3}-\d\d</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+															</op>
+															<op>%1$s</op>
+															<op>00</op>
+														</regex>
+													</op>
+													<!-- DD-Mon... -->
+													<op>
+														<!-- month comes before date -->
+														<mapValue mapid="parseMonth-vm">
+															<regex>
+																<op>([a-zA-Z]{3})-\d\d-\d\d</op>
+																<op>
+																	<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+																</op>
+																<op>%1$s</op>
+																<op>Nul</op>
+															</regex>
+														</mapValue>
+														-
+														<regex>
+															<op>[a-zA-Z]{3}-(\d\d)-\d\d</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+															</op>
+															<op>%1$s</op>
+															<op>00</op>
+														</regex>
+													</op>
+													<!-- Mon-DD... -->
+												</if>
+												-
+												<!-- and year always comes last when 3-char months are used -->
+												<regex>
+													<op>-(\d\d)$</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+													</op>
+													<op>%1$s</op>
+													<op>00</op>
+												</regex>
+												<!-- ...YY -->
+											</op>
+											<op>
+												<!-- does not use 3-char months, just need to rearrange terms -->
+												<regex>
+													<op>(\d\d\d\d)[-\/](\d\d)[-\/](\d\d)</op>
+													<op>
+														<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+													</op>
+													<op>%2$s\/%3$s\/%1$s</op>
+													<!-- YYYY-MM-DD -->
+													<op>
+														<regex>
+															<op>^(\d\d)\.(\d\d)\.(\d\d\d\d)$</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+															</op>
+															<!-- DD.MM.YYYY -->
+															<op>%2$s\/%1$s\/%3$s</op>
+															<op>
+																<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.13.0</getOid>
+															</op>
+															<!-- MM/DD/YYYY -->
+														</regex>
+													</op>
+												</regex>
+											</op>
+										</if>
+									</parseDate>
+								</op>
+							</sub>
+						</op>
+						<op>86400</op>
+					</div>
+				</round>
+			</value>
+			<minValue>0</minValue>
+			<valueInc>1</valueInc>
+			<label>Time Since Last Battery Test</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="chargerAdvTestBatteryProcessStatus">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.14.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>CHARGER_TEST_BATTERY_PROCESS_STATUS</sensorId>
+			<value>
+				<mapValue mapid="batteryProcessStatus-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.14.0</getOid>
+				</mapValue>
+			</value>
+			<label>Battery Process Test Status</label>
+			<enum>batteryProcessStatus-em</enum>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="chargerAdvTestBatteryConditionStatus">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.15.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>CHARGER_TEST_BATTERY_CONDITION_STATUS</sensorId>
+			<value>
+				<mapValue mapid="batteryConditionStatus-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.7.2.15.0</getOid>
+				</mapValue>
+			</value>
+			<label>Battery Condition Test Status</label>
+			<enum>batteryConditionStatus-em</enum>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="upsCommStatus">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.8.1.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>UPS_COMM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="upsCommStatus-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.8.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Communication Status</label>
+			<enum>upsCommStatus-em</enum>
+			<sensorSet>Charger Status</sensorSet>
+		</stateSensor>
+    <numSensor ruleid="upsDCOutputStatusVoltageNominal">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.17.1.2.1.2.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>DC_OUTPUT_STATUS_VOLTAGE_NOMINAL</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.1.17.1.2.1.2.0</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>DC Output Nominal Voltage</label>
+			<sensorSet>Charger DC Output Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="upsDCOutputStatusCurrentRating">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.17.1.2.1.3.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>DC_OUTPUT_STATUS_CURRENT_RATING</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.1.17.1.2.1.3.0</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>DC Output Current Rating</label>
+			<sensorSet>Charger DC Output Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="upsDCOutputStatusVoltage">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.17.1.2.1.4.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>DC_OUTPUT_STATUS_VOLTAGE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.1.17.1.2.1.4.0</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>DC Output Voltage</label>
+			<sensorSet>Charger DC Output Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="upsDCOutputStatusCurrent">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.17.1.2.1.5.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>DC_OUTPUT_STATUS_CURRENT</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.1.17.1.2.1.5.0</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>DC Output Current</label>
+			<sensorSet>Charger DC Output Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerInputPhaseVoltage" index=".1.3.6.1.4.1.318.1.1.29.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getRowOid>.1.3.6.1.4.1.318.1.1.29.2.1.1.2</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>voltageAC</type>
+			<sensorId>CHARGER_INPUT_VOLTAGE_<rowIndex/>
+			</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.318.1.1.29.2.1.1.2</getRowOid>
+			</value>
+			<label>Charger Input Voltage - Phase <rowIndex/>
+			</label>
+			<sensorSet>Charger Input Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerInputPhaseMinVoltage" index=".1.3.6.1.4.1.318.1.1.29.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getRowOid>.1.3.6.1.4.1.318.1.1.29.2.1.1.3</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>voltageAC</type>
+			<sensorId>CHARGER_INPUT_MINIMUM_VOLTAGE_<rowIndex/>
+			</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.318.1.1.29.2.1.1.3</getRowOid>
+			</value>
+			<label>Charger Input Minimum Voltage - Phase <rowIndex/>
+			</label>
+			<sensorSet>Charger Input Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerInputPhaseMaxVoltage" index=".1.3.6.1.4.1.318.1.1.29.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getRowOid>.1.3.6.1.4.1.318.1.1.29.2.1.1.4</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>voltageAC</type>
+			<sensorId>CHARGER_INPUT_MAXIMUM_VOLTAGE_<rowIndex/>
+			</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.318.1.1.29.2.1.1.4</getRowOid>
+			</value>
+			<label>Charger Input Maximum Voltage - Phase <rowIndex/>
+			</label>
+			<sensorSet>Charger Input Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerInputPhaseCurrent" index=".1.3.6.1.4.1.318.1.1.29.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="invalid_minusOne-vm">
+					<getRowOid>.1.3.6.1.4.1.318.1.1.29.2.1.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>CHARGER_INPUT_PHASE_CURRENT_<rowIndex/>
+			</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getRowOid>.1.3.6.1.4.1.318.1.1.29.2.1.1.5</getRowOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Charger Input Current - Phase <rowIndex/>
+			</label>
+			<sensorSet>Charger Input Status</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="chargerOutputStatus">
+			<type>state</type>
+			<sensorId>CHARGER_OUTPUT_STATUS</sensorId>
+			<value>
+				<mapValue mapid="chargerOutputStatus-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.29.3.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>Charger Output Status</label>
+			<enum>chargerOutputStatus-em</enum>
+			<sensorSet>Charger Output Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="chargerOutputVauxVoltage">
+			<type>voltage</type>
+			<sensorId>CHARGER_OUTPUT_VAUX_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.29.3.2.0</getOid>
+			</value>
+			<label>Load Output Voltage</label>
+			<sensorSet>Charger Output Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerOutputTotalCurrent">
+			<type>amperage</type>
+			<sensorId>CHARGER_OUTPUT_TOTAL_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.29.3.3.0</getOid>
+			</value>
+			<label>Charger Output Total Current</label>
+			<sensorSet>Charger Output Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="chargerOutputLoad">
+			<type>pctofcapacity</type>
+			<sensorId>CHARGER_OUTPUT_Load</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.29.3.4.0</getOid>
+			</value>
+			<label>Charger Output Load</label>
+			<sensorSet>Charger Output Status</sensorSet>
+		</numSensor>
+
+		<valueMap ruleid="invalid_minusOne-vm">
+			<valueIn>-1</valueIn><valueOut>[false]</valueOut>
+			<valueIn>*</valueIn><valueOut>[true]</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="chargerOutputStatus-em">
+			<label>unknown</label>
+			<label>Initializing</label>
+			<label>Standby</label>
+			<label>On Battery</label>
+			<label>Float Charging</label>
+			<label>Boost Charging</label>
+			<label>Initial Charging</label>
+			<label>Direct Feed</label>
+		</enumMap>
+		<valueMap ruleid="chargerOutputStatus-vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>5</valueIn><valueOut>4</valueOut>
+			<valueIn>6</valueIn><valueOut>5</valueOut>
+			<valueIn>7</valueIn><valueOut>6</valueOut>
+			<valueIn>8</valueIn><valueOut>7</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+
+		<valueMap ruleid="upsBasicBatteryStatus-vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="upsBasicBatteryStatus-em">
+			<label>Unknown</label>
+			<label>Normal</label>
+			<label>Low</label>
+			<label>In Fault Condition</label>
+		</enumMap>
+
+		<valueMap ruleid="upsAdvBatteryBreakerStatus-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="upsAdvBatteryBreakerStatus-em">
+			<label>Not Present</label>
+			<label>Disconnected</label>
+			<label>Closed</label>
+		</enumMap>
+
+		<valueMap ruleid="batteryConditionStatus-vm">
+			<valueIn>2</valueIn><valueOut>0</valueOut>
+			<valueIn>3</valueIn><valueOut>1</valueOut>
+			<valueIn>4</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="batteryConditionStatus-em">
+			<label>Battery OK</label>
+			<label>Battery Capacity Decreased</label>
+			<label>Battery Defect</label>
+		</enumMap>
+
+		<valueMap ruleid="batteryProcessStatus-vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>5</valueIn><valueOut>4</valueOut>
+			<valueIn>6</valueIn><valueOut>5</valueOut>
+		</valueMap>
+		<enumMap ruleid="batteryProcessStatus-em">
+			<label>OK</label>
+			<label>Precondition Not Met</label>
+			<label>Battery Test In Progress</label>
+			<label>Refused</label>
+			<label>Aborted</label>
+			<label>Pending</label>
+		</enumMap>
+
+		<valueMap ruleid="battery-flywheel-vm">
+			<valueIn>2</valueIn><valueOut>Flywheel</valueOut>
+			<valueIn>*</valueIn><valueOut>Battery</valueOut>
+		</valueMap>
+
+		<valueMap ruleid="parseMonth-vm">
+			<valueIn>Jan</valueIn>	<valueOut>01</valueOut>
+			<valueIn>Feb</valueIn>	<valueOut>02</valueOut>
+			<valueIn>Mar</valueIn>	<valueOut>03</valueOut>
+			<valueIn>Apr</valueIn>	<valueOut>04</valueOut>
+			<valueIn>May</valueIn>	<valueOut>05</valueOut>
+			<valueIn>Jun</valueIn>	<valueOut>06</valueOut>
+			<valueIn>Jul</valueIn>	<valueOut>07</valueOut>
+			<valueIn>Aug</valueIn>	<valueOut>08</valueOut>
+			<valueIn>Sep</valueIn>	<valueOut>09</valueOut>
+			<valueIn>Oct</valueIn>	<valueOut>10</valueOut>
+			<valueIn>Nov</valueIn>	<valueOut>11</valueOut>
+			<valueIn>Dec</valueIn>	<valueOut>12</valueOut>
+			<valueIn>*</valueIn>		<valueOut>00</valueOut>
+		</valueMap>
+
+		<valueMap ruleid="upsCommStatus-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="upsCommStatus-em">
+			<label>Unknown</label>
+			<label>OK</label>
+			<label>No Comm</label>
+		</enumMap>
+	</device>
+
+	<device deviceid="upsHighPrecBattery">
+		<oidMustExist ruleid="upsHighPrecBattery_exists" oid=".1.3.6.1.4.1.318.1.1.1.2.3" istree="yes" />
+		<oidMustMatch ruleid="has_apc_gutor_charger" oid=".1.3.6.1.2.1.1.2.0">
+			<valueList>
+				<value>.1.3.6.1.4.1.318.1.3.21.8</value>
+			</valueList>
+		</oidMustMatch>
+
+
+		<suppressRule suppressid="apcCharger/apc_gutor_charger/chargerAdvBatteryActualVoltage"/>
+		<suppressRule suppressid="apcCharger/apc_gutor_charger/ChargerAdvBatteryCurrent"/>
+		<suppressRule suppressid="apcCharger/apc_gutor_charger/chargerAdvBatteryTemperature"/>
+		<numSensor ruleid="ChargerHighPrecBatteryTemperature">
+			<type>temp/batttemp</type>
+			<sensorId>BATT_TEMP</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.1.2.3.2.0</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Battery Temperature</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="upsHighPrecBatteryVoltage">
+			<rowTest>
+				<mapValue mapid="apcCharger/apc_gutor_charger/invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.2.3.7.1.3.1</getOid>
+				</mapValue>
+			</rowTest>
+			<type>voltage/battvoltage</type>
+			<sensorId>BATT_VOLTAGE</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.318.1.1.1.2.3.7.1.3.1</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Battery Voltage</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="upsHighPrecBatteryCurrent">
+			<rowTest>
+				<mapValue mapid="apcCharger/apc_gutor_charger/invalid_minusOne-vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.1.2.3.5.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage/battamps</type>
+			<sensorId>BATT_AMPERAGE</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.318.1.1.1.2.3.5.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Battery Current</label>
+			<sensorSet>Charger Battery Status</sensorSet>
+		</numSensor>
+	</device>
+	<device deviceid="chargerdiscdatastate">
+		<oidMustExist ruleid="statetest" oid=".1.3.6.1.4.1.318.1.4.2.2.1.4.1"/>
+		<oidMustMatch ruleid="has_apc_gutor_charger" oid=".1.3.6.1.2.1.1.2.0">
+			<valueList>
+				<value>.1.3.6.1.4.1.318.1.3.21.8</value>
+			</valueList>
+		</oidMustMatch>
+
+	  <suppressRule suppressid="core/apcdiscdatastate/apcDiscoveryStatus_row1"/>
+		<suppressRule suppressid="apcsmartups/apcsmartups_discovery/apcDiscoveryStatus_row1"/>
+
+		<stateSensor ruleid="apcDiscoveryStatus_row1" index=".1.3.6.1.4.1.318.1.4.2.2.1.1">
+			<type>devstatus</type>
+			<sensorId>DEVSTATUS_<rowIndex/></sensorId>
+			<value><mapValue mapid="devstatus-to-index"><getRowOid>.1.3.6.1.4.1.318.1.4.2.2.1.4</getRowOid></mapValue></value>
+			<label>Device Status -<space/><getRowOid>.1.3.6.1.4.1.318.1.4.2.2.1.5</getRowOid></label>
+			<sensorSet>Charger Status</sensorSet>
+		</stateSensor>
+		<valueMap ruleid="devstatus-to-index">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+	</device>
+
+</APC_DDF>

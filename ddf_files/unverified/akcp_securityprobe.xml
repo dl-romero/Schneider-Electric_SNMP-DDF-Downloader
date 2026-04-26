@@ -3,11 +3,15 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="akcp_securityprobe"
 	ddfname="AKCP Security Probe"
-	ddfversion="3"
+	ddfversion="4"
 	canremove="yes">
-		 
 	<schemaVersion>1.6</schemaVersion>
-
+	<!--
+		SOURCE
+		\snmp\resources\mibs\akcp\akcp.mib
+		
+		SPAGENT-MIB | 04 January 2021
+	-->
 	<device deviceid="akcp_securityprobe">
 		<oidMustExist ruleid="akcp_securityprobe" oid=".1.3.6.1.4.1.3854.2" istree="yes" /> 
 
@@ -20,18 +24,6 @@
 		<setProductData ruleid="typedata" field="type">Environmental Monitor</setProductData>
 
 		<valueMap ruleid="isNum-vm">
-			<!--
-			<valueIn>1</valueIn><valueOut>[true]</valueOut>
-			<valueIn>2</valueIn><valueOut>[true]</valueOut>
-			<valueIn>3</valueIn><valueOut>[true]</valueOut>
-			<valueIn>5</valueIn><valueOut>[true]</valueOut>
-			<valueIn>14</valueIn><valueOut>[true]</valueOut>
-			<valueIn>15</valueIn><valueOut>[true]</valueOut>
-			<valueIn>16</valueIn><valueOut>[true]</valueOut>
-			<valueIn>17</valueIn><valueOut>[true]</valueOut>
-			<valueIn>18</valueIn><valueOut>[true]</valueOut>
-			<valueIn>129</valueIn><valueOut>[true]</valueOut>
-			-->
 			<valueIn>*</valueIn><valueOut>[false]</valueOut>
 		</valueMap>
 
@@ -112,16 +104,82 @@
 			<enum>sensorValueState-em</enum>
             <sensorSet>Sensor Status</sensorSet>
         </stateSensor>
+		
 		<valueMap ruleid="sensorValueState-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
 			<valueIn>*</valueIn><valueOut>2</valueOut>
 		</valueMap>
+		
 		<enumMap ruleid="sensorValueState-em">
 			<label>Off</label>
 			<label>On</label>
 			<label>Unknown</label>
 		</enumMap>
+		
+		<alarmFlags2 ruleid="sensorStatus_alarm" index=".1.3.6.1.4.1.3854.2.3.1.1.6">
+			<value><getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.6</getRowOid></value>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Security Probe High Warning</activeText>
+					<inactiveText>Security Probe High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe High Warning condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe High Warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Security Probe High Critical</activeText>
+					<inactiveText>Security Probe High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5">
+				<name>
+					<activeText>Security Probe Low Warning</activeText>
+					<inactiveText>Security Probe Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe Low Warning condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe Low Warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Security Probe Low Critical</activeText>
+					<inactiveText>Security Probe Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Security Probe Sensor Error</activeText>
+					<inactiveText>Security Probe Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.1.1.2</getRowOid> Security Probe Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
 
 		<numSensor ruleid="sensorTemperatureDegree" index=".1.3.6.1.4.1.3854.2.3.2.1.4">
             <type>temp</type>
@@ -152,7 +210,71 @@
             <label><getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Value</label>
             <sensorSet>Temperature</sensorSet>
         </numSensor>
-
+		
+		<alarmFlags2 ruleid="sensorTemperatureStatus_alarm" index=".1.3.6.1.4.1.3854.2.3.2.1.6">
+			<value><getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.6</getRowOid></value>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Temperature High Warning</activeText>
+					<inactiveText>Temperature High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature High Warning condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature High Warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Temperature High Critical</activeText>
+					<inactiveText>Temperature High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5">
+				<name>
+					<activeText>Temperature Low Warning</activeText>
+					<inactiveText>Temperature Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature Low Warning condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature Low Warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Temperature Low Critical</activeText>
+					<inactiveText>Temperature Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Temperature Sensor Error</activeText>
+					<inactiveText>Temperature Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Temperature</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.2.1.2</getRowOid> Temperature Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
 		<numSensor ruleid="sensorHumidityPercent" index=".1.3.6.1.4.1.3854.2.3.3.1.4">
             <type>humidity</type>
             <sensorId>SENSOR_HUMIDITY_PCT_<rowIndex/></sensorId>
@@ -163,6 +285,70 @@
             <label><getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Value</label>
             <sensorSet>Humidity</sensorSet>
         </numSensor>
+		
+		<alarmFlags2 ruleid="sensorHumidityStatus_alarm" index=".1.3.6.1.4.1.3854.2.3.3.1.6">
+			<value><getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.6</getRowOid></value>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Humidity High Warning</activeText>
+					<inactiveText>Humidity High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity High Warning condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity High Warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Humidity High Critical</activeText>
+					<inactiveText>Humidity High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5">
+				<name>
+					<activeText>Humidity Low Warning</activeText>
+					<inactiveText>Humidity Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity Low Warning condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity Low Warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Humidity Low Critical</activeText>
+					<inactiveText>Humidity Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Humidity Sensor Error</activeText>
+					<inactiveText>Humidity Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Humidity</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.3.1.2</getRowOid> Humidity Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
 
 		<valueMap ruleid="dryContactStatus-vm">
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -174,6 +360,7 @@
 			<valueIn>9</valueIn><valueOut>7</valueOut>
 			<valueIn>*</valueIn><valueOut>0</valueOut>
 		</valueMap>
+		
 		<enumMap ruleid="dryContactStatus-em">
 			<label>Unknown</label>
 			<label>No Status</label>
@@ -184,6 +371,7 @@
 			<label>Output Low</label>
 			<label>Output High</label>
 		</enumMap>
+		
 		<stateSensor ruleid="sensorDryContactStatus" index=".1.3.6.1.4.1.3854.2.3.4.1.6">
             <type>state</type>
             <sensorId>SENSOR_DRY_CONTACT_STATUS_<rowIndex/></sensorId>
@@ -196,7 +384,71 @@
             <label><getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Status</label>
             <sensorSet>Dry Contacts</sensorSet>
         </stateSensor>
-
+		
+		<alarmFlags2 ruleid="sensorDryContactStatus_alarm" index=".1.3.6.1.4.1.3854.2.3.4.1.6">
+			<value><getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.6</getRowOid></value>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Dry Contact High Warning</activeText>
+					<inactiveText>Dry Contact High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact High Warning condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact High Warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Dry Contact High Critical</activeText>
+					<inactiveText>Dry Contact High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5">
+				<name>
+					<activeText>Dry Contact Low Warning</activeText>
+					<inactiveText>Dry Contact Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact Low Warning condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact Low Warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Dry Contact Low Critical</activeText>
+					<inactiveText>Dry Contact Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Dry Contact Sensor Error</activeText>
+					<inactiveText>Dry Contact Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.4.1.2</getRowOid> Dry Contact Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
 		<stateSensor ruleid="sensorWaterStatus" index=".1.3.6.1.4.1.3854.2.3.9.1.6">
             <type>state</type>
             <sensorId>SENSOR_WATER_STATUS_<rowIndex/></sensorId>
@@ -209,6 +461,70 @@
             <label><getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Status</label>
             <sensorSet>Water Sensors</sensorSet>
         </stateSensor>
+		
+		<alarmFlags2 ruleid="sensorWaterStatus_alarm" index=".1.3.6.1.4.1.3854.2.3.9.1.6">
+			<value><getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.6</getRowOid></value>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Water High Critical</activeText>
+					<inactiveText>Water High Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water High Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water High Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6">
+				<name>
+					<activeText>Water Low Critical</activeText>
+					<inactiveText>Water Low Critical Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water Low Critical condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water Low Critical condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7">
+				<name>
+					<activeText>Water Sensor Error</activeText>
+					<inactiveText>Water Sensor Error Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water Sensor Error condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water Sensor Error condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="8">
+				<name>
+					<activeText>Water Sensor Relay On</activeText>
+					<inactiveText>Water Sensor Relay On Cleared</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water Sensor Relay On condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water Sensor Relay On condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="9">
+				<name>
+					<activeText>Water Sensor Relay Off</activeText>
+					<inactiveText>Water Sensor Relay Off Cleared</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water Sensor Relay Off condition exists.</activeText>
+					<inactiveText>A <getRowOid>.1.3.6.1.4.1.3854.2.3.9.1.2</getRowOid> Water Sensor Relay Off condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
 
 	</device>
 </APC_DDF>

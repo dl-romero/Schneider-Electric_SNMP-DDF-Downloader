@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<APC_DDF
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+        ddfid="vertiv_watchdog_wi"
+        ddfname="Vertiv Watchdog Wi EMS"
+        ddfversion="1"
+        canremove="yes">
+    <schemaVersion>1.6</schemaVersion>
+    <device deviceid="vertiv_EMS">
+        <oidMustExist istree="yes" ruleid="vertiv_EMS_exists" oid=".1.3.6.1.4.1.21239.127.1"/>
+        <setProductData ruleid="typedata" field="type">Environmental Monitor</setProductData>
+        <setProductData ruleid="vendordata" field="vendor">Vertiv</setProductData>
+        <setProductData ruleid="modeldata" field="model">Watchdog Wi</setProductData>
+
+        <stringSensor ruleid="sensorModel" index=".1.3.6.1.4.1.21239.127.1.2.3.1.1">
+            <type>string</type>
+            <sensorId>SENSOR_MODEL<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.2</getRowOid>
+            </value>
+            <label><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid><space/>Model (<getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.5</getRowOid>)</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid></sensorSet>
+        </stringSensor>
+        <stringSensor ruleid="serialNumber" index=".1.3.6.1.4.1.21239.127.1.2.3.1.1">
+            <type>string</type>
+            <sensorId>SERIAL_NUMBER<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.3</getRowOid>
+            </value>
+            <label><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid><space/>Serial Number (<getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.5</getRowOid>)</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid></sensorSet>
+        </stringSensor>
+        <valueMap ruleid="isFahrenheit">
+            <valueIn>0</valueIn><valueOut>[true]</valueOut>
+            <valueIn>*</valueIn> <valueOut>[false]</valueOut>
+        </valueMap>
+        <numSensor ruleid="temperatureSensor" index=".1.3.6.1.4.1.21239.127.1.2.3.1.1">
+            <type>temp</type>
+            <sensorId>TEMPERATURE_SENSOR<rowIndex/></sensorId>
+                <value>
+                    <if>
+                        <op><mapValue mapid="isFahrenheit"><getOid>.1.3.6.1.4.1.21239.127.1.2.2.0</getOid></mapValue></op>
+                        <op>
+                            <div><!-- true fahrenheit -->
+                                <op>
+                                    <sub>
+                                        <op>
+                                            <mult>
+                                                <op><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.6</getRowOid></op>
+                                                <op>0.1</op>
+                                            </mult>
+                                        </op>
+                                        <op>32</op>
+                                    </sub>
+                                </op>
+                                <op>1.8</op>
+                            </div><!-- end fahrenheit -->
+                        </op>
+                        <op>
+                            <mult>
+                                <op><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.6</getRowOid></op>
+                                <op>0.1</op>
+                            </mult>
+                        </op>
+                    </if>
+                </value>
+                <valueInc>0.1</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid><space/>Temperature (<getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.5</getRowOid>)</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid></sensorSet>
+        </numSensor>
+        <valueMap ruleid="HumiditySensors-vm">
+            <valueIn>WTHD</valueIn><valueOut>[true]</valueOut>
+            <valueIn>*</valueIn><valueOut>[false]</valueOut>
+
+        </valueMap>
+
+        <numSensor ruleid="humiditySensor" index=".1.3.6.1.4.1.21239.127.1.2.3.1.1">
+            <rowTest>
+                <mapValue mapid="HumiditySensors-vm">
+                    <getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.2</getRowOid>
+                </mapValue>
+            </rowTest>
+            <type>humidity</type>
+            <sensorId>HUMIDITY_SENSOR<rowIndex/></sensorId>
+            <value>
+                <getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.7</getRowOid>
+            </value>
+            <label><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid><space/>Humidity (<getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.5</getRowOid>)</label>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid></sensorSet>
+        </numSensor>
+        <stateSensor ruleid="outOfServiceSensor" index=".1.3.6.1.4.1.21239.127.1.2.3.1.1">
+            <type>state</type>
+            <sensorId>OUT_OF_SERVICE_SENSOR<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="outofserviceStatus-vm">
+                    <getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.10</getRowOid>
+                </mapValue>
+            </value>
+            <label><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid><space/>Out Of Service (<getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.5</getRowOid>)</label>
+            <enum>outofserviceStatus-em</enum>
+            <sensorSet><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid></sensorSet>
+        </stateSensor>
+
+        <valueMap ruleid="outofserviceStatus-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>3</valueOut>
+        </valueMap>
+        <enumMap ruleid="outofserviceStatus-em">
+            <label>Okay</label>
+            <label>Sensor Offline</label>
+            <label>Sensor Battery Warning</label>
+			<label>Unknown</label>
+        </enumMap>
+
+        <alarmFlags2 ruleid="sensorBatteryWaring" index=".1.3.6.1.4.1.21239.127.1.2.3.1.1">
+                <value><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.10</getRowOid></value>
+                <alarmFlagsTest match="2">
+                    <name>
+                        <activeText><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid><space/>Sensor Battery Warning (<getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.5</getRowOid>)</activeText>
+                        <inactiveText><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid><space/>Sensor Battery Warning Cleared (<getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.5</getRowOid>)</inactiveText>
+                    </name>
+                    <severity>warning</severity>
+                    <category>System</category>
+                    <description>
+                        <activeText><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid><space/>Sensor Battery Warning (<getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.5</getRowOid>) condition exists.</activeText>
+                        <inactiveText><getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.4</getRowOid><space/>Sensor Battery Warning (<getRowOid>.1.3.6.1.4.1.21239.127.1.2.3.1.5</getRowOid>)> condition no longer exists.</inactiveText>
+                    </description>
+                </alarmFlagsTest>
+        </alarmFlags2>
+
+		</device>
+        </APC_DDF>

@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="stulz_wib1000"
+  ddfname="Stulz WIB1000"
+  ddfversion="1"
+  canremove="yes">
+  <schemaVersion>1.6</schemaVersion>
+  
+    <device deviceid="stulz_wib1000">
+    
+        <oidMustExist ruleid="wib1000_exist" istree="yes" oid=".1.3.6.1.4.1.39983.1.1" />
+        
+        <setProductData ruleid="vendordata" field="vendor">Stulz</setProductData>
+        <setProductData ruleid="modeldata" field="model">WIB1000</setProductData>
+        <setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+        
+        <numSensor ruleid="ti">
+            <type>temp</type>
+            <sensorId>TI</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.1.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Inlet Air Temperature</label>
+            <sensorSet>Temperature</sensorSet>
+        </numSensor>
+        <numSensor ruleid="tae">
+            <type>temp</type>
+            <sensorId>TAE</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.2.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>External Air Temperature</label>
+            <sensorSet>Temperature</sensorSet>
+        </numSensor>
+        <numSensor ruleid="tm1">
+            <type>temp</type>
+            <sensorId>TM1</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.3.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Delivery Temperature 1</label>
+            <sensorSet>Temperature</sensorSet>
+        </numSensor>
+        <numSensor ruleid="tm2">
+            <type>temp</type>
+            <sensorId>TM2</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.4.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Delivery Temperature 2</label>
+            <sensorSet>Temperature</sensorSet>
+        </numSensor>
+        <numSensor ruleid="vdc">
+            <type>voltage</type>
+            <sensorId>VDC</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.5.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>VDC (SB9) Board</label>
+            <sensorSet>Voltage</sensorSet>
+        </numSensor>
+        <numSensor ruleid="ifch">
+            <type>amperage</type>
+            <sensorId>IFCH</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.6.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Current Fan (SB9)</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="if1">
+            <type>amperage</type>
+            <sensorId>IF1</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.7.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Current Fan 1 (S11)</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="if2">
+            <type>amperage</type>
+            <sensorId>IF2</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.8.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Current Fan 2 (S11)</label>
+            <sensorSet>Current</sensorSet>
+        </numSensor>
+        <numSensor ruleid="pf">
+            <type>powerW</type>
+            <sensorId>PF</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.9.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Power Fan (SB9)</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="pf1">
+            <type>powerW</type>
+            <sensorId>PF1</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.10.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Power Fan 1 (S11)</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="pf2">
+            <type>powerW</type>
+            <sensorId>PF2</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.11.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Power Fan 2 (S11)</label>
+            <sensorSet>Power</sensorSet>
+        </numSensor>
+        <numSensor ruleid="sf1">
+            <type>fanspeed</type>
+            <sensorId>SF1</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.12.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Speed Fan 1</label>
+            <sensorSet>Fanspeed</sensorSet>
+        </numSensor>
+        <numSensor ruleid="sf2">
+            <type>fanspeed</type>
+            <sensorId>SF2</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.1.13.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Speed Fan 2</label>
+            <sensorSet>Fanspeed</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dc1">
+            <type>pctofcapacity</type>
+            <sensorId>DC1</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.2.1.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Fan DC1 Speed</label>
+            <sensorSet>Fanspeed</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dc2">
+            <type>pctofcapacity</type>
+            <sensorId>DC2</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.2.2.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Fan DC2 Speed</label>
+            <sensorSet>Fanspeed</sensorSet>
+        </numSensor>
+        <numSensor ruleid="damper">
+            <type>pctofcapacity</type>
+            <sensorId>DAMPER</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.2.3.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Damper Opening</label>
+            <sensorSet>Fanspeed</sensorSet>
+        </numSensor>
+        <numSensor ruleid="b01">
+            <type>temp</type>
+            <sensorId>B01</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.5.1.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Cooling Set Point</label>
+            <sensorSet>Temperature</sensorSet>
+        </numSensor>
+        <numSensor ruleid="b02">
+            <type>temp</type>
+            <sensorId>B02</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.5.2.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Heating Set Point</label>
+            <sensorSet>Temperature</sensorSet>
+        </numSensor>
+        <numSensor ruleid="b03">
+            <type>temp</type>
+            <sensorId>B03</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.5.3.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>High Temperature Alarm Set Point</label>
+            <sensorSet>Temperature</sensorSet>
+        </numSensor>
+        <numSensor ruleid="b04">
+            <type>temp</type>
+            <sensorId>B04</sensorId>
+            <value>
+                <mult>
+                    <op>
+                        <getOid>.1.3.6.1.4.1.39983.1.1.5.4.0</getOid>
+                    </op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Low Temperature Alarm Set Point</label>
+            <sensorSet>Temperature</sensorSet>
+        </numSensor>
+
+        <stateSensor ruleid="stsoff">
+            <type>state</type>
+            <sensorId>STSOFF</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.39983.1.1.6.1.0</getOid>
+                </mapValue>
+            </value>
+            <label>System OFF</label>
+            <enum>falseTrue-em</enum>
+            <sensorSet>Device Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="stson">
+            <type>state</type>
+            <sensorId>STSON</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.39983.1.1.6.2.0</getOid>
+                </mapValue>
+            </value>
+            <label>System ON</label>
+            <enum>falseTrue-em</enum>
+            <sensorSet>Device Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="stsstandby">
+            <type>state</type>
+            <sensorId>STSSTANDBY</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.39983.1.1.6.3.0</getOid>
+                </mapValue>
+            </value>
+            <label>System STANDBY</label>
+            <enum>falseTrue-em</enum>
+            <sensorSet>Device Status</sensorSet>
+        </stateSensor>
+        <valueMap ruleid="2state-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>*</valueIn><valueOut>2</valueOut>
+        </valueMap>
+        <enumMap ruleid="falseTrue-em">
+            <label>FALSE</label>
+            <label>TRUE</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <alarmFlags ruleid="alhitemp">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.1.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Temperature Alarm Present</activeText>
+                    <inactiveText>High Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>High Temperature Alarm condition exists.</activeText>
+                    <inactiveText>High Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="allowtemp">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.2.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Temperature Alarm Present</activeText>
+                    <inactiveText>Low Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Low Temperature Alarm condition exists.</activeText>
+                    <inactiveText>Low Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alfanth">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.3.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fans Thermic Alarm Present</activeText>
+                    <inactiveText>Fans Thermic Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Fans Thermic Alarm condition exists.</activeText>
+                    <inactiveText>Fans Thermic Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alheatth">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.4.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Heater Thermic Alarm Present</activeText>
+                    <inactiveText>Heater Thermic Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Heater Thermic Alarm condition exists.</activeText>
+                    <inactiveText>Heater Thermic Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="aldirtyfilter">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.5.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Dirty Filter Alarm Present</activeText>
+                    <inactiveText>Dirty Filter Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Dirty Filter Alarm condition exists.</activeText>
+                    <inactiveText>Dirty Filter Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alair">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.6.0</getOid>
+            </value>
+                <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Air Flow Alarm Present</activeText>
+                    <inactiveText>Air Flow Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Air Flow Alarm condition exists.</activeText>
+                    <inactiveText>Air Flow Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alfiresmoke">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.7.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fire/Smoke Alarm Present</activeText>
+                    <inactiveText>Fire/Smoke Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Fire/Smoke Alarm condition exists.</activeText>
+                    <inactiveText>Fire/Smoke Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alintrusion">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.8.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Intrusion Alarm Present</activeText>
+                    <inactiveText>Intrusion Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Intrusion Alarm condition exists.</activeText>
+                    <inactiveText>Intrusion Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alfan1bl">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.9.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Blocked Present</activeText>
+                    <inactiveText>Fan 1 Blocked Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Fan 1 Blocked condition exists.</activeText>
+                    <inactiveText>Fan 1 Blocked condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alfan2bl">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.10.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Blocked Present</activeText>
+                    <inactiveText>Fan 2 Blocked Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Fan 2 Blocked condition exists.</activeText>
+                    <inactiveText>Fan 2 Blocked condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alinttempprobe">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.11.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Internal Temperature Probe Alarm Present</activeText>
+                    <inactiveText>Internal Temperature Probe Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Internal Temperature Probe Alarm condition exists.</activeText>
+                    <inactiveText>Internal Temperature Probe Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alexttempprobe">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.12.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>External Temperature Probe Alarm Present</activeText>
+                    <inactiveText>External Temperature Probe Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>External Temperature Probe Alarm condition exists.</activeText>
+                    <inactiveText>External Temperature Probe Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alsupplytempu1probe">
+            <value>    
+            <getOid>.1.3.6.1.4.1.39983.1.1.7.13.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Supply Temperature U1 Probe Present</activeText>
+                    <inactiveText>Supply Temperature U1 Probe Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Supply Temperature U1 Probe condition exists.</activeText>
+                    <inactiveText>Supply Temperature U1 Probe condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alsupplytempu2probe">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.14.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Supply Temperature U2 Probe Present</activeText>
+                    <inactiveText>Supply Temperature U2 Probe Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Temperature</category>
+                <description>
+                    <activeText>Supply Temperature U2 Probe condition exists.</activeText>
+                    <inactiveText>Supply Temperature U2 Probe condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alpowerfail">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.15.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Power Failure Alarm Present</activeText>
+                    <inactiveText>Power Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Power Failure Alarm condition exists.</activeText>
+                    <inactiveText>Power Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alhihum">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.16.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Humidity Alarm Present</activeText>
+                    <inactiveText>High Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Humidity</category>
+                <description>
+                    <activeText>High Humidity Alarm condition exists.</activeText>
+                    <inactiveText>High Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="albadworkingu1">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.17.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Bad Working Unit 1 Present</activeText>
+                    <inactiveText>Bad Working Unit 1 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Bad Working Unit 1 condition exists.</activeText>
+                    <inactiveText>Bad Working Unit 1 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="albadworkingu2">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.18.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Bad Working Unit 2 Present</activeText>
+                    <inactiveText>Bad Working Unit 2 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Bad Working Unit 2 condition exists.</activeText>
+                    <inactiveText>Bad Working Unit 2 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alvoltoutrange">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.19.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Voltage Out Of Range Alarm Present</activeText>
+                    <inactiveText>Voltage Out Of Range Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Power</category>
+                <description>
+                    <activeText>Voltage Out Of Range Alarm condition exists.</activeText>
+                    <inactiveText>Voltage Out Of Range Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alrtc">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.20.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Real Time Clock Alarm Present</activeText>
+                    <inactiveText>Real Time Clock Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Real Time Clock Alarm condition exists.</activeText>
+                    <inactiveText>Real Time Clock Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alfan1err">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.21.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 1 Error Present</activeText>
+                    <inactiveText>Fan 1 Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Fan 1 Error condition exists.</activeText>
+                    <inactiveText>Fan 1 Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="alfan2err">
+            <value>
+                <getOid>.1.3.6.1.4.1.39983.1.1.7.22.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan 2 Error Present</activeText>
+                    <inactiveText>Fan 2 Error Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Communication</category>
+                <description>
+                    <activeText>Fan 2 Error condition exists.</activeText>
+                    <inactiveText>Fan 2 Error condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+    </device>
+</APC_DDF>

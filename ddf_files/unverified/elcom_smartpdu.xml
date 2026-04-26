@@ -3,13 +3,13 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="elcom_smartpdu"
 	ddfname="Elcom SmartPDU"
-	ddfversion="1"
+	ddfversion="3"
 	canremove="yes">
 		 
 	<schemaVersion>1.6</schemaVersion>
 
 	<device deviceid="elcom_smartpdu">
-		<oidMustExist ruleid="elcom_ed" oid=".1.3.6.1.4.1.40367.12" istree="yes"/> 
+		<oidMustExist ruleid="elcom_ed" oid=".1.3.6.1.4.1.40367.12.2" istree="yes"/> 
 
         <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
         <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
@@ -31,10 +31,10 @@
 			<getOid>.1.3.6.1.4.1.40367.12.2.1.6.0</getOid>
 		</setProductData>
 
-		<setProductData ruleid="edPowerMgmtPDUTableNumberOfPhases-In" field="inputphasecount">
+		<setProductData ruleid="inputphasecount" field="inputphasecount">
 			<getOid>.1.3.6.1.4.1.40367.12.2.2.1.1.4.0</getOid>
 		</setProductData>
-		<setProductData ruleid="edPowerMgmtPDUTableNumberOfPhases-Out" field="outputphasecount">
+		<setProductData ruleid="outputphasecount" field="outputphasecount">
 			<getOid>.1.3.6.1.4.1.40367.12.2.2.1.1.4.0</getOid>
 		</setProductData>
 
@@ -112,7 +112,7 @@
 				</mult>
             </value>
 			<valueInc>0.0001</valueInc>
-            <label>Total Outlet Apparent Energy</label>
+            <label>Total Outlet Reactive Energy</label>
             <sensorSet>Aggregate Info</sensorSet>
         </numSensor>
 		<numSensor ruleid="edPowerMgmtAggrInfoTableActiveEnergyValue">
@@ -148,7 +148,7 @@
 				</mult>
             </value>
 			<valueInc>0.0001</valueInc>
-            <label>Total Outlet Active Energy</label>
+            <label>Total Outlet Active Power</label>
             <sensorSet>Aggregate Info</sensorSet>
         </numSensor>
 		<numSensor ruleid="edPowerMgmtAggrInfoTablePowerFactorValue">
@@ -435,15 +435,15 @@
 				<getRowOid>.1.3.6.1.4.1.40367.12.2.2.6.1.7</getRowOid>
 				</mapValue>
 			</rowTest>
-            <type>num/powerKW</type>
+            <type>powerW</type>
             <sensorId>PHASE_ACTIVE_POWER_<rowIndex/></sensorId>
             <value>
 				<mult>
                 <op><getRowOid>.1.3.6.1.4.1.40367.12.2.2.6.1.7</getRowOid></op>
-				<op>0.01</op>
+				<op>10</op>
 				</mult>
             </value>
-			<valueInc>0.01</valueInc>
+			<valueInc>1</valueInc>
             <label>Phase <getRowOid>.1.3.6.1.4.1.40367.12.2.2.6.1.1</getRowOid> Active Power</label>
             <sensorSet>Phase <getRowOid>.1.3.6.1.4.1.40367.12.2.2.6.1.1</getRowOid></sensorSet>
         </numSensor>

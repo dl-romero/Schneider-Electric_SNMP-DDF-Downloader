@@ -2,8 +2,8 @@
 <APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="uniflair_aquacentr_SNMP_chiller_imperial"
-	ddfname="Uniflair AQUACENTR SNMP Imperial Version"
-	ddfversion="1"
+	ddfname="Uniflair AQUACENTR [pcoWeb][SNMP][Imperial units]"
+	ddfversion="2"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 
@@ -2828,36 +2828,36 @@
 		<type>state</type>
 		<sensorId>type_a_alarm</sensorId>
 		<value>
-			<mapValue mapid="normal-alarm-vm">
+			<mapValue mapid="on_off_valuemap">
 				<getOid>.1.3.6.1.4.1.9839.2.1.1.58.0</getOid>
 			</mapValue>
 		</value>
 		<label>Type A alarm</label>
-		<enum>normal-alarm-em</enum>
+		<enum>off_on_enum</enum>
 		<sensorSet>ALARM SENSORS</sensorSet>
 	</stateSensor>
 	<stateSensor ruleid="type_b_alarm">
 		<type>state</type>
 		<sensorId>type_b_alarm</sensorId>
 		<value>
-			<mapValue mapid="normal-alarm-vm">
+			<mapValue mapid="on_off_valuemap">
 				<getOid>.1.3.6.1.4.1.9839.2.1.1.59.0</getOid>
 			</mapValue>
 		</value>
 		<label>Type B alarm</label>
-		<enum>normal-alarm-em</enum>
+		<enum>on_off_enum</enum>
 		<sensorSet>ALARM SENSORS</sensorSet>
 	</stateSensor>
 	<stateSensor ruleid="type_c_alarm">
 		<type>state</type>
 		<sensorId>type_c_alarm</sensorId>
 		<value>
-			<mapValue mapid="normal-alarm-vm">
+			<mapValue mapid="on_off_valuemap">
 				<getOid>.1.3.6.1.4.1.9839.2.1.1.60.0</getOid>
 			</mapValue>
 		</value>
 		<label>Type C alarm</label>
-		<enum>normal-alarm-em</enum>
+		<enum>on_off_enum</enum>
 		<sensorSet>ALARM SENSORS</sensorSet>
 	</stateSensor>
 	<stateSensor ruleid="interrupted_lan_alarm">
@@ -4403,7 +4403,7 @@
 			</description>
 		</alarmFlagsTest>
 	</alarmFlags>
-	<alarmFlags ruleid="type_a_alarm">
+	<!--<alarmFlags ruleid="type_a_alarm">
 		<value>
 			<getOid>.1.3.6.1.4.1.9839.2.1.1.58.0</getOid>
 		</value>
@@ -4453,7 +4453,7 @@
 				<inactiveText>Type C alarm Cleared</inactiveText>
 			</description>
 		</alarmFlagsTest>
-	</alarmFlags>
+	</alarmFlags>-->
 	<alarmFlags ruleid="interrupted_lan_alarm">
 		<value>
 			<getOid>.1.3.6.1.4.1.9839.2.1.1.61.0</getOid>
@@ -6045,6 +6045,10 @@
 		<valueIn>*</valueIn>
 		<valueOut>0</valueOut>
 	</valueMap>
+	<enumMap ruleid="off_on_enum">
+		<label>on</label>
+		<label>off</label>
+	</enumMap>
 	<enumMap ruleid="on_off_enum">
 		<label>off</label>
 		<label>on</label>

@@ -1,0 +1,1054 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="apc_ddf_1_6.xsl"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="apcMdcKite"
+  ddfname="APC Micro Data Center"
+  ddfversion="2"
+  canremove="yes">
+
+	<!--
+    Manufacturer:					APC by Schneider Electric
+    Model:								Micro Data Center
+
+    Reference:						APC PowerNet MIB (powernet438X.mib)
+    Reference Location:		/snmp/resources/mibs/apc/powernet438X.mib
+
+    Scope:								(modEnvMgr) .1.3.6.1.4.1.318.1.1.10.4.*
+                          (pmmInput) .1.3.6.1.4.1.318.1.1.28.3.1.*
+                          (mdc) .1.3.6.1.4.1.318.1.1.31.*
+
+    Walkfiles:						/snmp/resources/sapro/walkfiles/apc/mdc/apc_mdc_pf_696_an1_692g.walk
+  -->
+  <schemaVersion>1.6</schemaVersion>
+  <device deviceid="mdc_kite_discovery">
+    <oidMustMatch ruleid="mdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.1</value>
+      </valueList>
+    </oidMustMatch>
+
+    <setProductData ruleid="vendordata" field="vendor">APC by Schneider Electric</setProductData>
+
+    <setProductData ruleid="typedata" field="type">Micro Data Center</setProductData>
+
+    <setProductData ruleid="modelNumber" field="model">
+      <getOid>.1.3.6.1.4.1.318.1.4.2.2.1.2.1</getOid>
+    </setProductData>
+
+    <setProductData ruleid="serialNumber" field="serial_num">
+      <getOid>.1.3.6.1.4.1.318.1.4.2.2.1.3.1</getOid>
+    </setProductData>
+
+    <setProductData ruleid="hardwareRevision" field="revision">
+      <getOid>.1.3.6.1.4.1.318.1.1.31.1.2.0</getOid>
+    </setProductData>
+
+    <setProductData ruleid="firmwareVersion" field="appversion">
+      <getOid>.1.3.6.1.4.1.318.1.1.31.1.3.0</getOid>
+    </setProductData>
+
+    <setProductData ruleid="aosVersion" field="apcaosversion">
+      <getOid>.1.3.6.1.4.1.318.1.1.31.1.4.0</getOid>
+    </setProductData>
+
+  </device>
+	<device deviceid="mdcNB250">
+    <oidMustMatch ruleid="mdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.1</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="mdcNB250Exists" oid=".1.3.6.1.4.1.318.1.1.10.4" istree="yes"/>
+    <suppressRule ruleid="stompMemFluidSensorState" suppressid="apcenv/memDiscreteSensors/memFluidSensorState"/>
+    <suppressRule ruleid="stompMemSmokeSensorState" suppressid="apcenv/memDiscreteSensors/memSmokeSensorState"/>
+
+    <valueMap ruleid="invalid_minusOne-vm">
+      <valueIn>-1</valueIn><valueOut>[false]</valueOut>
+      <valueIn>*</valueIn><valueOut>[true]</valueOut>
+    </valueMap>
+
+    <numSensor ruleid="mdcMemSensorsTemperature" index=".1.3.6.1.4.1.318.1.1.10.4.2.3.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_TEMPERATURE_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.5</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.2</getRowOid> Temperature</label>
+      <sensorSet>NetBotz 250</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcMemSensorsHumidity" index=".1.3.6.1.4.1.318.1.1.10.4.2.3.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_HUMIDITY_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.6</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.3.1.2</getRowOid> Humidity</label>
+      <sensorSet>NetBotz 250</sensorSet>
+    </numSensor>
+
+    <valueMap ruleid="smokeDetectorStatus-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="smokeDetectorStatus-em">
+      <label>Unknown</label>
+      <label>Smoke Detected</label>
+      <label>No Smoke</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcSmokeSensorStatusSensorState" index=".1.3.6.1.4.1.318.1.1.10.4.7.2.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state/memsensorstate</type>
+      <sensorId>MEM_SMOKE_SENSOR_STATE_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="smokeDetectorStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.5</getRowOid>
+        </mapValue>
+      </value>
+      <label>Smoke Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Status</label>
+      <enum>smokeDetectorStatus-em</enum>
+      <sensorSet>NetBotz 250</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="alarmStatus-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>3</valueIn><valueOut>3</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="alarmStatus-em">
+      <label>Unknown</label>
+      <label>Normal</label>
+      <label>Warning</label>
+      <label>Critical</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcSmokeSensorStatusAlarmStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.2.1.7">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_SMOKE_SENSOR_ALARM_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="alarmStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.7</getRowOid>
+        </mapValue>
+      </value>
+      <label>Smoke Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Alarm Status</label>
+      <enum>alarmStatus-em</enum>
+      <sensorSet>NetBotz 250</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="fluidDetectorStatus-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="fluidDetectorStatus-em">
+      <label>Unknown</label>
+      <label>Fluid Detected</label>
+      <label>No Fluid</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcFluidSensorStatusSensorState" index=".1.3.6.1.4.1.318.1.1.10.4.7.6.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state/memsensorstate</type>
+      <sensorId>MEM_FLUID_SENSOR_STATE_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="fluidDetectorStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.5</getRowOid>
+        </mapValue>
+      </value>
+      <label>Fluid Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Status</label>
+      <enum>fluidDetectorStatus-em</enum>
+      <sensorSet>NetBotz 250</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcFluidSensorStatusAlarmStatus" index=".1.3.6.1.4.1.318.1.1.10.4.7.6.1.7">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_FLUID_SENSOR_ALARM_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="alarmStatus-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.7</getRowOid>
+        </mapValue>
+      </value>
+      <label>Fluid Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Alarm Status</label>
+      <enum>alarmStatus-em</enum>
+      <sensorSet>NetBotz 250</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="disabledEnabled-vm">
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="disabledEnabled-em">
+      <label>Unknown</label>
+      <label>Disabled</label>
+      <label>Enabled</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcProbeAlarmGeneration" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.5">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_TEMPERATURE_ALARM_GENERATION_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="disabledEnabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.5</getRowOid>
+        </mapValue>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Alarm Generation</label>
+      <enum>disabledEnabled-em</enum>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </stateSensor>
+
+    <numSensor ruleid="mdcProbeMaxTempThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_MAX_TEMPERATURE_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.6</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Maximum Temperature Threshold</label>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeHighTempThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.7">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_HIGH_TEMPERATURE_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.7</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> High Temperature Threshold</label>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeLowTempThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.8">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.8</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_LOW_TEMPERATURE_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.8</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Low Temperature Threshold</label>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeMinTempThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.9">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.9</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>MEM_MIN_TEMPERATURE_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.9</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Minimum Temperature Threshold</label>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeMaxHumidityThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.19">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.19</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_MAX_HUMIDITY_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.19</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Maximum Humidity Threshold</label>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeHighHumidityThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.20">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.20</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_HIGH_HUMIDITY_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.20</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> High Humidity Threshold</label>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeLowHumidityThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.21">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.21</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_LOW_HUMIDITY_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.21</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Low Humidity Threshold</label>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcProbeMinHumidityThreshold" index=".1.3.6.1.4.1.318.1.1.10.4.2.5.1.22">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.22</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>MEM_MIN_HUMIDITY_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.22</getRowOid>
+      </value>
+      <label>Probe <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.2.5.1.2</getRowOid> Minimum Humidity Threshold</label>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </numSensor>
+    <stateSensor ruleid="mdcFluidSensorConfigAlarmGeneration" index=".1.3.6.1.4.1.318.1.1.10.4.7.11.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.11.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_FLUID_SENSOR_ALARM_GENERATION_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="disabledEnabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.11.1.6</getRowOid>
+        </mapValue>
+      </value>
+      <label>Fluid Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.6.1.2</getRowOid> Alarm Generation</label>
+      <enum>disabledEnabled-em</enum>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcSmokeSensorConfigAlarmGeneration" index=".1.3.6.1.4.1.318.1.1.10.4.7.9.1.6">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.9.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>MEM_SMOKE_SENSOR_ALARM_GENERATION_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="disabledEnabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.9.1.6</getRowOid>
+        </mapValue>
+      </value>
+      <label>Smoke Detector <getRowOid>.1.3.6.1.4.1.318.1.1.10.4.7.2.1.2</getRowOid> Alarm Generation</label>
+      <enum>disabledEnabled-em</enum>
+      <sensorSet>NetBotz 250 Configuration</sensorSet>
+    </stateSensor>
+  </device>
+
+  <device deviceid="mdcPMM">
+    <oidMustMatch ruleid="mdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.1</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="mdcPMMExists" oid=".1.3.6.1.4.1.318.1.1.28.3" istree="yes"/>
+
+    <numSensor ruleid="mdcPmmInputFrequency" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.2">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>frequency</type>
+      <sensorId>PMM_INPUT_FREQUENCY_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.2</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Frequency</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmActiveEnergyReceived" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.7">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>num/kwatthr</type>
+      <sensorId>PMM_INPUT_ACTIVE_ENERGY_RECEIVED_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.7</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Active Energy Received</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputMinVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.12">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.12</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_MIN_VOLT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.12</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Minimum Voltage Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmLowVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.13">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.13</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_LOW_VOLT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.13</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Low Voltage Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmHighVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.14">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.14</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_HIGH_VOLT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.14</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input High Voltage Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmMaxVoltThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.15">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.15</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_MAX_VOLT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.15</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Maximum Voltage Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputMinCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.16">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.16</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_MIN_CURRENT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.16</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Minimum Current Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmLowCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.17">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.17</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_LOW_CURRENT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.17</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Low Current Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmHighCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.18">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.18</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_HIGH_CURRENT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.18</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input High Current Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmMaxCurrentThreshold" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.19">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.19</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity</type>
+      <sensorId>PMM_INPUT_MAX_CURRENT_THRESHOLD_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.19</getRowOid>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Maximum Current Threshold</label>
+      <sensorSet>PMM Configuration</sensorSet>
+    </numSensor>
+    <stateSensor ruleid="mdcPmmMaxVoltAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.40">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.40</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_MAX_VOLTAGE_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.40</getRowOid>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Maximum Voltage Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmHighVoltAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.41">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.41</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_HIGH_VOLTAGE_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.41</getRowOid>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input High Voltage Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmLowVoltAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.42">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.42</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_LOW_VOLTAGE_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.42</getRowOid>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Low Voltage Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmMinVoltAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.43">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.43</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_MIN_VOLTAGE_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.43</getRowOid>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Minimum Voltage Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmMaxCurrentAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.44">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.44</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_MAX_CURRENT_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.44</getRowOid>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Maximum Current Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmHighCurrentAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.45">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.45</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_HIGH_CURRENT_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.45</getRowOid>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input High Current Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmLowCurrentAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.46">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.46</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_LOW_CURRENT_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.46</getRowOid>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Low Current Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcPmmMinCurrentAlarm" index=".1.3.6.1.4.1.318.1.1.28.3.1.2.1.47">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.47</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PMM_INPUT_MIN_CURRENT_ALARM_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="enabledDisabled-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.47</getRowOid>
+        </mapValue>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.2.1.1</getRowOid> Input Minimum Current Alarm</label>
+      <enum>enabledDisabled-em</enum>
+      <sensorSet>PMM Configuration</sensorSet>
+    </stateSensor>
+
+    <valueMap ruleid="enabledDisabled-vm">
+      <valueIn>1</valueIn><valueOut>0</valueOut>
+      <valueIn>2</valueIn><valueOut>1</valueOut>
+      <valueIn>*</valueIn><valueOut>2</valueOut>
+    </valueMap>
+    <enumMap ruleid="enabledDisabled-em">
+      <label>Enabled</label>
+      <label>Disabled</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <numSensor ruleid="mdcPmmInputVoltageLtoN" index=".1.3.6.1.4.1.318.1.1.28.3.1.3.1.4">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage</type>
+      <sensorId>PMM_INPUT_VOLTAGE_LN_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.4</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.1</getRowOid> Input Voltage L-N</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputPhaseCurrent" index=".1.3.6.1.4.1.318.1.1.28.3.1.3.1.5">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>amperage</type>
+      <sensorId>PMM_INPUT_CURRENT_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.5</getRowOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.1</getRowOid> Input Current</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputActivePower" index=".1.3.6.1.4.1.318.1.1.28.3.1.3.1.6">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.6</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>powerW</type>
+      <sensorId>PMM_INPUT_ACTIVE_POWER_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.6</getRowOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.1</getRowOid> Input Active Power</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcPmmInputApparentPower" index=".1.3.6.1.4.1.318.1.1.28.3.1.3.1.7">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.7</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>powerVA</type>
+      <sensorId>PMM_INPUT_APPARENT_POWER_<rowIndex/></sensorId>
+      <value>
+        <mult>
+          <op><getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.7</getRowOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>PMM <getRowOid>.1.3.6.1.4.1.318.1.1.28.3.1.3.1.1</getRowOid> Input Apparent Power</label>
+      <sensorSet>PMM Input Monitoring</sensorSet>
+    </numSensor>
+
+  </device>
+  <device deviceid="mdcUPS">
+    <oidMustMatch ruleid="mdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.1</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="mdcUPSExists" oid=".1.3.6.1.4.1.318.1.1.31.2" istree="yes"/>
+
+    <numSensor ruleid="mdcUpsInputVoltage" index=".1.3.6.1.4.1.318.1.1.31.2.2.1.1.2">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.2.1.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage/inputvoltage</type>
+      <sensorId>INPUT_VOLTAGE_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.2.1.1.2</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.2.1.1.1</getRowOid> Input Voltage</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="mdcUpsOutputVoltage" index=".1.3.6.1.4.1.318.1.1.31.2.3.1.1.2">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>voltage/outputvoltage</type>
+      <sensorId>OUTPUT_VOLTAGE_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.2</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.1</getRowOid> Output Voltage</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcUpsOutputCurrent" index=".1.3.6.1.4.1.318.1.1.31.2.3.1.1.3">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>amperage</type>
+      <sensorId>UPSOUTPUTCURRENT_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.3</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.1</getRowOid><space/>Output Current</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcUpsOutputActivePower" index=".1.3.6.1.4.1.318.1.1.31.2.3.1.1.4">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>powerW</type>
+      <sensorId>TOTAL_OUTPUT_ACTIVE_POWER_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.4</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.1</getRowOid> Output Active Power</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcUpsOutputFrequency" index=".1.3.6.1.4.1.318.1.1.31.2.3.1.1.5">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.5</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>frequency/outputfrequency</type>
+      <sensorId>OUTPUT_FREQ_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.5</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.3.1.1.1</getRowOid> Output Frequency</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="mdcUpsBatteryRunTimeRemaining" index=".1.3.6.1.4.1.318.1.1.31.2.4.1.1.2">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>timeinmin/timeremainingonbatt</type>
+      <sensorId>TIME_REMAINING_ON_BATT_<rowNumber/></sensorId>
+      <value>
+        <round increment="0.1">
+          <div>
+            <op>
+              <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.2</getRowOid>
+            </op>
+            <op>6000</op>
+          </div>
+        </round>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.1</getRowOid> Battery Time Remaining</label>
+      <sensorSet>UPS Battery</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcUpsBatteryCapacity" index=".1.3.6.1.4.1.318.1.1.31.2.4.1.1.3">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>pctofcapacity/pctofbatt</type>
+      <sensorId>BATT_CAPACITY_LEFT</sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.3</getRowOid>
+      </value>
+      <label>UPS <getRowOid>.1.3.6.1.4.1.318.1.1.31.2.4.1.1.1</getRowOid> Battery Capacity Remaining</label>
+      <sensorSet>UPS Battery</sensorSet>
+    </numSensor>
+  </device>
+
+  <device deviceid="mdcCrac">
+    <oidMustMatch ruleid="mdcExists" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.1</value>
+      </valueList>
+    </oidMustMatch>
+    <oidMustExist ruleid="mdcCracExists" oid=".1.3.6.1.4.1.318.1.1.31.3" istree="yes"/>
+
+    <numSensor ruleid="mdcCoolingStatusSupplyAirTemp" index=".1.3.6.1.4.1.318.1.1.31.3.2.1.1.2">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>SUPPLY_AIR_TEMP_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.2</getRowOid>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.1</getRowOid> Supply Air Temperature</label>
+      <sensorSet>Cooling Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcCoolingStatusReturnAirTemp" index=".1.3.6.1.4.1.318.1.1.31.3.2.1.1.3">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>_RETURN_AIR_TEMP_<rowNumber/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.3</getRowOid>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.1</getRowOid> Return Air Temperature</label>
+      <sensorSet>Cooling Status</sensorSet>
+    </numSensor>
+
+    <valueMap ruleid="operateMode-vm">
+      <valueIn>2</valueIn><valueOut>0</valueOut>
+      <valueIn>3</valueIn><valueOut>1</valueOut>
+      <valueIn>4</valueIn><valueOut>2</valueOut>
+      <valueIn>5</valueIn><valueOut>3</valueOut>
+      <valueIn>6</valueIn><valueOut>4</valueOut>
+      <valueIn>7</valueIn><valueOut>5</valueOut>
+      <valueIn>8</valueIn><valueOut>6</valueOut>
+      <valueIn>*</valueIn><valueOut>7</valueOut>
+    </valueMap>
+    <enumMap ruleid="operateMode-em">
+      <label>Cooling</label>
+      <label>Dehumidification</label>
+      <label>BMS Shutdown</label>
+      <label>HMI Shutdown</label>
+      <label>Fault Shutdown</label>
+      <label>Remote Shutdown</label>
+      <label>Cooling/Auxiliary Heating</label>
+      <label>UNKNOWN</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcCoolingStatusOperateMode" index=".1.3.6.1.4.1.318.1.1.31.3.2.1.1.4">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>_OPERATING_MODE_<rowNumber/></sensorId>
+      <value>
+        <mapValue mapid="operateMode-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.4</getRowOid>
+        </mapValue>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.2.1.1.1</getRowOid> Operating Mode</label>
+      <enum>operateMode-em</enum>
+      <sensorSet>Cooling Status</sensorSet>
+    </stateSensor>
+
+    <numSensor ruleid="mdcCoolingConfigRackMaxTemp">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.1.0</getOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>RACK_MAX_TEMP</sensorId>
+      <value>
+        <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.1.0</getOid>
+      </value>
+      <label>CRAC Rack Maximum Temperature Setpoint</label>
+      <sensorSet>Cooling Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcCoolingConfigRackMinHum">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.2.0</getOid>
+        </mapValue>
+      </rowTest>
+      <type>humidity</type>
+      <sensorId>RACK_MAX_HUMIDITY</sensorId>
+      <value>
+        <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.2.0</getOid>
+      </value>
+      <label>CRAC Rack Minimum Humidity Setpoint</label>
+      <sensorSet>Cooling Configuration</sensorSet>
+    </numSensor>
+    <numSensor ruleid="mdcCoolingConfigUPSMinLoad">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.3.0</getOid>
+        </mapValue>
+      </rowTest>
+      <type>powerW</type>
+      <sensorId>CRAC_UPS_MIN_LOAD</sensorId>
+      <value>
+        <getOid>.1.3.6.1.4.1.318.1.1.31.3.3.3.0</getOid>
+      </value>
+      <label>CRAC UPS Minimum Load Setpoint</label>
+      <sensorSet>Cooling Configuration</sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="mdcCoolingConfigOutletAirTemp" index=".1.3.6.1.4.1.318.1.1.31.3.3.4.1.2">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.2</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>temp</type>
+      <sensorId>OUTLET_AIR_TEMP_SETPOINT_<rowIndex/></sensorId>
+      <value>
+        <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.2</getRowOid>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.1</getRowOid> Outlet Air Temperature Setpoint</label>
+      <sensorSet>Cooling Configuration</sensorSet>
+    </numSensor>
+
+    <valueMap ruleid="activeInactive-vm">
+      <valueIn>2</valueIn><valueOut>0</valueOut>
+      <valueIn>3</valueIn><valueOut>1</valueOut>
+      <valueIn>*</valueIn><valueOut>2</valueOut>
+    </valueMap>
+    <enumMap ruleid="activeInactive-em">
+      <label>Active</label>
+      <label>Inactive</label>
+      <label>UNKNOWN</label>
+    </enumMap>
+
+    <stateSensor ruleid="mdcCoolingConfigPTCHeater" index=".1.3.6.1.4.1.318.1.1.31.3.3.4.1.3">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>PTC_HEATER_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="activeInactive-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.3</getRowOid>
+        </mapValue>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.1</getRowOid> PTC Heater Status</label>
+      <enum>activeInactive-em</enum>
+      <sensorSet>Cooling Status</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="mdcCoolingConfigCondensationPump" index=".1.3.6.1.4.1.318.1.1.31.3.3.4.1.4">
+      <rowTest>
+        <mapValue mapid="apcMdcKite/mdcNB250/invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
+      <type>state</type>
+      <sensorId>CONDENSATION_PUMP_STATUS_<rowIndex/></sensorId>
+      <value>
+        <mapValue mapid="activeInactive-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.4</getRowOid>
+        </mapValue>
+      </value>
+      <label>CRAC <getRowOid>.1.3.6.1.4.1.318.1.1.31.3.3.4.1.1</getRowOid> Condensation Pump Status</label>
+      <enum>activeInactive-em</enum>
+      <sensorSet>Cooling Status</sensorSet>
+    </stateSensor>
+  </device>
+
+</APC_DDF>

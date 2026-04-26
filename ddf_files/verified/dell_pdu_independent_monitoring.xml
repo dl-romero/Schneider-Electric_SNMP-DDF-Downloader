@@ -1,0 +1,325 @@
+<?xml version="1.0"?>
+<APC_DDF
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+    ddfid="dell_pdu_independent_monitoring"
+    ddfname="Dell PDU [Independent Monitoring]"
+    ddfversion="2"
+    canremove="yes">
+    <schemaVersion>1.6</schemaVersion>
+    <!--
+        November 2024
+		SOURCE:	AD24032PA_WEB_SNMP_DEL_V10811_20240910.MIB, SNMP walk for Dell iPDU.walk	
+		BFO: 111677632, 112826732
+    -->
+	
+    <device deviceid="dell_pdu_independent_monitoring_discovery">
+        <oidMustExist ruleid="dell_pdu_exists" oid=".1.3.6.1.4.1.2254.169.20" istree="yes"/>
+     
+ 
+       	<setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+		<setProductData ruleid="software_version" field="appversion"><getOid>.1.3.6.1.4.1.2254.169.20.7.3.0</getOid></setProductData>
+		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.2254.169.20.7.5.0</getOid></setProductData>
+		<setDefaultLabel ruleid="labeldata"><getOid>.1.3.6.1.4.1.2254.169.20.7.7.0</getOid></setDefaultLabel>
+        <setProductData ruleid="vendordata" field="vendor"><getOid>.1.3.6.1.4.1.2254.169.20.7.8.0</getOid></setProductData>
+		<setProductData ruleid="serialnum" field="serial_num"><getOid>.1.3.6.1.4.1.2254.169.20.7.9.0</getOid></setProductData>
+		<setLocationData ruleid="location" field="LOCATION"><getOid>.1.3.6.1.4.1.2254.169.20.7.10.0</getOid></setLocationData>
+		<setProductData ruleid="macaddress" field="mac_addr"><getOid>.1.3.6.1.4.1.2254.169.20.7.14.0</getOid></setProductData>
+		<setProductData ruleid="hardwarerevision" field="revision"><getOid>.1.3.6.1.4.1.2254.169.20.7.20.0</getOid></setProductData>
+		<setProductData ruleid="input_count" field="inputphasecount"><getOid>.1.3.6.1.4.1.2254.169.20.8.2.6.0</getOid></setProductData>
+		<setProductData ruleid="output_count" field="outputphasecount"><getOid>.1.3.6.1.4.1.2254.169.20.8.2.6.0</getOid></setProductData>
+	</device>
+    <device deviceid="dell_pdu_independent_monitoring">
+        <oidMustExist ruleid="dell_pdu_independent_monitoring_table_exists" oid=".1.3.6.1.4.1.2254.169.20.8.2.7" istree="yes"/>
+
+		<numSensor ruleid="dellPduTotalPower">
+			<type>powerW</type>
+			<sensorId>_TOTAL_ACTIVE_POWER</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.2254.169.20.8.2.1.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Total Power</label>
+			<sensorSet>Input Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduTotalEnergy">
+			<type>num/kwatthr</type>
+			<sensorId>_TOTAL_ENERGY_USED</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.2254.169.20.8.2.2.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Total Energy</label>
+			<sensorSet>Input Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduInputVoltage" index=".1.3.6.1.4.1.2254.169.20.8.2.7.1.4">
+			<type>voltage</type>
+			<sensorId>VOLTAGE_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.4</getRowOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid> - Voltage <getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.3</getRowOid></label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduInputCurrent" index=".1.3.6.1.4.1.2254.169.20.8.2.7.1.5">
+			<type>amperage</type>
+			<sensorId>CURRENT_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.5</getRowOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid> - Current <getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.3</getRowOid></label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduInputPower" index=".1.3.6.1.4.1.2254.169.20.8.2.7.1.6">
+			<type>powerW</type>
+			<sensorId>POWER_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.6</getRowOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid> - Power <getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.3</getRowOid></label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduInputEnergy" index=".1.3.6.1.4.1.2254.169.20.8.2.7.1.7">
+			<type>num/kwatthr</type>
+			<sensorId>ENERGY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.7</getRowOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid> - Energy <getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.3</getRowOid></label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduInputPowerFactor" index=".1.3.6.1.4.1.2254.169.20.8.2.7.1.8">
+			<type>num/powerfactor</type>
+			<sensorId>POWER_FACTOR_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.8</getRowOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid> - Power Factor <getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.3</getRowOid></label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduInputApparentPower" index=".1.3.6.1.4.1.2254.169.20.8.2.7.1.9">
+			<type>powerVA</type>
+			<sensorId>APPARENT_POWER_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.9</getRowOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid> - Apparent Power <getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.3</getRowOid></label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduInputThdVoltage" index=".1.3.6.1.4.1.2254.169.20.8.2.7.1.10">
+			<type>pctofcapacity</type>
+			<sensorId>VOLTAGE_THD_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.10</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid> - Voltage THD <getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.3</getRowOid></label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduInputThdCurrent" index=".1.3.6.1.4.1.2254.169.20.8.2.7.1.11">
+			<type>pctofcapacity</type>
+			<sensorId>CURRENT_THD_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.11</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid> - Current THD <getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.3</getRowOid></label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduInputFrequency" index=".1.3.6.1.4.1.2254.169.20.8.2.7.1.12">
+			<type>frequency</type>
+			<sensorId>FREQUENCY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.12</getRowOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid> - Frequency <getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.3</getRowOid></label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.2254.169.20.8.2.7.1.2</getRowOid></sensorSet>
+		</numSensor>
+		
+        <valueMap ruleid="alarmSeverity-vm">
+			<valueIn>2</valueIn><valueOut>warning</valueOut>
+			<valueIn>3</valueIn><valueOut>critical</valueOut>
+			<valueIn>4</valueIn><valueOut>critical</valueOut>
+			<valueIn>*</valueIn><valueOut>critical</valueOut>
+        </valueMap>
+		
+		<alarmFlags2 ruleid="dellPduAlertStatus" index=".1.3.6.1.4.1.2254.169.20.1.2.1.3">
+			<value><getRowOid>.1.3.6.1.4.1.2254.169.20.1.2.1.3</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.2254.169.20.1.2.1.4</getRowOid></activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.2254.169.20.1.2.1.4</getRowOid> Cleared</inactiveText>
+				</name>
+				<severity><mapValue mapid="alarmSeverity-vm"><getRowOid>.1.3.6.1.4.1.2254.169.20.1.2.1.6</getRowOid></mapValue></severity>
+				<category>Device</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.2254.169.20.1.2.1.4</getRowOid></activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.2254.169.20.1.2.1.4</getRowOid> Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+	</device>
+		
+	<device deviceid="dell_pdu_emp">
+        <oidMustExist ruleid="dell_pdu_emp_exists" oid=".1.3.6.1.4.1.2254.169.20.9" istree="yes"/>
+		<oidMustNotMatch ruleid="dell_pdu_emp_count" oid=".1.3.6.1.4.1.2254.169.20.9.1.0">
+			<valueList>
+				<value>0</value>
+			</valueList>
+		</oidMustNotMatch>
+		
+		<valueMap ruleid="isFahrenheit-vm">
+            <valueIn>1</valueIn><valueOut>[true]</valueOut>
+            <valueIn>*</valueIn><valueOut>[false]</valueOut>
+        </valueMap>
+		
+		<numSensor ruleid="dellPduEMPTemperature" index=".1.3.6.1.4.1.2254.169.20.9.2.1.6">
+			<type>temp</type>
+			<sensorId>_EM_TEMP_<rowIndex/></sensorId>
+			<value>
+				<if>
+					<op><mapValue mapid="isFahrenheit-vm"><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.5</getRowOid></mapValue></op>
+					<op>
+						<div><!-- true fahrenheit -->
+							<op>
+								<sub>
+									<op>
+										<mult>
+										<op><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.6</getRowOid></op>
+										<op>0.1</op>
+										</mult>
+									</op>
+									<op>32</op>
+								</sub>
+							</op>
+							<op>1.8</op>
+						</div>
+					</op><!-- end fahrenheit -->
+					<op><!-- Celsius -->
+						<mult>
+						<op><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.6</getRowOid></op>
+						<op>0.1</op>
+						</mult>
+					</op>
+				</if>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>EMP <rowIndex/> - <getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.4</getRowOid> Temperature</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduEMPHumidity" index=".1.3.6.1.4.1.2254.169.20.9.2.1.7">
+			<type>humidity</type>
+			<sensorId>_EM_HUMIDITY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.7</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>EMP <rowIndex/> - <getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.4</getRowOid> Humidity</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+		
+		<valueMap ruleid="adcExists-vm">
+            <valueIn>*</valueIn><valueOut>[true]</valueOut>
+            <valueIn>0</valueIn><valueOut>[false]</valueOut>
+            <valueIn>1200</valueIn><valueOut>[false]</valueOut>
+        </valueMap>
+		
+		<numSensor ruleid="dellPduEMPADC1Reading" index=".1.3.6.1.4.1.2254.169.20.9.2.1.8">
+			<rowTest>
+				<mapValue mapid="adcExists-vm"><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.8</getRowOid></mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>_ADC1_TEMP_<rowIndex/></sensorId>
+			<value>
+				<if>
+					<op><mapValue mapid="isFahrenheit-vm"><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.5</getRowOid></mapValue></op>
+					<op>
+						<div><!-- true fahrenheit -->
+							<op>
+								<sub>
+									<op><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.8</getRowOid></op>
+									<op>32</op>
+								</sub>
+							</op>
+							<op>1.8</op>
+						</div>
+					</op><!-- end fahrenheit -->
+					<op><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.8</getRowOid></op><!-- Celsius -->
+				</if>
+			</value>
+			<valueInc>1</valueInc>
+			<label>EMP <rowIndex/> - ADC 1 Temperature</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dellPduEMPADC2Reading" index=".1.3.6.1.4.1.2254.169.20.9.2.1.9">
+			<rowTest>
+				<mapValue mapid="adcExists-vm"><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.9</getRowOid></mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>_ADC2_TEMP_<rowIndex/></sensorId>
+			<value>
+				<if>
+					<op><mapValue mapid="isFahrenheit-vm"><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.5</getRowOid></mapValue></op>
+					<op>
+						<div><!-- true fahrenheit -->
+							<op>
+								<sub>
+									<op><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.9</getRowOid></op>
+									<op>32</op>
+								</sub>
+							</op>
+							<op>1.8</op>
+						</div>
+					</op><!-- end fahrenheit -->
+					<op><getRowOid>.1.3.6.1.4.1.2254.169.20.9.2.1.9</getRowOid></op><!-- Celsius -->
+				</if>
+			</value>
+			<valueInc>1</valueInc>
+			<label>EMP <rowIndex/> - ADC 2 Temperature</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+	</device>
+</APC_DDF>

@@ -1,0 +1,1444 @@
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="netio_powerpdu"
+	ddfname="NETIO PowerPDU"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+		SOURCE:	NETIO-PRODUCTS-NETIO-MIB
+		BFO: 	115741924
+	-->
+	<device deviceid="netio_powerpdu">
+		<oidMustExist ruleid="netio_powerpdu_exists" oid="1.3.6.1.4.1.47952.1.1.1.1.1.0"/>
+
+		<setProductData ruleid="vendordata" field="vendor">NETIO</setProductData>
+		<setProductData ruleid="modeldata" field="model">PowerPDU</setProductData>
+		<setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+
+		<valueMap ruleid="delete_null_sensor">
+			<valueIn>-1</valueIn><valueOut>[false]</valueOut>
+			<valueIn>*</valueIn><valueOut>[true]</valueOut>
+		</valueMap>
+		
+		<stateSensor ruleid="netioOutputAction_1">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.1.0</getOid></mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>NETIO_OUTPUT_ACTION_1</sensorId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<getOid>.1.3.6.1.4.1.47952.1.1.1.5.1.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid> State</label>
+			<enum>rpdu_outlet_states</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="netioOutputAction_2">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.2.0</getOid></mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>NETIO_OUTPUT_ACTION_2</sensorId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<getOid>.1.3.6.1.4.1.47952.1.1.1.5.2.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid> State</label>
+			<enum>rpdu_outlet_states</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="netioOutputAction_3">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.3.0</getOid></mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>NETIO_OUTPUT_ACTION_3</sensorId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<getOid>.1.3.6.1.4.1.47952.1.1.1.5.3.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid> State</label>
+			<enum>rpdu_outlet_states</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="netioOutputAction_4">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.4.0</getOid></mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>NETIO_OUTPUT_ACTION_4</sensorId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<getOid>.1.3.6.1.4.1.47952.1.1.1.5.4.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid> State</label>
+			<enum>rpdu_outlet_states</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="netioOutputAction_5">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.5.0</getOid></mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>NETIO_OUTPUT_ACTION_5</sensorId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<getOid>.1.3.6.1.4.1.47952.1.1.1.5.5.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid> State</label>
+			<enum>rpdu_outlet_states</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="netioOutputAction_6">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.6.0</getOid></mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>NETIO_OUTPUT_ACTION_6</sensorId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<getOid>.1.3.6.1.4.1.47952.1.1.1.5.6.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid> State</label>
+			<enum>rpdu_outlet_states</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="netioOutputAction_7">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.7.0</getOid></mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>NETIO_OUTPUT_ACTION_7</sensorId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<getOid>.1.3.6.1.4.1.47952.1.1.1.5.7.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid> State</label>
+			<enum>rpdu_outlet_states</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="netioOutputAction_8">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.8.0</getOid></mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>NETIO_OUTPUT_ACTION_8</sensorId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<getOid>.1.3.6.1.4.1.47952.1.1.1.5.8.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid> State</label>
+			<enum>rpdu_outlet_states</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid></sensorSet>
+		</stateSensor>
+
+		<enumMap ruleid="rpdu_outlet_states">
+			<label>Off</label>
+			<label>On</label>
+			<label>Reset</label>
+			<label>Short On</label>
+			<label>Switch</label>
+			<label>Idle</label>
+			<label>Unknown</label>
+		</enumMap>
+		<valueMap ruleid="rpdu_outlet_state_map">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>*</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		
+		<stateControl ruleid="netioOutputAction_1_control">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.1.0</getOid></mapValue>
+			</rowTest>
+			<type>state/outletcontrol</type>
+			<controlId>RPDU_OUTLET_CONTROL_1</controlId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<formatNumber printffmt="%1.0f">
+						<getOid>.1.3.6.1.4.1.47952.1.1.1.5.1.0</getOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<set_value>
+				<setOid>
+					<op>.1.3.6.1.4.1.47952.1.1.1.5.1.0</op>
+					<op><mapValue mapid="outletControlToState"><setOidValue/></mapValue></op>
+				</setOid>
+			</set_value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid> State</label>
+			<cntrl_enum>outletControlMap</cntrl_enum>
+			<val_enum>rpdu_outlet_states</val_enum>
+		</stateControl>
+		<stateControl ruleid="netioOutputAction_2_control">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.2.0</getOid></mapValue>
+			</rowTest>
+			<type>state/outletcontrol</type>
+			<controlId>RPDU_OUTLET_CONTROL_2</controlId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<formatNumber printffmt="%1.0f">
+						<getOid>.1.3.6.1.4.1.47952.1.1.1.5.2.0</getOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<set_value>
+				<setOid>
+					<op>.1.3.6.1.4.1.47952.1.1.1.5.2.0</op>
+					<op><mapValue mapid="outletControlToState"><setOidValue/></mapValue></op>
+				</setOid>
+			</set_value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid> State</label>
+			<cntrl_enum>outletControlMap</cntrl_enum>
+			<val_enum>rpdu_outlet_states</val_enum>
+		</stateControl>
+		<stateControl ruleid="netioOutputAction_3_control">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.3.0</getOid></mapValue>
+			</rowTest>
+			<type>state/outletcontrol</type>
+			<controlId>RPDU_OUTLET_CONTROL_3</controlId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<formatNumber printffmt="%1.0f">
+						<getOid>.1.3.6.1.4.1.47952.1.1.1.5.3.0</getOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<set_value>
+				<setOid>
+					<op>.1.3.6.1.4.1.47952.1.1.1.5.3.0</op>
+					<op><mapValue mapid="outletControlToState"><setOidValue/></mapValue></op>
+				</setOid>
+			</set_value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid> State</label>
+			<cntrl_enum>outletControlMap</cntrl_enum>
+			<val_enum>rpdu_outlet_states</val_enum>
+		</stateControl>
+		<stateControl ruleid="netioOutputAction_4_control">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.4.0</getOid></mapValue>
+			</rowTest>
+			<type>state/outletcontrol</type>
+			<controlId>RPDU_OUTLET_CONTROL_4</controlId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<formatNumber printffmt="%1.0f">
+						<getOid>.1.3.6.1.4.1.47952.1.1.1.5.4.0</getOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<set_value>
+				<setOid>
+					<op>.1.3.6.1.4.1.47952.1.1.1.5.4.0</op>
+					<op><mapValue mapid="outletControlToState"><setOidValue/></mapValue></op>
+				</setOid>
+			</set_value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid> State</label>
+			<cntrl_enum>outletControlMap</cntrl_enum>
+			<val_enum>rpdu_outlet_states</val_enum>
+		</stateControl>
+		<stateControl ruleid="netioOutputAction_5_control">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.5.0</getOid></mapValue>
+			</rowTest>
+			<type>state/outletcontrol</type>
+			<controlId>RPDU_OUTLET_CONTROL_5</controlId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<formatNumber printffmt="%1.0f">
+						<getOid>.1.3.6.1.4.1.47952.1.1.1.5.5.0</getOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<set_value>
+				<setOid>
+					<op>.1.3.6.1.4.1.47952.1.1.1.5.5.0</op>
+					<op><mapValue mapid="outletControlToState"><setOidValue/></mapValue></op>
+				</setOid>
+			</set_value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid> State</label>
+			<cntrl_enum>outletControlMap</cntrl_enum>
+			<val_enum>rpdu_outlet_states</val_enum>
+		</stateControl>
+		<stateControl ruleid="netioOutputAction_6_control">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.6.0</getOid></mapValue>
+			</rowTest>
+			<type>state/outletcontrol</type>
+			<controlId>RPDU_OUTLET_CONTROL_6</controlId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<formatNumber printffmt="%1.0f">
+						<getOid>.1.3.6.1.4.1.47952.1.1.1.5.6.0</getOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<set_value>
+				<setOid>
+					<op>.1.3.6.1.4.1.47952.1.1.1.5.6.0</op>
+					<op><mapValue mapid="outletControlToState"><setOidValue/></mapValue></op>
+				</setOid>
+			</set_value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid> State</label>
+			<cntrl_enum>outletControlMap</cntrl_enum>
+			<val_enum>rpdu_outlet_states</val_enum>
+		</stateControl>
+		<stateControl ruleid="netioOutputAction_7_control">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.7.0</getOid></mapValue>
+			</rowTest>
+			<type>state/outletcontrol</type>
+			<controlId>RPDU_OUTLET_CONTROL_7</controlId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<formatNumber printffmt="%1.0f">
+						<getOid>.1.3.6.1.4.1.47952.1.1.1.5.7.0</getOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<set_value>
+				<setOid>
+					<op>.1.3.6.1.4.1.47952.1.1.1.5.7.0</op>
+					<op><mapValue mapid="outletControlToState"><setOidValue/></mapValue></op>
+				</setOid>
+			</set_value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid> State</label>
+			<cntrl_enum>outletControlMap</cntrl_enum>
+			<val_enum>rpdu_outlet_states</val_enum>
+		</stateControl>
+		<stateControl ruleid="netioOutputAction_8_control">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.8.0</getOid></mapValue>
+			</rowTest>
+			<type>state/outletcontrol</type>
+			<controlId>RPDU_OUTLET_CONTROL_8</controlId>
+			<value>
+				<mapValue mapid="rpdu_outlet_state_map">
+					<formatNumber printffmt="%1.0f">
+						<getOid>.1.3.6.1.4.1.47952.1.1.1.5.8.0</getOid>
+					</formatNumber>
+				</mapValue>
+			</value>
+			<set_value>
+				<setOid>
+					<op>.1.3.6.1.4.1.47952.1.1.1.5.8.0</op>
+					<op><mapValue mapid="outletControlToState"><setOidValue/></mapValue></op>
+				</setOid>
+			</set_value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid> State</label>
+			<cntrl_enum>outletControlMap</cntrl_enum>
+			<val_enum>rpdu_outlet_states</val_enum>
+		</stateControl>
+
+		<enumMap ruleid="outletControlMap">
+			<label>Off</label>
+			<label>On</label>
+			<label>Reset</label>
+			<label>Short On</label>
+			<label>Switch</label>
+			<label>Idle</label>
+		</enumMap>
+		<valueMap ruleid="outletControlToState">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+		</valueMap>
+
+		<numSensor ruleid="netioOutputLoad_1">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.1.0</getOid></mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>NETIO_OUTPUT_LOAD_1</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.25.1.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid> Load</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputLoad_2">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.2.0</getOid></mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>NETIO_OUTPUT_LOAD_2</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.25.2.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid> Load</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputLoad_3">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.3.0</getOid></mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>NETIO_OUTPUT_LOAD_3</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.25.3.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid> Load</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputLoad_4">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.4.0</getOid></mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>NETIO_OUTPUT_LOAD_4</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.25.4.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid> Load</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputLoad_5">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.5.0</getOid></mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>NETIO_OUTPUT_LOAD_5</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.25.5.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid> Load</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputLoad_6">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.6.0</getOid></mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>NETIO_OUTPUT_LOAD_6</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.25.6.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid> Load</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputLoad_7">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.7.0</getOid></mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>NETIO_OUTPUT_LOAD_7</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.25.7.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid> Load</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputLoad_8">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.8.0</getOid></mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>NETIO_OUTPUT_LOAD_8</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.25.8.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid> Load</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergy_1">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.1.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_1</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.26.1.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid> Energy Received (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergy_2">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.2.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_2</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.26.2.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid> Energy Received (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergy_3">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.3.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_3</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.26.3.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid> Energy Received (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergy_4">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.4.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_4</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.26.4.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid> Energy Received (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergy_5">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.5.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_5</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.26.5.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid> Energy Received (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergy_6">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.6.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_6</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.26.6.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid> Energy Received (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergy_7">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.7.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_7</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.26.7.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid> Energy Received (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergy_8">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.8.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_8</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.26.8.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid> Energy Received (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputCurrent_1">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.1.0</getOid></mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>NETIO_OUTPUT_CURRENT_1</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.28.1.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid> Current</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputCurrent_2">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.2.0</getOid></mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>NETIO_OUTPUT_CURRENT_2</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.28.2.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid> Current</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputCurrent_3">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.3.0</getOid></mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>NETIO_OUTPUT_CURRENT_3</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.28.3.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid> Current</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputCurrent_4">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.4.0</getOid></mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>NETIO_OUTPUT_CURRENT_4</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.28.4.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid> Current</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputCurrent_5">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.5.0</getOid></mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>NETIO_OUTPUT_CURRENT_5</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.28.5.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid> Current</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputCurrent_6">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.6.0</getOid></mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>NETIO_OUTPUT_CURRENT_6</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.28.6.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid> Current</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputCurrent_7">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.7.0</getOid></mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>NETIO_OUTPUT_CURRENT_7</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.28.7.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid> Current</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputCurrent_8">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.8.0</getOid></mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>NETIO_OUTPUT_CURRENT_8</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.28.8.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid> Current</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputPowerFactor_1">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.1.0</getOid></mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>NETIO_OUTPUT_POWER_FACTOR_1</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.29.1.0</getOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid> Power Factor</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputPowerFactor_2">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.2.0</getOid></mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>NETIO_OUTPUT_POWER_FACTOR_2</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.29.2.0</getOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid> Power Factor</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputPowerFactor_3">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.3.0</getOid></mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>NETIO_OUTPUT_POWER_FACTOR_3</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.29.3.0</getOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid> Power Factor</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputPowerFactor_4">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.4.0</getOid></mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>NETIO_OUTPUT_POWER_FACTOR_4</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.29.4.0</getOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid> Power Factor</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputPowerFactor_5">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.5.0</getOid></mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>NETIO_OUTPUT_POWER_FACTOR_5</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.29.5.0</getOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid> Power Factor</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputPowerFactor_6">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.6.0</getOid></mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>NETIO_OUTPUT_POWER_FACTOR_6</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.29.6.0</getOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid> Power Factor</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputPowerFactor_7">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.7.0</getOid></mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>NETIO_OUTPUT_POWER_FACTOR_7</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.29.7.0</getOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid> Power Factor</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputPowerFactor_8">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.8.0</getOid></mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>NETIO_OUTPUT_POWER_FACTOR_8</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.29.8.0</getOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid> Power Factor</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergyNR_1">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.1.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_NR_1</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.31.1.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid> Energy Received (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergyNR_2">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.2.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_NR_2</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.31.2.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid> Energy Received (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergyNR_3">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.3.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_NR_3</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.31.3.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid> Energy Received (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergyNR_4">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.4.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_NR_4</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.31.4.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid> Energy Received (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergyNR_5">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.5.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_NR_5</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.31.5.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid> Energy Received (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergyNR_6">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.6.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_NR_6</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.31.6.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid> Energy Received (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergyNR_7">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.7.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_NR_7</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.31.7.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid> Energy Received (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputEnergyNR_8">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.8.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_ENERGY_NR_8</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.31.8.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid> Energy Received (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergy_1">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.1.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_1</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.32.1.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid> Energy Delivered (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergy_2">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.2.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_2</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.32.2.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid> Energy Delivered (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergy_3">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.3.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_3</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.32.3.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid> Energy Delivered (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergy_4">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.4.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_4</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.32.4.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid> Energy Delivered (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergy_5">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.5.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_5</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.32.5.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid> Energy Delivered (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergy_6">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.6.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_6</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.32.6.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid> Energy Delivered (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergy_7">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.7.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_7</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.32.7.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid> Energy Delivered (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergy_8">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.8.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_8</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.32.8.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid> Energy Delivered (Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergyNR_1">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.1.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_NR_1</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.33.1.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid> Energy Delivered (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.1.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergyNR_2">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.2.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_NR_2</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.33.2.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid> Energy Delivered (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.2.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergyNR_3">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.3.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_NR_3</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.33.3.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid> Energy Delivered (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.3.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergyNR_4">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.4.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_NR_4</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.33.4.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid> Energy Delivered (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.4.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergyNR_5">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.5.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_NR_5</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.33.5.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid> Energy Delivered (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.5.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergyNR_6">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.6.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_NR_6</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.33.6.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid> Energy Delivered (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.6.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergyNR_7">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.7.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_NR_7</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.33.7.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid> Energy Delivered (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.7.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOutputReverseEnergyNR_8">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor"><getOid>.1.3.6.1.4.1.47952.1.1.1.1.8.0</getOid></mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_OUTPUT_REVERSE_ENERGY_NR_8</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.1.1.33.8.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid> Energy Delivered (Non-Resettable)</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.1.1.2.8.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioVoltage">
+			<type>voltage</type>
+			<sensorId>NETIO_VOLTAGE</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.2.1.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>Voltage</label>
+			<sensorSet>Totals</sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioFrequency">
+			<type>frequency</type>
+			<sensorId>NETIO_FREQUENCY</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.2.2.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>Frequency</label>
+			<sensorSet>Totals</sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioTotalCurrent">
+			<type>amperage</type>
+			<sensorId>NETIO_TOTAL_CURRENT</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.2.3.0</getOid></op>
+				<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>Total Current</label>
+			<sensorSet>Totals</sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioOverallPowerFactor">
+			<type>num/powerfactor</type>
+			<sensorId>NETIO_OVERALL_POWER_FACTOR</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.2.4.0</getOid></op>
+				<op>0.00001</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>Overall Power Factor</label>
+			<sensorSet>Totals</sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioTotalLoad">
+			<type>powerW</type>
+			<sensorId>NETIO_TOTAL_LOAD</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.2.5.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Total Load</label>
+			<sensorSet>Totals</sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioTotalEnergy">
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_TOTAL_ENERGY</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.2.6.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Total Energy Received (Resettable)</label>
+			<sensorSet>Totals</sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioTotalReverseEnergy">
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_TOTAL_REVERSE_ENERGY</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.2.9.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Total Energy Delivered (Resettable)</label>
+			<sensorSet>Totals</sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioTotalEnergyNR">
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_TOTAL_ENERGY_NR</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.2.10.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Total Energy Received (Non-Resettable)</label>
+			<sensorSet>Totals</sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioTotalReverseEnergyNR">
+			<type>num/kwatthr</type>
+			<sensorId>NETIO_TOTAL_REVERSE_ENERGY_NR</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.2.11.0</getOid></op>
+				<op>1000</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Total Energy Delivered (Non-Resettable)</label>
+			<sensorSet>Totals</sensorSet>
+		</numSensor>
+
+		<stateSensor ruleid="netioInputState_1">
+			<type>state</type>
+			<sensorId>NETIO_INPUT_STATE_1</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.47952.1.3.1.3.1.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.3.1.2.1.0</getOid> State</label>
+			<enum>offOn-em</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.3.1.2.1.0</getOid></sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="netioInputState_2">
+			<type>state</type>
+			<sensorId>NETIO_INPUT_STATE_2</sensorId>
+			<value>
+				<mapValue mapid="2state-vm">
+					<getOid>.1.3.6.1.4.1.47952.1.3.1.3.2.0</getOid>
+				</mapValue>
+			</value>
+			<label><getOid>.1.3.6.1.4.1.47952.1.3.1.2.2.0</getOid> State</label>
+			<enum>offOn-em</enum>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.3.1.2.2.0</getOid></sensorSet>
+		</stateSensor>
+
+		<enumMap ruleid="offOn-em">
+			<label>Off</label>
+			<label>On</label>
+			<label>Unknown</label>
+		</enumMap>
+		<valueMap ruleid="2state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>3</valueOut>
+		</valueMap>
+
+		<numSensor ruleid="netioInputS0Counter_1">
+			<type>num</type>
+			<sensorId>NETIO_INPUT_S0_COUNTER_1</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.3.1.5.1.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.3.1.2.1.0</getOid> S0 Counter</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.3.1.2.1.0</getOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="netioInputS0Counter_2">
+			<type>num</type>
+			<sensorId>NETIO_INPUT_S0_COUNTER_2</sensorId>
+			<value>
+				<mult>
+				<op><getOid>.1.3.6.1.4.1.47952.1.3.1.5.2.0</getOid></op>
+				<op>1</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getOid>.1.3.6.1.4.1.47952.1.3.1.2.2.0</getOid> S0 Counter</label>
+			<sensorSet><getOid>.1.3.6.1.4.1.47952.1.3.1.2.2.0</getOid></sensorSet>
+		</numSensor>
+    </device>
+</APC_DDF>

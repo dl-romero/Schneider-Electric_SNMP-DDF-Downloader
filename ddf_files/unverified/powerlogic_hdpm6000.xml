@@ -1,0 +1,742 @@
+<?xml version="1.0"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="powerlogic_hdpm6000"
+	ddfname="PowerLogic HDPM6000"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+
+	<device deviceid="seHdpmSystem">
+		<oidMustExist oid=".1.3.6.1.4.1.3833.1.6000.1" ruleid="hdpm" istree="yes"/>
+
+		<setProductData field="vendor" ruleid="vendordata">PowerLogic by Schneider Electric</setProductData>
+		<setProductData field="model" ruleid="modeldata">HDPM6000</setProductData>
+		<setProductData field="type" ruleid="typedata">Branch Circuit Monitor</setProductData>
+
+		<setProductData field="appversion" ruleid="seHdpmSystemFirmwareVersion">
+			<getOid>.1.3.6.1.4.1.3833.1.6000.1.1.2.0</getOid>
+		</setProductData>
+		<setProductData field="serial_num" ruleid="seHdpmSystemSerialNum">
+			<getOid>.1.3.6.1.4.1.3833.1.6000.1.1.4.0</getOid>
+		</setProductData>
+
+	</device>
+	<device deviceid="seHdpmModules">
+		<oidMustExist oid=".1.3.6.1.4.1.3833.1.6000.1.2" ruleid="seHdpmModules" istree="yes"/>
+		<oidMustNotMatch oid=".1.3.6.1.4.1.3833.1.6000.1.2.1.0">
+			<valueList>
+				<value>0</value>
+			</valueList>
+		</oidMustNotMatch>
+
+		<numSensor ruleid="seHdpmModuleChannels" index=".1.3.6.1.4.1.3833.1.6000.1.2.2.1.3">
+			<type>num</type>
+			<sensorId>MODULE_<rowIndex/>_CHANNELS</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.2.2.1.3</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Module <getRowOid>.1.3.6.1.4.1.3833.1.6000.1.2.2.1.2</getRowOid> - Channel Count</label>
+			<sensorSet>Modules</sensorSet>
+		</numSensor>
+	</device>
+	<device deviceid="seHdpmChannels">
+		<oidMustExist oid=".1.3.6.1.4.1.3833.1.6000.1.3" ruleid="seHdpmChannels" istree="yes"/>
+		<oidMustNotMatch oid=".1.3.6.1.4.1.3833.1.6000.1.3.1.0">
+			<valueList>
+				<value>0</value>
+			</valueList>
+		</oidMustNotMatch>
+
+		<numSensor ruleid="seHdpmChannelToCircuitAssignment" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.3">
+			<type>num</type>
+			<sensorId>CHANNEL_<rowIndex/>_CIRCUIT_ASSIGNMENT</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.3</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Channel <rowIndex/> - Circuit Assigned</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="seHdpmChannelWh" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.8">
+			<type>num/kwatthr</type>
+			<sensorId>CHANNEL_<rowIndex/>_ACTIVE_ENERGY</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.8</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.6.0</getOid></op><op>1000</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Channel <rowIndex/> - Active Energy</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmChannelVoltsRms" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.9">
+			<type>voltage</type>
+			<sensorId>CHANNEL_<rowIndex/>_VOLTS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.9</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op>
+				</if>
+			</valueInc>
+			<label>Channel <rowIndex/> - Voltage RMS</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmChannelAmpsRms" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.12">
+			<type>amperage</type>
+			<sensorId>CHANNEL_<rowIndex/>_AMPS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.12</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.8.0</getOid></op><op>100</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.8.0</getOid></op><op>100</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.8.0</getOid></op><op>100</op></div></op>
+				</if>
+			</valueInc>
+			<label>Channel <rowIndex/> - Current RMS</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmChannelPF" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.15">
+			<type>num/powerfactor</type>
+			<sensorId>CHANNEL_<rowIndex/>_POWER_FACTOR</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.15</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Channel <rowIndex/> - Power Factor</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmChannelWatt" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.18">
+			<type>powerW</type>
+			<sensorId>CHANNEL_<rowIndex/>_POWER</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.18</getRowOid></op>
+					<op>
+						<getOid>.1.3.6.1.4.1.3833.1.6000.1.1.9.0</getOid>
+					</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Channel <rowIndex/> - Active Power</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmChannelAvgVoltsRms" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.22">
+			<type>voltage</type>
+			<sensorId>CHANNEL_<rowIndex/>_AVG_VOLTS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.22</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op>
+				</if>
+			</valueInc>
+			<label>Channel <rowIndex/> - Voltage RMS Average</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmChannelAmpsRms" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.23">
+			<type>amperage</type>
+			<sensorId>CHANNEL_<rowIndex/>_AVG_AMPS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.23</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.8.0</getOid></op><op>100</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.8.0</getOid></op><op>100</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.8.0</getOid></op><op>100</op></div></op>
+				</if>
+			</valueInc>
+			<label>Channel <rowIndex/> - Current RMS Average</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmChannelAvgPF" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.24">
+			<type>num/powerfactor</type>
+			<sensorId>CHANNEL_<rowIndex/>_AVG_POWER_FACTOR</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.24</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Channel <rowIndex/> - Power Factor Average</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmChannelAvgWatt" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.25">
+			<type>powerW</type>
+			<sensorId>CHANNEL_<rowIndex/>_AVG_POWER</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.25</getRowOid></op>
+					<op>
+						<getOid>.1.3.6.1.4.1.3833.1.6000.1.1.9.0</getOid>
+					</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Channel <rowIndex/> - Active Power Average</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmChannelWattMax" index=".1.3.6.1.4.1.3833.1.6000.1.3.2.1.26">
+			<type>powerW</type>
+			<sensorId>CHANNEL_<rowIndex/>_MAX_POWER</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.3.2.1.26</getRowOid></op>
+					<op>
+						<getOid>.1.3.6.1.4.1.3833.1.6000.1.1.9.0</getOid>
+					</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Channel <rowIndex/> - Active Power Max</label>
+			<sensorSet>Channel <rowIndex/></sensorSet>
+		</numSensor>
+	</device>
+	<device deviceid="seHdpmACMeters">
+		<oidMustExist oid=".1.3.6.1.4.1.3833.1.6000.1.4" ruleid="seHdpmChannels" istree="yes"/>
+		<oidMustNotMatch oid=".1.3.6.1.4.1.3833.1.6000.1.4.1.0">
+			<valueList>
+				<value>0</value>
+			</valueList>
+		</oidMustNotMatch>
+
+		<numSensor ruleid="seHdpmACMeterNumberOfPhases" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.2">
+			<type>num</type>
+			<sensorId>ACMETER_<rowIndex/>_PHASE_COUNT</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.2</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>AC Meter <rowIndex/> - Phase Count</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterVoltsRms" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.3">
+			<type>voltage</type>
+			<sensorId>ACMETER_<rowIndex/>_VOLTS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.3</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op>
+				</if>
+			</valueInc>
+			<label>AC Meter <rowIndex/> - Voltage RMS</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterAmpsRms" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.4">
+			<type>amperage</type>
+			<sensorId>ACMETER_<rowIndex/>_AMPS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.4</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>AC Meter <rowIndex/> - Current RMS</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterPF" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.5">
+			<type>num/powerfactor</type>
+			<sensorId>ACMETER_<rowIndex/>_POWER_FACTOR</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.5</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>AC Meter <rowIndex/> - Power Factor</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterWatt" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.6">
+			<type>powerW</type>
+			<sensorId>ACMETER_<rowIndex/>_ACTIVE_POWER</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.6</getRowOid></op>
+					<op>
+						<getOid>.1.3.6.1.4.1.3833.1.6000.1.1.9.0</getOid>
+					</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>AC Meter <rowIndex/> - Active Power</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterVAR" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.7">
+			<type>powerVA/powerVAR</type>
+			<sensorId>ACMETER_<rowIndex/>_REACTIVE_POWER</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.7</getRowOid></op>
+					<op>
+						<getOid>.1.3.6.1.4.1.3833.1.6000.1.1.9.0</getOid>
+					</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>AC Meter <rowIndex/> - Reactive Power</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterWh" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.10">
+			<type>num/kwatthr</type>
+			<sensorId>ACMETER_<rowIndex/>_ACTIVE_ENERGY</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.10</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.6.0</getOid></op><op>1000</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>AC Meter <rowIndex/> - Active Energy</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterVARh" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.11">
+			<type>num/kVARhr</type>
+			<sensorId>ACMETER_<rowIndex/>_REACTIVE_ENERGY</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.11</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.6.0</getOid></op><op>1000</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>AC Meter <rowIndex/> - Reactive Energy</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterFrequency" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.12">
+			<type>frequency</type>
+			<sensorId>ACMETER_<rowIndex/>_FREQUENCY</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.12</getRowOid></op>
+					<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>AC Meter <rowIndex/> - Frequency</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterAmpsRmsavg" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.13">
+			<type>amperage</type>
+			<sensorId>ACMETER_<rowIndex/>_AVG_AMPS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.13</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>AC Meter <rowIndex/> - Average Current RMS</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmACMeterVAh" index=".1.3.6.1.4.1.3833.1.6000.1.4.2.1.14">
+			<type>num/kVAhr</type>
+			<sensorId>ACMETER_<rowIndex/>_APPARENT_ENERGY</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.4.2.1.14</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.6.0</getOid></op><op>1000</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>AC Meter <rowIndex/> - Apparent Energy</label>
+			<sensorSet>AC Meter <rowIndex/></sensorSet>
+		</numSensor>
+	</device>
+
+	<device deviceid="seHdpmCircuitSummary">
+		<oidMustExist oid=".1.3.6.1.4.1.3833.1.6000.1.7" ruleid="seHdpmChannels" istree="yes"/>
+		<oidMustNotMatch oid=".1.3.6.1.4.1.3833.1.6000.1.7.1.0">
+			<valueList>
+				<value>0</value>
+			</valueList>
+		</oidMustNotMatch>
+
+		<numSensor ruleid="seHdpmCircuitSummaryPhasesNumber" index=".1.3.6.1.4.1.3833.1.6000.1.7.2.1.2">
+			<type>num</type>
+			<sensorId>CIRCUITSUMMARY_<rowIndex/>_PHASE_COUNT</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.7.2.1.2</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Circuit Summary <rowIndex/> - Phase Count</label>
+			<sensorSet>Circuit Summary <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSummaryAveVoltsRms" index=".1.3.6.1.4.1.3833.1.6000.1.7.2.1.3">
+			<type>voltage</type>
+			<sensorId>CIRCUITSUMMARY_<rowIndex/>_AVG_VOLTS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.7.2.1.3</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op>
+				</if>
+			</valueInc>
+			<label>Circuit Summary <rowIndex/> - Voltage RMS Average</label>
+			<sensorSet>Circuit Summary <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSummaryTotalAmpsRms" index=".1.3.6.1.4.1.3833.1.6000.1.7.2.1.4">
+			<type>amperage</type>
+			<sensorId>CIRCUITSUMMARY_<rowIndex/>_TOTAL_AMPS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.7.2.1.4</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Circuit Summary <rowIndex/> - Current RMS Total</label>
+			<sensorSet>Circuit Summary <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSummaryAvePF" index=".1.3.6.1.4.1.3833.1.6000.1.7.2.1.5">
+			<type>num/powerfactor</type>
+			<sensorId>CIRCUITSUMMARY_<rowIndex/>_AVG_POWER_FACTOR</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.7.2.1.5</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Circuit Summary <rowIndex/> - Power Factor Average</label>
+			<sensorSet>Circuit Summary <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSummaryTotalWatts" index=".1.3.6.1.4.1.3833.1.6000.1.7.2.1.6">
+			<type>powerW</type>
+			<sensorId>CIRCUITSUMMARY_<rowIndex/>_TOTAL_ACTIVE_POWER</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.7.2.1.6</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Circuit Summary <rowIndex/> - Active Power Total</label>
+			<sensorSet>Circuit Summary <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSummaryTotalWh" index=".1.3.6.1.4.1.3833.1.6000.1.7.2.1.7">
+			<type>num/kwatthr</type>
+			<sensorId>CIRCUITSUMMARY_<rowIndex/>_TOTAL_ACTIVE_ENERGY</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.7.2.1.7</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.6.0</getOid></op><op>1000</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Circuit Summary <rowIndex/> - Active Energy Total</label>
+			<sensorSet>Circuit Summary <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSummaryAveAmpsRms" index=".1.3.6.1.4.1.3833.1.6000.1.7.2.1.8">
+			<type>amperage</type>
+			<sensorId>CIRCUITSUMMARY_<rowIndex/>_AVG_AMPS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.7.2.1.8</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Circuit Summary <rowIndex/> - Current RMS Average</label>
+			<sensorSet>Circuit Summary <rowIndex/></sensorSet>
+		</numSensor>
+	</device>
+
+	<device deviceid="seHdpmCircuitVoltsAmpsWatts">
+		<oidMustExist oid=".1.3.6.1.4.1.3833.1.6000.1.8.1" ruleid="seHdpmCircuitVoltsAmpsWatts" istree="yes"/>
+		<oidMustNotMatch oid=".1.3.6.1.4.1.3833.1.6000.1.8.1.1.0">
+			<valueList>
+				<value>0</value>
+			</valueList>
+		</oidMustNotMatch>
+
+		<numSensor ruleid="seHdpmCircuitVoltsRms" index=".1.3.6.1.4.1.3833.1.6000.1.8.1.2.1.2">
+			<type>voltage</type>
+			<sensorId>CIRCUIT_<rowIndex/>_VOLTS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.8.1.2.1.2</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op>
+				</if>
+			</valueInc>
+			<label>Circuit <rowIndex/> - Voltage RMS</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitAmpsRms" index=".1.3.6.1.4.1.3833.1.6000.1.8.1.2.1.3">
+			<type>amperage</type>
+			<sensorId>CIRCUIT_<rowIndex/>_AMPS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.8.1.2.1.3</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.8.0</getOid></op><op>100</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.8.0</getOid></op><op>100</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.8.0</getOid></op><op>100</op></div></op>
+				</if>
+			</valueInc>
+			<label>Circuit <rowIndex/> - Current RMS</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitWatt" index=".1.3.6.1.4.1.3833.1.6000.1.8.1.2.1.4">
+			<type>powerW</type>
+			<sensorId>CIRCUIT_<rowIndex/>_POWER</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.8.1.2.1.4</getRowOid></op>
+					<op>
+						<getOid>.1.3.6.1.4.1.3833.1.6000.1.1.9.0</getOid>
+					</op>
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Circuit <rowIndex/> - Active Power</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="seHdpmCircuitNumPhases" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.3">
+			<type>num</type>
+			<sensorId>CIRCUIT_<rowIndex/>_PHASE_COUNT</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.3</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Circuit <rowIndex/> - Phase Count</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitAveVoltsRms" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.4">
+			<type>voltage</type>
+			<sensorId>CIRCUIT_<rowIndex/>_AVG_VOLTS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.4</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op>
+				</if>
+			</valueInc>
+			<label>Circuit <rowIndex/> - Voltage RMS Average</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSumAmpsRms" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.5">
+			<type>amperage</type>
+			<sensorId>CIRCUIT_<rowIndex/>_TOTAL_AMPS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.5</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Circuit <rowIndex/> - Current RMS Total</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitPF" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.6">
+			<type>num/powerfactor</type>
+			<sensorId>CIRCUIT_<rowIndex/>_POWER_FACTOR</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.6</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Circuit <rowIndex/> - Power Factor</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSumWatts" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.7">
+			<type>powerW</type>
+			<sensorId>CIRCUIT_<rowIndex/>_TOTAL_ACTIVE_POWER</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.7</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Circuit <rowIndex/> - Active Power Total</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSumVAR" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.8">
+			<type>powerVA/powerVAR</type>
+			<sensorId>CIRCUIT_<rowIndex/>_TOTAL_REACTIVE_POWER</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.8</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Circuit <rowIndex/> - Reactive Power Total</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSumVA" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.9">
+			<type>powerVA</type>
+			<sensorId>CIRCUIT_<rowIndex/>_TOTAL_APPARENT_POWER</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.9</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Circuit <rowIndex/> - Apparent Power Total</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitTotalWh" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.11">
+			<type>num/kwatthr</type>
+			<sensorId>CIRCUIT_<rowIndex/>_TOTAL_ACTIVE_ENERGY</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.11</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.6.0</getOid></op><op>1000</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Circuit <rowIndex/> - Active Energy Total</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitAveAmpsRms" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.12">
+			<type>amperage</type>
+			<sensorId>CIRCUIT_<rowIndex/>_AVG_AMPS_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.12</getRowOid></op>
+					<op>0.001</op>
+				</mult>
+			</value>
+			<valueInc>0.001</valueInc>
+			<label>Circuit <rowIndex/> - Current RMS Average</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitAveVLLRms" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.13">
+			<type>voltage</type>
+			<sensorId>CIRCUIT_<rowIndex/>_AVG_VLL_RMS</sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.13</getRowOid></op>
+					<op>
+						<div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div>
+					</op>
+				</mult>
+			</value>
+			<valueInc>
+				<if>
+					<op>
+						<ge><op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op><op>1</op></ge>
+					</op>
+					<op>1</op>
+					<op><div><op><getOid>.1.3.6.1.4.1.3833.1.6000.1.1.7.0</getOid></op><op>10</op></div></op>
+				</if>
+			</valueInc>
+			<label>Circuit <rowIndex/> - Voltage L-L RMS Average</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+		<numSensor ruleid="seHdpmCircuitSumWattMax" index=".1.3.6.1.4.1.3833.1.6000.1.10.2.1.14">
+			<type>powerW</type>
+			<sensorId>CIRCUIT_<rowIndex/>_TOTAL_MAX_ACTIVE_POWER</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3833.1.6000.1.10.2.1.14</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Circuit <rowIndex/> - Active Power Max Total</label>
+			<sensorSet>Circuit <rowIndex/></sensorSet>
+		</numSensor>
+	</device>
+
+</APC_DDF>

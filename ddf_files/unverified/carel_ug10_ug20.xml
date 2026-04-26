@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 <!-- Carel_UG10_UG20 -->
 
-<APC_DDF ddfid ="carel_ug10_ug20" ddfname="Carel UG10 and UG20" ddfversion="1" canremove="yes">
+<APC_DDF
+  ddfid="carel_ug10_ug20"
+  ddfname="Carel UG10 and UG20 [pcoWeb][SNMP]"
+  ddfversion="1"
+  canremove="yes">
 <schemaVersion>1.6</schemaVersion>
 
 <!--DDF Sensors -->

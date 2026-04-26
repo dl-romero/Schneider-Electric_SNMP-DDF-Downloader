@@ -3,13 +3,13 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="netbotz750"
 	ddfname="NetBotz 750"
-	ddfversion="17"
+	ddfversion="20"
 	canremove="yes">
-		 
+
 	<schemaVersion>1.6</schemaVersion>
 
 	<device deviceid="netbotz750_discovery">
-	
+
 		<oidMustMatch ruleid="nb750sysid" oid=".1.3.6.1.2.1.1.2.0">
 			<valueList>
 				<value>.1.3.6.1.4.1.52674</value>
@@ -18,13 +18,13 @@
 	        	<value>.1.3.6.1.4.1.52674.500.*</value>
 			</valueList>
 		</oidMustMatch>
-		
+
 		<suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
         <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
         <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
 		<!-- <suppressRule ruleid="suppressmib2ifmac_addr" suppressid="mib2if/setmacaddr1/mac_addr"/> -->
-		
-		
+
+
 		<setProductData ruleid="vendordata" field="vendor">Schneider Electric</setProductData>
 		<setProductData ruleid="modeldata" field="model">
 			<getOid>.1.3.6.1.4.1.318.1.4.2.2.1.2.1</getOid>
@@ -45,23 +45,23 @@
 			<valueIn>750</valueIn><valueOut>NetBotz Rack Appliance</valueOut>
 			<valueIn>755</valueIn><valueOut>NetBotz Wall Appliance</valueOut>
 		</valueMap>
-		
+
 		<setProductData ruleid="mac_addr" field="mac_addr">
             <regex>
                 <!-- Pattern match on valid MAC address chars. Add colons into mac address for display -->
-                <op>([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])</op>
-                <op><getRowOid is-binary="yes">.1.3.6.1.2.1.2.2.1.6</getRowOid></op> 
+	            <op>([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])([0-9a-fA-F][0-9a-fA-F])</op>
+                <op><getRowOid is-binary="yes">.1.3.6.1.2.1.2.2.1.6</getRowOid></op>
                 <op>%1$s:%2$s:%3$s:%4$s:%5$s:%6$s</op>
             </regex>
         </setProductData>
-		
+
 		<setProductData ruleid="bootver" field="bootversion">1.0.0</setProductData>
 		<setProductData ruleid="modelnum" field="apcmodelnumber">NBRK0750</setProductData>
-		 
+
 	</device>
 
 	<device deviceid="netbotz750_sensors">
-		<oidMustExist ruleid="netbotz_750" oid=".1.3.6.1.4.1.52674.500.4" istree="yes"/> 
+		<oidMustExist ruleid="netbotz_750" oid=".1.3.6.1.4.1.52674.500.4" istree="yes"/>
 
 		<numSensor ruleid="tempSensorValue" index=".1.3.6.1.4.1.52674.500.4.1.1.1.7">
 			<rowTest>
@@ -125,10 +125,16 @@
         </numSensor>
 		<valueMap ruleid="otherNumericSensorValue_units-vm">
 			<valueIn>MILLIAMPS</valueIn><valueOut>amperage</valueOut>
+			<valueIn>VOLTS</valueIn><valueOut>voltage</valueOut>
 			<valueIn>*</valueIn><valueOut>num</valueOut>
 		</valueMap>
 		<valueMap ruleid="otherNumericSensorValue_scale-vm">
 			<valueIn>MILLIAMPS</valueIn><valueOut>0.001</valueOut>
+			<valueIn>*</valueIn><valueOut>1</valueOut>
+		</valueMap>
+		<valueMap ruleid="otherNumericSensorValueInc_scale-vm">
+			<valueIn>MILLIAMPS</valueIn><valueOut>0.001</valueOut>
+			<valueIn>VOLTS</valueIn><valueOut>0.1</valueOut>
 			<valueIn>*</valueIn><valueOut>1</valueOut>
 		</valueMap>
 		<numSensor ruleid="otherNumericSensorValue" index=".1.3.6.1.4.1.52674.500.4.1.10.1.7">
@@ -154,7 +160,7 @@
 				</mult>
             </value>
 			<valueInc>
-				<mapValue mapid="otherNumericSensorValue_scale-vm">
+				<mapValue mapid="otherNumericSensorValueInc_scale-vm">
 				<getRowOid>.1.3.6.1.4.1.52674.500.4.1.10.1.9</getRowOid>
 				</mapValue>
 			</valueInc>
@@ -253,7 +259,7 @@
 				</mapValue>
             </value>
             <label>Door Switch - <getRowOid>.1.3.6.1.4.1.52674.500.4.2.2.1.4</getRowOid></label>
-			<enum>open-em</enum>
+						<enum>open-em</enum>
             <sensorSet>State Sensors - Door Switch</sensorSet>
         </stateSensor>
 		<stateSensor ruleid="cameraMotionSensorValue" index=".1.3.6.1.4.1.52674.500.4.2.3.1.2">
@@ -262,7 +268,7 @@
 				<getRowOid>.1.3.6.1.4.1.52674.500.4.2.3.1.2</getRowOid>
 				</mapValue>
 			</rowTest>
-            <type>state</type>
+            <type>cameramotion</type>
             <sensorId>CAMERA_MOTION_<getRowOid>.1.3.6.1.4.1.52674.500.4.2.3.1.8</getRowOid></sensorId>
             <value>
 				<mapValue mapid="2state-vm">
@@ -389,7 +395,7 @@
 				</mapValue>
             </value>
             <label>Door Lock - <getRowOid>.1.3.6.1.4.1.52674.500.4.2.16.1.4</getRowOid></label>
-			<enum>open-em</enum>
+						<enum>open-em</enum>
             <sensorSet>State Sensors - Door Lock</sensorSet>
         </stateSensor>
 		<stateSensor ruleid="doorLockSensorErrorStatus" index=".1.3.6.1.4.1.52674.500.4.2.16.1.3">
@@ -406,7 +412,7 @@
 				</mapValue>
             </value>
             <label>Door Lock - <getRowOid>.1.3.6.1.4.1.52674.500.4.2.16.1.4</getRowOid> Status</label>
-			<enum>doorLockSensorStatus-em</enum>
+						<enum>doorLockSensorStatus-em</enum>
             <sensorSet>State Sensors - Door Lock</sensorSet>
         </stateSensor>
 		<stateSensor ruleid="rackHandleSensorValue" index=".1.3.6.1.4.1.52674.500.4.2.17.1.2">
@@ -423,7 +429,7 @@
 				</mapValue>
             </value>
             <label>Rack Handle - <getRowOid>.1.3.6.1.4.1.52674.500.4.2.17.1.4</getRowOid></label>
-			<enum>open-em</enum>
+						<enum>open-em</enum>
             <sensorSet>State Sensors - Rack Handle</sensorSet>
         </stateSensor>
 		<stateSensor ruleid="outputRelaySensorValue" index=".1.3.6.1.4.1.52674.500.4.2.18.1.2">
@@ -443,7 +449,7 @@
 			<enum>active-em</enum>
             <sensorSet>State Sensors - Output Relay</sensorSet>
         </stateSensor>
-	
+
 		<valueMap ruleid="errorCond-severity-vm">
 			<valueIn>1</valueIn><valueOut>information</valueOut>
 			<valueIn>2</valueIn><valueOut>warning</valueOut>
@@ -491,6 +497,7 @@
         </stateSensor>
 
 		<valueMap ruleid="deleteNull-vm">
+			<valueIn>-1.0</valueIn><valueOut>[false]</valueOut>
 			<valueIn>-1</valueIn><valueOut>[false]</valueOut>
 			<valueIn>*</valueIn><valueOut>[true]</valueOut>
 		</valueMap>

@@ -3,13 +3,19 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="panduit_pdu"
 	ddfname="Panduit PDU"
-	ddfversion="4"
+	ddfversion="10"
 	canremove="yes">
-		 
 	<schemaVersion>1.6</schemaVersion>
+	<!--
 
+		SOURCE
+		\snmp\resources\mibs\panduit\PanduitG5_v2_3_19\Panduit.MIB
+
+		PANDUIT-MIB | 18 June 2021
+
+	-->
 	<device deviceid="panduit_pdu">
-		<oidMustExist ruleid="panduit_pdu" oid=".1.3.6.1.4.1.19536.9.4.2.2" istree="yes" /> 
+		<oidMustExist ruleid="panduit_pdu" oid=".1.3.6.1.4.1.19536.9.4.2.2" istree="yes" />
 
         <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
         <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
@@ -329,7 +335,7 @@
 	</device>
 
 	<device deviceid="panduit_pdu_g5">
-		<oidMustExist ruleid="panduit_pdu_g5" oid=".1.3.6.1.4.1.19536.10.1" istree="yes" /> 
+		<oidMustExist ruleid="panduit_pdu_g5" oid=".1.3.6.1.4.1.19536.10.1" istree="yes" />
 
 		<suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
 		<suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
@@ -342,7 +348,7 @@
 		<setProductData ruleid="productVersion" field="appversion"><getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.5.1</getOid></setProductData>
 		<setDefaultLabel><getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.1</getOid></setDefaultLabel>
 		<setProductData ruleid="productMacAddress" field="mac_addr"><getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.14.1</getOid></setProductData>
-		
+
 		<setProductData ruleid="inputs" field="inputphasecount"><getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.11.1</getOid></setProductData>
 		<setProductData ruleid="banks" field="bankcount"><getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.12.1</getOid></setProductData>
 
@@ -357,7 +363,7 @@
 					<op>0.1</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Frequency</label>
+			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Total Frequency</label>
 			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
 		<numSensor ruleid="input_apparent_power" index=".1.3.6.1.4.1.19536.10.1.2.1.1.4" >
@@ -376,12 +382,10 @@
 			<type>powerVA</type>
 			<sensorId>INPUT_APPARENT_POWER_<rowIndex/></sensorId>
 			<value>
-				<mult>
-					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.1.1.4</getRowOid></op>
-					<op>0.1</op>
-				</mult>
+				<getRowOid>.1.3.6.1.4.1.19536.10.1.2.1.1.4</getRowOid>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Apparent Power</label>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Total Apparent Power</label>
 			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
 		<numSensor ruleid="input_power_watts" index=".1.3.6.1.4.1.19536.10.1.2.1.1.5">
@@ -402,7 +406,8 @@
 			<value>
 			 <getRowOid>.1.3.6.1.4.1.19536.10.1.2.1.1.5</getRowOid>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Input Power</label>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Total Active Power</label>
 			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
 		<numSensor ruleid="input_total_energy" index=".1.3.6.1.4.1.19536.10.1.2.1.1.6">
@@ -423,7 +428,8 @@
 			<value>
 			 <getRowOid>.1.3.6.1.4.1.19536.10.1.2.1.1.6</getRowOid>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid>Input Total Energy</label>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Total Energy</label>
 			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
 		<numSensor ruleid="input_power_factor" index=".1.3.6.1.4.1.19536.10.1.2.1.1.9">
@@ -444,10 +450,11 @@
 			<value>
 				<mult>
 					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.1.1.9</getRowOid></op>
-					<op>0.001</op>
+					<op>0.01</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Power Factor</label>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Total Power Factor</label>
 			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
 		<numSensor ruleid="input_power_var" index=".1.3.6.1.4.1.19536.10.1.2.1.1.10">
@@ -463,12 +470,16 @@
 					<op>[true]</op>
 				</if>
 			</rowTest>
-			<type>powerVA/powerVAR</type>
+			<type>num/powerKVAR</type>
 			<sensorId>INPUT_POWER_VAR_<rowIndex/></sensorId>
 			<value>
-			   <getRowOid>.1.3.6.1.4.1.19536.10.1.2.1.1.10</getRowOid>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.1.1.10</getRowOid></op>
+					<op>0.001</op>
+				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Reactive Power</label>
+			<valueInc>0.001</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Total Reactive Power</label>
 			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
 		<numSensor ruleid="input_total_current" index=".1.3.6.1.4.1.19536.10.1.2.1.1.11" >
@@ -480,6 +491,7 @@
 					<op>0.01</op>
 				</mult>
 			</value>
+			<valueInc>0.01</valueInc>
 			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Total Current</label>
 			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
@@ -492,7 +504,7 @@
 					<getRowOid>.1.3.6.1.4.1.19536.10.1.2.1.1.3</getRowOid>
 				</mapValue>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Input Frequency Status</label>
+			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid> Frequency Status</label>
 			<enum>frequency_status-em</enum>
 			<sensorSet>PDU Input</sensorSet>
 		</stateSensor>
@@ -509,7 +521,13 @@
 
 		<!-- pdug5 Input Phase Table -->
 
-		 <numSensor ruleid="input_phase_voltage" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1" >
+		<numSensor ruleid="input_phase_voltage" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1" >
+			<rowTest>
+				<neq>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid></op>
+					<op>0</op>
+				</neq>
+			</rowTest>
 			<type>voltage</type>
 			<sensorId>INPUT_PHASE_VOLTAGE_<rowIndex/></sensorId>
 			<value>
@@ -531,7 +549,7 @@
 					<getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.2</getRowOid>
 				</mapValue>
 			</label>
-			<sensorSet>PDU Input Phase</sensorSet>
+			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
 
 		<valueMap ruleid="voltage_meas_type-vm">
@@ -546,22 +564,26 @@
 
 		<numSensor ruleid="input_phase_current_rating" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
-							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.2.1.1.10</getRowOid></op>
-							<op>0</op>
-						</lt>
+						<gt>
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.2.2.1.10</getRowOid></op>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq>
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
 			<type>amperage</type>
 			<sensorId>INPUT_PHASE_CURRENT_RATING_<rowIndex/></sensorId>
 			<value>
 				<mult>
-					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid></op>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.10</getRowOid></op>
 					<op>0.01</op>
 				</mult>
 			</value>
@@ -579,8 +601,13 @@
 			</label>
 			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
-		
 		<numSensor ruleid="input_phase_current" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1">
+			<rowTest>
+				<neq>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid></op>
+					<op>0</op>
+				</neq>
+			</rowTest>
 			<type>amperage</type>
 			<sensorId>INPUT_PHASE_CURRENT_<rowIndex/></sensorId>
 			<value>
@@ -603,7 +630,7 @@
 			</label>
 			<sensorSet>PDU Input</sensorSet>
 		</numSensor>
-		
+
 		<valueMap ruleid="amps_meas_type-vm">
 			<valueIn>1</valueIn><valueOut>Single Phase</valueOut>
 			<valueIn>2</valueIn><valueOut>Neutral</valueOut>
@@ -614,22 +641,27 @@
 
 		<numSensor ruleid="input_phase_powerVA" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.2.2.1.19</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq>
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
 			<type>powerVA</type>
 			<sensorId>INPUT_PHASE_POWERVA_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid>
+				<getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.19</getRowOid>
 			</value>
+			<valueInc>1</valueInc>
 			<label>
 				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
 					<regex>
@@ -647,22 +679,27 @@
 		</numSensor>
 		<numSensor ruleid="input_phase_power_watts" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.2.2.1.20</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq>
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
 			<type>powerW</type>
 			<sensorId>INPUT_PHASE_POWER_WATTS_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid>
+				<getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.20</getRowOid>
 			</value>
+			<valueInc>1</valueInc>
 			<label>
 				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
 					<regex>
@@ -670,7 +707,7 @@
 					<op><rowIndex/></op>
 					<op>%1$s</op>
 					</regex>
-				</getOid> Watts<space/>
+				</getOid> Active Power<space/>
 				<mapValue mapid="input_power_meas_type_status-vm">
 					<getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid>
 				</mapValue>
@@ -679,22 +716,30 @@
 		</numSensor>
 		<numSensor ruleid="input_phase_power_wattHour" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.2.2.1.21</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq>
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
-			<type>watthours</type>
+			<type>num/kwatthr</type>
 			<sensorId>INPUT_PHASE_POWER_WATTHOUR_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.21</getRowOid></op>
+					<op>0.001</op>
+				</mult>
 			</value>
+			<valueInc>0.001</valueInc>
 			<label>
 				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
 					<regex>
@@ -702,7 +747,7 @@
 					<op><rowIndex/></op>
 					<op>%1$s</op>
 					</regex>
-				</getOid> Watt Hour<space/>
+				</getOid> Energy<space/>
 				<mapValue mapid="input_power_meas_type_status-vm">
 					<getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid>
 				</mapValue>
@@ -711,25 +756,30 @@
 		</numSensor>
 		<numSensor ruleid="input_phase_power_factor" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.2.2.1.23</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq>
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
 			<type>num/powerfactor</type>
 			<sensorId>INPUT_PHASE_POWER_FACTOR_<rowIndex/></sensorId>
 			<value>
 				<mult>
-					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid></op>
-					<op>0.001</op>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.23</getRowOid></op>
+					<op>0.01</op>
 				</mult>
 			</value>
+			<valueInc>0.01</valueInc>
 			<label>
 				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
 					<regex>
@@ -746,21 +796,28 @@
 		</numSensor>
 		<numSensor ruleid="input_phase_powerVAR" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.2.2.1.24</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq>
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
-			<type>powerVA/powerVAR</type>
+			<type>num/powerKVAR</type>
 			<sensorId>INPUT_PHASE_POWERVAR_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2</getRowOid>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.24</getRowOid></op>
+					<op>0.001</op>
+				</mult>
 			</value>
 			<label>
 				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
@@ -769,7 +826,7 @@
 					<op><rowIndex/></op>
 					<op>%1$s</op>
 					</regex>
-				</getOid> Reactive Power VAR<space/>
+				</getOid> Reactive Power<space/>
 				<mapValue mapid="input_power_meas_type_status-vm">
 					<getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.18</getRowOid>
 				</mapValue>
@@ -778,6 +835,7 @@
 		</numSensor>
 
 		<valueMap ruleid="input_power_meas_type_status-vm">
+			<valueIn>*</valueIn><valueOut></valueOut>
 			<valueIn>1</valueIn><valueOut>Single Phase</valueOut>
 			<valueIn>2</valueIn><valueOut>Neutral</valueOut>
 			<valueIn>3</valueIn><valueOut>Phase 1</valueOut>
@@ -787,29 +845,56 @@
 
 		<!-- pdug5 Group Table -->
 
-		<numSensor ruleid="group_type" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1" >
-			<type>num</type>
+		<stateSensor ruleid="group_type" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1" >
+			<rowTest>
+				<neq><!-- pdug5GroupBreakerStatus -->
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+					<op>0</op>
+				</neq>
+			</rowTest>
+			<type>state</type>
 			<sensorId>GROUP_TYPE_<rowIndex/></sensorId>
 			<value>
+				<mapValue mapid="group_type-vm">
 					<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.3</getRowOid>
+				</mapValue>
 			</value>
 			<label>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Group Type<space/>
-				<mapValue mapid="group_type-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid>
-				</mapValue>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Type
 			</label>
+			<enum>group_type-em</enum>
 			<sensorSet>Group</sensorSet>
-		</numSensor>
+		</stateSensor>
 
 		<valueMap ruleid="group_type-vm">
-			<valueIn>2</valueIn><valueOut>Breaker 1 Pole</valueOut>
-			<valueIn>3</valueIn><valueOut>Breaker 2 Pole</valueOut>
-			<valueIn>4</valueIn><valueOut>Breaker 3 Pole</valueOut>
-			<valueIn>5</valueIn><valueOut>Outlet Section/ No Breaker</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>5</valueIn><valueOut>4</valueOut>
 		</valueMap>
 
+		<enumMap ruleid="group_type-em">
+			<label>N/A</label>
+			<label>Breaker 1 Pole</label>
+			<label>Breaker 2 Pole</label>
+			<label>Breaker 3 Pole</label>
+			<label>Outlet Section/ No Breaker</label>
+		</enumMap>
+
 		<numSensor ruleid="group_voltage" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1" >
+			<rowTest>
+				<neq><!-- pdug5GroupBreakerStatus -->
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+					<op>0</op>
+				</neq>
+			</rowTest>
 			<type>voltage</type>
 			<sensorId>GROUP_VOLTAGE_<rowIndex/></sensorId>
 			<value>
@@ -818,21 +903,33 @@
 					<op>0.1</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Group Voltage</label>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Voltage
+			</label>
 			<sensorSet>Group</sensorSet>
 		</numSensor>
 		<numSensor ruleid="group_current_rating" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.3.1.1.11</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq><!-- pdug5GroupBreakerStatus -->
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
 			<type>amperage</type>
 			<sensorId>GROUP_CURRENT_RATING_<rowIndex/></sensorId>
@@ -842,10 +939,25 @@
 					<op>0.01</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Current Rating</label>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Current Rating
+			</label>
 			<sensorSet>Group</sensorSet>
 		</numSensor>
 		<numSensor ruleid="group_current" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
+			<rowTest>
+				<neq><!-- pdug5GroupBreakerStatus -->
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+					<op>0</op>
+				</neq>
+			</rowTest>
 			<type>amperage</type>
 			<sensorId>GROUP_CURRENT_<rowIndex/></sensorId>
 			<value>
@@ -854,153 +966,262 @@
 					<op>0.01</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Current</label>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Current
+			</label>
 			<sensorSet>Group </sensorSet>
 		</numSensor>
 		<numSensor ruleid="group_current_percent_load" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.3.1.1.18</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq><!-- pdug5GroupBreakerStatus -->
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
 			<type>pctofcapacity</type>
 			<sensorId>GROUP_CURRENT_PERCENT_LOAD_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.18</getRowOid>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Percent Load</label>
+			<valueInc>1</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Percent Load
+			</label>
 			<sensorSet>Group</sensorSet>
 		</numSensor>
 		<numSensor ruleid="group_powerVA" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.3.1.1.19</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq><!-- pdug5GroupBreakerStatus -->
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
 			<type>powerVA</type>
 			<sensorId>GROUP_POWERVA_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.19</getRowOid>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Apparent Power</label>
+			<valueInc>1</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Apparent Power
+			</label>
 			<sensorSet>Group</sensorSet>
 		</numSensor>
 		<numSensor ruleid="group_power_watts" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.3.1.1.20</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq><!-- pdug5GroupBreakerStatus -->
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
 			<type>powerW</type>
 			<sensorId>GROUP_POWER_WATTS_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.20</getRowOid>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Watts</label>
+			<valueInc>1</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Active Power
+			</label>
 			<sensorSet>Group</sensorSet>
 		</numSensor>
 		<numSensor ruleid="group_power_wattHour" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.3.1.1.21</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq><!-- pdug5GroupBreakerStatus -->
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
-			<type>watthours</type>
+			<type>num/kwatthr</type>
 			<sensorId>GROUP_POWER_WATT_HOUR_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.21</getRowOid>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.21</getRowOid></op>
+					<op>0.001</op>
+				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Watt Hours</label>
+			<valueInc>0.001</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Energy
+			</label>
 			<sensorSet>Group</sensorSet>
 		</numSensor>
 		<numSensor ruleid="group_power_factor" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.3.1.1.23</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq><!-- pdug5GroupBreakerStatus -->
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
 			<type>num/powerfactor</type>
 			<sensorId>GROUP_POWER_FACTOR_<rowIndex/></sensorId>
 			<value>
 				<mult>
 					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.23</getRowOid></op>
-					<op>0.001</op>
+					<op>0.01</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Power Factor</label>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Power Factor
+			</label>
 			<sensorSet>Group</sensorSet>
 		</numSensor>
 		<numSensor ruleid="group_powerVAR" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.3.1.1.24</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<neq><!-- pdug5GroupBreakerStatus -->
+							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+							<op>0</op>
+						</neq>
+					</op>
+				</and>
 			</rowTest>
-			<type>powerVA/powerVAR</type>
+			<type>num/powerKVAR</type>
 			<sensorId>GROUP_POWERVAR_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.24</getRowOid>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.24</getRowOid></op>
+					<op>0.001</op>
+				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Reactive Power</label>
+			<valueInc>0.001</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Reactive Power
+			</label>
 			<sensorSet>Group</sensorSet>
 		</numSensor>
 		<numSensor ruleid="group_outlet_count" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
+			<rowTest>
+				<neq><!-- pdug5GroupBreakerStatus -->
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+					<op>0</op>
+				</neq>
+			</rowTest>
 			<type>num</type>
 			<sensorId>GROUP_OUTLET_COUNT_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.25</getRowOid>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Outlet Count</label>
+			<valueInc>1</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Outlet Count
+			</label>
 			<sensorSet>Group</sensorSet>
 		</numSensor>
 
 		<stateSensor ruleid="group_breaker_status" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
 			<rowTest>
-				<mapValue mapid="null_breaker_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid>
-				</mapValue>
+				<neq><!-- pdug5GroupBreakerStatus -->
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid></op>
+					<op>0</op>
+				</neq>
 			</rowTest>
 			<type>state</type>
 			<sensorId>GROUP_BREAKER_STATUS_<rowIndex/></sensorId>
@@ -1009,52 +1230,37 @@
 					<getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.26</getRowOid>
 				</mapValue>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid> Breaker Status</label>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/>
+				Group<space/><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.2</getRowOid><space/>Breaker Status
+			</label>
 			<enum>breaker_status-em</enum>
 			<sensorSet>Group</sensorSet>
 		</stateSensor>
-
-		<valueMap ruleid="null_breaker_status-vm">
-			<valueIn>1</valueIn><valueOut>[false]</valueOut>
-			<valueIn>*</valueIn><valueOut>[true]</valueOut>
-		</valueMap>
 
 		<valueMap ruleid="breaker_status-vm">
 			<valueIn>2</valueIn><valueOut>0</valueOut>
 			<valueIn>3</valueIn><valueOut>1</valueOut>
 			<valueIn>*</valueIn><valueOut>2</valueOut>
 		</valueMap>
-		
+
 		<enumMap ruleid="breaker_status-em">
 			<label>On</label>
 			<label>Off</label>
-			<label>Unknown</label>
+			<label>N/A</label>
 		</enumMap>
 
 		<!-- pdug5 Environment -->
 
-		<stateSensor ruleid="temperature_probe_status" index=".1.3.6.1.4.1.19536.10.1.4.2.1.1">
-			<rowTest>
-				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.3</getRowOid>
-				</mapValue>
-			</rowTest>
-			<type>state</type>
-			<sensorId>TEMPERATURE_PROBE_STATUS_<rowIndex/></sensorId>
-			<value>
-				<mapValue mapid="probe_connection_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.3</getRowOid>
-				</mapValue>
-			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.2</getRowOid> Temperature Probe Status</label>
-			<enum>probe_connection_status-em</enum>
-			<sensorSet>Environmental</sensorSet>
-		</stateSensor>
-
 		<numSensor ruleid="temperature_value" index=".1.3.6.1.4.1.19536.10.1.4.2.1.1">
 			<rowTest>
 				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.4</getRowOid>
+					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.3</getRowOid>
 				</mapValue>
 			</rowTest>
 			<type>temp</type>
@@ -1062,8 +1268,9 @@
 			<value>
 				<if>
 					<op>
-						<eq>
-							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.4.1.1.1</getRowOid></op>
+						<eq><!-- pdug5TemperatureScale -->
+							<op><getOid>.1.3.6.1.4.1.19536.10.1.4.1.1.1.1</getOid></op>
+							<!-- Fahrenheit -->
 							<op>2</op>
 						</eq>
 					</op>
@@ -1071,88 +1278,48 @@
 						<div>
 							<op>
 								<sub>
-									<op>
-										<!-- scale by .1 -->
-										<mult>
-											<op><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.4</getRowOid></op>
-											<op>0.1</op>
-										</mult>
-									</op>
+									<op><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.4</getRowOid></op>
 									<op>32</op>
 								</sub>
 							</op>
 							<op>1.8</op>
 						</div>
 					</op>
-					<op>
-						<mult>
-							<op><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.4</getRowOid></op>
-							<op>0.1</op>
-						</mult>
-					</op>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.4</getRowOid></op>
 				</if>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.2</getRowOid> Temperature Value</label>
+			<valueInc>
+				<mapValue mapid="tempValueInc-vm"><getOid>.1.3.6.1.4.1.19536.10.1.4.1.1.1.1</getOid></mapValue>
+			</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.2</getRowOid> Temperature</label>
 			<sensorSet>Environmental</sensorSet>
 		</numSensor>
 
-		<stateSensor ruleid="humidity_probe_status" index=".1.3.6.1.4.1.19536.10.1.4.3.1.1">
-			<rowTest>
-				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.3.1.3</getRowOid>
-				</mapValue>
-			</rowTest>
-			<type>state</type>
-			<sensorId>HUMIDITY_PROBE_STATUS_<rowIndex/></sensorId>
-			<value>
-				<mapValue mapid="probe_connection_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.3.1.3</getRowOid>
-				</mapValue>
-			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.2</getRowOid> Humidity Probe Status</label>
-			<enum>probe_connection_status-em</enum>
-			<sensorSet>Environmental</sensorSet>
-		</stateSensor>
+		<valueMap ruleid="tempValueInc-vm">
+			<valueIn>*</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>0.1</valueOut>
+		</valueMap>
 
 		<numSensor ruleid="humidity_value" index=".1.3.6.1.4.1.19536.10.1.4.3.1.1">
 			<rowTest>
 				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.3.1.4</getRowOid>
+					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.3.1.3</getRowOid>
 				</mapValue>
 			</rowTest>
 			<type>humidity</type>
 			<sensorId>HUMIDITY_VALUE_<rowIndex/></sensorId>
 			<value>
-				<div>
-					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.4.3.1.4</getRowOid></op>
-					<op>10</op>
-				</div>
+				<getRowOid>.1.3.6.1.4.1.19536.10.1.4.3.1.4</getRowOid>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.2</getRowOid> Humidity Value</label>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.2</getRowOid> Humidity</label>
 			<sensorSet>Environmental</sensorSet>
 		</numSensor>
 
-		 <stateSensor ruleid="door_probe_status" index=".1.3.6.1.4.1.19536.10.1.4.4.1.1">
-			<rowTest>
-				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.4.1.3</getRowOid>
-				</mapValue>
-			</rowTest>
-			<type>state</type>
-			<sensorId>DOOR_PROBE_STATUS_<rowIndex/></sensorId>
-			<value>
-				<mapValue mapid="probe_connection_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.4.1.3</getRowOid>
-				</mapValue>
-			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.4.1.2</getRowOid> Door Probe Status</label>
-			<enum>probe_connection_status-em</enum>
-			<sensorSet>Environmental</sensorSet>
-		</stateSensor>
 		 <stateSensor ruleid="door_state" index=".1.3.6.1.4.1.19536.10.1.4.4.1.1">
 			<rowTest>
 				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.4.1.4</getRowOid>
+					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.4.1.3</getRowOid>
 				</mapValue>
 			</rowTest>
 			<type>state</type>
@@ -1166,27 +1333,10 @@
 			<enum>door_status-em</enum>
 			<sensorSet>Environmental</sensorSet>
 		</stateSensor>
-		<stateSensor ruleid="dry_probe_status" index=".1.3.6.1.4.1.19536.10.1.4.5.1.1">
-			<rowTest>
-				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.5.1.3</getRowOid>
-				</mapValue>
-			</rowTest>
-			<type>state</type>
-			<sensorId>DRY_PROBE_STATUS_<rowIndex/></sensorId>
-			<value>
-				<mapValue mapid="probe_connection_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.5.1.3</getRowOid>
-				</mapValue>
-			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.5.1.2</getRowOid> Dry Probe Status</label>
-			<enum>probe_connection_status-em</enum>
-			<sensorSet>Environmental</sensorSet>
-		</stateSensor>
 		<stateSensor ruleid="dry_state" index=".1.3.6.1.4.1.19536.10.1.4.5.1.1">
 			<rowTest>
 				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.5.1.4</getRowOid>
+					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.5.1.3</getRowOid>
 				</mapValue>
 			</rowTest>
 			<type>state</type>
@@ -1199,28 +1349,11 @@
 			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.5.1.2</getRowOid> Dry State</label>
 			<enum>dry_state-em</enum>
 			<sensorSet>Environmental</sensorSet>
-		</stateSensor>  
-		<stateSensor ruleid="spot_probe_status" index=".1.3.6.1.4.1.19536.10.1.4.6.1.1">
-			<rowTest>
-				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.6.1.3</getRowOid>
-				</mapValue>
-			</rowTest>
-			<type>state</type>
-			<sensorId>SPOT_PROBE_STATUS_<rowIndex/></sensorId>
-			<value>
-				<mapValue mapid="probe_connection_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.6.1.3</getRowOid>
-				</mapValue>
-			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.6.1.2</getRowOid> Spot Probe Status</label>
-			<enum>probe_connection_status-em</enum>
-			<sensorSet>Environmental</sensorSet>
 		</stateSensor>
 		<stateSensor ruleid="spot_state" index=".1.3.6.1.4.1.19536.10.1.4.6.1.1">
 			<rowTest>
 				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.6.1.4</getRowOid>
+					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.6.1.3</getRowOid>
 				</mapValue>
 			</rowTest>
 			<type>state</type>
@@ -1231,30 +1364,13 @@
 				</mapValue>
 			</value>
 			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.6.1.2</getRowOid> Spot State</label>
-			<enum>leak_status--em</enum>
-			<sensorSet>Environmental</sensorSet>
-		</stateSensor>
-		<stateSensor ruleid="rope_probe_status" index=".1.3.6.1.4.1.19536.10.1.4.7.1.1">
-			<rowTest>
-				<mapValue mapid="probe_status-vm">
-					<getRowOid> .1.3.6.1.4.1.19536.10.1.4.7.1.3</getRowOid>
-				</mapValue>
-			</rowTest>
-			<type>state</type>
-			<sensorId>ROPE_PROBE_STATUS_<rowIndex/></sensorId>
-			<value>
-				<mapValue mapid="probe_connection_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.7.1.3</getRowOid>
-				</mapValue>
-			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.4.7.1.2</getRowOid> Rope Probe Status</label>
-			<enum>probe_connection_status-em</enum>
+			<enum>leak_status-em</enum>
 			<sensorSet>Environmental</sensorSet>
 		</stateSensor>
 		<stateSensor ruleid="rope_state" index=".1.3.6.1.4.1.19536.10.1.4.7.1.1">
 			<rowTest>
 				<mapValue mapid="probe_status-vm">
-					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.7.1.4</getRowOid>
+					<getRowOid>.1.3.6.1.4.1.19536.10.1.4.7.1.3</getRowOid>
 				</mapValue>
 			</rowTest>
 			<type>state</type>
@@ -1279,7 +1395,7 @@
 			<label>Good</label>
 			<label>Alarmed</label>
 			<label>Unknown</label>
-		</enumMap>    
+		</enumMap>
 
 		<valueMap ruleid="probe_status-vm">
 			<valueIn>1</valueIn><valueOut>[false]</valueOut>
@@ -1292,7 +1408,7 @@
 			<valueIn>3</valueIn><valueOut>2</valueOut>
 			<valueIn>*</valueIn><valueOut>3</valueOut>
 		</valueMap>
-		
+
 		<enumMap ruleid="probe_connection_status-em">
 			<label>Disconnected</label>
 			<label>Connected</label>
@@ -1307,26 +1423,38 @@
 			<label>Unknown</label>
 		</enumMap>
 
-		<enumMap ruleid="leak_status--em">
+		<enumMap ruleid="leak_status-em">
 			<label>No Leak</label>
 			<label>Leak</label>
 			<label>Unknown</label>
-		</enumMap>    
+		</enumMap>
 
 		<!-- pdug5 Outlets -->
 
+		<!--
+			v10: Slight update to outlet rowTests. It appears that pdug5OutletIndex will return a valid value for outlets that are "present"
+			on devices that DO NOT support any outlet parameters up to the number of outlets an RPDU has. E.g., if the device has 24  outlets,
+			pdug5OutletIndex will return valid values up to OID .1.3.6.1.4.1.19536.10.1.5.1.1.1.24 and return 0 for the remaining OIDs in that
+			table. Using pdug5OutletType for validation instead since it will return -1 on outlets that are "present" but do not support outlet
+			parameters and 0 for outlets that are not present.
+		-->
+
 		<numSensor ruleid="outlet_current_rating" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.4</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<gt><!-- pdug5OutletType -->
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.3</getRowOid></op>
+							<op>0</op>
+						</gt>
+					</op>
+				</and>
 			</rowTest>
 			<type>amperage</type>
 			<sensorId>OUTLET_CURRENT_RATING_<rowIndex/></sensorId>
@@ -1336,10 +1464,33 @@
 					<op>0.01</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Outlet Current Rating</label>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Outlet Current Rating
+			</label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 		<numSensor ruleid="outlet_current" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
+			<rowTest>
+				<and>
+					<op>
+						<gt>
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.5</getRowOid></op>
+							<op>-1</op>
+						</gt>
+					</op>
+					<op>
+						<gt><!-- pdug5OutletType -->
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.3</getRowOid></op>
+							<op>0</op>
+						</gt>
+					</op>
+				</and>
+			</rowTest>
 			<type>amperage</type>
 			<sensorId>OUTLET_CURRENT_<rowIndex/></sensorId>
 			<value>
@@ -1348,152 +1499,234 @@
 					<op>0.01</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Outlet Current</label>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Outlet Current
+			</label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 		<numSensor ruleid="outlet_current_percent_load" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.11</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<gt><!-- pdug5OutletType -->
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.3</getRowOid></op>
+							<op>0</op>
+						</gt>
+					</op>
+				</and>
 			</rowTest>
 			<type>pctofcapacity</type>
 			<sensorId>OUTLET_CURRENT_PERCENT_LOAD_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.11</getRowOid>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Outlet Current Percent Load</label>
+			<valueInc>1</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Percent Load
+			</label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 		<numSensor ruleid="outlet_VA" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.12</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<gt><!-- pdug5OutletType -->
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.3</getRowOid></op>
+							<op>0</op>
+						</gt>
+					</op>
+				</and>
 			</rowTest>
-			<type>powerVA</type>
+			<type>num/powerKVA</type>
 			<sensorId>OUTLET_VA_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.12</getRowOid>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.12</getRowOid></op>
+					<op>0.001</op>
+				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Apparent Power</label>
+			<valueInc>0.001</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Apparent Power
+			</label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 		<numSensor ruleid="outlet_watts" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.13</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<gt><!-- pdug5OutletType -->
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.3</getRowOid></op>
+							<op>0</op>
+						</gt>
+					</op>
+				</and>
 			</rowTest>
-			<type>powerW</type>
+			<type>num/powerKW</type>
 			<sensorId>OUTLET_WATTS_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.13</getRowOid>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.13</getRowOid></op>
+					<op>0.001</op>
+				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Watts</label>
+			<valueInc>0.001</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Active Power
+			</label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 		<numSensor ruleid="outlet_wattHour" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.14</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<gt><!-- pdug5OutletType -->
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.3</getRowOid></op>
+							<op>0</op>
+						</gt>
+					</op>
+				</and>
 			</rowTest>
-			<type>watthours</type>
+			<type>num/kwatthr</type>
 			<sensorId>OUTLET_WATTHOUR_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.14</getRowOid>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.14</getRowOid></op>
+					<op>0.001</op>
+				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Watt Hours</label>
+			<valueInc>0.001</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Energy
+			</label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 		<numSensor ruleid="outlet_power_factor" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.16</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<gt><!-- pdug5OutletType -->
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.3</getRowOid></op>
+							<op>0</op>
+						</gt>
+					</op>
+				</and>
 			</rowTest>
 			<type>num/powerfactor</type>
 			<sensorId>OUTLET_POWER_FACTOR_<rowIndex/></sensorId>
 			<value>
 				<mult>
 					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.16</getRowOid></op>
-					<op>0.001</op>
+					<op>0.01</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Power Factor</label>
+			<valueInc>0.01</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Power Factor
+			</label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 		<numSensor ruleid="outlet_VAR" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
 			<rowTest>
-				<if>
+				<and>
 					<op>
-						<lt>
+						<gt>
 							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.17</getRowOid></op>
-							<op>0</op>
-						</lt>
+							<op>-1</op>
+						</gt>
 					</op>
-					<op>[false]</op>
-					<op>[true]</op>
-				</if>
+					<op>
+						<gt><!-- pdug5OutletType -->
+							<op><getRowOid default="-1">.1.3.6.1.4.1.19536.10.1.5.1.1.3</getRowOid></op>
+							<op>0</op>
+						</gt>
+					</op>
+				</and>
 			</rowTest>
-			<type>powerVA/powerVAR</type>
+			<type>num/powerKVAR</type>
 			<sensorId>OUTLET_VAR_<rowIndex/></sensorId>
 			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.17</getRowOid>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.17</getRowOid></op>
+					<op>0.001</op>
+				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Reactive Power</label>
-			<sensorSet>Outlet</sensorSet>
-		</numSensor>
-		<numSensor ruleid="outlet_branch" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
-			<type>Outlet</type>
-			<sensorId>OUTLET_BRANCH_<rowIndex/></sensorId>
-			<value>
-				<getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.18</getRowOid>
-			</value>
-			<label><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Branch Number</label>
+			<valueInc>0.001</valueInc>
+			<label>
+				<getOid>.1.3.6.1.4.1.19536.10.1.1.2.1.2.
+				<regex>
+					<op>(\d+)\.\d+</op>
+					<op><rowIndex/></op>
+					<op>%1$s</op>
+				</regex></getOid><space/><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.2</getRowOid> Reactive Power
+			</label>
 			<sensorSet>Outlet</sensorSet>
 		</numSensor>
 
 		<!-- pdug5 Alarms -->
 
 		<alarmFlags2 ruleid="input_phase_voltage_threshold_status" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1">
-			<value><getOid>.1.3.6.1.4.1.19536.10.1.2.2.1.4</getOid></value>
+			<value><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.4</getRowOid></value>
 			<alarmFlagsTest match="2">
 				<name>
 					<activeText>Input Voltage Threshold Low Warning</activeText>
@@ -1544,7 +1777,7 @@
 			</alarmFlagsTest>
 		</alarmFlags2>
 		<alarmFlags2 ruleid="input_phase_current_threshold_status" index=".1.3.6.1.4.1.19536.10.1.2.2.1.1">
-			<value><getOid>.1.3.6.1.4.1.19536.10.1.2.2.1.12</getOid></value>
+			<value><getRowOid>.1.3.6.1.4.1.19536.10.1.2.2.1.12</getRowOid></value>
 			<alarmFlagsTest match="2">
 				<name>
 					<activeText>Input Current Threshold Low Warning</activeText>
@@ -1595,7 +1828,7 @@
 			</alarmFlagsTest>
 		</alarmFlags2>
 		<alarmFlags2 ruleid="group_voltage_threshold_status" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
-			<value><getOid>.1.3.6.1.4.1.19536.10.1.3.1.1.6</getOid></value>
+			<value><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.6</getRowOid></value>
 			<alarmFlagsTest match="2">
 				<name>
 					<activeText>Group Voltage Threshold Low Warning</activeText>
@@ -1646,7 +1879,7 @@
 			</alarmFlagsTest>
 		</alarmFlags2>
 		<alarmFlags2 ruleid="group_current_threshold_status" index=".1.3.6.1.4.1.19536.10.1.3.1.1.1">
-			<value><getOid>.1.3.6.1.4.1.19536.10.1.3.1.1.13</getOid></value>
+			<value><getRowOid>.1.3.6.1.4.1.19536.10.1.3.1.1.13</getRowOid></value>
 			<alarmFlagsTest match="2">
 				<name>
 					<activeText>Group Current Threshold Low Warning</activeText>
@@ -1697,7 +1930,7 @@
 			</alarmFlagsTest>
 		</alarmFlags2>
 		 <alarmFlags2 ruleid="temperature_threshold_status" index=".1.3.6.1.4.1.19536.10.1.4.2.1.1">
-			<value><getOid>.1.3.6.1.4.1.19536.10.1.4.2.1.5</getOid></value>
+			<value><getRowOid>.1.3.6.1.4.1.19536.10.1.4.2.1.5</getRowOid></value>
 			<alarmFlagsTest match="2">
 				<name>
 					<activeText>Temperature Threshold Low Warning</activeText>
@@ -1748,7 +1981,7 @@
 			</alarmFlagsTest>
 		</alarmFlags2>
 		<alarmFlags2 ruleid="humidity_threshold_status" index=".1.3.6.1.4.1.19536.10.1.4.3.1.1">
-			<value><getOid>.1.3.6.1.4.1.19536.10.1.4.3.1.5</getOid></value>
+			<value><getRowOid>.1.3.6.1.4.1.19536.10.1.4.3.1.5</getRowOid></value>
 			<alarmFlagsTest match="2">
 				<name>
 					<activeText>Humidity Threshold Low Warning</activeText>
@@ -1799,7 +2032,7 @@
 			</alarmFlagsTest>
 		</alarmFlags2>
 		<alarmFlags2 ruleid="outlet_active_power_threshold_status" index=".1.3.6.1.4.1.19536.10.1.5.1.1.1">
-			<value><getOid>.1.3.6.1.4.1.19536.10.1.5.1.1.6</getOid></value>
+			<value><getRowOid>.1.3.6.1.4.1.19536.10.1.5.1.1.6</getRowOid></value>
 			<alarmFlagsTest match="2">
 				<name>
 					<activeText>Outlet Active Power Threshold Low Warning</activeText>

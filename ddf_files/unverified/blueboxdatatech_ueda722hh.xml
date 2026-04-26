@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-			xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd" 
-			ddfid="blueboxdatatech_ueda722hh" 
-			ddfname="Bluebox Datatech UEDA 72.2HH" 
-			ddfversion="1" 
+<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+			ddfid="blueboxdatatech_ueda722hh"
+			ddfname="Bluebox Datatech UEDA 72.2HH [pcoWeb][SNMP]" 
+			ddfversion="1"
 			canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<device deviceid="blueboxdatatech_ueda722hh">

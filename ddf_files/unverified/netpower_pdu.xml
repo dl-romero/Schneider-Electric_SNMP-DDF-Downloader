@@ -1,0 +1,1269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="netpower_pdu"
+	ddfname="NetPower PDU"
+	ddfversion="3"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+
+	<!--
+        MANUFACTURER:					NetPower
+        MODEL:                PDU
+        SOURCE:
+        /snmp/resources/mibs/netpower/SMART-PDU-MIB.txt
+        SCOPE:
+        .1.3.6.1.4.1.55508.1.2.1.* |  power1OutletTable
+        WALKFILES:
+        \snmp\resources\sapro\walkfiles\netpower\SNMP DeviceWalk_PDU.txt
+    -->
+
+	<device deviceid="netpower_pdu">
+		<oidMustExist istree="yes" ruleid="powerTables" oid=".1.3.6.1.4.1.55508.1.2"/>
+
+		<setProductData ruleid="vendordata" field="vendor">NetPower</setProductData>
+		<setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+		<setDefaultLabel ruleid="labeldata"><getOid>.1.3.6.1.4.1.55508.1.2.5.1.3.0</getOid></setDefaultLabel>
+		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.55508.1.2.5.1.5.0</getOid></setProductData>
+
+		<!-- eventInfo -->
+
+		<stringSensor ruleid="source_id">
+			<type>string</type>
+			<sensorId>SOURCE_ID</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.1.1.0</getOid>
+			</value>
+			<label>Source ID</label>
+			<sensorSet>Event Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="power_description">
+			<type>string</type>
+			<sensorId>POWER_DESCRIPTION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.1.2.0</getOid>
+			</value>
+			<label>Power Description</label>
+			<sensorSet>Event Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="event_source">
+			<type>string</type>
+			<sensorId>EVENT_SOURCE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.1.3.0</getOid>
+			</value>
+			<label>Event Source</label>
+			<sensorSet>Event Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="sensor_description">
+			<type>string</type>
+			<sensorId>SENSOR_DESCRIPTION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.1.4.0</getOid>
+			</value>
+			<label>Sensor Description</label>
+			<sensorSet>Event Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="event_type">
+			<type>string</type>
+			<sensorId>EVENT_TYPE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.1.5.0</getOid>
+			</value>
+			<label>Event Type</label>
+			<sensorSet>Event Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="event_timestamp">
+			<type>string</type>
+			<sensorId>EVENT_TIME</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.1.6.0</getOid>
+			</value>
+			<label>Event Timestamp</label>
+			<sensorSet>Event Information</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="total_load">
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.1.1.7.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="low_load_limit">
+			<type>amperage</type>
+			<sensorId>LOW_LOAD_LIMIT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.1.1.8.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Low Load Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="high_load_limit">
+			<type>amperage</type>
+			<sensorId>HIGH_LOAD_LIMIT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.1.1.9.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>High Load Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+
+		<alarmFlags2 ruleid="pdu_load_low_limit_alarm">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.1.1.7.0</getOid>
+				</mapValue>
+			</rowTest>
+			<value>
+				<if>
+					<op>
+						<lt>
+							<op><getOid>.1.3.6.1.4.1.55508.1.1.1.7.0</getOid></op>
+							<op><getOid>.1.3.6.1.4.1.55508.1.1.1.8.0</getOid></op>
+						</lt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>PDU Load Low Threshold Violation Alarm Present</activeText>
+					<inactiveText>PDU Load Low Threshold Violation Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>PDU load low threshold violation alarm condition exists.</activeText>
+					<inactiveText>PDU load low threshold violation alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="pdu_load_high_limit_alarm">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.1.1.7.0</getOid>
+				</mapValue>
+			</rowTest>
+			<value>
+				<if>
+					<op>
+						<gt>
+							<op><getOid>.1.3.6.1.4.1.55508.1.1.1.7.0</getOid></op>
+							<op><getOid>.1.3.6.1.4.1.55508.1.1.1.9.0</getOid></op>
+						</gt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>PDU Load High Threshold Violation Alarm Present</activeText>
+					<inactiveText>PDU Load High Threshold Violation Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>PDU load high threshold violation alarm condition exists.</activeText>
+					<inactiveText>PDU load high threshold violation alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<!-- sysNetwork -->
+
+		<stringSensor ruleid="ip_address">
+			<type>string</type>
+			<sensorId>IP_ADDRESS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.1.0</getOid>
+			</value>
+			<label>IP Address</label>
+			<sensorSet>System Network Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="mask_ip_address">
+			<type>string</type>
+			<sensorId>MASK_IP_ADDRESS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.2.0</getOid>
+			</value>
+			<label>Mask IP Address</label>
+			<sensorSet>System Network Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="gateway_ip_address">
+			<type>string</type>
+			<sensorId>GATEWAY_IP_ADDRESS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.3.0</getOid>
+			</value>
+			<label>Gateway IP Address</label>
+			<sensorSet>System Network Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="dns_ip_address_1">
+			<type>string</type>
+			<sensorId>DNS_IP_ADDRESS_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.4.0</getOid>
+			</value>
+			<label>DNS IP Address 1</label>
+			<sensorSet>System Network Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="dns_ip_address_2">
+			<type>string</type>
+			<sensorId>DNS_IP_ADDRESS_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.5.0</getOid>
+			</value>
+			<label>DNS IP Address 2</label>
+			<sensorSet>System Network Information</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="reboot_system">
+			<type>num</type>
+			<sensorId>REBOOT_SYSTEM</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.6.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Reboot System</label>
+			<sensorSet>Event Information</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="trap_destination_ip_address_1">
+			<type>string</type>
+			<sensorId>TRAP_DESTINATION_IP_ADDRESS_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.7.0</getOid>
+			</value>
+			<label>Trap Destination IP Address 1</label>
+			<sensorSet>System Network Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="trap_destination_ip_address_2">
+			<type>string</type>
+			<sensorId>TRAP_DESTINATION_IP_ADDRESS_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.8.0</getOid>
+			</value>
+			<label>Trap Destination IP Address 2</label>
+			<sensorSet>System Network Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="trap_destination_ip_address_3">
+			<type>string</type>
+			<sensorId>TRAP_DESTINATION_IP_ADDRESS_3</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.9.0</getOid>
+			</value>
+			<label>Trap Destination IP Address 3</label>
+			<sensorSet>System Network Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="trap_destination_ip_address_4">
+			<type>string</type>
+			<sensorId>TRAP_DESTINATION_IP_ADDRESS_4</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.1.2.10.0</getOid>
+			</value>
+			<label>Trap Destination IP Address 4</label>
+			<sensorSet>System Network Information</sensorSet>
+		</stringSensor>
+
+		<!-- power1OutletTable -->
+
+		<stateSensor ruleid="outlet_fuse_status" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>OUTLET_FUSE_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="normalAlarm-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.5</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Fuse Status</label>
+			<enum>normalAlarm-em</enum>
+			<sensorSet>Outlet Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="outlet_status" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.6</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>OUTLET_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="defaultIsTwo-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.6</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Status</label>
+			<enum>offOn-em</enum>
+			<sensorSet>Outlet Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="outlet_load" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.7</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>OUTLET_LOAD_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.7</getRowOid></op>
+					<op>0.1</op>
+			 </mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Load</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="outlet_load_low_limit" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.8</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>OUTLET_LOAD_LOW_LIMIT<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.8</getRowOid></op>
+					<op>0.1</op>
+			 </mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Load Low Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="outlet_load_high_limit" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.9</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>OUTLET_LOAD_HIGH_LIMIT<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.9</getRowOid></op>
+					<op>0.1</op>
+			 </mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Load High Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="outlet_energy" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.10</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>OUTLET_ENERGY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.10</getRowOid></op>
+					<op>0.01</op>
+			 </mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Energy</label>
+			<sensorSet>Energy Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="outlet_power" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.11</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>OUTLET_POWER_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.11</getRowOid></op>
+					<op>0.01</op>
+			 </mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Power</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="outlet_power_factor" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.12</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>OUTLET_POWER_FACTOR_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.12</getRowOid></op>
+					<op>0.01</op>
+			 </mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Power Factor</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+
+		<alarmFlags2 ruleid="outlet_fuse_alarm" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.5</getRowOid>
+				</mapValue>
+			</rowTest>
+			<value>
+				<if>
+					<op>
+						<eqString>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.5</getRowOid></op>
+							<op>Alarm</op>
+						</eqString>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Fuse Alarm Present</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Fuse Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> fuse alarm condition exists.</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> fuse alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="outlet_load_low_limit_alarm" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.7</getRowOid>
+				</mapValue>
+			</rowTest>
+			<value>
+				<if>
+					<op>
+						<lt>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.7</getRowOid></op>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.8</getRowOid></op>
+						</lt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Load Low Threshold Violation Alarm Present</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Load Low Threshold Violation Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> load low threshold violation alarm condition exists.</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> load low threshold violation alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="outlet_load_high_limit_alarm" index=".1.3.6.1.4.1.55508.1.2.1.1.1">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.7</getRowOid>
+				</mapValue>
+			</rowTest>
+			<value>
+				<if>
+					<op>
+						<gt>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.7</getRowOid></op>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.9</getRowOid></op>
+						</gt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Load High Threshold Violation Alarm Present</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> Load High Threshold Violation Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> load high threshold violation alarm condition exists.</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.55508.1.2.1.1.3</getRowOid> load high threshold violation alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<!-- powerSummaryTable -->
+
+		<stringSensor ruleid="power_id">
+			<type>string</type>
+			<sensorId>POWER_ID</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.2.5.1.2.0</getOid>
+			</value>
+			<label>Power ID</label>
+			<sensorSet>Device Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="power_name">
+			<type>string</type>
+			<sensorId>POWER_NAME</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.2.5.1.3.0</getOid>
+			</value>
+			<label>Power Name</label>
+			<sensorSet>Device Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="power_type">
+			<type>string</type>
+			<sensorId>POWER_TYPE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.2.5.1.4.0</getOid>
+			</value>
+			<label>Power Type</label>
+			<sensorSet>Device Information</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="power_model">
+			<type>string</type>
+			<sensorId>POWER_MODEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.2.5.1.5.0</getOid>
+			</value>
+			<label>Power Model</label>
+			<sensorSet>Device Information</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="power_on_gap">
+			<type>num</type>
+			<sensorId>POWER_ON_GAP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.55508.1.2.5.1.6.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Power On Gap</label>
+			<sensorSet>Outlet Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="total_load_a">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.7.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD_A</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.7.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load Phase A</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="total_load_a_low_limit">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.8.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD_A_LOW_LIMIT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.8.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load Phase A Low Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="total_load_a_high_limit">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.9.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD_A_HIGH_LIMIT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.9.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load Phase A High Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="total_load_b">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.10.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD_B</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.10.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load Phase B</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="total_load_b_low_limit">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.11.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD_B_LOW_LIMIT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.11.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load Phase B Low Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="total_load_b_high_limit">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.12.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD_B_HIGH_LIMIT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.12.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load Phase B High Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="total_load_c">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.13.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD_C</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.13.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load Phase C</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="total_load_c_low_limit">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.14.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD_C_LOW_LIMIT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.14.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load Phase C Low Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="total_load_c_high_limit">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.15.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>amperage</type>
+			<sensorId>TOTAL_LOAD_C_HIGH_LIMIT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.15.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Total Load Phase C High Limit</label>
+			<sensorSet>Current Sensors</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="voltage_a">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.16.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>VOLTAGE_A</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.16.0</getOid></op>
+					<op>1</op>
+			 	</mult>
+			</value>
+			<label>Voltage Phase A</label>
+			<sensorSet>Voltage Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="voltage_b">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.17.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>VOLTAGE_B</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.17.0</getOid></op>
+					<op>1</op>
+			 	</mult>
+			</value>
+			<label>Voltage Phase B</label>
+			<sensorSet>Voltage Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="voltage_c">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.18.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>VOLTAGE_C</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.18.0</getOid></op>
+					<op>1</op>
+			 	</mult>
+			</value>
+			<label>Voltage Phase C</label>
+			<sensorSet>Voltage Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="energy">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.19.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>ENERGY</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.19.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Energy</label>
+			<sensorSet>Energy Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="active_power_a">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.20.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>ACTIVE_POWER_A</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.20.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Active Power Phase A</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="rated_power_a">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.21.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>RATED_POWER_A</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.21.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Rated Power Phase A</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remaining_power_a">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.22.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>REMAINING_POWER_A</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.22.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Remaining Power Capacity Phase A</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="apparent_power_a">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.23.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>APPARENT_POWER_A</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.23.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Apparent Power Phase A</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="power_factor_a">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.24.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>POWER_FACTOR_A</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.24.0</getOid></op>
+					<op>0.01</op>
+			 	</mult>
+			</value>
+			<label>Power Factor Phase A</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="active_power_b">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.25.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>ACTIVE_POWER_B</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.25.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Active Power Phase B</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="rated_power_b">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.26.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>RATED_POWER_B</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.26.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Rated Power Phase B</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remaining_power_b">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.27.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>REMAINING_POWER_B</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.27.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Remaining Power Capacity Phase B</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="apparent_power_b">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.28.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>APPARENT_POWER_B</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.28.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Apparent Power Phase B</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="power_factor_b">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.29.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>POWER_FACTOR_B</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.29.0</getOid></op>
+					<op>0.01</op>
+			 	</mult>
+			</value>
+			<label>Power Factor Phase B</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="active_power_c">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.30.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>ACTIVE_POWER_C</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.30.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Active Power Phase C</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="rated_power_c">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.31.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>RATED_POWER_C</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.31.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Rated Power Phase C</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="remaining_power_c">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.32.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>REMAINING_POWER_C</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.32.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Remaining Power Capacity Phase C</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="apparent_power_c">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.33.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>APPARENT_POWER_C</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.33.0</getOid></op>
+					<op>0.1</op>
+			 	</mult>
+			</value>
+			<label>Apparent Power Phase C</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="power_factor_c">
+			<rowTest>
+				<mapValue mapid="isAvailable-vm">
+					<getOid>.1.3.6.1.4.1.55508.1.2.5.1.34.0</getOid>
+				</mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>POWER_FACTOR_C</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.55508.1.2.5.1.34.0</getOid></op>
+					<op>0.01</op>
+			 	</mult>
+			</value>
+			<label>Power Factor Phase C</label>
+			<sensorSet>Power Sensors</sensorSet>
+		</numSensor>
+
+		<valueMap ruleid="isAvailable-vm">
+			<valueIn>*</valueIn><valueOut>[true]</valueOut>
+			<valueIn>-1</valueIn><valueOut>[false]</valueOut>
+			<valueIn>--</valueIn><valueOut>[false]</valueOut>
+		</valueMap>
+
+		<valueMap ruleid="defaultIsTwo-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="offOn-em">
+			<label>Off</label>
+			<label>On</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<valueMap ruleid="normalAlarm-vm">
+			<valueIn>Normal</valueIn><valueOut>0</valueOut>
+			<valueIn>Alarm</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="normalAlarm-em">
+			<label>Normal</label>
+			<label>Alarm</label>
+			<label>Unknown</label>
+		</enumMap>
+	</device>
+
+	<device deviceid="netpower_environmental">
+		<oidMustExist istree="yes" ruleid="netpower_environmental_exists" oid=".1.3.6.1.4.1.55508.1.3.1.1"/>
+
+		<!-- environmentTable -->
+
+		<numSensor ruleid="temperature_value" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<rowTest>
+				<mapValue mapid="netpower_pdu/netpower_pdu/isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.7</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>TEMPERATURE_VALUE</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.7</getRowOid>
+			</value>
+			<label>Temperature</label>
+			<sensorSet>Environmental Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="temperature_low_limit" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<rowTest>
+				<mapValue mapid="netpower_pdu/netpower_pdu/isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.8</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>TEMPERATURE_LOW_LIMIT</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.8</getRowOid>
+			</value>
+			<label>Temperature Low Limit</label>
+			<sensorSet>Environmental Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="temperature_high_limit" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<rowTest>
+				<mapValue mapid="netpower_pdu/netpower_pdu/isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.9</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>temp</type>
+			<sensorId>TEMPERATURE_HIGH_LIMIT</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.9</getRowOid>
+			</value>
+			<label>Temperature High Limit</label>
+			<sensorSet>Environmental Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="humidity_value" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<rowTest>
+				<mapValue mapid="netpower_pdu/netpower_pdu/isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.10</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>HUMIDITY_VALUE</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.10</getRowOid>
+			</value>
+			<label>Humidity</label>
+			<sensorSet>Environmental Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="humidity_low_limit" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<rowTest>
+				<mapValue mapid="netpower_pdu/netpower_pdu/isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.11</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>HUMIDITY_LOW_LIMIT</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.11</getRowOid>
+			</value>
+			<label>Humidity Low Limit</label>
+			<sensorSet>Environmental Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="humidity_high_limit" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<rowTest>
+				<mapValue mapid="netpower_pdu/netpower_pdu/isAvailable-vm">
+					<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.12</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>humidity</type>
+			<sensorId>HUMIDITY_HIGH_LIMIT</sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.12</getRowOid>
+			</value>
+			<label>Humidity High Limit</label>
+			<sensorSet>Environmental Sensors</sensorSet>
+		</numSensor>
+
+		<alarmFlags2 ruleid="temperature_low_limit_alarm" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<value>
+				<if>
+					<op>
+						<lt>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.7</getRowOid></op>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.8</getRowOid></op>
+						</lt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Temperature Low Threshold Violation Alarm Present</activeText>
+					<inactiveText>Temperature Low Threshold Violation Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Temperature low threshold violation alarm condition exists.</activeText>
+					<inactiveText>Temperature low threshold violation alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="temperature_high_limit_alarm" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<value>
+				<if>
+					<op>
+						<gt>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.7</getRowOid></op>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.9</getRowOid></op>
+						</gt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Temperature High Threshold Violation Alarm Present</activeText>
+					<inactiveText>Temperature High Threshold Violation Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Temperature high threshold violation alarm condition exists.</activeText>
+					<inactiveText>Temperature high threshold violation alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="humidity_low_limit_alarm" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<value>
+				<if>
+					<op>
+						<lt>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.10</getRowOid></op>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.11</getRowOid></op>
+						</lt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Humidity Low Threshold Violation Alarm Present</activeText>
+					<inactiveText>Humidity Low Threshold Violation Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Humidity low threshold violation alarm condition exists.</activeText>
+					<inactiveText>Humidity low threshold violation alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="humidity_high_limit_alarm" index=".1.3.6.1.4.1.55508.1.3.1.1.1">
+			<value>
+				<if>
+					<op>
+						<gt>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.10</getRowOid></op>
+							<op><getRowOid>.1.3.6.1.4.1.55508.1.3.1.1.12</getRowOid></op>
+						</gt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Humidity High Threshold Violation Alarm Present</activeText>
+					<inactiveText>Humidity High Threshold Violation Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>Humidity high threshold violation alarm condition exists.</activeText>
+					<inactiveText>Humidity high threshold violation alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+	</device>
+</APC_DDF>

@@ -2,20 +2,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="generex_bacs2"
-	ddfname="Generex BACS2"
-	ddfversion="2"
+	ddfname="Schneider Electric EcoStruxure BMS BACS"
+	ddfversion="5"
 	canremove="yes">
-		 
+
 	<schemaVersion>1.6</schemaVersion>
 
 	<device deviceid="generex_bacs2">
-		<oidMustExist ruleid="generex_bacs2" oid=".1.3.6.1.2.1.33.5" istree="yes"/> 
+		<oidMustExist ruleid="generex_bacs2" oid=".1.3.6.1.2.1.33.5" istree="yes"/>
 
         <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
         <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
         <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
         <suppressRule ruleid="suppressmib2typedata" suppressid="upsmib/upsmibdisctypedata/typedata"/>
-		<setProductData ruleid="typedata" field="type">Battery Manager</setProductData>
+		    <setProductData ruleid="typedata" field="type">Battery Manager</setProductData>
+		    <setProductData ruleid="modeldata" field="model">EcoStruxure BMS BACS</setProductData>
+		    <setDefaultLabel ruleid="labeldata">EcoStruxure BMS BACS</setDefaultLabel>
 
 		<valueMap ruleid="bacsModuleType-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
@@ -261,6 +263,110 @@
             <label>Voltage High Warning Level</label>
             <sensorSet>BACS Settings</sensorSet>
         </numSensor>
+		<numSensor ruleid="bacsStringVoltageLowAlarm">
+            <type>voltage</type>
+            <sensorId>BACS_STRING_VOLTAGE_LOW_ALARM</sensorId>
+            <value>
+							<mult>
+							<op><getOid>.1.3.6.1.2.1.33.5.1.21.0</getOid></op>
+							<op>0.01</op>
+							</mult>
+            </value>
+			      <valueInc>0.01</valueInc>
+            <label>String Voltage Low Alarm Level</label>
+            <sensorSet>BACS Settings</sensorSet>
+		</numSensor>
+		<numSensor ruleid="bacsStringVoltageHighAlarm">
+            <type>voltage</type>
+            <sensorId>BACS_STRING_VOLTAGE_HIGH_ALARM</sensorId>
+            <value>
+							<mult>
+							<op><getOid>.1.3.6.1.2.1.33.5.1.22.0</getOid></op>
+							<op>0.01</op>
+							</mult>
+            </value>
+			      <valueInc>0.01</valueInc>
+            <label>String Voltage High Alarm Level</label>
+            <sensorSet>BACS Settings</sensorSet>
+		</numSensor>
+		<numSensor ruleid="bacsStringVoltageLowWarn">
+            <type>voltage</type>
+            <sensorId>BACS_STRING_VOLTAGE_LOW_WARN</sensorId>
+            <value>
+							<mult>
+							<op><getOid>.1.3.6.1.2.1.33.5.1.23.0</getOid></op>
+							<op>0.01</op>
+							</mult>
+            </value>
+			      <valueInc>0.01</valueInc>
+            <label>String Voltage Low Warning Level</label>
+            <sensorSet>BACS Settings</sensorSet>
+		</numSensor>
+		<numSensor ruleid="bacsStringVoltageHighWarn">
+            <type>voltage</type>
+            <sensorId>BACS_STRING_VOLTAGE_HIGH_WARN</sensorId>
+            <value>
+							<mult>
+							<op><getOid>.1.3.6.1.2.1.33.5.1.24.0</getOid></op>
+							<op>0.01</op>
+							</mult>
+            </value>
+			      <valueInc>0.01</valueInc>
+            <label>String Voltage High Warning Level</label>
+            <sensorSet>BACS Settings</sensorSet>
+		</numSensor>
+		<numSensor ruleid="bacsStringCurrentDeviationDischargeAlarm">
+            <type>amperage</type>
+            <sensorId>BACS_STRING_CURRENT_DEVIATION_DISCHARGE_ALARM</sensorId>
+            <value>
+							<mult>
+							<op><getOid>.1.3.6.1.2.1.33.5.1.25.0</getOid></op>
+							<op>0.01</op>
+							</mult>
+            </value>
+			      <valueInc>0.01</valueInc>
+            <label>String Current Deviation Discharge Alarm Level</label>
+            <sensorSet>BACS Settings</sensorSet>
+		</numSensor>
+		<numSensor ruleid="bacsStringCurrentDeviationChargeAlarm">
+            <type>amperage</type>
+            <sensorId>BACS_STRING_CURRENT_DEVIATION_CHARGE_ALARM</sensorId>
+            <value>
+							<mult>
+							<op><getOid>.1.3.6.1.2.1.33.5.1.26.0</getOid></op>
+							<op>0.01</op>
+							</mult>
+            </value>
+			      <valueInc>0.01</valueInc>
+            <label>String Current Deviation Charge Alarm Level</label>
+            <sensorSet>BACS Settings</sensorSet>
+		</numSensor>
+		<numSensor ruleid="bacsStringCurrentDeviationDischargeWarn">
+            <type>amperage</type>
+            <sensorId>BACS_STRING_CURRENT_DEVIATION_DISCHARGE_WARN</sensorId>
+            <value>
+							<mult>
+							<op><getOid>.1.3.6.1.2.1.33.5.1.27.0</getOid></op>
+							<op>0.01</op>
+							</mult>
+            </value>
+			      <valueInc>0.01</valueInc>
+            <label>String Current Deviation Discharge Warning Level</label>
+            <sensorSet>BACS Settings</sensorSet>
+		</numSensor>
+		<numSensor ruleid="bacsStringCurrentDeviationChargeWarn">
+            <type>amperage</type>
+            <sensorId>BACS_STRING_CURRENT_DEVIATION_CHARGE_WARN</sensorId>
+            <value>
+							<mult>
+							<op><getOid>.1.3.6.1.2.1.33.5.1.28.0</getOid></op>
+							<op>0.01</op>
+							</mult>
+            </value>
+			      <valueInc>0.01</valueInc>
+            <label>String Current Deviation Charge Warning Level</label>
+            <sensorSet>BACS Settings</sensorSet>
+		</numSensor>
 		<numSensor ruleid="bacsAvModuleVolt">
             <type>voltage</type>
             <sensorId>BACS_AV_MODULE_VOLT</sensorId>
@@ -317,7 +423,7 @@
 				</formatNumber>
 				<space/>- Voltage
 			</label>
-            <sensorSet>BACS Objects - Battery Module <getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></sensorSet>
+            <sensorSet>BACS Objects - Battery Module <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></op><op>1</op></add></formatNumber></sensorSet>
         </numSensor>
 		<numSensor ruleid="bacsModuleTemperature" index=".1.3.6.1.2.1.33.5.2.5.1.1">
             <type>temp</type>
@@ -338,7 +444,7 @@
 				</formatNumber>
 				<space/>- Temperature
 			</label>
-            <sensorSet>BACS Objects - Battery Module <getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></sensorSet>
+            <sensorSet>BACS Objects - Battery Module <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></op><op>1</op></add></formatNumber></sensorSet>
         </numSensor>
 		<numSensor ruleid="bacsModuleBypass" index=".1.3.6.1.2.1.33.5.2.5.1.1">
             <type>pctofcapacity</type>
@@ -359,7 +465,7 @@
 				</formatNumber>
 				<space/>- Bypass
 			</label>
-            <sensorSet>BACS Objects - Battery Module <getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></sensorSet>
+            <sensorSet>BACS Objects - Battery Module <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></op><op>1</op></add></formatNumber></sensorSet>
         </numSensor>
 		<numSensor ruleid="bacsModuleResistance" index=".1.3.6.1.2.1.33.5.2.5.1.1">
             <type>num</type>
@@ -380,11 +486,11 @@
 				</formatNumber>
 				<space/>- Impedance (ohms)
 			</label>
-            <sensorSet>BACS Objects - Battery Module <getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></sensorSet>
+            <sensorSet>BACS Objects - Battery Module <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></op><op>1</op></add></formatNumber></sensorSet>
         </numSensor>
-		
+
 		<!-- Alarms -->
-		
+
 		<alarmFlags2 ruleid="bacsModuleState" index=".1.3.6.1.2.1.33.5.2.5.1.1">
 			<value><getRowOid>.1.3.6.1.2.1.33.5.2.5.1.6</getRowOid></value>
 			<alarmFlagsTest mask="1" match="1">
@@ -408,7 +514,7 @@
 						<space/>- General Alarm Cleared
 					</inactiveText>
 				</name>
-				<severity>warning</severity>
+				<severity>critical</severity>
 				<category>System</category>
 				<description>
 					<activeText>A General Alarm condition exists on Module<space/>
@@ -763,7 +869,7 @@
 				<severity>critical</severity>
 				<category>System</category>
 				<description>
-					<activeText>A Equalizing Error Alarm condition exists on Module<space/>
+					<activeText>An Equalizing Error Alarm condition exists on Module<space/>
 						<formatNumber printffmt="%1.0f">
 							<add>
 								<op><getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></op>
@@ -772,7 +878,7 @@
 						</formatNumber>
 						.
 					</activeText>
-					<inactiveText>A Equalizing Error Alarm condition on Module<space/>
+					<inactiveText>An Equalizing Error Alarm condition on Module<space/>
 						<formatNumber printffmt="%1.0f">
 							<add>
 								<op><getRowOid>.1.3.6.1.2.1.33.5.2.5.1.1</getRowOid></op>
@@ -1113,8 +1219,8 @@
 				</mult>
             </value>
 			<valueInc>0.01</valueInc>
-            <label>Battery String <getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid> - Current</label>
-            <sensorSet>BACS Objects - Battery String <getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></sensorSet>
+            <label>Battery String <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op><op>1</op></add></formatNumber> - Current</label>
+            <sensorSet>BACS Objects - Battery String <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op><op>1</op></add></formatNumber></sensorSet>
         </numSensor>
 		<numSensor ruleid="bacsStringTotalVolt" index=".1.3.6.1.2.1.33.5.2.7.1.1">
             <type>voltage</type>
@@ -1126,8 +1232,8 @@
 				</mult>
             </value>
 			<valueInc>0.01</valueInc>
-            <label>Battery String <getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid> - Total Voltage</label>
-            <sensorSet>BACS Objects - Battery String <getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></sensorSet>
+            <label>Battery String <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op><op>1</op></add></formatNumber> - Total Voltage</label>
+            <sensorSet>BACS Objects - Battery String <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op><op>1</op></add></formatNumber></sensorSet>
         </numSensor>
 		<numSensor ruleid="bacsStringAverageVolt" index=".1.3.6.1.2.1.33.5.2.7.1.1">
             <type>voltage</type>
@@ -1139,9 +1245,1635 @@
 				</mult>
             </value>
 			<valueInc>0.01</valueInc>
-            <label>Battery String <getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid> - Average Voltage</label>
-            <sensorSet>BACS Objects - Battery String <getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></sensorSet>
-        </numSensor>
+            <label>Battery String <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op><op>1</op></add></formatNumber> - Average Voltage</label>
+            <sensorSet>BACS Objects - Battery String <formatNumber printffmt="%1.0f"><add><op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op><op>1</op></add></formatNumber></sensorSet>
+		</numSensor>
+    <alarmFlags2 ruleid="bacsStringAlarm" index=".1.3.6.1.2.1.33.5.2.7.1.1">
+			<value><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.6</getRowOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- General Alarm
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- General Alarm Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A General Alarm condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A General Alarm condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- System Failure
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- System Failure Cleared
+					</inactiveText>
+				</name>
+				<severity>failure</severity>
+				<category>System</category>
+				<description>
+					<activeText>A System Failure condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A System Failure condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Voltage High Alarm
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Voltage High Alarm Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Voltage High Alarm condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Voltage High Alarm condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Voltage Low Alarm
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Voltage Low Alarm Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Voltage Low Alarm condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Voltage Low Alarm condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="10" match="10">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Temperature High Alarm
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Temperature High Alarm Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Temperature High Alarm condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Temperature High Alarm condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="20" match="20">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Temperature Low Alarm
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Temperature Low Alarm Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Temperature Low Alarm condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Temperature Low Alarm condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="40" match="40">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Resistor High Alarm
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Resistor High Alarm Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Resistor High Alarm condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Resistor High Alarm condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="80" match="80">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Resistor Low Alarm
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Resistor Low Alarm Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Resistor Low Alarm condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Resistor Low Alarm condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="100" match="100">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Equalizing Error Alarm
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Equalizing Error Alarm Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Equalizing Error Alarm condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Equalizing Error Alarm condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="200" match="200">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Voltage High Warning
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Voltage High Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Voltage High Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Voltage High Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="400" match="400">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Voltage Low Warning
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Voltage Low Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Voltage Low Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Voltage Low Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="800" match="800">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Temperature High Warning
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Temperature High Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Temperature High Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Temperature High Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="1000" match="1000">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Temperature Low Warning
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Temperature Low Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Temperature Low Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Temperature Low Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2000" match="2000">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Resistor High Warning
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Resistor High Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Resistor High Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Resistor High Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4000" match="4000">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Resistor Low Warning
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Resistor Low Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Resistor Low Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Resistor Low Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8000" match="8000">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Incompatible Module Rev
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Incompatible Module Rev Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Incompatible Module Rev condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>An Incompatible Module Rev condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+    <alarmFlags2 ruleid="bacsStringAlarm2" index=".1.3.6.1.2.1.33.5.2.7.1.1">
+			<value><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.7</getRowOid></value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Sensor High
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Sensor High Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Current Sensor High condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Current Sensor High condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="2" match="2">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Sensor Low
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Sensor Low Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Current Sensor Low condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Current Sensor Low condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="4" match="4">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Sensor High Warning
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Sensor High Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Current Sensor High Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Current Sensor High Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="8" match="8">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Sensor Low Warning
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Sensor Low Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Current Sensor Low Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Current Sensor Low Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="10" match="10">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Equalizing Cut Off
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Equalizing Cut Off Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Equalizing Cut Off condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>An Equalizing Cut Off condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="20" match="20">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Deviation Discharge
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Deviation Discharge Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Current Deviation Discharge condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Current Deviation Discharge condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="40" match="40">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Deviation Charge
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Deviation Charge Cleared
+					</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Current Deviation Charge condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Current Deviation Charge condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="80" match="80">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Deviation Discharge Warning
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Deviation Discharge Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Current Deviation Discharge Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Current Deviation Discharge Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest mask="100" match="100">
+				<name>
+					<activeText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Deviation Charge Warning Alarm
+					</activeText>
+					<inactiveText>Battery String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>- Current Deviation Charge Warning Cleared
+					</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Current Deviation Charge Warning condition exists on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						.
+					</activeText>
+					<inactiveText>A Current Deviation Charge Warning condition on String<space/>
+						<formatNumber printffmt="%1.0f">
+							<add>
+								<op><getRowOid>.1.3.6.1.2.1.33.5.2.7.1.1</getRowOid></op>
+								<op>1</op>
+							</add>
+						</formatNumber>
+						<space/>no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="bacsWellKnownAlarms" index=".1.3.6.1.2.1.33.5.3.2.1.2">
+			<value>
+				<baseNToInt base="16">
+					<mapValue mapid="alarm_map">
+						<getRowOid>.1.3.6.1.2.1.33.5.3.2.1.2</getRowOid>
+					</mapValue>
+				</baseNToInt>
+			</value>
+
+			<alarmFlagsTest match="1" log="no">
+				<name>
+					<activeText>System Error Alarm</activeText>
+					<inactiveText>System Error Alarm Cleared</inactiveText>
+				</name>
+				<severity>error</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Communication problem from the agent to one or more of the battery modules exists.</activeText>
+					<inactiveText>A Communication problem from the agent to one or more of the battery modules no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2" log="no">
+				<name>
+					<activeText>Internal Resistance Warning</activeText>
+					<inactiveText>Internal Resistance Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Internal resistance of one or more batteries is above the warning level.</activeText>
+					<inactiveText>An Internal resistance of one or more batteries is above the warning level.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3" log="no">
+				<name>
+					<activeText>Internal Resistance Alarm</activeText>
+					<inactiveText>Internal Resistance Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Internal resistance of one or more batteries is above the alarm level.</activeText>
+					<inactiveText>An Internal resistance of one or more batteries is above the alarm level.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4" log="no">
+				<name>
+					<activeText>Voltage Alarm</activeText>
+					<inactiveText>Voltage Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Voltage of one or more batteries is outside the defined range.</activeText>
+					<inactiveText>A Voltage of one or more batteries is no longer outside the defined range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5" log="no">
+				<name>
+					<activeText>Temperature Alarm</activeText>
+					<inactiveText>Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Temperature of one or more batteries is outside the defined range.</activeText>
+					<inactiveText>A Temperature of one or more batteries is no longer outside the defined range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="6" log="no">
+				<name>
+					<activeText>Voltage High Alarm</activeText>
+					<inactiveText>Voltage High Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Voltage of one or more batteries is higher than the defined range.</activeText>
+					<inactiveText>A Voltage of one or more batteries is no longer higher than the defined range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="7" log="no">
+				<name>
+					<activeText>Voltage Low Alarm</activeText>
+					<inactiveText>Voltage Low Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Voltage of one or more batteries is lower than the defined range.</activeText>
+					<inactiveText>A Voltage of one or more batteries is no longer lower than the defined range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="8" log="no">
+				<name>
+					<activeText>Temperature High Alarm</activeText>
+					<inactiveText>Temperature High Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Temperature of one or more batteries is higher than the defined range.</activeText>
+					<inactiveText>A Temperature of one or more batteries is no longer higher than the defined range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="9" log="no">
+				<name>
+					<activeText>Temperature Low Alarm</activeText>
+					<inactiveText>Temperature Low Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Temperature of one or more batteries is lower than the defined range.</activeText>
+					<inactiveText>A Temperature of one or more batteries is no longer lower than the defined range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="10" log="no">
+				<name>
+					<activeText>Resistance High Alarm</activeText>
+					<inactiveText>Resistance High Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Internal resistance of one or more batteries is above the alarm level.</activeText>
+					<inactiveText>An Internal resistance of one or more batteries is no longer above the alarm level.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="11" log="no">
+				<name>
+					<activeText>Resistance Low Alarm</activeText>
+					<inactiveText>Resistance Low Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Internal resistance of one or more batteries is below the alarm level.</activeText>
+					<inactiveText>An Internal resistance of one or more batteries is no longer below the alarm level.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="12" log="no">
+				<name>
+					<activeText>Equalizing Error Alarm</activeText>
+					<inactiveText>Equalizing Error Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Equalizing error alarm condition exists.</activeText>
+					<inactiveText>An Equalizing error alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="13" log="no">
+				<name>
+					<activeText>Voltage High Warning</activeText>
+					<inactiveText>Voltage High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Voltage of one or more batteries is higher than the defined warning range.</activeText>
+					<inactiveText>A Voltage of one or more batteries is no longer higher than the defined warning range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="14" log="no">
+				<name>
+					<activeText>Voltage Low Warning</activeText>
+					<inactiveText>Voltage Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Voltage of one or more batteries is lower than the defined warning range.</activeText>
+					<inactiveText>A Voltage of one or more batteries is no longer lower than the defined warning range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="15" log="no">
+				<name>
+					<activeText>Temperature High Warning</activeText>
+					<inactiveText>Temperature High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Temperature of one or more batteries is higher than the defined warning range.</activeText>
+					<inactiveText>A Temperature of one or more batteries is no longer higher than the defined warning range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="16" log="no">
+				<name>
+					<activeText>Temperature Low Warning</activeText>
+					<inactiveText>Temperature Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Temperature of one or more batteries is lower than the defined warning range.</activeText>
+					<inactiveText>A Temperature of one or more batteries is no longer lower than the defined warning range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="17" log="no">
+				<name>
+					<activeText>Resistance High Warning</activeText>
+					<inactiveText>Resistance High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Internal resistance of one or more batteries is higher than the defined warning range.</activeText>
+					<inactiveText>An Internal resistance of one or more batteries is no longer higher than the defined warning range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="18" log="no">
+				<name>
+					<activeText>Resistance Low Warning</activeText>
+					<inactiveText>Resistance Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Internal resistance of one or more batteries is lower than the defined warning range.</activeText>
+					<inactiveText>An Internal resistance of one or more batteries is no longer lower than the defined warning range.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="19" log="no">
+				<name>
+					<activeText>Initializing Alarm</activeText>
+					<inactiveText>Initializing Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>An Initializing alarm condition exists.</activeText>
+					<inactiveText>An Initializing alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="20" log="no">
+				<name>
+					<activeText>Communication Lost Alarm</activeText>
+					<inactiveText>Communication Lost Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Communication lost alarm condition exists.</activeText>
+					<inactiveText>A Communication lost alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="21" log="no">
+				<name>
+					<activeText>Battery Breaker Open Alarm</activeText>
+					<inactiveText>Battery Breaker Open Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Battery breaker open alarm condition exists.</activeText>
+					<inactiveText>A Battery breaker open alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="22" log="no">
+				<name>
+					<activeText>Thermal Runaway Alarm</activeText>
+					<inactiveText>Thermal Runaway Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Thermal runaway alarm condition exists.</activeText>
+					<inactiveText>A Thermal runaway alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="23" log="no">
+				<name>
+					<activeText>Sensor Communication Lost Alarm</activeText>
+					<inactiveText>Sensor Communication Lost Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Sensor communication lost alarm condition exists.</activeText>
+					<inactiveText>A Sensor communication lost alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="24" log="no">
+				<name>
+					<activeText>Discharging Alarm</activeText>
+					<inactiveText>Discharging Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Discharging alarm condition exists.</activeText>
+					<inactiveText>A Discharging alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="25" log="no">
+				<name>
+					<activeText>Discharging Stopped Alarm</activeText>
+					<inactiveText>Discharging Stopped Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Discharging stopped alarm condition exists.</activeText>
+					<inactiveText>A Discharging stopped alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="26" log="no">
+				<name>
+					<activeText>Maximum Voltage Difference Alarm</activeText>
+					<inactiveText>Maximum Voltage Difference Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A Maximum voltage difference alarm condition exists.</activeText>
+					<inactiveText>A Maximum voltage difference alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="27" log="no">
+				<name>
+					<activeText>String Voltage High Alarm</activeText>
+					<inactiveText>String Voltage High Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String voltage high alarm condition exists.</activeText>
+					<inactiveText>A String voltage high alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="28" log="no">
+				<name>
+					<activeText>String Voltage Low Alarm</activeText>
+					<inactiveText>String Voltage Low Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String voltage low alarm condition exists.</activeText>
+					<inactiveText>A String voltage low alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="29" log="no">
+				<name>
+					<activeText>String Voltage High Warning</activeText>
+					<inactiveText>String Voltage High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String voltage high warning condition exists.</activeText>
+					<inactiveText>A String voltage high warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="30" log="no">
+				<name>
+					<activeText>String Voltage Low Warning</activeText>
+					<inactiveText>String Voltage Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String voltage low warning condition exists.</activeText>
+					<inactiveText>A String voltage low warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="31" log="no">
+				<name>
+					<activeText>String Current High Alarm</activeText>
+					<inactiveText>String Current High Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String current high alarm condition exists.</activeText>
+					<inactiveText>A String current high alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="32" log="no">
+				<name>
+					<activeText>String Current Low Alarm</activeText>
+					<inactiveText>String Current Low Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String current low alarm condition exists.</activeText>
+					<inactiveText>A String current low alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="33" log="no">
+				<name>
+					<activeText>String Current High Warning</activeText>
+					<inactiveText>String Current High Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String current high warning condition exists.</activeText>
+					<inactiveText>A String current high warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="34" log="no">
+				<name>
+					<activeText>String Current Low Warning</activeText>
+					<inactiveText>String Current Low Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String current low warning condition exists.</activeText>
+					<inactiveText>A String current low warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="35" log="no">
+				<name>
+					<activeText>String Equalizing Disabled Alarm</activeText>
+					<inactiveText>String Equalizing Disabled Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String equalizing disabled alarm condition exists.</activeText>
+					<inactiveText>A String equalizing disabled alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="36" log="no">
+				<name>
+					<activeText>String Current Deviation during Charge Alarm</activeText>
+					<inactiveText>String Current Deviation during Charge Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String current deviation during charge alarm condition exists.</activeText>
+					<inactiveText>A String current deviation during charge alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="37" log="no">
+				<name>
+					<activeText>String Current Deviation during Discharge Alarm</activeText>
+					<inactiveText>String Current Deviation during Discharge Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String current deviation during discharge alarm condition exists.</activeText>
+					<inactiveText>A String current deviation during discharge alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="38" log="no">
+				<name>
+					<activeText>String Current Deviation during Charge Warning</activeText>
+					<inactiveText>String Current Deviation during Charge Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String current deviation during charge warning condition exists.</activeText>
+					<inactiveText>A String current deviation during charge warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="39" log="no">
+				<name>
+					<activeText>String Current Deviation during Discharge Warning</activeText>
+					<inactiveText>String Current Deviation during Discharge Warning Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>A String current deviation during discharge warning condition exists.</activeText>
+					<inactiveText>A String current deviation during discharge warning condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<valueMap ruleid="alarm_map">
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.1</valueIn><valueOut>1</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.2</valueIn><valueOut>2</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.3</valueIn><valueOut>3</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.4</valueIn><valueOut>4</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.5</valueIn><valueOut>5</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.6</valueIn><valueOut>6</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.7</valueIn><valueOut>7</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.8</valueIn><valueOut>8</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.9</valueIn><valueOut>9</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.10</valueIn><valueOut>10</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.11</valueIn><valueOut>11</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.12</valueIn><valueOut>12</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.13</valueIn><valueOut>13</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.14</valueIn><valueOut>14</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.15</valueIn><valueOut>15</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.16</valueIn><valueOut>16</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.17</valueIn><valueOut>17</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.18</valueIn><valueOut>18</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.19</valueIn><valueOut>19</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.20</valueIn><valueOut>20</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.21</valueIn><valueOut>21</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.22</valueIn><valueOut>22</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.23</valueIn><valueOut>23</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.24</valueIn><valueOut>24</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.25</valueIn><valueOut>25</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.26</valueIn><valueOut>26</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.27</valueIn><valueOut>27</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.28</valueIn><valueOut>28</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.29</valueIn><valueOut>29</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.30</valueIn><valueOut>30</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.31</valueIn><valueOut>31</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.32</valueIn><valueOut>32</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.33</valueIn><valueOut>33</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.34</valueIn><valueOut>34</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.35</valueIn><valueOut>35</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.36</valueIn><valueOut>36</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.37</valueIn><valueOut>37</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.38</valueIn><valueOut>38</valueOut>
+			<valueIn>.1.3.6.1.2.1.33.5.3.3.39</valueIn><valueOut>39</valueOut>
+		</valueMap>
 
 	</device>
 </APC_DDF>

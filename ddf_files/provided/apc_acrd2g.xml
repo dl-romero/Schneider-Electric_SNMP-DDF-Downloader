@@ -4,12 +4,12 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="apc_acrd2g"
 	ddfname="Schneider ACRD2G"
-	ddfversion="14"
+	ddfversion="15"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<device deviceid="APC_ACRD2g_discovery" >
-		<oidMustExist ruleid="apc_cooling" oid="1.3.6.1.4.1.318.1.1.27" istree="yes" /> 
-		<oidMustMatch ruleid="APC_ACRD2g" oid=".1.3.6.1.2.1.1.2.0">
+		<oidMustExist ruleid="apc_cooling_discovery" oid="1.3.6.1.4.1.318.1.1.27" istree="yes" />
+		<oidMustMatch ruleid="APC_ACRD2g_discovery" oid=".1.3.6.1.2.1.1.2.0">
 			<valueList>
 				<value>.1.3.6.1.4.1.318.1.3.14.15</value>
 				<!-- CW -->
@@ -48,14 +48,14 @@
 		</setProductData>
 
 		<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
-		
+
 		<!-- Restricts model data from core DDF -->
 		<suppressRule ruleid="stompapcmodel" suppressid="core/apcdiscdata/modeldata"/>
-		
+
 	</device>
 	<device deviceid="APC_ACRD2g_DX_and_CW">
-		<oidMustExist ruleid="apc_cooling" oid="1.3.6.1.4.1.318.1.1.27" istree="yes" /> 
-		<oidMustMatch ruleid="APC_ACRD2g" oid=".1.3.6.1.2.1.1.2.0">
+		<oidMustExist ruleid="apc_cooling_DX_and_CW" oid="1.3.6.1.4.1.318.1.1.27" istree="yes" />
+		<oidMustMatch ruleid="APC_ACRD2g_DX_and_CW" oid=".1.3.6.1.2.1.1.2.0">
 			<valueList>
 				<value>.1.3.6.1.4.1.318.1.3.14.15</value>
 				<!-- CW -->
@@ -1017,8 +1017,8 @@
 
 	</device>
 	<device deviceid="APC_ACRD2g_CW_Only" >
-		<oidMustExist ruleid="apc_cooling" oid="1.3.6.1.4.1.318.1.1.27" istree="yes" /> 
-		<oidMustMatch ruleid="APC_ACRD2g" oid=".1.3.6.1.2.1.1.2.0">
+		<oidMustExist ruleid="apc_cooling_CW_Only" oid="1.3.6.1.4.1.318.1.1.27" istree="yes" />
+		<oidMustMatch ruleid="APC_ACRD2g_CW_Only" oid=".1.3.6.1.2.1.1.2.0">
 			<valueList>
 				<value>.1.3.6.1.4.1.318.1.3.14.15</value>
 				<!-- CW -->
@@ -1080,26 +1080,6 @@
 			<label>Fluid Flow</label>
 			<sensorSet>Status - Analog</sensorSet>
 		</numSensor>
-		<numSensor ruleid="evapFan1RunHrs">
-			<type>runhours</type>
-			<sensorId>_EVAP_FAN1_RUN_HOURS</sensorId>
-			<value>
-				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.68</getOid>
-			</value>
-			<valueInc>1</valueInc>
-			<label>Evap. Fan 1 Run Hours</label>
-			<sensorSet>Status - Analog</sensorSet>
-		</numSensor>
-		<numSensor ruleid="evapFan2RunHrs">
-			<type>runhours</type>
-			<sensorId>_EVAP_FAN2_RUN_HOURS</sensorId>
-			<value>
-				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.69</getOid>
-			</value>
-			<valueInc>1</valueInc>
-			<label>Evap. Fan 2 Run Hours</label>
-			<sensorSet>Status - Analog</sensorSet>
-		</numSensor>
 		<numSensor ruleid="evapFan3RunHrs">
 			<type>runhours</type>
 			<sensorId>_EVAP_FAN3_RUN_HOURS</sensorId>
@@ -1108,26 +1088,6 @@
 			</value>
 			<valueInc>1</valueInc>
 			<label>Evap. Fan 3 Run Hours</label>
-			<sensorSet>Status - Analog</sensorSet>
-		</numSensor>
-		<numSensor ruleid="heater1RunHrs">
-			<type>runhours</type>
-			<sensorId>_HEATER1_RUNHOURS</sensorId>
-			<value>
-				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.71</getOid>
-			</value>
-			<valueInc>1</valueInc>
-			<label>Heater 1 Run Hours</label>
-			<sensorSet>Status - Analog</sensorSet>
-		</numSensor>
-		<numSensor ruleid="heater2RunHrs">
-			<type>runhours</type>
-			<sensorId>_HEATER2_RUNHOURS</sensorId>
-			<value>
-				<getOid>1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.72</getOid>
-			</value>
-			<valueInc>1</valueInc>
-			<label>Heater 2 Run Hours</label>
 			<sensorSet>Status - Analog</sensorSet>
 		</numSensor>
 		<numSensor ruleid="heater3RunHrs">
@@ -1165,14 +1125,14 @@
 
 	</device>
 	<device deviceid="APC_ACRD2g_ACRD300series_Only" >
-		<oidMustExist ruleid="apc_cooling" oid="1.3.6.1.4.1.318.1.1.27" istree="yes" /> 
-		<oidMustMatch ruleid="APC_ACRD2g" oid=".1.3.6.1.2.1.1.2.0">
+		<oidMustExist ruleid="apc_cooling_ACRD300series_Only" oid="1.3.6.1.4.1.318.1.1.27" istree="yes" />
+		<oidMustMatch ruleid="APC_ACRD2g_ACRD300series_Only" oid=".1.3.6.1.2.1.1.2.0">
 			<valueList>
 				<value>.1.3.6.1.4.1.318.1.3.14.23</value>
 				<!-- ACRD300 series -->
 			</valueList>
 		</oidMustMatch>
-		
+
         <numSensor ruleid="group_minimum_rack_temperature">
             <type>temp</type>
             <sensorId>GROUP_MINIMUM_RACK_TEMPERATURE</sensorId>
@@ -1214,7 +1174,7 @@
             <sensorId>TOTAL_AIR_SIDE_COOLING_DEMAND</sensorId>
             <value>
 				<!-- Convert to Watts -->
-				<mult>
+							<mult>
 					<op>
 						<!-- Scaling - kW -->
 						<mult>
@@ -1234,7 +1194,7 @@
             <sensorId>TOTAL_SENSIBLE_COOLING_POWER</sensorId>
             <value>
 				<!-- Convert to Watts -->
-				<mult>
+							<mult>
 					<op>
 						<!-- Scaling - kW -->
 						<mult>
@@ -1314,20 +1274,7 @@
             <label>Room Temperature</label>
             <sensorSet>Analog</sensorSet>
         </numSensor>
-        <numSensor ruleid="dew_point_temperature">
-            <type>temp</type>
-            <sensorId>DEW_POINT_TEMPERATURE</sensorId>
-            <value>
-                <mult>
-                    <op><getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.18</getOid></op>
-                    <op>0.1</op>
-                </mult>
-            </value>
-            <valueInc>0.1</valueInc>
-            <label>Dew Point Temperature</label>
-            <sensorSet>Analog</sensorSet>
-        </numSensor>
-        <numSensor ruleid="airflow">
+        <numSensor ruleid="airflow_ls">
             <type>volairflowsec</type>
             <sensorId>AIRFLOW</sensorId>
             <value>
@@ -1485,7 +1432,7 @@
             <sensorId>SUCTION_PRESSURE</sensorId>
             <value>
 				<!-- Convert Bar to kPa -->
-                <mult>
+							<mult>
 					<op>
 						<!-- Scaling - Bar -->
 						<mult>
@@ -1498,26 +1445,6 @@
             </value>
             <valueInc>0.1</valueInc>
             <label>Suction Pressure</label>
-            <sensorSet>Analog</sensorSet>
-        </numSensor>
-        <numSensor ruleid="discharge_pressure">
-            <type>pressure</type>
-            <sensorId>DISCHARGE_PRESSURE</sensorId>
-            <value>
-				<!-- Convert Bar to kPa -->
-				<mult>
-					<op>
-						<!-- Scaling - Bar -->
-						<mult>
-							<op><getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.44</getOid></op>
-							<op>0.1</op>
-						</mult>
-					</op>
-					<op>100</op>
-				</mult>
-            </value>
-            <valueInc>0.1</valueInc>
-            <label>Discharge Pressure</label>
             <sensorSet>Analog</sensorSet>
         </numSensor>
         <numSensor ruleid="suction_evap_temp">
@@ -1883,6 +1810,19 @@
             <label>Fan 8 Run Hours</label>
             <sensorSet>Analog</sensorSet>
         </numSensor>
+        <numSensor ruleid="inlet_water_temperature">
+            <type>temp</type>
+            <sensorId>INLET_WATER_TEMPERATURE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.88</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Inlet Water Temperature</label>
+            <sensorSet>Analog</sensorSet>
+        </numSensor>
         <numSensor ruleid="supply_air_setpoint">
             <type>temp</type>
             <sensorId>SUPPLY_AIR_SETPOINT</sensorId>
@@ -2108,18 +2048,6 @@
             </value>
             <label>Idle on Leak Detect</label>
             <enum>no_yes-em</enum>
-            <sensorSet>Status</sensorSet>
-        </stateSensor>
-        <stateSensor ruleid="shutdown_input_state">
-            <type>state</type>
-            <sensorId>SHUTDOWN_INPUT_STATE</sensorId>
-            <value>
-                <mapValue mapid="status1-vm">
-                    <getOid>.1.3.6.1.4.1.318.1.1.27.1.5.2.2.1.4.1.5</getOid>
-                </mapValue>
-            </value>
-            <label>Shutdown Input State</label>
-            <enum>open_closed-em</enum>
             <sensorSet>Status</sensorSet>
         </stateSensor>
         <stateSensor ruleid="shutdown_input_present">

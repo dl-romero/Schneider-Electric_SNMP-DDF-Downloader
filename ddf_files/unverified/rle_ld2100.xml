@@ -1,38 +1,34 @@
 <?xml version="1.0"?>
-<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-  ddfid="rle_ld2100" ddfname="RLE LD2100" ddfversion="2" canremove="yes">
+<APC_DDF 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="rle_ld2100" 
+	ddfname="RLE LD2100" 
+	ddfversion="3" 
+	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
+	<!--
 	
+		SOURCE
+		\snmp\resources\mibs\rle\LD21004.0.mib.txt
+	
+		RLE-LD2100-MIB | 03 March 2022
+		
+		WALKFILES
+		\snmp\resources\sapro\walkfiles\rle\*
+	
+	-->
 	<device deviceid="rle_ld2100">
 		<oidMustExist ruleid="rle_ld2100_mustexist" istree="yes" oid=".1.3.6.1.4.1.3184.1.12.1"/>
-
-        <!--<setProductData ruleid="typedata" field="type">SNMP Device</setProductData>-->
-
-		<setProductData ruleid="vendordata" field="vendor">
-            <getOid>.1.3.6.1.4.1.3184.1.12.1.1.1.0</getOid>
-		</setProductData>
 		
-		<suppressRule ruleid="stompmib2model" suppressid="core/mib2data/modeldata"/>
-        <setProductData ruleid="modeldata" field="model">
-            <getOid>.1.3.6.1.4.1.3184.1.12.1.1.2.0</getOid>
-        </setProductData>
+		<suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
 
-        <setProductData ruleid="appversiondata" field="appversion">
-            <getOid>.1.3.6.1.4.1.3184.1.12.1.1.3.0</getOid>
-        </setProductData>
-
-		<stateSensor ruleid="leak_status">
-			<type>state</type>
-			<sensorId>LEAK_STATUS</sensorId>
-			<value>
-				<mapValue mapid="leak_status-vm">
-					<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.1.0</getOid>
-				</mapValue>
-			</value>
-			<enum>leak_status-em</enum>
-			<label>Leak Status</label>
-			<sensorSet>Leak</sensorSet>
-		</stateSensor>
+        <setProductData ruleid="vendordata" field="vendor"><getOid>.1.3.6.1.4.1.3184.1.12.1.1.1.0</getOid></setProductData>
+        <setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.3184.1.12.1.1.2.0</getOid></setProductData>
+		<setProductData ruleid="appversiondata" field="appversion"><getOid>.1.3.6.1.4.1.3184.1.12.1.1.3.0</getOid></setProductData>
+		<setProductData ruleid="typedata" field="type">Generic Device</setProductData>
 
 		<valueMap ruleid="leak_status-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
@@ -47,79 +43,147 @@
 		<enumMap ruleid="leak_status-em">
 			<label>Not Installed</label>
 			<label>Normal</label>
-			<label>Alarm Leak Present</label>
-			<label>Alarm Cable Fault</label>
-			<label>Alarm Contamination</label>
-			<label>Alarm Communication Loss</label>
+			<label>Leak Present</label>
+			<label>Cable Fault</label>
+			<label>Contamination</label>
+			<label>Communication Loss</label>
 			<label>Unknown</label>
 		</enumMap>
+		
+		<stateSensor ruleid="leak_status">
+			<type>state</type>
+			<sensorId>LEAK_STATUS</sensorId>
+			<value>
+				<mapValue mapid="leak_status-vm">
+					<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.1.0</getOid>
+				</mapValue>
+			</value>
+			<enum>leak_status-em</enum>
+			<label>Leak Status</label>
+			<sensorSet>Leak</sensorSet>
+		</stateSensor>
+		
+		<alarmFlags ruleid="leak_status_alarm">
+			<value><getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.1.0</getOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Leak Present Alarm</activeText>
+					<inactiveText>Leak Present Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A(n) Leak Present Alarm condition exists.</activeText>
+					<inactiveText>A(n) Leak Present Alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Cable Fault Alarm</activeText>
+					<inactiveText>Cable Fault Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A(n) Cable Fault Alarm condition exists.</activeText>
+					<inactiveText>A(n) Cable Fault Alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Contamination Alarm</activeText>
+					<inactiveText>Contamination Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A(n) Contamination Alarm condition exists.</activeText>
+					<inactiveText>A(n) Contamination Alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="5">
+				<name>
+					<activeText>Communication Loss Alarm</activeText>
+					<inactiveText>Communication Loss Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Communication</category>
+				<description>
+					<activeText>A(n) Communication Loss Alarm condition exists.</activeText>
+					<inactiveText>A(n) Communication Loss Alarm condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
 
-		<valueMap ruleid="distance_units-vm">
-			<valueIn>0</valueIn><valueOut>feet</valueOut>
-			<valueIn>*</valueIn><valueOut>meters</valueOut>
+		<valueMap ruleid="isMetersConversion-vm">
+			<valueIn>0</valueIn><valueOut>3.281</valueOut><!-- feet -->
+			<valueIn>*</valueIn><valueOut>1</valueOut><!-- meters -->
+		</valueMap>
+		
+		<valueMap ruleid="isMetersValueInc-vm">
+			<valueIn>0</valueIn><valueOut>0.001</valueOut><!-- feet -->
+			<valueIn>*</valueIn><valueOut>1</valueOut><!-- meters -->
 		</valueMap>
 
 		<numSensor ruleid="leak_reading">
 			<type>num</type>
-			<units>
-				<mapValue mapid="distance_units-vm">
-					<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.5.0</getOid>
-				</mapValue>
-			</units>
+			<units>meters</units>
 			<sensorId>LEAK_READING</sensorId>
 			<value>
-				<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.2.0</getOid>
+				<div>
+					<op><getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.2.0</getOid></op>
+					<op>
+						<mapValue mapid="isMetersConversion-vm">
+							<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.5.0</getOid>
+						</mapValue>
+					</op>
+				</div>
 			</value>
-			<valueInc>1</valueInc>
+			<valueInc>
+				<mapValue mapid="isMetersValueInc-vm">
+					<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.5.0</getOid>
+				</mapValue>
+			</valueInc>
 			<label>Leak Reading</label>
 			<sensorSet>Leak</sensorSet>
 		</numSensor>
 		
 		<numSensor ruleid="cable_leakage">
-			<type>num</type>
+			<type>amperage</type>
 			<sensorId>CABLE_LEAKAGE</sensorId>
 			<value>
-				<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.3.0</getOid>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.3.0</getOid></op>
+					<op>0.000001</op><!-- convert micro-amps to amps -->
+				</mult>
 			</value>
-			<valueInc>1</valueInc>
-			<label>Cable Leakage (micro-Amps)</label>
+			<valueInc>0.000001</valueInc>
+			<label>Cable Leakage</label>
 			<sensorSet>Cable</sensorSet>
 		</numSensor>
 		
 		<numSensor ruleid="cable_length">
 			<type>num</type>
-			<units>
-				<mapValue mapid="distance_units-vm">
-					<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.5.0</getOid>
-				</mapValue>
-			</units>
+			<units>meters</units>
 			<sensorId>CABLE_LENGTH</sensorId>
 			<value>
-				<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.4.0</getOid>
+				<div>
+					<op><getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.4.0</getOid></op>
+					<op>
+						<mapValue mapid="isMetersConversion-vm">
+							<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.5.0</getOid>
+						</mapValue>
+					</op>
+				</div>
 			</value>
-			<valueInc>1</valueInc>
+			<valueInc>
+				<mapValue mapid="isMetersValueInc-vm">
+					<getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.5.0</getOid>
+				</mapValue>
+			</valueInc>
 			<label>Cable Length</label>
 			<sensorSet>Cable</sensorSet>
 		</numSensor>
-		
-		<alarmFlags ruleid="cable_leakage_alarm">
-      <value>
-        <getOid>.1.3.6.1.4.1.3184.1.12.1.2.1.1.3.0</getOid>
-      </value>
-      <alarmFlagsTest mask="1" match="1">
-        <name>
-          <activeText>Cable Leakage Alarm Present</activeText>
-          <inactiveText>Cable Leakage Alarm Cleared</inactiveText>
-        </name>
-        <severity>critical</severity>
-        <category>system</category>
-        <description>
-          <activeText>Cable Leakage Alarm Present</activeText>
-          <inactiveText>Cable Leakage Alarm Cleared</inactiveText>
-        </description>
-      </alarmFlagsTest>
-    </alarmFlags>
 	
 	</device>
-	
 </APC_DDF>	

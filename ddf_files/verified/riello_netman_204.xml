@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="riello_netman_204"
 	ddfname="Riello NetMan 204"
-	ddfversion="4"
+	ddfversion="5"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	
@@ -95,7 +95,7 @@
             <type>powerVA</type>
             <sensorId>NOMINAL_VA</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.1.14.0</getOid>
+                <getOid>.1.3.6.1.4.1.5491.10.1.1.9.0</getOid>
             </value>
             <valueInc>1</valueInc>
             <label>Nominal Apparent Power</label>
@@ -121,8 +121,10 @@
             <label>Nominal Battery Voltage</label>
             <sensorSet>UPS ID</sensorSet>
         </numSensor>
+        <!-- Riello confirmed that rupsIdentBatteryCapacity is measured in amp-hours. This in not mentioned in the MIB. -->
         <numSensor ruleid="rupsIdentBatteryCapacity">
-            <type>pctofcapacity</type>
+            <type>num</type>
+            <units>amphours</units>
             <sensorId>NOMINAL_BATT_CAPACITY</sensorId>
             <value>
                 <getOid>.1.3.6.1.4.1.5491.10.1.1.12.0</getOid>
@@ -225,34 +227,48 @@
 		
 		<suppressRule ruleid="suppressupsBatteryVoltage" suppressid="upsmib/upsmib/upsBatteryVoltage"/>
         <numSensor ruleid="rupsBatteryVoltage">
-			<rowTest>
+			<!-- 
+            
+            rowTest mapid does not exist in the DDF. Commenting out for the time being.
+            
+            <rowTest>
 				<mapValue mapid="riello_netman_204/delete_null_sensor-vm">
 					<getOid>.1.3.6.1.4.1.5491.10.1.2.5.0</getOid>
 				</mapValue>
-			</rowTest>
+			</rowTest> -->
             <type>voltage</type>
             <sensorId>_BATT_VOLTAGE</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.2.5.0</getOid>
+			  	<mult>
+				  <op><getOid>.1.3.6.1.4.1.5491.10.1.2.5.0</getOid></op>
+				  <op>0.1</op>
+				</mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Battery Voltage</label>
             <sensorSet>UPS Battery</sensorSet>
         </numSensor>
 		
 		<suppressRule ruleid="suppressupsBatteryCurrent" suppressid="upsmib/upsmib/upsBatteryCurrent"/>
         <numSensor ruleid="rupsBatteryCurrent">
-			<rowTest>
+			<!-- 
+            
+            rowTest mapid does not exist in the DDF. Commenting out for the time being.
+            
+            <rowTest>
 				<mapValue mapid="riello_netman_204/delete_null_sensor-vm">
 					<getOid>.1.3.6.1.4.1.5491.10.1.2.6.0</getOid>
 				</mapValue>
-			</rowTest>
+			</rowTest> -->
             <type>amperage</type>
             <sensorId>BATT_AMPERAGE</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.2.6.0</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.2.6.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Battery Current</label>
             <sensorSet>UPS Battery</sensorSet>
         </numSensor>
@@ -399,9 +415,12 @@
             <type>amperage</type>
             <sensorId>_INPUT_AMPS_1</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.3.3.1.4.1</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.3.3.1.4.1</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Input Current L1</label>
             <sensorSet>UPS Input</sensorSet>
         </numSensor>
@@ -414,9 +433,12 @@
             <type>amperage</type>
             <sensorId>_INPUT_AMPS_2</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.3.3.1.4.2</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.3.3.1.4.2</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Input Current L2</label>
             <sensorSet>UPS Input</sensorSet>
         </numSensor>
@@ -429,9 +451,12 @@
             <type>amperage</type>
             <sensorId>_INPUT_AMPS_3</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.3.3.1.4.3</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.3.3.1.4.3</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Input Current L3</label>
             <sensorSet>UPS Input</sensorSet>
         </numSensor>
@@ -578,9 +603,12 @@
             <type>amperage</type>
             <sensorId>_OUTPUT_AMPS_1</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.3.1</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.3.1</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Output Current L1</label>
             <sensorSet>UPS Output</sensorSet>
         </numSensor>
@@ -593,9 +621,12 @@
             <type>amperage</type>
             <sensorId>_OUTPUT_AMPS_2</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.3.2</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.3.2</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Output Current L2</label>
             <sensorSet>UPS Output</sensorSet>
         </numSensor>
@@ -608,9 +639,12 @@
             <type>amperage</type>
             <sensorId>_OUTPUT_AMPS_3</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.3.3</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.3.3</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Output Current L3</label>
             <sensorSet>UPS Output</sensorSet>
         </numSensor>
@@ -655,6 +689,24 @@
             </value>
             <valueInc>1</valueInc>
             <label>Output Power L3</label>
+            <sensorSet>UPS Output</sensorSet>
+        </numSensor>
+		<numSensor ruleid="rupsOutputPowerTotal">
+            <type>powerW</type>
+            <sensorId>_OUTPUT_POWER_TOTAL</sensorId>
+            <value>
+                <add>
+                    <op>
+                        <add>
+                            <op><getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.4.1</getOid></op>
+                            <op><getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.4.2</getOid></op>
+                        </add>
+                    </op>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.4.3</getOid></op>
+                </add>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Output Power Total (Calculated)</label>
             <sensorSet>UPS Output</sensorSet>
         </numSensor>
 		
@@ -705,9 +757,12 @@
             <type>amperage</type>
             <sensorId>_OUTPUT_PEAK_AMPS_1</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.6.1</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.6.1</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Output Peak Current L1</label>
             <sensorSet>UPS Output</sensorSet>
         </numSensor>
@@ -720,9 +775,12 @@
             <type>amperage</type>
             <sensorId>_OUTPUT_PEAK_AMPS_2</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.6.2</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.6.2</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Output Peak Current L2</label>
             <sensorSet>UPS Output</sensorSet>
         </numSensor>
@@ -735,9 +793,12 @@
             <type>amperage</type>
             <sensorId>_OUTPUT_PEAK_AMPS_3</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.6.3</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.4.4.1.6.3</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Output Peak Current L3</label>
             <sensorSet>UPS Output</sensorSet>
         </numSensor>
@@ -808,9 +869,12 @@
             <type>amperage</type>
             <sensorId>_INPUT_CURRENT_2_1_1</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.5.3.1.3.1</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.5.3.1.3.1</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Bypass Current L1</label>
             <sensorSet>UPS Bypass</sensorSet>
         </numSensor>
@@ -823,9 +887,12 @@
             <type>amperage</type>
             <sensorId>_INPUT_CURRENT_2_1_2</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.5.3.1.3.2</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.5.3.1.3.2</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Bypass Current L2</label>
             <sensorSet>UPS Bypass</sensorSet>
         </numSensor>
@@ -838,9 +905,12 @@
             <type>amperage</type>
             <sensorId>_INPUT_CURRENT_2_1_3</sensorId>
             <value>
-                <getOid>.1.3.6.1.4.1.5491.10.1.5.3.1.3.3</getOid>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.5491.10.1.5.3.1.3.3</getOid></op>
+                    <op>0.1</op>
+                </mult>
             </value>
-            <valueInc>1</valueInc>
+            <valueInc>0.1</valueInc>
             <label>Bypass Current L3</label>
             <sensorSet>UPS Bypass</sensorSet>
         </numSensor>

@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid ="powershield_8_bms"
+	ddfname="PowerShield 8 Battery Manager"
+	ddfversion="5"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+	
+		SOURCE
+		\snmp\resources\mibs\powershield\PowershieldController.mib
+	
+		PS-B1002-MIB | 01/26/2022
+		
+		WALKFILES
+		\snmp\resources\sapro\walkfiles\powershield\powershield_8_bms.walk
+	
+	-->
+	<device deviceid="powershield_8_bms">
+	  <oidMustExist ruleid="powershield_8_bms_exists" istree="yes" oid=".1.3.6.1.4.1.35154.1002"/>
+	  
+	  <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+	  <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+	  <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+	  <suppressRule ruleid="suppresscorelabeldata" suppressid="core/mib2datalabel/labeldata"/>
+	  
+	  <setProductData ruleid="vendordata" field="vendor">PowerShield</setProductData>
+	  <setProductData ruleid="modeldata" field="model">PowerShield 8 BMS</setProductData>
+	  <setProductData ruleid="typedata" field="type">Battery Manager</setProductData>
+	  
+	  <setDefaultLabel ruleid="labeldata"><sysHostname/></setDefaultLabel>
+	  
+	  <valueMap ruleid="delete_null_sensor">
+	    <valueIn>-2147483648</valueIn><valueOut>[false]</valueOut>
+	    <valueIn>*</valueIn><valueOut>[true]</valueOut>
+	  </valueMap>
+		
+	  <numSensor ruleid="battManMonoblockDCVoltage" index=".1.3.6.1.4.1.35154.1002.1.1.1.1.1">
+		<rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.4</getRowOid>
+		  </mapValue>
+		</rowTest>
+		<type>voltage</type>
+		<sensorId>DC_VOTALGE_MONOBLOCK_<rowIndex/></sensorId>
+		<value>
+		  <mult>
+			<op>
+			  <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.4</getRowOid>
+			</op>
+			<op>0.001</op>
+		  </mult>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>
+			DC Voltage - 
+			String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.2</getRowOid><space/>
+			Monoblock<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.3</getRowOid>
+		</label>
+		<sensorSet>Voltage</sensorSet>
+	  </numSensor>
+	  <numSensor ruleid="battManMonoblockRippleVoltage" index=".1.3.6.1.4.1.35154.1002.1.1.1.1.1">
+		<rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.5</getRowOid>
+		  </mapValue>
+		</rowTest>
+		<type>voltage</type>
+		<sensorId>RIPPLE_VOTALGE_MONOBLOCK_<rowIndex/></sensorId>
+		<value>
+		  <mult>
+			<op>
+			  <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.5</getRowOid>
+			</op>
+			<op>0.001</op>
+		  </mult>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>
+			Ripple Voltage - 
+			String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.2</getRowOid><space/>
+			Monoblock<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.3</getRowOid>
+		</label>
+		<sensorSet>Voltage</sensorSet>
+	  </numSensor>
+	  <numSensor ruleid="battManMonoblockPostTemperature" index=".1.3.6.1.4.1.35154.1002.1.1.1.1.1">
+		<rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.6</getRowOid>
+		  </mapValue>
+		</rowTest>
+		<type>temp</type>
+		<sensorId>POST_TEMPERATURE_MONOBLOCK_<rowIndex/></sensorId>
+		<value>
+		  <mult>
+			<op>
+			  <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.6</getRowOid>
+			</op>
+			<op>0.1</op>
+		  </mult>
+		</value>
+		<valueInc>0.1</valueInc>
+		<label>
+			Post Temperature - 
+			String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.2</getRowOid><space/>
+			Monoblock<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.3</getRowOid>
+		</label>
+		<sensorSet>Temperature</sensorSet>
+	  </numSensor>
+	  <numSensor ruleid="battManMonoblockImpedance" index=".1.3.6.1.4.1.35154.1002.1.1.1.1.1">
+		<rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.7</getRowOid>
+		  </mapValue>
+		</rowTest>
+		<type>num</type>
+		<sensorId>IMPEDANCE_MONOBLOCK_<rowIndex/></sensorId>
+		<value>
+		  <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.7</getRowOid>
+		</value>
+		<label>
+			Impedance - 
+			String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.2</getRowOid><space/>
+			Monoblock<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.1.1.3</getRowOid>
+			<space/>(uOhms)
+		</label>
+		<sensorSet>Impedance</sensorSet>
+	  </numSensor>
+	  
+	  <numSensor ruleid="battManStringDCVoltage" index=".1.3.6.1.4.1.35154.1002.1.1.2.1.1">
+	    <rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.2</getRowOid>
+		  </mapValue>
+	    </rowTest>
+        <type>voltage</type>
+        <sensorId>DC_VOLTAGE_STRING_<rowIndex/></sensorId>
+        <value>
+          <mult>
+            <op><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.2</getRowOid></op>
+            <op>0.1</op>
+          </mult>
+        </value>
+	    <valueInc>0.1</valueInc>
+        <label>DC Voltage - String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.1</getRowOid></label>
+        <sensorSet>Voltage</sensorSet>
+      </numSensor>
+	  <numSensor ruleid="battManStringCurrent" index=".1.3.6.1.4.1.35154.1002.1.1.2.1.1">
+	    <rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.3</getRowOid>
+		  </mapValue>
+	    </rowTest>
+        <type>amperage</type>
+        <sensorId>CURRENT_STRING_<rowIndex/></sensorId>
+        <value>
+          <mult>
+            <op><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.3</getRowOid></op>
+            <op>0.1</op>
+          </mult>
+        </value>
+	    <valueInc>0.1</valueInc>
+        <label>Current - String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.1</getRowOid></label>
+        <sensorSet>Current</sensorSet>
+      </numSensor>
+	  <numSensor ruleid="battManStringRippleCurrent" index=".1.3.6.1.4.1.35154.1002.1.1.2.1.1">
+	    <rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.4</getRowOid>
+		  </mapValue>
+	    </rowTest>
+        <type>amperage</type>
+        <sensorId>RIPPLE_CURRENT_STRING_<rowIndex/></sensorId>
+        <value>
+          <mult>
+            <op><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.4</getRowOid></op>
+            <op>0.1</op>
+          </mult>
+        </value>
+	    <valueInc>0.1</valueInc>
+        <label>Ripple Current - String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.1</getRowOid></label>
+        <sensorSet>Voltage</sensorSet>
+      </numSensor>
+	  <numSensor ruleid="battManStringTemperature1" index=".1.3.6.1.4.1.35154.1002.1.1.2.1.1">
+	    <rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.5</getRowOid>
+		  </mapValue>
+	    </rowTest>
+        <type>temp</type>
+        <sensorId>TEMPERATURE_1_STRING_<rowIndex/></sensorId>
+        <value>
+          <mult>
+            <op><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.5</getRowOid></op>
+            <op>0.1</op>
+          </mult>
+        </value>
+	    <valueInc>0.1</valueInc>
+        <label>Temperature 1 - String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.1</getRowOid></label>
+        <sensorSet>Temperature</sensorSet>
+      </numSensor>
+	  <numSensor ruleid="battManStringTemperature2" index=".1.3.6.1.4.1.35154.1002.1.1.2.1.1">
+	    <rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.6</getRowOid>
+		  </mapValue>
+	    </rowTest>
+        <type>temp</type>
+        <sensorId>TEMPERATURE_2_STRING_<rowIndex/></sensorId>
+        <value>
+          <mult>
+            <op><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.6</getRowOid></op>
+            <op>0.1</op>
+          </mult>
+        </value>
+	    <valueInc>0.1</valueInc>
+        <label>Temperature 2 - String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.1</getRowOid></label>
+        <sensorSet>Temperature</sensorSet>
+      </numSensor>
+	  <numSensor ruleid="battManStringHumidity" index=".1.3.6.1.4.1.35154.1002.1.1.2.1.1">
+	    <rowTest>
+		  <mapValue mapid="delete_null_sensor">
+		    <getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.7</getRowOid>
+		  </mapValue>
+	    </rowTest>
+        <type>humidity</type>
+        <sensorId>HUMIDITY_STRING_<rowIndex/></sensorId>
+        <value>
+			<getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.7</getRowOid>
+        </value>
+        <label>Humidity - String<space/><getRowOid>.1.3.6.1.4.1.35154.1002.1.1.2.1.1</getRowOid></label>
+        <sensorSet>Humidity</sensorSet>
+      </numSensor>
+	  
+	  <valueMap ruleid="psAlarms-vm">
+		<valueIn>*</valueIn><valueOut>Unknown</valueOut>
+        <valueIn>1</valueIn><valueOut>String Idle</valueOut>
+        <valueIn>2</valueIn><valueOut>String Float</valueOut>
+        <valueIn>3</valueIn><valueOut>String Charge</valueOut>
+        <valueIn>4</valueIn><valueOut>String Discharge</valueOut>
+        <valueIn>5</valueIn><valueOut>String State Unknown</valueOut>
+        <valueIn>6</valueIn><valueOut>Block Charge Voltage High</valueOut>
+        <valueIn>7</valueIn><valueOut>Block Charge Voltage High</valueOut>
+        <valueIn>8</valueIn><valueOut>Block Float Voltage High</valueOut>
+        <valueIn>9</valueIn><valueOut>Block Float Voltage High</valueOut>
+        <valueIn>10</valueIn><valueOut>Block Float Voltage Low</valueOut>
+        <valueIn>11</valueIn><valueOut>Block Float Voltage Low</valueOut>
+        <valueIn>12</valueIn><valueOut>Block Discharge Voltage Low</valueOut>
+        <valueIn>13</valueIn><valueOut>Block Discharge Voltage Low</valueOut>
+        <valueIn>14</valueIn><valueOut>Block Idle Voltage Low</valueOut>
+        <valueIn>15</valueIn><valueOut>Block Idle Voltage Low</valueOut>
+        <valueIn>16</valueIn><valueOut>Block Float Ripple Voltage High</valueOut>
+        <valueIn>17</valueIn><valueOut>Block Charge Temperature High</valueOut>
+        <valueIn>18</valueIn><valueOut>Block Charge Temperature High</valueOut>
+        <valueIn>19</valueIn><valueOut>Block Charge Temperature Low</valueOut>
+        <valueIn>20</valueIn><valueOut>Block Charge Temperature Low</valueOut>
+        <valueIn>21</valueIn><valueOut>Block Float Temperature High</valueOut>
+        <valueIn>22</valueIn><valueOut>Block Float Temperature High</valueOut>
+        <valueIn>23</valueIn><valueOut>Block Float Temperature Low</valueOut>
+        <valueIn>24</valueIn><valueOut>Block Float Temperature Low</valueOut>
+        <valueIn>25</valueIn><valueOut>Block Discharge Temperature High</valueOut>
+        <valueIn>26</valueIn><valueOut>Block Discharge Temperature High</valueOut>
+        <valueIn>27</valueIn><valueOut>Block Discharge Temperature Low</valueOut>
+        <valueIn>28</valueIn><valueOut>Block Discharge Temperature Low</valueOut>
+        <valueIn>29</valueIn><valueOut>Block Idle Temperature High</valueOut>
+        <valueIn>30</valueIn><valueOut>Block Idle Temperature High</valueOut>
+        <valueIn>31</valueIn><valueOut>Block Idle Temperature Low</valueOut>
+        <valueIn>32</valueIn><valueOut>Block Idle Temperature Low</valueOut>
+        <valueIn>33</valueIn><valueOut>Block Ohmic High</valueOut>
+        <valueIn>34</valueIn><valueOut>Block Ohmic High</valueOut>
+        <valueIn>35</valueIn><valueOut>Block Ohmic Low</valueOut>
+        <valueIn>36</valueIn><valueOut>Block Ohmic Low</valueOut>
+        <valueIn>37</valueIn><valueOut>Ambient Temperature High</valueOut>
+        <valueIn>38</valueIn><valueOut>Ambient Temperature High</valueOut>
+        <valueIn>39</valueIn><valueOut>Ambient Temperature Low</valueOut>
+        <valueIn>40</valueIn><valueOut>Ambient Temperature Low</valueOut>
+        <valueIn>41</valueIn><valueOut>Block Float Voltage Variation High</valueOut>
+        <valueIn>42</valueIn><valueOut>Block Discharge Voltage Variation High</valueOut>
+        <valueIn>43</valueIn><valueOut>Block Discharge Voltage Variation High</valueOut>
+        <valueIn>44</valueIn><valueOut>Unused 1</valueOut>
+        <valueIn>45</valueIn><valueOut>Block Charge Temperature Variation High</valueOut>
+        <valueIn>46</valueIn><valueOut>Block Charge Temperature Variation High</valueOut>
+        <valueIn>47</valueIn><valueOut>Block Float Temperature Variation High</valueOut>
+        <valueIn>48</valueIn><valueOut>Block Float Temperature Variation High</valueOut>
+        <valueIn>49</valueIn><valueOut>Block Discharge Temperature Variation High</valueOut>
+        <valueIn>50</valueIn><valueOut>Block Discharge Temperature Variation High</valueOut>
+        <valueIn>51</valueIn><valueOut>Block Idle Temperature Variation High</valueOut>
+        <valueIn>52</valueIn><valueOut>Block Idle Temperature Variation Hgih</valueOut>
+        <valueIn>53</valueIn><valueOut>String Float Current High</valueOut>
+        <valueIn>54</valueIn><valueOut>String Charge Current High</valueOut>
+        <valueIn>55</valueIn><valueOut>String Discharge Current Low</valueOut>
+        <valueIn>56</valueIn><valueOut>String Float Ripple Current High</valueOut>
+        <valueIn>57</valueIn><valueOut>String Float Ripple Current High</valueOut>
+        <valueIn>58</valueIn><valueOut>String Charge Voltage High</valueOut>
+        <valueIn>59</valueIn><valueOut>String Charge Voltage High</valueOut>
+        <valueIn>60</valueIn><valueOut>String Float Voltage High</valueOut>
+        <valueIn>61</valueIn><valueOut>String Float Voltage High</valueOut>
+        <valueIn>62</valueIn><valueOut>String Float Voltage Low</valueOut>
+        <valueIn>63</valueIn><valueOut>String Float Voltage Low</valueOut>
+        <valueIn>64</valueIn><valueOut>String Discharge Voltage Low</valueOut>
+        <valueIn>65</valueIn><valueOut>String Discharge Voltage Low</valueOut>
+        <valueIn>66</valueIn><valueOut>String Idle Voltage Low</valueOut>
+        <valueIn>67</valueIn><valueOut>String Idle Voltage Low</valueOut>
+        <valueIn>68</valueIn><valueOut>Ambient Temperature Variation High</valueOut>
+        <valueIn>69</valueIn><valueOut>Ambient Block Temperature High</valueOut>
+        <valueIn>70</valueIn><valueOut>Ambient Block Temperature High</valueOut>
+        <valueIn>71</valueIn><valueOut>Humidity High</valueOut>
+        <valueIn>72</valueIn><valueOut>Discharge Period High</valueOut>
+        <valueIn>73</valueIn><valueOut>Discharge Period High</valueOut>
+        <valueIn>74</valueIn><valueOut>Ohmic Schedule High</valueOut>
+        <valueIn>75</valueIn><valueOut>Block Ohmic Variation High</valueOut>
+        <valueIn>76</valueIn><valueOut>Block Ohmic Variation High</valueOut>
+        <valueIn>77</valueIn><valueOut>Digital input Alarm</valueOut>
+        <valueIn>78</valueIn><valueOut>High CPU Temperature</valueOut>
+        <valueIn>79</valueIn><valueOut>Low Disk Space</valueOut>
+        <valueIn>80</valueIn><valueOut>Out of Disk Space</valueOut>
+        <valueIn>81</valueIn><valueOut>Hub Status Error</valueOut>
+        <valueIn>82</valueIn><valueOut>M Sensor Status Error</valueOut>
+        <valueIn>83</valueIn><valueOut>Device Comms Error</valueOut>
+        <valueIn>84</valueIn><valueOut>Ambient Temperature Variation High</valueOut>
+        <valueIn>85</valueIn><valueOut>Charge Period High</valueOut>
+        <valueIn>86</valueIn><valueOut>Charge Period High</valueOut>
+        <valueIn>87</valueIn><valueOut>Humidity High</valueOut>
+        <valueIn>88</valueIn><valueOut>Block Voltage Error</valueOut>
+        <valueIn>89</valueIn><valueOut>Block Temperature Error</valueOut>
+        <valueIn>90</valueIn><valueOut>Block Ohmic Error</valueOut>
+        <valueIn>91</valueIn><valueOut>String Current Error</valueOut>
+        <valueIn>92</valueIn><valueOut>Ambient Temperature Error</valueOut>
+        <valueIn>93</valueIn><valueOut>Block Comms Error</valueOut>
+        <valueIn>94</valueIn><valueOut>String Ripple Current Error</valueOut>
+	  </valueMap>
+	  
+	  <valueMap ruleid="psAlarmBlockNumber-vm">
+		<valueIn>0</valueIn><valueOut>N/A</valueOut>
+		<valueIn>*</valueIn><valueOut>*</valueOut>
+	  </valueMap>
+	  
+	  <alarmFlags2 ruleid="psAlarms" index=".1.3.6.1.4.1.35154.1002.1.2.1.1.5">
+			<value><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.5</getRowOid></value>
+			<alarmFlagsTest match="0">
+				<name>
+					<activeText>PowerShield BMS Informational Alarm</activeText>
+					<inactiveText>PowerShield BMS Informational Alarm Cleared</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>Device</category>
+				<description>
+					<activeText>
+						(String <getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.3</getRowOid><space/>
+						Block <mapValue mapid="psAlarmBlockNumber-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.4</getRowOid></mapValue>)
+						<space/><mapValue mapid="psAlarms-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.2</getRowOid></mapValue>
+						<space/>condition exists.
+					</activeText>
+					<inactiveText>
+						(String <getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.3</getRowOid><space/>
+						Block <mapValue mapid="psAlarmBlockNumber-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.4</getRowOid></mapValue>)
+						<space/><mapValue mapid="psAlarms-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.2</getRowOid></mapValue>
+						<space/>condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>PowerShield BMS Warning Alarm</activeText>
+					<inactiveText>PowerShield BMS Warning Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Device</category>
+				<description>
+					<activeText>
+						(String <getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.3</getRowOid><space/>
+						Block <mapValue mapid="psAlarmBlockNumber-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.4</getRowOid></mapValue>)
+						<space/><mapValue mapid="psAlarms-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.2</getRowOid></mapValue>
+						<space/>condition exists.
+					</activeText>
+					<inactiveText>
+						(String <getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.3</getRowOid><space/>
+						Block <mapValue mapid="psAlarmBlockNumber-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.4</getRowOid></mapValue>)
+						<space/><mapValue mapid="psAlarms-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.2</getRowOid></mapValue>
+						<space/>condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>PowerShield BMS Critical Alarm</activeText>
+					<inactiveText>PowerShield BMS Critical Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>
+						(String <getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.3</getRowOid><space/>
+						Block <mapValue mapid="psAlarmBlockNumber-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.4</getRowOid></mapValue>)
+						<space/><mapValue mapid="psAlarms-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.2</getRowOid></mapValue>
+						<space/>condition exists.
+					</activeText>
+					<inactiveText>
+						(String <getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.3</getRowOid><space/>
+						Block <mapValue mapid="psAlarmBlockNumber-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.4</getRowOid></mapValue>)
+						<space/><mapValue mapid="psAlarms-vm"><getRowOid>.1.3.6.1.4.1.35154.1002.1.2.1.1.2</getRowOid></mapValue>
+						<space/>condition no longer exists.
+					</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+	
+	</device>
+</APC_DDF>

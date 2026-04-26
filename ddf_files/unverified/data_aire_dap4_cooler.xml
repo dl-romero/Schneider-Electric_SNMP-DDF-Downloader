@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="data_aire_dap4_cooler"
-	ddfname="Data Aire DAP4 Cooler [pcoWeb]"
+	ddfname="Data Aire DAP4 Cooler [pcoWeb][SNMP]"
 	ddfversion="5"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>

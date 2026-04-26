@@ -5,7 +5,7 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="eltek_smartpacks"
 	ddfname="Eltek SmartPackS"
-	ddfversion="3"
+	ddfversion="4"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<device deviceid="eltek_smartpacks">
@@ -531,9 +531,10 @@
 			<value>
 				<mult>
 				<op><getOid>.1.3.6.1.4.1.12148.10.4.13.0</getOid></op>
-				<op>1</op>
+				<op>0.01</op>
 				</mult>
 			</value>
+			<value>0.01</value>
 			<label>Generator Voltage Control Stage Voltage</label>
 			<sensorSet>generator</sensorSet>
 		</numSensor>
@@ -899,8 +900,12 @@
 			<type>num</type>
 			<sensorId>DCDC_CURRENT_MAJOR_ALARM_LEVEL<rowIndex/></sensorId>
 			<value>
+				<mult>
 				<op><getRowOid>.1.3.6.1.4.1.12148.10.6.3.1.6</getRowOid></op>
+				<op>0.01</op>
+				</mult>
 			</value>
+			<valueInc>0.01</valueInc>
 			<label>DCDC Current <rowIndex/> Major Alarm Level</label>
 			<sensorSet>DCDC</sensorSet>
 		</numSensor>
@@ -908,8 +913,12 @@
 			<type>num</type>
 			<sensorId>DCDC_CURRENT_MINOR_ALARM_LEVEL<rowIndex/></sensorId>
 			<value>
+				<mult>
 				<op><getRowOid>.1.3.6.1.4.1.12148.10.6.3.1.7</getRowOid></op>
+				<op>0.01</op>
+				</mult>
 			</value>
+			<valueInc>0.01</valueInc>
 			<label>DCDC Current <rowIndex/> Minor Alarm Level</label>
 			<sensorSet>DCDC</sensorSet>
 		</numSensor>
@@ -1069,9 +1078,10 @@
 			<value>
 				<mult>
 				<op><getOid>.1.3.6.1.4.1.12148.10.7.2.6.0</getOid></op>
-				<op>1</op>
+				<op>0.01</op>
 				</mult>
 			</value>
+			<value>0.01</value>
 			<label>Solar Chargers Current Major Alarm Level</label>
 			<sensorSet>solarChargers</sensorSet>
 		</numSensor>
@@ -1081,9 +1091,10 @@
 			<value>
 				<mult>
 				<op><getOid>.1.3.6.1.4.1.12148.10.7.2.7.0</getOid></op>
-				<op>1</op>
+				<op>0.01</op>
 				</mult>
 			</value>
+			<value>0.01</value>
 			<label>Solar Chargers Current Minor Alarm Level</label>
 			<sensorSet>solarChargers</sensorSet>
 		</numSensor>
@@ -1115,7 +1126,7 @@
 			<type>pctofcapacity</type>
 			<sensorId>SOLAR_CHARGERS_CAPACITY_VALUE</sensorId>
 			<value>
-				<op><getOid>.1.3.6.1.4.1.12148.10.7.3.5.0</getOid></op>
+				<getOid>.1.3.6.1.4.1.12148.10.7.3.5.0</getOid>
 			</value>
 			<label>Solar Chargers Capacity Value</label>
 			<sensorSet>Solar Chargers</sensorSet>
@@ -1124,7 +1135,7 @@
 			<type>pctofcapacity</type>
 			<sensorId>SOLAR_CHARGERS_CAPACITY_MAJOR_ALARM_LEVEL</sensorId>
 			<value>
-				<op><getOid>.1.3.6.1.4.1.12148.10.7.3.6.0</getOid></op>
+				<getOid>.1.3.6.1.4.1.12148.10.7.3.6.0</getOid>
 			</value>
 			<label>Solar Chargers Capacity Major Alarm Level</label>
 			<sensorSet>Solar Chargers</sensorSet>
@@ -1166,10 +1177,7 @@
 			<type>num</type>
 			<sensorId>SOLAR_CHARGERS_ERROR_VALUE</sensorId>
 			<value>
-				<mult>
-				<op><getOid>.1.3.6.1.4.1.12148.10.7.4.5.0</getOid></op>
-				<op>1</op>
-				</mult>
+				<getOid>.1.3.6.1.4.1.12148.10.7.4.5.0</getOid>
 			</value>
 			<valueInc>1</valueInc>
 			<label>Solar Chargers Error Value</label>
@@ -1276,7 +1284,10 @@
 			<type>amperage</type>
 			<sensorId>WIND_CHARGERS_CURRENT_MAJOR_ALARM_LEVEL</sensorId>
 			<value>
+				<mult>
 				<op><getOid>.1.3.6.1.4.1.12148.10.8.2.6.0</getOid></op>
+				<op>0.01</op>
+				</mult>
 			</value>
 			<label>Wind Chargers Current Major Alarm Level</label>
 			<sensorSet>Wind Chargers</sensorSet>
@@ -1285,8 +1296,12 @@
 			<type>amperage</type>
 			<sensorId>WIND_CHARGERS_CURRNET_MINOR_ALARM_LEVEL</sensorId>
 			<value>
+				<mult>
 				<op><getOid>.1.3.6.1.4.1.12148.10.8.2.7.0</getOid></op>
+				<op>0.01</op>
+				</mult>
 			</value>
+			<value>0.01</value>
 			<label>Wind Chargers Current Minor Alarm Level</label>
 			<sensorSet>Wind Chargers</sensorSet>
 		</numSensor>
@@ -1467,7 +1482,10 @@
 			<type>amperage</type>
 			<sensorId>LOAD_CURRENT_VALUE</sensorId>
 			<value>
+				<mult>
 				<op><getOid>.1.3.6.1.4.1.12148.10.9.2.5.0</getOid></op>
+				<op>0.01</op>
+				</mult>
 			</value>
 			<label>Load Current Value</label>
 			<sensorSet>Load</sensorSet>
@@ -1476,8 +1494,12 @@
 			<type>amperage</type>
 			<sensorId>LOAD_CURRENT_MAJOR_HIGH_LEVEL</sensorId>
 			<value>
+				<mult>
 				<op><getOid>.1.3.6.1.4.1.12148.10.9.2.6.0</getOid></op>
+				<op>0.01</op>
+				</mult>
 			</value>
+			<value>0.01</value>
 			<label>Load Current Major High Level</label>
 			<sensorSet>Load</sensorSet>
 		</numSensor>
@@ -1485,8 +1507,12 @@
 			<type>amperage</type>
 			<sensorId>LOAD_CURRENT_MINOR_HIGH_LEVEL</sensorId>
 			<value>
+				<mult>
 				<op><getOid>.1.3.6.1.4.1.12148.10.9.2.7.0</getOid></op>
+				<op>0.01</op>
+				</mult>
 			</value>
+			<value>0.01</value>
 			<label>Load Current Minor High Level</label>
 			<sensorSet>Load</sensorSet>
 		</numSensor>
@@ -1576,8 +1602,12 @@
 			<type>voltage</type>
 			<sensorId>LOAD_LVLD_CONNECT_VOLTAGE<rowIndex/></sensorId>
 			<value>
+				<mult>
 				<op><getRowOid>.1.3.6.1.4.1.12148.10.9.6.1.7</getRowOid></op>
+				<op>0.01</op>
+				</mult>
 			</value>
+			<value>0.01</value>
 			<label>Load LVLD <rowIndex/> Connect Voltage</label>
 			<sensorSet>Load</sensorSet>
 		</numSensor>
@@ -1585,8 +1615,12 @@
 			<type>voltage</type>
 			<sensorId>LOAD_LVLD_DISCONNECT_VOLTAGE<rowIndex/></sensorId>
 			<value>
+				<mult>
 				<op><getRowOid>.1.3.6.1.4.1.12148.10.9.6.1.8</getRowOid></op>
+				<op>0.01</op>
+				</mult>
 			</value>
+			<value>0.01</value>
 			<label>Load LVLD <rowIndex/> Disconnect Voltage</label>
 			<sensorSet>Load</sensorSet>
 		</numSensor>
@@ -2289,9 +2323,10 @@
 			<value>
 				<mult>
 				<op><getOid>.1.3.6.1.4.1.12148.10.10.15.1.0</getOid></op>
-				<op>1</op>
+				<op>0.01</op>
 				</mult>
 			</value>
+			<value>0.01</value>
 			<label>Battery Boost Voltage</label>
 			<sensorSet>battery</sensorSet>
 		</numSensor>
@@ -2486,7 +2521,18 @@
 			<enum>inputConfigType-em</enum>
 			<sensorSet>inputs</sensorSet>
 		</stateSensor>
-
+		<stateSensor ruleid="inputIoUnitProgInputStatus" index=".1.3.6.1.4.1.12148.10.11.4.1.2.1">
+			<type>state</type>
+			<sensorId>INPUT_IO_UNIT_PROG_INPUT_STATUS_<rowNumber/></sensorId>
+			<value>
+				<mapValue mapid="systemStatus-vm">
+					<getRowOid>.1.3.6.1.4.1.12148.10.11.4.1.2.1</getRowOid>
+				</mapValue>
+			</value>
+			<label>Input IO Unit <rowIndex/> - <getRowOid>.1.3.6.1.4.1.12148.10.11.4.1.3.1</getRowOid> Status</label>
+			<enum>systemStatus-em</enum>
+			<sensorSet>inputs</sensorSet>
+		</stateSensor>
 		<numSensor ruleid="outputControlUnitNumberOfOutputs" index=".1.3.6.1.4.1.12148.10.12.1.1.2">
 			<type>num</type>
 			<sensorId>OUTPUT_CONTROL_UNIT_NUMBER_OF_OUTPUTS<rowIndex/></sensorId>
@@ -2626,6 +2672,7 @@
 			<valueIn>6</valueIn><valueOut>5</valueOut>
 			<valueIn>*</valueIn><valueOut>6</valueOut>
 		</valueMap>
+	
 		<valueMap ruleid="systemStatus-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>

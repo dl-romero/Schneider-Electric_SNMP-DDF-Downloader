@@ -4,24 +4,27 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="chatsworth_pdu"
 	ddfname="Chatsworth PDU"
-	ddfversion="9"
+	ddfversion="10"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<!--
 		SOURCE
 		\snmp\resources\mibs\chatsworth\Version 2.1.0\UnityMib.txt
-		
+
 		CPI-UNITY-MIB | 4 August 2020
+
+		"Customized" to get serial number from eConnect devices using the chatsworth_econnect_serial_num_x device section.
+		The indexing is very weird. Each part of index is the ASCII table decimal value for each ASCII character in the MAC address.
 	-->
 	<device deviceid="chatsworth_pdu_discovery">
 		<oidMustExist ruleid="cpiPDU_exists" oid=".1.3.6.1.4.1.30932.1.1" istree="yes"/>
-		
-        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+
+    <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
 		<suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
 		<suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
 		<suppressRule ruleid="stompmib2label" suppressid="core/mib2datalabel/labeldata"/>
 		<suppressRule ruleid="stompmib2location" suppressid="core/mib2data/locationdata"/>
-		
+
 		<setProductData ruleid="vendordata" field="vendor">Chatsworth</setProductData>
 		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.30932.1.1.1.2</getOid></setProductData>
 		<setProductData ruleid="mac_addrdata" field="mac_addr"><getOid>1.3.6.1.4.1.30932.1.1.1.3</getOid></setProductData>
@@ -31,33 +34,48 @@
 		<setLocationData ruleid="locationdata" field="LOCATION"><getOid>1.3.6.1.4.1.30932.1.1.2.41</getOid></setLocationData>
 		<!-- pduName -->
 		<setDefaultLabel ruleid="chatsworth_label"><getOid>1.3.6.1.4.1.30932.1.1.2.40</getOid></setDefaultLabel>
-		
+
 	</device>
-	
+
+	<!--
+		For some reason, Chatsworth is using the MAC address as the index for almost all of the OIDs in the "econnect" portion of their MIB.
+		The serial number is only available in this OID brnach. DCE does not return the serial number properly unless you use <getOid> and
+		include the entire index. Probably something that should be addressed in DCE itself, but this is a DDF workaround for the time being.
+		A new chatsworth_econnect_serial_num_x <device> section will be needed for each unique device a user has in their environment since
+		the index is the MAC address of the device (replacing "x" with the next ). Make sure the deviceid is also unique. The serial number
+		OID witout the index is .1.3.6.1.4.1.30932.1.10.1.2.10.1.18. Below is a template to modify as needed.
+	-->
+	<device deviceid="chatsworth_econnect_serial_num_1">
+	  <oidMustExist ruleid="econnect_exists" oid=".1.3.6.1.4.1.30932.1.10.1.2.10.1" istree="yes"/><!-- checks for supported OID branch -->
+	  <setProductData ruleid="econnect_serial_num_1" field="serial_num">
+			<getOid>.1.3.6.1.4.1.30932.1.10.1.2.10.1.18.</getOid><!-- insert full OID + index for serial number. The index will be different on EVERY unique device -->
+	  </setProductData>
+	</device>
+
 	<device deviceid="phaseCount-1">
 		<oidMustNotExist ruleid="cpiLineTableCount_doesNotExist" oid=".1.3.6.1.4.1.30932.1.10.1.3.1.0"/>
-		
+
 		<setProductData ruleid="inputphasecount" field="inputphasecount">3</setProductData>
 		<setProductData ruleid="outputphasecount" field="outputphasecount">3</setProductData>
 		<setProductData ruleid="bankcount" field="bankcount">6</setProductData>
-		
+
 	</device>
-	
+
 	<device deviceid="phaseCount-2">
 		<oidMustExist ruleid="cpiLineTableCount_exists" oid=".1.3.6.1.4.1.30932.1.10.1.3.1.0"/>
-		
+
 		<valueMap ruleid="phaseCount-vm">
 			<valueIn>*</valueIn><valueOut>1</valueOut>
 			<valueIn>2</valueIn><valueOut>1</valueOut>
 			<valueIn>3</valueIn><valueOut>3</valueOut>
 		</valueMap>
-		
+
 		<setProductData ruleid="inputphasecount" field="inputphasecount"><mapValue mapid="phaseCount-vm"><getOid>.1.3.6.1.4.1.30932.1.10.1.3.1.0</getOid></mapValue></setProductData>
 		<setProductData ruleid="outputphasecount" field="outputphasecount"><mapValue mapid="phaseCount-vm"><getOid>.1.3.6.1.4.1.30932.1.10.1.3.1.0</getOid></mapValue></setProductData>
 		<setProductData ruleid="bankcount" field="bankcount"><getOid>.1.3.6.1.4.1.30932.1.10.1.3.1.0</getOid></setProductData>
-		
+
 	</device>
-	
+
 	<device deviceid="chatsworth_pdu_sensors">
 		<oidMustExist ruleid="cpiPDU_exists" oid=".1.3.6.1.4.1.30932.1.1" istree="yes"/>
 
@@ -244,7 +262,7 @@
 			<valueIn>65535</valueIn><valueOut>[false]</valueOut>
 			<valueIn>*</valueIn><valueOut>[true]</valueOut>
 		</valueMap>
-		
+
 		<numSensor ruleid="probe_1_temperature_sensor">
 			<rowTest>
 				<mapValue mapid="notPresent-vm">
@@ -382,12 +400,12 @@
 			<label>Branch Z-X Energy</label>
 			<sensorSet>Energy</sensorSet>
 		</numSensor>
-		
+
 		<valueMap ruleid="ignore-vm">
 			<valueIn>0</valueIn><valueOut>[false]</valueOut>
 			<valueIn>*</valueIn><valueOut>[true]</valueOut>
 		</valueMap>
-		
+
 		<numSensor ruleid="xy_crit_overload_threshold_1">
 			<rowTest>
 				<mapValue mapid="ignore-vm">

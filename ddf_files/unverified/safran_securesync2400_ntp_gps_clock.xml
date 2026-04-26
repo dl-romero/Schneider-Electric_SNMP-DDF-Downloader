@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid ="safran_securesync2400_ntp_gps_clock" 		
+	ddfname="Safran SecureSync 2400 NTP GPS Clock" 	
+	ddfversion="1" 					
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	
+	<!--
+		DDF-1648
+        SOURCE: 10.12.0.90.walk, XDU6400v2.mib, XDUglobal.mib
+        BFO: 114647129
+    -->
+	
+	<device deviceid="vsafran_securesync2400_ntp_gps_clock">
+		<oidMustExist ruleid="safran_securesync2400_ntp_gps_clock_mustexist" oid=".1.3.6.1.4.1.18837.3" istree="yes"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Safran</setProductData>
+		<setProductData ruleid="modeldata" field="model">SecureSync 2400 NTP GPS Clock</setProductData>
+		<setProductData ruleid="typedata" field="type">Generic Device</setProductData>
+
+		<valueMap ruleid="2state-vm">
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>*</valueIn><valueOut>0</valueOut>
+        </valueMap>
+        <valueMap ruleid="3state-vm">
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>*</valueIn><valueOut>0</valueOut>
+        </valueMap>
+        <valueMap ruleid="4state-vm">
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>4</valueIn><valueOut>4</valueOut>
+            <valueIn>*</valueIn><valueOut>0</valueOut>
+        </valueMap>
+        <valueMap ruleid="06state-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>4</valueIn><valueOut>4</valueOut>
+            <valueIn>5</valueIn><valueOut>5</valueOut>
+            <valueIn>6</valueIn><valueOut>6</valueOut>
+            <valueIn>*</valueIn><valueOut>7</valueOut>
+        </valueMap>
+        <valueMap ruleid="7state-vm">
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>4</valueIn><valueOut>4</valueOut>
+            <valueIn>5</valueIn><valueOut>5</valueOut>
+            <valueIn>6</valueIn><valueOut>6</valueOut>
+            <valueIn>7</valueIn><valueOut>7</valueOut>
+            <valueIn>*</valueIn><valueOut>0</valueOut>
+        </valueMap>
+        <valueMap ruleid="03state-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>*</valueIn><valueOut>4</valueOut>
+        </valueMap>
+        <valueMap ruleid="01state-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>*</valueIn><valueOut>2</valueOut>
+        </valueMap>
+		
+		<enumMap ruleid="installed-em">
+            <label>Not Installed</label>
+            <label>Installed</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="enabled-em">
+            <label>Disabled</label>
+            <label>Enabled</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="inRange-em">
+            <label>Out Range</label>
+            <label>In Range</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="present-em">
+            <label>Not Present</label>
+            <label>Present</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="OK-em">
+            <label>Not OK</label>
+            <label>OK</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="sync-em">
+            <label>Sync</label>
+            <label>No Sync</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="holdoverState-em">
+            <label>In Holdover</label>
+            <label>Not In Holdover</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="pendingClear-em">
+            <label>Pending</label>
+            <label>Clear</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="active-em">
+            <label>Active</label>
+            <label>No Active</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="valid-em">
+            <label>Valid</label>
+            <label>Invalid</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="bayHealth-em">
+            <label>OK</label>
+            <label>No Monitoring</label>
+            <label>Warning</label>
+            <label>Fault</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="bayType-em">
+            <label>Active</label>
+            <label>DC12</label>
+            <label>DC24</label>
+            <label>None</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="dynMode-em">
+            <label>Land</label>
+            <label>Sea</label>
+            <label>Air</label>
+            <label>Stationary</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="gpsRefAntenna-em">
+            <label>OK</label>
+            <label>Short</label>
+            <label>Open</label>
+            <label>Unknown</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="okAlarmNone-em">
+            <label>OK</label>
+            <label>Alarm</label>
+            <label>None</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="utcTaiGps-em">
+            <label>utc</label>
+            <label>tai</label>
+            <label>gps</label>
+            <label>unknown</label>
+        </enumMap>
+        <enumMap ruleid="staDiscipline-em">
+            <label>None</label>
+            <label>Warm Up</label>
+            <label>Calibration</label>
+            <label>Track Setup</label>
+            <label>Track Lock</label>
+            <label>Free Run</label>
+            <label>Fault</label>
+            <label>Unknown</label>
+        </enumMap>
+        <enumMap ruleid="rcvMode-em">
+            <label>SingleSat</label>
+            <label>Standard</label>
+            <label>Continuous</label>
+            <label>Averaging</label>
+            <label>TimeOnly</label>
+            <label>Standby</label>
+            <label>SelfTest</label>
+            <label>Unknown</label>
+        </enumMap>
+
+		<stateSensor ruleid="sys_sta_power_dc">
+            <type>state</type>
+            <sensorId>SYS_STA_POWER_DC</sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.1.2.0</getOid>
+                </mapValue>
+            </value>
+            <label>Sys Sta Power Dc</label>
+            <enum>okAlarmNone-em</enum>
+            <sensorSet>System Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="sys_sta_sync_state">
+            <type>state</type>
+            <sensorId>SYS_STA_SYNC_STATE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.1.5.0</getOid>
+                </mapValue>
+            </value>
+            <label>Sys Sta Sync State</label>
+            <enum>sync-em</enum>
+            <sensorSet>System Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="sys_sta_holdover_state">
+            <type>state</type>
+            <sensorId>SYS_STA_HOLDOVER_STATE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.1.6.0</getOid>
+                </mapValue>
+            </value>
+            <label>Sys Sta Holdover State</label>
+            <enum>holdoverState-em</enum>
+            <sensorSet>System Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="sys_sta_time_scale">
+            <type>state</type>
+            <sensorId>SYS_STA_TIME_SCALE</sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.1.10.0</getOid>
+                </mapValue>
+            </value>
+            <label>Sys Sta Time Scale</label>
+            <enum>utcTaiGps-em</enum>
+            <sensorSet>System Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="sys_sta_minor_alarm">
+            <type>state</type>
+            <sensorId>SYS_STA_MINOR_ALARM</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.1.13.0</getOid>
+                </mapValue>
+            </value>
+            <label>Sys Sta Minor Alarm</label>
+            <enum>pendingClear-em</enum>
+            <sensorSet>System Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="sys_sta_major_alarm">
+            <type>state</type>
+            <sensorId>SYS_STA_MAJOR_ALARM</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.1.14.0</getOid>
+                </mapValue>
+            </value>
+            <label>Sys Sta Major Alarm</label>
+            <enum>pendingClear-em</enum>
+            <sensorSet>System Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="sys_sta_bsh_jamming_state">
+            <type>state</type>
+            <sensorId>SYS_STA_BSH_JAMMING_STATE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.1.22.0</getOid>
+                </mapValue>
+            </value>
+            <label>Sys Sta Bsh Jamming State</label>
+            <enum>active-em</enum>
+            <sensorSet>System Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="sys_sta_bsh_spoofing_state">
+            <type>state</type>
+            <sensorId>SYS_STA_BSH_SPOOFING_STATE</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.1.23.0</getOid>
+                </mapValue>
+            </value>
+            <label>Sys Sta Bsh Spoofing State</label>
+            <enum>active-em</enum>
+            <sensorSet>System Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="sys_sta_disciplining">
+            <type>state</type>
+            <sensorId>SYS_STA_DISCIPLINING</sensorId>
+            <value>
+                <mapValue mapid="06state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.1.24.0</getOid>
+                </mapValue>
+            </value>
+            <label>Sys Sta Disciplining</label>
+            <enum>staDiscipline-em</enum>
+            <sensorSet>System Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="gps_ref_time_valid" index=".1.3.6.1.4.1.18837.3.2.2.2.1.1.1">
+            <type>state</type>
+            <sensorId>GPS_REF_TIME_VALID</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.2.1.1.4</getOid>
+                </mapValue>
+            </value>
+            <label>Gps Ref Time Valid</label>
+            <enum>valid-em</enum>
+            <sensorSet>GPS Ref Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="gps_ref_1pps_valid" index=".1.3.6.1.4.1.18837.3.2.2.2.1.1.1">
+            <type>state</type>
+            <sensorId>GPS_REF_1PPS_VALID</sensorId>
+            <value>
+                <mapValue mapid="2state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.2.1.1.5</getOid>
+                </mapValue>
+            </value>
+            <label>Gps Ref 1Pps Valid</label>
+            <enum>valid-em</enum>
+            <sensorSet>GPS Ref Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="gps_ref_rcv_mode" index=".1.3.6.1.4.1.18837.3.2.2.2.1.1.1">
+            <type>state</type>
+            <sensorId>GPS_REF_RCV_MODE</sensorId>
+            <value>
+                <mapValue mapid="7state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.2.1.1.6</getOid>
+                </mapValue>
+            </value>
+            <label>Gps Ref Rcv Mode</label>
+            <enum>rcvMode-em</enum>
+            <sensorSet>GPS Ref Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="gps_ref_dyn_mode" index=".1.3.6.1.4.1.18837.3.2.2.2.1.1.1">
+            <type>state</type>
+            <sensorId>GPS_REF_DYN_MODE</sensorId>
+            <value>
+                <mapValue mapid="4state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.2.1.1.7</getOid>
+                </mapValue>
+            </value>
+            <label>Gps Ref Dyn Mode</label>
+            <enum>dynMode-em</enum>
+            <sensorSet>GPS Ref Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="gps_ref_antenna_state" index=".1.3.6.1.4.1.18837.3.2.2.2.1.1.1">
+            <type>state</type>
+            <sensorId>GPS_REF_ANTENNA_STATE</sensorId>
+            <value>
+                <mapValue mapid="4state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.2.1.1.17</getOid>
+                </mapValue>
+            </value>
+            <label>Gps Ref Antenna State</label>
+            <enum>gpsRefAntenna-em</enum>
+            <sensorSet>GPS Ref Status</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_1_health">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_1_HEALTH</sensorId>
+            <value>
+                <mapValue mapid="03state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.0.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 1 Health</label>
+            <enum>bayHealth-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_1_type">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_1_TYPE</sensorId>
+            <value>
+                <mapValue mapid="03state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.1.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 1 Type</label>
+            <enum>bayType-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_1_presence">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_1_PRESENCE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.2.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 1 Presence</label>
+            <enum>installed-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_1_fan_enabled">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_1_FAN_ENABLED</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.5.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 1 Fan Enabled</label>
+            <enum>enabled-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_1_voltage_in_range">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_1_VOLTAGE_IN_RANGE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.8.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 1 Voltage In Range</label>
+            <enum>inRange-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_1_current_in_range">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_1_CURRENT_IN_RANGE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.9.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 1 Current In Range</label>
+            <enum>inRange-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_1_fanspeed_in_range">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_1_FANSPEED_IN_RANGE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.10.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 1 Fanspeed In Range</label>
+            <enum>inRange-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_1_temp_in_range">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_1_TEMP_IN_RANGE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.11.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 1 Temp In Range</label>
+            <enum>inRange-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_2_health">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_2_HEALTH</sensorId>
+            <value>
+                <mapValue mapid="03state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.0.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 2 Health</label>
+            <enum>bayHealth-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_2_type">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_2_TYPE</sensorId>
+            <value>
+                <mapValue mapid="03state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.1.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 2 Type</label>
+            <enum>bayType-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_2_presence">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_2_PRESENCE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.2.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 2 Presence</label>
+            <enum>installed-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_2_fan_enabled">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_2_FAN_ENABLED</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.5.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 2 Fan Enabled</label>
+            <enum>enabled-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_2_voltage_in_range">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_2_VOLTAGE_IN_RANGE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.8.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 2 Voltage In Range</label>
+            <enum>inRange-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_2_current_in_range">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_2_CURRENT_IN_RANGE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.9.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 2 Current In Range</label>
+            <enum>inRange-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_2_fanspeed_in_range">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_2_FANSPEED_IN_RANGE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.10.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 2 Fanspeed In Range</label>
+            <enum>inRange-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_bay_2_temp_in_range">
+            <type>state</type>
+            <sensorId>HOT_SWAP_BAY_2_TEMP_IN_RANGE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.11.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Bay 2 Temp In Range</label>
+            <enum>inRange-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="hot_swap_overall_health">
+            <type>state</type>
+            <sensorId>HOT_SWAP_OVERALL_HEALTH</sensorId>
+            <value>
+                <mapValue mapid="03state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.6.0.0</getOid>
+                </mapValue>
+            </value>
+            <label>Hot Swap Overall Health</label>
+            <enum>bayHealth-em</enum>
+            <sensorSet>Hot Swap</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="power_dc_present">
+            <type>state</type>
+            <sensorId>POWER_DC_PRESENT</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.7.0.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power Dc Present</label>
+            <enum>present-em</enum>
+            <sensorSet>Power</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="power_poe_present">
+            <type>state</type>
+            <sensorId>POWER_POE_PRESENT</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.7.1.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power Poe Present</label>
+            <enum>present-em</enum>
+            <sensorSet>Power</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="power_poe_25w_available">
+            <type>state</type>
+            <sensorId>POWER_POE_25W_AVAILABLE</sensorId>
+            <value>
+                <mapValue mapid="01state-vm">
+                    <getOid>.1.3.6.1.4.1.18837.3.2.2.7.2.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power Poe 25W Available</label>
+            <enum>OK-em</enum>
+            <sensorSet>Power</sensorSet>
+        </stateSensor>
+        
+       <stringSensor ruleid="sys_sta_version">
+            <type>string</type>
+            <sensorId>SYS_STA_VERSION</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.1.11.0</getOid>
+            </value>
+            <label>Sys Sta Version</label>
+            <sensorSet>Spec Products</sensorSet>
+        </stringSensor>
+        <stringSensor ruleid="sys_sta_timing_version">
+            <type>string</type>
+            <sensorId>SYS_STA_TIMING_VERSION</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.1.12.0</getOid>
+            </value>
+            <label>Sys Sta Timing Version</label>
+            <sensorSet>Spec Products</sensorSet>
+        </stringSensor>
+        <stringSensor ruleid="sys_sta_serial">
+            <type>string</type>
+            <sensorId>SYS_STA_SERIAL</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.1.16.0</getOid>
+            </value>
+            <label>Sys Sta Serial</label>
+            <sensorSet>Spec Products</sensorSet>
+        </stringSensor>
+
+        <numSensor ruleid="sys_sta_osc_temp">
+            <type>temp</type>
+            <sensorId>SYS_STA_OSC_TEMP</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.1.17.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Sys Sta Osc Temp</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="sys_sta_brd_temp">
+            <type>temp</type>
+            <sensorId>SYS_STA_BRD_TEMP</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.1.18.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Sys Sta Brd Temp</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="sys_sta_cpu_temp">
+            <type>temp</type>
+            <sensorId>SYS_STA_CPU_TEMP</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.1.19.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Sys Sta Cpu Temp</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hot_swap_bay_1_voltage">
+            <type>voltage</type>
+            <sensorId>HOT_SWAP_BAY_1_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.3.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Hot Swap Bay 1 Voltage</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hot_swap_bay_1_current">
+            <type>amperage</type>
+            <sensorId>HOT_SWAP_BAY_1_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.4.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Hot Swap Bay 1 Current</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hot_swap_bay_1_fanspeed">
+            <type>fanspeed</type>
+            <sensorId>HOT_SWAP_BAY_1_FANSPEED</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.6.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Hot Swap Bay 1 Fanspeed</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hot_swap_bay_1_temp">
+            <type>temp</type>
+            <sensorId>HOT_SWAP_BAY_1_TEMP</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.7.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Hot Swap Bay 1 Temp</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hot_swap_bay_2_voltage">
+            <type>voltage</type>
+            <sensorId>HOT_SWAP_BAY_2_VOLTAGE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.3.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Hot Swap Bay 2 Voltage</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hot_swap_bay_2_current">
+            <type>amperage</type>
+            <sensorId>HOT_SWAP_BAY_2_CURRENT</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.4.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Hot Swap Bay 2 Current</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hot_swap_bay_2_fanspeed">
+            <type>fanspeed</type>
+            <sensorId>HOT_SWAP_BAY_2_FANSPEED</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.6.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Hot Swap Bay 2 Fanspeed</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+        <numSensor ruleid="hot_swap_bay_2_temp">
+            <type>temp</type>
+            <sensorId>HOT_SWAP_BAY_2_TEMP</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.2.7.0</getOid>
+            </value>
+            <valueInc>0.001</valueInc>
+            <label>Hot Swap Bay 2 Temp</label>
+            <sensorSet>Spec Products</sensorSet>
+        </numSensor>
+
+        <alarmFlags ruleid="Sys_Sta_Minor_Alarm_Alrm">
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.1.13.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Minor Alarm - <getOid>.1.3.6.1.4.1.18837.3.2.2.1.20.0</getOid> Present</activeText>
+                    <inactiveText>Minor Alarm - <getOid>.1.3.6.1.4.1.18837.3.2.2.1.20.0</getOid> Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Alarm</category>
+                <description>
+                    <activeText>Minor Alarm is active and pending resolution for <getOid>.1.3.6.1.4.1.18837.3.2.2.1.20.0</getOid> condition exists.</activeText>
+                    <inactiveText>Minor Alarm is cleared and <getOid>.1.3.6.1.4.1.18837.3.2.2.1.20.0</getOid> condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="Sys_Sta_Major_Alarm_Alrm">
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.1.14.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Major Alarm - <getOid>.1.3.6.1.4.1.18837.3.2.2.1.21.0</getOid> Present</activeText>
+                    <inactiveText>Major Alarm - <getOid>.1.3.6.1.4.1.18837.3.2.2.1.21.0</getOid> Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Alarm</category>
+                <description>
+                    <activeText>Major Alarm is active and pending resolution for <getOid>.1.3.6.1.4.1.18837.3.2.2.1.21.0</getOid> condition exists.</activeText>
+                    <inactiveText>Major Alarm is cleared and <getOid>.1.3.6.1.4.1.18837.3.2.2.1.21.0</getOid> condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="Hot_Swap_Bay_1_Voltage_In_Range_Alrm">
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.8.0</getOid>
+            </value>
+            <alarmFlagsTest match="0">
+                <name>
+                    <activeText>Hot Swap Bay 1 Voltage Out of Range Present</activeText>
+                    <inactiveText>Hot Swap Bay 1 Voltage In Range Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Alarm</category>
+                <description>
+                    <activeText>Hot Swap Bay 1 Voltage is out of range condition exists.</activeText>
+                    <inactiveText>Hot Swap Bay 1 Voltage is in range  condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="Hot_Swap_Bay_1_Current_In_Range_Alrm">
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.9.0</getOid>
+            </value>
+            <alarmFlagsTest match="0">
+                <name>
+                    <activeText>Hot Swap Bay 1 Current Out of Range Present</activeText>
+                    <inactiveText>Hot Swap Bay 1 Current In Range Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Alarm</category>
+                <description>
+                    <activeText>Hot Swap Bay 1 Current is out of range condition exists.</activeText>
+                    <inactiveText>Hot Swap Bay 1 Current is in range  condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="Hot_Swap_Bay_1_FanSpeed_In_Range_Alrm">
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.1.10.0</getOid>
+            </value>
+            <alarmFlagsTest match="0">
+                <name>
+                    <activeText>Hot Swap Bay 1 Fan Speed Out of Range Present</activeText>
+                    <inactiveText>Hot Swap Bay 1 Fan Speed In Range Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Alarm</category>
+                <description>
+                    <activeText>Hot Swap Bay 1 Fan Speed is out of range condition exists.</activeText>
+                    <inactiveText>Hot Swap Bay 1 Fan Speed is in range  condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags ruleid="hot_swap_overall_health_alrm">
+            <value>
+                <getOid>.1.3.6.1.4.1.18837.3.2.2.6.0.0</getOid>
+            </value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Hot Swap Overall Health No Monitoring Present</activeText>
+                    <inactiveText>Hot Swap Overall Health No Monitoring Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Hot Swap</category>
+                <description>
+                    <activeText>Hot Swap Overall Health No Monitoring condition exists.</activeText>
+                    <inactiveText>Hot Swap Overall Health No Monitoring condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>Hot Swap Overall Health Warning Present</activeText>
+                    <inactiveText>Hot Swap Overall Health Warning Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Hot Swap</category>
+                <description>
+                    <activeText>Hot Swap Overall Health Warning condition exists.</activeText>
+                    <inactiveText>Hot Swap Overall Health Warning condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText>Hot Swap Overall Health Fault Present</activeText>
+                    <inactiveText>Hot Swap Overall Health Fault Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>Hot Swap</category>
+                <description>
+                    <activeText>Hot Swap Overall Health Fault condition exists.</activeText>
+                    <inactiveText>Hot Swap Overall Health Fault condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+        <alarmFlags2 ruleid="gps_ref_antenna_state_alrm" index=".1.3.6.1.4.1.18837.3.2.2.2.1.1.1">
+            <value>
+                <getRowOid>.1.3.6.1.4.1.18837.3.2.2.2.1.1.17</getRowOid>
+            </value>
+            <alarmFlagsTest match="2">
+                <name>
+                    <activeText>GPS Reference Antenna State Short Present</activeText>
+                    <inactiveText>GPS Reference Antenna State Short Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>GPS Ref Status</category>
+                <description>
+                    <activeText>GPS Reference Antenna State Short condition exists.</activeText>
+                    <inactiveText>GPS Reference Antenna State Short condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="3">
+                <name>
+                    <activeText>GPS Reference Antenna State Open Present</activeText>
+                    <inactiveText>GPS Reference Antenna State Open Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>GPS Ref Status</category>
+                <description>
+                    <activeText>GPS Reference Antenna State Open condition exists.</activeText>
+                    <inactiveText>GPS Reference Antenna State Open condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+            <alarmFlagsTest match="4">
+                <name>
+                    <activeText>GPS Reference Antenna State Unknown Present</activeText>
+                    <inactiveText>GPS Reference Antenna State Unknown Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>GPS Ref Status</category>
+                <description>
+                    <activeText>GPS Reference Antenna State Unknown condition exists.</activeText>
+                    <inactiveText>GPS Reference Antenna State Unknown condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+	</device>
+</APC_DDF>

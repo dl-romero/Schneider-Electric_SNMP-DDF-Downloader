@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <APC_DDF
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-	ddfid="tripplite_webcardlx"
-	ddfname="TrippLite WEBCARDLX"
-	ddfversion="10"
-	canremove="yes">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="tripplite_webcardlx"
+  ddfname="TrippLite WEBCARDLX"
+  ddfversion="14"
+  canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<device deviceid="tripplite_webcardlx">
 		<oidMustExist ruleid="tlpProducts" oid=".1.3.6.1.4.1.850.1" istree="yes"/>
@@ -41,7 +41,7 @@
 			<getOid>.1.3.6.1.4.1.850.1.2.1.1.2.0</getOid>
 		</setProductData>
 		<setProductData ruleid="tlpDeviceIdentSerialNum" field="serial_num">
-			<getOid>.1.3.6.1.4.1.850.1.2.1.1.5.0</getOid>
+			<getOid>.1.3.6.1.4.1.850.1.1.2.1.1.5.1</getOid>
 		</setProductData>
 		<setProductData ruleid="tlpAgentMAC" field="mac_addr">
 			<getOid>.1.3.6.1.4.1.850.1.2.1.1.4.0</getOid>
@@ -113,13 +113,13 @@
 		</stringSensor>
 
 		<valueMap ruleid="rowStatus-vm">
-			<valueIn>1</valueIn>			<valueOut>0</valueOut>
-			<valueIn>2</valueIn>			<valueOut>1</valueOut>
-			<valueIn>3</valueIn>			<valueOut>2</valueOut>
-			<valueIn>4</valueIn>			<valueOut>3</valueOut>
-			<valueIn>5</valueIn>			<valueOut>4</valueOut>
-			<valueIn>6</valueIn>			<valueOut>5</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>5</valueIn><valueOut>4</valueOut>
+			<valueIn>6</valueIn><valueOut>5</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
 		</valueMap>
 		<enumMap ruleid="rowStatus-em">
 			<label>Active</label>
@@ -131,15 +131,15 @@
 		</enumMap>
 
 		<valueMap ruleid="alarmStatus-vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>2</valueIn>			<valueOut>2</valueOut>
-			<valueIn>3</valueIn>			<valueOut>3</valueOut>
-			<valueIn>4</valueIn>			<valueOut>4</valueOut>
-			<valueIn>5</valueIn>			<valueOut>5</valueOut>
-			<valueIn>6</valueIn>			<valueOut>6</valueOut>
-			<valueIn>7</valueIn>			<valueOut>7</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>7</valueIn><valueOut>7</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
 		</valueMap>
 		<enumMap ruleid="alarmStatus-em">
 			<label>None</label>
@@ -153,9 +153,9 @@
 		</enumMap>
 
 		<valueMap ruleid="openClosed-vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>*</valueIn>			<valueOut>2</valueOut>
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
 		</valueMap>
 		<enumMap ruleid="openClosed-em">
 			<label>Open</label>
@@ -164,10 +164,10 @@
 		</enumMap>
 
 		<valueMap ruleid="onOff-vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>2</valueIn>			<valueOut>2</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
 		</valueMap>
 		<enumMap ruleid="onOff-em">
 			<label>Unknown</label>
@@ -175,26 +175,12 @@
 			<label>On</label>
 		</enumMap>
 
-		<valueMap ruleid="id_cy_vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>2</valueIn>			<valueOut>2</valueOut>
-			<valueIn>3</valueIn>			<valueOut>3</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
-		</valueMap>
-		<enumMap ruleid="id_cy_em">
-			<label>Idle</label>
-			<label>Turn Off</label>
-			<label>Turn On</label>
-			<label>Cycle</label>
-		</enumMap>
-
 		<valueMap ruleid="inputSource-vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>2</valueIn>			<valueOut>2</valueOut>
-			<valueIn>3</valueIn>			<valueOut>3</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
 		</valueMap>
 		<enumMap ruleid="inputSource-em">
 			<label>None</label>
@@ -204,9 +190,9 @@
 		</enumMap>
 
 		<valueMap ruleid="rampAction-vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
 		</valueMap>
 		<enumMap ruleid="rampAction-em">
 			<label>Remain Off</label>
@@ -214,82 +200,14 @@
 		</enumMap>
 
 		<valueMap ruleid="shedAction-vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
 		</valueMap>
 		<enumMap ruleid="shedAction-em">
 			<label>Remain On</label>
 			<label>Turn Off After Delay</label>
 		</enumMap>
-
-		<valueMap ruleid="phase-vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>2</valueIn>			<valueOut>2</valueOut>
-			<valueIn>3</valueIn>			<valueOut>3</valueOut>
-			<valueIn>4</valueIn>			<valueOut>4</valueOut>
-			<valueIn>5</valueIn>			<valueOut>5</valueOut>
-			<valueIn>6</valueIn>			<valueOut>6</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
-		</valueMap>
-		<enumMap ruleid="phase-em">
-			<label>Unknown</label>
-			<label>Phase1</label>
-			<label>Phase2</label>
-			<label>Phase3</label>
-			<label>Phase1-2</label>
-			<label>Phase2-3</label>
-			<label>Phase3-1</label>
-		</enumMap>
-
-		<valueMap ruleid="enabledDisabled-vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
-		</valueMap>
-		<enumMap ruleid="enabledDisabled-em">
-			<label>Disabled</label>
-			<label>Enabled</label>
-		</enumMap>
-
-		<valueMap ruleid="un_nm_vm">
-			<valueIn>0</valueIn>			<valueOut>0</valueOut>
-			<valueIn>1</valueIn>			<valueOut>1</valueOut>
-			<valueIn>2</valueIn>			<valueOut>2</valueOut>
-			<valueIn>3</valueIn>			<valueOut>3</valueOut>
-			<valueIn>4</valueIn>			<valueOut>4</valueOut>
-			<valueIn>5</valueIn>			<valueOut>5</valueOut>
-			<valueIn>6</valueIn>			<valueOut>6</valueOut>
-			<valueIn>7</valueIn>			<valueOut>7</valueOut>
-			<valueIn>8</valueIn>			<valueOut>8</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
-		</valueMap>
-		<enumMap ruleid="un_nm_em">
-			<label>Unknown</label>
-			<label>TEMPERATURE</label>
-			<label>Pal</label>
-			<label>Pansa</label>
-			<label>Delta</label>
-			<label>Sinetica</label>
-			<label>Netos6</label>
-			<label>Netos7</label>
-			<label>Panms</label>
-			<label>Nmc5</label>
-		</enumMap>
-
-		<valueMap ruleid="cri_in_vm">
-			<valueIn>1</valueIn>			<valueOut>0</valueOut>
-			<valueIn>2</valueIn>			<valueOut>1</valueOut>
-			<valueIn>3</valueIn>			<valueOut>2</valueOut>
-			<valueIn>*</valueIn>			<valueOut>0</valueOut>
-		</valueMap>
-		<enumMap ruleid="cri_in_vm">
-			<label>Critical</label>
-			<label>Warning</label>
-			<label>Warning</label>
-		</enumMap>
-
 	</device>
 
 	<device deviceid="tlpUps">
@@ -334,7 +252,7 @@
 			<sensorSet>UPS - Battery Summary</sensorSet>
 		</stateSensor>
 
-		<suppressRule ruleid="suppress-upsBatteryStatus" suppressid="upsmib/upsmib/upsSecondsOnBattery"/>
+		<suppressRule ruleid="suppress-upsSecondsOnBattery" suppressid="upsmib/upsmib/upsSecondsOnBattery"/>
 		<numSensor ruleid="tlpUpsSecondsOnBattery" index=".1.3.6.1.4.1.850.1.1.3.1.3.1.1.1.2">
 			<type>timeinmin</type>
 			<sensorId>TLPUPS<rowIndex/>_TIME_ON_BATT</sensorId>
@@ -349,7 +267,7 @@
 			<sensorSet>UPS - Battery Summary</sensorSet>
 		</numSensor>
 
-		<suppressRule ruleid="suppress-upsBatteryStatus" suppressid="upsmib/upsmib/upsEstimatedMinutesRemaining"/>
+		<suppressRule ruleid="suppress-upsEstimatedMinutesRemaining" suppressid="upsmib/upsmib/upsEstimatedMinutesRemaining"/>
 		<numSensor ruleid="tlpUpsEstimatedMinutesRemaining" index=".1.3.6.1.4.1.850.1.1.3.1.3.1.1.1.3">
 			<type>timeinmin/timeremainingonbatt</type>
 			<sensorId>TLPUPS<rowIndex/>_TIME_REMAINING_ON_BATT</sensorId>
@@ -1351,9 +1269,9 @@
 				<value>0</value>
 			</valueList>
 		</oidMustNotMatch>
-		
-		<!-- suppress upsmib alarms -->
-		<suppressRule ruleid="suppressupsMib_alarm" suppressid="upsmib/upsmib/upsMib_alarm"/>
+
+	  <!-- suppress upsmib alarms -->
+	  <suppressRule ruleid="suppressupsMib_alarm" suppressid="upsmib/upsmib/upsMib_alarm"/>
 
 		<setProductData ruleid="tlpPduIdentNumPhases-in" field="inputphasecount">
 			<getOid usegetnext="yes">.1.3.6.1.4.1.850.1.1.3.2.1.2.1.3</getOid>
@@ -1732,6 +1650,1011 @@
 			</label>
 			<sensorSet>PDU</sensorSet>
 		</numSensor>
+
+		<valueMap ruleid="severity-vm">
+			<valueIn>1</valueIn><valueOut>critical</valueOut>
+			<valueIn>2</valueIn><valueOut>warning</valueOut>
+			<valueIn>3</valueIn><valueOut>informational</valueOut>
+			<valueIn>4</valueIn><valueOut>informational</valueOut>
+			<valueIn>5</valueIn><valueOut>failure</valueOut>
+			<valueIn>6</valueIn><valueOut>critical</valueOut>
+			<valueIn>*</valueIn><valueOut>critical</valueOut>
+		</valueMap>
+		<valueMap ruleid="wellKnownTlpPduAlarms-vm">
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.1</valueIn><valueOut>1</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.2</valueIn><valueOut>2</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.3</valueIn><valueOut>3</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.4</valueIn><valueOut>4</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.5</valueIn><valueOut>5</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.1</valueIn><valueOut>6</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.2</valueIn><valueOut>7</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.3</valueIn><valueOut>8</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.4</valueIn><valueOut>9</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.5</valueIn><valueOut>10</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.6</valueIn><valueOut>11</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.7</valueIn><valueOut>12</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.8</valueIn><valueOut>13</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.9</valueIn><valueOut>14</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.10</valueIn><valueOut>15</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.11</valueIn><valueOut>16</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.12</valueIn><valueOut>17</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.13</valueIn><valueOut>18</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.14</valueIn><valueOut>19</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.15</valueIn><valueOut>20</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.16</valueIn><valueOut>21</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.17</valueIn><valueOut>22</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.18</valueIn><valueOut>23</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.19</valueIn><valueOut>24</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.20</valueIn><valueOut>25</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.21</valueIn><valueOut>26</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.22</valueIn><valueOut>27</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.23</valueIn><valueOut>28</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.24</valueIn><valueOut>29</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.25</valueIn><valueOut>30</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.26</valueIn><valueOut>31</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.27</valueIn><valueOut>32</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.28</valueIn><valueOut>33</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.29</valueIn><valueOut>34</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.30</valueIn><valueOut>35</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.31</valueIn><valueOut>36</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.32</valueIn><valueOut>37</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.33</valueIn><valueOut>38</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.34</valueIn><valueOut>39</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.35</valueIn><valueOut>40</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.36</valueIn><valueOut>41</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.37</valueIn><valueOut>42</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.38</valueIn><valueOut>43</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.39</valueIn><valueOut>44</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.40</valueIn><valueOut>45</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.41</valueIn><valueOut>46</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.42</valueIn><valueOut>47</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.43</valueIn><valueOut>48</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.44</valueIn><valueOut>49</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.45</valueIn><valueOut>50</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.46</valueIn><valueOut>51</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.47</valueIn><valueOut>52</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.6.48</valueIn><valueOut>53</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.7.1</valueIn><valueOut>54</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.7.2</valueIn><valueOut>55</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.7.3</valueIn><valueOut>56</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.7.4</valueIn><valueOut>57</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.7.5</valueIn><valueOut>58</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.7.6</valueIn><valueOut>59</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.8.1</valueIn><valueOut>60</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.8.2</valueIn><valueOut>61</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.8.3</valueIn><valueOut>62</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.8.4</valueIn><valueOut>63</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.8.5</valueIn><valueOut>64</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.8.6</valueIn><valueOut>65</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.9</valueIn><valueOut>66</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.10</valueIn><valueOut>67</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.11.1</valueIn><valueOut>68</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.11.2</valueIn><valueOut>69</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.11.3</valueIn><valueOut>70</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.11.4</valueIn><valueOut>71</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.11.5</valueIn><valueOut>72</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.11.6</valueIn><valueOut>73</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.12</valueIn><valueOut>74</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.13</valueIn><valueOut>75</valueOut>
+			<valueIn>.1.3.6.1.4.1.850.1.3.3.4.14</valueIn><valueOut>76</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+
+		<alarmFlags2 ruleid="tlpPduAlarms" index=".1.3.6.1.4.1.850.1.3.2.1.2">
+			<value><mapValue mapid="wellKnownTlpPduAlarms-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.2</getRowOid></mapValue></value>
+				<alarmFlagsTest match="1">
+					<name>
+						<activeText>The load level is above the designated threshold Alarm</activeText>
+						<inactiveText>The load level is above the designated threshold Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The load level is above the designated threshold Alarm</activeText>
+						<inactiveText>The load level is above the designated threshold Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="2">
+					<name>
+						<activeText>An input condition is out of tolerance Alarm</activeText>
+						<inactiveText>An input condition is out of tolerance Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>An input condition is out of tolerance Alarm</activeText>
+						<inactiveText>An input condition is out of tolerance Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="3">
+					<name>
+						<activeText>An output condition (other than OutputOverload) is out of tolerance Alarm</activeText>
+						<inactiveText>An output condition (other than OutputOverload) is out of tolerance Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>An output condition (other than OutputOverload) is out of tolerance Alarm</activeText>
+						<inactiveText>An output condition (other than OutputOverload) is out of tolerance Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="4">
+					<name>
+						<activeText>The output load exceeds the pdu output capacity Alarm</activeText>
+						<inactiveText>The output load exceeds the pdu output capacity Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output load exceeds the pdu output capacity Alarm</activeText>
+						<inactiveText>The output load exceeds the pdu output capacity Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="5">
+					<name>
+						<activeText>The output of the pdu is in the off state Alarm</activeText>
+						<inactiveText>The output of the pdu is in the off state Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output of the pdu is in the off state Alarm</activeText>
+						<inactiveText>The output of the pdu is in the off state Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="6">
+					<name>
+						<activeText>Load 1 is off Alarm</activeText>
+						<inactiveText>Load 1 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 1 is off Alarm</activeText>
+						<inactiveText>Load 1 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="7">
+					<name>
+						<activeText>Load 2 is off Alarm</activeText>
+						<inactiveText>Load 2 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 2 is off Alarm</activeText>
+						<inactiveText>Load 2 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="8">
+					<name>
+						<activeText>Load 3 is off Alarm</activeText>
+						<inactiveText>Load 3 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 3 is off Alarm</activeText>
+						<inactiveText>Load 3 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="9">
+					<name>
+						<activeText>Load 4 is off Alarm</activeText>
+						<inactiveText>Load 4 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 4 is off Alarm</activeText>
+						<inactiveText>Load 4 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="A">
+					<name>
+						<activeText>Load 5 is off Alarm</activeText>
+						<inactiveText>Load 5 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 5 is off Alarm</activeText>
+						<inactiveText>Load 5 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="B">
+					<name>
+						<activeText>Load 6 is off Alarm</activeText>
+						<inactiveText>Load 6 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 6 is off Alarm</activeText>
+						<inactiveText>Load 6 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="C">
+					<name>
+						<activeText>Load 7 is off Alarm</activeText>
+						<inactiveText>Load 7 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 7 is off Alarm</activeText>
+						<inactiveText>Load 7 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="D">
+					<name>
+						<activeText>Load 8 is off Alarm</activeText>
+						<inactiveText>Load 8 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 8 is off Alarm</activeText>
+						<inactiveText>Load 8 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="E">
+					<name>
+						<activeText>Load 9 is off Alarm</activeText>
+						<inactiveText>Load 9 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 9 is off Alarm</activeText>
+						<inactiveText>Load 9 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="F">
+					<name>
+						<activeText>Load 10 is off Alarm</activeText>
+						<inactiveText>Load 10 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 10 is off Alarm</activeText>
+						<inactiveText>Load 10 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="10">
+					<name>
+						<activeText>Load 11 is off Alarm</activeText>
+						<inactiveText>Load 11 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 11 is off Alarm</activeText>
+						<inactiveText>Load 11 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="11">
+					<name>
+						<activeText>Load 12 is off Alarm</activeText>
+						<inactiveText>Load 12 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 12 is off Alarm</activeText>
+						<inactiveText>Load 12 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="12">
+					<name>
+						<activeText>Load 13 is off Alarm</activeText>
+						<inactiveText>Load 13 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 13 is off Alarm</activeText>
+						<inactiveText>Load 13 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="13">
+					<name>
+						<activeText>Load 14 is off Alarm</activeText>
+						<inactiveText>Load 14 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 14 is off Alarm</activeText>
+						<inactiveText>Load 14 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="14">
+					<name>
+						<activeText>Load 15 is off Alarm</activeText>
+						<inactiveText>Load 15 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 15 is off Alarm</activeText>
+						<inactiveText>Load 15 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="15">
+					<name>
+						<activeText>Load 16 is off Alarm</activeText>
+						<inactiveText>Load 16 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 16 is off Alarm</activeText>
+						<inactiveText>Load 16 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="16">
+					<name>
+						<activeText>Load 17 is off Alarm</activeText>
+						<inactiveText>Load 17 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 17 is off Alarm</activeText>
+						<inactiveText>Load 17 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="17">
+					<name>
+						<activeText>Load 18 is off Alarm</activeText>
+						<inactiveText>Load 18 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 18 is off Alarm</activeText>
+						<inactiveText>Load 18 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="18">
+					<name>
+						<activeText>Load 19 is off Alarm</activeText>
+						<inactiveText>Load 19 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 19 is off Alarm</activeText>
+						<inactiveText>Load 19 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="19">
+					<name>
+						<activeText>Load 20 is off Alarm</activeText>
+						<inactiveText>Load 20 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 20 is off Alarm</activeText>
+						<inactiveText>Load 20 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="1A">
+					<name>
+						<activeText>Load 21 is off Alarm</activeText>
+						<inactiveText>Load 21 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 21 is off Alarm</activeText>
+						<inactiveText>Load 21 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="1B">
+					<name>
+						<activeText>Load 22 is off Alarm</activeText>
+						<inactiveText>Load 22 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 22 is off Alarm</activeText>
+						<inactiveText>Load 22 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="1C">
+					<name>
+						<activeText>Load 23 is off Alarm</activeText>
+						<inactiveText>Load 23 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 23 is off Alarm</activeText>
+						<inactiveText>Load 23 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="1D">
+					<name>
+						<activeText>Load 24 is off Alarm</activeText>
+						<inactiveText>Load 24 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 24 is off Alarm</activeText>
+						<inactiveText>Load 24 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="1E">
+					<name>
+						<activeText>Load 25 is off Alarm</activeText>
+						<inactiveText>Load 25 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 25 is off Alarm</activeText>
+						<inactiveText>Load 25 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="1F">
+					<name>
+						<activeText>Load 26 is off Alarm</activeText>
+						<inactiveText>Load 26 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 26 is off Alarm</activeText>
+						<inactiveText>Load 26 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="20">
+					<name>
+						<activeText>Load 27 is off Alarm</activeText>
+						<inactiveText>Load 27 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 27 is off Alarm</activeText>
+						<inactiveText>Load 27 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="21">
+					<name>
+						<activeText>Load 28 is off Alarm</activeText>
+						<inactiveText>Load 28 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 28 is off Alarm</activeText>
+						<inactiveText>Load 28 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="22">
+					<name>
+						<activeText>Load 29 is off Alarm</activeText>
+						<inactiveText>Load 29 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 29 is off Alarm</activeText>
+						<inactiveText>Load 29 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="23">
+					<name>
+						<activeText>Load 30 is off Alarm</activeText>
+						<inactiveText>Load 30 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 30 is off Alarm</activeText>
+						<inactiveText>Load 30 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="24">
+					<name>
+						<activeText>Load 31 is off Alarm</activeText>
+						<inactiveText>Load 31 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 31 is off Alarm</activeText>
+						<inactiveText>Load 31 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="25">
+					<name>
+						<activeText>Load 32 is off Alarm</activeText>
+						<inactiveText>Load 32 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 32 is off Alarm</activeText>
+						<inactiveText>Load 32 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="26">
+					<name>
+						<activeText>Load 33 is off Alarm</activeText>
+						<inactiveText>Load 33 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 33 is off Alarm</activeText>
+						<inactiveText>Load 33 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="27">
+					<name>
+						<activeText>Load 34 is off Alarm</activeText>
+						<inactiveText>Load 34 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 34 is off Alarm</activeText>
+						<inactiveText>Load 34 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="28">
+					<name>
+						<activeText>Load 35 is off Alarm</activeText>
+						<inactiveText>Load 35 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 35 is off Alarm</activeText>
+						<inactiveText>Load 35 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="29">
+					<name>
+						<activeText>Load 36 is off Alarm</activeText>
+						<inactiveText>Load 36 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 36 is off Alarm</activeText>
+						<inactiveText>Load 36 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="2A">
+					<name>
+						<activeText>Load 37 is off Alarm</activeText>
+						<inactiveText>Load 37 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 37 is off Alarm</activeText>
+						<inactiveText>Load 37 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="2B">
+					<name>
+						<activeText>Load 38 is off Alarm</activeText>
+						<inactiveText>Load 38 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 38 is off Alarm</activeText>
+						<inactiveText>Load 38 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="2C">
+					<name>
+						<activeText>Load 39 is off Alarm</activeText>
+						<inactiveText>Load 39 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 39 is off Alarm</activeText>
+						<inactiveText>Load 39 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="2D">
+					<name>
+						<activeText>Load 40 is off Alarm</activeText>
+						<inactiveText>Load 40 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 40 is off Alarm</activeText>
+						<inactiveText>Load 40 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="2E">
+					<name>
+						<activeText>Load 41 is off Alarm</activeText>
+						<inactiveText>Load 41 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 41 is off Alarm</activeText>
+						<inactiveText>Load 41 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="2F">
+					<name>
+						<activeText>Load 42 is off Alarm</activeText>
+						<inactiveText>Load 42 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 42 is off Alarm</activeText>
+						<inactiveText>Load 42 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="30">
+					<name>
+						<activeText>Load 43 is off Alarm</activeText>
+						<inactiveText>Load 43 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 43 is off Alarm</activeText>
+						<inactiveText>Load 43 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="31">
+					<name>
+						<activeText>Load 44 is off Alarm</activeText>
+						<inactiveText>Load 44 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 44 is off Alarm</activeText>
+						<inactiveText>Load 44 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="32">
+					<name>
+						<activeText>Load 45 is off Alarm</activeText>
+						<inactiveText>Load 45 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 45 is off Alarm</activeText>
+						<inactiveText>Load 45 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="33">
+					<name>
+						<activeText>Load 46 is off Alarm</activeText>
+						<inactiveText>Load 46 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 46 is off Alarm</activeText>
+						<inactiveText>Load 46 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="34">
+					<name>
+						<activeText>Load 47 is off Alarm</activeText>
+						<inactiveText>Load 47 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 47 is off Alarm</activeText>
+						<inactiveText>Load 47 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="35">
+					<name>
+						<activeText>Load 48 is off Alarm</activeText>
+						<inactiveText>Load 48 is off Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Load 48 is off Alarm</activeText>
+						<inactiveText>Load 48 is off Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="36">
+					<name>
+						<activeText>Circuit breaker 1 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 1 is open Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Circuit breaker 1 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 1 is open Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="37">
+					<name>
+						<activeText>Circuit breaker 2 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 2 is open Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Circuit breaker 2 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 2 is open Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="38">
+					<name>
+						<activeText>Circuit breaker 3 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 3 is open Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Circuit breaker 3 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 3 is open Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="39">
+					<name>
+						<activeText>Circuit breaker 4 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 4 is open Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Circuit breaker 4 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 4 is open Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="3A">
+					<name>
+						<activeText>Circuit breaker 5 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 5 is open Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Circuit breaker 5 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 5 is open Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="3B">
+					<name>
+						<activeText>Circuit breaker 6 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 6 is open Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>Circuit breaker 6 is open Alarm</activeText>
+						<inactiveText>Circuit breaker 6 is open Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="3C">
+					<name>
+						<activeText>The output current on phase 1 or l1-l2 exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on phase 1 or l1-l2 exceeds load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on phase 1 or l1-l2 exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on phase 1 or l1-l2 exceeds load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="3D">
+					<name>
+						<activeText>The output current on phase 2 or l2-l3 exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on phase 2 or l2-l3 exceeds load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on phase 2 or l2-l3 exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on phase 2 or l2-l3 exceeds load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="3E">
+					<name>
+						<activeText>The output current on phase 3 or l3-l1 exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on phase 3 or l3-l1 exceeds load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on phase 3 or l3-l1 exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on phase 3 or l3-l1 exceeds load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="3F">
+					<name>
+						<activeText>The output current on l1-n exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on l1-n exceeds load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on l1-n exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on l1-n exceeds load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="40">
+					<name>
+						<activeText>The output current on l2-n exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on l2-n exceeds load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on l2-n exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on l2-n exceeds load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="41">
+					<name>
+						<activeText>The output current on l3-n exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on l3-n exceeds load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on l3-n exceeds load limits Alarm</activeText>
+						<inactiveText>The output current on l3-n exceeds load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="42">
+					<name>
+						<activeText>One of more loads are not on Alarm</activeText>
+						<inactiveText>One of more loads are not on Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>One of more loads are not on Alarm</activeText>
+						<inactiveText>One of more loads are not on Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="43">
+					<name>
+						<activeText>The load level is below the designated threshold Alarm</activeText>
+						<inactiveText>The load level is below the designated threshold Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The load level is below the designated threshold Alarm</activeText>
+						<inactiveText>The load level is below the designated threshold Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="44">
+					<name>
+						<activeText>The output current on phase 1 or l1-l2 is below load limits Alarm</activeText>
+						<inactiveText>The output current on phase 1 or l1-l2 is below load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on phase 1 or l1-l2 is below load limits Alarm</activeText>
+						<inactiveText>The output current on phase 1 or l1-l2 is below load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="45">
+					<name>
+						<activeText>The output current on phase 2 or l2-l3 is below load limits Alarm</activeText>
+						<inactiveText>The output current on phase 2 or l2-l3 is below load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on phase 2 or l2-l3 is below load limits Alarm</activeText>
+						<inactiveText>The output current on phase 2 or l2-l3 is below load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="46">
+					<name>
+						<activeText>The output current on phase 3 or l3-l1 is below load limits Alarm</activeText>
+						<inactiveText>The output current on phase 3 or l3-l1 is below load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on phase 3 or l3-l1 is below load limits Alarm</activeText>
+						<inactiveText>The output current on phase 3 or l3-l1 is below load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="47">
+					<name>
+						<activeText>The output current on l1-n is below load limits Alarm</activeText>
+						<inactiveText>The output current on l1-n is below load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on l1-n is below load limits Alarm</activeText>
+						<inactiveText>The output current on l1-n is below load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="48">
+					<name>
+						<activeText>The output current on l2-n is below load limits Alarm</activeText>
+						<inactiveText>The output current on l2-n is below load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on l2-n is below load limits Alarm</activeText>
+						<inactiveText>The output current on l2-n is below load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="49">
+					<name>
+						<activeText>The output current on l3-n is below load limits Alarm</activeText>
+						<inactiveText>The output current on l3-n is below load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The output current on l3-n is below load limits Alarm</activeText>
+						<inactiveText>The output current on l3-n is below load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="4A">
+					<name>
+						<activeText>The thd value is out of range Alarm</activeText>
+						<inactiveText>The thd value is out of range Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>The thd value is out of range Alarm</activeText>
+						<inactiveText>The thd value is out of range Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="4B">
+					<name>
+						<activeText>A general fault in the pdu has been detected Alarm</activeText>
+						<inactiveText>A general fault in the pdu has been detected Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>A general fault in the pdu has been detected Alarm</activeText>
+						<inactiveText>A general fault in the pdu has been detected Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+				<alarmFlagsTest match="4C">
+					<name>
+						<activeText>One or more outlets is above load limits Alarm</activeText>
+						<inactiveText>One or more outlets is above load limits Alarm Cleared</inactiveText>
+					</name>
+					<severity><mapValue mapid="severity-vm"><getRowOid>.1.3.6.1.4.1.850.1.3.2.1.7</getRowOid></mapValue></severity>
+					<category>Device</category>
+					<description>
+						<activeText>One or more outlets is above load limits Alarm</activeText>
+						<inactiveText>One or more outlets is above load limits Alarm Cleared</inactiveText>
+					</description>
+				</alarmFlagsTest>
+		</alarmFlags2>
 	</device>
 
 	<device deviceid="tlpEnvirosense">
@@ -2311,12 +3234,785 @@
 		</numSensor>
 	</device>
 
-	<device deviceid="tlpCooling">
+<device deviceid="tlpCooling">
 		<oidMustExist ruleid="exists-tlpCool" istree="yes" oid=".1.3.6.1.4.1.850.1.1.3.4" />
 		<oidMustNotMatch ruleid="tlpCoolingIdentNumCooling" oid=".1.3.6.1.4.1.850.1.1.3.5.1.1.0">
 			<valueList>
 				<value>0</value>
 			</valueList>
 		</oidMustNotMatch>
+
+  <!-- tlpCoolingDeviceTable -->
+
+  <stateSensor ruleid="tlp_cooling_device_cooling_type" index=".1.3.6.1.4.1.850.1.1.3.5.2.1.1.1">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_DEVICE_COOLING_TYPE<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="coolingDeviceType-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.2.1.1.1</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Device Type</label>
+			<enum>coolingDeviceType-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+  <!-- tlpCoolingTemperatureCelsiusTable -->
+
+  <numSensor ruleid="tlp_cooling_ambient_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.1">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_AMBIENT_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.1</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Ambient Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_supply_air_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.2">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_SUPPLY_AIR_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.2</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Supply Air Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_return_air_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.3">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_RETURN_AIR_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.3</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Return Air Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_condenser_inlet_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.4">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_CONDENSER_INLET_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.4</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Condenser Inlet Air Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_evaporator_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.5">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_EVAPORATOR_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.5</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Evaporator Surface Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_suction_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.6">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_SUCTION_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.6</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Suction Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_remote_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.7">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_REMOTE_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.7</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> External Remote Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_condenser_outlet_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.8">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_CONDENSER_OUTLET_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.8</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Condenser Outlet Air Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_liquid_pipe_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.9">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_LIQUID_PIPE_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.9</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Liquid Pipe Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_subcooling_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.10">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_SUBCOOLING_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.10</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Subcooling Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_superheat_deg_c" index=".1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.11">
+			<type>temp</type>
+			<sensorId>_TLP_COOLING_SUPERHEAT_DEG_C<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.1.2.1.11</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Superheat Temperature</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+  <!-- tlpCoolingPressureBarTable -->
+
+  <numSensor ruleid="tlp_cooling_suction_pressure_bar" index=".1.3.6.1.4.1.850.1.1.3.5.3.2.3.1.1">
+			<type>pressure</type>
+			<sensorId>_TLP_COOLING_SUCTION_PRESSURE_BAR<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.2.3.1.1</getRowOid></op>
+					<op>10</op> <!-- convert Bar to kPa * 0.1 -->
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Suction Pressure</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_discharge_pressure_bar" index=".1.3.6.1.4.1.850.1.1.3.5.3.2.3.1.2">
+			<type>pressure</type>
+			<sensorId>_TLP_COOLING_DISCHARGE_PRESSURE_BAR<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.2.3.1.2</getRowOid></op>
+					<op>10</op> <!-- convert Bar to kPa * 0.1 -->
+				</mult>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Discharge Pressure</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+  <!-- tlpCoolingCurrentTable -->
+
+  <numSensor ruleid="tlp_cooling_unit_current" index=".1.3.6.1.4.1.850.1.1.3.5.3.3.1.1">
+			<type>amperage</type>
+			<sensorId>_TLP_COOLING_UNIT_CURRENT<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.3.1.1</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Unit Current</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_compressor_current" index=".1.3.6.1.4.1.850.1.1.3.5.3.3.1.2">
+			<type>amperage</type>
+			<sensorId>_TLP_COOLING_COMPRESSOR_CURRENT<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.3.1.2</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Compressor Current</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_evaporator_fan_current" index=".1.3.6.1.4.1.850.1.1.3.5.3.3.1.3">
+			<type>amperage</type>
+			<sensorId>_TLP_COOLING_EVAPORATOR_FAN_CURRENT<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.3.1.3</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Evaporator Fan Current</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_condenser_fan_current" index=".1.3.6.1.4.1.850.1.1.3.5.3.3.1.4">
+			<type>amperage</type>
+			<sensorId>_TLP_COOLING_CONDENSER_FAN_CURRENT<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.3.1.4</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Condenser Fan Current</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+  <!-- tlpCoolingDynamicTable -->
+
+  <stateSensor ruleid="tlp_cooling_evaporator_fan_speed" index=".1.3.6.1.4.1.850.1.1.3.5.3.4.1.1">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_EVAPORATOR_FAN_SPEED<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="fanSpeed-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.4.1.1</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Evaporator Fan Speed</label>
+			<enum>fanSpeed-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+		<stateSensor ruleid="tlp_cooling_condenser_fan_speed" index=".1.3.6.1.4.1.850.1.1.3.5.3.4.1.2">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_CONDENSER_FAN_SPEED<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="fanSpeed-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.4.1.2</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Condenser Fan Speed</label>
+			<enum>fanSpeed-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+		<numSensor ruleid="tlp_cooling_compressor_frequency" index=".1.3.6.1.4.1.850.1.1.3.5.3.4.1.3">
+			<type>frequency</type>
+			<sensorId>_TLP_COOLING_COMPRESSOR_FREQUENCY<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.4.1.3</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Compressor Frequency</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_eev_step" index=".1.3.6.1.4.1.850.1.1.3.5.3.4.1.4">
+			<type>num</type>
+			<sensorId>_TLP_COOLING_EEV_STEP<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.4.1.4</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> EEV Step</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_eev_step_percent" index=".1.3.6.1.4.1.850.1.1.3.5.3.4.1.5">
+			<type>pctofcapacity</type>
+			<sensorId>_TLP_COOLING_EEV_STEP_PERCENT<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.4.1.5</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> EEV Step Open Percent</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_indoor_fan_speed" index=".1.3.6.1.4.1.850.1.1.3.5.3.4.1.6">
+			<type>pctofcapacity</type>
+			<sensorId>_TLP_COOLING_INDOOR_FAN_SPEED<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.4.1.6</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Indoor Fan Speed</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_outdoor_fan_speed" index=".1.3.6.1.4.1.850.1.1.3.5.3.4.1.7">
+			<type>pctofcapacity</type>
+			<sensorId>_TLP_COOLING_OUTDOOR_FAN_SPEED<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.4.1.7</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Outdoor Fan Speed</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_compressor_speed" index=".1.3.6.1.4.1.850.1.1.3.5.3.4.1.8">
+			<type>pctofcapacity</type>
+			<sensorId>_TLP_COOLING_COMPRESSOR_SPEED<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.4.1.8</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Compressor Speed</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+  <!-- tlpCoolingRuntimeTable -->
+
+  <numSensor ruleid="tlp_cooling_compressor_run_hours" index=".1.3.6.1.4.1.850.1.1.3.5.3.5.1.1">
+			<type>runhours</type>
+			<sensorId>_TLP_COOLING_COMPRESSOR_RUN_HOURS<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.5.1.1</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Compressor Run Hours</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_condensate_pump_run_hours" index=".1.3.6.1.4.1.850.1.1.3.5.3.5.1.2">
+			<type>runhours</type>
+			<sensorId>_TLP_COOLING_CONDENSATE_PUMP_RUN_HOURS<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.5.1.2</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Condensate Pump Run Hours</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_air_filter_run_hours" index=".1.3.6.1.4.1.850.1.1.3.5.3.5.1.3">
+			<type>runhours</type>
+			<sensorId>_TLP_COOLING_AIR_FILTER_RUN_HOURS<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.5.1.3</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Air Filter Run Hours</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_evaporator_fan_run_hours" index=".1.3.6.1.4.1.850.1.1.3.5.3.5.1.4">
+			<type>runhours</type>
+			<sensorId>_TLP_COOLING_EVAPORATOR_FAN_RUN_HOURS<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.5.1.4</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Evaporator Fan Run Hours</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_condenser_fan_run_hours" index=".1.3.6.1.4.1.850.1.1.3.5.3.5.1.5">
+			<type>runhours</type>
+			<sensorId>_TLP_COOLING_CONDENSER_FAN_RUN_HOURS<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.5.1.5</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Condenser Fan Run Hours</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_atomizer_run_hours" index=".1.3.6.1.4.1.850.1.1.3.5.3.5.1.6">
+			<type>runhours</type>
+			<sensorId>_TLP_COOLING_ATOMIZER_RUN_HOURS<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.5.1.6</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Atomizer Run Hours</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_indoor_fan_run_hours" index=".1.3.6.1.4.1.850.1.1.3.5.3.5.1.7">
+			<type>runhours</type>
+			<sensorId>_TLP_COOLING_INDOOR_FAN_RUN_HOURS<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.5.1.7</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Indoor Fan Run Hours</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_outdoor_fan_run_hours" index=".1.3.6.1.4.1.850.1.1.3.5.3.5.1.8">
+			<type>runhours</type>
+			<sensorId>_TLP_COOLING_OUTDOOR_FAN_RUN_HOURS<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.5.1.8</getRowOid>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Outdoor Fan Run Hours</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+  <!--  tlpCoolingStatusTable -->
+
+  <stateSensor ruleid="tlp_cooling_operating_mode" index=".1.3.6.1.4.1.850.1.1.3.5.3.6.1.1">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_OPERATING_MODE<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="operatingMode-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.6.1.1</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Operating Mode</label>
+			<enum>operatingMode-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+		<numSensor ruleid="tlp_cooling_cool_output" index=".1.3.6.1.4.1.850.1.1.3.5.3.6.1.2">
+			<type>num/powerKW</type>
+			<sensorId>_TLP_COOLING_COOL_OUTPUT<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.6.1.2</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Output</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+    <stateSensor ruleid="tlp_cooling_compressor_status" index=".1.3.6.1.4.1.850.1.1.3.5.3.6.1.4">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_COMPRESSOR_STATUS<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.6.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Compressor Status</label>
+			<enum>offOn-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+    <stateSensor ruleid="tlp_cooling_water_status" index=".1.3.6.1.4.1.850.1.1.3.5.3.6.1.5">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_WATER_STATUS<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.6.1.5</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Unit Water Status</label>
+			<enum>waterStatus-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+    <stateSensor ruleid="tlp_cooling_defrost_mode" index=".1.3.6.1.4.1.850.1.1.3.5.3.6.1.6">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_DEFROST_MODE<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.6.1.6</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Defrost Mode</label>
+			<enum>disableEnable-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+    <stateSensor ruleid="tlp_cooling_quiet_mode" index=".1.3.6.1.4.1.850.1.1.3.5.3.6.1.7">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_QUIET_MODE<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.6.1.7</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Quiet Mode</label>
+			<enum>disableEnable-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+    <stateSensor ruleid="tlp_cooling_hot_gas_bypass_mode" index=".1.3.6.1.4.1.850.1.1.3.5.3.6.1.8">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_HOT_GAS_BYPASS_MODE<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.6.1.8</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Hot Gas Bypass Mode</label>
+			<enum>disableEnable-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+    <stateSensor ruleid="tlp_cooling_auto_fan_speed" index=".1.3.6.1.4.1.850.1.1.3.5.3.6.1.9">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_AUTO_FAN_SPEED<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.6.1.9</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Auto Fan Speed</label>
+			<enum>disableEnable-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+  <!-- tlpCoolingMaintenanceTable -->
+
+  <stateSensor ruleid="tlp_cooling_compressor_maintenance_needed" index=".1.3.6.1.4.1.850.1.1.3.5.3.7.1.1">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_COMPRESSOR_MAINTENANCE_NEEDED<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.7.1.1</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Compressor Maintenance Needed</label>
+			<enum>trueFalse-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+    <stateSensor ruleid="tlp_cooling_filter_maintenance_needed" index=".1.3.6.1.4.1.850.1.1.3.5.3.7.1.2">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_FILTER_MAINTENANCE_NEEDED<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.7.1.2</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Filter Maintenance Needed</label>
+			<enum>trueFalse-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+    <stateSensor ruleid="tlp_cooling_indoor_fan_maintenance_needed" index=".1.3.6.1.4.1.850.1.1.3.5.3.7.1.3">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_INDOOR_FAN_MAINTENANCE_NEEDED<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.7.1.3</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Indoor Fan Maintenance Needed</label>
+			<enum>trueFalse-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+    <stateSensor ruleid="tlp_cooling_outdoor_fan_maintenance_needed" index=".1.3.6.1.4.1.850.1.1.3.5.3.7.1.13">
+			<type>state</type>
+			<sensorId>_TLP_COOLING_OUTDOOR_FAN_MAINTENANCE_NEEDED<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="2State-vm">
+					<getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.7.1.13</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Outdoor Fan Maintenance Needed</label>
+			<enum>trueFalse-em</enum>
+			<sensorSet>Cooling</sensorSet>
+		</stateSensor>
+
+  <!-- tlpCoolingHumidityTable -->
+
+  <numSensor ruleid="tlp_cooling_return_air_humidity" index=".1.3.6.1.4.1.850.1.1.3.5.3.8.1.1">
+			<type>humidity</type>
+			<sensorId>_TLP_COOLING_RETURN_AIR_HUMIDITY<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.8.1.1</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Return Air Humidity</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_control_humidity" index=".1.3.6.1.4.1.850.1.1.3.5.3.8.1.2">
+			<type>humidity</type>
+			<sensorId>_TLP_COOLING_CONTROL_HUMIDITY<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.8.1.2</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Control Humidity</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<numSensor ruleid="tlp_cooling_recommended_humidity" index=".1.3.6.1.4.1.850.1.1.3.5.3.8.1.3">
+			<type>humidity</type>
+			<sensorId>_TLP_COOLING_RECOMMENDED_HUMIDITY<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.8.1.3</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Recommended Humidity</label>
+			<sensorSet>Cooling</sensorSet>
+		</numSensor>
+
+		<valueMap ruleid="coolingDeviceType-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="coolingDeviceType-em">
+			<label>Unknown</label>
+			<label>Top Cooling</label>
+			<label>InRow Cooling</label>
+		</enumMap>
+
+		<valueMap ruleid="fanSpeed-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="fanSpeed-em">
+			<label>Off</label>
+			<label>Low</label>
+			<label>Medium Low</label>
+			<label>Medium</label>
+			<label>Medium High</label>
+			<label>High</label>
+			<label>Auto</label>
+		</enumMap>
+
+		<valueMap ruleid="operatingMode-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>7</valueIn><valueOut>7</valueOut>
+			<valueIn>8</valueIn><valueOut>8</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="operatingMode-em">
+			<label>Off</label>
+			<label>Idle</label>
+			<label>Cooling</label>
+			<label>Shutting Down</label>
+			<label>Dehumidifying</label>
+			<label>Defrosting</label>
+			<label>Not Connected</label>
+			<label>Humidifying</label>
+			<label>Cooling and Humidifying</label>
+		</enumMap>
+
+		<valueMap ruleid="2State-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="offOn-em">
+			<label>Off</label>
+			<label>On</label>
+		</enumMap>
+		<enumMap ruleid="waterStatus-em">
+			<label>Not Full</label>
+			<label>Full</label>
+		</enumMap>
+		<enumMap ruleid="disableEnable-em">
+			<label>Disable</label>
+			<label>Enable</label>
+	  </enumMap>
+
+		<valueMap ruleid="trueFalse-vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>1</valueOut>
+		</valueMap>
+		<enumMap ruleid="trueFalse-em">
+			<label>True</label>
+			<label>False</label>
+	  </enumMap>
+
+		<alarmFlags2 ruleid="tlp_cooling_alarm_status" index=".1.3.6.1.4.1.850.1.1.3.5.3.6.1.3">
+			<value><getRowOid>.1.3.6.1.4.1.850.1.1.3.5.3.6.1.3</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Device Warning Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Device Warning Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>system</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Device Warning Alarm Condition Present.</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Device Warning Alarm Condition Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Device Critical Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Device Critical Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>system</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Device Critical Alarm Condition Present.</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.850.1.1.1.2.1.6</getRowOid> Cooling Device Critical Alarm Condition Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
 	</device>
 </APC_DDF>

@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="pcoWeb_climaveneta_coolblade_dau090"
-	ddfname="(pcoWeb) Climaveneta Coolblade DAU090"
+	ddfname="Climaveneta Coolblade DAU090 [pcoWeb][SNMP]"
 	ddfversion="1"
 	canremove="yes">
 		 

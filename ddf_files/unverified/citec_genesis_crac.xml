@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<APC_DDF 
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd" 
-		ddfid="citec_genesis_crac" 
-		ddfname="CITEC GENESIS CRAC" 
-		ddfversion="3" 
+<APC_DDF
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+		ddfid="citec_genesis_crac"
+		ddfname="CITEC GENESIS CRAC [pcoWeb][SNMP]" 
+		ddfversion="3"
 		canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<device deviceid="citec_genesis_crac">

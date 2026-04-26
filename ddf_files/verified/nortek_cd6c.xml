@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="nortek_cd6c"
+	ddfname="Nortek Air Solutions CD6C"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+	
+		SOURCE
+		\snmp\resources\mibs\nortek\EWCD6Cv3.mib
+		
+		CD6C MIB | 25 February 2021
+		
+		WALKFILES
+		\snmp\resources\sapro\walkfiles\nortek\CDU-Nortek.txt
+		
+	-->
+	<device deviceid="cd6c">
+		<oidMustExist ruleid="system_exists" oid=".1.3.6.1.4.1.30657.2.1.1" istree="yes"/> 
+		
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Nortek Air Solutions</setProductData>
+		<setProductData ruleid="modeldata" field="model">CD6C</setProductData>
+		<setProductData ruleid="software_version" field="appversion">
+			<substring start="0" end="1">
+				<div><op><getOid>.1.3.6.1.4.1.30657.2.1.1.46.0</getOid></op><op>10</op></div>
+			</substring>.
+			<substring start="2"><getOid>.1.3.6.1.4.1.30657.2.1.1.46.0</getOid></substring>
+		</setProductData>
+		<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+		
+		<valueMap ruleid="9state-vm">
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>7</valueIn><valueOut>7</valueOut>
+			<valueIn>8</valueIn><valueOut>8</valueOut>
+			<valueIn>9</valueIn><valueOut>9</valueOut>
+		</valueMap>
+		
+		<valueMap ruleid="5state-vm">
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+		</valueMap>
+		
+		<enumMap ruleid="cduStatusMode-em">
+			<label>Unknown</label>
+			<label>Not Configured</label>
+			<label>Shutdown Remote Switch</label>
+			<label>Shutdown Network</label>
+			<label>Shutdown Manual Override Switch</label>
+			<label>Full Manual Control</label>
+			<label>Standby</label>
+			<label>Online</label>
+			<label>Filling</label>
+			<label>Fault Shutdown</label>
+		</enumMap>
+		
+		<enumMap ruleid="cduStatusCurrentPump-em">
+			<label>Unknown</label>
+			<label>Pump Off</label>
+			<label>Pump Inverter 1</label>
+			<label>Pump Inverter 2</label>
+			<label>Pump DOL 1</label>
+			<label>Pump DOL 2</label>
+		</enumMap>
+
+        <stateSensor ruleid="cduStatusMode">
+            <type>state</type>
+            <sensorId>_OPERATING_MODE</sensorId>
+            <value>
+                <mapValue mapid="9state-vm">
+                    <getOid>.1.3.6.1.4.1.30657.2.1.1.1.0</getOid>
+                </mapValue>
+            </value>
+            <label>CDU Status Mode</label>
+            <enum>cduStatusMode-em</enum>
+            <sensorSet>Device</sensorSet>
+        </stateSensor>
+		
+        <alarmFlags ruleid="cduStatusMode_alarm">
+            <value><getOid>.1.3.6.1.4.1.30657.2.1.1.1.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>CDU Not Configured</activeText>
+                    <inactiveText>CDU Not Configured Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU is not configured.</activeText>
+                    <inactiveText>A CDU not configured condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+			<alarmFlagsTest match="2">
+                <name>
+                    <activeText>Shutdown Remote Switch</activeText>
+                    <inactiveText>Shutdown Remote Switch Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A shutdown remote switch condition exists.</activeText>
+                    <inactiveText>A shutdown remote switch condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+			<alarmFlagsTest match="3">
+                <name>
+                    <activeText>Shutdown Network</activeText>
+                    <inactiveText>Shutdown Network Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A shutdown network condition exists.</activeText>
+                    <inactiveText>A shutdown network condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+			<alarmFlagsTest match="4">
+                <name>
+                    <activeText>Shutdown Manual Override Switch</activeText>
+                    <inactiveText>Shutdown Manual Override Switch Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A shutdown manual override switch condition exists.</activeText>
+                    <inactiveText>A shutdown manual override switch condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+			<alarmFlagsTest match="5">
+                <name>
+                    <activeText>Full Manual Control</activeText>
+                    <inactiveText>Full Manual Control Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A full manual control condition exists.</activeText>
+                    <inactiveText>A full manual control condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+			<alarmFlagsTest match="6">
+                <name>
+                    <activeText>CDU On Standby</activeText>
+                    <inactiveText>CDU On Standby Cleared</inactiveText>
+                </name>
+                <severity>informational</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU on standby.</activeText>
+                    <inactiveText>A CDU on standby condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+			<alarmFlagsTest match="7">
+                <name>
+                    <activeText>CDU Online</activeText>
+                    <inactiveText>CDU Online Cleared</inactiveText>
+                </name>
+                <severity>informational</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>CDU is online.</activeText>
+                    <inactiveText>A CDU online condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+			<alarmFlagsTest match="8">
+                <name>
+                    <activeText>Filling</activeText>
+                    <inactiveText>Filling Cleared</inactiveText>
+                </name>
+                <severity>informational</severity>
+                <category>Device</category>
+                <description>
+                    <activeText>A filling condition exists.</activeText>
+                    <inactiveText>A filling condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+			<alarmFlagsTest match="9">
+                <name>
+                    <activeText>Fault Shutdown</activeText>
+                    <inactiveText>Fault Shutdown Cleared</inactiveText>
+                </name>
+                <severity>warning</severity>
+                <category>Fault</category>
+                <description>
+                    <activeText>A fault shutdown condition exists.</activeText>
+                    <inactiveText>A fault shutdown condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+		
+
+        <numSensor ruleid="cduStatusPrimaryTempT1">
+            <type>temp</type>
+            <sensorId>_TEMP1_ARU_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.30657.2.1.1.2.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Primary Temperature (T1)</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusSecondaryTempT2a">
+            <type>temp</type>
+            <sensorId>_TEMP2_ARU_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.30657.2.1.1.4.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Secondary Temperature (T2a)</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusSecondaryTempT2b">
+            <type>temp</type>
+            <sensorId>_TEMP2_ARU_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.30657.2.1.1.6.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Secondary Temperature (T2b)</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusSecondaryTempT2">
+            <type>temp</type>
+            <sensorId>_NAIRFM_SYSAVGREM_TEMP</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.30657.2.1.1.8.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Secondary Temperature (T2)</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusRoomTempT3">
+            <type>temp</type>
+            <sensorId>_IN_ROOM_UNIT_TEMP</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.30657.2.1.1.10.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Room Temperature (T3)</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusSecondaryReturnTempT4">
+            <type>temp</type>
+            <sensorId>_ROOM_TEMPERATURE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.30657.2.1.1.12.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Secondary Return Temperature (T4)</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusSecondaryFlowRate">
+            <type>volairflow</type>
+            <sensorId>_RDT2_AIR_FLOW</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.14.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Secondary Flow Rate</label>
+            <sensorSet>Flow Rate</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusPS1">
+            <type>pressure</type>
+            <sensorId>_RDT2_DISCHARGE_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.16.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Secondary Pressure (PS1)</label>
+            <sensorSet>Pressure</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusPS2">
+            <type>pressure</type>
+            <sensorId>DISCHARGE_PRESS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.18.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Secondary Pressure (PS2)</label>
+            <sensorSet>Pressure</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusSecDiffPress">
+            <type>pressure</type>
+            <sensorId>_FILTER_DIFF_PRESS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.20.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Secondary Differential Pressure (PS2-PS1)</label>
+            <sensorSet>Pressure</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusPS3">
+            <type>pressure</type>
+            <sensorId>SUCTION_PRESS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.22.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Filter Inlet Pressure (PS3)</label>
+            <sensorSet>Pressure</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusPS4">
+            <type>pressure</type>
+            <sensorId>_DISCHARGE_PRESSURE_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.24.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Filter Outlet Pressure (PS4)</label>
+            <sensorSet>Pressure</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusFilterPressDiff">
+            <type>pressure</type>
+            <sensorId>FILTER_DIFF_PRESSURE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.26.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Filter Differential Pressure (PS3-PS4)</label>
+            <sensorSet>Pressure</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusDewpoint">
+            <type>temp</type>
+            <sensorId>_TEMP3_ARU_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.30657.2.1.1.28.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Dewpoint</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusCurrentSetpoint">
+            <type>temp</type>
+            <sensorId>_TEMP4_ARU_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.30657.2.1.1.30.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Operating Setpoint</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusPrimaryFlowRate">
+            <type>fluidflow</type>
+            <sensorId>_WATER_FLOW_RATE</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.32.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Primary Chilled Water Flow Rate</label>
+            <sensorSet>Flow Rate</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusUnitDuty">
+            <type>powerW</type>
+            <sensorId>_OUTPUT_POWER_BANK_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.34.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Unit Duty</label>
+            <sensorSet>Device</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusRoomRH">
+            <type>humidity</type>
+            <sensorId>OUTDOOR_AIR_HUMIDITY</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.30657.2.1.1.35.0</getOid></op>
+                    <op>0.1</op>
+                </mult>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Room Relative Humidity</label>
+            <sensorSet>Environmental</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusPumpSpeed">
+            <type>pctofcapacity</type>
+            <sensorId>_PUMP_SPEED</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.36.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Pump Speed</label>
+            <sensorSet>Pump</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusValveDemand">
+            <type>pctofcapacity</type>
+            <sensorId>_FLUID_VALVE_PCT_OPEN</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.37.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Valve Demand</label>
+            <sensorSet>Pump</sensorSet>
+        </numSensor>
+
+        <stateSensor ruleid="cduStatusCurrentPump">
+            <type>state</type>
+            <sensorId>_CURRENT_SECONDARY_PUMP</sensorId>
+            <value>
+                <mapValue mapid="5state-vm">
+                    <getOid>.1.3.6.1.4.1.30657.2.1.1.38.0</getOid>
+                </mapValue>
+            </value>
+            <label>Current Secondary Pump</label>
+            <enum>cduStatusCurrentPump-em</enum>
+            <sensorSet>Pump</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="cduStatusPumpRuntimeP1">
+            <type>runhours</type>
+            <sensorId>_RDT2_COND_PUMP_RH</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.39.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Pump 1 Runtime</label>
+            <sensorSet>Pump</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusPumpRuntimeP2">
+            <type>runhours</type>
+            <sensorId>_CONDENSATE_PUMP_RUNHOURS</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.40.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Pump 2 Runtime</label>
+            <sensorSet>Pump</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusValveRuntime">
+            <type>runhours</type>
+            <sensorId>_VALVE_RUNTIME_1</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.41.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Valve 1 Runtime</label>
+            <sensorSet>Pump</sensorSet>
+        </numSensor>
+        <numSensor ruleid="cduStatusUpTime">
+            <type>timeinmin</type>
+            <sensorId>_TIME_SINCE_POWERUP</sensorId>
+            <value>
+                <getOid>.1.3.6.1.4.1.30657.2.1.1.42.0</getOid>
+            </value>
+            <valueInc>1</valueInc>
+            <label>Time Since CDU Power-Up</label>
+            <sensorSet>Device</sensorSet>
+        </numSensor>
+
+	</device>
+</APC_DDF>

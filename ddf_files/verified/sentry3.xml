@@ -1,70 +1,69 @@
 <?xml version="1.0"?>
-<APC_DDF 
+<APC_DDF
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="apc_ddf_1_6.xsd"
 	ddfid="sentry3"
 	ddfname="Sentry3"
-	ddfversion="21"
+	ddfversion="24"
 	canremove="yes">
-	
 	<schemaVersion>1.6</schemaVersion>
-	
-	<device deviceid="sentry3discdata">
-		<oidMustExist ruleid="mib2objidtest" oid=".1.3.6.1.4.1.1718.3.2.1.1.2" istree="yes"/> 
+	<!--
 
+		SOURCE
+		\snmp\resources\mibs\servertech\Sentry3.mib
+
+		Sentry3-MIB | 22 April 2021
+
+	-->
+	<device deviceid="sentry3discdata">
+		<oidMustExist ruleid="systemTables_exists" oid=".1.3.6.1.4.1.1718.3.2" istree="yes"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Server Technologies</setProductData>
+		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.1718.3.2.1.1.7.1</getOid></setProductData>
+		<setProductData ruleid="serialnum" field="serial_num"><getOid>.1.3.6.1.4.1.1718.3.2.1.1.6.1</getOid></setProductData>
+		<setProductData ruleid="sysversion" field="appversion"><getOid>.1.3.6.1.4.1.1718.3.1.1.0</getOid></setProductData>
     	<setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+
     	<setProductData ruleid="inputphasecount" field="inputphasecount">3</setProductData>
     	<setProductData ruleid="outputphasecount" field="outputphasecount">3</setProductData>
-		
-		<!-- Location Data -->
-		<setLocationData ruleid="location" field="LOCATION"><getOid>.1.3.6.1.4.1.1718.3.1.3.0</getOid></setLocationData> 
-			
-		<!-- Set Firmware Version -->
-		<setProductData ruleid="bootversion" field="bootversion">
-			<getOid>.1.3.6.1.4.1.1718.3.1.2.0</getOid>
-		</setProductData>
-		<setProductData ruleid="sysversion" field="appversion">
-			<getOid>.1.3.6.1.4.1.1718.3.1.1.0</getOid>
-		</setProductData>
 
-		<!-- Put serial number in product field -->
-		<setProductData ruleid="serialnum" field="serial_num">
-			<getOid>.1.3.6.1.4.1.1718.3.2.1.1.6.1</getOid>
-		</setProductData>
-		<setProductData ruleid="modeldata" field="model">
-			<getOid>.1.3.6.1.4.1.1718.3.2.1.1.7.1</getOid>
-		</setProductData>
-	</device>
+		<setLocationData ruleid="location" field="LOCATION"><getOid>.1.3.6.1.4.1.1718.3.1.3.0</getOid></setLocationData>
+		<setProductData ruleid="bootversion" field="bootversion"><getOid>.1.3.6.1.4.1.1718.3.1.2.0</getOid></setProductData>
 
-	<device deviceid="sentry3">
-		<oidMustExist ruleid="sentry3Detect" oid=".1.3.6.1.4.1.1718.3.2.1.1.2" istree="yes"/> 
-	 
-			 
-		<!--System Group -->	 
-		<!-- systemTotalPower-->	 
+		<valueMap ruleid="delete_null_sensor_tempHumid">
+			<valueIn>1</valueIn><valueOut>[false]</valueOut>
+			<valueIn>*</valueIn><valueOut>[true]</valueOut>
+		</valueMap>
+
+		<valueMap ruleid="delete_null_sensor">
+			<valueIn>-1</valueIn><valueOut>[false]</valueOut>
+			<valueIn>*</valueIn><valueOut>[true]</valueOut>
+		</valueMap>
+
+		<!-- systemTotalPower-->
 		<numSensor ruleid="systemTotalPower">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor">
 					<getOid>.1.3.6.1.4.1.1718.3.1.6.0</getOid>
 				</mapValue>
 			</rowTest>
-			<type>powerW/systemTotalPower</type>
+			<type>powerW</type>
 			<sensorId>OUTPUT_POWER_TOTAL</sensorId>
 			<value>
 				<getOid>.1.3.6.1.4.1.1718.3.1.6.0</getOid>
 			</value>
 			<label>System Total Power</label>
-			<sensorSet>System Group</sensorSet> 
+			<sensorSet>System Group</sensorSet>
 		</numSensor>
 
-		<!-- systemWattsPerUnitArea-->	 
+		<!-- systemWattsPerUnitArea-->
 		<numSensor ruleid="systemWattsPerUnitArea">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor">
 					<getOid>.1.3.6.1.4.1.1718.3.1.8.0</getOid>
 				</mapValue>
 			</rowTest>
-			<type>powerW/systemWattsPerUnitArea</type>
+			<type>powerW</type>
 			<sensorId>WATTS_PER_UNIT_AREA</sensorId>
 			<value>
 				<getOid>.1.3.6.1.4.1.1718.3.1.8.0</getOid>
@@ -72,7 +71,7 @@
 			<label>System Watts Per Unit Area</label>
 			<sensorSet>System Group</sensorSet>
 		</numSensor>
-		
+
 		<!-- systemPowerFactor-->
 		<numSensor ruleid="systemPowerFactor">
 			<type>num/powerfactor</type>
@@ -90,10 +89,10 @@
 			<sensorSet>System Group</sensorSet>
 		</numSensor>
 
-		<!-- Tower -->	 
+		<!-- Tower -->
 		<!-- towerStatus -->
 		<stateSensor ruleid="towerStatus" index=".1.3.6.1.4.1.1718.3.2.1.1.4">
-			<type>state/towerStatus</type>
+			<type>state</type>
 			<sensorId>TOWER_STATUS_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.4</getRowOid>
@@ -108,7 +107,7 @@
 			<label>No Communication</label>
 			<label>Fan Fail</label>
 			<label>Over Temperature</label>
-		</enumMap>		
+		</enumMap>
 		<alarmFlags2 ruleid="towerStatus-af" index=".1.3.6.1.4.1.1718.3.2.1.1.4">
 			<value><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.4</getRowOid></value>
 			<alarmFlagsTest match="1">
@@ -172,10 +171,10 @@
 				</description>
 			</alarmFlagsTest>
 		</alarmFlags2>
-	
+
 		<!-- towerCapabilities -->
 		<stateSensor ruleid="towerCapabilities" index=".1.3.6.1.4.1.1718.3.2.1.1.8">
-			<type>state/towerCapabilities</type>
+			<type>state</type>
 			<sensorId>TOWER_CAPABILITIES_<rowIndex/></sensorId>
 			<value>
 				<mapValue mapid="towerCapabilities-vm">
@@ -186,7 +185,7 @@
 			<enum>TowerCapabilities-em</enum>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid></sensorSet>
 		</stateSensor>
-				
+
 		<valueMap ruleid="towerCapabilities-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -206,12 +205,115 @@
 			<label>tempSense</label>
 			<label>Unknown</label>
 		</enumMap>
-				 
-		<!-- Infeed -->
+
+		<numSensor ruleid="towerVACapacity" index=".1.3.6.1.4.1.1718.3.2.1.1.9">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.9</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>TOWER_VA_CAPACITY_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.9</getRowOid>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid><space/>Apparent Power Capacity</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="towerVACapacityUsed" index=".1.3.6.1.4.1.1718.3.2.1.1.10">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.10</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>pctofcapacity</type>
+			<sensorId>TOWER_VA_CAPACITY_USED_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.10</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid><space/>Apparent Power Capacity Used</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="towerActivePower" index=".1.3.6.1.4.1.1718.3.2.1.1.11">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.11</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>powerW</type>
+			<sensorId>TOWER_ACTIVE_POWER_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.11</getRowOid>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid><space/>Active Power</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="towerApparentPower" index=".1.3.6.1.4.1.1718.3.2.1.1.12">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.12</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>TOWER_APPARENT_POWER_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.12</getRowOid>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid><space/>Apparent Power</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="towerPowerFactor" index=".1.3.6.1.4.1.1718.3.2.1.1.13">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.13</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>num/powerfactor</type>
+			<sensorId>TOWER_POWER_FACTOR_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.13</getRowOid></op>
+					<op>0.01</op>
+				</mult>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid><space/>Power Factor</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="towerEnergy" index=".1.3.6.1.4.1.1718.3.2.1.1.14">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.14</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>num/kwatthr</type>
+			<sensorId>TOWER_ENERGY_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.14</getRowOid>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid><space/>Total Energy Consumption</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="towerLineFrequency" index=".1.3.6.1.4.1.1718.3.2.1.1.15">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.15</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>frequency</type>
+			<sensorId>TOWER_LINE_FREQUENCY_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.15</getRowOid>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid><space/>Line Fequency</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.3</getRowOid></sensorSet>
+		</numSensor>
 
 		<!--infeedCapabilities-->
 		<stateSensor ruleid="infeedCapabilities" index=".1.3.6.1.4.1.1718.3.2.2.1.4">
-			<type>state/infeedCapabilities</type>
+			<type>state</type>
 			<sensorId>INFEED_CAPABILITIES_<rowIndex/></sensorId>
 			<value>
 				<mapValue mapid="InfeedCapabilities-vm">
@@ -222,7 +324,7 @@
 			<enum>InfeedCapabilities-em</enum>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
 		</stateSensor>
-		
+
 		<valueMap ruleid="InfeedCapabilities-vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
@@ -248,11 +350,10 @@
 			<label>Branch Load Sense</label>
 			<label>Unknown</label>
 		</enumMap>
-		
-	 
+
 		<!--infeedStatus-->
 		<stateSensor ruleid="infeedStatus" index=".1.3.6.1.4.1.1718.3.2.2.1.5">
-			<type>state/infeedStatus</type>
+			<type>state</type>
 			<sensorId>INFEED_STATUS_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.5</getRowOid>
@@ -273,9 +374,9 @@
 			<label>Reading</label>
 			<label>Off Fuse</label>
 			<label>On Fuse</label>
-		</enumMap>	 
+		</enumMap>
 		<alarmFlags2 ruleid="infeedStatus-af" index=".1.3.6.1.4.1.1718.3.2.2.1.5">
-			<value><getRowOid>.1.3.6.1.4.1.1718.3.2.1.1.5</getRowOid></value>
+			<value><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.5</getRowOid></value>
 			<alarmFlagsTest match="0">
 				<name>
 					<activeText>Infeed <getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid> Status: Off</activeText>
@@ -385,10 +486,10 @@
 				</description>
 			</alarmFlagsTest>
 		</alarmFlags2>
-		
+
 		<!-- infeedLoadStatus -->
 		<stateSensor ruleid="infeedLoadStatus" index=".1.3.6.1.4.1.1718.3.2.2.1.6">
-			<type>state/infeedLoadStatus</type>
+			<type>state</type>
 			<sensorId>INFEED_LOAD_STATUS_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.6</getRowOid>
@@ -495,8 +596,8 @@
 				</description>
 			</alarmFlagsTest>
 		</alarmFlags2>
-		
-		<!-- infeedLoadValue -->	 
+
+		<!-- infeedLoadValue -->
 		<numSensor ruleid="infeedLoadValue" index=".1.3.6.1.4.1.1718.3.2.2.1.7">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor">
@@ -505,7 +606,7 @@
 			</rowTest>
 			<type>amperage</type>
 			<sensorId>_OUTPUT_CURRENT_<rowNumber/></sensorId>
-			<value> 
+			<value>
 				<div>
 					<op>
 						<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.7</getRowOid>
@@ -515,7 +616,7 @@
 			</value>
 			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Load Value</label>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
-		</numSensor> 
+		</numSensor>
 
 		<!-- infeedLoadHighThresh -->
 		<numSensor ruleid="infeedLoadHighThresh" index=".1.3.6.1.4.1.1718.3.2.2.1.8">
@@ -524,7 +625,7 @@
 					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.8</getRowOid>
 				</mapValue>
 			</rowTest>
-			<type>amperage/infeedLoadHighThresh</type>
+			<type>amperage</type>
 			<sensorId>INFEED_LOAD_HIGH_THRESH_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.8</getRowOid>
@@ -575,32 +676,32 @@
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
 		</numSensor>
 
-		<!-- infeedCapacity -->	 
+		<!-- infeedCapacity -->
 		<numSensor ruleid="infeedCapacity" index=".1.3.6.1.4.1.1718.3.2.2.1.10">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor">
 					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.10</getRowOid>
 				</mapValue>
 			</rowTest>
-			<type>amperage/infeedCapacity</type>
+			<type>amperage</type>
 			<sensorId>INFEED_CAPACITY_<rowIndex/></sensorId>
-			<value> 
+			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.10</getRowOid>
 			</value>
 			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Capacity</label>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
-		</numSensor>	
+		</numSensor>
 
-		<!-- infeedVoltage -->	 
+		<!-- infeedVoltage -->
 		<numSensor ruleid="infeedVoltage" index=".1.3.6.1.4.1.1718.3.2.2.1.11">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor">
 					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.11</getRowOid>
 				</mapValue>
 			</rowTest>
-			<type>voltage/infeedVoltage</type>
+			<type>voltage</type>
 			<sensorId>INFEED_VOLTAGE_<rowIndex/></sensorId>
-			<value> 
+			<value>
 				<div>
 					<op>
 						<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.11</getRowOid>
@@ -610,20 +711,20 @@
 			</value>
 			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Voltage</label>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
-		</numSensor> 
-		
-		<!-- infeedPower -->	 
+		</numSensor>
+
+		<!-- infeedPower -->
 		<numSensor ruleid="infeedPower" index=".1.3.6.1.4.1.1718.3.2.2.1.12">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor">
 					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.12</getRowOid>
 				</mapValue>
 			</rowTest>
-			<type>powerW/infeedPower</type>
+			<type>powerW</type>
 			<sensorId>
 				_RPDU_OUTPUT_POWER_
 				<regex>
-				<op>\.(\d*)$</op>
+				<op>(\d+)\.\d+</op>
 				<op><rowIndex/></op>
 				<op>%1$s</op>
 				</regex>
@@ -634,7 +735,7 @@
 			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Power</label>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
 		</numSensor>
-		
+
 		<!-- infeedApparentPower -->
 		<numSensor ruleid="infeedApparentPower" index=".1.3.6.1.4.1.1718.3.2.2.1.13">
 			<rowTest>
@@ -642,11 +743,11 @@
 					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.13</getRowOid>
 				</mapValue>
 			</rowTest>
-			<type>powerVA/infeedApparentPower</type>
+			<type>powerVA</type>
 			<sensorId>
 				_RPDU_OUTPUT_APPARENT_POWER_
 				<regex>
-				<op>\.(\d*)$</op>
+				<op>(\d+)\.\d+</op>
 				<op><rowIndex/></op>
 				<op>%1$s</op>
 				</regex>
@@ -718,7 +819,61 @@
 			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Energy</label>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
 		</numSensor>
-		
+
+		<stateSensor ruleid="infeedReactance" index=".1.3.6.1.4.1.1718.3.2.2.1.17">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.17</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>state</type>
+			<sensorId>INFEED_REACTANCE_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.17</getRowOid>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Reactance</label>
+			<enum>infeedReactance-em</enum>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
+		</stateSensor>
+
+		<enumMap ruleid="infeedReactance-em">
+			<label>Unknown</label>
+			<label>Capacitive</label>
+			<label>Inductive</label>
+			<label>Resistive</label>
+		</enumMap>
+
+		<numSensor ruleid="infeedPhaseVoltage" index=".1.3.6.1.4.1.1718.3.2.2.1.18">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.18</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>INFEED_PHASE_VOLTAGE_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.18</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Phase Voltage</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="infeedPhaseCurrent" index=".1.3.6.1.4.1.1718.3.2.2.1.19">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.19</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>voltage</type>
+			<sensorId>INFEED_PHASE_CURRENT_<rowIndex/></sensorId>
+			<value>
+				<mult><op><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.19</getRowOid></op><op>0.1</op></mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Phase Current</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
+		</numSensor>
+
 		<!-- infeedCapacityUsed -->
 		<numSensor ruleid="infeedCapacityUsed" index=".1.3.6.1.4.1.1718.3.2.2.1.20">
 			<rowTest>
@@ -734,15 +889,43 @@
 					<op>0.1</op>
 				</mult>
 			</value>
-			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Capacity Used</label>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Load Capacity Used</label>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
 		</numSensor>
-		
+		<numSensor ruleid="infeedVACapacity" index=".1.3.6.1.4.1.1718.3.2.2.1.24">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.24</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>powerVA</type>
+			<sensorId>INFEED_VA_CAPACITY_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.24</getRowOid>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Apparent Power Capacity</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
+		</numSensor>
+		<numSensor ruleid="infeedVACapacityUsed" index=".1.3.6.1.4.1.1718.3.2.2.1.25">
+			<rowTest>
+				<mapValue mapid="delete_null_sensor">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.25</getRowOid>
+				</mapValue>
+			</rowTest>
+			<type>pctofcapacity</type>
+			<sensorId>INFEED_VA_CAPACITY_USED_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.25</getRowOid>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid><space/>Infeed Apparent Power Capacity Used</label>
+			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.2.1.3</getRowOid></sensorSet>
+		</numSensor>
+
 		<!-- Outlet -->
 
 		<!--OutletCapabilities-->
 		<stateSensor ruleid="OutletCapabilities" index=".1.3.6.1.4.1.1718.3.2.3.1.4">
-			<type>state/outletCapabilities</type>
+			<type>state</type>
 			<sensorId>OUTLET_CAPABILITIES_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.3.1.4</getRowOid>
@@ -763,11 +946,11 @@
 			<label>Voltage Sense</label>
 			<label>Power Sense</label>
 		</enumMap>
-		
-		
+
+
 		<!--OutletStatus-->
 		<stateSensor ruleid="OutletStatus" index=".1.3.6.1.4.1.1718.3.2.3.1.5">
-			<type>state/outletStatus</type>
+			<type>state</type>
 			<sensorId>OUTLET_STATUS_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.3.1.5</getRowOid>
@@ -899,11 +1082,11 @@
 					<inactiveText>Outlet <getRowOid>.1.3.6.1.4.1.1718.3.2.3.1.3</getRowOid> Status has returned to normal.</inactiveText>
 				</description>
 			</alarmFlagsTest>
-		</alarmFlags2>		
-				
+		</alarmFlags2>
+
 		<!--OutletLoadStatus-->
 		<stateSensor ruleid="OutletLoadStatus" index=".1.3.6.1.4.1.1718.3.2.3.1.6">
-			<type>state/loadStatus</type>
+			<type>state</type>
 			<sensorId>OUTLET_LOAD_STATUS_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.3.1.6</getRowOid>
@@ -912,7 +1095,7 @@
 			<enum>OutletLoadStatus-em</enum>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.3.1.3</getRowOid></sensorSet>
 		</stateSensor>
-		
+
 		<enumMap ruleid="OutletLoadStatus-em">
 			<label>Normal</label>
 			<label>Not On</label>
@@ -1115,7 +1298,7 @@
 				</description>
 			</alarmFlagsTest>
 		</alarmFlags2>
-				
+
 		<!-- outletCapacity -->
 		<numSensor ruleid="outletCapacity" index=".1.3.6.1.4.1.1718.3.2.3.1.12">
 			<rowTest>
@@ -1246,10 +1429,10 @@
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.3.1.3</getRowOid></sensorSet>
 		</numSensor>
 
-		<!-- Environmental Monitor-->	 
-		<!-- envMonStatus -->	 
+		<!-- Environmental Monitor-->
+		<!-- envMonStatus -->
 		<stateSensor ruleid="envMonStatus" index=".1.3.6.1.4.1.1718.3.2.4.1.4">
-			<type>state/envMonStatus</type>
+			<type>state</type>
 			<sensorId>ENVMON_STATUS_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.4.1.4</getRowOid>
@@ -1278,8 +1461,8 @@
 				</description>
 			</alarmFlagsTest>
 		</alarmFlags2>-->
-		
-		<!-- envMonWaterSensorStatus -->	 
+
+		<!-- envMonWaterSensorStatus -->
 		<stateSensor ruleid="envMonWaterSensorStatus" index=".1.3.6.1.4.1.1718.3.2.4.1.6">
 			<type>state</type>
 			<sensorId>ENVMON_WATER_SENSOR_STATUS_<rowIndex/></sensorId>
@@ -1324,8 +1507,8 @@
 			</alarmFlagsTest>
 		</alarmFlags2>-->
 
-	 
-		<!-- envMonADCStatus -->	 
+
+		<!-- envMonADCStatus -->
 		<stateSensor ruleid="envMonADCStatus" index=".1.3.6.1.4.1.1718.3.2.4.1.8">
 			<type>state</type>
 			<sensorId>ENVMON_ADC_STATUS_<rowIndex/></sensorId>
@@ -1408,20 +1591,13 @@
 				</description>
 			</alarmFlagsTest>
 		</alarmFlags2>-->
-			
+
 		<!-- Temperature and Humidity Sensor -->
-		
+
 		<alarmFlags2 ruleid="tempHumidSensorStatus-af" index=".1.3.6.1.4.1.1718.3.2.5.1.4">
 			<rowTest>
-				<mapValue mapid="delete_null_sensor">
-					<and>
-						<op>
-							<eq><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.6</getRowOid></eq>
-						</op>
-						<op>
-							<eq><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.10</getRowOid></eq>
-						</op>
-					</and>
+				<mapValue mapid="delete_null_sensor_tempHumid">
+					<getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.4</getRowOid>
 				</mapValue>
 			</rowTest>
 			<value><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.4</getRowOid></value>
@@ -1463,15 +1639,15 @@
 			</alarmFlagsTest>
 		</alarmFlags2>
 
-		
-		<!-- tempHumidSensorTempStatus -->	 
+
+		<!-- tempHumidSensorTempStatus -->
 		<stateSensor ruleid="tempHumidSensorTempStatus" index=".1.3.6.1.4.1.1718.3.2.5.1.2">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor_tempHumid">
 					<getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.4</getRowOid>
 				</mapValue>
 			</rowTest>
-			<type>state/TempStatus</type>
+			<type>state</type>
 			<sensorId>TEMPHUMIDSENSOR_TEMP_STATUS_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.5</getRowOid>
@@ -1582,7 +1758,7 @@
 					<inactiveText>Temp/Humid Sensor <getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.3</getRowOid> Temp Status has returned to normal.</inactiveText>
 				</description>
 			</alarmFlagsTest>
-		</alarmFlags2>		
+		</alarmFlags2>
 		<!-- tempHumidSensorTempValue -->
 		<numSensor ruleid="tempHumidSensorTempValue" index=".1.3.6.1.4.1.1718.3.2.5.1.6">
 			<rowTest>
@@ -1592,7 +1768,7 @@
 			</rowTest>
 			<type>temp</type>
 			<sensorId>_RPDU_TEMP_<rowNumber/></sensorId>
-			<value>	 
+			<value>
 				<if><!-- Fahrenheit -->
 					<op>
 						<eq>
@@ -1604,13 +1780,13 @@
 						<div>
 							<op>
 								<sub>
-									<op><div><op><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.6</getRowOid></op><op>10</op></div></op>		
+									<op><div><op><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.6</getRowOid></op><op>10</op></div></op>
 									<op>32</op>
 								</sub>
 							</op>
 							<op>1.8</op>
-						</div>						
-					</op><!-- end fahrenheit -->											 
+						</div>
+					</op><!-- end fahrenheit -->
 					<op>
 						<if><!-- Celsius -->
 							<op>
@@ -1628,10 +1804,10 @@
 			<label><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.3</getRowOid><space/>Temperature</label>
 			<sensorSet><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.3</getRowOid></sensorSet>
 		</numSensor>
-		<valueMap ruleid="whattype">			
+		<valueMap ruleid="whattype">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
-			<valueIn>*</valueIn><valueOut>0</valueOut>			
+			<valueIn>*</valueIn><valueOut>0</valueOut>
 		</valueMap>
 		<alarmFlags2 ruleid="tempHumidSensorTempLowThresh-af" index=".1.3.6.1.4.1.1718.3.2.5.1.7">
 			<rowTest>
@@ -1662,7 +1838,7 @@
 					<inactiveText><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.3</getRowOid>: Temperature is within normal range.</inactiveText>
 				</description>
 			</alarmFlagsTest>
-		</alarmFlags2>		
+		</alarmFlags2>
 		<alarmFlags2 ruleid="tempHumidSensorTempHighThresh-af" index=".1.3.6.1.4.1.1718.3.2.5.1.8">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor_tempHumid">
@@ -1692,16 +1868,16 @@
 					<inactiveText><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.3</getRowOid>: Temperature is within normal range.</inactiveText>
 				</description>
 			</alarmFlagsTest>
-		</alarmFlags2>		
-		
-		<!-- tempHumidSensorHumidStatus -->	 
+		</alarmFlags2>
+
+		<!-- tempHumidSensorHumidStatus -->
 		<stateSensor ruleid="tempHumidSensorHumidStatus" index=".1.3.6.1.4.1.1718.3.2.5.1.9">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor_tempHumid">
 					<getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.4</getRowOid>
 				</mapValue>
 			</rowTest>
-			<type>state/HumidStatus</type>
+			<type>state</type>
 			<sensorId>TEMPHUMIDSENSOR_HUMID_STATUS_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.9</getRowOid>
@@ -1860,7 +2036,7 @@
 					<inactiveText><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.3</getRowOid>: Humidity is within normal range.</inactiveText>
 				</description>
 			</alarmFlagsTest>
-		</alarmFlags2>		
+		</alarmFlags2>
 		<alarmFlags2 ruleid="tempHumidSensorTempHighThresh-af" index=".1.3.6.1.4.1.1718.3.2.5.1.12">
 			<rowTest>
 				<mapValue mapid="delete_null_sensor_tempHumid">
@@ -1890,12 +2066,12 @@
 					<inactiveText><getRowOid>.1.3.6.1.4.1.1718.3.2.5.1.3</getRowOid>: Humidity is within normal range.</inactiveText>
 				</description>
 			</alarmFlagsTest>
-		</alarmFlags2>		
-		
+		</alarmFlags2>
+
 		<!-- contactClosureEntry Begin -->
 		<!-- contactClosureStatus -->
 		<stateSensor ruleid="contactClosureStatus" index=".1.3.6.1.4.1.1718.3.2.6.1.4">
-			<type>state/contactClosure</type>
+			<type>state</type>
 			<sensorId>EM_CONTACT_<rowIndex/></sensorId>
 			<value>
 				<getRowOid>.1.3.6.1.4.1.1718.3.2.6.1.4</getRowOid>
@@ -1936,17 +2112,7 @@
 					<inactiveText>Contact Closure <getRowOid>.1.3.6.1.4.1.1718.3.2.6.1.3</getRowOid> Water Sensor Status has returned to normal.</inactiveText>
 				</description>
 			</alarmFlagsTest>
-		</alarmFlags2>-->
-		
-		<valueMap ruleid="delete_null_sensor_tempHumid">
-			<valueIn>*</valueIn><valueOut>[false]</valueOut>
-			<valueIn>0</valueIn><valueOut>[true]</valueOut>
-		</valueMap>
-		
-		<valueMap ruleid="delete_null_sensor">
-			<valueIn>-1</valueIn><valueOut>[false]</valueOut>
-			<valueIn>*</valueIn><valueOut>[true]</valueOut>
-		</valueMap>
+		</alarmFlags2>
 		
 		<alarmFlags ruleid="towerStatusEvent">
 			<value><getOid>.1.3.6.1.4.1.1718.3.100.0.1</getOid></value>

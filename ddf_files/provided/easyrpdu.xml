@@ -5,10 +5,10 @@
   xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
   ddfid="easyrpdu"
   ddfname="APC Easy RPDU"
-  ddfversion="2"
+  ddfversion="7"
   canremove="yes">
 
-	<!--
+  <!--
     Manufacturer:					APC by Schneider Electric
     Model:								Easy RPDU
 
@@ -25,9 +25,14 @@
   <schemaVersion>1.6</schemaVersion>
 	<device deviceid="easy_rpdu">
 		<oidMustExist ruleid="has_epdu" oid=".1.3.6.1.4.1.318.1.1.30" istree="yes"/>
+    <oidMustNotMatch ruleid="esayMdcCheck" oid=".1.3.6.1.2.1.1.2.0">
+      <valueList>
+        <value>.1.3.6.1.4.1.318.1.3.36.2</value>
+      </valueList>
+    </oidMustNotMatch>
 
     <setProductData ruleid="vendordata" field="vendor">APC by Schneider Electric</setProductData>
-		<setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
+    <setProductData ruleid="typedata" field="type">Rack PDU</setProductData>
 
     <setProductData ruleid="ePDUDeviceStatusModelNumber_1" field="model">
       <getOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.4.1</getOid>
@@ -35,7 +40,11 @@
     <setProductData ruleid="ePDUDeviceStatusSerialNumber_1" field="serial_num">
       <getOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.5.1</getOid>
     </setProductData>
-    <setProductData field="inputphasecount" ruleid="ePDUDeviceStatusNumPhases_1_in">
+
+	<setProductData field="inputphasecount" ruleid="ePDUDeviceStatusNumPhases_1_in">
+      <getOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6.1</getOid>
+    </setProductData>
+	<setProductData field="outputphasecount" ruleid="ePDUDeviceStatusNumPhases_1_out">
       <getOid>.1.3.6.1.4.1.318.1.1.30.2.1.1.6.1</getOid>
     </setProductData>
 
@@ -162,6 +171,14 @@
       <label>PDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid> Voltage Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid></label>
       <sensorSet>PDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.2</getRowOid></sensorSet>
     </numSensor>
+
+    <valueMap ruleid="rpdu_Id-vm">
+      <valueIn>1</valueIn><valueOut>Host</valueOut>
+      <valueIn>2</valueIn><valueOut>Guest1</valueOut>
+      <valueIn>3</valueIn><valueOut>Guest2</valueOut>
+      <valueIn>4</valueIn><valueOut>Guest3</valueOut>
+    </valueMap>
+
     <alarmFlags2 ruleid="ePDUPhaseConfigOverVoltageThreshold" index=".1.3.6.1.4.1.318.1.1.30.4.2.1.4">
       <value>
         <if>
@@ -177,14 +194,30 @@
       </value>
       <alarmFlagsTest match="1">
         <name>
-          <activeText>Phase Over Voltage</activeText>
-          <inactiveText>Phase Over Voltage Cleared</inactiveText>
+          <activeText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>:<space/>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> Over Voltage
+          </activeText>
+          <inactiveText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>:<space/>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> Over Voltage Cleared
+          </inactiveText>
         </name>
         <severity>critical</severity>
         <category>Voltage</category>
         <description>
-          <activeText>A phase voltage has exceeded the Over Voltage threshold.</activeText>
-          <inactiveText>Phase voltage has returned to normal.</inactiveText>
+          <activeText>A phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> voltage has exceeded the Over Voltage threshold on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>.
+          </activeText>
+          <inactiveText>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> voltage has returned to normal on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>.
+          </inactiveText>
         </description>
       </alarmFlagsTest>
     </alarmFlags2>
@@ -203,14 +236,30 @@
       </value>
       <alarmFlagsTest match="1">
         <name>
-          <activeText>Phase Low Voltage</activeText>
-          <inactiveText>Phase Low Voltage Cleared</inactiveText>
+          <activeText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>:<space/>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> Low Voltage
+          </activeText>
+          <inactiveText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>:<space/>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> Low Voltage Cleared
+          </inactiveText>
         </name>
         <severity>critical</severity>
         <category>Voltage</category>
         <description>
-          <activeText>A phase voltage has dropped below the Low Voltage threshold.</activeText>
-          <inactiveText>Phase voltage has returned to normal.</inactiveText>
+          <activeText>A phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> voltage has dropped below the Low Voltage threshold on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>.
+          </activeText>
+          <inactiveText>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> voltage has returned to normal on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>.
+          </inactiveText>
         </description>
       </alarmFlagsTest>
     </alarmFlags2>
@@ -247,14 +296,30 @@
       </value>
       <alarmFlagsTest match="1">
         <name>
-          <activeText>Phase Over Current</activeText>
-          <inactiveText>Phase Over Current Cleared</inactiveText>
+          <activeText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>:<space/>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> Over Current
+          </activeText>
+          <inactiveText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>:<space/>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> Over Current Cleared
+          </inactiveText>
         </name>
         <severity>critical</severity>
         <category>Current</category>
         <description>
-          <activeText>A phase current has exceeded the Over Current threshold.</activeText>
-          <inactiveText>Phase current has returned to normal.</inactiveText>
+          <activeText>A phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> current has exceeded the Over Current threshold on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>.
+          </activeText>
+          <inactiveText>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> current has returned to normal on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>.
+          </inactiveText>
         </description>
       </alarmFlagsTest>
     </alarmFlags2>
@@ -273,14 +338,30 @@
       </value>
       <alarmFlagsTest match="1">
         <name>
-          <activeText>Phase Low Current</activeText>
-          <inactiveText>Phase Low Current Cleared</inactiveText>
+          <activeText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>:<space/>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> Low Current
+          </activeText>
+          <inactiveText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>:<space/>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> Low Current Cleared
+          </inactiveText>
         </name>
         <severity>critical</severity>
         <category>Current</category>
         <description>
-          <activeText>A phase current has dropped below the Low Current threshold.</activeText>
-          <inactiveText>Phase current has returned to normal.</inactiveText>
+          <activeText>A phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> current has dropped below the Low Current threshold on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>.
+          </activeText>
+          <inactiveText>Phase <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.2.1.3</getRowOid> current has returned to normal on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.4.1.1.2</getRowOid>
+            </mapValue>.
+          </inactiveText>
         </description>
       </alarmFlagsTest>
     </alarmFlags2>
@@ -395,31 +476,31 @@
     </stateSensor>
 
     <valueMap ruleid="ctrlAction-vm">
-			<valueIn>1</valueIn><valueOut>1</valueOut>
-			<valueIn>2</valueIn><valueOut>2</valueOut>
-			<valueIn>*</valueIn><valueOut>0</valueOut>
-		</valueMap>
-		<enumMap ruleid="ctrlAction-em">
-			<label>None</label>
-			<label>Immediate On</label>
-			<label>Immediate Off</label>
-		</enumMap>
+      <valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>2</valueIn><valueOut>2</valueOut>
+      <valueIn>*</valueIn><valueOut>0</valueOut>
+    </valueMap>
+    <enumMap ruleid="ctrlAction-em">
+      <label>None</label>
+      <label>Immediate On</label>
+      <label>Immediate Off</label>
+    </enumMap>
     <stateControl ruleid="ePDUOutletControlCommand" index=".1.3.6.1.4.1.318.1.1.30.6.2.1.1">
       <rowTest>
         <mapValue mapid="invalid_minusOne-vm">
           <getRowOid>.1.3.6.1.4.1.318.1.1.30.6.2.1.1</getRowOid>
         </mapValue>
       </rowTest>
-			<type>state/outletcontrol</type>
+      <type>state/outletcontrol</type>
       <controlId>OUTLET_CTRL_<rowIndex/></controlId>
       <value><getRowOid>.1.3.6.1.4.1.318.1.1.30.6.1.1.4</getRowOid></value>
       <val_enum>ePDUOutletStatusState-em</val_enum>
       <set_value>
-				<setRowOid>
-					<op>.1.3.6.1.4.1.318.1.1.30.6.2.1.4</op>
-					<op><mapValue mapid="ctrlAction-vm"><setOidValue/></mapValue></op>
-				</setRowOid>
-			</set_value>
+        <setRowOid>
+          <op>.1.3.6.1.4.1.318.1.1.30.6.2.1.4</op>
+          <op><mapValue mapid="ctrlAction-vm"><setOidValue/></mapValue></op>
+        </setRowOid>
+      </set_value>
       <cntrl_enum>ctrlAction-em</cntrl_enum>
       <label>PDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.6.2.1.2</getRowOid> Outlet <getRowOid>.1.3.6.1.4.1.318.1.1.30.6.2.1.3</getRowOid> Control</label>
     </stateControl>
@@ -443,6 +524,11 @@
       <sensorSet>PDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.2</getRowOid></sensorSet>
     </numSensor>
     <alarmFlags2 ruleid="ePDUSensorConfigTempMaxThreshold" index=".1.3.6.1.4.1.318.1.1.30.8.2.1.3">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
       <value>
         <if>
           <op>
@@ -457,18 +543,39 @@
       </value>
       <alarmFlagsTest match="1">
         <name>
-          <activeText>High Temperature</activeText>
-          <inactiveText>High Temperature Cleared</inactiveText>
+          <activeText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>:<space/>High Temperature
+          </activeText>
+          <inactiveText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>:<space/>High Temperature Cleared
+          </inactiveText>
         </name>
         <severity>critical</severity>
         <category>Temperature</category>
         <description>
-          <activeText>A sensor temperature reading has exceeded the Temperature Max threshold.</activeText>
-          <inactiveText>Sensor temperature reading has returned to normal.</inactiveText>
+          <activeText>A sensor temperature reading has exceeded the Temperature Max threshold on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>.
+          </activeText>
+          <inactiveText>Sensor temperature reading has returned to normal on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>.
+          </inactiveText>
         </description>
       </alarmFlagsTest>
     </alarmFlags2>
     <alarmFlags2 ruleid="ePDUSensorConfigTempMinThreshold" index=".1.3.6.1.4.1.318.1.1.30.8.2.1.3">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.3</getRowOid>
+        </mapValue>
+      </rowTest>
       <value>
         <if>
           <op>
@@ -483,14 +590,30 @@
       </value>
       <alarmFlagsTest match="1">
         <name>
-          <activeText>Low Temperature</activeText>
-          <inactiveText>Low Temperature Cleared</inactiveText>
+          <activeText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>:<space/>Low Temperature
+          </activeText>
+          <inactiveText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>:<space/>Low Temperature Cleared
+          </inactiveText>
         </name>
         <severity>critical</severity>
         <category>Temperature</category>
         <description>
-          <activeText>A sensor temperature reading has fallen below the Temperature Min threshold.</activeText>
-          <inactiveText>Sensor temperature reading has returned to normal.</inactiveText>
+          <activeText>A sensor temperature reading has fallen below the Temperature Min threshold on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>.
+          </activeText>
+          <inactiveText>Sensor temperature reading has returned to normal on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>.
+          </inactiveText>
         </description>
       </alarmFlagsTest>
     </alarmFlags2>
@@ -514,11 +637,16 @@
       <sensorSet>PDU <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.2</getRowOid></sensorSet>
     </numSensor>
     <alarmFlags2 ruleid="ePDUSensorConfigHumidityMaxThreshold" index=".1.3.6.1.4.1.318.1.1.30.8.2.1.4">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
       <value>
         <if>
           <op>
             <gt>
-              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.3</getRowOid></op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.4</getRowOid></op>
               <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.5</getRowOid></op>
             </gt>
           </op>
@@ -528,23 +656,44 @@
       </value>
       <alarmFlagsTest match="1">
         <name>
-          <activeText>High Humidity</activeText>
-          <inactiveText>High Humidity Cleared</inactiveText>
+          <activeText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>:<space/>High Humidity
+          </activeText>
+          <inactiveText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>:<space/>High Humidity Cleared
+          </inactiveText>
         </name>
         <severity>critical</severity>
         <category>Humidity</category>
         <description>
-          <activeText>A sensor humidity reading has exceeded the Humidity Max threshold.</activeText>
-          <inactiveText>Sensor humidity reading has returned to normal.</inactiveText>
+          <activeText>A sensor humidity reading has exceeded the Humidity Max threshold on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>.
+          </activeText>
+          <inactiveText>Sensor humidity reading has returned to normal on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>.
+          </inactiveText>
         </description>
       </alarmFlagsTest>
     </alarmFlags2>
-    <alarmFlags2 ruleid="ePDUSensorConfigHumidityMinThreshold" index=".1.3.6.1.4.1.318.1.1.30.8.2.1.3">
+    <alarmFlags2 ruleid="ePDUSensorConfigHumidityMinThreshold" index=".1.3.6.1.4.1.318.1.1.30.8.2.1.4">
+      <rowTest>
+        <mapValue mapid="invalid_minusOne-vm">
+          <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.4</getRowOid>
+        </mapValue>
+      </rowTest>
       <value>
         <if>
           <op>
             <lt>
-              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.3</getRowOid></op>
+              <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.8.2.1.4</getRowOid></op>
               <op><getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.6</getRowOid></op>
             </lt>
           </op>
@@ -554,14 +703,30 @@
       </value>
       <alarmFlagsTest match="1">
         <name>
-          <activeText>Low Humidity</activeText>
-          <inactiveText>Low Humidity Cleared</inactiveText>
+          <activeText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>:<space/>Low Humidity
+          </activeText>
+          <inactiveText>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>:<space/>Low Humidity Cleared
+          </inactiveText>
         </name>
         <severity>critical</severity>
         <category>Humidity</category>
         <description>
-          <activeText>A sensor humidity reading has fallen below the Humidity Min threshold.</activeText>
-          <inactiveText>Sensor humidity reading has returned to normal.</inactiveText>
+          <activeText>A sensor humidity reading has fallen below the Humidity Min threshold on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>.
+          </activeText>
+          <inactiveText>Sensor humidity reading has returned to normal on<space/>
+            <mapValue mapid="rpdu_Id-vm">
+              <getRowOid>.1.3.6.1.4.1.318.1.1.30.8.1.1.2</getRowOid>
+            </mapValue>.
+          </inactiveText>
         </description>
       </alarmFlagsTest>
     </alarmFlags2>

@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
   <!-- Stulz_Esquared_900_CWE -->
-<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd" canremove="yes"
-    ddfid="carel_stulz_ccd_1200_cwe" ddfname="Carel Stulz CCD 1200 CWE" ddfversion="1">
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  canremove="yes"
+  ddfid="carel_stulz_ccd_1200_cwe"
+  ddfname="Carel Stulz CCD 1200 CWE [pcoWeb][SNMP]"
+  ddfversion="1">
   <schemaVersion>1.6</schemaVersion>
 
   <device deviceid="defaultDevice">

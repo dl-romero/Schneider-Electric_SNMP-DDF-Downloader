@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="dataaire_gfcd106_crac"
-	ddfname="Data Aire GFCD-106 CRAC"
+	ddfname="Data Aire GFCD-106 CRAC [pcoWeb][SNMP]"
 	ddfversion="2"
 	canremove="yes">
 

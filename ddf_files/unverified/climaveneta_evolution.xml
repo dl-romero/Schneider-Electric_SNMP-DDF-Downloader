@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="apc_ddf_1_6.xsd"
 	ddfid="climaveneta_evolution"
-	ddfname="Climaveneta Evolution [pcoWeb]"
+	ddfname="Climaveneta Evolution [pcoWeb][SNMP]"
 	ddfversion="1"
 	canremove="yes">
   <schemaVersion>1.6</schemaVersion>

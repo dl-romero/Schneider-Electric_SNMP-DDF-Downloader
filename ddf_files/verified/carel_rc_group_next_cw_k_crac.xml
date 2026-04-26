@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
 <!-- Carel RC Group neXT.CW.K CRAC -->
-<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="apc_ddf_1_6.xsd"
-        ddfid ="carel_rc_group_next_cw_k_crac" ddfname="Carel RC Group neXT.CW.K CRAC"
-        ddfversion ="2" canremove="yes">
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="apc_ddf_1_6.xsd"
+  ddfid="carel_rc_group_next_cw_k_crac"
+  ddfname="Carel RC Group neXT.CW.K CRAC [pcoWeb][SNMP]"
+  ddfversion="2"
+  canremove="yes">
   <schemaVersion>1.6</schemaVersion>
 
   <device deviceid="rc_group_next.cw.k_header">

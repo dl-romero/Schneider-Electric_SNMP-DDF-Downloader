@@ -1,0 +1,2582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid ="cet_compas_ups"
+  ddfname="CET Compas UPS"
+  ddfversion="2"
+  canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+
+  <!--
+	  DDF-1639
+	  SOURCE: cetsnmpwalk.walk, CetCompas.mib
+	  BFO: 111551690
+  -->
+
+  <device deviceid="cet_compas_ups">
+		<oidMustExist ruleid="cet_compas_ups_mustexist" oid="1.3.6.1.4.1.12551.20.1" istree="yes"/>
+
+		<setProductData ruleid="vendordata" field="vendor">CET</setProductData>
+		<setProductData ruleid="modeldata" field="model">Compas</setProductData>
+		<setProductData ruleid="typedata" field="type">UPS</setProductData>
+		<setProductData ruleid="revision" field="revision"><getOid>.1.3.6.1.4.1.12551.20.1.10.3.91.0</getOid></setProductData>
+		<setProductData ruleid="bootversion" field="bootversion"><getOid>.1.3.6.1.4.1.12551.20.1.10.3.92.0</getOid></setProductData>
+		<setProductData ruleid="appversion" field="appversion"><getOid>.1.3.6.1.4.1.12551.20.1.10.3.93.0</getOid></setProductData>
+		<setProductData ruleid="serialnum" field="serial_num"><getOid>.1.3.6.1.4.1.12551.20.1.10.3.96.0</getOid></setProductData>
+
+		<stringSensor ruleid="battery_global_state">
+			<type>string</type>
+			<sensorId>BATTERY_GLOBAL_STATE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.1</getOid>
+			</value>
+			<label>Battery - Global - State</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="converters_voltage">
+			<type>voltage</type>
+			<sensorId>CONVERTERS_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.11</getOid>
+			</value>
+			<label>Converters - Voltage</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_regulation_operating_mode">
+			<type>string</type>
+			<sensorId>BATTERY_REGULATION_OPERATING_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.16</getOid>
+			</value>
+			<label>Battery - Regulation - Operating Mode</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_regulation_previous_dc_operating_mode">
+			<type>string</type>
+			<sensorId>BATTERY_REGULATION_PREVIOUS_DC_OPERATING_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.17</getOid>
+			</value>
+			<label>Battery - Regulation - Previous DC Operating Mode</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_regulation_target_voltage">
+			<type>voltage</type>
+			<sensorId>BATTERY_REGULATION_TARGET_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.18</getOid>
+			</value>
+			<label>Battery - Regulation - Target Voltage</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_regulation_max_charge_current">
+			<type>amperage</type>
+			<sensorId>BATTERY_REGULATION_MAX_CHARGE_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.19</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery - Regulation - Max Charge Current</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converters_power">
+			<type>powerW</type>
+			<sensorId>CONVERTERS_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.21</getOid>
+			</value>
+			<label>Converters - Power</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converters_current">
+			<type>amperage</type>
+			<sensorId>CONVERTERS_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.22</getOid>
+			</value>
+			<label>Converters - Current</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converters_installed_power">
+			<type>powerW</type>
+			<sensorId>CONVERTERS_INSTALLED_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.23</getOid>
+			</value>
+			<label>Converters - Installed Power</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converters_count_members">
+			<type>num</type>
+			<sensorId>CONVERTERS_COUNT_MEMBERS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.32</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converters - Count - Members</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converters_count_ok">
+			<type>num</type>
+			<sensorId>CONVERTERS_COUNT_OK</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.33</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converters - Count - OK</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="load_global_power">
+			<type>powerW</type>
+			<sensorId>LOAD_GLOBAL_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.51</getOid>
+			</value>
+			<label>Load - Global - Power</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="load_global_current">
+			<type>amperage</type>
+			<sensorId>LOAD_GLOBAL_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.52</getOid>
+			</value>
+			<label>Load - Global - Current</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_measurements_voltage">
+			<type>voltage</type>
+			<sensorId>BATTERY_MEASUREMENTS_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.60</getOid>
+			</value>
+			<label>Battery - Measurements - Voltage</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_measurements_input_current">
+			<type>amperage</type>
+			<sensorId>BATTERY_MEASUREMENTS_INPUT_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.61</getOid>
+			</value>
+			<label>Battery - Measurements - Input Current</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_measurements_input_power">
+			<type>powerW</type>
+			<sensorId>BATTERY_MEASUREMENTS_INPUT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.62</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery - Measurements - Input Power</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_measurements_temperature">
+			<type>temp</type>
+			<sensorId>BATTERY_MEASUREMENTS_TEMPERATURE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.71</getOid>
+			</value>
+			<label>Battery - Measurements - Temperature</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_estimates_resistance">
+			<type>num</type>
+			<sensorId>BATTERY_ESTIMATES_RESISTANCE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.81</getOid>
+			</value>
+			<label>Battery - Estimates - Resistance (ohms)</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_capacity_nominal">
+			<type>num</type>
+			<units>amphours</units>
+			<sensorId>BATTERY_CAPACITY_NOMINAL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.90</getOid>
+			</value>
+			<label>Battery - Capacity - Nominal</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_autonomy_state_of_charge">
+			<type>pctofcapacity</type>
+			<sensorId>BATTERY_AUTONOMY_STATE_OF_CHARGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.91</getOid>
+			</value>
+			<label>Battery - Autonomy - State Of Charge</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_autonomy_calculated_autonomy">
+			<type>timeinmin</type>
+			<sensorId>BATTERY_AUTONOMY_CALCULATED_AUTONOMY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.92</getOid>
+			</value>
+			<label>Battery - Autonomy - Calculated Autonomy</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_capacity_remaining">
+			<type>pctofcapacity</type>
+			<sensorId>BATTERY_CAPACITY_REMAINING</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.93</getOid>
+			</value>
+			<label>Battery - Capacity - Remaining</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_autonomy_battery_current_integration">
+			<type>num</type>
+			<sensorId>BATTERY_AUTONOMY_BATTERY_CURRENT_INTEGRATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.94</getOid>
+			</value>
+			<label>Battery - Autonomy - Battery Current Integration</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_capacity_state_of_health">
+			<type>string</type>
+			<sensorId>BATTERY_CAPACITY_STATE_OF_HEALTH</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.95</getOid>
+			</value>
+			<label>Battery - Capacity - State Of Health</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_boost_last_start_trigger">
+			<type>string</type>
+			<sensorId>BATTERY_BOOST_LAST_START_TRIGGER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.202</getOid>
+			</value>
+			<label>Battery - Boost - Last Start Trigger</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_boost_last_stop_trigger">
+			<type>string</type>
+			<sensorId>BATTERY_BOOST_LAST_STOP_TRIGGER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.203</getOid>
+			</value>
+			<label>Battery - Boost - Last Stop Trigger</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_boost_duration">
+			<type>timeinmin</type>
+			<sensorId>BATTERY_BOOST_DURATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.205</getOid>
+			</value>
+			<label>Battery - Boost - Duration</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_boost_start_time">
+			<type>string</type>
+			<sensorId>BATTERY_BOOST_START_TIME</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.206</getOid>
+			</value>
+			<label>Battery - Boost - Start Time</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_test_result">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_RESULT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.251</getOid>
+			</value>
+			<label>Battery - Test - Result</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_test_discharged_capacity_ratio">
+			<type>pctofcapacity</type>
+			<sensorId>BATTERY_TEST_DISCHARGED_CAPACITY_RATIO</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.252</getOid>
+			</value>
+			<label>Battery - Test - Discharged Capacity Ratio</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_test_discharged_capacity">
+			<type>num</type>
+			<units>amphours</units>
+			<sensorId>BATTERY_TEST_DISCHARGED_CAPACITY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.253</getOid>
+			</value>
+			<label>Battery - Test - Discharged Capacity</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_test_final_voltage">
+			<type>voltage</type>
+			<sensorId>BATTERY_TEST_FINAL_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.254</getOid>
+			</value>
+			<label>Battery - Test - Final Voltage</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_test_duration">
+			<type>timeinmin</type>
+			<sensorId>BATTERY_TEST_DURATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.255</getOid>
+			</value>
+			<label>Battery - Test - Duration</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_test_start_time">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_START_TIME</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.256</getOid>
+			</value>
+			<label>Battery - Test - Start Time</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_test_previous_result">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_PREVIOUS_RESULT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.261</getOid>
+			</value>
+			<label>Battery - Test - Previous Result</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_test_previous_discharged_capacity_ratio">
+			<type>num</type>
+			<sensorId>BATTERY_TEST_PREVIOUS_DISCHARGED_CAPACITY_RATIO</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.262</getOid>
+			</value>
+			<label>Battery - Test - Previous Discharged Capacity Ratio</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_test_previous_discharged_capacity">
+			<type>num</type>
+			<units>amphours</units>
+			<sensorId>BATTERY_TEST_PREVIOUS_DISCHARGED_CAPACITY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.263</getOid>
+			</value>
+			<label>Battery - Test - Previous Discharged Capacity</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_test_previous_final_voltage">
+			<type>voltage</type>
+			<sensorId>BATTERY_TEST_PREVIOUS_FINAL_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.264</getOid>
+			</value>
+			<label>Battery - Test - Previous Final Voltage</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_test_previous_duration">
+			<type>timeinmin</type>
+			<sensorId>BATTERY_TEST_PREVIOUS_DURATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.265</getOid>
+			</value>
+			<label>Battery - Test - Previous Duration</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_test_previous_start_time">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_PREVIOUS_START_TIME</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.266</getOid>
+			</value>
+			<label>Battery - Test - Previous Start Time</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_test_next_scheduled_battery_test">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_NEXT_SCHEDULED_BATTERY_TEST</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.271</getOid>
+			</value>
+			<label>Battery - Test - Next Scheduled Battery Test</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_disconnect_global_state">
+			<type>string</type>
+			<sensorId>BATTERY_DISCONNECT_GLOBAL_STATE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.301</getOid>
+			</value>
+			<label>Battery Disconnect - Global - State</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_disconnect_global_reason">
+			<type>string</type>
+			<sensorId>BATTERY_DISCONNECT_GLOBAL_REASON</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.302</getOid>
+			</value>
+			<label>Battery Disconnect - Global - Reason</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_disconnect_global_feedback_state">
+			<type>string</type>
+			<sensorId>BATTERY_DISCONNECT_GLOBAL_FEEDBACK_STATE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.13.2.1.3.303</getOid>
+			</value>
+			<label>Battery Disconnect - Global - Feedback State</label>
+			<sensorSet>DC System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="dc_bus_voltage_alarm_low_threshold">
+			<type>voltage</type>
+			<sensorId>DC_BUS_VOLTAGE_ALARM_LOW_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.50</getOid>
+			</value>
+			<label>DC Bus - Voltage - Alarm Low Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_voltage_alarm_low_clear_threshold">
+			<type>voltage</type>
+			<sensorId>DC_BUS_VOLTAGE_ALARM_LOW_CLEAR_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.51</getOid>
+			</value>
+			<label>DC Bus - Voltage - Alarm Low Clear Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_voltage_alarm_high_threshold">
+			<type>voltage</type>
+			<sensorId>DC_BUS_VOLTAGE_ALARM_HIGH_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.52</getOid>
+			</value>
+			<label>DC Bus - Voltage - Alarm High Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_voltage_alarm_high_clear_threshold">
+			<type>voltage</type>
+			<sensorId>DC_BUS_VOLTAGE_ALARM_HIGH_CLEAR_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.53</getOid>
+			</value>
+			<label>DC Bus - Voltage - Alarm High Clear Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_global_presence">
+			<type>string</type>
+			<sensorId>BATTERY_GLOBAL_PRESENCE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.90</getOid>
+			</value>
+			<label>Battery - Global - Presence</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_measurement_source_voltage">
+			<type>string</type>
+			<sensorId>BATTERY_MEASUREMENT_SOURCE_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.100</getOid>
+			</value>
+			<label>Battery - Measurement Source - Voltage</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_measurement_source_current">
+			<type>string</type>
+			<sensorId>BATTERY_MEASUREMENT_SOURCE_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.101</getOid>
+			</value>
+			<label>Battery - Measurement Source - Current</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_characteristics_type">
+			<type>string</type>
+			<sensorId>BATTERY_CHARACTERISTICS_TYPE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.102</getOid>
+			</value>
+			<label>Battery - Characteristics - Type</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_characteristics_number_of_cells">
+			<type>num</type>
+			<sensorId>BATTERY_CHARACTERISTICS_NUMBER_OF_CELLS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.103</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery - Characteristics - Number Of Cells</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_characteristics_string_capacity">
+			<type>num</type>
+			<units>amphours</units>
+			<sensorId>BATTERY_CHARACTERISTICS_STRING_CAPACITY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.104</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery - Characteristics - String Capacity</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_characteristics_number_of_string">
+			<type>num</type>
+			<sensorId>BATTERY_CHARACTERISTICS_NUMBER_OF_STRING</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.105</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery - Characteristics - Number Of String</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_autonomy_peukert_number">
+			<type>num</type>
+			<sensorId>BATTERY_AUTONOMY_PEUKERT_NUMBER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.106</getOid>
+			</value>
+			<label>Battery - Autonomy - Peukert Number</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_autonomy_max_depth_of_discharge_for_estimation">
+			<type>pctofcapacity</type>
+			<sensorId>BATTERY_AUTONOMY_MAX_DEPTH_OF_DISCHARGE_FOR_ESTIMATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.107</getOid>
+			</value>
+			<label>Battery - Autonomy - Max Depth Of Discharge for Estimation</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_float_voltage_per_cell">
+			<type>voltage</type>
+			<sensorId>BATTERY_FLOAT_VOLTAGE_PER_CELL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.111</getOid>
+			</value>
+			<label>Battery - Float - Voltage Per Cell</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_float_source">
+			<type>string</type>
+			<sensorId>BATTERY_FLOAT_SOURCE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.112</getOid>
+			</value>
+			<label>Battery - Float - Source</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_current_limitation_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_CURRENT_LIMITATION_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.113</getOid>
+			</value>
+			<label>Battery - Current Limitation - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_current_limitation_current_limit">
+			<type>amperage</type>
+			<sensorId>BATTERY_CURRENT_LIMITATION_CURRENT_LIMIT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.114</getOid>
+			</value>
+			<label>Battery - Current Limitation - Current Limit</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_current_limitation_source">
+			<type>string</type>
+			<sensorId>BATTERY_CURRENT_LIMITATION_SOURCE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.115</getOid>
+			</value>
+			<label>Battery - Current Limitation - Source</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_temperature_alarm_low_threshold">
+			<type>temp</type>
+			<sensorId>BATTERY_TEMPERATURE_ALARM_LOW_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.121</getOid>
+			</value>
+			<label>Battery - Temperature - Alarm Low Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_temperature_alarm_high_threshold">
+			<type>temp</type>
+			<sensorId>BATTERY_TEMPERATURE_ALARM_HIGH_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.122</getOid>
+			</value>
+			<label>Battery - Temperature - Alarm High Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_temperature_alarm_high_hysteresis">
+			<type>temp</type>
+			<sensorId>BATTERY_TEMPERATURE_ALARM_HIGH_HYSTERESIS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.123</getOid>
+			</value>
+			<label>Battery - Temperature - Alarm High Hysteresis</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_temperature_disable_charge_when_too_high">
+			<type>string</type>
+			<sensorId>BATTERY_TEMPERATURE_DISABLE_CHARGE_WHEN_TOO_HIGH</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.126</getOid>
+			</value>
+			<label>Battery - Temperature - Disable Charge When Too High</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_temperature_compensation_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_TEMPERATURE_COMPENSATION_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.151</getOid>
+			</value>
+			<label>Battery - Temperature Compensation - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_temperature_compensation_cell_coefficient">
+			<type>num</type>
+			<sensorId>BATTERY_TEMPERATURE_COMPENSATION_CELL_COEFFICIENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.152</getOid>
+			</value>
+			<label>Battery - Temperature Compensation - Cell Coefficient</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_temperature_compensation_reference_temperature">
+			<type>temp</type>
+			<sensorId>BATTERY_TEMPERATURE_COMPENSATION_REFERENCE_TEMPERATURE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.153</getOid>
+			</value>
+			<label>Battery - Temperature Compensation - Reference Temperature</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_temperature_compensation_minimum_temperature">
+			<type>temp</type>
+			<sensorId>BATTERY_TEMPERATURE_COMPENSATION_MINIMUM_TEMPERATURE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.154</getOid>
+			</value>
+			<label>Battery - Temperature Compensation - Minimum Temperature</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_temperature_compensation_maximum_temperature">
+			<type>temp</type>
+			<sensorId>BATTERY_TEMPERATURE_COMPENSATION_MAXIMUM_TEMPERATURE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.155</getOid>
+			</value>
+			<label>Battery - Temperature Compensation - Maximum Temperature</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_boost_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_BOOST_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.201</getOid>
+			</value>
+			<label>Battery - Boost - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_boost_voltage_per_cell">
+			<type>voltage</type>
+			<sensorId>BATTERY_BOOST_VOLTAGE_PER_CELL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.202</getOid>
+			</value>
+			<label>Battery - Boost - Voltage Per Cell</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_boost_timeout_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_BOOST_TIMEOUT_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.203</getOid>
+			</value>
+			<label>Battery - Boost - Timeout Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_boost_timeout_duration">
+			<type>timeinsec</type>
+			<sensorId>BATTERY_BOOST_TIMEOUT_DURATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.204</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery - Boost - Timeout Duration</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_boost_stop_on_low_current_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_BOOST_STOP_ON_LOW_CURRENT_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.205</getOid>
+			</value>
+			<label>Battery - Boost - Stop On Low Current - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_boost_stop_on_low_current_threshold">
+			<type>amperage</type>
+			<sensorId>BATTERY_BOOST_STOP_ON_LOW_CURRENT_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.206</getOid>
+			</value>
+			<label>Battery - Boost - Stop On Low Current - Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_boost_start_on_low_cell_voltage_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_BOOST_START_ON_LOW_CELL_VOLTAGE_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.207</getOid>
+			</value>
+			<label>Battery - Boost - Start On Low Cell Voltage - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_boost_start_on_low_cell_voltage_threshold">
+			<type>voltage</type>
+			<sensorId>BATTERY_BOOST_START_ON_LOW_CELL_VOLTAGE_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.208</getOid>
+			</value>
+			<label>Battery - Boost - Start On Low Cell Voltage - Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_boost_stop_on_temperature_high_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_BOOST_STOP_ON_TEMPERATURE_HIGH_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.209</getOid>
+			</value>
+			<label>Battery - Boost - Stop On Temperature High - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_boost_start_on_long_discharge_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_BOOST_START_ON_LONG_DISCHARGE_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.211</getOid>
+			</value>
+			<label>Battery - Boost - Start On Long Discharge - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_boost_start_on_long_discharge_threshold">
+			<type>timeinsec</type>
+			<sensorId>BATTERY_BOOST_START_ON_LONG_DISCHARGE_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.212</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery - Boost - Start On Long Discharge - Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_test_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.251</getOid>
+			</value>
+			<label>Battery - Test - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_test_type">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_TYPE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.252</getOid>
+			</value>
+			<label>Battery - Test - Type</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_test_power_setpoint">
+			<type>powerW</type>
+			<sensorId>BATTERY_TEST_POWER_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.253</getOid>
+			</value>
+			<label>Battery - Test - Power Setpoint</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_test_timeout_duration">
+			<type>timeinsec</type>
+			<sensorId>BATTERY_TEST_TIMEOUT_DURATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.254</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery - Test - Timeout Duration</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_test_low_stop">
+			<type>voltage</type>
+			<sensorId>BATTERY_TEST_LOW_STOP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.255</getOid>
+			</value>
+			<label>Battery - Test - Low Stop</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_test_scheduling">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_SCHEDULING</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.261</getOid>
+			</value>
+			<label>Battery - Test - Scheduling</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_test_scheduler_cron_rule">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_SCHEDULER_CRON_RULE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.262</getOid>
+			</value>
+			<label>Battery - Test - Scheduler Cron Rule</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_test_guard_time">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_GUARD_TIME</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.271</getOid>
+			</value>
+			<label>Battery - Test - Guard Time</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_test_guard_time_duration">
+			<type>timeinmin</type>
+			<sensorId>BATTERY_TEST_GUARD_TIME_DURATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.272</getOid>
+			</value>
+			<label>Battery - Test - Guard Time duration</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_test_enable_ac_loss_guard">
+			<type>string</type>
+			<sensorId>BATTERY_TEST_ENABLE_AC_LOSS_GUARD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.273</getOid>
+			</value>
+			<label>Battery - Test - Enable AC Loss Guard</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_test_ac_loss_guard_value">
+			<type>timeinhrs</type>
+			<sensorId>BATTERY_TEST_AC_LOSS_GUARD_VALUE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.274</getOid>
+			</value>
+			<label>Battery - Test - AC Loss Guard Value</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_disconnect_global_presence">
+			<type>string</type>
+			<sensorId>BATTERY_DISCONNECT_GLOBAL_PRESENCE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.301</getOid>
+			</value>
+			<label>Battery Disconnect - Global - Presence</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_disconnect_global_inhibit">
+			<type>string</type>
+			<sensorId>BATTERY_DISCONNECT_GLOBAL_INHIBIT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.302</getOid>
+			</value>
+			<label>Battery Disconnect - Global - Inhibit</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="battery_disconnect_voltage_too_low_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_DISCONNECT_VOLTAGE_TOO_LOW_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.310</getOid>
+			</value>
+			<label>Battery Disconnect - Voltage Too Low - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_disconnect_voltage_too_low_threshold">
+			<type>voltage</type>
+			<sensorId>BATTERY_DISCONNECT_VOLTAGE_TOO_LOW_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.311</getOid>
+			</value>
+			<label>Battery Disconnect - Voltage Too Low - Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_disconnect_global_closing_delay">
+			<type>timeinsec</type>
+			<sensorId>BATTERY_DISCONNECT_GLOBAL_CLOSING_DELAY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.312</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery Disconnect - Global - Closing Delay</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_disconnect_global_opening_delay">
+			<type>timeinsec</type>
+			<sensorId>BATTERY_DISCONNECT_GLOBAL_OPENING_DELAY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.313</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Battery Disconnect - Global - Opening Delay</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="battery_disconnect_temperature_too_high_enabled">
+			<type>string</type>
+			<sensorId>BATTERY_DISCONNECT_TEMPERATURE_TOO_HIGH_ENABLED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.321</getOid>
+			</value>
+			<label>Battery Disconnect - Temperature Too High - Enabled</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="battery_disconnect_temperature_too_high_disconnect_threshold">
+			<type>temp</type>
+			<sensorId>BATTERY_DISCONNECT_TEMPERATURE_TOO_HIGH_DISCONNECT_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.322</getOid>
+			</value>
+			<label>Battery Disconnect - Temperature Too High - Disconnect Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_disconnect_temperature_too_high_reconnect_threshold">
+			<type>temp</type>
+			<sensorId>BATTERY_DISCONNECT_TEMPERATURE_TOO_HIGH_RECONNECT_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.323</getOid>
+			</value>
+			<label>Battery Disconnect - Temperature Too High - Reconnect Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_strings_midpoint_unbalance_alarm_threshold">
+			<type>num</type>
+			<sensorId>BATTERY_STRINGS_MIDPOINT_UNBALANCE_ALARM_THRESHOLD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.350</getOid>
+			</value>
+			<label>Battery Strings - Midpoint Unbalance - Alarm Threshold</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="battery_strings_midpoint_unbalance_alarm_hysteresis">
+			<type>num</type>
+			<sensorId>BATTERY_STRINGS_MIDPOINT_UNBALANCE_ALARM_HYSTERESIS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.351</getOid>
+			</value>
+			<label>Battery Strings - Midpoint Unbalance - Alarm Hysteresis</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="load_number_of_loads">
+			<type>num</type>
+			<sensorId>LOAD_NUMBER_OF_LOADS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.401</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Load - Number of Loads</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="generic_events_event_table_length">
+			<type>num</type>
+			<sensorId>GENERIC_EVENTS_EVENT_TABLE_LENGTH</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.601</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Generic - Events - Event Table Length</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="plc_global_number_of_custom_data">
+			<type>num</type>
+			<sensorId>PLC_GLOBAL_NUMBER_OF_CUSTOM_DATA</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.901</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>PLC - Global - Number Of Custom Data</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="plc_global_number_of_custom_alarm">
+			<type>num</type>
+			<sensorId>PLC_GLOBAL_NUMBER_OF_CUSTOM_ALARM</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.15.2.1.3.902</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>PLC - Global - Number Of Custom Alarm</label>
+			<sensorSet>DC System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="converters_bypass_state">
+			<type>string</type>
+			<sensorId>CONVERTERS_BYPASS_STATE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.31</getOid>
+			</value>
+			<label>Converters - Bypass - State</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="ac_outputs_global_current">
+			<type>amperage</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.102</getOid>
+			</value>
+			<label>AC Outputs - Global - Current</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_global_active_power">
+			<type>powerW</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.103</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Global - Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_global_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.104</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Global - Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="ac_outputs_global_status">
+			<type>string</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_STATUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.106</getOid>
+			</value>
+			<label>AC Outputs - Global - Status</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="ac_outputs_global_members">
+			<type>num</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_MEMBERS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.107</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Global - Members</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_global_installed_active_power">
+			<type>powerW</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_INSTALLED_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.111</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Global - Installed Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_global_installed_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_INSTALLED_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.112</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Global - Installed Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_global_available_active_power">
+			<type>powerW</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_AVAILABLE_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.113</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Global - Available Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_global_available_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_AVAILABLE_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.114</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Global - Available Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_global_power_factor">
+			<type>num/powerfactor</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_POWER_FACTOR</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.115</getOid>
+			</value>
+			<label>AC Outputs - Global - Power Factor</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_global_saturation_level">
+			<type>num</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_SATURATION_LEVEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.117</getOid>
+			</value>
+			<label>AC Outputs - Global - Saturation Level</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_voltage">
+			<type>voltage</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.121</getOid>
+			</value>
+			<label>AC Outputs - Phase 1 - Voltage</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_current">
+			<type>amperage</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.122</getOid>
+			</value>
+			<label>AC Outputs - Phase 1 - Current</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_active_power">
+			<type>powerW</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.123</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.124</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_frequency">
+			<type>frequency</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_FREQUENCY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.125</getOid>
+			</value>
+			<label>AC Outputs - Phase 1 - Frequency</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="ac_outputs_phase_1_status">
+			<type>string</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_STATUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.126</getOid>
+			</value>
+			<label>AC Outputs - Phase 1 - Status</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="ac_outputs_phase_1_members">
+			<type>num</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_MEMBERS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.127</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Members</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_installed_active_power">
+			<type>powerW</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_INSTALLED_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.131</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Installed Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_installed_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_INSTALLED_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.132</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Installed Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_available_active_power">
+			<type>powerW</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_AVAILABLE_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.133</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Available Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_available_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_AVAILABLE_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.134</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Available Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_power_factor">
+			<type>num/powerfactor</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_POWER_FACTOR</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.135</getOid>
+			</value>
+			<label>AC Outputs - Phase 1 - Power Factor</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_saturation_level">
+			<type>num</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_SATURATION_LEVEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.137</getOid>
+			</value>
+			<label>AC Outputs - Phase 1 - Saturation Level</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_global_current">
+			<type>amperage</type>
+			<sensorId>AC_INPUTS_GLOBAL_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.302</getOid>
+			</value>
+			<label>AC Inputs - Global - Current</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_global_active_power">
+			<type>powerW</type>
+			<sensorId>AC_INPUTS_GLOBAL_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.303</getOid>
+			</value>
+			<label>AC Inputs - Global - Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_global_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_INPUTS_GLOBAL_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.304</getOid>
+			</value>
+			<label>AC Inputs - Global - Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="ac_inputs_global_status">
+			<type>string</type>
+			<sensorId>AC_INPUTS_GLOBAL_STATUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.310</getOid>
+			</value>
+			<label>AC Inputs - Global - Status</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="ac_inputs_global_installed_active_power">
+			<type>powerW</type>
+			<sensorId>AC_INPUTS_GLOBAL_INSTALLED_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.311</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Global - Installed Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_global_installed_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_INPUTS_GLOBAL_INSTALLED_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.312</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Global - Installed Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_global_available_active_power">
+			<type>powerW</type>
+			<sensorId>AC_INPUTS_GLOBAL_AVAILABLE_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.313</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Global - Available Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_global_available_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_INPUTS_GLOBAL_AVAILABLE_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.314</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Global - Available Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_global_saturation_level">
+			<type>num</type>
+			<sensorId>AC_INPUTS_GLOBAL_SATURATION_LEVEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.317</getOid>
+			</value>
+			<label>AC Inputs - Global - Saturation Level</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_phase_1_voltage">
+			<type>voltage</type>
+			<sensorId>AC_INPUTS_PHASE_1_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.321</getOid>
+			</value>
+			<label>AC Inputs - Phase 1 - Voltage</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_phase_1_current">
+			<type>amperage</type>
+			<sensorId>AC_INPUTS_PHASE_1_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.322</getOid>
+			</value>
+			<label>AC Inputs - Phase 1 - Current</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_phase_1_active_power">
+			<type>powerW</type>
+			<sensorId>AC_INPUTS_PHASE_1_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.323</getOid>
+			</value>
+			<label>AC Inputs - Phase 1 - Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_phase_1_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_INPUTS_PHASE_1_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.324</getOid>
+			</value>
+			<label>AC Inputs - Phase 1 - Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_phase_1_frequency">
+			<type>frequency</type>
+			<sensorId>AC_INPUTS_PHASE_1_FREQUENCY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.325</getOid>
+			</value>
+			<label>AC Inputs - Phase 1 - Frequency</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="ac_inputs_phase_1_status">
+			<type>string</type>
+			<sensorId>AC_INPUTS_PHASE_1_STATUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.330</getOid>
+			</value>
+			<label>AC Inputs - Phase 1 - Status</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="ac_inputs_phase_1_installed_active_power">
+			<type>powerW</type>
+			<sensorId>AC_INPUTS_PHASE_1_INSTALLED_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.331</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Phase 1 - Installed Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_phase_1_installed_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_INPUTS_PHASE_1_INSTALLED_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.332</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Phase 1 - Installed Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_phase_1_available_active_power">
+			<type>powerW</type>
+			<sensorId>AC_INPUTS_PHASE_1_AVAILABLE_ACTIVE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.333</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Phase 1 - Available Active Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_phase_1_available_apparent_power">
+			<type>powerVA</type>
+			<sensorId>AC_INPUTS_PHASE_1_AVAILABLE_APPARENT_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.334</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Phase 1 - Available Apparent Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_phase_1_saturation_level">
+			<type>num</type>
+			<sensorId>AC_INPUTS_PHASE_1_SATURATION_LEVEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.337</getOid>
+			</value>
+			<label>AC Inputs - Phase 1 - Saturation Level</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_1_voltage">
+			<type>voltage</type>
+			<sensorId>DC_BUS_1_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.501</getOid>
+			</value>
+			<label>DC - Bus 1 - Voltage</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_1_current">
+			<type>amperage</type>
+			<sensorId>DC_BUS_1_CURRENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.502</getOid>
+			</value>
+			<label>DC - Bus 1 - Current</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_1_power">
+			<type>powerW</type>
+			<sensorId>DC_BUS_1_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.503</getOid>
+			</value>
+			<label>DC - Bus 1 - Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_1_voltage_setpoint">
+			<type>voltage</type>
+			<sensorId>DC_BUS_1_VOLTAGE_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.504</getOid>
+			</value>
+			<label>DC - Bus 1 - Voltage SetPoint</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_1_power_setpoint">
+			<type>powerW</type>
+			<sensorId>DC_BUS_1_POWER_SETPOINT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.505</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>DC - Bus 1 - Power Setpoint</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="dc_bus_1_status">
+			<type>string</type>
+			<sensorId>DC_BUS_1_STATUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.506</getOid>
+			</value>
+			<label>DC - Bus 1 - Status</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="dc_bus_1_members">
+			<type>num</type>
+			<sensorId>DC_BUS_1_MEMBERS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.507</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>DC - Bus 1 - Members</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_1_installed_power">
+			<type>powerW</type>
+			<sensorId>DC_BUS_1_INSTALLED_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.511</getOid>
+			</value>
+			<label>DC - Bus 1 - Installed Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_1_available_power">
+			<type>powerW</type>
+			<sensorId>DC_BUS_1_AVAILABLE_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.512</getOid>
+			</value>
+			<label>DC - Bus 1 - Available Power</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="dc_bus_1_status_charger">
+			<type>string</type>
+			<sensorId>DC_BUS_1_STATUS_CHARGER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.516</getOid>
+			</value>
+			<label>DC - Bus 1 - Status Charger</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="dc_bus_1_saturation_level">
+			<type>num</type>
+			<sensorId>DC_BUS_1_SATURATION_LEVEL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.517</getOid>
+			</value>
+			<label>DC - Bus 1 - Saturation Level</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="gateway_gw1_bus_status">
+			<type>string</type>
+			<sensorId>GATEWAY_GW1_BUS_STATUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.611</getOid>
+			</value>
+			<label>Gateway - GW1 - Bus Status</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="gateway_gw1_configuration_status">
+			<type>string</type>
+			<sensorId>GATEWAY_GW1_CONFIGURATION_STATUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.612</getOid>
+			</value>
+			<label>Gateway - GW1 - Configuration Status</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="gateway_gw1_last_configuration_sending_state">
+			<type>string</type>
+			<sensorId>GATEWAY_GW1_LAST_CONFIGURATION_SENDING_STATE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.613</getOid>
+			</value>
+			<label>Gateway - GW1 - Last Configuration Sending State</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="gateway_gw1_last_configuration_sending_message">
+			<type>string</type>
+			<sensorId>GATEWAY_GW1_LAST_CONFIGURATION_SENDING_MESSAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.614</getOid>
+			</value>
+			<label>Gateway - GW1 - Last Configuration Sending Message</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="gateway_gw1_last_configuration_sending_details">
+			<type>string</type>
+			<sensorId>GATEWAY_GW1_LAST_CONFIGURATION_SENDING_DETAILS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.615</getOid>
+			</value>
+			<label>Gateway - GW1 - Last Configuration Sending Details</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<stringSensor ruleid="synchronizer_global_status">
+			<type>string</type>
+			<sensorId>SYNCHRONIZER_GLOBAL_STATUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.706</getOid>
+			</value>
+			<label>Synchronizer - Global - Status</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="synchronizer_global_members">
+			<type>num</type>
+			<sensorId>SYNCHRONIZER_GLOBAL_MEMBERS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.707</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Synchronizer - Global - Members</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="synchronizer_global_ok">
+			<type>num</type>
+			<sensorId>SYNCHRONIZER_GLOBAL_OK</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.708</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Synchronizer - Global - OK</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="synchronizer_phase_1_status">
+			<type>string</type>
+			<sensorId>SYNCHRONIZER_PHASE_1_STATUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.726</getOid>
+			</value>
+			<label>Synchronizer - Phase 1 - Status</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="synchronizer_phase_1_members">
+			<type>num</type>
+			<sensorId>SYNCHRONIZER_PHASE_1_MEMBERS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.727</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Synchronizer - Phase 1 - Members</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<numSensor ruleid="synchronizer_phase_1_ok">
+			<type>num</type>
+			<sensorId>SYNCHRONIZER_PHASE_1_OK</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.13.2.1.3.728</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Synchronizer - Phase 1 - OK</label>
+			<sensorSet>Converter System 1 Data</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="system_global_topology">
+			<type>string</type>
+			<sensorId>SYSTEM_GLOBAL_TOPOLOGY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1</getOid>
+			</value>
+			<label>System - Global - Topology</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="system_ac_number_of_phases">
+			<type>num</type>
+			<sensorId>SYSTEM_AC_NUMBER_OF_PHASES</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.6</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>System - AC - Number Of Phases</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<stringSensor ruleid="converters_allow_full_remote_control">
+			<type>string</type>
+			<sensorId>CONVERTERS_ALLOW_FULL_REMOTE_CONTROL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.41</getOid>
+			</value>
+			<label>Converters - Allow Full Remote Control</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</stringSensor>
+		<numSensor ruleid="ac_outputs_global_saturation_level_alarm_set">
+			<type>num</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_SATURATION_LEVEL_ALARM_SET</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.111</getOid>
+			</value>
+			<label>AC Outputs - Global - Saturation Level Alarm Set</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_global_saturation_level_alarm_clear">
+			<type>num</type>
+			<sensorId>AC_OUTPUTS_GLOBAL_SATURATION_LEVEL_ALARM_CLEAR</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.112</getOid>
+			</value>
+			<label>AC Outputs - Global - Saturation Level Alarm Clear</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_configured_converters">
+			<type>num</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_CONFIGURED_CONVERTERS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.121</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Configured Converters</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_redundant_converters">
+			<type>num</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_REDUNDANT_CONVERTERS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.122</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Redundant Converters</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_nominal_phase_shift">
+			<type>num</type>
+			<units>degreesAngle</units>
+			<sensorId>AC_OUTPUTS_PHASE_1_NOMINAL_PHASE_SHIFT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.123</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Outputs - Phase 1 - Nominal Phase Shift</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_phase_1_nominal_voltage">
+			<type>voltage</type>
+			<sensorId>AC_OUTPUTS_PHASE_1_NOMINAL_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.124</getOid>
+			</value>
+			<label>AC Outputs - Phase 1 - Nominal Voltage</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_peak_shaving_override_power_limitation_timeout">
+			<type>timeinsec</type>
+			<sensorId>AC_INPUTS_PEAK_SHAVING_OVERRIDE_POWER_LIMITATION_TIMEOUT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.301</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Peak Shaving - Override Power Limitation Timeout</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_global_saturation_level_alarm_set">
+			<type>num</type>
+			<sensorId>AC_INPUTS_GLOBAL_SATURATION_LEVEL_ALARM_SET</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.311</getOid>
+			</value>
+			<label>AC Inputs - Global - Saturation Level Alarm Set</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_global_saturation_level_alarm_clear">
+			<type>num</type>
+			<sensorId>AC_INPUTS_GLOBAL_SATURATION_LEVEL_ALARM_CLEAR</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.312</getOid>
+			</value>
+			<label>AC Inputs - Global - Saturation Level Alarm Clear</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_1_override_voltage_setpoint_timeout">
+			<type>timeinsec</type>
+			<sensorId>DC_BUS_1_OVERRIDE_VOLTAGE_SETPOINT_TIMEOUT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.501</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>DC - Bus 1 - Override Voltage SetPoint Timeout</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_bus_1_override_power_setpoint_timeout">
+			<type>timeinsec</type>
+			<sensorId>DC_BUS_1_OVERRIDE_POWER_SETPOINT_TIMEOUT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.503</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>DC - Bus 1 - Override Power SetPoint Timeout</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_global_saturation_level_alarm_set">
+			<type>num</type>
+			<sensorId>DC_GLOBAL_SATURATION_LEVEL_ALARM_SET</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.511</getOid>
+			</value>
+			<label>DC - Global - Saturation Level Alarm Set</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_global_saturation_level_alarm_clear">
+			<type>num</type>
+			<sensorId>DC_GLOBAL_SATURATION_LEVEL_ALARM_CLEAR</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.512</getOid>
+			</value>
+			<label>DC - Global - Saturation Level Alarm Clear</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_voltage_low_start">
+			<type>voltage</type>
+			<sensorId>DC_VOLTAGE_LOW_START</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1000</getOid>
+			</value>
+			<label>DC - Voltage - Low Start</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_voltage_low_transfer">
+			<type>voltage</type>
+			<sensorId>DC_VOLTAGE_LOW_TRANSFER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1001</getOid>
+			</value>
+			<label>DC - Voltage - Low Transfer</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_voltage_low_stop">
+			<type>voltage</type>
+			<sensorId>DC_VOLTAGE_LOW_STOP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1002</getOid>
+			</value>
+			<label>DC - Voltage - Low Stop</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_voltage_high_start">
+			<type>voltage</type>
+			<sensorId>DC_VOLTAGE_HIGH_START</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1003</getOid>
+			</value>
+			<label>DC - Voltage - High Start</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_voltage_high_transfer">
+			<type>voltage</type>
+			<sensorId>DC_VOLTAGE_HIGH_TRANSFER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1004</getOid>
+			</value>
+			<label>DC - Voltage - High Transfer</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_voltage_high_stop">
+			<type>voltage</type>
+			<sensorId>DC_VOLTAGE_HIGH_STOP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1005</getOid>
+			</value>
+			<label>DC - Voltage - High Stop</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_voltage_low_start">
+			<type>voltage</type>
+			<sensorId>AC_INPUTS_VOLTAGE_LOW_START</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1006</getOid>
+			</value>
+			<label>AC Inputs - Voltage - Low Start</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_voltage_low_transfer">
+			<type>voltage</type>
+			<sensorId>AC_INPUTS_VOLTAGE_LOW_TRANSFER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1007</getOid>
+			</value>
+			<label>AC Inputs - Voltage - Low Transfer</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_voltage_low_stop">
+			<type>voltage</type>
+			<sensorId>AC_INPUTS_VOLTAGE_LOW_STOP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1008</getOid>
+			</value>
+			<label>AC Inputs - Voltage - Low Stop</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_voltage_high_start">
+			<type>voltage</type>
+			<sensorId>AC_INPUTS_VOLTAGE_HIGH_START</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1009</getOid>
+			</value>
+			<label>AC Inputs - Voltage - High Start</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_voltage_high_transfer">
+			<type>voltage</type>
+			<sensorId>AC_INPUTS_VOLTAGE_HIGH_TRANSFER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1010</getOid>
+			</value>
+			<label>AC Inputs - Voltage - High Transfer</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_voltage_high_stop">
+			<type>voltage</type>
+			<sensorId>AC_INPUTS_VOLTAGE_HIGH_STOP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1011</getOid>
+			</value>
+			<label>AC Inputs - Voltage - High Stop</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_frequency_low_start">
+			<type>frequency</type>
+			<sensorId>AC_INPUTS_FREQUENCY_LOW_START</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1012</getOid>
+			</value>
+			<label>AC Inputs - Frequency - Low Start</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_frequency_low_stop">
+			<type>frequency</type>
+			<sensorId>AC_INPUTS_FREQUENCY_LOW_STOP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1013</getOid>
+			</value>
+			<label>AC Inputs - Frequency - Low Stop</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_frequency_high_start">
+			<type>frequency</type>
+			<sensorId>AC_INPUTS_FREQUENCY_HIGH_START</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1014</getOid>
+			</value>
+			<label>AC Inputs - Frequency - High Start</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_frequency_high_stop">
+			<type>frequency</type>
+			<sensorId>AC_INPUTS_FREQUENCY_HIGH_STOP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1015</getOid>
+			</value>
+			<label>AC Inputs - Frequency - High Stop</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_outputs_frequency_nominal">
+			<type>frequency</type>
+			<sensorId>AC_OUTPUTS_FREQUENCY_NOMINAL</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1016</getOid>
+			</value>
+			<label>AC Outputs - Frequency - Nominal</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_short_circuit_threshold_voltage">
+			<type>voltage</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_SHORT_CIRCUIT_THRESHOLD_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1034</getOid>
+			</value>
+			<label>Converter Configuration - Advanced - Short circuit threshold voltage</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_short_circuit_hold_time">
+			<type>timeinsec</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_SHORT_CIRCUIT_HOLD_TIME</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1035</getOid>
+			</value>
+			<label>Converter Configuration - Advanced - Short circuit hold time</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_input_source_in_percent">
+			<type>pctofcapacity</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_INPUT_SOURCE_IN_PERCENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1036</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Input source in Percent</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_synchronization_tracking_speed">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_SYNCHRONIZATION_TRACKING_SPEED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1037</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Synchronization tracking speed</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_max_current_percent">
+			<type>pctofcapacity</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_MAX_CURRENT_PERCENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1038</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Max current Percent</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_max_power_percent">
+			<type>pctofcapacity</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_MAX_POWER_PERCENT</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1039</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Max power Percent</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_max_overload_duration">
+			<type>timeinsec</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_MAX_OVERLOAD_DURATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1040</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Max Overload Duration</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_ac_in_mode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_AC_IN_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1041</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - AC in mode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_booster_10x_i_in">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_BOOSTER_10X_I_IN</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1042</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Booster 10x I in</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_remote_off_disable_ac_inpower">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_REMOTE_OFF_DISABLE_AC_INPOWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1043</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Remote Off Disable AC InPower</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_reinjection_allowed">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_REINJECTION_ALLOWED</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1044</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Reinjection allowed</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_external_clock">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_EXTERNAL_CLOCK</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1045</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - External clock</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_walk_in_mode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_WALK_IN_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1046</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Walk in mode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_triangle_mode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_TRIANGLE_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1047</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Triangle mode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_airco_mode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_AIRCO_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1048</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Airco Mode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_start_without_supervision">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_START_WITHOUT_SUPERVISION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1049</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Start without supervision</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_p_dc_max">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_P_DC_MAX</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1050</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - P DC Max</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_ac_1_stop_power">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_AC_1_STOP_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1051</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - AC 1 stop power</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_ac_2_stop_power">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_AC_2_STOP_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1052</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - AC 2 stop power</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_ac_3_stop_power">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_AC_3_STOP_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1053</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - AC 3 stop power</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_ac_4_stop_power">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_AC_4_STOP_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1054</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - AC 4 stop power</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_st_module_number">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_ST_MODULE_NUMBER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1055</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - St module Number</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_st_module_redundancy">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_ST_MODULE_REDUNDANCY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1056</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - St module Redundancy</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_tus">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_TUS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1057</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Tus</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_tus_modules_number">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_TUS_MODULES_NUMBER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1058</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Tus modules number</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_tus_sub_sub_system_address">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_TUS_SUB_SUB_SYSTEM_ADDRESS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1059</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Tus sub sub system address</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_tus_sub_sub_system_output_phase">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_TUS_SUB_SUB_SYSTEM_OUTPUT_PHASE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1060</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Tus sub sub system output phase</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_tus_sub_system_index">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_TUS_SUB_SYSTEM_INDEX</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1061</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Tus sub system index</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_number_of_tus_sub_sub_system">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_NUMBER_OF_TUS_SUB_SUB_SYSTEM</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1062</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Number of tus sub sub system</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_x_tus_supply_source">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_X_TUS_SUPPLY_SOURCE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1063</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - X Tus supply Source</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_y_tus_supply_source">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_Y_TUS_SUPPLY_SOURCE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1064</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Y Tus supply Source</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_tus_sub_sub_system_dc_group">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_TUS_SUB_SUB_SYSTEM_DC_GROUP</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1065</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Tus sub sub system dc group</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_safe_charging_voltage">
+			<type>voltage</type>
+			<sensorId>DC_SAFE_CHARGING_VOLTAGE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1066</getOid>
+			</value>
+			<label>DC - Safe - Charging Voltage</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_safe_discharging_power">
+			<type>powerW</type>
+			<sensorId>DC_SAFE_DISCHARGING_POWER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1067</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>DC - Safe - Discharging Power</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ac_inputs_peak_shaving_default_power_limitation">
+			<type>num</type>
+			<sensorId>AC_INPUTS_PEAK_SHAVING_DEFAULT_POWER_LIMITATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1068</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>AC Inputs - Peak Shaving - Default Power Limitation</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_p_ac_max_per_phase_safe_mode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_P_AC_MAX_PER_PHASE_SAFE_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1069</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - P AC max per phase safe mode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_phase_compensation">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_PHASE_COMPENSATION</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1070</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Phase compensation</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_sierra_mode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_SIERRA_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1071</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Sierra mode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_v_dc_low_stop_charger">
+			<type>voltage</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_V_DC_LOW_STOP_CHARGER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1072</getOid>
+			</value>
+			<label>Converter Configuration - Advanced - V DC low stop charger</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_lvd_mode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_LVD_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1073</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Lvd mode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_max_v_dc_increment_safe_mode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_MAX_V_DC_INCREMENT_SAFE_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1074</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Max V DC increment safe mode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_out_sync_1">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_OUT_SYNC_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1075</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Out Sync 1</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_out_sync_2">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_OUT_SYNC_2</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1076</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Out Sync 2</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_out_sync_3">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_OUT_SYNC_3</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1077</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Out Sync 3</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_out_sync_4">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_OUT_SYNC_4</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1078</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Out Sync 4</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_out_sync_5">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_OUT_SYNC_5</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1079</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Out Sync 5</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_out_sync_6">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_OUT_SYNC_6</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1080</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Out Sync 6</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_out_sync_7">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_OUT_SYNC_7</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1081</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Out Sync 7</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_out_sync_8">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_OUT_SYNC_8</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1082</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Out Sync 8</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_scaling_factor">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_SCALING_FACTOR</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1083</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Scaling Factor</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_temperature_derating_mode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_TEMPERATURE_DERATING_MODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1084</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - Temperature Derating Mode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="dc_internal_regulation_slope">
+			<type>num</type>
+			<sensorId>DC_INTERNAL_REGULATION_SLOPE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1087</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>DC Internal - Regulation - Slope</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_backfeeddetectionmode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_BACKFEEDDETECTIONMODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1097</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - BackFeedDetectionMode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+		<numSensor ruleid="converter_configuration_advanced_sleepmode">
+			<type>num</type>
+			<sensorId>CONVERTER_CONFIGURATION_ADVANCED_SLEEPMODE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.15.2.1.3.1098</getOid>
+			</value>
+		  	<valueInc>1</valueInc>
+			<label>Converter Configuration - Advanced - SleepMode</label>
+			<sensorSet>Converter System 1 Configurations</sensorSet>
+		</numSensor>
+
+		<valueMap ruleid="alarmSeverity-vm">
+			<valueIn>major</valueIn><valueOut>critical</valueOut>
+			<valueIn>minor</valueIn><valueOut>warning</valueOut>
+			<valueIn>warning</valueIn><valueOut>warning</valueOut>
+			<valueIn>none</valueIn><valueOut>informational</valueOut>
+			<valueIn>Major</valueIn><valueOut>critical</valueOut>
+			<valueIn>Minor</valueIn><valueOut>warning</valueOut>
+			<valueIn>Warning</valueIn><valueOut>warning</valueOut>
+			<valueIn>None</valueIn><valueOut>informational</valueOut>
+			<valueIn>*</valueIn><valueOut>critical</valueOut>
+		</valueMap>
+
+        <alarmFlags2 ruleid="siteV1Alarm-af" index=".1.3.6.1.4.1.12551.20.1.11.2.1.3">
+			<value><getRowOid>.1.3.6.1.4.1.12551.20.1.11.2.1.3</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.12551.20.1.11.2.1.2</getRowOid></activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.12551.20.1.11.2.1.2</getRowOid> Cleared</inactiveText>
+                </name>
+                <severity>
+                    <mapValue mapid="alarmSeverity-vm">
+                        <getRowOid>.1.3.6.1.4.1.12551.20.1.11.2.1.4</getRowOid>
+                    </mapValue>
+                </severity>
+                <category>Device</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.12551.20.1.11.2.1.2</getRowOid></activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.12551.20.1.11.2.1.2</getRowOid> Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="es1Alarm-af" index=".1.3.6.1.4.1.12551.20.1.20.1.11.2.1.3">
+			<value><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.11.2.1.3</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.11.2.1.2</getRowOid></activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.11.2.1.2</getRowOid> Cleared</inactiveText>
+                </name>
+                <severity>
+                    <mapValue mapid="alarmSeverity-vm">
+                        <getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.11.2.1.4</getRowOid>
+                    </mapValue>
+                </severity>
+                <category>Device</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.11.2.1.2</getRowOid></activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.11.2.1.2</getRowOid> Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="es1DcSys1Alarm-af" index=".1.3.6.1.4.1.12551.20.1.20.1.20.1.11.2.1.3">
+			<value><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.11.2.1.3</getRowOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.11.2.1.2</getRowOid></activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.11.2.1.2</getRowOid> Cleared</inactiveText>
+                </name>
+                <severity>
+                    <mapValue mapid="alarmSeverity-vm">
+                        <getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.11.2.1.4</getRowOid>
+                    </mapValue>
+                </severity>
+                <category>Device</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.11.2.1.2</getRowOid></activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.20.1.11.2.1.2</getRowOid> Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+        <alarmFlags2 ruleid="es1ConvSys1Alarm-af" index=".1.3.6.1.4.1.12551.20.1.20.1.24.1.11.2.1.3">
+			<value><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.11.2.1.3</getRowOid></value>
+			<alarmFlagsTest match="1">
+                <name>
+                    <activeText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.11.2.1.2</getRowOid></activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.11.2.1.2</getRowOid> Cleared</inactiveText>
+                </name>
+                <severity>
+                    <mapValue mapid="alarmSeverity-vm">
+                        <getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.11.2.1.4</getRowOid>
+                    </mapValue>
+                </severity>
+                <category>Device</category>
+                <description>
+                    <activeText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.11.2.1.2</getRowOid></activeText>
+                    <inactiveText><getRowOid>.1.3.6.1.4.1.12551.20.1.20.1.24.1.11.2.1.2</getRowOid> Cleared</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags2>
+    </device>
+</APC_DDF>

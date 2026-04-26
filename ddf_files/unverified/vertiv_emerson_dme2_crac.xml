@@ -1,0 +1,933 @@
+
+<APC_DDF
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+        ddfid="vertiv_emerson_dme2_crac"
+        ddfname="Vertiv Emerson DME2 CRAC"
+        ddfversion="1"
+        canremove="yes">
+    <schemaVersion>1.6</schemaVersion>
+    <!--
+
+        SOURCE
+        \snmp\resources\mibs\vertiv\ENP_AC_DME2_OWN[COM]-MIB.mib
+        \snmp\resources\mibs\vertiv\ENP_RDU[DUMMY]-MIB.mib
+
+        ENP_AC_DME2_OWN | August 2023
+
+        WALKFILES
+        \snmp\resources\sapro\walkfiles\vertiv\SNMP Walk CRAC DME22 Unit.txt
+
+    -->
+    <device deviceid="vertiv_emerson_dme2_crac">
+        <oidMustExist ruleid="system_exists" oid=".1.3.6.1.4.1.13400.2.0.2" istree="yes"/>
+
+
+        <setProductData ruleid="vendordata" field="vendor">Vertiv Tech Co., Ltd.</setProductData>
+        <setProductData ruleid="modeldata" field="model">DME2</setProductData>
+        <setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+
+
+        <numSensor ruleid="phase_a_voltage">
+            <type>voltage</type>
+            <sensorId>PHASE_A_VOLTAGE</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.40.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Phase A Voltage</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="phase_b_voltage">
+            <type>voltage</type>
+            <sensorId>PHASE_B_VOLTAGE</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.41.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Phase B Voltage</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="phase_c_voltage">
+            <type>voltage</type>
+            <sensorId>PHASE_C_VOLTAGE</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.42.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Phase C Voltage</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="power_frequency">
+            <type>frequency</type>
+            <sensorId>POWER_FREQUENCY</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.43.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Power Frequency</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="return_air_temperature1">
+            <type>temp</type>
+            <sensorId>RETURN_AIR_TEMPERATURE1</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.44.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Return Air Temperature 1</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="return_air_humidity1">
+            <type>humidity</type>
+            <sensorId>RETURN_AIR_HUMIDITY1</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.45.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Return Air Humidity 1</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="return_air_temperature_setpoint">
+            <type>temp</type>
+            <sensorId>RETURN_AIR_TEMPERATURE_SETPOINT</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.47.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Return Air Temperature Setpoint</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="temperature_proportional_band">
+            <type>temp</type>
+            <sensorId>TEMPERATURE_PROPORTIONAL_BAND</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.48.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Temperature Proportional Band</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="humidity_proportional_band">
+            <type>humidity</type>
+            <sensorId>HUMIDITY_PROPORTIONAL_BAND</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.49.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Humidity Proportional Band</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+        <numSensor ruleid="return_air_humidity_setpoint">
+            <type>humidity</type>
+            <sensorId>RETURN_AIR_HUMIDITY_SETPOINT</sensorId>
+            <value>
+                <div>
+                    <op><getOid>.1.3.6.1.4.1.13400.2.0.2.2.50.0</getOid></op>
+                    <op>10</op>
+                </div>
+            </value>
+            <valueInc>0.1</valueInc>
+            <label>Return Air Humidity Setpoint</label>
+            <sensorSet>Analog Sensors</sensorSet>
+        </numSensor>
+
+
+        <valueMap ruleid="two_state-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>*</valueIn><valueOut>2</valueOut>
+        </valueMap>
+
+        <enumMap ruleid="off_on-em">
+            <label>Off</label>
+            <label>On</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <enumMap ruleid="normal_alarm-em">
+            <label>Normal</label>
+            <label>Alarm</label>
+            <label>Unknown</label>
+        </enumMap>
+
+
+
+        <stateSensor ruleid="cooling">
+            <type>state</type>
+            <sensorId>COOLING</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.0.2.2.51.0</getOid>
+                </mapValue>
+            </value>
+            <label>Cooling</label>
+            <enum>off_on-em</enum>
+            <sensorSet>State Sensors</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="heating">
+            <type>state</type>
+            <sensorId>HEATING</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.0.2.2.52.0</getOid>
+                </mapValue>
+            </value>
+            <label>Heating</label>
+            <enum>off_on-em</enum>
+            <sensorSet>State Sensors</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="humidifying">
+            <type>state</type>
+            <sensorId>HUMIDIFYING</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.0.2.2.53.0</getOid>
+                </mapValue>
+            </value>
+            <label>Humidifying</label>
+            <enum>off_on-em</enum>
+            <sensorSet>State Sensors</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="dehumidifying">
+            <type>state</type>
+            <sensorId>DEHUMIDIFYING</sensorId>
+            <value>
+                <mapValue mapid="two_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.0.2.2.54.0</getOid>
+                </mapValue>
+            </value>
+            <label>Dehumidifying</label>
+            <enum>off_on-em</enum>
+            <sensorSet>State Sensors</sensorSet>
+        </stateSensor>
+
+        <valueMap ruleid="three_state-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>*</valueIn><valueOut>3</valueOut>
+        </valueMap>
+
+        <enumMap ruleid="turn_off_on_standby-em">
+            <label>Turn On</label>
+            <label>Turn Off</label>
+            <label>Standby</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <stateSensor ruleid="system_operating_state">
+            <type>state</type>
+            <sensorId>SYSTEM_OPERATING_STATE</sensorId>
+            <value>
+                <mapValue mapid="three_state-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.0.2.2.55.0</getOid>
+                </mapValue>
+            </value>
+            <label>System Operating State</label>
+            <enum>turn_off_on_standby-em</enum>
+            <sensorSet>State Sensors</sensorSet>
+        </stateSensor>
+
+        <valueMap ruleid="teamwork_mode-vm">
+            <valueIn>0</valueIn><valueOut>0</valueOut>
+            <valueIn>1</valueIn><valueOut>1</valueOut>
+            <valueIn>2</valueIn><valueOut>2</valueOut>
+            <valueIn>3</valueIn><valueOut>3</valueOut>
+            <valueIn>4</valueIn><valueOut>4</valueOut>
+            <valueIn>*</valueIn><valueOut>5</valueOut>
+        </valueMap>
+
+        <enumMap ruleid="teamwork_mode-em">
+            <label>Single</label>
+            <label>Teamwork Mode 0</label>
+            <label>Teamwork Mode 1</label>
+            <label>Teamwork Mode 2</label>
+            <label>Teamwork Mode 3</label>
+            <label>Unknown</label>
+        </enumMap>
+
+        <stateSensor ruleid="teamwork_status">
+            <type>state</type>
+            <sensorId>TEAMWORK_STATUS</sensorId>
+            <value>
+                <mapValue mapid="teamwork_mode-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.0.2.2.56.0</getOid>
+                </mapValue>
+            </value>
+            <label>Teamwork Status</label>
+            <enum>teamwork_mode-em</enum>
+            <sensorSet>State Sensors</sensorSet>
+        </stateSensor>
+
+        <stateSensor ruleid="communicate_status">
+            <type>state</type>
+            <sensorId>COMMUNICATE_STATUS</sensorId>
+            <value>
+                <mapValue mapid="normal_alarm-vm">
+                    <getOid>.1.3.6.1.4.1.13400.2.0.2.2.57.0</getOid>
+                </mapValue>
+            </value>
+            <label>Communicate Status</label>
+            <enum>normal_alarm-em</enum>
+            <sensorSet>State Sensors</sensorSet>
+        </stateSensor>
+
+
+        <alarmFlags ruleid="remote_shutdown_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.2.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Remote Shutdown Alarm Active</activeText>
+                    <inactiveText>Remote Shutdown Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Remote Shutdown Alarm condition exists.</activeText>
+                    <inactiveText>Remote Shutdown Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="water_under_floor_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.3.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Water Under Floor Alarm Active</activeText>
+                    <inactiveText>Water Under Floor Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Water Under Floor Alarm condition exists.</activeText>
+                    <inactiveText>Water Under Floor Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="surge_protection_device_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.4.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Surge Protection Device Alarm Active</activeText>
+                    <inactiveText>Surge Protection Device Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Surge Protection Device Alarm condition exists.</activeText>
+                    <inactiveText>Surge Protection Device Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="custom_alarm1">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.5.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Alarm 1 Active</activeText>
+                    <inactiveText>Custom Alarm 1 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Custom Alarm 1 condition exists.</activeText>
+                    <inactiveText>Custom Alarm 1 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="custom_alarm2">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.6.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Alarm 2 Active</activeText>
+                    <inactiveText>Custom Alarm 2 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Custom Alarm 2 condition exists.</activeText>
+                    <inactiveText>Custom Alarm 2 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="custom_alarm3">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.7.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Custom Alarm 3 Active</activeText>
+                    <inactiveText>Custom Alarm 3 Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Custom Alarm 3 condition exists.</activeText>
+                    <inactiveText>Custom Alarm 3 condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="loss_of_power_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.8.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Loss Of Power Alarm Active</activeText>
+                    <inactiveText>Loss Of Power Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Loss Of Power Alarm condition exists.</activeText>
+                    <inactiveText>Loss Of Power Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="power_over_voltage_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.9.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Power Over Voltage Alarm Active</activeText>
+                    <inactiveText>Power Over Voltage Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Power Over Voltage Alarm condition exists.</activeText>
+                    <inactiveText>Power Over Voltage Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="power_under_voltage_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.10.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Power Under Voltage Alarm Active</activeText>
+                    <inactiveText>Power Under Voltage Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Power Under Voltage Alarm condition exists.</activeText>
+                    <inactiveText>Power Under Voltage Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="power_frequency_offset_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.11.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Power Frequency Offset Alarm Active</activeText>
+                    <inactiveText>Power Frequency Offset Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Power Frequency Offset Alarm condition exists.</activeText>
+                    <inactiveText>Power Frequency Offset Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="power_loss_of_phase_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.12.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Power Loss Of Phase Alarm Active</activeText>
+                    <inactiveText>Power Loss Of Phase Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Power Loss Of Phase Alarm condition exists.</activeText>
+                    <inactiveText>Power Loss Of Phase Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="power_opposite_phase_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.13.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Power Opposite Phase Alarm Active</activeText>
+                    <inactiveText>Power Opposite Phase Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Power Opposite Phase Alarm condition exists.</activeText>
+                    <inactiveText>Power Opposite Phase Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="fan_maintenance_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.14.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Fan Maintenance Alarm Active</activeText>
+                    <inactiveText>Fan Maintenance Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Fan Maintenance Alarm condition exists.</activeText>
+                    <inactiveText>Fan Maintenance Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="filter_maintenance_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.15.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Filter Maintenance Alarm Active</activeText>
+                    <inactiveText>Filter Maintenance Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Filter Maintenance Alarm condition exists.</activeText>
+                    <inactiveText>Filter Maintenance Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="humidifier_maintenance_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.16.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Humidifier Maintenance Alarm Active</activeText>
+                    <inactiveText>Humidifier Maintenance Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Humidifier Maintenance Alarm condition exists.</activeText>
+                    <inactiveText>Humidifier Maintenance Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="humidifier_failure_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.17.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Humidifier Failure Alarm Active</activeText>
+                    <inactiveText>Humidifier Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Humidifier Failure Alarm condition exists.</activeText>
+                    <inactiveText>Humidifier Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="humidifier_high_water_level_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.18.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Humidifier High Water Level Alarm Active</activeText>
+                    <inactiveText>Humidifier High Water Level Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Humidifier High Water Level Alarm condition exists.</activeText>
+                    <inactiveText>Humidifier High Water Level Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="loss_of_air_flow_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.19.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Loss Of Air Flow Alarm Active</activeText>
+                    <inactiveText>Loss Of Air Flow Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Loss Of Air Flow Alarm condition exists.</activeText>
+                    <inactiveText>Loss Of Air Flow Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="high_return_air_temperature_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.20.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Return Air Temperature Alarm Active</activeText>
+                    <inactiveText>High Return Air Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>High Return Air Temperature Alarm condition exists.</activeText>
+                    <inactiveText>High Return Air Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="low_return_air_temperature_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.21.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Return Air Temperature Alarm Active</activeText>
+                    <inactiveText>Low Return Air Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Low Return Air Temperature Alarm condition exists.</activeText>
+                    <inactiveText>Low Return Air Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="high_return_air_humidity_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.22.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Return Air Humidity Alarm Active</activeText>
+                    <inactiveText>High Return Air Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>High Return Air Humidity Alarm condition exists.</activeText>
+                    <inactiveText>High Return Air Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="low_return_air_humidity_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.23.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Return Air Humidity Alarm Active</activeText>
+                    <inactiveText>Low Return Air Humidity Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Low Return Air Humidity Alarm condition exists.</activeText>
+                    <inactiveText>Low Return Air Humidity Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="return_air_temperature_sensor_failure_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.24.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Return Air Temperature Sensor Failure Alarm Active</activeText>
+                    <inactiveText>Return Air Temperature Sensor Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Return Air Temperature Sensor Failure Alarm condition exists.</activeText>
+                    <inactiveText>Return Air Temperature Sensor Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+
+        <alarmFlags ruleid="return_air_humidity_sensor_failure_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.25.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Return Air Humidity Sensor Failure Alarm Active</activeText>
+                    <inactiveText>Return Air Humidity Sensor Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Return Air Humidity Sensor Failure Alarm condition exists.</activeText>
+                    <inactiveText>Return Air Humidity Sensor Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="return_sensor_communication_failure_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.26.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Return Sensor Communication Failure Alarm Active</activeText>
+                    <inactiveText>Return Sensor Communication Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Return Sensor Communication Failure Alarm condition exists.</activeText>
+                    <inactiveText>Return Sensor Communication Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="supply_sensor_communication_failure_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.27.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Supply Sensor Communication Failure Alarm Active</activeText>
+                    <inactiveText>Supply Sensor Communication Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Supply Sensor Communication Failure Alarm condition exists.</activeText>
+                    <inactiveText>Supply Sensor Communication Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="remote_sensor_communication_failure_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.28.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Remote Sensor Communication Failure Alarm Active</activeText>
+                    <inactiveText>Remote Sensor Communication Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Remote Sensor Communication Failure Alarm condition exists.</activeText>
+                    <inactiveText>Remote Sensor Communication Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="loss_of_air_flow_sensor_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.29.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Loss Of Air Flow Sensor Failure Alarm Active</activeText>
+                    <inactiveText>Loss Of Air Flow Sensor Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Loss Of Air Flow Sensor Failure Alarm condition exists.</activeText>
+                    <inactiveText>Loss Of Air Flow Sensor Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="high_pressure_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.30.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Pressure Alarm Active</activeText>
+                    <inactiveText>High Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>High Pressure Alarm condition exists.</activeText>
+                    <inactiveText>High Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="high_voltage_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.31.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Voltage Alarm Active</activeText>
+                    <inactiveText>High Voltage Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>High Voltage Alarm condition exists.</activeText>
+                    <inactiveText>High Voltage Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+
+        <alarmFlags ruleid="low_pressure_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.32.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Pressure Alarm Active</activeText>
+                    <inactiveText>Low Pressure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Low Pressure Alarm condition exists.</activeText>
+                    <inactiveText>Low Pressure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+
+        <alarmFlags ruleid="low_pressure_lockout_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.33.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Low Pressure Lockout Alarm Active</activeText>
+                    <inactiveText>Low Pressure Lockout Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Low Pressure Lockout Alarm condition exists.</activeText>
+                    <inactiveText>Low Pressure Lockout Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="high_discharge_temperature_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.34.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Discharge Temperature Alarm Active</activeText>
+                    <inactiveText>High Discharge Temperature Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>High Discharge Temperature Alarm condition exists.</activeText>
+                    <inactiveText>High Discharge Temperature Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="high_discharge_temperature_lock_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.35.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>High Discharge Temperature Lock Alarm Active</activeText>
+                    <inactiveText>High Discharge Temperature Lock Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>High Discharge Temperature Lock Alarm condition exists.</activeText>
+                    <inactiveText>High Discharge Temperature Lock Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="energy_saving_card_failure_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.36.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Energy Saving Card Failure Alarm Active</activeText>
+                    <inactiveText>Energy Saving Card Failure Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Energy Saving Card Failure Alarm condition exists.</activeText>
+                    <inactiveText>Energy Saving Card Failure Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="loss_of_teamwork_master_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.37.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Loss Of Teamwork Master Alarm Active</activeText>
+                    <inactiveText>Loss Of Teamwork Master Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Loss Of Teamwork Master Alarm condition exists.</activeText>
+                    <inactiveText>Loss Of Teamwork Master Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="loss_of_teamwork_slave_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.38.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Loss Of Teamwork Slave Alarm Active</activeText>
+                    <inactiveText>Loss Of Teamwork Slave Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Loss Of Teamwork Slave Alarm condition exists.</activeText>
+                    <inactiveText>Loss Of Teamwork Slave Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+        <alarmFlags ruleid="repeated_of_teamwork_address_alarm">
+            <value><getOid>.1.3.6.1.4.1.13400.2.0.2.2.39.0</getOid></value>
+            <alarmFlagsTest match="1">
+                <name>
+                    <activeText>Repeated Teamwork Address Alarm Active</activeText>
+                    <inactiveText>Repeated Teamwork Address Alarm Cleared</inactiveText>
+                </name>
+                <severity>critical</severity>
+                <category>System</category>
+                <description>
+                    <activeText>Repeated Teamwork Address Alarm condition exists.</activeText>
+                    <inactiveText>Repeated Teamwork Address Alarm condition no longer exists.</inactiveText>
+                </description>
+            </alarmFlagsTest>
+        </alarmFlags>
+
+    </device>
+</APC_DDF>
+
+
+
+
+

@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
 
-<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-         ddfid="carel_rittal_chiller" ddfname="Carel Rittal Chiller" ddfversion="1" canremove="yes">
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="carel_rittal_chiller"
+	ddfname="Carel Rittal Chiller [pcoWeb][SNMP]"
+	ddfversion="1"
+	canremove="yes">
     <schemaVersion>1.6</schemaVersion>
 
 

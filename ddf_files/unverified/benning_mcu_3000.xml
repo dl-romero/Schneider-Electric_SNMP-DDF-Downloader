@@ -1,0 +1,644 @@
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="benning_mcu_3000"
+	ddfname="Benning MCU 3000"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+	
+		SOURCE
+		\snmp\resources\mibs\benning\dcmcu3000-MIB.mib
+	
+		DCMCU3000-MIB | 31 August 2022
+		
+		WALKFILES
+		\snmp\resources\sapro\walkfiles\benning\BenningMcu3000.txt
+	
+	-->
+	<device deviceid="benning_mcu_3000">
+		<oidMustExist ruleid="dcmcu3000-MIB_exists" oid=".1.3.6.1.4.1.27383.6" istree="yes"/>
+	
+        <suppressRule ruleid="suppresscorevendordata" suppressid="core/mib2data/vendordata"/>
+        <suppressRule ruleid="suppresscoremodeldata" suppressid="core/mib2data/modeldata"/>
+        <suppressRule ruleid="suppresscoretypedata" suppressid="core/mib2data/typedata"/>
+		<suppressRule ruleid="suppresscorelabeldata" suppressid="core/mib2datalabel/labeldata"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Benning</setProductData>
+		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.27383.6.1.1.2.0</getOid></setProductData>
+		<setProductData ruleid="typedata" field="type">DC Rectifier</setProductData>
+		
+		<setDefaultLabel ruleid="labeldata"><getOid>.1.3.6.1.4.1.27383.6.1.1.4.0</getOid></setDefaultLabel>
+
+        <numSensor ruleid="dcIdentNominalVoltage">
+            <type>voltage</type>
+            <sensorId>SYSTEM_NOMINAL_OUTPUT_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.1.7.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>System Nominal Output Voltage</label>
+            <sensorSet>System</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcIdentNominalCurrent">
+            <type>amperage</type>
+            <sensorId>SYSTEM_NOMINAL_OUTPUT_CURRENT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.1.8.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>System Nominal Output Current</label>
+            <sensorSet>System</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcPowerSystemBusbarVoltage">
+            <type>voltage</type>
+            <sensorId>POWER_SYSTEM_BUSBAR_VOLTAGE</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.2.1.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power System Busbar Voltage</label>
+            <sensorSet>Power System</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcPowerSystemTotalRectCurrent">
+            <type>amperage</type>
+            <sensorId>POWER_SYSTEM_TOTAL_RECTIFIER_CURRENT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.2.2.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power System Total Rectifier Current</label>
+            <sensorSet>Power System</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcPowerSystemTotalBatteryCurrent">
+            <type>amperage</type>
+            <sensorId>POWER_SYSTEM_TOTAL_BATTERY_CURRENT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.2.3.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power System Total Battery Current</label>
+            <sensorSet>Power System</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcPowerSystemTotalLoadCurrent">
+            <type>amperage</type>
+            <sensorId>POWER_SYSTEM_OUTPUT_CURRENT_TOTAL</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.2.4.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power System Total Load Current</label>
+            <sensorSet>Power System</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcPowerSystemTotalOutputPower">
+            <type>powerW</type>
+            <sensorId>POWER_SYSTEM_OUTPUT_POWER_TOTAL</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.2.5.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power System Total Output Power</label>
+            <sensorSet>Power System</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcPowerSystemRelativeOutputPower">
+            <type>powerW</type>
+            <sensorId>POWER_SYSTEM_RELATIVE_OUTPUT_POWER</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.2.6.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power System Relative Output Power</label>
+            <sensorSet>Power System</sensorSet>
+        </numSensor>
+
+		<valueMap ruleid="dcPowerSystemStatus-vm">
+			<valueIn>2</valueIn> <valueOut>0</valueOut><!-- bit 1 -->
+			<valueIn>4</valueIn> <valueOut>1</valueOut><!-- bit 2 -->
+			<valueIn>8</valueIn> <valueOut>2</valueOut><!-- bit 3 -->
+			<valueIn>10</valueIn><valueOut>3</valueOut><!-- bit 4 -->
+			<valueIn>20</valueIn><valueOut>4</valueOut><!-- bit 5 -->
+			<valueIn>40</valueIn><valueOut>5</valueOut><!-- bit 6 -->
+			<valueIn>80</valueIn><valueOut>6</valueOut><!-- bit 7 -->
+			<valueIn>*</valueIn> <valueOut>7</valueOut><!-- default -->
+		</valueMap>
+
+		<enumMap ruleid="dcPowerSystemStatus-em">
+			<label>Float</label>                    <!-- bit 1 -->
+			<label>Boost</label>                    <!-- bit 2 -->
+			<label>Client Specific Operation</label><!-- bit 3 -->
+			<label>Battery Test</label>             <!-- bit 4 -->
+			<label>Discharging</label>              <!-- bit 5 -->
+			<label>Direct Feed</label>              <!-- bit 6 -->
+			<label>Off</label>                      <!-- bit 7 -->
+			<label>Unknown</label>                  <!-- default -->
+		</enumMap>
+
+        <stateSensor ruleid="dcPowerSystemStatus">
+            <type>state</type>
+            <sensorId>POWER_SYSTEM_STATUS</sensorId>
+            <value>
+                <mapValue mapid="dcPowerSystemStatus-vm">
+                    <getOid>.1.3.6.1.4.1.27383.6.1.2.7.0</getOid>
+                </mapValue>
+            </value>
+            <label>Power System Status</label>
+            <enum>dcPowerSystemStatus-em</enum>
+            <sensorSet>Power System</sensorSet>
+        </stateSensor>
+
+		<alarmFlags ruleid="dcPowerSystemFault">
+			<value><getOid>.1.3.6.1.4.1.27383.6.1.2.8.0</getOid></value>
+			<alarmFlagsTest match="4"><!-- bit 2 -->
+				<name>
+					<activeText>Power System Minor Fault</activeText>
+					<inactiveText>Power System Minor Fault Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Fault</category>
+				<description>
+					<activeText>A Power System Minor Fault condition exists.</activeText>
+					<inactiveText>A Power System Minor Fault condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="8"><!-- bit 3 -->
+				<name>
+					<activeText>Power System Major Fault</activeText>
+					<inactiveText>Power System Major Fault Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Fault</category>
+				<description>
+					<activeText>A Power System Major Fault condition exists.</activeText>
+					<inactiveText>A Power System Major Fault condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="10"><!-- bit 4 -->
+				<name>
+					<activeText>Power System Information Fault</activeText>
+					<inactiveText>Power System Information Fault Cleared</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>Fault</category>
+				<description>
+					<activeText>A Power System Information Fault condition exists.</activeText>
+					<inactiveText>A Power System Information Fault condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+        <numSensor ruleid="dcPowerSystemTemperature">
+            <type>temp</type>
+            <sensorId>PS_TEMPERATURE_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.2.9.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Power System Temperature</label>
+            <sensorSet>Power System</sensorSet>
+        </numSensor>
+		
+		<valueMap ruleid="dcPowerSystemClientSpecificMeasurementUnit-vm">
+			<valueIn>*</valueIn>         <valueOut>num</valueOut>
+			<valueIn>A</valueIn>    <valueOut>amperage</valueOut>
+			<valueIn>kW</valueIn><valueOut>num/powerKW</valueOut>
+			<valueIn>h</valueIn>   <valueOut>timeinhrs</valueOut>
+			<valueIn>V</valueIn>     <valueOut>voltage</valueOut>
+		</valueMap>
+		
+        <numSensor ruleid="dcPowerSystemClientSpecificMeasurement" index=".1.3.6.1.4.1.27383.6.1.2.12.1.3">
+			<rowTest>
+				<neq>
+					<op><getRowOid>.1.3.6.1.4.1.27383.6.1.2.12.1.3</getRowOid></op>
+					<op>-32768</op>
+				</neq>
+			</rowTest>
+            <type>
+				<mapValue mapid="dcPowerSystemClientSpecificMeasurementUnit-vm">
+					<getRowOid>.1.3.6.1.4.1.27383.6.1.2.12.1.4</getRowOid>
+				</mapValue>
+			</type>
+            <sensorId>POWER_SYSTEM_CLIENT_SPEC_MEASUREMENT_<rowIndex/></sensorId>
+            <value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.27383.6.1.2.12.1.3</getRowOid></op>
+					<op>0.01</op>
+				</mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label><getRowOid>.1.3.6.1.4.1.27383.6.1.2.12.1.2</getRowOid></label><!-- dcPowerSystemClientSpecificMeasurementDescription -->
+            <sensorSet>Power System</sensorSet>
+        </numSensor>
+
+		<valueMap ruleid="3state-vm">
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		
+		<enumMap ruleid="offOn-em">
+			<label>Unknown</label>
+			<label>Off</label>
+			<label>On</label>
+		</enumMap>
+
+        <stateSensor ruleid="dcRectifierStatus" index=".1.3.6.1.4.1.27383.6.1.4.2.1.3">
+            <type>state</type>
+            <sensorId>RECTIFIER_STATUS_<rowIndex/></sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.3</getRowOid>
+                </mapValue>
+            </value>
+            <label>Rectifier <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.1</getRowOid> Status</label>
+            <enum>offOn-em</enum>
+            <sensorSet>Rectifier</sensorSet>
+        </stateSensor>
+		
+		<alarmFlags2 ruleid="dcRectifierModuleFault" index=".1.3.6.1.4.1.27383.6.1.4.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="1"><!-- true -->
+				<name>
+					<activeText>Rectifier Module Fault</activeText>
+					<inactiveText>Rectifier Module Fault Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Fault</category>
+				<description>
+					<activeText>A Rectifier <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.1</getRowOid> Module Fault condition exists.</activeText>
+					<inactiveText>A Rectifier <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.1</getRowOid> Module Fault condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="dcRectifierFanFault" index=".1.3.6.1.4.1.27383.6.1.4.2.1.5">
+			<value><getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.5</getRowOid></value>
+			<alarmFlagsTest match="1"><!-- true -->
+				<name>
+					<activeText>Rectifier Fan Fault</activeText>
+					<inactiveText>Rectifier Fan Fault Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Fault</category>
+				<description>
+					<activeText>A Rectifier <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.1</getRowOid> Fan Fault condition exists.</activeText>
+					<inactiveText>A Rectifier <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.1</getRowOid> Fan Fault condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="dcRectifierMainsFault" index=".1.3.6.1.4.1.27383.6.1.4.2.1.6">
+			<value><getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.6</getRowOid></value>
+			<alarmFlagsTest match="1"><!-- true -->
+				<name>
+					<activeText>Rectifier Mains Fault</activeText>
+					<inactiveText>Rectifier Mains Fault Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Fault</category>
+				<description>
+					<activeText>A Rectifier <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.1</getRowOid> Mains Fault condition exists.</activeText>
+					<inactiveText>A Rectifier <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.1</getRowOid> Mains Fault condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+        <numSensor ruleid="dcRectifierVoltage" index=".1.3.6.1.4.1.27383.6.1.4.2.1.7">
+            <type>voltage</type>
+            <sensorId>RECTIFIER_VOLTAGE_<rowIndex/></sensorId>
+            <value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.7</getRowOid></op>
+					<op>0.01</op>
+				</mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Rectifier <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.1</getRowOid> Voltage</label>
+            <sensorSet>Rectifier</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcRectifierCurrent" index=".1.3.6.1.4.1.27383.6.1.4.2.1.8">
+            <type>amperage</type>
+            <sensorId>RECTIFIER_CURRENT_<rowIndex/></sensorId>
+            <value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.8</getRowOid></op>
+					<op>0.01</op>
+				</mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Rectifier <getRowOid>.1.3.6.1.4.1.27383.6.1.4.2.1.1</getRowOid> Current</label>
+            <sensorSet>Rectifier</sensorSet>
+        </numSensor>
+
+		<alarmFlags ruleid="dcBatteryFault">
+			<value><getOid>.1.3.6.1.4.1.27383.6.1.5.1.0</getOid></value>
+			<alarmFlagsTest match="1"><!-- bit 0 -->
+				<name>
+					<activeText>Battery Circuit Test Failed</activeText>
+					<inactiveText>Battery Circuit Test Failed Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Battery</category>
+				<description>
+					<activeText>A Battery Circuit Test Failed condition exists.</activeText>
+					<inactiveText>A Battery Circuit Test Failed condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="2"><!-- bit 1 -->
+				<name>
+					<activeText>Battery Test Failed</activeText>
+					<inactiveText>Battery Test Failed Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Battery</category>
+				<description>
+					<activeText>A Battery Test Failed condition exists.</activeText>
+					<inactiveText>A Battery Test Failed condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4"><!-- bit 2 -->
+				<name>
+					<activeText>Battery Temperature Sensor Fault</activeText>
+					<inactiveText>Battery Temperature Sensor Fault Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Battery</category>
+				<description>
+					<activeText>A Battery Temperature Sensor Fault condition exists.</activeText>
+					<inactiveText>A Battery Temperature Sensor Fault condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		
+        <numSensor ruleid="dcBatteryVoltage1">
+            <type>voltage</type>
+            <sensorId>BATTERY_VOLTAGE_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.5.2.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Battery Voltage 1</label>
+            <sensorSet>Battery</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcBatteryCurrent1">
+            <type>amperage</type>
+            <sensorId>BATTERY_CURRENT_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.5.3.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Battery Current 1</label>
+            <sensorSet>Battery</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcBatteryCapacity1">
+            <type>num</type>
+			<units>amphours</units>
+            <sensorId>BATTERY_CAPACITY_1</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.5.4.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Battery Capacity 1</label>
+            <sensorSet>Battery</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcBatteryVoltage2">
+            <type>voltage</type>
+            <sensorId>BATTERY_VOLTAGE_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.5.5.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Battery Voltage 2</label>
+            <sensorSet>Battery</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcBatteryCurrent2">
+            <type>amperage</type>
+            <sensorId>BATTERY_CURRENT_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.5.6.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Battery Current 2</label>
+            <sensorSet>Battery</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcBatteryCapacity2">
+            <type>num</type>
+			<units>amphours</units>
+            <sensorId>BATTERY_CAPACITY_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.5.7.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Battery Capacity 2</label>
+            <sensorSet>Battery</sensorSet>
+        </numSensor>
+        <numSensor ruleid="dcBatteryTemperature">
+            <type>temp</type>
+            <sensorId>PS_TEMPERATURE_2</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.5.8.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Battery Temperature</label>
+            <sensorSet>Battery</sensorSet>
+        </numSensor>
+		
+		<enumMap ruleid="disabledEnabled-em">
+			<label>Unknown</label>
+			<label>Disabled</label>
+			<label>Enabled</label>
+		</enumMap>
+
+        <stateSensor ruleid="dcBatteryAutomaticBoostCharge">
+            <type>state</type>
+            <sensorId>BATTERY_AUTOMATIC_BOOST_CHARGE</sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getOid>.1.3.6.1.4.1.27383.6.1.5.9.0</getOid>
+                </mapValue>
+            </value>
+            <label>Battery Automatic Boost Charge</label>
+            <enum>disabledEnabled-em</enum>
+            <sensorSet>Battery</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="dcBatteryTemperatureControlledCharging">
+            <type>state</type>
+            <sensorId>BATTERY_TEMPERATURE_CONTROLLED_CHARGING</sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getOid>.1.3.6.1.4.1.27383.6.1.5.10.0</getOid>
+                </mapValue>
+            </value>
+            <label>Battery Temperature Controlled Charging</label>
+            <enum>disabledEnabled-em</enum>
+            <sensorSet>Battery</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="dcBatteryCurrentLimitation">
+            <type>state</type>
+            <sensorId>BATTERY_CURRENT_LIMITATION</sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getOid>.1.3.6.1.4.1.27383.6.1.5.11.0</getOid>
+                </mapValue>
+            </value>
+            <label>Battery Current Limitation</label>
+            <enum>disabledEnabled-em</enum>
+            <sensorSet>Battery</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="dcBatterySensorCompensation">
+            <type>state</type>
+            <sensorId>BATTERY_SENSOR_COMPENSATION</sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getOid>.1.3.6.1.4.1.27383.6.1.5.12.0</getOid>
+                </mapValue>
+            </value>
+            <label>Battery Sensor Compensation</label>
+            <enum>disabledEnabled-em</enum>
+            <sensorSet>Battery</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="dcBatteryAutomaticBatteryTest">
+            <type>state</type>
+            <sensorId>BATTERY_AUTOMATIC_BATTERY_TEST</sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getOid>.1.3.6.1.4.1.27383.6.1.5.13.0</getOid>
+                </mapValue>
+            </value>
+            <label>Battery Automatic Battery Test</label>
+            <enum>disabledEnabled-em</enum>
+            <sensorSet>Battery</sensorSet>
+        </stateSensor>
+        <stateSensor ruleid="dcBatteryAutomaticBatteryCircuitTest">
+            <type>state</type>
+            <sensorId>BATTERY_AUTOMATIC_BATTERY_CIRCUIT_TEST</sensorId>
+            <value>
+                <mapValue mapid="3state-vm">
+                    <getOid>.1.3.6.1.4.1.27383.6.1.5.14.0</getOid>
+                </mapValue>
+            </value>
+            <label>Battery Automatic Battery Circuit Test</label>
+            <enum>disabledEnabled-em</enum>
+            <sensorSet>Battery</sensorSet>
+        </stateSensor>
+
+        <numSensor ruleid="dcLoadDistributionTotalCurrent">
+            <type>amperage</type>
+            <sensorId>LOAD_DISTRIBUTION_TOTAL_CURRENT</sensorId>
+            <value>
+                <mult>
+                    <op><getOid>.1.3.6.1.4.1.27383.6.1.6.1.0</getOid></op>
+                    <op>0.01</op>
+                </mult>
+            </value>
+            <valueInc>0.01</valueInc>
+            <label>Load Distribution Total Current</label>
+            <sensorSet>Load Distribution</sensorSet>
+        </numSensor>
+		
+		<valueMap ruleid="dcAlarmWellKnownDescription-vm">
+			<valueIn>1</valueIn><valueOut>Agent to DC Power System Communication Problem</valueOut>
+			<valueIn>2</valueIn><valueOut>General Alarm</valueOut>
+			<valueIn>3</valueIn><valueOut>Non-Urgent Error</valueOut>
+			<valueIn>4</valueIn><valueOut>Urgent Error</valueOut>
+			<valueIn>5</valueIn><valueOut>Battery In Discharge Mode</valueOut>
+			<valueIn>6</valueIn><valueOut>System In Boost Mode</valueOut>
+			<valueIn>7</valueIn><valueOut>Rectifier Address Redundancy Warning</valueOut>
+			<valueIn>8</valueIn><valueOut>Rectifier Address Redundancy Fault</valueOut>
+			<valueIn>9</valueIn><valueOut>Rectifier Current Redundancy Fault</valueOut>
+			<valueIn>10</valueIn><valueOut>Battery Alarm</valueOut>
+			<valueIn>11</valueIn><valueOut>System In Battery Test Mode</valueOut>
+			<valueIn>12</valueIn><valueOut>Battery Test Failed</valueOut>
+			<valueIn>13</valueIn><valueOut>Invalid Battery Test Result</valueOut>
+			<valueIn>14</valueIn><valueOut>Battery Circuit Test Failed</valueOut>
+			<valueIn>15</valueIn><valueOut>All Rectifiers Off</valueOut>
+			<valueIn>16</valueIn><valueOut>Rectifier Output Current High</valueOut>
+			<valueIn>17</valueIn><valueOut>Rectifier Output Voltage Out of Range</valueOut>
+			<valueIn>18</valueIn><valueOut>Rectifier Over Voltage</valueOut>
+			<valueIn>19</valueIn><valueOut>AC Input Alarm</valueOut>
+			<valueIn>20</valueIn><valueOut>Rectifier Alarm</valueOut>
+			<valueIn>21</valueIn><valueOut>Rectifier Fan Failed</valueOut>
+			<valueIn>22</valueIn><valueOut>Rectifier Off</valueOut>
+			<valueIn>23</valueIn><valueOut>High Rectifier Temperature Warning</valueOut>
+			<valueIn>24</valueIn><valueOut>High Rectifier Temperature Fault</valueOut>
+			<valueIn>25</valueIn><valueOut>Rectifier Temperature Sensor Fault</valueOut>
+			<valueIn>26</valueIn><valueOut>Rectifier Short Circuit Fault</valueOut>
+			<valueIn>27</valueIn><valueOut>Battery Symmetry Fault</valueOut>
+			<valueIn>28</valueIn><valueOut>Battery Temperature Sensor Fault</valueOut>
+			<valueIn>50</valueIn><valueOut>Client Specific Alarm 01</valueOut>
+			<valueIn>51</valueIn><valueOut>Client Specific Alarm 02</valueOut>
+			<valueIn>52</valueIn><valueOut>Client Specific Alarm 03</valueOut>
+			<valueIn>53</valueIn><valueOut>Client Specific Alarm 04</valueOut>
+			<valueIn>54</valueIn><valueOut>Client Specific Alarm 05</valueOut>
+			<valueIn>55</valueIn><valueOut>Client Specific Alarm 06</valueOut>
+			<valueIn>56</valueIn><valueOut>Client Specific Alarm 07</valueOut>
+			<valueIn>57</valueIn><valueOut>Client Specific Alarm 08</valueOut>
+			<valueIn>58</valueIn><valueOut>Client Specific Alarm 09</valueOut>
+			<valueIn>59</valueIn><valueOut>Client Specific Alarm 10</valueOut>
+			<valueIn>*</valueIn><valueOut>Unknown Alarm</valueOut>
+		</valueMap>
+		
+		<alarmFlags2 ruleid="dcAlarmState" index=".1.3.6.1.4.1.27383.6.1.11.2.1.4">
+			<value><getRowOid>.1.3.6.1.4.1.27383.6.1.11.2.1.4</getRowOid></value>
+			<alarmFlagsTest match="2"><!-- active -->
+				<name>
+					<activeText>Alarm State</activeText>
+					<inactiveText>Alarm State Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Device</category>
+				<description>
+					<activeText>A(n) <mapValue mapid="dcAlarmWellKnownDescription-vm"><rowIndex/></mapValue> condition exists.</activeText>
+					<inactiveText>A(n) <mapValue mapid="dcAlarmWellKnownDescription-vm"><rowIndex/></mapValue> condition no longer exists.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		
+	</device>
+</APC_DDF>

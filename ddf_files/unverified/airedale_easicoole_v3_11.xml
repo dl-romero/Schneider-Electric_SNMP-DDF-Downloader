@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<APC_DDF 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd" 
-	ddfid="airedale_easicoole_v3_11" 
-	ddfname="Airedale EasiCoolE v3.11 [pcoWeb]" 
-	ddfversion="1" 
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="airedale_easicoole_v3_11"
+	ddfname="Airedale EasiCoolE v3.11 [pcoWeb][SNMP]" 
+	ddfversion="1"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<device deviceid="airdale_easicool">

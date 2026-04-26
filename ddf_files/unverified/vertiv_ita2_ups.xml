@@ -1,0 +1,2047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="vertiv_ita2_ups"
+  ddfname="Vertiv ITA2 UPS"
+  ddfversion="2">
+  <schemaVersion>1.6</schemaVersion>
+
+  <device deviceid="vertiv_ita2_ups">
+    <oidMustExist ruleid="vertiv_ita2_ups_exists" oid=".1.3.6.1.4.1.13400.2.491.2.2.2.0"/>
+
+    <setProductData ruleid="typedata" field="type">UPS</setProductData>
+    <setProductData ruleid="vendordata" field="vendor">
+      <getOid>.1.3.6.1.4.1.13400.2.491.1.1.0</getOid>
+    </setProductData>
+    <setProductData ruleid="modeldata" field="model">
+      <getOid>.1.3.6.1.4.1.13400.2.491.1.2.0</getOid>
+    </setProductData>
+
+    <numSensor ruleid="upsInputVoltage1">
+      <type>voltageAC</type>
+      <sensorId>_INPUT_VOLTAGE_1</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.2.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Voltage - Phase 1</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsInputVoltage2">
+      <type>voltageAC</type>
+      <sensorId>_INPUT_VOLTAGE_2</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.3.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Voltage - Phase 2</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsInputVoltage3">
+      <type>voltageAC</type>
+      <sensorId>_INPUT_VOLTAGE_3</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.4.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Voltage - Phase 3</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputVoltage1">
+      <type>voltageAC</type>
+      <sensorId>_OUTPUT_VAC_1</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.5.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Output Voltage - Phase 1</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputVoltage2">
+      <type>voltageAC</type>
+      <sensorId>_OUTPUT_VAC_2</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.6.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Output Voltage - Phase 2</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputVoltage3">
+      <type>voltageAC</type>
+      <sensorId>_OUTPUT_VAC_3</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.7.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Output Voltage - Phase 3</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputCurrent1">
+      <type>amperage</type>
+      <sensorId>_OUTPUT_AMPS_1</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.8.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Output Current - Phase 1</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputCurrent2">
+      <type>amperage</type>
+      <sensorId>_OUTPUT_AMPS_2</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.9.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Output Current - Phase 2</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputCurrent3">
+      <type>amperage</type>
+      <sensorId>_OUTPUT_AMPS_3</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.10.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Output Current - Phase 3</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputFrequency">
+      <type>frequency</type>
+      <sensorId>_UPS_PHASE_OUTPUT_FREQ_0</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.11.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Output Frequency</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="upsBypassVoltage23">
+      <type>voltageAC</type>
+      <sensorId>_INPUT1_VAC_2_1_5</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.12.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Bypass Voltage - Phase 2-3</label>
+      <sensorSet>UPS Bypass</sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="upsInputVoltage12">
+      <type>voltageAC</type>
+      <sensorId>_MAIN_INPUT_VOLTAGE_L2L_1</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.13.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Voltage - Phase 1-2</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsInputVoltage23">
+      <type>voltageAC</type>
+      <sensorId>_MAIN_INPUT_VOLTAGE_L2L_2</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.14.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Voltage - Phase 2-3</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsInputVoltage31">
+      <type>voltageAC</type>
+      <sensorId>_MAIN_INPUT_VOLTAGE_L2L_3</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.15.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Voltage - Phase 3-1</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsInputCurrent1">
+      <type>amperage</type>
+      <sensorId>_INPUT_AMPS_1</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.16.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Current - Phase 1</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsInputCurrent2">
+      <type>amperage</type>
+      <sensorId>_INPUT_AMPS_2</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.17.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Current - Phase 2</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsInputCurrent3">
+      <type>amperage</type>
+      <sensorId>_INPUT_AMPS_3</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.18.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Current - Phase 3</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsInputFrequency">
+      <type>frequency</type>
+      <sensorId>_INPUT_FREQ_1</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.19.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Input Frequency</label>
+      <sensorSet>UPS Input</sensorSet>
+    </numSensor>
+
+    <numSensor ruleid="upsBypassVoltage31">
+      <type>voltageAC</type>
+      <sensorId>_INPUT1_VAC_2_1_6</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.20.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Bypass Voltage - Phase 3-1</label>
+      <sensorSet>UPS Bypass</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsBypassVoltage1">
+      <type>voltageAC</type>
+      <sensorId>_INPUT1_VAC_2_1_1</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.23.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Bypass Voltage - Phase 1</label>
+      <sensorSet>UPS Bypass</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsBypassVoltage2">
+      <type>voltageAC</type>
+      <sensorId>_INPUT1_VAC_2_1_2</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.24.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Bypass Voltage - Phase 2</label>
+      <sensorSet>UPS Bypass</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsBypassVoltage3">
+      <type>voltageAC</type>
+      <sensorId>_INPUT1_VAC_2_1_3</sensorId>
+      <value>
+				<mult>
+  				<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.25.0</getOid></op>
+  				<op>0.1</op>
+				</mult>
+      </value>
+      <label>Bypass Voltage - Phase 3</label>
+      <sensorSet>UPS Bypass</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputPowerFactor1">
+      <type>num/powerfactor</type>
+      <sensorId>_OUTPUT_POWER_FACTOR_1</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.31.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Output Power Factor - Phase 1</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputPowerFactor2">
+      <type>num/powerfactor</type>
+      <sensorId>_OUTPUT_POWER_FACTOR_2</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.32.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Output Power Factor - Phase 2</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputPowerFactor3">
+      <type>num/powerfactor</type>
+      <sensorId>_OUTPUT_POWER_FACTOR_3</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.33.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Output Power Factor - Phase 3</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputPower1">
+      <type>powerW</type>
+      <sensorId>_OUTPUT_POWER_1</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.37.0</getOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>Output Power - Phase 1</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputPower2">
+      <type>powerW</type>
+      <sensorId>_OUTPUT_POWER_2</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.38.0</getOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>Output Power - Phase 2</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputPower3">
+      <type>powerW</type>
+      <sensorId>_OUTPUT_POWER_3</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.39.0</getOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>Output Power - Phase 3</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputApparentPower1">
+      <type>powerVA</type>
+      <sensorId>OUTPUT_APPARENT_POWER_1</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.40.0</getOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>Output Apparent Power - Phase 1</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputApparentPower2">
+      <type>powerVA</type>
+      <sensorId>OUTPUT_APPARENT_POWER_2</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.41.0</getOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>Output Apparent Power - Phase 2</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputApparentPower3">
+      <type>powerVA</type>
+      <sensorId>OUTPUT_APPARENT_POWER_3</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.42.0</getOid></op>
+          <op>100</op>
+        </mult>
+      </value>
+      <label>Output Apparent Power - Phase 3</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputPercentLoad1">
+      <type>pctofcapacity</type>
+      <sensorId>_OUTPUT_LOAD_1</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.43.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Output Load - Phase 1</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputPercentLoad2">
+      <type>pctofcapacity</type>
+      <sensorId>_OUTPUT_LOAD_2</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.44.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Output Load - Phase 2</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsOutputPercentLoad3">
+      <type>pctofcapacity</type>
+      <sensorId>_OUTPUT_LOAD_3</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.45.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Output Load - Phase 3</label>
+      <sensorSet>UPS Output</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsRuntime">
+      <type>timeindays</type>
+      <sensorId>_UPS_RUNTIME</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.56.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>UPS Runtime</label>
+      <sensorSet>UPS Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsBatteryVoltage">
+      <type>voltage</type>
+      <sensorId>_BATT_VOLTAGE</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.57.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Battery Voltage</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsBatteryChargeCurrent">
+      <type>amperage</type>
+      <sensorId>_BATT_CHARGE_CURRENT</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.58.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Battery Charging Current</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsBatteryDischargeCurrent">
+      <type>amperage</type>
+      <sensorId>BATT_AMPERAGE</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.59.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Battery Discharge Current</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsNegativeBatteryVoltage">
+      <type>voltage</type>
+      <sensorId>_NEGATIVE_BATT_VOLTAGE</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.60.0</getOid></op>
+          <op>-0.1</op>
+        </mult>
+      </value>
+      <label>Negative Battery Voltage</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsNegativeBatteryChargeCurrent">
+      <type>amperage</type>
+      <sensorId>_NEGATIVE_BATT_CHARGE_CURRENT</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.61.0</getOid></op>
+          <op>-0.1</op>
+        </mult>
+      </value>
+      <label>Negative Battery Charging Current</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsNegativeBatteryDischargeCurrent">
+      <type>amperage</type>
+      <sensorId>NEGATIVE_BATT_AMPERAGE</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.62.0</getOid></op>
+          <op>-0.1</op>
+        </mult>
+      </value>
+      <label>Negative Battery Discharge Current</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsEstimatedMinutesRemaining">
+      <type>timeinmin</type>
+      <sensorId>TIME_REMAINING_ON_BATT</sensorId>
+      <value>
+        <mult>
+          <op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.63.0</getOid></op>
+          <op>0.1</op>
+        </mult>
+      </value>
+      <label>Battery Time Remaining</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+		<numSensor ruleid="upsAmbientTemperature">
+			<type>temp</type>
+			<sensorId>_EM_TEMP_1</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.65.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Ambient Temperature</label>
+			<sensorSet>UPS Status</sensorSet>
+		</numSensor>
+    <numSensor ruleid="upsEstimatedChargeRemaining">
+      <type>pctofcapacity</type>
+      <sensorId>BATT_CAPACITY_LEFT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.66.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+      <label>Battery Capacity Remaining</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="upsBatteryDischargeCount">
+      <type>num</type>
+      <sensorId>BATT_DISCHARGE_COUNT</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.67.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+      <label>Battery Discharge Count</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+		<numSensor ruleid="upsInputEnergy">
+			<type>num/kwatthr</type>
+			<sensorId>_INPUT_ENERGY</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.68.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Input Energy</label>
+			<sensorSet>UPS Input</sensorSet>
+		</numSensor>
+		<numSensor ruleid="upsOutputEnergy">
+			<type>num/kwatthr</type>
+			<sensorId>_OUTPUT_ENERGY</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.69.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Output Energy</label>
+			<sensorSet>UPS Output</sensorSet>
+		</numSensor>
+    <stateSensor ruleid="upsStatus">
+      <type>state</type>
+      <sensorId>UPS_STATUS</sensorId>
+      <value>
+        <mapValue mapid="upsStatus-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.70.0</getOid>
+        </mapValue>
+      </value>
+      <label>UPS Status</label>
+      <enum>upsStatus-em</enum>
+      <sensorSet>UPS Status</sensorSet>
+    </stateSensor>
+		<valueMap ruleid="upsStatus-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>*</valueIn><valueOut>5</valueOut>
+		</valueMap>
+    <enumMap ruleid="upsStatus-em">
+      <label>Shutdown</label>
+      <label>Online</label>
+      <label>On Battery</label>
+      <label>On Bypass</label>
+      <label>On Union Mode</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <stateSensor ruleid="upsInputStatus">
+      <type>state</type>
+      <sensorId>UPS_INPUT_STATUS</sensorId>
+      <value>
+        <mapValue mapid="upsInputStatus-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.71.0</getOid>
+        </mapValue>
+      </value>
+      <label>UPS Input Status</label>
+      <enum>upsInputStatus-em</enum>
+      <sensorSet>UPS Status</sensorSet>
+    </stateSensor>
+		<valueMap ruleid="upsInputStatus-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>4</valueOut>
+		</valueMap>
+    <enumMap ruleid="upsInputStatus-em">
+      <label>Online</label>
+      <label>On Battery</label>
+      <label>On Union Mode</label>
+      <label>Shutdown</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <stateSensor ruleid="upsBatteryStatus">
+      <type>state</type>
+      <sensorId>BATTSTATUS</sensorId>
+      <value>
+        <mapValue mapid="upsBatteryStatus-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.72.0</getOid>
+        </mapValue>
+      </value>
+      <label>Battery Status</label>
+      <enum>upsBatteryStatus-em</enum>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="upsNegativeBatteryGroupStatus">
+      <type>state</type>
+      <sensorId>NEGATIVE_BATT_GROUP_STATUS</sensorId>
+      <value>
+        <mapValue mapid="upsBatteryStatus-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.73.0</getOid>
+        </mapValue>
+      </value>
+      <label>Negative Battery Group Status</label>
+      <enum>upsBatteryStatus-em</enum>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </stateSensor>
+    <valueMap ruleid="upsBatteryStatus-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+      <valueIn>*</valueIn><valueOut>6</valueOut>
+    </valueMap>
+    <enumMap ruleid="upsBatteryStatus-em">
+      <label>Non-Discharge/Non-Rechargeable</label>
+      <label>Float Charging</label>
+      <label>Equalization Charging</label>
+      <label>Discharging</label>
+      <label>In Self Test</label>
+      <label>No Battery</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <stateSensor ruleid="upsChargerStatus">
+      <type>state</type>
+      <sensorId>CHARGER_STATUS</sensorId>
+      <value>
+        <mapValue mapid="onOffStatus-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.74.0</getOid>
+        </mapValue>
+      </value>
+      <label>Charger Status</label>
+      <enum>onOffStatus-em</enum>
+      <sensorSet>UPS Status</sensorSet>
+    </stateSensor>
+    <valueMap ruleid="onOffStatus-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+      <valueIn>*</valueIn><valueOut>2</valueOut>
+    </valueMap>
+    <enumMap ruleid="onOffStatus-em">
+      <label>On</label>
+      <label>Off</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <stateSensor ruleid="upsParallelSystemStatus">
+      <type>state</type>
+      <sensorId>PARALLEL_SYSTEM_STATUS</sensorId>
+      <value>
+        <mapValue mapid="upsParallelSystemStatus-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.75.0</getOid>
+        </mapValue>
+      </value>
+      <label>Parallel System Status</label>
+      <enum>upsParallelSystemStatus-em</enum>
+      <sensorSet>UPS Status</sensorSet>
+    </stateSensor>
+		<valueMap ruleid="upsParallelSystemStatus-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>4</valueOut>
+		</valueMap>
+    <enumMap ruleid="upsParallelSystemStatus-em">
+      <label>Main Inverter Power Supply</label>
+      <label>On Battery</label>
+      <label>On Bypass</label>
+      <label>Shutdown</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <stateSensor ruleid="outlet1Status">
+      <type>state</type>
+      <sensorId>_OUTLET_STATE_1</sensorId>
+      <value>
+        <mapValue mapid="onOffStatus-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.77.0</getOid>
+        </mapValue>
+      </value>
+      <label>Outlet 1 Status</label>
+      <enum>onOffStatus-em</enum>
+      <sensorSet>Outlet Status</sensorSet>
+    </stateSensor>
+    <stateSensor ruleid="outlet2Status">
+      <type>state</type>
+      <sensorId>_OUTLET_STATE_2</sensorId>
+      <value>
+        <mapValue mapid="onOffStatus-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.78.0</getOid>
+        </mapValue>
+      </value>
+      <label>Outlet 2 Status</label>
+      <enum>onOffStatus-em</enum>
+      <sensorSet>Outlet Status</sensorSet>
+    </stateSensor>
+    <numSensor ruleid="batteryRunningTime">
+      <type>timeinsec</type>
+      <sensorId>BATT_RUNTIME</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.148.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+      <label>Battery Running Time</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="batteryDischargingTime">
+      <type>timeinsec</type>
+      <sensorId>BATT_DISCHARGE_TIME</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.491.2.2.149.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+      <label>Battery Discharging Time</label>
+      <sensorSet>UPS Battery Status</sensorSet>
+    </numSensor>
+    <numSensor ruleid="selfStartDelay">
+      <type>timeinsec</type>
+      <sensorId>SELF_START_DELAY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.161.0</getOid>
+			</value>
+      <label>Self Start Delay</label>
+      <sensorSet>UPS Settings</sensorSet>
+    </numSensor>
+    <numSensor ruleid="remoteShutdownDelay">
+      <type>timeinsec</type>
+      <sensorId>REMOTE_SHUTDOWN_DELAY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.162.0</getOid>
+			</value>
+      <label>Remote Shutdown Delay</label>
+      <sensorSet>UPS Settings</sensorSet>
+    </numSensor>
+    <stateSensor ruleid="batterySelfTestInterval">
+      <type>state</type>
+      <sensorId>BATT_SELF_TEST_INTERVAL</sensorId>
+      <value>
+        <mapValue mapid="selfTest-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.163.0</getOid>
+        </mapValue>
+      </value>
+      <label>Parallel System Status</label>
+      <enum>selfTest-em</enum>
+      <sensorSet>UPS Settings</sensorSet>
+    </stateSensor>
+		<valueMap ruleid="selfTest-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>*</valueIn><valueOut>6</valueOut>
+		</valueMap>
+    <enumMap ruleid="selfTest-em">
+      <label>Forbidden</label>
+      <label>8 Weeks</label>
+      <label>12 Weeks</label>
+      <label>16 Weeks</label>
+      <label>20 Weeks</label>
+      <label>26 Weeks</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <stateSensor ruleid="upsWorkingMode">
+      <type>state</type>
+      <sensorId>UPS_WORKING_MODE</sensorId>
+      <value>
+        <mapValue mapid="workingMode-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.164.0</getOid>
+        </mapValue>
+      </value>
+      <label>UPS Working Mode</label>
+      <enum>workingMode-em</enum>
+      <sensorSet>UPS Settings</sensorSet>
+    </stateSensor>
+		<valueMap ruleid="workingMode-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+    <enumMap ruleid="workingMode-em">
+      <label>Normal</label>
+      <label>Eco Mode</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <stateSensor ruleid="selfStartSetting">
+      <type>state</type>
+      <sensorId>UPS_SELF_START_SETTING</sensorId>
+      <value>
+        <mapValue mapid="selfStartSetting-vm">
+          <getOid>.1.3.6.1.4.1.13400.2.491.2.2.165.0</getOid>
+        </mapValue>
+      </value>
+      <label>UPS Self Start Setting</label>
+      <enum>selfStartSetting-em</enum>
+      <sensorSet>UPS Settings</sensorSet>
+    </stateSensor>
+		<valueMap ruleid="selfStartSetting-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+    <enumMap ruleid="selfStartSetting-em">
+      <label>Forbidden</label>
+      <label>Allow</label>
+      <label>Unknown</label>
+    </enumMap>
+
+    <numSensor ruleid="remoteOpenDelay">
+      <type>timeinsec</type>
+      <sensorId>REMOTE_OPEN_DELAY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.167.0</getOid>
+			</value>
+      <label>Remote Open Delay</label>
+      <sensorSet>UPS Settings</sensorSet>
+    </numSensor>
+
+    <alarmFlags ruleid="rectifierFault">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.49.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Rectifier Fault Alarm</activeText>
+					<inactiveText>Rectifier Fault Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Rectifier Fault Alarm is Active.</activeText>
+					<inactiveText>Rectifier Fault Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="dcDcFault">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.50.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>DC-DC Fault Alarm</activeText>
+					<inactiveText>DC-DC Fault Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>DC-DC Fault Alarm is Active.</activeText>
+					<inactiveText>DC-DC Fault Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="chargerFault">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.51.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Charger Fault Alarm</activeText>
+					<inactiveText>Charger Fault Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Charger Fault Alarm is Active.</activeText>
+					<inactiveText>Charger Fault Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="inputAbnormal">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.79.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Input Abnormal Alarm</activeText>
+					<inactiveText>Input Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Input Abnormal Alarm is Active.</activeText>
+					<inactiveText>Input Abnormal Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="systemOverTemp">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.80.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>System Over Temperature Alarm</activeText>
+					<inactiveText>System Over Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>System Over Temperature Alarm is Active.</activeText>
+					<inactiveText>System Over Temperature Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="systemBatteryLowPreWarning">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.81.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>System Battery Low Pre-Warning Alarm</activeText>
+					<inactiveText>System Battery Low Pre-Warning Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>System Battery Low Pre-Warning Alarm is Active.</activeText>
+					<inactiveText>System Battery Low Pre-Warning Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="inputPhaseReversed">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.82.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Input Phase Reversed Alarm</activeText>
+					<inactiveText>Input Phase Reversed Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Input Phase Reversed Alarm is Active.</activeText>
+					<inactiveText>Input Phase Reversed Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="inputNeutralLost">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.83.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Input Neutral Lost Alarm</activeText>
+					<inactiveText>Input Neutral Lost Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Input Neutral Lost Alarm is Active.</activeText>
+					<inactiveText>Input Neutral Lost Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="inputGroundLost">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.84.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Input Ground Lost Alarm</activeText>
+					<inactiveText>Input Ground Lost Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Input Ground Lost Alarm is Active.</activeText>
+					<inactiveText>Input Ground Lost Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="rectifierOverload">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.85.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Rectifier Overload Alarm</activeText>
+					<inactiveText>Rectifier Overload Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Rectifier Overload Alarm is Active.</activeText>
+					<inactiveText>Rectifier Overload Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryCabinetNotConnected">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.86.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Cabinet Not Connected Alarm</activeText>
+					<inactiveText>Battery Cabinet Not Connected Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Cabinet Not Connected Alarm is Active.</activeText>
+					<inactiveText>Battery Cabinet Not Connected Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="inverterOverload">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.87.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Inverter Overload Alarm</activeText>
+					<inactiveText>Inverter Overload Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Inverter Overload Alarm is Active.</activeText>
+					<inactiveText>Inverter Overload Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="lbsAbnormal">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.88.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Load Bus Sync Abnormal Alarm</activeText>
+					<inactiveText>Load Bus Sync Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Load Bus Sync Abnormal Alarm is Active.</activeText>
+					<inactiveText>Load Bus Sync Abnormal Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="outputPending">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.89.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Output Pending Alarm</activeText>
+					<inactiveText>Output Pending Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Output Pending Alarm is Active.</activeText>
+					<inactiveText>Output Pending Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="outputDisabled">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.90.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Output Disabled Alarm</activeText>
+					<inactiveText>Output Disabled Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Output Disabled Alarm is Active.</activeText>
+					<inactiveText>Output Disabled Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="bypassAbnormal">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.91.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Bypass Abnormal Alarm</activeText>
+					<inactiveText>Bypass Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Bypass Abnormal Alarm is Active.</activeText>
+					<inactiveText>Bypass Abnormal Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="bypassAbnormalInEcoMode">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.92.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Bypass Abnormal In Eco Mode Alarm</activeText>
+					<inactiveText>Bypass Abnormal In Eco Mode Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Bypass Abnormal In Eco Mode Alarm is Active.</activeText>
+					<inactiveText>Bypass Abnormal In Eco Mode Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="bypassPhaseReversed">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.93.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Bypass Phase Reversed Alarm</activeText>
+					<inactiveText>Bypass Phase Reversed Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Bypass Phase Reversed Alarm is Active.</activeText>
+					<inactiveText>Bypass Phase Reversed Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="bypassOverCurrent">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.94.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Bypass Over Current Alarm</activeText>
+					<inactiveText>Bypass Over Current Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Bypass Over Current Alarm is Active.</activeText>
+					<inactiveText>Bypass Over Current Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="bypassCableConnectionAbnormal">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.95.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Bypass Cable Connection Abnormal Alarm</activeText>
+					<inactiveText>Bypass Cable Connection Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Bypass Cable Connection Abnormal Alarm is Active.</activeText>
+					<inactiveText>Bypass Cable Connection Abnormal Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryReversed">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.96.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Reversed Alarm</activeText>
+					<inactiveText>Battery Reversed Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Reversed Alarm is Active.</activeText>
+					<inactiveText>Battery Reversed Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryLowPreWarning">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.97.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Low Pre-Warning Alarm</activeText>
+					<inactiveText>Battery Low Pre-Warning Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Low Pre-Warning Alarm is Active.</activeText>
+					<inactiveText>Battery Low Pre-Warning Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryVoltageAbnormal">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.98.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Voltage Abnormal Alarm</activeText>
+					<inactiveText>Battery Voltage Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Voltage Abnormal Alarm is Active.</activeText>
+					<inactiveText>Battery Voltage Abnormal Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="noBattery">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.99.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>No Battery Alarm</activeText>
+					<inactiveText>No Battery Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>No Battery Alarm is Active.</activeText>
+					<inactiveText>No Battery Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryOverTemperature">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.100.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Over Temperature Alarm</activeText>
+					<inactiveText>Battery Over Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Over Temperature Alarm is Active.</activeText>
+					<inactiveText>Battery Over Temperature Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryAging">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.101.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Aging Alarm</activeText>
+					<inactiveText>Battery Aging Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Aging Alarm is Active.</activeText>
+					<inactiveText>Battery Aging Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryTestFailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.102.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Test Failure Alarm</activeText>
+					<inactiveText>Battery Test Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Test Failure Alarm is Active.</activeText>
+					<inactiveText>Battery Test Failure Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batterySeriesNotQualified">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.103.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Series Not Qualified Alarm</activeText>
+					<inactiveText>Battery Series Not Qualified Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Series Not Qualified Alarm is Active.</activeText>
+					<inactiveText>Battery Series Not Qualified Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="fanFailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.104.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Fan Failure Alarm</activeText>
+					<inactiveText>Fan Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Fan Failure Alarm is Active.</activeText>
+					<inactiveText>Fan Failure Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="repo">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.105.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Repo Alarm</activeText>
+					<inactiveText>Repo Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Repo Alarm is Active.</activeText>
+					<inactiveText>Repo Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="electricLeak">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.106.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Electric Leak Alarm</activeText>
+					<inactiveText>Electric Leak Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Electric Leak Alarm is Active.</activeText>
+					<inactiveText>Electric Leak Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="versionIncompatible">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.107.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Version Incompatible Alarm</activeText>
+					<inactiveText>Version Incompatible Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Version Incompatible Alarm is Active.</activeText>
+					<inactiveText>Version Incompatible Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="shutoffDueToOverTemperature">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.108.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Shutoff Due To Over Temperature Alarm</activeText>
+					<inactiveText>Shutoff Due To Over Temperature Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Shutoff Due To Over Temperature Alarm is Active.</activeText>
+					<inactiveText>Shutoff Due To Over Temperature Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="loadSharingAbnormal">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.111.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Load Sharing Abnormal Alarm</activeText>
+					<inactiveText>Load Sharing Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Load Sharing Abnormal Alarm is Active.</activeText>
+					<inactiveText>Load Sharing Abnormal Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="systemParallelSettingsAsynchronous">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.112.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>System Parallel Settings Asynchronous Alarm</activeText>
+					<inactiveText>System Parallel Settings Asynchronous Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>System Parallel Settings Asynchronous Alarm is Active.</activeText>
+					<inactiveText>System Parallel Settings Asynchronous Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="localParallelSettingsAsynchronous">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.113.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Local Parallel Settings Asynchronous Alarm</activeText>
+					<inactiveText>Local Parallel Settings Asynchronous Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Local Parallel Settings Asynchronous Alarm is Active.</activeText>
+					<inactiveText>Local Parallel Settings Asynchronous Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="onMaintenanceBypass">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.114.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>On Maintenance Bypass Alarm</activeText>
+					<inactiveText>On Maintenance Bypass Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>On Maintenance Bypass Alarm is Active.</activeText>
+					<inactiveText>On Maintenance Bypass Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryMode">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.115.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Mode Alarm</activeText>
+					<inactiveText>Battery Mode Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Mode Alarm is Active.</activeText>
+					<inactiveText>Battery Mode Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="bypassMode">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.116.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Bypass Mode Alarm</activeText>
+					<inactiveText>Bypass Mode Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Bypass Mode Alarm is Active.</activeText>
+					<inactiveText>Bypass Mode Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="dcBusAbnormal">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.117.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>DC Bus Abnormal Alarm</activeText>
+					<inactiveText>DC Bus Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>DC Bus Abnormal Alarm is Active.</activeText>
+					<inactiveText>DC Bus Abnormal Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="inputBackfeed">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.121.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Input Backfeed Alarm</activeText>
+					<inactiveText>Input Backfeed Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Input Backfeed Alarm is Active.</activeText>
+					<inactiveText>Input Backfeed Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="inverterFault">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.122.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Inverter Fault Alarm</activeText>
+					<inactiveText>Inverter Fault Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Inverter Fault Alarm is Active.</activeText>
+					<inactiveText>Inverter Fault Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="inverterRelayWelded">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.123.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Inverter Relay Welded Alarm</activeText>
+					<inactiveText>Inverter Relay Welded Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Inverter Relay Welded Alarm is Active.</activeText>
+					<inactiveText>Inverter Relay Welded Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="bypassBackfeed">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.124.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Bypass Backfeed Alarm</activeText>
+					<inactiveText>Bypass Backfeed Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Bypass Backfeed Alarm is Active.</activeText>
+					<inactiveText>Bypass Backfeed Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="auxiliaryPowerFault">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.125.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Auxiliary Power Fault Alarm</activeText>
+					<inactiveText>Auxiliary Power Fault Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Auxiliary Power Fault Alarm is Active.</activeText>
+					<inactiveText>Auxiliary Power Fault Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="internalCommunicationsFault">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.126.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Internal Communications Fault Alarm</activeText>
+					<inactiveText>Internal Communications Fault Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Internal Communications Fault Alarm is Active.</activeText>
+					<inactiveText>Internal Communications Fault Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="eodTurnedOff">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.133.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>EOD Turn Off Alarm</activeText>
+					<inactiveText>EOD Turn Off Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>EOD Turn Alarm is Active.</activeText>
+					<inactiveText>EOD Turn Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="remoteShutdown">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.134.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Remote Shutdown Alarm</activeText>
+					<inactiveText>Remote Shutdown Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Remote Shutdown Alarm is Active.</activeText>
+					<inactiveText>Remote Shutdown Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="guaranteedShutdown">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.135.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Guaranteed Shutdown Alarm</activeText>
+					<inactiveText>Guaranteed Shutdown Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Guaranteed Shutdown Alarm is Active.</activeText>
+					<inactiveText>Guaranteed Shutdown Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="loadOffDueToShutdownOnBattery">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.136.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Load Off Due To Shutdown On Battery Alarm</activeText>
+					<inactiveText>Load Off Due To Shutdown On Battery Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Load Off Due To Shutdown On Battery Alarm is Active.</activeText>
+					<inactiveText>Load Off Due To Shutdown On Battery Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="outputOffBypassUnavailable">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.137.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Output Off Bypass Unavailable Alarm</activeText>
+					<inactiveText>Output Off Bypass Unavailable Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Output Off Bypass Unavailable Alarm is Active.</activeText>
+					<inactiveText>Output Off Bypass Unavailable Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="remotePowerOn">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.138.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Remote Power On Alarm</activeText>
+					<inactiveText>Remote Power On Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Remote Power On Alarm is Active.</activeText>
+					<inactiveText>Remote Power On Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="remoteShutoff">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.139.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Remote Shutoff Alarm</activeText>
+					<inactiveText>Remote Shutoff Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Remote Shutoff Alarm is Active.</activeText>
+					<inactiveText>Remote Shutoff Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryTestStarted">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.140.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Test Started Alarm</activeText>
+					<inactiveText>Battery Test Started Alarm Cleared</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Test Started Alarm is Active.</activeText>
+					<inactiveText>Battery Test Started Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryTestStopped">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.141.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Test Stopped Alarm</activeText>
+					<inactiveText>Battery Test Stopped Alarm Cleared</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Test Stopped Alarm is Active.</activeText>
+					<inactiveText>Battery Test Stopped Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="localSettingsSync ">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.142.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Local Settings Sync Alarm</activeText>
+					<inactiveText>Local Settings Sync Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Local Settings Sync Alarm is Active.</activeText>
+					<inactiveText>Local Settings Sync Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="systemSettingsSync ">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.143.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>System Settings Sync Alarm</activeText>
+					<inactiveText>System Settings Sync Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>System Settings Sync Alarm is Active.</activeText>
+					<inactiveText>System Settings Sync Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryToUtilityTransition">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.144.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery To Utility Transition Alarm</activeText>
+					<inactiveText>Battery To Utility Transition Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery To Utility Transition Alarm is Active.</activeText>
+					<inactiveText>Battery To Utility Transition Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="manualShutdown">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.145.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Manual Shutdown Alarm</activeText>
+					<inactiveText>Manual Shutdown Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Manual Shutdown Alarm is Active.</activeText>
+					<inactiveText>Manual Shutdown Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="operatingOnInverter">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.146.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Operating On Inverter</activeText>
+					<inactiveText>Not Operating On Inverter</inactiveText>
+				</name>
+				<severity>informational</severity>
+				<category>System</category>
+				<description>
+					<activeText>Operating On Inverter</activeText>
+					<inactiveText>Not Operating On Inverter</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="manualPowerOn">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.147.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Manual Power On Alarm</activeText>
+					<inactiveText>Manual Power On Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Manual Power On Alarm is Active.</activeText>
+					<inactiveText>Manual Power On Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="parallelNoAbnormal">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.150.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Parallel No Abnormal Alarm</activeText>
+					<inactiveText>Parallel No Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Parallel No Abnormal Alarm is Active.</activeText>
+					<inactiveText>Parallel No Abnormal Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="parallelBypassCableConnection">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.151.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Parallel Bypass Cable Connection Alarm</activeText>
+					<inactiveText>Parallel Bypass Cable Connection Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Parallel Bypass Cable Connection Alarm is Active.</activeText>
+					<inactiveText>Parallel Bypass Cable Connection Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="onIntelligentSleepMode">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.152.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>On Intelligent Sleep Mode Alarm</activeText>
+					<inactiveText>On Intelligent Sleep Mode Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>On Intelligent Sleep Mode Alarm is Active.</activeText>
+					<inactiveText>On Intelligent Sleep Mode Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="batteryCabinetConnection">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.153.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Battery Cabinet Connection Alarm</activeText>
+					<inactiveText>Battery Cabinet Connection Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Battery Cabinet Connection Alarm is Active.</activeText>
+					<inactiveText>Battery Cabinet Connection Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="parallelCableConnection">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.154.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Parallel Cable Connection Alarm</activeText>
+					<inactiveText>Parallel Cable Connection Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Parallel Cable Connection Alarm is Active.</activeText>
+					<inactiveText>Parallel Cable Connection Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="systemFault">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.155.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>System Fault Alarm</activeText>
+					<inactiveText>System Fault Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>System Fault Alarm is Active.</activeText>
+					<inactiveText>System Fault Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+    <alarmFlags ruleid="communicationFailure">
+			<value>
+				<getOid>.1.3.6.1.4.1.13400.2.491.2.2.156.0</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Communication Failure Alarm</activeText>
+					<inactiveText>Communication Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Communication Failure Alarm is Active.</activeText>
+					<inactiveText>Communication Failure Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+  </device>
+</APC_DDF>

@@ -1,607 +1,2101 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <APC_DDF
-	canremove="yes"
-	ddfversion="3"
-	ddfname="CyberPower"
-	ddfid="cyberpower"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <schemaVersion>1.6</schemaVersion>
+	ddfid="cyberpower"
+	ddfname="CyberPower"
+	ddfversion="9"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
 
-  <device deviceid="defaultDevice">
-    <oidMustExist istree="no" oid=".1.3.6.1.4.1.3808.1.1.1.1.1.1.0" ruleid="OIDMustExist"/>
+		SOURCE
+		\snmp\resources\mibs\cyberpower\cyber-power-cps1.7.mib
 
-    <setProductData field="type" ruleid="typedata">UPS</setProductData>
-    <setProductData field="vendor" ruleid="vendordata">Cyber Power</setProductData>
-    <setDefaultLabel ruleid="labeldata">
-		Cyber Power UPS (<sysHostname/>)
-	</setDefaultLabel>
-    <setProductData field="appversion" ruleid="firmwaredata">
-        <getOid>.1.3.6.1.4.1.3808.1.1.1.1.2.1.0</getOid>
-    </setProductData>
-    <setProductData field="model" ruleid="modeldata">
-        <getOid>.1.3.6.1.4.1.3808.1.1.1.1.1.1.0</getOid>
-    </setProductData>
-	<stateSensor ruleid="battStatusSensor">
-      <type>state</type>
-      <sensorId>BATT_STATUS</sensorId>
-      <value>
-        <mapValue mapid="batt-status-vm">
-          <getOid>.1.3.6.1.4.1.3808.1.1.1.2.1.1.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Battery Status</label>
-      <enum>batt-status-en</enum>
-      <sensorSet>Battery Sensors</sensorSet>
-    </stateSensor>
-        
-    <valueMap ruleid="batt-status-vm">
-      <valueIn>2</valueIn> <valueOut>1</valueOut>
-      <valueIn>3</valueIn> <valueOut>2</valueOut>
-      <valueIn>*</valueIn> <valueOut>0</valueOut>
-    </valueMap>
+		CPS-MIB | 11 May 2022
 
-    <enumMap ruleid="batt-status-en">
-      <label>Unknown</label>
-      <label>Battery Normal</label>
-      <label>Battery Low</label>
-    </enumMap>
-	<numSensor ruleid="ups_base_battery_time_on_battery">
-      <type>timeinmin</type>
-      <sensorId>_TIME_ON_BATT</sensorId>
-      <value>
-        <getOid>1.3.6.1.4.1.3808.1.1.1.2.1.2.0</getOid>
-      </value>
-      <valueInc>1</valueInc>
-      <label>UPS Base Battery Time On Battery</label>
-      <sensorSet>UPS Battery</sensorSet>
-    </numSensor>
-    <numSensor ruleid="UpsAdvanceBatteryCapacity-Sensor">
-        <type>pctofcapacity</type>
-        <units>percent</units>
-        <sensorId>UPS_ADVANCE_BATTERY_CAPACITY</sensorId>
-        <value>
-            <getOid>.1.3.6.1.4.1.3808.1.1.1.2.2.1.0</getOid>
-        </value>
-        <label>UPS Battery Capacity</label>
-        <sensorSet>Battery Sensors</sensorSet>
-    </numSensor>
-    <numSensor ruleid="UpsAdvanceBatteryRunTimeRemaining-Sensor">
-        <type>timeinmin</type>
-        <units>min</units>
-        <sensorId>UPS_ADVANCE_BATTERY_RUN_TIME_REMAINING</sensorId>
-        <value>
-          <div>
-            <op>
-              <getOid>.1.3.6.1.4.1.3808.1.1.1.2.2.4.0</getOid>
-            </op>
-            <op>6000</op>
-          </div>
-        </value>
-        <label>UPS Battery Run Time Remaining</label>
-        <sensorSet>Battery Sensors</sensorSet>
-    </numSensor>
-    <numSensor ruleid="UpsAdvanceBatteryTemperature-Sensor">
-        <type>temp</type>
-        <units>degreeC</units>
-        <sensorId>UPS_ADVANCE_BATTERY_TEMPERATURE</sensorId>
-        <value>
-            <getOid>.1.3.6.1.4.1.3808.1.1.1.2.2.3.0</getOid>
-        </value>
-        <label>UPS Battery Temperature</label>
-        <sensorSet>Battery Sensors</sensorSet>
-    </numSensor>
-	<numSensor ruleid="ups_base_input_phase">
-      <type>num</type>
-      <sensorId>_UPS_BASE_INPUT_PHASE</sensorId>
-      <value>
-        <getOid>1.3.6.1.4.1.3808.1.1.1.3.1.1.0</getOid>
-      </value>
-      <valueInc>1</valueInc>
-      <label>UPS Base Input Phase</label>
-      <sensorSet>UPS Input</sensorSet>
-    </numSensor>
-    <numSensor ruleid="UpsAdvanceInputLineVoltage-Sensor">
-        <type>voltage</type>
-        <units>volts</units>
-        <sensorId>UPS_ADVANCE_INPUT_LINE_VOLTAGE</sensorId>
-        <value>
-            <div>
-                <op>
-                    <getOid>.1.3.6.1.4.1.3808.1.1.1.3.2.1.0</getOid>
-                </op>
-                <op>10</op>
-            </div>
-        </value>
-        <label>UPS Input Line Voltage</label>
-        <sensorSet>UPS Input</sensorSet>
-    </numSensor>
-	<numSensor ruleid="ups_advance_input_max_line_voltage">
-      <type>voltage</type>
-      <sensorId>1_1_MAX_INPUT_VOLTAGE</sensorId>
-      <value>
-        <mult>
-          <op>
-            <getOid>1.3.6.1.4.1.3808.1.1.1.3.2.2.0</getOid>
-          </op>
-          <op>0.1</op>
-        </mult>
-      </value>
-      <valueInc>0.1</valueInc>
-      <label>UPS Advance Input Max Line Voltage</label>
-      <sensorSet>UPS Input</sensorSet>
-    </numSensor>
-	<numSensor ruleid="ups_advance_input_min_line_voltage">
-      <type>voltage</type>
-      <sensorId>1_2_MIN_INPUT_VOLTAGE</sensorId>
-      <value>
-        <mult>
-          <op>
-            <getOid>1.3.6.1.4.1.3808.1.1.1.3.2.3.0</getOid>
-          </op>
-          <op>0.1</op>
-        </mult>
-      </value>
-      <valueInc>0.1</valueInc>
-      <label>UPS Advance Input Min Line Voltage</label>
-      <sensorSet>UPS Input</sensorSet>
-    </numSensor>
-	<numSensor ruleid="ups_advance_input_frequency">
-      <type>frequency</type>
-      <sensorId>_INPUT1_HZ_1</sensorId>
-      <value>
-        <mult>
-          <op>
-            <getOid>1.3.6.1.4.1.3808.1.1.1.3.2.4.0</getOid>
-          </op>
-          <op>0.1</op>
-        </mult>
-      </value>
-      <valueInc>0.1</valueInc>
-      <label>UPS Advance Input Frequency</label>
-      <sensorSet>UPS Input</sensorSet>
-    </numSensor>
-	<stateSensor ruleid="ups_advance_input_line_fail_cause">
-      <type>state</type>
-      <sensorId>_UPS_ADVANCE_INPUT_LINE_FAIL_CAUSE</sensorId>
-      <value>
-        <mapValue mapid="failcause_vm">
-          <getOid>1.3.6.1.4.1.3808.1.1.1.3.2.5.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Advance Input Line Fail Cause</label>
-      <enum>failcause_em</enum>
-      <sensorSet>UPS Input</sensorSet>
-    </stateSensor>
-	<valueMap ruleid="failcause_vm">
-		<valueIn>1</valueIn>
-		<valueOut>0</valueOut>
-		<valueIn>2</valueIn>
-		<valueOut>1</valueOut>
-		<valueIn>3</valueIn>
-		<valueOut>2</valueOut>
-		<valueIn>4</valueIn>
-		<valueOut>3</valueOut>
-		<valueIn>*</valueIn>
-		<valueOut>0</valueOut>
-	</valueMap>
-	<enumMap ruleid="failcause_em">
-		<label>No Transfer</label>
-		<label>High Line Voltage</label>
-		<label>Brownout</label>
-		<label>Self Test</label>
-	</enumMap>
-	<stateSensor ruleid="output-status-Sensor">
-      <type>state</type>
-      <sensorId>OUTPUT_STATUS</sensorId>
-      <value>
-        <mapValue mapid="output-status-vm">
-          <getOid>.1.3.6.1.4.1.3808.1.1.1.4.1.1.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Output Status</label>
-      <enum>output-status-en</enum>
-      <sensorSet>UPS Output</sensorSet>
-    </stateSensor>
+		WALKFILES
+		\snmp\resources\sapro\walkfiles\cyberpower\*
 
-    <valueMap ruleid="output-status-vm">
-      <valueIn>1</valueIn> <valueOut>0</valueOut>
-      <valueIn>2</valueIn> <valueOut>1</valueOut>
-      <valueIn>3</valueIn> <valueOut>2</valueOut>
-      <valueIn>4</valueIn> <valueOut>3</valueOut>
-      <valueIn>5</valueIn> <valueOut>4</valueOut>
-      <valueIn>6</valueIn> <valueOut>5</valueOut>
-      <valueIn>7</valueIn> <valueOut>6</valueOut>
-      <valueIn>*</valueIn> <valueOut>0</valueOut>
-    </valueMap>
+	-->
 
-    <enumMap ruleid="output-status-en">
-      <label>Unknown</label>
-      <label>On Line</label>
-      <label>On Battery</label>
-      <label>On Boost</label>
-      <label>On Sleep</label>
-      <label>Off</label>
-      <label>Rebooting</label>
-    </enumMap>
-	<numSensor ruleid="ups_base_output_phase">
-      <type>num</type>
-      <sensorId>_UPS_BASE_OUTPUT_PHASE</sensorId>
-      <value>
-        <getOid>1.3.6.1.4.1.3808.1.1.1.4.1.2.0</getOid>
-      </value>
-      <valueInc>1</valueInc>
-      <label>UPS Base Output Phase</label>
-      <sensorSet>UPS Output</sensorSet>
-    </numSensor>
-    <numSensor ruleid="UpsAdvanceOutputVoltage-Sensor">
-        <type>voltage</type>
-        <units>volts</units>
-        <sensorId>UPS_ADVANCE_OUTPUT_VOLTAGE</sensorId>
-        <value>
-            <div>
-                <op>
-                    <getOid>.1.3.6.1.4.1.3808.1.1.1.4.2.1.0</getOid>
-                </op>
-                <op>10</op>
-            </div>
-        </value>
-        <label>UPS Output Voltage</label>
-        <sensorSet>UPS Output</sensorSet>
-    </numSensor>
-	<numSensor ruleid="UpsAdvanceOutputFrequency-Sensor">
-        <type>frequency</type>
-        <sensorId>UPS_ADVANCE_OUTPUT_FREQUENCY</sensorId>
-        <value>
-            <div>
-                <op>
-                    <getOid>.1.3.6.1.4.1.3808.1.1.1.4.2.2.0</getOid>
-                </op>
-                <op>10</op>
-            </div>
-        </value>
-        <label>UPS Output Frequency</label>
-        <sensorSet>UPS Output</sensorSet>
-    </numSensor>
-    <numSensor ruleid="UpsAdvanceOutputLoad-Sensor">
-        <type>pctofcapacity</type>
-        <units>percent</units>
-        <sensorId>UPS_ADVANCE_OUTPUT_LOAD</sensorId>
-        <value>
-            <getOid>.1.3.6.1.4.1.3808.1.1.1.4.2.3.0</getOid>
-        </value>
-        <label>UPS Output Load</label>
-        <sensorSet>UPS Output</sensorSet>
-    </numSensor>
-    <numSensor ruleid="ups_base_config_num_devices">
-      <type>num</type>
-      <sensorId>_UPS_BASE_CONFIG_NUM_DEVICES</sensorId>
-      <value>
-        <getOid>1.3.6.1.4.1.3808.1.1.1.5.1.1.0</getOid>
-      </value>
-      <valueInc>1</valueInc>
-      <label>UPS Base Config Num Devices</label>
-      <sensorSet>UPS Config</sensorSet>
-    </numSensor>
-	<numSensor ruleid="device_index">
-      <type>num</type>
-      <sensorId>_DEVICE_INDEX</sensorId>
-      <value>
-        <getOid>1.3.6.1.4.1.3808.1.1.1.5.1.2.1.1.1</getOid>
-      </value>
-      <valueInc>1</valueInc>
-      <label>Device Index</label>
-      <sensorSet>UPS Config</sensorSet>
-    </numSensor>
-    <numSensor ruleid="va_rating">
-      <type>num</type>
-      <sensorId>_VA_RATING</sensorId>
-      <value>
-        <getOid>1.3.6.1.4.1.3808.1.1.1.5.1.2.1.3.1</getOid>
-      </value>
-      <valueInc>1</valueInc>
-      <label>VA Rating</label>
-      <sensorSet>UPS Config</sensorSet>
-    </numSensor>
-    <stateSensor ruleid="accept_this_device">
-      <type>state</type>
-      <sensorId>_ACCEPT_THIS_DEVICE</sensorId>
-      <value>
-        <mapValue mapid="yesno_vm">
-          <getOid>1.3.6.1.4.1.3808.1.1.1.5.1.2.1.4.1</getOid>
-        </mapValue>
-      </value>
-      <label>Accept This Device</label>
-      <enum>yesno_em</enum>
-      <sensorSet>UPS Config</sensorSet>
-    </stateSensor>
-	<valueMap ruleid="yesno_vm">
-		<valueIn>1</valueIn>
-		<valueOut>0</valueOut>
-		<valueIn>2</valueIn>
-		<valueOut>1</valueOut>
-		<valueIn>*</valueIn>
-		<valueOut>0</valueOut>
-	</valueMap>
-	<enumMap ruleid="yesno_em">
-		<label>Yes</label>
-		<label>No</label>
-	</enumMap>
-    <numSensor ruleid="ups_advance_config_rated_output_voltage">
-      <type>voltage</type>
-      <sensorId>_OUTPUT_VOLTAGE</sensorId>
-      <value>
-        <getOid>1.3.6.1.4.1.3808.1.1.1.5.2.1.0</getOid>
-      </value>
-      <valueInc>1</valueInc>
-      <label>UPS Advance Config Rated Output Voltage</label>
-      <sensorSet>UPS Advance Config</sensorSet>
-    </numSensor>
-    <stateSensor ruleid="ups_advance_config_alarm">
-      <type>state</type>
-      <sensorId>_UPS_ADVANCE_CONFIG_ALARM</sensorId>
-      <value>
-        <mapValue mapid="configalarm_vm">
-          <getOid>1.3.6.1.4.1.3808.1.1.1.5.2.4.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Advance Config Alarm</label>
-      <enum>configalarm_em</enum>
-      <sensorSet>UPS Advance Config</sensorSet>
-    </stateSensor>
-	<valueMap ruleid="configalarm_vm">
-		<valueIn>1</valueIn>
-		<valueOut>0</valueOut>
-		<valueIn>2</valueIn>
-		<valueOut>1</valueOut>
-		<valueIn>3</valueIn>
-		<valueOut>2</valueOut>
-		<valueIn>*</valueIn>
-		<valueOut>0</valueOut>
-	</valueMap>
-	<enumMap ruleid="configalarm_em">
-		<label>Timed</label>
-		<label>At Low Battery</label>
-		<label>Never</label>
-	</enumMap>
-    <stateSensor ruleid="ups_advance_control_ups_off">
-      <type>state</type>
-      <sensorId>_UPS_ADVANCE_CONTROL_UPS_OFF</sensorId>
-      <value>
-        <mapValue mapid="controlups_vm">
-          <getOid>1.3.6.1.4.1.3808.1.1.1.6.2.1.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Advance Control UPS Off</label>
-      <enum>controlups_em</enum>
-      <sensorSet>UPS Advance Control</sensorSet>
-    </stateSensor>
-	<valueMap ruleid="controlups_vm">
-		<valueIn>1</valueIn>
-		<valueOut>0</valueOut>
-		<valueIn>2</valueIn>
-		<valueOut>1</valueOut>
-		<valueIn>*</valueIn>
-		<valueOut>0</valueOut>
-	</valueMap>
-	<enumMap ruleid="controlups_em">
-		<label>No Turn UPS Off</label>
-		<label>Turn UPS Off</label>
-	</enumMap>
-    <stateSensor ruleid="ups_advance_control_reboot_ups">
-      <type>state</type>
-      <sensorId>_UPS_ADVANCE_CONTROL_REBOOT_UPS</sensorId>
-      <value>
-        <mapValue mapid="rebootups_vm">
-          <getOid>1.3.6.1.4.1.3808.1.1.1.6.2.2.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Advance Control Reboot UPS</label>
-      <enum>rebootups_em</enum>
-      <sensorSet>UPS Advance Control</sensorSet>
-    </stateSensor>
-	<valueMap ruleid="rebootups_vm">
-		<valueIn>1</valueIn>
-		<valueOut>0</valueOut>
-		<valueIn>2</valueIn>
-		<valueOut>1</valueOut>
-		<valueIn>*</valueIn>
-		<valueOut>0</valueOut>
-	</valueMap>
-	<enumMap ruleid="rebootups_em">
-		<label>No Reboot UPS</label>
-		<label>Reboot UPS</label>
-	</enumMap>
-    <stateSensor ruleid="ups_advance_control_turn_on_ups">
-      <type>state</type>
-      <sensorId>_UPS_ADVANCE_CONTROL_TURN_ON_UPS</sensorId>
-      <value>
-        <mapValue mapid="turnonups_vm">
-          <getOid>1.3.6.1.4.1.3808.1.1.1.6.2.6.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Advance Control Turn On UPS</label>
-      <enum>turnonups_em</enum>
-      <sensorSet>UPS Advance Control</sensorSet>
-    </stateSensor>
-	<valueMap ruleid="turnonups_vm">
-		<valueIn>1</valueIn>
-		<valueOut>0</valueOut>
-		<valueIn>2</valueIn>
-		<valueOut>1</valueOut>
-		<valueIn>*</valueIn>
-		<valueOut>0</valueOut>
-	</valueMap>
-	<enumMap ruleid="turnonups_em">
-		<label>No Turn On UPS</label>
-		<label>Turn UPS On</label>
-	</enumMap>
-	<stateSensor ruleid="ups_advance_test_diagnostics">
-      <type>state</type>
-      <sensorId>_UPS_ADVANCE_TEST_DIAGNOSTICS</sensorId>
-      <value>
-        <mapValue mapid="diagnostics_vm">
-          <getOid>1.3.6.1.4.1.3808.1.1.1.7.2.2.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Advance Test Diagnostics</label>
-      <enum>diagnostics_em</enum>
-      <sensorSet>UPS Advance Test</sensorSet>
-    </stateSensor>
-	<valueMap ruleid="diagnostics_vm">
-		<valueIn>1</valueIn>
-		<valueOut>0</valueOut>
-		<valueIn>2</valueIn>
-		<valueOut>1</valueOut>
-		<valueIn>3</valueIn>
-		<valueOut>2</valueOut>
-		<valueIn>4</valueIn>
-		<valueOut>3</valueOut>
-		<valueIn>5</valueIn>
-		<valueOut>4</valueOut>
-		<valueIn>*</valueIn>
-		<valueOut>0</valueOut>
-	</valueMap>
-	<enumMap ruleid="diagnostics_em">
-		<label>Unknown</label>
-		<label>Biweekly</label>
-		<label>Weekly</label>
-		<label>At Turn On</label>
-		<label>Never</label>
-	</enumMap>
-	<stateSensor ruleid="last-test-status-Sensor">
-      <type>state</type>
-      <sensorId>LAST_TEST_STATUS</sensorId>
-      <value>
-        <mapValue mapid="last-test-status-vm">
-          <getOid>.1.3.6.1.4.1.3808.1.1.1.7.2.3.0</getOid>
-        </mapValue>
-      </value>
-      <label>Last Test Status</label>
-      <enum>last-test-status-en</enum>
-      <sensorSet>Diagnostics</sensorSet>
-    </stateSensor>
-    <valueMap ruleid="last-test-status-vm">
-      <valueIn>1</valueIn> <valueOut>1</valueOut>
-      <valueIn>2</valueIn> <valueOut>2</valueOut>
-      <valueIn>3</valueIn> <valueOut>3</valueOut>
-      <valueIn>4</valueIn> <valueOut>4</valueOut>
-      <valueIn>*</valueIn> <valueOut>0</valueOut>
-    </valueMap>
+	<device deviceid="defaultDevice">
+		<oidMustExist ruleid="OIDMustExist" oid=".1.3.6.1.4.1.3808.1.1.1.1.1.1.0" istree="no" />
 
-    <enumMap ruleid="last-test-status-en">
-      <label>Unknown</label>
-      <label>Test OK</label>
-      <label>Test Failed</label>
-      <label>Test Invalid</label>
-      <label>Test In Progress</label>
-    </enumMap>
-	<numSensor ruleid="days_since_last_test">
-      <type>timeindays</type>
-      <sensorId>DAYS_SINCE_LAST_TEST</sensorId>
-      <value>
-          <!--    
+		<setProductData field="vendor" ruleid="vendordata">Cyber Power</setProductData>
+		<setProductData field="model" ruleid="modeldata"><getOid>.1.3.6.1.4.1.3808.1.1.1.1.1.1.0</getOid></setProductData>
+		<setProductData field="appversion" ruleid="firmwaredata"><getOid>.1.3.6.1.4.1.3808.1.1.1.1.2.4.0</getOid></setProductData>
+		<setProductData field="serial_num" ruleid="serialnumber"><getOid>.1.3.6.1.4.1.3808.1.1.1.1.2.3.0</getOid></setProductData>
+		<setProductData field="type" ruleid="typedata">UPS</setProductData>
+
+		<stateSensor ruleid="battStatusSensor">
+			<type>state</type>
+			<sensorId>BATT_STATUS</sensorId>
+			<value>
+				<mapValue mapid="batt-status-vm">
+					<getOid>.1.3.6.1.4.1.3808.1.1.1.2.1.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Battery Status</label>
+			<enum>batt-status-en</enum>
+			<sensorSet>Battery Sensors</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="batt-status-vm">
+			<valueIn>2</valueIn> <valueOut>1</valueOut>
+			<valueIn>3</valueIn> <valueOut>2</valueOut>
+			<valueIn>*</valueIn> <valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="batt-status-en">
+			<label>Unknown</label>
+			<label>Battery Normal</label>
+			<label>Battery Low</label>
+		</enumMap>
+
+		<numSensor ruleid="ups_base_battery_time_on_battery">
+			<type>timeinmin</type>
+			<sensorId>_TIME_ON_BATT</sensorId>
+			<value>
+				<getOid>1.3.6.1.4.1.3808.1.1.1.2.1.2.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>UPS Base Battery Time On Battery</label>
+			<sensorSet>UPS Battery</sensorSet>
+		</numSensor>
+		<numSensor ruleid="UpsAdvanceBatteryCapacity-Sensor">
+			<type>pctofcapacity</type>
+			<units>percent</units>
+			<sensorId>UPS_ADVANCE_BATTERY_CAPACITY</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.3808.1.1.1.2.2.1.0</getOid>
+			</value>
+			<label>UPS Battery Capacity</label>
+			<sensorSet>Battery Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="UpsAdvanceBatteryRunTimeRemaining-Sensor">
+			<type>timeinmin</type>
+			<units>min</units>
+			<sensorId>UPS_ADVANCE_BATTERY_RUN_TIME_REMAINING</sensorId>
+			<value>
+				<div>
+					<op>
+						<getOid>.1.3.6.1.4.1.3808.1.1.1.2.2.4.0</getOid>
+					</op>
+					<op>6000</op>
+				</div>
+			</value>
+			<label>UPS Battery Run Time Remaining</label>
+			<sensorSet>Battery Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="UpsAdvanceBatteryTemperature-Sensor">
+			<type>temp</type>
+			<units>degreeC</units>
+			<sensorId>UPS_ADVANCE_BATTERY_TEMPERATURE</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.3808.1.1.1.2.2.3.0</getOid>
+			</value>
+			<label>UPS Battery Temperature</label>
+			<sensorSet>Battery Sensors</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ups_base_input_phase">
+			<type>num</type>
+			<sensorId>_UPS_BASE_INPUT_PHASE</sensorId>
+			<value>
+				<getOid>1.3.6.1.4.1.3808.1.1.1.3.1.1.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>UPS Base Input Phase</label>
+			<sensorSet>UPS Input</sensorSet>
+		</numSensor>
+		<numSensor ruleid="UpsAdvanceInputLineVoltage-Sensor">
+			<type>voltage</type>
+			<units>volts</units>
+			<sensorId>UPS_ADVANCE_INPUT_LINE_VOLTAGE</sensorId>
+			<value>
+				<div>
+					<op>
+						<getOid>.1.3.6.1.4.1.3808.1.1.1.3.2.1.0</getOid>
+					</op>
+					<op>10</op>
+				</div>
+			</value>
+			<label>UPS Input Line Voltage</label>
+			<sensorSet>UPS Input</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ups_advance_input_max_line_voltage">
+			<type>voltage</type>
+			<sensorId>1_1_MAX_INPUT_VOLTAGE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>1.3.6.1.4.1.3808.1.1.1.3.2.2.0</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>UPS Advance Input Max Line Voltage</label>
+			<sensorSet>UPS Input</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ups_advance_input_min_line_voltage">
+			<type>voltage</type>
+			<sensorId>1_2_MIN_INPUT_VOLTAGE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>1.3.6.1.4.1.3808.1.1.1.3.2.3.0</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>UPS Advance Input Min Line Voltage</label>
+			<sensorSet>UPS Input</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ups_advance_input_frequency">
+			<type>frequency</type>
+			<sensorId>_INPUT1_HZ_1</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>1.3.6.1.4.1.3808.1.1.1.3.2.4.0</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>UPS Advance Input Frequency</label>
+			<sensorSet>UPS Input</sensorSet>
+		</numSensor>
+
+		<stateSensor ruleid="ups_advance_input_line_fail_cause">
+			<type>state</type>
+			<sensorId>_UPS_ADVANCE_INPUT_LINE_FAIL_CAUSE</sensorId>
+			<value>
+				<mapValue mapid="failcause_vm">
+					<getOid>1.3.6.1.4.1.3808.1.1.1.3.2.5.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Advance Input Line Fail Cause</label>
+			<enum>failcause_em</enum>
+			<sensorSet>UPS Input</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="failcause_vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="failcause_em">
+			<label>No Transfer</label>
+			<label>High Line Voltage</label>
+			<label>Brownout</label>
+			<label>Self Test</label>
+		</enumMap>
+
+		<stateSensor ruleid="output-status-Sensor">
+			<type>state</type>
+			<sensorId>OUTPUT_STATUS</sensorId>
+			<value>
+				<mapValue mapid="output-status-vm">
+					<getOid>.1.3.6.1.4.1.3808.1.1.1.4.1.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Output Status</label>
+			<enum>output-status-en</enum>
+			<sensorSet>UPS Output</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="output-status-vm">
+			<valueIn>1</valueIn> <valueOut>0</valueOut>
+			<valueIn>2</valueIn> <valueOut>1</valueOut>
+			<valueIn>3</valueIn> <valueOut>2</valueOut>
+			<valueIn>4</valueIn> <valueOut>3</valueOut>
+			<valueIn>5</valueIn> <valueOut>4</valueOut>
+			<valueIn>6</valueIn> <valueOut>5</valueOut>
+			<valueIn>7</valueIn> <valueOut>6</valueOut>
+			<valueIn>*</valueIn> <valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="output-status-en">
+			<label>Unknown</label>
+			<label>On Line</label>
+			<label>On Battery</label>
+			<label>On Boost</label>
+			<label>On Sleep</label>
+			<label>Off</label>
+			<label>Rebooting</label>
+		</enumMap>
+
+		<numSensor ruleid="ups_base_output_phase">
+			<type>num</type>
+			<sensorId>_UPS_BASE_OUTPUT_PHASE</sensorId>
+			<value>
+				<getOid>1.3.6.1.4.1.3808.1.1.1.4.1.2.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>UPS Base Output Phase</label>
+			<sensorSet>UPS Output</sensorSet>
+		</numSensor>
+		<numSensor ruleid="UpsAdvanceOutputVoltage-Sensor">
+			<type>voltage</type>
+			<units>volts</units>
+			<sensorId>UPS_ADVANCE_OUTPUT_VOLTAGE</sensorId>
+			<value>
+				<div>
+					<op>
+						<getOid>.1.3.6.1.4.1.3808.1.1.1.4.2.1.0</getOid>
+					</op>
+					<op>10</op>
+				</div>
+			</value>
+			<label>UPS Output Voltage</label>
+			<sensorSet>UPS Output</sensorSet>
+		</numSensor>
+		<numSensor ruleid="UpsAdvanceOutputFrequency-Sensor">
+			<type>frequency</type>
+			<sensorId>UPS_ADVANCE_OUTPUT_FREQUENCY</sensorId>
+			<value>
+				<div>
+					<op>
+						<getOid>.1.3.6.1.4.1.3808.1.1.1.4.2.2.0</getOid>
+					</op>
+					<op>10</op>
+				</div>
+			</value>
+			<label>UPS Output Frequency</label>
+			<sensorSet>UPS Output</sensorSet>
+		</numSensor>
+		<numSensor ruleid="UpsAdvanceOutputLoad-Sensor">
+			<type>pctofcapacity</type>
+			<units>percent</units>
+			<sensorId>UPS_ADVANCE_OUTPUT_LOAD</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.3808.1.1.1.4.2.3.0</getOid>
+			</value>
+			<label>UPS Output Load</label>
+			<sensorSet>UPS Output</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ups_base_config_num_devices">
+			<type>num</type>
+			<sensorId>_UPS_BASE_CONFIG_NUM_DEVICES</sensorId>
+			<value>
+				<getOid>1.3.6.1.4.1.3808.1.1.1.5.1.1.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>UPS Base Config Num Devices</label>
+			<sensorSet>UPS Config</sensorSet>
+		</numSensor>
+		<numSensor ruleid="device_index">
+			<type>num</type>
+			<sensorId>_DEVICE_INDEX</sensorId>
+			<value>
+				<getOid>1.3.6.1.4.1.3808.1.1.1.5.1.2.1.1.1</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Device Index</label>
+			<sensorSet>UPS Config</sensorSet>
+		</numSensor>
+		<numSensor ruleid="va_rating">
+			<type>num</type>
+			<sensorId>_VA_RATING</sensorId>
+			<value>
+				<getOid>1.3.6.1.4.1.3808.1.1.1.5.1.2.1.3.1</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>VA Rating</label>
+			<sensorSet>UPS Config</sensorSet>
+		</numSensor>
+
+		<stateSensor ruleid="accept_this_device">
+			<type>state</type>
+			<sensorId>_ACCEPT_THIS_DEVICE</sensorId>
+			<value>
+				<mapValue mapid="yesno_vm">
+					<getOid>1.3.6.1.4.1.3808.1.1.1.5.1.2.1.4.1</getOid>
+				</mapValue>
+			</value>
+			<label>Accept This Device</label>
+			<enum>yesno_em</enum>
+			<sensorSet>UPS Config</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="yesno_vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="yesno_em">
+			<label>Yes</label>
+			<label>No</label>
+		</enumMap>
+
+		<numSensor ruleid="ups_advance_config_rated_output_voltage">
+			<type>voltage</type>
+			<sensorId>_OUTPUT_VOLTAGE</sensorId>
+			<value>
+				<getOid>1.3.6.1.4.1.3808.1.1.1.5.2.1.0</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>UPS Advance Config Rated Output Voltage</label>
+			<sensorSet>UPS Advance Config</sensorSet>
+		</numSensor>
+
+		<stateSensor ruleid="ups_advance_config_alarm">
+			<type>state</type>
+			<sensorId>_UPS_ADVANCE_CONFIG_ALARM</sensorId>
+			<value>
+				<mapValue mapid="configalarm_vm">
+					<getOid>1.3.6.1.4.1.3808.1.1.1.5.2.4.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Advance Config Alarm</label>
+			<enum>configalarm_em</enum>
+			<sensorSet>UPS Advance Config</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="configalarm_vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="configalarm_em">
+			<label>Timed</label>
+			<label>At Low Battery</label>
+			<label>Never</label>
+		</enumMap>
+
+		<stateSensor ruleid="ups_advance_control_ups_off">
+			<type>state</type>
+			<sensorId>_UPS_ADVANCE_CONTROL_UPS_OFF</sensorId>
+			<value>
+				<mapValue mapid="controlups_vm">
+					<getOid>1.3.6.1.4.1.3808.1.1.1.6.2.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Advance Control UPS Off</label>
+			<enum>controlups_em</enum>
+			<sensorSet>UPS Advance Control</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="controlups_vm">
+			<valueIn>1</valueIn>
+			<valueOut>0</valueOut>
+			<valueIn>2</valueIn>
+			<valueOut>1</valueOut>
+			<valueIn>*</valueIn>
+			<valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="controlups_em">
+			<label>No Turn UPS Off</label>
+			<label>Turn UPS Off</label>
+		</enumMap>
+
+		<stateSensor ruleid="ups_advance_control_reboot_ups">
+			<type>state</type>
+			<sensorId>_UPS_ADVANCE_CONTROL_REBOOT_UPS</sensorId>
+			<value>
+				<mapValue mapid="rebootups_vm">
+					<getOid>1.3.6.1.4.1.3808.1.1.1.6.2.2.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Advance Control Reboot UPS</label>
+			<enum>rebootups_em</enum>
+			<sensorSet>UPS Advance Control</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="rebootups_vm">
+			<valueIn>1</valueIn>
+			<valueOut>0</valueOut>
+			<valueIn>2</valueIn>
+			<valueOut>1</valueOut>
+			<valueIn>*</valueIn>
+			<valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="rebootups_em">
+			<label>No Reboot UPS</label>
+			<label>Reboot UPS</label>
+		</enumMap>
+
+		<stateSensor ruleid="ups_advance_control_turn_on_ups">
+			<type>state</type>
+			<sensorId>_UPS_ADVANCE_CONTROL_TURN_ON_UPS</sensorId>
+			<value>
+				<mapValue mapid="turnonups_vm">
+					<getOid>1.3.6.1.4.1.3808.1.1.1.6.2.6.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Advance Control Turn On UPS</label>
+			<enum>turnonups_em</enum>
+			<sensorSet>UPS Advance Control</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="turnonups_vm">
+			<valueIn>1</valueIn>
+			<valueOut>0</valueOut>
+			<valueIn>2</valueIn>
+			<valueOut>1</valueOut>
+			<valueIn>*</valueIn>
+			<valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="turnonups_em">
+			<label>No Turn On UPS</label>
+			<label>Turn UPS On</label>
+		</enumMap>
+
+		<stateSensor ruleid="ups_advance_test_diagnostics">
+			<type>state</type>
+			<sensorId>_UPS_ADVANCE_TEST_DIAGNOSTICS</sensorId>
+			<value>
+				<mapValue mapid="diagnostics_vm">
+					<getOid>1.3.6.1.4.1.3808.1.1.1.7.2.2.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Advance Test Diagnostics</label>
+			<enum>diagnostics_em</enum>
+			<sensorSet>UPS Advance Test</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="diagnostics_vm">
+			<valueIn>1</valueIn>
+			<valueOut>0</valueOut>
+			<valueIn>2</valueIn>
+			<valueOut>1</valueOut>
+			<valueIn>3</valueIn>
+			<valueOut>2</valueOut>
+			<valueIn>4</valueIn>
+			<valueOut>3</valueOut>
+			<valueIn>5</valueIn>
+			<valueOut>4</valueOut>
+			<valueIn>*</valueIn>
+			<valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="diagnostics_em">
+			<label>Unknown</label>
+			<label>Biweekly</label>
+			<label>Weekly</label>
+			<label>At Turn On</label>
+			<label>Never</label>
+		</enumMap>
+
+		<stateSensor ruleid="last-test-status-Sensor">
+			<type>state</type>
+			<sensorId>LAST_TEST_STATUS</sensorId>
+			<value>
+				<mapValue mapid="last-test-status-vm">
+					<getOid>.1.3.6.1.4.1.3808.1.1.1.7.2.3.0</getOid>
+				</mapValue>
+			</value>
+			<label>Last Test Status</label>
+			<enum>last-test-status-en</enum>
+			<sensorSet>Diagnostics</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="last-test-status-vm">
+			<valueIn>1</valueIn> <valueOut>1</valueOut>
+			<valueIn>2</valueIn> <valueOut>2</valueOut>
+			<valueIn>3</valueIn> <valueOut>3</valueOut>
+			<valueIn>4</valueIn> <valueOut>4</valueOut>
+			<valueIn>*</valueIn> <valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="last-test-status-en">
+			<label>Unknown</label>
+			<label>Test OK</label>
+			<label>Test Failed</label>
+			<label>Test Invalid</label>
+			<label>Test In Progress</label>
+		</enumMap>
+
+		<numSensor ruleid="days_since_last_test">
+			<type>timeindays</type>
+			<sensorId>DAYS_SINCE_LAST_TEST</sensorId>
+			<value>
+				<!--
           The date is in form MM-DD-YYYY.
           Parse that value as a date.  Subtract current time,
           and divide by 86400 - the number of seconds in a day.
           -->
-        <div>
-          <op>
-            <sub>
-              <op>
-                <curUTCTime/>
-              </op>
-              <op>
-                <parseDate>
-                  <getOid>.1.3.6.1.4.1.3808.1.1.1.7.2.4.0</getOid>
-                </parseDate>
-              </op>
-            </sub>
-          </op>
-          <op>86400</op>
-        </div>
-      </value>
-      <valueInc>1.0</valueInc>
-      <label>Days Since Last Test</label>
-      <sensorSet>Diagnostics</sensorSet>
-    </numSensor>
-	<stateSensor ruleid="ups_advance_test_runtime_calibration">
-      <type>state</type>
-      <sensorId>_UPS_ADVANCE_TEST_RUNTIME_CALIBRATION</sensorId>
-      <value>
-        <mapValue mapid="runcalibration_vm">
-          <getOid>1.3.6.1.4.1.3808.1.1.1.7.2.6.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Advance Test Runtime Calibration</label>
-      <enum>runcalibration_em</enum>
-      <sensorSet>UPS Advance Test</sensorSet>
-    </stateSensor>
-	<valueMap ruleid="runcalibration_vm">
-		<valueIn>1</valueIn>
-		<valueOut>0</valueOut>
-		<valueIn>2</valueIn>
-		<valueOut>1</valueOut>
-		<valueIn>3</valueIn>
-		<valueOut>2</valueOut>
-		<valueIn>*</valueIn>
-		<valueOut>0</valueOut>
-	</valueMap>
-	<enumMap ruleid="runcalibration_em">
-		<label>No Perform Calibration</label>
-		<label>Perform Calibration</label>
-		<label>Cancel Current Calibration</label>
-	</enumMap>
-    <stateSensor ruleid="ups_advance_test_calibration_results">
-      <type>state</type>
-      <sensorId>_UPS_ADVANCE_TEST_CALIBRATION_RESULTS</sensorId>
-      <value>
-        <mapValue mapid="calibrationresults_vm">
-          <getOid>1.3.6.1.4.1.3808.1.1.1.7.2.7.0</getOid>
-        </mapValue>
-      </value>
-      <label>UPS Advance Test Calibration Results</label>
-      <enum>calibrationresults_em</enum>
-      <sensorSet>UPS Advance Test</sensorSet>
-    </stateSensor>
-	<valueMap ruleid="calibrationresults_vm">
-		<valueIn>1</valueIn>
-		<valueOut>0</valueOut>
-		<valueIn>2</valueIn>
-		<valueOut>1</valueOut>
-		<valueIn>3</valueIn>
-		<valueOut>2</valueOut>
-		<valueIn>*</valueIn>
-		<valueOut>0</valueOut>
-	</valueMap>
-	<enumMap ruleid="calibrationresults_em">
-		<label>Ok</label>
-		<label>Invalid Calibration</label>
-		<label>Calibration in Progress</label>
-	</enumMap>
-    <stateSensor ruleid="outlet-status-Sensor" index=".1.3.6.1.4.1.3808.1.1.1.8.1.1.1.1">
-      <type>state</type>
-      <sensorId>OUTLET_STATUS_<rowIndex/></sensorId>
-      <value>
-        <mapValue mapid="outlet-status-vm">
-          <getRowOid>.1.3.6.1.4.1.3808.1.1.1.8.1.1.1.2</getRowOid>
-        </mapValue>
-      </value>
-      <label>UPS Outlet Status <rowIndex/></label>
-      <enum>outlet-status-en</enum>
-      <sensorSet>UPS Outlet</sensorSet>
-    </stateSensor>
-    <valueMap ruleid="outlet-status-vm">
-      <valueIn>1</valueIn> <valueOut>1</valueOut>
-      <valueIn>2</valueIn> <valueOut>2</valueOut>
-      <valueIn>4</valueIn> <valueOut>3</valueOut>
-      <valueIn>*</valueIn> <valueOut>0</valueOut>
-    </valueMap>
-    <enumMap ruleid="outlet-status-en">
-      <label>Unknown</label>
-      <label>On</label>
-      <label>Off</label>
-      <label>Critical/Uncontrollable</label>
-    </enumMap>
-    </device>
+				<div>
+					<op>
+						<sub>
+							<op>
+								<curUTCTime/>
+							</op>
+							<op>
+								<parseDate>
+									<getOid>.1.3.6.1.4.1.3808.1.1.1.7.2.4.0</getOid>
+								</parseDate>
+							</op>
+						</sub>
+					</op>
+					<op>86400</op>
+				</div>
+			</value>
+			<valueInc>1.0</valueInc>
+			<label>Days Since Last Test</label>
+			<sensorSet>Diagnostics</sensorSet>
+		</numSensor>
+
+		<stateSensor ruleid="ups_advance_test_runtime_calibration">
+			<type>state</type>
+			<sensorId>_UPS_ADVANCE_TEST_RUNTIME_CALIBRATION</sensorId>
+			<value>
+				<mapValue mapid="runcalibration_vm">
+					<getOid>1.3.6.1.4.1.3808.1.1.1.7.2.6.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Advance Test Runtime Calibration</label>
+			<enum>runcalibration_em</enum>
+			<sensorSet>UPS Advance Test</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="runcalibration_vm">
+			<valueIn>1</valueIn>
+			<valueOut>0</valueOut>
+			<valueIn>2</valueIn>
+			<valueOut>1</valueOut>
+			<valueIn>3</valueIn>
+			<valueOut>2</valueOut>
+			<valueIn>*</valueIn>
+			<valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="runcalibration_em">
+			<label>No Perform Calibration</label>
+			<label>Perform Calibration</label>
+			<label>Cancel Current Calibration</label>
+		</enumMap>
+
+		<stateSensor ruleid="ups_advance_test_calibration_results">
+			<type>state</type>
+			<sensorId>_UPS_ADVANCE_TEST_CALIBRATION_RESULTS</sensorId>
+			<value>
+				<mapValue mapid="calibrationresults_vm">
+					<getOid>1.3.6.1.4.1.3808.1.1.1.7.2.7.0</getOid>
+				</mapValue>
+			</value>
+			<label>UPS Advance Test Calibration Results</label>
+			<enum>calibrationresults_em</enum>
+			<sensorSet>UPS Advance Test</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="calibrationresults_vm">
+			<valueIn>1</valueIn>
+			<valueOut>0</valueOut>
+			<valueIn>2</valueIn>
+			<valueOut>1</valueOut>
+			<valueIn>3</valueIn>
+			<valueOut>2</valueOut>
+			<valueIn>*</valueIn>
+			<valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="calibrationresults_em">
+			<label>Ok</label>
+			<label>Invalid Calibration</label>
+			<label>Calibration in Progress</label>
+		</enumMap>
+
+		<stateSensor ruleid="outlet-status-Sensor" index=".1.3.6.1.4.1.3808.1.1.1.8.1.1.1.1">
+			<type>state</type>
+			<sensorId>OUTLET_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="outlet-status-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.1.8.1.1.1.2</getRowOid>
+				</mapValue>
+			</value>
+			<label>UPS Outlet Status <rowIndex/></label>
+			<enum>outlet-status-en</enum>
+			<sensorSet>UPS Outlet</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="outlet-status-vm">
+			<valueIn>1</valueIn> <valueOut>1</valueOut>
+			<valueIn>2</valueIn> <valueOut>2</valueOut>
+			<valueIn>4</valueIn> <valueOut>3</valueOut>
+			<valueIn>*</valueIn> <valueOut>0</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="outlet-status-en">
+			<label>Unknown</label>
+			<label>On</label>
+			<label>Off</label>
+			<label>Critical/Uncontrollable</label>
+		</enumMap>
+
+	</device>
+
+	<device deviceid="cyberpower_ePDU2">
+		<oidMustExist ruleid="OIDMustExist" oid=".1.3.6.1.4.1.3808.1.1.6" istree="yes" />
+		<oidMustNotMatch ruleid="OIDMustNotMatch" oid=".1.3.6.1.4.1.3808.1.1.6.2.1.0">
+			<valueList><value>0</value></valueList>
+		</oidMustNotMatch>
+
+		<setProductData field="vendor" ruleid="vendordata">Cyber Power</setProductData>
+		<setDefaultLabel ruleid="labeldata"><getOid>.1.3.6.1.4.1.3808.1.1.6.2.2.1.3.1</getOid></setDefaultLabel>
+		<setProductData field="appversion" ruleid="firmwaredata"><getOid>.1.3.6.1.4.1.3808.1.1.6.2.2.1.7.1</getOid></setProductData>
+		<setProductData field="model" ruleid="modeldata"><getOid>.1.3.6.1.4.1.3808.1.1.6.2.2.1.9.1</getOid></setProductData>
+		<setProductData field="serial_num" ruleid="serialnumber"><getOid>.1.3.6.1.4.1.3808.1.1.6.2.2.1.10.1</getOid></setProductData>
+		<setProductData field="type" ruleid="typedata">Rack PDU</setProductData>
+
+		<suppressRule ruleid="stomp_devicetype" suppressid="cyberpower/defaultDevice/typedata"/> <!-- suppress "UPS" type from defaultDevice section -->
+
+		<!-- ePDU2DeviceStatusTable -->
+
+		<stateSensor ruleid="ePDU2DeviceStatusLoadState" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>state</type>
+			<sensorId>DEVICE_LOAD_STATE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="load_state-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Load State</label>
+			<enum>load_state-em</enum>
+			<sensorSet>Device Status</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="load_state-vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>3</valueIn><valueOut>2</valueOut>
+			<valueIn>4</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>4</valueOut>
+		</valueMap>
+		<enumMap ruleid="load_state-em">
+			<label>Normal</label>
+			<label>Low Load Alarm</label>
+			<label>Near Overload Alarm</label>
+			<label>Overload Alarm</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<alarmFlags2 ruleid="ePDU2DeviceStatusLoadStateAlarm" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.4</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Low Load Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Low Load Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Low Load Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Low Load Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Near Overload Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Near Overload Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Near Overload Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Near Overload Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Overload Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Overload Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Overload Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Overload Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<numSensor ruleid="ePDU2DeviceStatusCurrentLoad" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>amperage</type>
+			<sensorId>DEVICE_CURRENT_LOAD_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.5</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Load</label>
+			<sensorSet>Device Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDU2DeviceStatusCurrentPeakLoad" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>amperage</type>
+			<sensorId>DEVICE_PEAK_LOAD_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.6</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Peak Load</label>
+			<sensorSet>Device Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDU2DeviceStatusEnergy" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>num/kwatthr</type>
+			<sensorId>DEVICE_ENERGY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.9</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Energy</label>
+			<sensorSet>Device Status</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="ePDU2DeviceStatusPowerSupplyStatus" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>state</type>
+			<sensorId>DEVICE_POWER_SUPPLY_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="ps_state-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Overall Power Supply Status</label>
+			<enum>ps_state-em</enum>
+			<sensorSet>Device Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="ePDU2DeviceStatusPowerSupply1Status" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>state</type>
+			<sensorId>DEVICE_POWER_SUPPLY_1_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="ps_state-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.13</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 1 Status</label>
+			<enum>ps_state-em</enum>
+			<sensorSet>Device Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="ePDU2DeviceStatusPowerSupply2Status" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>state</type>
+			<sensorId>DEVICE_POWER_SUPPLY_2_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="ps_state-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.14</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 2 Status</label>
+			<enum>ps_state-em</enum>
+			<sensorSet>Device Status</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="ps_state-vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="ps_state-em">
+			<label>Normal</label>
+			<label>Alarm</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<alarmFlags2 ruleid="ePDU2DeviceStatusPowerSupplyAlarm" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.12</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="ePDU2DeviceStatusPowerSupply1Alarm" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.13</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 1 Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 1 Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 1 Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 1 Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="ePDU2DeviceStatusPowerSupply2Alarm" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.14</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 2 Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 2 Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 2 Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Supply 2 Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<numSensor ruleid="ePDU2DeviceStatusApparentPower" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>powerVA</type>
+			<sensorId>DEVICE_APPARENT_POWER_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.15</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Apparent Power</label>
+			<sensorSet>Device Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDU2DeviceStatusPowerFactor" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>num/powerfactor</type>
+			<sensorId>DEVICE_POWER_FACTOR_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.16</getRowOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power Factor</label>
+			<sensorSet>Device Status</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="ePDU2DeviceStatusRoleType" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>state</type>
+			<sensorId>DEVICE_ROLE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="device_role-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.14</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Role Type</label>
+			<enum>device_role-em</enum>
+			<sensorSet>Device Status</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="device_role-vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="device_role-em">
+			<label>Standalone</label>
+			<label>Host</label>
+			<label>Guest</label>
+		</enumMap>
+
+		<numSensor ruleid="ePDU2DeviceStatusPowerLoad" index=".1.3.6.1.4.1.3808.1.1.6.3.4.1.1">
+			<type>powerW</type>
+			<sensorId>DEVICE_POWER_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.18</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.3.4.1.3</getRowOid> - Power</label>
+			<sensorSet>Device Status</sensorSet>
+		</numSensor>
+
+		<!-- ePDU2PhaseStatusTable -->
+
+		<stateSensor ruleid="ePDU2PhaseStatusLoadState" index=".1.3.6.1.4.1.3808.1.1.6.4.4.1.1">
+			<type>state</type>
+			<sensorId>PHASE_LOAD_STATE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="load_state-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>Load State - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid></label>
+			<enum>load_state-em</enum>
+			<sensorSet>Phase Status</sensorSet>
+		</stateSensor>
+
+		<alarmFlags2 ruleid="ePDU2PhaseStatusLoadStateAlarm" index=".1.3.6.1.4.1.3808.1.1.6.4.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.4</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Low Load - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Low Load - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Load - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Low Load - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Near Overload - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Near Overload - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Near Overload - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Near Overload - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Overload - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Overload - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Overload - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Overload - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<numSensor ruleid="ePDU2PhaseStatusLoad" index=".1.3.6.1.4.1.3808.1.1.6.4.4.1.1">
+			<type>amperage</type>
+			<sensorId>LOAD_PHASE_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.5</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Load - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid></label>
+			<sensorSet>Phase Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDU2PhaseStatusVoltage" index=".1.3.6.1.4.1.3808.1.1.6.4.4.1.1">
+			<type>voltage</type>
+			<sensorId>VOLTAGE_PHASE_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.6</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Voltage - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid></label>
+			<sensorSet>Phase Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDU2PhaseStatusPower" index=".1.3.6.1.4.1.3808.1.1.6.4.4.1.1">
+			<type>powerW</type>
+			<sensorId>POWER_PHASE_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.7</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Power - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid></label>
+			<sensorSet>Phase Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDU2PhaseStatusApparentPower" index=".1.3.6.1.4.1.3808.1.1.6.4.4.1.1">
+			<type>powerVA</type>
+			<sensorId>APPARENT_POWER_PHASE_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.8</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Apparent Power - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid></label>
+			<sensorSet>Phase Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDU2PhaseStatusPowerFactor" index=".1.3.6.1.4.1.3808.1.1.6.4.4.1.1">
+			<type>num/powerfactor</type>
+			<sensorId>POWER_FACTOR_PHASE_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.9</getRowOid></op>
+				<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.01</valueInc>
+			<label>Power Factor - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid></label>
+			<sensorSet>Phase Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDU2PhaseStatusPeakLoad" index=".1.3.6.1.4.1.3808.1.1.6.4.4.1.1">
+			<type>amperage</type>
+			<sensorId>PEAK_LOAD_PHASE_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.10</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Peak Load - Phase <getRowOid>.1.3.6.1.4.1.3808.1.1.6.4.4.1.3</getRowOid></label>
+			<sensorSet>Phase Status</sensorSet>
+		</numSensor>
+
+		<!-- ePDU2BankStatusTable -->
+
+		<stateSensor ruleid="ePDU2BankStatusLoadState" index=".1.3.6.1.4.1.3808.1.1.6.5.4.1.1">
+			<type>state</type>
+			<sensorId>BANK_LOAD_STATE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="load_state-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.4</getRowOid>
+				</mapValue>
+			</value>
+			<label>Load State - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid></label>
+			<enum>load_state-em</enum>
+			<sensorSet>Bank Status</sensorSet>
+		</stateSensor>
+
+		<alarmFlags2 ruleid="ePDU2BankStatusLoadStateAlarm" index=".1.3.6.1.4.1.3808.1.1.6.5.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.4</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>Low Load - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Low Load - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Low Load - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Low Load - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>Near Overload - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Near Overload - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Near Overload - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Near Overload - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>Overload - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Overload - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Overload - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm</activeText>
+					<inactiveText>Overload - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid> Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<numSensor ruleid="ePDU2BankStatusLoad" index=".1.3.6.1.4.1.3808.1.1.6.5.4.1.1">
+			<type>amperage</type>
+			<sensorId>BANK_LOAD_<rowIndex/></sensorId>
+			<value>
+				<mult>
+				<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.5</getRowOid></op>
+				<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Load - Bank <getRowOid>.1.3.6.1.4.1.3808.1.1.6.5.4.1.3</getRowOid></label>
+			<sensorSet>Bank Status</sensorSet>
+		</numSensor>
+
+		<!-- ePDU2OutletSwitchedStatusTable -->
+
+		<stateSensor ruleid="ePDU2OutletSwitchedStatusState" index=".1.3.6.1.4.1.3808.1.1.6.6.1.4.1.1">
+			<type>state</type>
+			<sensorId>SWITCHED_OUTLET_STATE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="on_off-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.6.1.4.1.5</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.6.6.1.4.1.4</getRowOid> State</label>
+			<enum>on_off-em</enum>
+			<sensorSet>Outlet Status</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="on_off-vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="on_off-em">
+			<label>On</label>
+			<label>Off</label>
+			<label>Unknown</label>
+		</enumMap>
+	</device>
+	<device deviceid="cyberpower_ePDU2_ATS">
+		<oidMustExist ruleid="OIDMustExist" oid=".1.3.6.1.4.1.3808.1.1.6.9.4" istree="yes" />
+		<oidMustNotMatch ruleid="OIDMustNotMatch" oid=".1.3.6.1.4.1.3808.1.1.6.9.1.0">
+			<valueList><value>0</value></valueList>
+		</oidMustNotMatch>
+
+		<setProductData field="type" ruleid="typedata">Transfer Switch</setProductData>
+		<suppressRule ruleid="stomp_devicetype" suppressid="cyberpower/defaultDevice/typedata"/> <!-- suppress "UPS" type from defaultDevice section -->
+		<suppressRule ruleid="stomp_devicetype" suppressid="cyberpower/cyberpower_ePDU2/typedata"/> <!-- suppress "Rack PDU" type from defaultDevice section -->
+
+		<!-- ePDU2SourceConfigTable -->
+		<stateSensor ruleid="ePDU2SourceConfigPreferredSource" index=".1.3.6.1.4.1.3808.1.1.6.9.2.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_CONFIG_PREFERRED_SOURCE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="source-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.2.1.3</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.2.1.2</getRowOid> Preferred Source</label>
+			<enum>source-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+		<valueMap ruleid="source-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="source-em">
+			<label>Unknown</label>
+			<label>Source A</label>
+			<label>Source B</label>
+			<label>None</label>
+		</enumMap>
+
+		<numSensor ruleid="ePDUSourceConfigNominalVoltage" index=".1.3.6.1.4.1.3808.1.1.6.9.2.1.1">
+			<type>voltage</type>
+			<sensorId>SOURCE_CONFIG_NOMINAL_VOLTAGE_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.2.1.6</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.2.1.2</getRowOid> Nominal Voltage</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+
+		<!-- ePDU2SourceInfoTable -->
+		<numSensor ruleid="ePDUSourceInfoSourceSwitch" index=".1.3.6.1.4.1.3808.1.1.6.9.3.1.1">
+			<type>num</type>
+			<sensorId>SOURCE_INFO_SOURCE_SWITCH_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.3</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.2</getRowOid> Source Switch Events</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceInfoSourcePreferenceChange" index=".1.3.6.1.4.1.3808.1.1.6.9.3.1.1">
+			<type>num</type>
+			<sensorId>SOURCE_INFO_SOURCE_PREFERENCE_CHANGE_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.4</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.2</getRowOid> Source Preference Change Events</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceInfoPreferredSourceFreqOutOfRange" index=".1.3.6.1.4.1.3808.1.1.6.9.3.1.1">
+			<type>num</type>
+			<sensorId>SOURCE_INFO_PREFERRED_SOURCE_FREQ_OUT_OF_RANGE_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.5</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.2</getRowOid> Preferred Source Frequency Out of Range Events</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceInfoPreferredSourceVoltOutOfRange" index=".1.3.6.1.4.1.3808.1.1.6.9.3.1.1">
+			<type>num</type>
+			<sensorId>SOURCE_INFO_PREFERRED_SOURCE_VOLT_OUT_OF_RANGE_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.6</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.2</getRowOid> Preferred Source Voltage Out of Range Events</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceInfoDeviceCurrentOverload" index=".1.3.6.1.4.1.3808.1.1.6.9.3.1.1">
+			<type>num</type>
+			<sensorId>SOURCE_INFO_DEVICE_CURRENT_OVERLOAD_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.7</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.2</getRowOid> Device Current Overload Events</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceInfoBank1Overload" index=".1.3.6.1.4.1.3808.1.1.6.9.3.1.1">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.8</getRowOid></op><op>-1</op></neq>
+			</rowTest>
+			<type>num</type>
+			<sensorId>SOURCE_INFO_BANK_1_OVERLOAD_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.8</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.2</getRowOid> Bank 1 Current Overload Events</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceInfoBank3Overload" index=".1.3.6.1.4.1.3808.1.1.6.9.3.1.1">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.9</getRowOid></op><op>-1</op></neq>
+			</rowTest>
+			<type>num</type>
+			<sensorId>SOURCE_INFO_BANK_2_OVERLOAD_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.9</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.2</getRowOid> Bank 2 Current Overload Events</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceInfoBank3Overload" index=".1.3.6.1.4.1.3808.1.1.6.9.3.1.1">
+			<rowTest>
+				<neq><op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.10</getRowOid></op><op>-1</op></neq>
+			</rowTest>
+			<type>num</type>
+			<sensorId>SOURCE_INFO_BANK_3_OVERLOAD_<rowIndex/></sensorId>
+			<value>
+				<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.10</getRowOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.3.1.2</getRowOid> Bank 3 Current Overload Events</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+
+		<!-- ePDU2SourceStatusTable -->
+		<stateSensor ruleid="ePDU2SourceStatusSelectedSource" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_STATUS_SELECTED_SOURCE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="source-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.3</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Selected Source</label>
+			<enum>source-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="ePDUSourceStatusNominalFrequency" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>frequency</type>
+			<sensorId>SOURCE_STATUS_NOMINAL_FREQUENCY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.4</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Nominal Frequency</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceStatusSourceAVoltage" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>voltage</type>
+			<sensorId>SOURCE_STATUS_SOURCE_A_VOLTAGE_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.5</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Voltage</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceStatusSourceBVoltage" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>voltage</type>
+			<sensorId>SOURCE_STATUS_SOURCE_B_VOLTAGE_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.6</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Voltage</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceStatusSourceAFrequency" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>frequency</type>
+			<sensorId>SOURCE_STATUS_SOURCE_A_FREQUENCY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.7</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Frequency</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+		<numSensor ruleid="ePDUSourceStatusSourceBFrequency" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>frequency</type>
+			<sensorId>SOURCE_STATUS_SOURCE_B_FREQUENCY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.8</getRowOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Frequency</label>
+			<sensorSet>Source Status</sensorSet>
+		</numSensor>
+
+		<valueMap ruleid="overUnder-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="overUnderVoltage-em">
+			<label>Unknown</label>
+			<label>Normal</label>
+			<label>Over Voltage</label>
+			<label>Under Voltage</label>
+		</enumMap>
+		<enumMap ruleid="overUnderFrequency-em">
+			<label>Unknown</label>
+			<label>Normal</label>
+			<label>Over Frequency</label>
+			<label>Under Frequency</label>
+		</enumMap>
+		<stateSensor ruleid="ePDU2SourceStatusSourceAVolStatus" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_STATUS_SOURCE_A_VOL_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="overUnder-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.9</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Voltage Status</label>
+			<enum>overUnderVoltage-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="ePDU2SourceStatusSourceBVolStatus" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_STATUS_SOURCE_B_VOL_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="overUnder-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.10</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Voltage Status</label>
+			<enum>overUnderVoltage-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="ePDU2SourceStatusSourceAFreqStatus" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_STATUS_SOURCE_A_FREQ_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="overUnder-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.11</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Frequency Status</label>
+			<enum>overUnderFrequency-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="ePDU2SourceStatusSourceBFreqStatus" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_STATUS_SOURCE_B_FREQ_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="overUnder-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.12</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Frequency Status</label>
+			<enum>overUnderFrequency-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+
+		<stateSensor ruleid="ePDU2SourceStatusSourcePhaseSync" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_STATUS_SOURCE_PHASE_SYNC_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="phaseSync-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.13</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Phase Sync</label>
+			<enum>phaseSync-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+		<valueMap ruleid="phaseSync-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="phaseSync-em">
+			<label>Unknown</label>
+			<label>In Sync</label>
+			<label>Out of Sync</label>
+		</enumMap>
+
+		<stateSensor ruleid="ePDU2SourceStatusPowerSupplySourceAStatus" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_STATUS_POWER_SUPPLY_SOURCE_A_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="sourceStatus-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.14</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Power Supply Source A Status</label>
+			<enum>sourceStatus-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="ePDU2SourceStatusPowerSupplySourceBStatus" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_STATUS_POWER_SUPPLY_SOURCE_B_STATUS_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="sourceStatus-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.15</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Power Supply Source B Status</label>
+			<enum>sourceStatus-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+		<valueMap ruleid="sourceStatus-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="sourceStatus-em">
+			<label>Unknown</label>
+			<label>Normal</label>
+			<label>3.3V Failed</label>
+			<label>24V Failed</label>
+			<label>3.3V and 24V Failed</label>
+		</enumMap>
+
+		<stateSensor ruleid="ePDU2SourceStatusRedundancyState" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<type>state</type>
+			<sensorId>SOURCE_STATUS_REDUNDANCY_STATE<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="redundancyState-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.16</getRowOid>
+				</mapValue>
+			</value>
+			<label>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Redundancy State</label>
+			<enum>redundancyState-em</enum>
+			<sensorSet>Source Status</sensorSet>
+		</stateSensor>
+		<valueMap ruleid="redundancyState-vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<enumMap ruleid="redundancyState-em">
+			<label>Unknown</label>
+			<label>ATS Redundancy Lost</label>
+			<label>ATS Fully Redundant</label>
+		</enumMap>
+
+		<alarmFlags2 ruleid="ePDU2SourceStatusSourceAVolStatus-af" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.9</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Over Voltage Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Over Voltage Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Over Voltage Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Over Voltage Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Under Voltage Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Under Voltage Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Under Voltage Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Under Voltage Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="ePDU2SourceStatusSourceBVolStatus-af" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.10</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Over Voltage Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Over Voltage Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Over Voltage Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Over Voltage Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Under Voltage Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Under Voltage Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Under Voltage Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Under Voltage Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="ePDU2SourceStatusSourceAFreqStatus-af" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.11</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Over Frequency Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Over Frequency Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Over Frequency Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Over Frequency Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Under Frequency Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Under Frequency Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Under Frequency Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A Under Frequency Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="ePDU2SourceStatusSourceBFreqStatus-af" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.12</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Over Frequency Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Over Frequency Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Over Frequency Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Over Frequency Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Under Frequency Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Under Frequency Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Under Frequency Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B Under Frequency Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="ePDU2SourceStatusSourcePhaseSync-af" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.13</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Phase Out of Sync Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Phase Out of Sync Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Phase Out of Sync Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Phase Out of Sync Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="ePDU2SourceStatusPowerSupplySourceAStatus-af" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.14</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 3.3v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 3.3v Power Supply Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 3.3v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 3.3v Power Supply Failure Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 24v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 24v Power Supply Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 24v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 24v Power Supply Failure Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 3.3v and 24v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 3.3v and 24v Power Supply Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 3.3v and 24v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source A 3.3v and 24v Power Supply Failure Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="ePDU2SourceStatusPowerSupplySourceBStatus-af" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.15</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 3.3v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 3.3v Power Supply Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 3.3v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 3.3v Power Supply Failure Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="3">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 24v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 24v Power Supply Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 24v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 24v Power Supply Failure Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+			<alarmFlagsTest match="4">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 3.3v and 24v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 3.3v and 24v Power Supply Failure Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 3.3v and 24v Power Supply Failure Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Source B 3.3v and 24v Power Supply Failure Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="ePDU2SourceStatusRedundancyState-af" index=".1.3.6.1.4.1.3808.1.1.6.9.4.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.16</getRowOid></value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Redundancy Lost Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Redundancy Lost Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Redundancy Lost Alarm</activeText>
+					<inactiveText>ATS <getRowOid>.1.3.6.1.4.1.3808.1.1.6.9.4.1.2</getRowOid> Redundancy Lost Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+	</device>
+
+	<device deviceid="environmentSensor">
+		<oidMustExist ruleid="OIDMustExist" oid=".1.3.6.1.4.1.3808.1.1.4" istree="yes" />
+		<oidMustNotExist ruleid="OIDMustNotExist" oid=".1.3.6.1.4.1.3808.1.1.8" istree="yes" />
+
+		<numSensor ruleid="envirTemperature">
+			<type>temp</type>
+			<sensorId>EM_TEMP_1</sensorId>
+			<value>
+				<div>
+					<op>
+						<sub>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.3808.1.1.4.2.1.0</getOid></op>
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op>32</op>
+						</sub>
+					</op>
+					<op>1.8</op>
+				</div>
+			</value>
+			<label>Temperature (<getOid>.1.3.6.1.4.1.3808.1.1.4.1.2.0</getOid>)</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+		<numSensor ruleid="envirHumidity">
+			<type>humidity</type>
+			<sensorId>_EM_HUMIDITY_1</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.3808.1.1.4.3.1.0</getOid>
+			</value>
+			<label>Humidity (<getOid>.1.3.6.1.4.1.3808.1.1.4.1.2.0</getOid>)</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+
+		<alarmFlags ruleid="envirTempHighThresholdAlarm">
+			<value>
+				<if>
+          			<op>
+            			<gt>
+              				<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.3808.1.1.4.2.1.0</getOid></op><!-- value -->
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op><getOid>.1.3.6.1.4.1.3808.1.1.4.2.2.0</getOid></op><!-- maxThreshold -->
+						</gt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Maximum Temperature Threshold Violation</activeText>
+					<inactiveText>Maximum Temperature Threshold Violation Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Maximum Temperature Threshold Violation</activeText>
+					<inactiveText>Maximum Temperature Threshold Violation Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="envirTempLowThresholdAlarm">
+			<value>
+				<if>
+					<op>
+						<lt>
+							<op>
+								<mult>
+									<op><getOid>.1.3.6.1.4.1.3808.1.1.4.2.1.0</getOid></op><!-- value -->
+									<op>0.1</op>
+								</mult>
+							</op>
+							<op><getOid>.1.3.6.1.4.1.3808.1.1.4.2.3.0</getOid></op><!-- minThreshold -->
+						</lt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Minimum Temperature Threshold Violation</activeText>
+					<inactiveText>Minimum Temperature Threshold Violation Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Minimum Temperature Threshold Violation</activeText>
+					<inactiveText>Minimum Temperature Threshold Violation Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="envirHumidHighThresholdAlarm">
+			<value>
+				<if>
+					<op>
+						<gt>
+							<op><getOid>.1.3.6.1.4.1.3808.1.1.4.3.1.0</getOid></op><!-- value -->
+							<op><getOid>.1.3.6.1.4.1.3808.1.1.4.3.2.0</getOid></op><!-- maxThreshold -->
+						</gt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Maximum Humidity Threshold Violation</activeText>
+					<inactiveText>Maximum Humidity Threshold Violation Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Maximum Humidity Threshold Violation</activeText>
+					<inactiveText>Maximum Humidity Threshold Violation Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="envirHumidLowThresholdAlarm">
+			<value>
+				<if>
+					<op>
+						<lt>
+							<op><getOid>.1.3.6.1.4.1.3808.1.1.4.3.1.0</getOid></op><!-- value -->
+							<op><getOid>.1.3.6.1.4.1.3808.1.1.4.3.3.0</getOid></op><!-- minThreshold -->
+						</lt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Minimum Humidity Threshold Violation</activeText>
+					<inactiveText>Minimum Humidity Threshold Violation Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Minimum Humidity Threshold Violation</activeText>
+					<inactiveText>Minimum Humidity Threshold Violation Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+	</device>
+
+	<device deviceid="environmentSensor2">
+		<oidMustExist ruleid="OIDMustExist" oid=".1.3.6.1.4.1.3808.1.1.8" istree="yes" />
+		<oidMustNotMatch ruleid="OIDMustNotMatch" oid=".1.3.6.1.4.1.3808.1.1.8.1.1.0">
+			<valueList><value>0</value></valueList>
+		</oidMustNotMatch>
+
+		<numSensor ruleid="envir2Temperature" index=".1.3.6.1.4.1.3808.1.1.8.1.2.1.1">
+			<type>temp</type>
+			<sensorId>EM_TEMP_<rowIndex/></sensorId>
+			<value>
+				<if>
+					<op>
+						<eq>
+							<op><getOid>.1.3.6.1.4.1.3808.1.1.8.2.2.0</getOid></op>
+							<op>2</op>
+						</eq>
+					</op>
+					<op>
+						<div>
+							<op>
+								<sub>
+									<op>
+										<mult>
+											<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.2.3.1.3</getRowOid></op>
+											<op>0.01</op>
+										</mult>
+									</op>
+									<op>32</op>
+								</sub>
+							</op>
+							<op>1.8</op>
+						</div>
+					</op>
+					<op>
+						<mult>
+							<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.2.3.1.3</getRowOid></op>
+							<op>0.01</op>
+						</mult>
+					</op>
+				</if>
+			</value>
+			<label>Temperature (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+		<numSensor ruleid="envir2Humidity" index=".1.3.6.1.4.1.3808.1.1.8.1.2.1.1">
+			<type>humidity</type>
+			<sensorId>_EM_HUMIDITY_<rowIndex/></sensorId>
+			<value>
+				<mult>
+					<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.3.2.1.3</getRowOid></op>
+					<op>0.01</op>
+				</mult>
+			</value>
+			<label>Humidity (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</label>
+			<sensorSet>Environmental</sensorSet>
+		</numSensor>
+
+		<alarmFlags2 ruleid="envir2TempHighThresholdAlarm" index=".1.3.6.1.4.1.3808.1.1.8.1.2.1.1">
+			<value>
+				<if>
+					<op>
+						<gt>
+							<op>
+								<mult>
+									<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.2.3.1.3</getRowOid></op><!-- value -->
+									<op>0.01</op>
+								</mult>
+							</op>
+							<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.2.3.1.4</getRowOid></op><!-- maxThreshold -->
+						</gt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Maximum Temperature Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</activeText>
+					<inactiveText>Maximum Temperature Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>) Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText>Maximum Temperature Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</activeText>
+					<inactiveText>Maximum Temperature Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="envir2TempLowThresholdAlarm" index=".1.3.6.1.4.1.3808.1.1.8.1.2.1.1">
+			<value>
+				<if>
+					<op>
+						<lt>
+              				<op>
+								<mult>
+									<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.2.3.1.3</getRowOid></op><!-- value -->
+									<op>0.01</op>
+								</mult>
+							</op>
+							<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.2.3.1.5</getRowOid></op><!-- maxThreshold -->
+						</lt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Minimum Temperature Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</activeText>
+					<inactiveText>Minimum Temperature Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>) Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Minimum Temperature Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</activeText>
+					<inactiveText>Minimum Temperature Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="envir2HumidHighThresholdAlarm" index=".1.3.6.1.4.1.3808.1.1.8.1.2.1.1">
+			<value>
+				<if>
+					<op>
+						<gt>
+              				<op>
+								<mult>
+									<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.3.2.1.3</getRowOid></op><!-- value -->
+									<op>0.01</op>
+								</mult>
+							</op>
+							<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.3.2.1.4</getRowOid></op><!-- maxThreshold -->
+						</gt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Maximum Humidity Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</activeText>
+					<inactiveText>Maximum Humidity Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>) Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Maximum Humidity Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</activeText>
+					<inactiveText>Maximum Humidity Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+		<alarmFlags2 ruleid="envir2HumidLowThresholdAlarm" index=".1.3.6.1.4.1.3808.1.1.8.1.2.1.1">
+			<value>
+				<if>
+					<op>
+						<lt>
+              				<op>
+								<mult>
+									<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.3.2.1.3</getRowOid></op><!-- value -->
+									<op>0.01</op>
+								</mult>
+							</op>
+							<op><getRowOid>.1.3.6.1.4.1.3808.1.1.8.3.2.1.5</getRowOid></op><!-- maxThreshold -->
+						</lt>
+					</op>
+					<op>1</op>
+					<op>0</op>
+				</if>
+			</value>
+			<alarmFlagsTest match="1">
+				<name>
+					<activeText>Minimum Humidity Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</activeText>
+					<inactiveText>Minimum Humidity Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>) Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>System</category>
+				<description>
+					<activeText>Minimum Humidity Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>)</activeText>
+					<inactiveText>Minimum Humidity Threshold Violation (<getRowOid>.1.3.6.1.4.1.3808.1.1.8.1.2.1.4</getRowOid>) Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+
+		<stateSensor ruleid="envir2ContactStatus" index=".1.3.6.1.4.1.3808.1.1.8.4.2.1.1">
+			<type>state</type>
+			<sensorId>ENVIR2_CONTACT_STATE_<rowIndex/></sensorId>
+			<value>
+				<mapValue mapid="contact_state-vm">
+					<getRowOid>.1.3.6.1.4.1.3808.1.1.8.4.2.1.5</getRowOid>
+				</mapValue>
+			</value>
+			<label><getRowOid>.1.3.6.1.4.1.3808.1.1.8.4.2.1.4</getRowOid> - State</label>
+			<enum>contact_state-em</enum>
+			<sensorSet>Environmental</sensorSet>
+		</stateSensor>
+
+		<valueMap ruleid="contact_state-vm">
+			<valueIn>1</valueIn><valueOut>0</valueOut>
+			<valueIn>2</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<enumMap ruleid="contact_state-em">
+			<label>Normal</label>
+			<label>Abnormal</label>
+			<label>Unknown</label>
+		</enumMap>
+
+		<alarmFlags2 ruleid="envir2ContactStatusAlarm" index=".1.3.6.1.4.1.3808.1.1.8.4.2.1.1">
+			<value><getRowOid>.1.3.6.1.4.1.3808.1.1.8.4.2.1.5</getRowOid></value>
+			<alarmFlagsTest match="2">
+				<name>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.8.4.2.1.4</getRowOid> - Abnormal Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.8.4.2.1.4</getRowOid> - Abnormal Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>System</category>
+				<description>
+					<activeText><getRowOid>.1.3.6.1.4.1.3808.1.1.8.4.2.1.4</getRowOid> - Abnormal Alarm</activeText>
+					<inactiveText><getRowOid>.1.3.6.1.4.1.3808.1.1.8.4.2.1.4</getRowOid> - Abnormal Alarm Cleared</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags2>
+	</device>
+
 </APC_DDF>

@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<APC_DDF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
-         ddfid="uniflair_am_IT_M_Controller_TS_SNMP"
-         ddfname="Uniflair am IT M Controller TS SNMP"
-         ddfversion="4"
-         canremove="yes">
+<APC_DDF 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+  ddfid="uniflair_am_IT_M_Controller_TS_SNMP"
+  ddfname="Uniflair am IT M Controller TS SNMP"
+  ddfversion="6" 
+  canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	<device deviceid="schneiderelectric_amico">
-		<oidMustExist ruleid="snmpdevicetest" istree="yes" oid=".1.3.6.1.4.1.318.1.1.27" />
+		<oidMustExist ruleid="snmpdevicetest" istree="yes" oid=".1.3.6.1.4.1.318.1.1.27"/>
 		<oidMustMatch ruleid="amicosysid" oid=".1.3.6.1.2.1.1.2.0">
 			<valueList>
 				<value>.1.3.6.1.4.1.318.1.3.14.20</value>
 			</valueList>
 		</oidMustMatch>
-
 		<setProductData ruleid="vendordata" field="vendor">Schneider Electric</setProductData>
-		<setProductData ruleid="modeldata" field="model"><getOid>.1.3.6.1.4.1.318.1.1.27.1.3.2.1.3.1.4</getOid></setProductData>
-        <setProductData ruleid="appversiondata" field="appversion"><getOid>.1.3.6.1.4.1.318.1.1.27.1.3.2.1.3.1.3</getOid></setProductData>
-        <setProductData ruleid="serialnumdata" field="serial_num"><getOid>.1.3.6.1.4.1.318.1.1.27.1.3.2.1.3.1.1</getOid></setProductData>
+		<setProductData ruleid="modeldata" field="model">
+			<getOid>.1.3.6.1.4.1.318.1.1.27.1.3.2.1.3.1.4</getOid>
+		</setProductData>
+		<setProductData ruleid="serialnumdata" field="serial_num">
+			<getOid>.1.3.6.1.4.1.318.1.1.27.1.3.2.1.3.1.1</getOid>
+		</setProductData>
+		<setProductData ruleid="aosVersion" field="apcaosversion">
+            <getOid>.1.3.6.1.4.1.318.1.4.2.4.1.4.1</getOid>
+        </setProductData>
+		<setProductData ruleid="appversiondata" field="appversion">
+			<getOid>.1.3.6.1.4.1.318.1.4.2.4.1.4.2</getOid>
+		</setProductData>
+		<setProductData ruleid="bootversion" field="bootversion">
+		    <getOid>.1.3.6.1.4.1.318.1.4.2.4.1.4.3</getOid>
+		</setProductData>
 		<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
-
 		<numSensor ruleid="return_air_temperature">
 			<type>temp</type>
 			<sensorId>_RETURN_AIR_TEMP</sensorId>
@@ -108,7 +119,7 @@
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Return Air Relative Humidity</label>
-			<sensorSet>Humidity</sensorSet>
+			<sensorSet>Percentage</sensorSet>
 		</numSensor>
 		<numSensor ruleid="leaving_chilled_water_temperature_circuit1">
 			<type>temp</type>
@@ -185,6 +196,36 @@
 			<label>Circuit 1 Superheat</label>
 			<sensorSet>Temperature</sensorSet>
 		</numSensor>
+		<numSensor ruleid="circuit1_cold_water_valve_ramp">
+			<type>percent</type>
+			<sensorId>_CIRCUIT1_COLD_WATER_VALVE_RAMP</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.22</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Circuit 1 Cold Water Valve Ramp</label>
+			<sensorSet>Percentage</sensorSet>
+		</numSensor>
+		<numSensor ruleid="circuit1_hot_water_valve_ramp">
+			<type>percent</type>
+			<sensorId>_CIRCUIT1_HOT_WATER_VALVE_RAMP</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.23</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Circuit 1 Hot Water Valve Ramp</label>
+			<sensorSet>Percentage</sensorSet>
+		</numSensor>
 		<numSensor ruleid="evaporator_fan_speed">
 			<type>pctofcapacity</type>
 			<sensorId>_UNIT_EVAPORATOR_FAN_SPEED</sensorId>
@@ -200,6 +241,21 @@
 			<label>Evaporator Fan Speed</label>
 			<sensorSet>Percentage</sensorSet>
 		</numSensor>
+		<numSensor ruleid="cpy_humidifier_request">
+			<type>pctofcapacity</type>
+			<sensorId>_UNIT_Humidifier_Request</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.25</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Cpy_Humidifier_Request</label>
+			<sensorSet>Percentage</sensorSet>
+		</numSensor>
 		<numSensor ruleid="room_temperature_mean_value">
 			<type>temp</type>
 			<sensorId>_ROOM_TEMPERATURE_MEAN_VALUE</sensorId>
@@ -212,11 +268,11 @@
 				</mult>
 			</value>
 			<valueInc>0.1</valueInc>
-			<label>Room Temperature Mean Value</label>
+			<label>LAN Average Return Air Temperature</label>
 			<sensorSet>Temperature</sensorSet>
 		</numSensor>
 		<numSensor ruleid="room_relative_humidity_mean_value">
-			<type>pctofcapacity</type>
+			<type>humidity</type>
 			<sensorId>_ROOM_RELATIVE_HUMIDITY_MEAN_VALUE</sensorId>
 			<value>
 				<mult>
@@ -227,7 +283,7 @@
 				</mult>
 			</value>
 			<valueInc>0.1</valueInc>
-			<label>Room Relative Humidity Mean Value</label>
+			<label>LAN Average Relative Humidity</label>
 			<sensorSet>Percentage</sensorSet>
 		</numSensor>
 		<numSensor ruleid="room_absolute_humidity_grams_per_kg">
@@ -315,7 +371,21 @@
 			<label>Compressor 1 Run Hours</label>
 			<sensorSet>Time</sensorSet>
 		</numSensor>
-
+		<numSensor ruleid="supply_air_relative_humidity">
+			<type>humidity</type>
+			<sensorId>_SUPPLY_AIR_RELATIVE_HUMIDITY</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.39</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Supply Air Relative Humidity</label>
+			<sensorSet>Humidity</sensorSet>
+		</numSensor>
 		<numSensor ruleid="heater_1_run_hours">
 			<type>runhours</type>
 			<sensorId>_HEATER_1_RUN_HOURS</sensorId>
@@ -360,7 +430,12 @@
 			<type>pctofcapacity</type>
 			<sensorId>_MODULATING_HEATER_ELEMENT</sensorId>
 			<value>
-				<mult><op><getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.44</getOid></op><op>0.1</op></mult>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.44</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
 			</value>
 			<valueInc>0.1</valueInc>
 			<label>Modulating Heater Element</label>
@@ -386,6 +461,16 @@
 			<label>Standby Mode Run Hours</label>
 			<sensorSet>Time</sensorSet>
 		</numSensor>
+		<numSensor ruleid="damper_run_hours">
+			<type>runhours</type>
+			<sensorId>_DAMPER_RUN_HOURS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.47</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Damper Run Hours</label>
+			<sensorSet>Time</sensorSet>
+		</numSensor>
 		<numSensor ruleid="evaporator_fan_run_hours">
 			<type>runhours</type>
 			<sensorId>_EVAPORATOR_FAN_RUN_HOURS</sensorId>
@@ -396,6 +481,163 @@
 			<label>Evaporator Fan Run Hours</label>
 			<sensorSet>Time</sensorSet>
 		</numSensor>
+		<numSensor ruleid="cooling_active_setpoint">
+			<type>temp</type>
+			<sensorId>_COOLING_ACTIVE_SETPOINT</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.51</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Cooling Active Setpoint Temperature</label>
+			<sensorSet>Temperature</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eev_pre-position_time">
+			<type>timeinsec</type>
+			<sensorId>_EEV_PREPOSITION_TIME</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.52</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>EEV: Pre-Position Time</label>
+			<sensorSet>Time</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="cpy_humidifier_status">
+			<type>state</type>
+			<sensorId>_CPY_HUMIDIFIER_STATUS</sensorId>
+			<value>
+				<mapValue mapid="cpyHumidifierStatus_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.53</getOid>
+				</mapValue>
+			</value>
+			<label>Cpy Humidifier Status</label>
+			<enum>cpyHumidifierStatus_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="unit_status">
+			<type>state</type>
+			<sensorId>_UNIT_STATUS</sensorId>
+			<value>
+				<mapValue mapid="unitStatus_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.54</getOid>
+				</mapValue>
+			</value>
+			<label>Unit Status</label>
+			<enum>unitStatus_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="freecooling_status">
+			<type>state</type>
+			<sensorId>_FREECOOLING_STATUS</sensorId>
+			<value>
+				<mapValue mapid="freecoolingStatus_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.55</getOid>
+				</mapValue>
+			</value>
+			<label>Freecooling Status</label>
+			<enum>freecoolingStatus_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="cooling_heating_status">
+			<type>state</type>
+			<sensorId>_COOLING_HEATING_STATUS</sensorId>
+			<value>
+				<mapValue mapid="coolingHeatingStatus_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.56</getOid>
+				</mapValue>
+			</value>
+			<label>Cooling/Heating Status</label>
+			<enum>coolingHeatingStatus_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="compressor_status">
+			<type>state</type>
+			<sensorId>_COMPRESSOR_STATUS</sensorId>
+			<value>
+				<mapValue mapid="compressorStatus_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.57</getOid>
+				</mapValue>
+			</value>
+			<label>Compressor Status</label>
+			<enum>compressorStatus_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="sleep_mode_status">
+			<type>state</type>
+			<sensorId>_SLEEP_MODE_STATUS</sensorId>
+			<value>
+				<mapValue mapid="noneDisableEnable_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.58</getOid>
+				</mapValue>
+			</value>
+			<label>Sleep Mode Status</label>
+			<enum>noneDisableEnable_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="lan_status">
+			<type>state</type>
+			<sensorId>_LAN_STATUS</sensorId>
+			<value>
+				<mapValue mapid="lanStatus_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.59</getOid>
+				</mapValue>
+			</value>
+			<label>LAN Status</label>
+			<enum>lanStatus_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="auto_manual_status">
+			<type>state</type>
+			<sensorId>_AUTO_MANUAL_STATUS</sensorId>
+			<value>
+				<mapValue mapid="autoManual_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.60</getOid>
+				</mapValue>
+			</value>
+			<label>Auto/Manual Status</label>
+			<enum>autoManual_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="unit_command_status">
+			<type>state</type>
+			<sensorId>_UNIT_COMMAND_STATUS</sensorId>
+			<value>
+				<mapValue mapid="unitCommand_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.61</getOid>
+				</mapValue>
+			</value>
+			<label>Unit On/OFF Control Through</label>
+			<enum>unitCommand_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="restart_condition_status">
+			<type>state</type>
+			<sensorId>_RESTART_CONDITION_STATUS</sensorId>
+			<value>
+				<mapValue mapid="restartCondition_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.62</getOid>
+				</mapValue>
+			</value>
+			<label>Restart Condition</label>
+			<enum>restartCondition_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="alarm_status">
+			<type>state</type>
+			<sensorId>_ALARM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="alarmStatus_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.63</getOid>
+				</mapValue>
+			</value>
+			<label>Alarm Status</label>
+			<enum>alarmStatus_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
 		<numSensor ruleid="afc_air_pressure">
 			<type>pressure</type>
 			<sensorId>_AFC_AIR_PRESSURE</sensorId>
@@ -408,7 +650,7 @@
 				</mult>
 			</value>
 			<valueInc>0.0001</valueInc>
-			<label>AFC: Air Pressure</label>
+			<label>AFC Air Pressure</label>
 			<sensorSet>Pressure</sensorSet>
 		</numSensor>
 		<numSensor ruleid="modulating_heater_run_hours">
@@ -421,6 +663,548 @@
 			<label>Modulating Heater Run Hours</label>
 			<sensorSet>Time</sensorSet>
 		</numSensor>
+		<stateSensor ruleid="afc_sensor_health">
+			<type>state</type>
+			<sensorId>_AFC_SENSOR_HEALTH</sensorId>
+			<value>
+				<mapValue mapid="afcSensorHealth_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.69</getOid>
+				</mapValue>
+			</value>
+			<label>Restart Condition</label>
+			<enum>afcSensorHealth_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="scaled_damper_opening_valve">
+			<type>percent</type>
+			<sensorId>_SCALED_DAMPER_OPENING_VALVE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.70</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Scaled Damper Opening Valve</label>
+			<sensorSet>Percentage</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="dehumidification_status">
+			<type>state</type>
+			<sensorId>_DEHUMIDIFICATION_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableEnable_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.71</getOid>
+				</mapValue>
+			</value>
+			<label>Dehumidification Status</label>
+			<enum>disableEnable_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="motorized_damper_status">
+			<type>state</type>
+			<sensorId>_MOTORIZED_DAMPER_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableEnable_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.72</getOid>
+				</mapValue>
+			</value>
+			<label>Motorized Damper Status</label>
+			<enum>disableEnable_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="double_power_supply_status">
+			<type>state</type>
+			<sensorId>_DOUPLE_POWER_SUPPLY_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableEnable_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.73</getOid>
+				</mapValue>
+			</value>
+			<label>Douple Power Supply Status</label>
+			<enum>doublePowerSupply_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="summer_winter_mode_status">
+			<type>state</type>
+			<sensorId>_SUMMER_WINTER_MODE_STATUS</sensorId>
+			<value>
+				<mapValue mapid="summerWinterMode_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.74</getOid>
+				</mapValue>
+			</value>
+			<label>Summer Winter Mode Status</label>
+			<enum>summerWinterMode_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="supply_air_absolute_humidity_grams_per_kg">
+			<type>num</type>
+			<sensorId>_SUPPLY_AIR_ABSOLUTE_HUMIDITY_GRAMS_PER_KG</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.76</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Supply Air Absolute Humidity Grams per KG</label>
+			<sensorSet>Humidity</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="summer_winter_season_status">
+			<type>state</type>
+			<sensorId>_SUMMER_WINTER_SEASON_STATUS</sensorId>
+			<value>
+				<mapValue mapid="summerWinterSeason_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.89</getOid>
+				</mapValue>
+			</value>
+			<label>Summer Winter Season Status</label>
+			<enum>summerWinterSeason_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="d9_rated_steam_capacity">
+			<type>num</type>
+			<sensorId>_D9_RATED_STEAM_CAPACITY</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getRowOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.91</getRowOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>D9 Rated Steam Capacity(Kg/h)</label>
+			<sensorSet>Capacity</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="humidifier_active_model">
+			<type>state</type>
+			<sensorId>_HUMIDIFIER_ACTIVE_MODEL</sensorId>
+			<value>
+				<mapValue mapid="humidifierModel_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.92</getOid>
+				</mapValue>
+			</value>
+			<label>Humidifier Active Model</label>
+			<enum>humidifierModel_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="instant_steam_flow_rate">
+			<type>num</type>
+			<sensorId>_INSTANT_STEAM_FLOW_RATE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getRowOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.97</getRowOid>
+					</op>
+					<op>1</op>
+				</mult>
+			</value>
+			<label>Instant Steam Flow Rate(Kg/h)</label>
+			<sensorSet>Flow</sensorSet>
+		</numSensor>
+		<numSensor ruleid="unit_current">
+			<type>amperage</type>
+			<sensorId>_UNIT_CURRENT</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getRowOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.98</getRowOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Unit_Current</label>
+			<sensorSet>Current</sensorSet>
+		</numSensor>
+		<numSensor ruleid="Supply_water_conductivity">
+			<type>num</type>
+			<sensorId>_SUPPLY_WATER_CONDUCTIVITY</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getRowOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.99</getRowOid>
+					</op>
+					<op>1</op>
+				</mult>
+			</value>
+			<label>Supply Water Conductivity(uS/cm)</label>
+			<sensorSet>Conductivity</sensorSet>
+		</numSensor>
+		<numSensor ruleid="cylinder_hour_counter">
+			<type>timeinhrs</type>
+			<sensorId>_CYLINDER_HOUR_COUNTER</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.100</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Cylinder Hour Counter</label>
+			<sensorSet>Time</sensorSet>
+		</numSensor>
+		<numSensor ruleid="humidifier_software_release">
+			<type>num</type>
+			<sensorId>_HUMIDIFIER_SOFTWARE_RELEASE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getRowOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.101</getRowOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Humidifier Software Release</label>
+			<sensorSet>Humidifier</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="electric_heater_status">
+			<type>state</type>
+			<sensorId>_ELECTRIC_HEATER_STATUS</sensorId>
+			<value>
+				<mapValue mapid="electricHeater_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.102</getOid>
+				</mapValue>
+			</value>
+			<label>Electric Heater Status</label>
+			<enum>electricHeater_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="freecooling_damper_run_hours">
+			<type>runhours</type>
+			<sensorId>_FREECOOLING_DAMPER_RUN_HOURS</sensorId>
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.103</getOid>
+			</value>
+			<valueInc>1</valueInc>
+			<label>Freecooling Damper Run Hours</label>
+			<sensorSet>Time</sensorSet>
+		</numSensor>
+		<numSensor ruleid="external_humidifier_request">
+			<type>percent</type>
+			<sensorId>_EXTERNAL_HUMIDIFIER_REQUEST</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.104</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>External Humidifier Request</label>
+			<sensorSet>Percentage</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="cpy_humidifier_enable_status">
+			<type>state</type>
+			<sensorId>_CPY_HUMIDIFIER_ENABLE_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableEnable_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.105</getOid>
+				</mapValue>
+			</value>
+			<label>CPY Humidifier Enable Status</label>
+			<enum>disableEnable_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="external_humidifier_status">
+			<type>state</type>
+			<sensorId>_EXTERNAL_HUMIDIFIER_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableEnableOnly_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.106</getOid>
+				</mapValue>
+			</value>
+			<label>External Humidifier Status</label>
+			<enum>disableEnableOnly_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="external_humidifier_control_status">
+			<type>state</type>
+			<sensorId>_EXTERNAL_HUMIDIFIER_CONTROL_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableEnableOnly_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.107</getOid>
+				</mapValue>
+			</value>
+			<label>External Humidifier 0-10V Control Status</label>
+			<enum>disableEnableOnly_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="antifreeze_compressor_status">
+			<type>state</type>
+			<sensorId>_ANTIFREEZE_COMPRESSOR_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableEnable_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.108</getOid>
+				</mapValue>
+			</value>
+			<label>Antifreeze Compressor Status</label>
+			<enum>antifreezeComp_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="supervision_status">
+			<type>state</type>
+			<sensorId>_SUPERVISION_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableEnable_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.109</getOid>
+				</mapValue>
+			</value>
+			<label>Supervision Status</label>
+			<enum>disableEnable_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="freezing_temperature">
+			<type>temp</type>
+			<sensorId>_FREEZING_TEMPERATURE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.111</getOid>
+					</op>
+					<op>0.01</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Freezing Temperature</label>
+			<sensorSet>Temperature</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="hot_gas_reheat_status">
+			<type>state</type>
+			<sensorId>_HOT_GAS_REHEAT_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableEnable_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.112</getOid>
+				</mapValue>
+			</value>
+			<label>Hot Gas Reheat Status</label>
+			<enum>disableOnOff_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<numSensor ruleid="eev_valve_opening">
+			<type>percent</type>
+			<sensorId>_EEV_VALVE_OPENING</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.113</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>EEV: Valve Opening</label>
+			<sensorSet>Percentage</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eev_control_setpoint_temperature">
+			<type>temp</type>
+			<sensorId>_EEV_CONTROL_SETPOINT_TEMPERATURE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.115</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>EEV: Control Setpoint Temperature</label>
+			<sensorSet>Temperature</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eev_contrloller_firmware_version">
+			<type>num</type>
+			<sensorId>_EEV_CONTROLLER_FIRMWARE_VERSION</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getRowOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.116</getRowOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>EEV: Contrloller Firmware Version</label>
+			<sensorSet>Firmware</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eev_condensation_pressure_for_subcooling">
+			<type>pressure</type>
+			<sensorId>_EEV_CONDENSATION_PRESSURE_FOR_SUBCOOLING</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.118</getOid>
+					</op>
+					<op>100</op>
+				</mult>
+			</value>
+			<label>EEV: Condensation Pressure For Subcooling</label>
+			<sensorSet>Pressure</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eev_condensation_bubble_point">
+			<type>temp</type>
+			<sensorId>_EEV_CONDENSATION_BUBBLE_POINT</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.120</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>EEV: Condensation Bubble Point</label>
+			<sensorSet>Temperature</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eev_refrigerant_liquid_temperature">
+			<type>temp</type>
+			<sensorId>_EEV_REFRIGERANT_LIQUID_TEMPERATURE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.122</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>EEV: Refrigerant Liquid Temperature</label>
+			<sensorSet>Temperature</sensorSet>
+		</numSensor>
+		<numSensor ruleid="eev_subcooling">
+			<type>temp</type>
+			<sensorId>_EEV_SUBCOOLING</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.124</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>EEV: Subcooling</label>
+			<sensorSet>Temperature</sensorSet>
+		</numSensor>
+		<numSensor ruleid="evaporator_pressure_s1_reading">
+			<type>pressure</type>
+			<sensorId>_EVAPORATOR_PRESSURE_S1_READING</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.126</getOid>
+					</op>
+					<op>100</op>
+				</mult>
+			</value>
+			<label>Evaporator pressure S1 Reading</label>
+			<sensorSet>Pressure</sensorSet>
+		</numSensor>
+		<numSensor ruleid="suction_temperature_s2_reading">
+			<type>temp</type>
+			<sensorId>_SUCTION_TEMPERATURE_S2_READING</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.128</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Suction Temperature S2 Reading</label>
+			<sensorSet>Temperature</sensorSet>
+		</numSensor>
+		<numSensor ruleid="discharge_pressure_s3_reading">
+			<type>pressure</type>
+			<sensorId>_DISCHARGE_PRESSURE_S3_READING</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.130</getOid>
+					</op>
+					<op>100</op>
+				</mult>
+			</value>
+			<label>Discharge pressure S3 Reading</label>
+			<sensorSet>Pressure</sensorSet>
+		</numSensor>
+		<numSensor ruleid="refrigerant_liquid_temperature_s4_reading">
+			<type>temp</type>
+			<sensorId>_REFRIGERANT_LIQUID_TEMPERATURE_S4_READING</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.132</getOid>
+					</op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<valueInc>0.1</valueInc>
+			<label>Refrigerant Liquid Temperature S4 Reading</label>
+			<sensorSet>Temperature</sensorSet>
+		</numSensor>
+		<numSensor ruleid="afc_pressure_mean_value_from_lan_mode">
+			<type>pressure</type>
+			<sensorId>_AFC_PRESSURE_MEAN_VALUE_FROM_LAN_MODE</sensorId>
+			<value>
+				<mult>
+					<op>
+						<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.134</getOid>
+					</op>
+					<op>0.0001</op>
+				</mult>
+			</value>
+			<label>AFC Pressure Mean Value from LAN Mode</label>
+			<sensorSet>Pressure</sensorSet>
+		</numSensor>
+		<stateSensor ruleid="mop_status">
+			<type>state</type>
+			<sensorId>_MOP_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableActiveAlarm_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.135</getOid>
+				</mapValue>
+			</value>
+			<label>MOP Status</label>
+			<enum>disableActiveAlarm_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="lop_status">
+			<type>state</type>
+			<sensorId>_LOP_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableActiveAlarm_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.136</getOid>
+				</mapValue>
+			</value>
+			<label>LOP Status</label>
+			<enum>disableActiveAlarm_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="lowsh_status">
+			<type>state</type>
+			<sensorId>_LOWSH_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableActiveAlarm_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.137</getOid>
+				</mapValue>
+			</value>
+			<label>LowSH Status</label>
+			<enum>disableActiveAlarm_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="high_condensing_temperature_status">
+			<type>state</type>
+			<sensorId>_HIGH_CONDENSING_TEMPERATURE_STATUS</sensorId>
+			<value>
+				<mapValue mapid="disableActiveAlarm_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.138</getOid>
+				</mapValue>
+			</value>
+			<label>High Temperature Condensing Status</label>
+			<enum>disableActiveAlarm_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
 		<stateSensor ruleid="system_on_fan_on">
 			<type>state</type>
 			<sensorId>_SYSTEM_ON_FAN_ON</sensorId>
@@ -445,7 +1229,6 @@
 			<enum>onoff_em</enum>
 			<sensorSet>Status</sensorSet>
 		</stateSensor>
-
 		<stateSensor ruleid="electric_heater_1">
 			<type>state</type>
 			<sensorId>_ELECTRIC_HEATER_1</sensorId>
@@ -518,15 +1301,601 @@
 			<enum>onoff_em</enum>
 			<sensorSet>Status</sensorSet>
 		</stateSensor>
+		<stateSensor ruleid="unit_standby_status">
+			<type>state</type>
+			<sensorId>_UNIT_STANDBY_STATUS</sensorId>
+			<value>
+				<mapValue mapid="onoff_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.169</getOid>
+				</mapValue>
+			</value>
+			<label>Unit Standby Status</label>
+			<enum>onoff_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="unit_on_from_supervision">
+			<type>state</type>
+			<sensorId>_UNIT_ON_FROM_SUPERVISION</sensorId>
+			<value>
+				<mapValue mapid="onoff_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.170</getOid>
+				</mapValue>
+			</value>
+			<label>Unit On/Off Switch Enable From Supervision</label>
+			<enum>onoff_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="remote_change_setpoint_control">
+			<type>state</type>
+			<sensorId>_REMOTE_CHANGE_SETPOINT_CONTROL</sensorId>
+			<value>
+				<mapValue mapid="onoff_vm">
+					<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.2.2.1.4.1.172</getOid>
+				</mapValue>
+			</value>
+			<label>Remote Change Setpoint Control</label>
+			<enum>onoff_em</enum>
+			<sensorSet>Status</sensorSet>
+		</stateSensor>
+		<alarmFlags ruleid="humidifier_shutdown_alarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.93</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Humidifier Shutdown Alarm</activeText>
+					<inactiveText>Humidifier Shutdown Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Humidifier</category>
+				<description>
+					<activeText>Humidifier Shutdown Alarm is Active.</activeText>
+					<inactiveText>Humidifier Shutdown Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="humidifier_auto_reset_alarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.94</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Humidifier Auto Reset Alarm</activeText>
+					<inactiveText>Humidifier Auto Reset Alarm Cleared</inactiveText>
+				</name>
+				<severity>critical</severity>
+				<category>Humidifier</category>
+				<description>
+					<activeText>Humidifier Auto Reset Alarm is Active.</activeText>
+					<inactiveText>Humidifier Auto Reset Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
+		<alarmFlags ruleid="humidifier_warning_alarm">
+			<value>
+				<getOid>.1.3.6.1.4.1.318.1.1.27.1.4.1.2.1.3.1.95</getOid>
+			</value>
+			<alarmFlagsTest mask="1" match="1">
+				<name>
+					<activeText>Humidifier Warning Alarm</activeText>
+					<inactiveText>Humidifier Warning Alarm Cleared</inactiveText>
+				</name>
+				<severity>warning</severity>
+				<category>Humidifier</category>
+				<description>
+					<activeText>Humidifier Warning Alarm is Active.</activeText>
+					<inactiveText>Humidifier Warning Alarm Cleared.</inactiveText>
+				</description>
+			</alarmFlagsTest>
+		</alarmFlags>
 		<valueMap ruleid="onoff_vm">
 			<valueIn>0</valueIn><valueOut>0</valueOut>
 			<valueIn>1</valueIn><valueOut>1</valueOut>
 			<valueIn>*</valueIn><valueOut>0</valueOut>
 		</valueMap>
-
+		<valueMap ruleid="afcSensorHealth_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+		</valueMap>
+		<valueMap ruleid="automanual_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>0</valueOut>
+		</valueMap>
+		<valueMap ruleid="summerWinterSeason_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<valueMap ruleid="lanStatus_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+		</valueMap>
+		<valueMap ruleid="unitCommand_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>7</valueIn><valueOut>7</valueOut>
+		</valueMap>
+		<valueMap ruleid="restartCondition_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<valueMap ruleid="summerWinterMode_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<valueMap ruleid="freecoolingStatus_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<valueMap ruleid="alarmStatus_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<valueMap ruleid="disableEnable_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		<valueMap ruleid="disableEnableOnly_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+		</valueMap>
+		<valueMap ruleid="noneDisableEnable_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<valueMap ruleid="disableActiveAlarm_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<valueMap ruleid="coolingHeatingStatus_vm_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<valueMap ruleid="electricHeater_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+		</valueMap>
+		<valueMap ruleid="unitStatus_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+		</valueMap>
+		<valueMap ruleid="compressorStatus_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+		</valueMap>
+		<valueMap ruleid="cpyHumidifierStatus_vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>7</valueIn><valueOut>7</valueOut>
+			<valueIn>8</valueIn><valueOut>8</valueOut>
+			<valueIn>9</valueIn><valueOut>9</valueOut>
+			<valueIn>10</valueIn><valueOut>10</valueOut>
+			<valueIn>11</valueIn><valueOut>11</valueOut>
+		</valueMap>
+		<valueMap ruleid="humidifierModel_vm">
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>4</valueIn><valueOut>4</valueOut>
+			<valueIn>5</valueIn><valueOut>5</valueOut>
+			<valueIn>6</valueIn><valueOut>6</valueOut>
+			<valueIn>7</valueIn><valueOut>7</valueOut>
+			<valueIn>8</valueIn><valueOut>8</valueOut>
+			<valueIn>9</valueIn><valueOut>9</valueOut>
+			<valueIn>10</valueIn><valueOut>10</valueOut>
+			<valueIn>11</valueIn><valueOut>11</valueOut>
+			<valueIn>12</valueIn><valueOut>12</valueOut>
+			<valueIn>13</valueIn><valueOut>13</valueOut>
+			<valueIn>14</valueIn><valueOut>14</valueOut>
+			<valueIn>15</valueIn><valueOut>15</valueOut>
+			<valueIn>16</valueIn><valueOut>16</valueOut>
+			<valueIn>17</valueIn><valueOut>17</valueOut>
+			<valueIn>18</valueIn><valueOut>18</valueOut>
+			<valueIn>19</valueIn><valueOut>19</valueOut>
+			<valueIn>20</valueIn><valueOut>20</valueOut>
+			<valueIn>21</valueIn><valueOut>21</valueOut>
+			<valueIn>22</valueIn><valueOut>22</valueOut>
+			<valueIn>23</valueIn><valueOut>23</valueOut>
+			<valueIn>24</valueIn><valueOut>24</valueOut>
+			<valueIn>25</valueIn><valueOut>25</valueOut>
+			<valueIn>26</valueIn><valueOut>26</valueOut>
+			<valueIn>27</valueIn><valueOut>27</valueOut>
+			<valueIn>28</valueIn><valueOut>28</valueOut>
+			<valueIn>29</valueIn><valueOut>29</valueOut>
+			<valueIn>30</valueIn><valueOut>30</valueOut>
+			<valueIn>31</valueIn><valueOut>31</valueOut>
+			<valueIn>32</valueIn><valueOut>32</valueOut>
+			<valueIn>33</valueIn><valueOut>33</valueOut>
+			<valueIn>34</valueIn><valueOut>34</valueOut>
+			<valueIn>35</valueIn><valueOut>35</valueOut>
+			<valueIn>36</valueIn><valueOut>36</valueOut>
+			<valueIn>37</valueIn><valueOut>37</valueOut>
+			<valueIn>38</valueIn><valueOut>38</valueOut>
+			<valueIn>39</valueIn><valueOut>39</valueOut>
+			<valueIn>40</valueIn><valueOut>40</valueOut>
+			<valueIn>41</valueIn><valueOut>41</valueOut>
+			<valueIn>42</valueIn><valueOut>42</valueOut>
+			<valueIn>43</valueIn><valueOut>43</valueOut>
+			<valueIn>44</valueIn><valueOut>44</valueOut>
+			<valueIn>45</valueIn><valueOut>45</valueOut>
+			<valueIn>46</valueIn><valueOut>46</valueOut>
+			<valueIn>47</valueIn><valueOut>47</valueOut>
+			<valueIn>48</valueIn><valueOut>48</valueOut>
+			<valueIn>49</valueIn><valueOut>49</valueOut>
+			<valueIn>50</valueIn><valueOut>50</valueOut>
+			<valueIn>51</valueIn><valueOut>51</valueOut>
+			<valueIn>52</valueIn><valueOut>52</valueOut>
+			<valueIn>53</valueIn><valueOut>53</valueOut>
+			<valueIn>54</valueIn><valueOut>54</valueOut>
+			<valueIn>55</valueIn><valueOut>55</valueOut>
+			<valueIn>56</valueIn><valueOut>56</valueOut>
+			<valueIn>57</valueIn><valueOut>57</valueOut>
+			<valueIn>58</valueIn><valueOut>58</valueOut>
+			<valueIn>59</valueIn><valueOut>59</valueOut>
+			<valueIn>60</valueIn><valueOut>60</valueOut>
+			<valueIn>61</valueIn><valueOut>61</valueOut>
+			<valueIn>62</valueIn><valueOut>62</valueOut>
+			<valueIn>63</valueIn><valueOut>63</valueOut>
+			<valueIn>64</valueIn><valueOut>64</valueOut>
+			<valueIn>65</valueIn><valueOut>65</valueOut>
+			<valueIn>66</valueIn><valueOut>66</valueOut>
+			<valueIn>67</valueIn><valueOut>67</valueOut>
+			<valueIn>68</valueIn><valueOut>68</valueOut>
+			<valueIn>69</valueIn><valueOut>69</valueOut>
+			<valueIn>70</valueIn><valueOut>70</valueOut>
+			<valueIn>71</valueIn><valueOut>71</valueOut>
+			<valueIn>72</valueIn><valueOut>72</valueOut>
+			<valueIn>73</valueIn><valueOut>73</valueOut>
+			<valueIn>74</valueIn><valueOut>74</valueOut>
+			<valueIn>75</valueIn><valueOut>75</valueOut>
+			<valueIn>76</valueIn><valueOut>76</valueOut>
+			<valueIn>77</valueIn><valueOut>77</valueOut>
+			<valueIn>78</valueIn><valueOut>78</valueOut>
+			<valueIn>79</valueIn><valueOut>79</valueOut>
+			<valueIn>80</valueIn><valueOut>80</valueOut>
+			<valueIn>81</valueIn><valueOut>81</valueOut>
+			<valueIn>82</valueIn><valueOut>82</valueOut>
+			<valueIn>83</valueIn><valueOut>83</valueOut>
+			<valueIn>84</valueIn><valueOut>84</valueOut>
+			<valueIn>85</valueIn><valueOut>85</valueOut>
+			<valueIn>86</valueIn><valueOut>86</valueOut>
+			<valueIn>87</valueIn><valueOut>87</valueOut>
+			<valueIn>88</valueIn><valueOut>88</valueOut>
+			<valueIn>89</valueIn><valueOut>89</valueOut>
+			<valueIn>90</valueIn><valueOut>90</valueOut>
+			<valueIn>91</valueIn><valueOut>91</valueOut>
+			<valueIn>92</valueIn><valueOut>92</valueOut>
+			<valueIn>93</valueIn><valueOut>93</valueOut>
+			<valueIn>94</valueIn><valueOut>94</valueOut>
+			<valueIn>95</valueIn><valueOut>95</valueOut>
+			<valueIn>96</valueIn><valueOut>96</valueOut>
+			<valueIn>97</valueIn><valueOut>97</valueOut>
+			<valueIn>98</valueIn><valueOut>98</valueOut>
+			<valueIn>99</valueIn><valueOut>99</valueOut>
+			<valueIn>100</valueIn><valueOut>100</valueOut>
+			<valueIn>101</valueIn><valueOut>101</valueOut>
+			<valueIn>102</valueIn><valueOut>102</valueOut>
+			<valueIn>103</valueIn><valueOut>103</valueOut>
+			<valueIn>104</valueIn><valueOut>104</valueOut>
+			<valueIn>105</valueIn><valueOut>105</valueOut>
+			<valueIn>106</valueIn><valueOut>106</valueOut>
+			<valueIn>107</valueIn><valueOut>107</valueOut>
+			<valueIn>108</valueIn><valueOut>108</valueOut>
+			<valueIn>109</valueIn><valueOut>109</valueOut>
+			<valueIn>110</valueIn><valueOut>110</valueOut>
+			<valueIn>111</valueIn><valueOut>111</valueOut>
+			<valueIn>112</valueIn><valueOut>112</valueOut>
+			<valueIn>113</valueIn><valueOut>113</valueOut>
+			<valueIn>114</valueIn><valueOut>114</valueOut>
+			<valueIn>115</valueIn><valueOut>115</valueOut>
+			<valueIn>116</valueIn><valueOut>116</valueOut>
+			<valueIn>117</valueIn><valueOut>117</valueOut>
+			<valueIn>118</valueIn><valueOut>118</valueOut>
+			<valueIn>119</valueIn><valueOut>119</valueOut>
+			<valueIn>120</valueIn><valueOut>120</valueOut>
+			<valueIn>121</valueIn><valueOut>121</valueOut>
+		</valueMap>
 		<enumMap ruleid="onoff_em">
 			<label>Off</label>
 			<label>On</label>
+		</enumMap>
+		<enumMap ruleid="autoManual_em">
+			<label>Auto</label>
+			<label>Manual</label>
+		</enumMap>
+		<enumMap ruleid="afcSensorHealth_em">
+			<label>OK</label>
+			<label>Failed</label>
+		</enumMap>
+		<enumMap ruleid="lanStatus_em">
+			<label>Idle</label>
+			<label>Init</label>
+			<label>Scan</label>
+			<label>Ready</label>
+			<label>Alarm</label>
+			<label>Disable</label>
+		</enumMap>
+		<enumMap ruleid="freecoolingStatus_em">
+			<label>None</label>
+			<label>Disable</label>
+			<label>On</label>
+			<label>Off</label>
+		</enumMap>
+		<enumMap ruleid="summerWinterMode_em">
+			<label>Disable</label>
+			<label>Enabled - HMI</label>
+			<label>Enabled - Supervision</label>
+			<label>Enabled - DI</label>
+		</enumMap>
+		<enumMap ruleid="disableActiveAlarm_em">
+			<label>Disable</label>
+			<label>Enabled - Active</label>
+			<label>Enabled - Alarm</label>
+			<label>Enabled</label>
+		</enumMap>
+		<enumMap ruleid="summerWinterSeason_em">
+			<label>None</label>
+			<label>Summer</label>
+			<label>Winter</label>
+		</enumMap>
+		<enumMap ruleid="coolingHeatingStatus_em">
+			<label>None</label>
+			<label>Cooling</label>
+			<label>Heating</label>
+			<label>Simultaneous</label>
+		</enumMap>
+		<enumMap ruleid="unitCommand_em">
+			<label>None</label>
+			<label>HMI Auto</label>
+			<label>HMI Manual</label>
+			<label>Scheduler</label>
+			<label>LAN</label>
+			<label>Sleep Mode</label>
+			<label>Digital Input</label>
+			<label>Supervision</label>
+		</enumMap>
+		<enumMap ruleid="compressorStatus_em">
+			<label>None</label>
+			<label>Compressor Off</label>
+			<label>Compressor Min On</label>
+			<label>Compressor Min Off</label>
+			<label>Compressor Min Cycle Off</label>
+			<label>Compressor Min Cycle</label>
+			<label>Compressor On</label>
+		</enumMap>
+		<enumMap ruleid="restartCondition_em">
+			<label>None</label>
+			<label>Emergency</label>
+			<label>Auto Restart</label>
+			<label>No Auto Restart</label>
+		</enumMap>
+		<enumMap ruleid="unitStatus_em">
+			<label>None</label>
+			<label>Off</label>
+			<label>DLY</label>
+			<label>On</label>
+			<label>Standby</label>
+			<label>Manual Mode</label>
+		</enumMap>
+		<enumMap ruleid="electricHeater_em">
+			<label>Disable</label>
+			<label>Emergency</label>
+			<label>Auto Restart</label>
+			<label>No Auto Restart</label>
+		</enumMap>
+		<enumMap ruleid="alarmStatus_em">
+			<label>None</label>
+			<label>No Alarm</label>
+			<label>Rotational Alarm</label>
+			<label>Alarm</label>
+		</enumMap>
+		<enumMap ruleid="disableEnable_em">
+			<label>Disable</label>
+			<label>Enabled - Off</label>
+			<label>Enabled - On</label>
+		</enumMap>
+		<enumMap ruleid="disableOnOff_em">
+			<label>Disable</label>
+			<label>Enabled - On</label>
+			<label>Enabled - Off</label>
+		</enumMap>
+		<enumMap ruleid="antifreezeComp_em">
+			<label>Disable</label>
+			<label>Enabled - On</label>
+			<label>Compressor - Alarm</label>
+		</enumMap>
+		<enumMap ruleid="disableEnableOnly_em">
+			<label>Disable</label>
+			<label>Enabled</label>
+		</enumMap>
+		<enumMap ruleid="noneDisableEnable_em">
+			<label>None</label>
+			<label>Disable</label>
+			<label>Enabled - On</label>
+			<label>Enabled - Off</label>
+		</enumMap>
+		<enumMap ruleid="doublePowerSupply_em">
+			<label>Disable</label>
+			<label>Enabled Line A</label>
+			<label>Enabled Line B</label>
+		</enumMap>
+		<enumMap ruleid="cpyHumidifierStatus_em">
+			<label>No Production</label>
+			<label>Start of Evaporator Cycle</label>
+			<label>Water Fill</label>
+			<label>Evaporation</label>
+			<label>Antifoam Water Drain</label>
+			<label>Water Drain</label>
+			<label>End of Water Drain</label>
+			<label>Inactivity Full Drain</label>
+			<label>Emptying Ext. Request</label>
+			<label>Lack of Supply Water</label>
+			<label>Pre-cleaning</label>
+			<label>Periodic Drain</label>
+		</enumMap>
+		<enumMap ruleid="humidifierModel_em">
+			<label>KUESR 1.5 200 1 pmp</label>
+			<label>KUESR 1.5 208 1 pmp</label>
+			<label>KUESR 1.5 230 1 pmp</label>
+			<label>KUES1 1.5 200 1 pmp</label>
+			<label>KUES2 1.5 208 1 pmp</label>
+			<label>KUES3 1.5 230 1 pmp</label>
+			<label>KUESR 3 200 1 pmp</label>
+			<label>KUESR 3 208 1 pmp</label>
+			<label>KUESR 3 230 1 pmp</label>
+			<label>KUETR 3 208 3 pmp</label>
+			<label>KUETR 3 230 3 pmp</label>
+			<label>KUETR 3 400 3 pmp</label>
+			<label>KUES1 3 200 1 pmp</label>
+			<label>KUES1 3 208 1 pmp</label>
+			<label>KUES1 3 230 1 pmp</label>
+			<label>KUET1 3 200 3 pmp</label>
+			<label>KUET1 3 208 3 pmp</label>
+			<label>KUET1 3 230 3 pmp</label>
+			<label>KUET1 3 400 3 pmp</label>
+			<label>KUET1 3 460 3 pmp</label>
+			<label>KUES2 5 200 1 pmp</label>
+			<label>KUES2 5 208 1 pmp</label>
+			<label>KUES2 5 230 1 pmp</label>
+			<label>KUET2 5 200 3 pmp</label>
+			<label>KUET2 5 208 3 pmp</label>
+			<label>KUET2 5 230 3 pmp</label>
+			<label>KUET2 5 400 3 pmp</label>
+			<label>KUET2 5 460 3 pmp</label>
+			<label>KUET2 5 575 3 pmp</label>
+			<label>KUET2 8 200 3 pmp</label>
+			<label>KUET2 8 208 3 pmp</label>
+			<label>KUET2 8 230 3 pmp</label>
+			<label>KUET2 8 400 3 pmp</label>
+			<label>KUET2 8 460 3 pmp</label>
+			<label>KUET2 8 575 3 pmp</label>
+			<label>KUES3 09 208 1 pmp</label>
+			<label>KUES3 09 230 1 pmp</label>
+			<label>KUET3 10 200 3 pmp</label>
+			<label>KUET3 10 208 3 pmp</label>
+			<label>KUET3 10 230 3 pmp</label>
+			<label>KUET3 10 400 3 pmp</label>
+			<label>KUET3 10 460 3 pmp</label>
+			<label>KUET3 10 575 3 pmp</label>
+			<label>KUET3 15 200 3 pmp</label>
+			<label>KUET3 15 208 3 pmp</label>
+			<label>KUET3 15 230 3 pmp</label>
+			<label>KUET3 15 400 3 pmp</label>
+			<label>KUET3 15 460 3 pmp</label>
+			<label>KUET3 15 575 3 pmp</label>
+			<label>KUET3 18 400 3 pmp</label>
+			<label>KUET3 18 460 3 pmp</label>
+			<label>KUET3 18 575 3 pmp</label>
+			<label>KUET4 25 200 3 pmp</label>
+			<label>KUET4 25 208 3 pmp</label>
+			<label>KUET4 25 230 3 pmp</label>
+			<label>KUET4 25 400 3 pmp</label>
+			<label>KUET4 25 460 3 pmp</label>
+			<label>KUET4 25 575 3 pmp</label>
+			<label>KUET4 35 200 3 pmp</label>
+			<label>KUET4 35 208 3 pmp</label>
+			<label>KUET4 35 230 3 pmp</label>
+			<label>KUET4 35 400 3 pmp</label>
+			<label>KUET4 35 460 3 pmp</label>
+			<label>KUET4 35 575 3 pmp</label>
+			<label>KUET4 45 400 3 pmp</label>
+			<label>KUET4 45 460 3 pmp</label>
+			<label>KUET4 45 575 3 pmp</label>
+			<label>KUESR 1.5 200 1 val</label>
+			<label>KUESR 1.5 208 1 val</label>
+			<label>KUESR 1.5 230 1 val</label>
+			<label>KUES1 1.5 200 1 val</label>
+			<label>KUES1 1.5 208 1 val</label>
+			<label>KUES1 1.5 230 1 val</label>
+			<label>KUESR 3 200 1 val</label>
+			<label>KUESR 3 208 1 val</label>
+			<label>KUESR 3 230 1 val</label>
+			<label>KUETR 3 208 3 val</label>
+			<label>KUETR 3 230 3 val</label>
+			<label>KUETR 3 400 3 val</label>
+			<label>KUES1 3 200 1 val</label>
+			<label>KUES1 3 208 1 val</label>
+			<label>KUES1 3 230 1 val</label>
+			<label>KUET1 3 200 3 val</label>
+			<label>KUET1 3 208 3 val</label>
+			<label>KUET1 3 230 3 val</label>
+			<label>KUET1 3 400 3 val</label>
+			<label>KUET1 3 460 3 val</label>
+			<label>KUES2 5 200 1 val</label>
+			<label>KUES2 5 208 1 val</label>
+			<label>KUES2 5 230 1 val</label>
+			<label>KUET2 5 200 3 val</label>
+			<label>KUET2 5 208 3 val</label>
+			<label>KUET2 5 230 3 val</label>
+			<label>KUET2 5 400 3 val</label>
+			<label>KUET2 5 460 3 val</label>
+			<label>KUET2 5 575 3 val</label>
+			<label>KUET2 8 200 3 val</label>
+			<label>KUET2 8 208 3 val</label>
+			<label>KUET2 8 230 3 val</label>
+			<label>KUET2 8 400 3 val</label>
+			<label>KUET2 8 460 3 val</label>
+			<label>KUET2 8 575 3 val</label>
+			<label>KUES3 09 208 1 val</label>
+			<label>KUES3 09 230 1 val</label>
+			<label>KUET3 10 200 3 val</label>
+			<label>KUET3 10 208 3 val</label>
+			<label>KUET3 10 230 3 val</label>
+			<label>KUET3 10 400 3 val</label>
+			<label>KUET3 10 460 3 val</label>
+			<label>KUET3 10 575 3 val</label>
+			<label>KUET3 15 200 3 val</label>
+			<label>KUET3 15 208 3 val</label>
+			<label>KUET3 15 230 3 val</label>
+			<label>KUET3 15 400 3 val</label>
+			<label>KUET3 15 460 3 val</label>
+			<label>KUET3 15 575 3 val</label>
+			<label>KUET3 18 400 3 val</label>
+			<label>KUET3 18 460 3 val</label>
+			<label>KUET3 18 575 3 val</label>
+			<label>KUETR 3 460 3 pmp</label>
+			<label>KUETR 3 460 3 val</label>
 		</enumMap>
 	</device>
 </APC_DDF>

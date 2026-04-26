@@ -3,7 +3,7 @@
 	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
 	ddfid="uniflair_bce_SNMP_chiller_imperial"
 	ddfname="Uniflair BCE Chiller [pcoWeb][SNMP]"
-	ddfversion="3"
+	ddfversion="4"
 	canremove="yes">
 	<schemaVersion>1.6</schemaVersion>
 	
@@ -283,12 +283,12 @@
       <type>state</type>
       <sensorId>UNIT_ON_ALARM_TYPE_A</sensorId>
       <value>
-        <mapValue mapid="normal-alarm-vm">
+        <mapValue mapid="on-off-vm">
             <getOid>.1.3.6.1.4.1.9839.2.1.1.58.0.0</getOid>
         </mapValue>
       </value>
-      <label>Unit On Alarm Type A</label>
-      <enum>normal-alarm-em</enum>
+      <label>Type A Alarm</label>
+      <enum>off-on-em</enum>
       <sensorSet>State Sensors</sensorSet>
     </stateSensor>
     
@@ -296,12 +296,12 @@
       <type>state</type>
       <sensorId>UNIT_ON_ALARM_TYPE_B</sensorId>
       <value>
-        <mapValue mapid="normal-alarm-vm">
+        <mapValue mapid="on-off-vm">
             <getOid>.1.3.6.1.4.1.9839.2.1.1.59.0.0</getOid>
         </mapValue>
       </value>
-      <label>Unit On Alarm Type B</label>
-      <enum>normal-alarm-em</enum>
+			<label>Type B Alarm</label>
+      <enum>on-off-em</enum>
       <sensorSet>State Sensors</sensorSet>
     </stateSensor>
     <enumMap ruleid="on-off-em">
@@ -309,6 +309,11 @@
       <label>On</label>
       <label>Unknown</label>
     </enumMap>
+			<enumMap ruleid="off-on-em">
+				<label>On</label>
+				<label>Off</label>
+				<label>Unknown</label>
+			</enumMap>
 
     <enumMap ruleid="normal-alarm-em">
       <label>Normal</label>
@@ -735,7 +740,7 @@
 				</description>
 			</alarmFlagsTest>
 		</alarmFlags>
-		<alarmFlags ruleid="type-a-alarm">
+		<!--<alarmFlags ruleid="type-a-alarm">
 			<value><getOid>.1.3.6.1.4.1.9839.2.1.1.58.0</getOid></value>
 			<alarmFlagsTest match="1">
 				<name>
@@ -779,7 +784,7 @@
 					<inactiveText>A Type C Alarm condition no longer exists.</inactiveText>
 				</description>
 			</alarmFlagsTest>
-		</alarmFlags>
+		</alarmFlags>-->
 		<alarmFlags ruleid="interrupted-lan-alarm">
 			<value><getOid>.1.3.6.1.4.1.9839.2.1.1.61.0</getOid></value>
 			<alarmFlagsTest match="1">

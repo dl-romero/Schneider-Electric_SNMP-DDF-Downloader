@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APC_DDF
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://localhost/ddf_schema/apc_ddf_1_6.xsd"
+	ddfid="emerson_enp_env_sic"
+	ddfname="Emerson ENP ENV SIC"
+	ddfversion="1"
+	canremove="yes">
+	<schemaVersion>1.6</schemaVersion>
+	<!--
+		SOURCE
+		\snmp\resources\mibs\emerson\ENP_ENV_SIC[SENSOR]-MIB.mib
+		
+		ENP_ENV_SIC-MIB | 22 December 2020
+	-->
+	<device deviceid="ENP_ENV_SIC">
+		<oidMustExist ruleid="ENP_ENV_SIC_exists" oid=".1.3.6.1.4.1.13400.2.503" istree="yes"/>
+
+		<setProductData ruleid="vendordata" field="vendor">Emerson</setProductData>
+		<setProductData ruleid="modeldata" field="model">
+			<getOid>.1.3.6.1.4.1.13400.2.503.1.2.0</getOid>
+		</setProductData>
+		<setProductData ruleid="typedata" field="type">Cooling Device</setProductData>
+		<!--
+			system | group2 | .1.3.6.1.4.1.13400.2.503.2.2
+		-->
+		<valueMap ruleid="1state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>*</valueIn><valueOut>2</valueOut>
+		</valueMap>
+		
+		<valueMap ruleid="3state-vm">
+			<valueIn>0</valueIn><valueOut>0</valueOut>
+			<valueIn>1</valueIn><valueOut>1</valueOut>
+			<valueIn>2</valueIn><valueOut>2</valueOut>
+			<valueIn>3</valueIn><valueOut>3</valueOut>
+			<valueIn>*</valueIn><valueOut>4</valueOut>
+		</valueMap>
+
+		<enumMap ruleid="sensor-em">
+			<label>Temp/Humidity Sensor</label>
+			<label>Temperature Sensor</label>
+			<label>4 DI Sensor</label>
+			<label>Invalid Equipment</label>
+			<label>Unknown</label>
+		</enumMap>
+		
+		<enumMap ruleid="tempAlarmStatus-em">
+			<label>Normal</label>
+			<label>High Temperature</label>
+			<label>Low Temperature</label>
+			<label>Invalid</label>
+			<label>Unknown</label>
+		</enumMap>
+		
+		<enumMap ruleid="humAlarmStatus-em">
+			<label>Normal</label>
+			<label>High Humidity</label>
+			<label>Low Humidity</label>
+			<label>Invalid</label>
+			<label>Unknown</label>
+		</enumMap>
+		
+		<enumMap ruleid="door-em">
+			<label>Normal</label>
+			<label>Alarm</label>
+			<label>Uninstall</label>
+			<label>Leave</label>
+			<label>Unknown</label>
+		</enumMap>
+		
+		<enumMap ruleid="communicationStatus-em">
+			<label>Normal</label>
+			<label>Failure</label>
+			<label>Unknown</label>
+		</enumMap>
+		<!--
+			Sensor 0
+		-->
+		<stateSensor ruleid="sensor0">
+			<type>state</type>
+			<sensorId>_SENSOR0</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.1.0</getOid>
+				</mapValue>
+			</value>
+			<label>Sensor 0 Status</label>
+			<enum>sensor-em</enum>
+			<sensorSet>Sensor 0</sensorSet>
+		</stateSensor>
+		
+		<numSensor ruleid="temp0">
+			<type>temp</type>
+			<sensorId>_TEMP0</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.503.2.2.2.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Temperature 0</label>
+			<sensorSet>Sensor 0</sensorSet>
+		</numSensor>
+		<numSensor ruleid="hum0">
+			<type>humidity</type>
+			<sensorId>_HUM0</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.503.2.2.3.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Humidity 0</label>
+			<sensorSet>Sensor 0</sensorSet>
+		</numSensor>
+		
+		<stateSensor ruleid="temp0alarmstatus">
+			<type>state</type>
+			<sensorId>_TEMP0_ALARM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.4.0</getOid>
+				</mapValue>
+			</value>
+			<label>Temperature 0 Alarm Status</label>
+			<enum>tempAlarmStatus-em</enum>
+			<sensorSet>Sensor 0</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="hum0alarmstatus">
+			<type>state</type>
+			<sensorId>_HUM0_ALARM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.5.0</getOid>
+				</mapValue>
+			</value>
+			<label>Humidity 0 Alarm Status</label>
+			<enum>humAlarmStatus-em</enum>
+			<sensorSet>Sensor 0</sensorSet>
+		</stateSensor>
+		<!--
+			Sensor 1
+		-->
+		<stateSensor ruleid="sensor1">
+			<type>state</type>
+			<sensorId>_SENSOR1</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.6.0</getOid>
+				</mapValue>
+			</value>
+			<label>Sensor 1 Status</label>
+			<enum>sensor-em</enum>
+			<sensorSet>Sensor 1</sensorSet>
+		</stateSensor>
+		
+		<numSensor ruleid="temp1">
+			<type>temp</type>
+			<sensorId>_TEMP1</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.503.2.2.7.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Temperature 1</label>
+			<sensorSet>Sensor 1</sensorSet>
+		</numSensor>
+		<numSensor ruleid="hum1">
+			<type>humidity</type>
+			<sensorId>_HUM1</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.503.2.2.8.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Humidity 1</label>
+			<sensorSet>Sensor 1</sensorSet>
+		</numSensor>
+		
+		<stateSensor ruleid="temp1alarmstatus">
+			<type>state</type>
+			<sensorId>_TEMP1_ALARM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.9.0</getOid>
+				</mapValue>
+			</value>
+			<label>Temperature 1 Alarm Status</label>
+			<enum>tempAlarmStatus-em</enum>
+			<sensorSet>Sensor 1</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="hum1alarmstatus">
+			<type>state</type>
+			<sensorId>_HUM1_ALARM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.10.0</getOid>
+				</mapValue>
+			</value>
+			<label>Humidity 1 Alarm Status</label>
+			<enum>humAlarmStatus-em</enum>
+			<sensorSet>Sensor 1</sensorSet>
+		</stateSensor>
+		<!--
+			Sensor 2
+		-->
+		<stateSensor ruleid="sensor2">
+			<type>state</type>
+			<sensorId>_SENSOR2</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.11.0</getOid>
+				</mapValue>
+			</value>
+			<label>Sensor 2 Status</label>
+			<enum>sensor-em</enum>
+			<sensorSet>Sensor 2</sensorSet>
+		</stateSensor>
+		
+		<numSensor ruleid="temp2">
+			<type>temp</type>
+			<sensorId>_TEMP2</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.503.2.2.12.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Temperature 2</label>
+			<sensorSet>Sensor 2</sensorSet>
+		</numSensor>
+		<numSensor ruleid="hum2">
+			<type>humidity</type>
+			<sensorId>_HUM2</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.503.2.2.13.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Humidity 2</label>
+			<sensorSet>Sensor 2</sensorSet>
+		</numSensor>
+		
+		<stateSensor ruleid="temp2alarmstatus">
+			<type>state</type>
+			<sensorId>_TEMP2_ALARM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.14.0</getOid>
+				</mapValue>
+			</value>
+			<label>Temperature 2 Alarm Status</label>
+			<enum>tempAlarmStatus-em</enum>
+			<sensorSet>Sensor 2</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="hum2alarmstatus">
+			<type>state</type>
+			<sensorId>_HUM2_ALARM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.15.0</getOid>
+				</mapValue>
+			</value>
+			<label>Humidity 2 Alarm Status</label>
+			<enum>humAlarmStatus-em</enum>
+			<sensorSet>Sensor 2</sensorSet>
+		</stateSensor>
+		<!--
+			Sensor 3
+		-->
+		<stateSensor ruleid="sensor3">
+			<type>state</type>
+			<sensorId>_SENSOR3</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.16.0</getOid>
+				</mapValue>
+			</value>
+			<label>Sensor 3 Status</label>
+			<enum>sensor-em</enum>
+			<sensorSet>Sensor 3</sensorSet>
+		</stateSensor>
+		
+		<numSensor ruleid="temp3">
+			<type>temp</type>
+			<sensorId>_TEMP3</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.503.2.2.17.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Temperature 3</label>
+			<sensorSet>Sensor 3</sensorSet>
+		</numSensor>
+		<numSensor ruleid="hum3">
+			<type>humidity</type>
+			<sensorId>_HUM3</sensorId>
+			<value>
+				<mult>
+					<op><getOid>.1.3.6.1.4.1.13400.2.503.2.2.18.0</getOid></op>
+					<op>0.1</op>
+				</mult>
+			</value>
+			<label>Humidity 3</label>
+			<sensorSet>Sensor 3</sensorSet>
+		</numSensor>
+		
+		<stateSensor ruleid="temp3alarmstatus">
+			<type>state</type>
+			<sensorId>_TEMP3_ALARM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.19.0</getOid>
+				</mapValue>
+			</value>
+			<label>Temperature 3 Alarm Status</label>
+			<enum>tempAlarmStatus-em</enum>
+			<sensorSet>Sensor 3</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="hum3alarmstatus">
+			<type>state</type>
+			<sensorId>_HUM3_ALARM_STATUS</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.20.0</getOid>
+				</mapValue>
+			</value>
+			<label>Humidity 3 Alarm Status</label>
+			<enum>humAlarmStatus-em</enum>
+			<sensorSet>Sensor 3</sensorSet>
+		</stateSensor>
+		<!--
+			Door/Water/Smoke
+		-->
+		<stateSensor ruleid="door01">
+			<type>state</type>
+			<sensorId>_DOOR01</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.22.0</getOid>
+				</mapValue>
+			</value>
+			<label>Door 0-1 Status</label>
+			<enum>door-em</enum>
+			<sensorSet>Door</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="door02">
+			<type>state</type>
+			<sensorId>_DOOR02</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.23.0</getOid>
+				</mapValue>
+			</value>
+			<label>Door 0-2 Status</label>
+			<enum>door-em</enum>
+			<sensorSet>Door</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="water0">
+			<type>state</type>
+			<sensorId>_WATER0</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.24.0</getOid>
+				</mapValue>
+			</value>
+			<label>Water 0 Status</label>
+			<enum>door-em</enum>
+			<sensorSet>Water</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="smoke0">
+			<type>state</type>
+			<sensorId>_SMOKE0</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.25.0</getOid>
+				</mapValue>
+			</value>
+			<label>Smoke 0 Status</label>
+			<enum>door-em</enum>
+			<sensorSet>Smoke</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="door11">
+			<type>state</type>
+			<sensorId>_DOOR11</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.27.0</getOid>
+				</mapValue>
+			</value>
+			<label>Door 1-1 Status</label>
+			<enum>door-em</enum>
+			<sensorSet>Door</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="door12">
+			<type>state</type>
+			<sensorId>_DOOR12</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.28.0</getOid>
+				</mapValue>
+			</value>
+			<label>Door 1-2 Status</label>
+			<enum>door-em</enum>
+			<sensorSet>Door</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="water1">
+			<type>state</type>
+			<sensorId>_WATER1</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.29.0</getOid>
+				</mapValue>
+			</value>
+			<label>Water 1 Status</label>
+			<enum>door-em</enum>
+			<sensorSet>Water</sensorSet>
+		</stateSensor>
+		<stateSensor ruleid="smoke1">
+			<type>state</type>
+			<sensorId>_SMOKE1</sensorId>
+			<value>
+				<mapValue mapid="3state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.30.0</getOid>
+				</mapValue>
+			</value>
+			<label>Smoke 1 Status</label>
+			<enum>door-em</enum>
+			<sensorSet>Smoke</sensorSet>
+		</stateSensor>
+		<!--
+			Communication
+		-->
+		<stateSensor ruleid="communicationstatus">
+			<type>state</type>
+			<sensorId>_COMMUNICATION_STATUS</sensorId>
+			<value>
+				<mapValue mapid="1state-vm">
+					<getOid>.1.3.6.1.4.1.13400.2.503.2.2.31.0</getOid>
+				</mapValue>
+			</value>
+			<label>Communication Status</label>
+			<enum>communicationStatus-em</enum>
+			<sensorSet>Communication</sensorSet>
+		</stateSensor>
+		
+	</device>
+</APC_DDF>
